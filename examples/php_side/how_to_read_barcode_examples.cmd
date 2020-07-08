@@ -1,0 +1,1 @@
+php -n -dallow_url_include=On how_to_read_barcode_examples.php

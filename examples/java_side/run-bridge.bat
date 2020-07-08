@@ -1,0 +1,1 @@
+"%JAVA_HOME%\bin\java" -Djava.ext.dirs=../../jar -jar JavaBridge.jar SERVLET_LOCAL:8888
