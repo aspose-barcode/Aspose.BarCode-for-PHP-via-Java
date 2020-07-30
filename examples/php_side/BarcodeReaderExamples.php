@@ -45,15 +45,12 @@ class BarcodeReaderExamples
     public function howToGetCodeBytes()
     {
         print("\n---\nfunction '".__FUNCTION__."'\n");
-        $expectedCodeBytes = array("105", "99", "70", "1", "61", "0", "0", "2", "70", "10", "82", "20", "40", "0", "97", "106");
         $fileName = "example2.jpg";
         $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, null);
        forEach($reader->readBarCodes() as $res)
        {
-           $actualCodeBytes = $reader->getCodeBytes();
-           print("expected code bytes  : ".sizeof($expectedCodeBytes));
-           print("\n");
-           print("actual code bytes  : ".sizeof($actualCodeBytes));
+           $actualCodeBytes = $res->getCodeBytes();
+           print("code bytes  : ".sizeof($actualCodeBytes));
        }
     }
 
@@ -170,9 +167,9 @@ public function howToRecognitionCodeAllSupportedTypes2()
         forEach($reader->readBarCodes() as $res)
         {
             print("CodeText : ".$res->getCodeText());
-            print("getMacroPdf417FileID : ".$reader->getMacroPdf417FileID()."\n");
-            print("getMacroPdf417SegmentID : ".$reader->getMacroPdf417SegmentID()."\n");
-            print('getMacroPdf417SegmentsCount : '.$reader->getMacroPdf417SegmentsCount()."\n");
+            print("getMacroPdf417FileID : ".$res->getExtended()->getPdf417()->getMacroPdf417FileID()."\n");
+            print("getMacroPdf417SegmentID : ".$res->getExtended()->getPdf417()->getMacroPdf417SegmentID()."\n");
+            print('getMacroPdf417SegmentsCount : '.$res->getExtended()->getPdf417()->getMacroPdf417SegmentsCount()."\n");
         }
 
     }
