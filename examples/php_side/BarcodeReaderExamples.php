@@ -12,13 +12,13 @@ class BarcodeReaderExamples
         $full_path = $this->subfolder.$file_name;
         print(file_exists($full_path));
         $reader = new BarcodeReader($full_path, null, null);
-        while ($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print($reader->getCodeText(false));
+            print($res->getCodeText());
             print("\n");
-            print($reader->getCodeTypeName());
+            print($res->getCodeTypeName());
         }
-        $reader->close();
+
     }
 
     public function howToSetQualitySettings()
@@ -32,13 +32,13 @@ class BarcodeReaderExamples
         $reader->getQualitySettings()->setAllowMedianSmoothing(true);
         $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
 
-        while ($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print($reader->getCodeText(false));
+            print($res->getCodeText());
             print("\n");
-            print($reader->getCodeTypeName());
+            print($res->getCodeTypeName());
         }
-        $reader->close();
+
     }
 
 
@@ -48,7 +48,7 @@ class BarcodeReaderExamples
         $expectedCodeBytes = array("105", "99", "70", "1", "61", "0", "0", "2", "70", "10", "82", "20", "40", "0", "97", "106");
         $fileName = "example2.jpg";
         $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, null);
-       while($reader->read())
+       forEach($reader->readBarCodes() as $res)
        {
            $actualCodeBytes = $reader->getCodeBytes();
            print("expected code bytes  : ".sizeof($expectedCodeBytes));
@@ -64,13 +64,13 @@ class BarcodeReaderExamples
         {
             $fileName = "code128.jpg";
             $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, DecodeType::CODE_128);
-            while($reader->read())
+            forEach($reader->readBarCodes() as $res)
             {
-                print("Code Text : ".$reader->getCodeTypeName());
+                print("Code Text : ".$res->getCodeTypeName());
                 print("\n");
-                print("Code Type : ".$reader->getCodeText(false));
+                print("Code Type : ".$res->getCodeText());
             }
-            $reader->close();
+
         }
         catch (BarcodeException $e)
         {
@@ -85,13 +85,13 @@ class BarcodeReaderExamples
         {
             $fileName = "code11.png";
             $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, DecodeType::CODE_11);
-            while($reader->read())
+            forEach($reader->readBarCodes() as $res)
             {
-                print("Code Text : ".$reader->getCodeTypeName());
+                print("Code Text : ".$res->getCodeTypeName());
                 print("\n");
-                print("Code Type : ".$reader->getCodeText(false));
+                print("Code Type : ".$res->getCodeText());
             }
-            $reader->close();
+
         }
         catch (BarcodeException $e)
         {
@@ -106,13 +106,13 @@ class BarcodeReaderExamples
         {
             $fileName = "example2.jpg";
             $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, DecodeType::ALL_SUPPORTED_TYPES);
-            while($reader->read())
+            forEach($reader->readBarCodes() as $res)
             {
-                print("Code Text : ".$reader->getCodeTypeName());
+                print("Code Text : ".$res->getCodeTypeName());
                 print("\n");
-                print("Code Type : ".$reader->getCodeText(false));
+                print("Code Type : ".$res->getCodeText());
             }
-            $reader->close();
+
         }
         catch (BarcodeException $e)
         {
@@ -127,13 +127,13 @@ public function howToRecognitionCodeAllSupportedTypes2()
         {
             $fileName = "example1.png";
             $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, DecodeType::ALL_SUPPORTED_TYPES);
-            while($reader->read())
+            forEach($reader->readBarCodes() as $res)
             {
-                print("Code Text : ".$reader->getCodeTypeName());
+                print("Code Text : ".$res->getCodeTypeName());
                 print("\n");
-                print("Code Type : ".$reader->getCodeText(false));
+                print("Code Type : ".$res->getCodeText());
             }
-            $reader->close();
+
         }
         catch (BarcodeException $e)
         {
@@ -148,13 +148,13 @@ public function howToRecognitionCodeAllSupportedTypes2()
         $reader = new BarcodeReader(loadImageByName($this->subfolder, $fileName), null, DecodeType::ALL_SUPPORTED_TYPES);
         $reader->setBarCodeImage($this->subfolder . "code11.png", null);
 
-        while($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print("Code Text : ".$reader->getCodeTypeName());
+            print("Code Text : ".$res->getCodeTypeName());
             print("\n");
-            print("Code Type : ".$reader->getCodeText(false));
+            print("Code Type : ".$res->getCodeText());
         }
-        $reader->close();
+
     }
 
     public function howToMacroPdf417()
@@ -167,9 +167,9 @@ public function howToRecognitionCodeAllSupportedTypes2()
         $gen->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentsCount(3);
         $image = $gen->generateBarcodeImage("PNG");
         $reader = new BarCodeReader(($image), null, DecodeType::MACRO_PDF_417);
-        while($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print("CodeText : ".$reader->getCodeText(false));
+            print("CodeText : ".$res->getCodeText());
             print("getMacroPdf417FileID : ".$reader->getMacroPdf417FileID()."\n");
             print("getMacroPdf417SegmentID : ".$reader->getMacroPdf417SegmentID()."\n");
             print('getMacroPdf417SegmentsCount : '.$reader->getMacroPdf417SegmentsCount()."\n");
@@ -188,11 +188,11 @@ public function howToRecognitionCodeAllSupportedTypes2()
 
         $reader = new BarCodeReader(($image), null, DecodeType::QR);
         $reader->setDetectEncoding(true);
-        while ($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print("CodeText : " . $reader->getCodeText(false));
+            print("CodeText : " . $res->getCodeText());
             print "\n";
-            print("CodeType : " . $reader->getCodeTypeName());
+            print("CodeType : " . $res->getCodeTypeName());
         }
     }
 
@@ -205,11 +205,11 @@ public function howToRecognitionCodeAllSupportedTypes2()
         $image = $generator->generateBarcodeImage("PNG");
         $reader = new BarCodeReader(($image), null, DecodeType::AUSTRALIA_POST);
         $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE);
-        while ($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print("CodeText : " . $reader->getCodeText(false));
+            print("CodeText : " . $res->getCodeText());
             print "\n";
-            print("CodeType : " . $reader->getCodeTypeName());
+            print("CodeType : " . $res->getCodeTypeName());
         }
     }
 
@@ -222,11 +222,11 @@ public function howToRecognitionCodeAllSupportedTypes2()
         $image = $generator->generateBarcodeImage("PNG");
         $reader = new BarCodeReader(($image), null, DecodeType::AUSTRALIA_POST);
         $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
-        while ($reader->read())
+        forEach($reader->readBarCodes() as $res)
         {
-            print("CodeText : " . $reader->getCodeText(false));
+            print("CodeText : " . $res->getCodeText());
             print "\n";
-            print("CodeType : " . $reader->getCodeTypeName());
+            print("CodeType : " . $res->getCodeTypeName());
         }
     }
 

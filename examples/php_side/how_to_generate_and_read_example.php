@@ -28,10 +28,10 @@ function generate_and_read()
     $image_data_base64 = base64_encode($image_bytes);
     $reader = new BarcodeReader($image_data_base64, null, DecodeType::ALL_SUPPORTED_TYPES);
 
-    if ($reader->read())
+    if (sizeof($reader->readBarCodes()) > 0)
     {
-        print "Recognized barcode code text: " . $reader->getCodeText(false) . "\n";
-        print "Recognized barcode code type: " . $reader->getCodeTypeName() . "\n";
+        print "Recognized barcode code text: " . $reader->readBarCodes()[0]->getCodeText() . "\n";
+        print "Recognized barcode code type: " . $reader->readBarCodes()[0]->getCodeTypeName() . "\n";
     }
     else
     {

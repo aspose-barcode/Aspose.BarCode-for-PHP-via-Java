@@ -1588,7 +1588,7 @@ class  ChecksumValidation
     /**
      *    If checksum is required by the specification - it will be validated.
      */
-    const default = "0";
+    const default = 0;
 
     /**
      *    Always validate checksum if possible.
@@ -4435,6 +4435,26 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
+     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+     * about the used references for encoding the data in the symbol.
+     * Current implementation consists all well known charset encodings.
+     */
+    public function getPdf417ECIEncoding() : int
+    {
+        return java_cast($this->getJavaClass()->getPdf417ECIEncoding(), "integer");
+    }
+
+/**
+ * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+ * about the used references for encoding the data in the symbol.
+ * Current implementation consists all well known charset encodings.
+ */
+    public function setPdf417ECIEncoding($value) : void
+    {
+        $this->getJavaClass()->setPdf417ECIEncoding($value);
+    }
+
+    /**
      * 
      * Returns a human-readable string representation of this Pdf417Parameters.
      *
@@ -5214,6 +5234,170 @@ final class FontUnit extends BaseJavaClass
         }
     }
 }
+
+/**
+ * <p>
+ * Helper class for automatic codetext generation of the Extended Codetext Mode
+ * </p>
+ */
+class ExtCodetextBuilder extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    function init(): void {
+    }
+    /**
+     * <p>
+     * Checks necessity to shield previous item by "\000000"
+     * </p>
+     *
+     * @param Index Index in m_List
+     * @return Necessity to shield
+     */
+    function isNeedToShieldItemFromPrevECI($Index) {
+        return java_cast($this->getJavaClass()->isNeedToShieldItemFromPrevECI($Index), "boolean");
+    }
+
+    /**
+     * <p>
+     * Clears extended codetext items
+     * </p>
+     */
+    function clear() {
+    $this->getJavaClass()->clear();
+    }
+
+    /**
+     * <p>
+     * Adds plain codetext to the extended codetext items
+     * </p>
+     *
+     * @param codetext Codetext in unicode to add as extended codetext item
+     */
+    function addPlainCodetext($codetext) {
+        $this->getJavaClass()->addPlainCodetext($codetext);
+    }
+
+    /**
+     * <p>
+     * Adds codetext with Extended Channel Identifier
+     * </p>
+     *
+     * @param ECIEncoding Extended Channel Identifier
+     * @param codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
+     */
+    function addECICodetext($ECIEncoding, $codetext) {
+    $this->getJavaClass()->addECICodetext($ECIEncoding, $codetext);
+    }
+
+    /**
+     * <p>
+     * Generate extended codetext from generation items list
+     * </p>
+     *
+     * @return Return string of extended codetext
+     */
+    function getExtendedCodetext() {
+    }
+
+}
+
+/**
+ * <p>Extended codetext generator for 2D QR barcodes for ExtendedCodetext Mode of QREncodeMode</p>
+ * <p>Use Display2DText property of BarCodeBuilder to set visible text to removing managing characters.</p>
+ * <p><hr><blockquote><pre>
+ *  Example how to generate FNC1 first position for Extended Mode
+ *  <pre>
+ *  //create codetext
+ *  QrExtCodetextBuilder lTextBuilder = new QrExtCodetextBuilder();
+ *  lTextBuilder.addFNC1FirstPosition();
+ *  lTextBuilder.addPlainCodetext("000%89%%0");
+ *  lTextBuilder.addFNC1GroupSeparator();
+ *  lTextBuilder.addPlainCodetext("12345&lt;FNC1&gt;");
+ *  //generate codetext
+ *  String lCodetext = lTextBuilder.getExtendedCodetext();
+ *  </pre>
+ *  Example how to generate FNC1 second position for Extended Mode
+ *  <pre>
+ *  //create codetext
+ *  QrExtCodetextBuilder lTextBuilder = new QrExtCodetextBuilder();
+ * lTextBuilder.addFNC1SecondPosition("12");
+ * lTextBuilder.addPlainCodetext("TRUE3456");
+ *  //generate codetext
+ * String lCodetext = lTextBuilder.getExtendedCodetext();
+ *  </pre>
+ * Example how to generate multi ECI mode for Extended Mode
+ *  <pre>
+ *  //create codetext
+ * QrExtCodetextBuilder lTextBuilder = new QrExtCodetextBuilder();
+ * lTextBuilder.addECICodetext(ECIEncodings.Win1251, "Will");
+ * lTextBuilder.addECICodetext(ECIEncodings.UTF8, "Right");
+ * lTextBuilder.addECICodetext(ECIEncodings.UTF16BE, "Power");
+ * lTextBuilder.addPlainCodetext("t\\e\\\\st");
+ *  //generate codetext
+ *  String lCodetext = lTextBuilder.getExtendedCodetext();
+ *  </pre>
+ *  </pre></blockquote></hr></p>
+ */
+class QrExtCodetextBuilder extends ExtCodetextBuilder
+{
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.MwQrExtCodetextBuilder";
+
+    function __construct()
+    {
+        $java_class = new java(self::JAVA_CLASS_NAME);
+        parent::__construct($java_class);
+    }
+
+    function init():void {
+    }
+
+    /**
+     * <p>
+     * Adds FNC1 in first position to the extended codetext items
+     * </p>
+     */
+    function addFNC1FirstPosition()
+    {
+        $this->getJavaClass()->addFNC1FirstPosition();
+    }
+
+    /**
+     * <p>
+     * Adds FNC1 in second position to the extended codetext items
+     * </p>
+     *
+     * @param codetext Value of the FNC1 in the second position
+     */
+    function addFNC1SecondPosition($codetext) {
+        $this->getJavaClass()->addFNC1SecondPosition($codetext);
+    }
+
+    /**
+     * <p>
+     * Adds Group Separator (GS - '\\u001D') to the extended codetext items
+     * </p>
+     */
+    function addFNC1GroupSeparator() {
+        $this->getJavaClass()->addFNC1GroupSeparator();
+    }
+
+    /**
+     * <p>
+     * Generates Extended codetext from the extended codetext list.
+     * </p>
+     *
+     * @return Extended codetext as string
+     */
+    function getExtendedCodetext() {
+        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+    }
+
+}
+
 /**
  * PatchCode parameters.
  */
@@ -5334,25 +5518,25 @@ final class CodabarSymbol
      * Specifies character A as the start or stop symbol of the Codabar barcode specification.
      *
      */
-    const A = 'A';
+    const A = 65;
     /**
      * 
      * Specifies character B as the start or stop symbol of the Codabar barcode specification.
      *
      */
-    const B = 'B';
+    const B = 66;
     /**
      * 
      * Specifies character C as the start or stop symbol of the Codabar barcode specification.
      *
      */
-    const C = 'C';
+    const C = 67;
     /**
      * 
      * Specifies character D as the start or stop symbol of the Codabar barcode specification.
      *
      */
-    const D = 'D';
+    const D = 68;
 }
 
 /**
@@ -6983,5 +7167,10 @@ class ECIEncodings
      * Korean Character Set encoding. ECI Id:"\000030"
      */
     const EUC_KR = 30;
+
+    /**
+     * <p>No Extended Channel Interpretation/p>
+     */
+    const NONE = 0;
 }
 ?>

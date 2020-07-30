@@ -21,6 +21,7 @@ class BarcodeGeneratorExamples
         $code_text_expected = "123678943";
         $generator = new BarcodeGenerator($type_expected, $code_text_expected);
         $generator->save($this->subfolder . "howToSave.png", "PNG");
+        print("image saved to ". $this->subfolder ."howToSave.png");
     }
 
     function howToSetBarcodeType()
@@ -184,5 +185,6 @@ class BarcodeGeneratorExamples
         $generator->getParameters()->getCaptionAbove()->getFont()->getSize()->setPoint(5);
         $save_path = $this->subfolder . "howToSetFont.bmp";
         $generator->save($save_path, "BMP");
+        prt_mess("image is saved to $save_path");
     }
 }

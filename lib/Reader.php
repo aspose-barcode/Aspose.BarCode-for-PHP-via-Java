@@ -17,7 +17,6 @@ require_once('assist.php');
 class BarcodeReader extends BaseJavaClass
 {
     private $qualitySettings;
-    private $barcodeRegion;
     private $code128DataPortions;
     private $recognizedResults;
 
@@ -118,8 +117,6 @@ class BarcodeReader extends BaseJavaClass
         try
         {
             $this->qualitySettings = new QualitySettings($this->getJavaClass()->getQualitySettings());
-            if (!$this->getJavaClass()->getRegion()->isNull())
-                $this->barcodeRegion = new BarCodeRegion($this->getJavaClass()->getRegion());
         } catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
@@ -373,53 +370,11 @@ class BarcodeReader extends BaseJavaClass
         }
     }
 
-    /**
-     * Closes barcode reader.
-     */
-    public function close(): void
-    {
-        try
-        {
-            $this->getJavaClass()->close();
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
     public function abort(): void
     {
         try
         {
             $this->getJavaClass()->abort();
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Reads barcode from the image.
-     *
-     * Detect AllSupportedTypes
-     *
-     *  $full_path = "test.png";
-     *  $reader = new BarcodeReader($full_path);
-     *  while($reader->read())
-     * {
-     *     print($reader->getCodeText(false));
-     *     print($reader->getCodeTypeName());
-     * }
-     * reader->close();
-     * @return True if the next barcode was read successfully; false if there are no more nodes to read.
-     */
-    public function read(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->read(), "boolean");
         } catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
@@ -549,316 +504,6 @@ class BarcodeReader extends BaseJavaClass
         {
             $this->getJavaClass()->setQualitySettings($value->getJavaClass());
             $this->qualitySettings = $value;
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the code text.
-     * Text will not contain the checksum for 1D barcode types, which support the checksum. Please use GetCodeText(true) method to get result with checksum.
-     *
-     * @return The code text of the barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getCodeText() instead.
-     */
-    public function getCodeText($includeCheckSum)
-    {
-        try
-        {
-            if (is_null($includeCheckSum))
-            {
-                $includeCheckSum = false;
-            }
-            return java_cast($this->getJavaClass()->getCodeText($includeCheckSum), "string");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the checksum for 1D barcodes.
-     * @return The checksum for 1D barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getOneD()->getCheckSum() instead.
-     */
-    public function getCheckSum()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCheckSum(), "string");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the angle of the barcode (0-360).
-     *
-     * @return The angle for barcode (0-360).
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getRegion()->getAngle() instead.
-     */
-    public function getAngle()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAngle(), "float");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the encoded code bytes.
-     *
-     * @return The code bytes of the barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getCodeBytes() instead.
-     */
-    public function getCodeBytes(): array
-    {
-        try
-        {
-            return explode(",", $this->getJavaClass()->getCodeBytes());
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the file ID of the barcode, only available with MacroPdf417.
-     *
-     * @return The file ID for MacroPdf417
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getPdf417()->getMacroPdf417FileID() instead.
-     */
-    public function getMacroPdf417FileID()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417FileID(), "string");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the segment ID of the barcode,only available with MacroPdf417.
-     *
-     * @return The segment ID of the barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getPdf417()->getMacroPdf417SegmentID() instead.
-     */
-    public function getMacroPdf417SegmentID()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417SegmentID(), "integer");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets macro pdf417 barcode segments count. Default value is -1.
-     *
-     * @return The segments count.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getPdf417()->getMacroPdf417SegmentsCount() instead.
-     */
-    public function getMacroPdf417SegmentsCount()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417SegmentsCount(), "integer");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets Code128DataPortion instance for recognized Code128 barcode
-     *
-     * @return The array of {@link Code128DataPortion} objects.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getCode128()->getCode128DataPortions() instead.
-     */
-    public function getCode128DataPortions(): iterable
-    {
-        try
-        {
-            if (is_null($this->code128DataPortions))
-            {
-                $this->code128DataPortions = array();
-                $javaCode128DataPortions = java_values($this->getJavaClass()->getCode128DataPortions());
-                for ($i = 0; $i < sizeof($javaCode128DataPortions); $i++)
-                {
-                    $this->code128DataPortions[$i] = Code128DataPortion::construct($javaCode128DataPortions[$i]);
-                }
-
-            }
-            return $this->code128DataPortions;
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the QR structured append mode barcodes quantity. Default value is -1.
-     *
-     * @return The quantity of the QR structured append mode barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getQR()->getQRStructuredAppendModeBarCodesQuantity() instead.
-     */
-    public function getQRStructuredAppendModeBarCodesQuantity()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getQRStructuredAppendModeBarCodesQuantity(), "integer");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the index of the QR structured append mode barcode. Index starts from 0. DEFAULT value is -1.
-     *
-     * @return The index of the QR structured append mode barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getQR()->getQRStructuredAppendModeBarCodeIndex() instead.
-     */
-    public function getQRStructuredAppendModeBarCodeIndex()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getQRStructuredAppendModeBarCodeIndex(), "integer");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the QR structured append mode parity data. Default value is -1.
-     *
-     * @return The QR structured append mode parity data.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getExtended()->getQR()->getQRStructuredAppendModeParityData() instead.
-     */
-    public function getQRStructuredAppendModeParityData()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getQRStructuredAppendModeParityData(), "integer");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Checks the deniable recognition. Such recognition might occur in QualitySettings::getMaxBarcodes() mode decoding or use QualitySettings::getAllowIncorrectBarcodes()
-     *
-     * @return True if the deniable recognition was read.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getConfidence() instead.
-     */
-    public function getIsDeniable()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getIsDeniable(), "boolean");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the barcode region.
-     *
-     * @return The region of the recognized barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getRegion() instead.
-     */
-    public function getRegion()
-    {
-        try
-        {
-            if (java_cast($this->getJavaClass()->getRegion()->isNull(), "boolean"))
-            {
-                $this->barcodeRegion = null;
-            } else if (is_null($this->barcodeRegion))
-            {
-                $this->barcodeRegion = new BarCodeRegion($this->getJavaClass()->getRegion());
-            }
-            return $this->barcodeRegion;
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the barcode type.
-     *
-     * @return The type information of the recognized barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getCodeType() instead.
-     */
-    public function getCodeType()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeType(), "integer");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Gets the name of the barcode type.
-     *
-     * @return The type name of the recognized barcode.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getCodeTypeName() instead.
-     */
-    public function getCodeTypeName()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeTypeName(), "string");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-
-    /**
-     * Gets the recognition quality. Works for 1D and postal barcodes.
-     *
-     * @return The recognition quality percent.
-     * @deprecated This method is obsolete. Use BarCodeReader->getFoundBarCodes()[]->getReadingQuality() instead.
-     */
-    public function getRecognitionQuality()
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getRecognitionQuality(), "float");
         } catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
@@ -2850,7 +2495,7 @@ final class QualitySettings extends BaseJavaClass
      */
     public function getDetectorSettings()
     {
-        return auto_DetectorSettings;
+        return $this->detectorSettings;
     }
 
     /**
@@ -2882,30 +2527,6 @@ final class QualitySettings extends BaseJavaClass
         $this->setAllowMicroWhiteSpotsRemoving($Src->getAllowMicroWhiteSpotsRemoving());
         $this->setAllowSaltAndPaperFiltering($Src->getAllowSaltAndPaperFiltering());
         $this->setAllowDetectScanGap($Src->getAllowDetectScanGap());
-    }
-}
-
-class BarCodeRegion extends BaseJavaClass
-{
-    protected function init(): void
-    {
-        // TODO: Implement init() method.
-    }
-
-    /**
-     * Gets the points of the region.
-     */
-    public function getPoints(): array
-    {
-        $javaPoints = explode(" # ", $this->getJavaClass()->getPoints());
-
-        $points = array();
-        for ($i = 0; $i < sizeof($javaPoints); $i++)
-        {
-            $point = explode(",", $javaPoints[$i]);
-            $points[$i] = new Point($point[0], $point[1]);
-        }
-        return $points;
     }
 }
 
