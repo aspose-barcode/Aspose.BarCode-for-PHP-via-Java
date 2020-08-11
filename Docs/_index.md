@@ -1,32 +1,36 @@
 ---
-title: Aspose.BarCode for Java
+title: Aspose.BarCode for PHP via Java
 type: docs
-weight: 20
-url: /java/
+weight: 80
+url: /phpjava/
 ---
 
 {{% alert color="primary" %}} 
 
-![todo:image_alt_text](home_1.png)
 
-**Welcome to Aspose.BarCode for Java**
 
-Aspose.BarCode for Java is a robust and reliable barcode generation and recognition component, written in Java, it allows developers to quickly and easily add barcode generation and recognition functionality to their Java applications. It is available for the Java SE, Java EE and Java ME platforms.
+![todo:image_alt_text](aspose-barcode-for-php-via-java-home_1)
 
-Aspose.BarCode for Java supports most established barcode standards and barcode specifications. It has the ability to export to multiple image formats including: BMP, GIF, JPEG, PNG and TIFF.
+**Welcome to Aspose.BarCode for PHP via Java.**
 
-This section introduces Aspose.BarCode for Java and its features, gives examples as case studies and lists some customers who choose to use Aspose.BarCode in their solutions. This section also includes information about Aspose.BarCode for Java [installation](/barcode/java/installation-html/), [evaluation](/barcode/java/installation-html/) and [licensing](/barcode/java/licensing-html/).
+Aspose.BarCode for PHP via Java is a set of barcode generation and recognition components using JavaBridge. Aspose.BarCode for PHP via Java allows developers to quickly and easily add barcode generation and recognition functionality to their PHP applications. Aspose.BarCode for PHP via Java supports most established barcode standards and barcode specifications. It has the ability to export to multiple image formats including: BMP, GIF, JPEG, PNG and TIFF.
 
 {{% /alert %}} 
-## **Aspose.BarCode for Java Resources**
+
+
+## **Aspose.BarCode for PHP via Java Resources**
 Following are the links to some useful resources you may need to accomplish your tasks.
 
-- [Aspose.BarCode for Java Online Documentation](/barcode/java/)
-- [Aspose.BarCode for Java Features](/barcode/java/product-overview/)
-- [Aspose.BarCode for Java Release Notes](/barcode/java/release-notes/)
-- [Aspose.BarCode for Java Product Page](https://products.aspose.com/barcode/java)
-- [Install Aspose.BarCode for Java from Maven Repository](/barcode/java/installation/)
-- [Aspose.BarCode for Java API Reference Guide](https://apireference.aspose.com/java/barcode)
-- [Download Aspose.BarCode for Java from GitHub Repository](https://github.com/aspose-barcode/Aspose.Barcode-for-Java)
-- [Aspose.BarCode for Java Free Support Forum](https://forum.aspose.com/c/barcode)
-- [Aspose.BarCode for Java Paid Support Helpdesk](https://helpdesk.aspose.com/)
+- [Aspose.BarCode for Java Online Documentation](https://docs.aspose.com/display/barcodejava/Home) (Aspose.BarCode for PHP via Java is ported from Aspose.BarCode for Java. So, you can use the same documentation)
+- [Aspose.BarCode for PHP via Java Features](https://docs.aspose.com/display/barcodejava/Aspose.BarCode+for+PHP+via+Java+Features)
+- [Aspose.BarCode for PHP via Java Release Notes](https://docs.aspose.com/display/barcodejava/PHP+via+Java+Release+Notes)
+- [Aspose.BarCode for PHP via Java Product Page](https://products.aspose.com/barcode/php-java)
+- [Download Aspose.BarCode for PHP via Java](https://downloads.aspose.com/barcode/php)
+- [Aspose.BarCode for PHP via Java Free Support Forum](https://forum.aspose.com/c/barcode)
+- [Aspose.BarCode for PHP via Java Paid Support Helpdesk](https://helpdesk.aspose.com/)
+
+
+
+
+
+
