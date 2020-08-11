@@ -13,7 +13,7 @@ jobs:
       - name: hugo build
         run: |
           cd aspose-barcode-docs
-          git clone https://github.com/aspose-pdf/Aspose.PDF-for-Android-via-java.git || (cd Aspose.PDF-for-Android-via-java && git pull)
+          git clone https://github.com/aspose-barcode/Aspose.BarCode-for-PHP-via-Java.git || (cd Aspose.BarCode-for-PHP-via-Java && git pull)
           git clone --single-branch --branch master https://git.dev.dynabic.com/containerize-hugo/lutsk-aspose-prototype.git || (cd lutsk-aspose-prototype && git pull)
           cd lutsk-aspose-prototype
           git clone --single-branch --branch master https://git.dev.dynabic.com/containerize-hugo/lutsk-aspose-theme.git themes/lutsk-aspose-theme || (cd themes/lutsk-aspose-theme && git pull)
