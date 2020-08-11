@@ -3,6 +3,7 @@ title: Aspose.BarCode for PHP via Java
 type: docs
 weight: 80
 url: /phpjava/
+is_root: true
 ---
 
 {{% alert color="primary" %}} 
