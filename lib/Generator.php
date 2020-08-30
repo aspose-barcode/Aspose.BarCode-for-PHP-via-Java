@@ -4454,6 +4454,27 @@ class Pdf417Parameters extends BaseJavaClass
         $this->getJavaClass()->setPdf417ECIEncoding($value);
     }
 
+
+    /**
+     * Used to instruct the reader to interpret the data contained within the symbol
+     * as programming for reader initialization
+     * @return
+     */
+    public function isReaderInitialization()
+    {
+        return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
+    }
+
+    /**
+     * Used to instruct the reader to interpret the data contained within the symbol
+     * as programming for reader initialization
+     * @param value
+     */
+    public function setReaderInitialization($value)
+    {
+        $this->getJavaClass()->setReaderInitialization($value);
+    }
+
     /**
      * 
      * Returns a human-readable string representation of this Pdf417Parameters.

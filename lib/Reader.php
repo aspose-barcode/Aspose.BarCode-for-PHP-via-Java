@@ -503,7 +503,7 @@ class BarcodeReader extends BaseJavaClass
         try
         {
             $this->getJavaClass()->setQualitySettings($value->getJavaClass());
-            $this->qualitySettings = $value;
+            //$this->qualitySettings = new QualitySettings($this->getJavaClass()->getQualitySettings());
         } catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
@@ -2193,6 +2193,24 @@ final class QualitySettings extends BaseJavaClass
     public final function setAllowIncorrectBarcodes($value)
     {
         $this->getJavaClass()->setAllowIncorrectBarcodes($value);
+    }
+
+    /**
+     *  Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
+     * @return If True, allows engine to recognize tiny barcodes on large images.
+     */
+    public function getReadTinyBarcodes()
+    {
+        return java_cast($this->getJavaClass()->getReadTinyBarcodes(), "boolean");
+    }
+
+    /**
+     * Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
+     * @param value If True, allows engine to recognize tiny barcodes on large images.
+     */
+    public function setReadTinyBarcodes($value)
+    {
+        getNativeObject()->setReadTinyBarcodes($value);
     }
 
     /**
