@@ -14,9 +14,9 @@ class BarcodeReaderExamples
         $reader = new BarcodeReader($full_path, null, null);
         forEach($reader->readBarCodes() as $res)
         {
-            print($res->getCodeText());
+            print("Code Text : ".$res->getCodeText());
             print("\n");
-            print($res->getCodeTypeName());
+            print("Code Type : ".$res->getCodeTypeName());
         }
 
     }
@@ -34,9 +34,9 @@ class BarcodeReaderExamples
 
         forEach($reader->readBarCodes() as $res)
         {
-            print($res->getCodeText());
+            print("Code Text : ".$res->getCodeText());
             print("\n");
-            print($res->getCodeTypeName());
+            print("Code Type : ".$res->getCodeTypeName());
         }
 
     }
