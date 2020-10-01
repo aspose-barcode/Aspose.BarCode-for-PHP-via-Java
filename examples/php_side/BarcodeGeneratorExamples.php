@@ -13,7 +13,7 @@ class BarcodeGeneratorExamples
         $generator->setCodeText("123ABC");
         $path = $this->subfolder . "howToGenerateBarcodeImage.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
     }
 
     function howToSave()
@@ -24,7 +24,7 @@ class BarcodeGeneratorExamples
         $generator = new BarcodeGenerator($type_expected, $code_text_expected);
         $path = $this->subfolder . "howToSave.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
     }
 
     function howToSetBarcodeType()
@@ -36,7 +36,7 @@ class BarcodeGeneratorExamples
         $type_actual = $generator->getBarcodeType();
         $path = $this->subfolder . "howToSetBarcodeType.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("type_expected = " . $type_expected . "\n");
         print("type_actual = " . $type_actual . "\n");
     }
@@ -48,7 +48,7 @@ class BarcodeGeneratorExamples
         $generator = new BarcodeGenerator(EncodeTypes::CODE_128, $expected);
         $path = $this->subfolder . "howToGetCodeText.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("CodeText = " . $generator->getCodeText());
 
     }
@@ -61,7 +61,7 @@ class BarcodeGeneratorExamples
         $generator = new BarcodeGenerator($encodeType, $codeText);
         $path = $this->subfolder . "howToGenerateOneD.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
     }
 
     function howToGenerateTwoD()
@@ -72,7 +72,7 @@ class BarcodeGeneratorExamples
         $generator = new BarcodeGenerator($encodeType, $codeText);
         $path = $this->subfolder . "howToGenerateTwoD.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");;
     }
 
     function howToSetBackColor()
@@ -85,7 +85,7 @@ class BarcodeGeneratorExamples
         $generator->save($this->subfolder . "howToSetBackColor.png", "PNG");
         $path = $this->subfolder . "howToGetCodeText.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("color_expected = " . $color_expected . "\n");
         print("color_actual = " . $color_actual . "\n");
     }
@@ -98,7 +98,7 @@ class BarcodeGeneratorExamples
         $color_actual = $generator->getParameters()->getBackColor();
         $path = $this->subfolder . "howToGetDefaultBackColor.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("color_expected = " . $color_expected . "\n");
         print("color_actual = " . $color_actual . "\n");
     }
@@ -111,7 +111,7 @@ class BarcodeGeneratorExamples
         $color_actual = $generator->getParameters()->getBarcode()->getForeColor();
         $path = $this->subfolder . "howToGetDefaultForeColor.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("Color expected = " . $color_expected . "\n");
         print("Color actual = " . $color_actual . "\n");
     }
@@ -125,7 +125,7 @@ class BarcodeGeneratorExamples
         $color_actual = $generator->getParameters()->getBarcode()->getForeColor();
         $path = $this->subfolder . "howToSetForeColor.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("Color expected = " . $color_expected . "\n");
         print("Color actual = " . $color_actual . "\n");
     }
@@ -141,7 +141,7 @@ class BarcodeGeneratorExamples
         $actual = $generator->getCodeText();
         $path = $this->subfolder . "howToSetCodeText.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("CodeText actual = " . $actual . "\n");
         print("CodeText expected = " . $expected . "\n");
     }
@@ -157,7 +157,7 @@ class BarcodeGeneratorExamples
         $code_text_actual = $generator->getCodeText();
         $path = $this->subfolder . "howToGetBarcodeTypeAndCodeText.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("code text actual = " . $code_text_actual . "\n");
         print("code text expected = " . $code_text_expected . "\n");
         print("encode type actual = " . $encode_type_actual . "\n");
@@ -172,7 +172,7 @@ class BarcodeGeneratorExamples
         $dash_style_actual = $generator->getParameters()->getBorder()->getDashStyle();
         $path = $this->subfolder . "howToGetDefaultDashStyle.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
+        print("barcode image saved to ".$path."\n");
         print("dash_style_actual = " . $dash_style_actual . "\n");
         print("dash_style_expected" . $dash_style_expected . "\n");
     }
@@ -185,9 +185,9 @@ class BarcodeGeneratorExamples
         $border_color_actual = $generator->getParameters()->getBorder()->getColor();
         $path = $this->subfolder . "howToDefaultBorderColor.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
-        print("border_color_expected = " . $border_color_expected . "\n");
-        print("border_color_actual = " . $border_color_actual . "\n");
+        print("barcode image saved to ".$path."\n");
+        print("border_color_expected = " . $border_color_expected ."\n");
+        print("border_color_actual = " . $border_color_actual ."\n");
     }
 
     function howToSetBorderColor()
@@ -199,9 +199,9 @@ class BarcodeGeneratorExamples
         $border_color_actual = $generator->getParameters()->getBorder()->getColor();
         $path = $this->subfolder . "howToSetBorderColor.png";
         $generator->save($path, "PNG");
-        print("barcode image saved to ".$path);
-        print("border_color_expected = " . $border_color_expected . "\n");
-        print("border_color_actual = " . $border_color_actual . "\n");
+        print("barcode image saved to ".$path."\n");
+        print("border_color_expected = " . $border_color_expected ."\n");
+        print("border_color_actual = " . $border_color_actual ."\n");
     }
 
     function howToSetFont()
@@ -214,7 +214,7 @@ class BarcodeGeneratorExamples
         $generator->getParameters()->getCaptionAbove()->getFont()->getSize()->setPoint(5);
         $save_path = $this->subfolder . "howToSetFont.bmp";
         $generator->save($save_path, "BMP");
-        print("barcode image saved to ".$save_path);
+        print("barcode image saved to ".$save_path."\n");
     }
 }
 
