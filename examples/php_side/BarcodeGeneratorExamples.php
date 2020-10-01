@@ -88,7 +88,6 @@ class BarcodeGeneratorExamples
         print("barcode image saved to ".$path);
         print("color_expected = " . $color_expected . "\n");
         print("color_actual = " . $color_actual . "\n");
-        prt_mess("image saved to ". $this->subfolder ."howToSetBackColor.png");
     }
 
     function howToGetDefaultBackColor()
