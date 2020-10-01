@@ -1,6 +1,6 @@
 {
 	"name" : "aspose/barcode",
-	"version": "20.8.0",
+	"version": "20.9.0",
 	"type" : "library",
 	"description" : "A PHP library that allows developers to quickly and easily add barcode generation and recognition functionality to their PHP applications while using Aspose.Barcode for Java as core library and PHP-Java Bridge for communication.",
 	"keywords" : [
@@ -14,7 +14,7 @@
 		}
 	],
 	"require" : {
-		"php" : ">=7.0"
+		"php" : ">=7.1"
 	},
 	"autoload": {
         "psr-4": { "aspose\\barcode\\" : "lib/" }

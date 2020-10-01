@@ -41,7 +41,12 @@ class BarcodeReader extends BaseJavaClass
                 $decodeTypes = array($decodeTypes);
             $java_class = new java(self::JAVA_CLASS_NAME, self::loadImage($image), $rectangles, $decodeTypes);
             parent::__construct($java_class);
-        } catch (Exception $ex)
+        }
+        catch (java_InternalException $ex)
+        {
+            throw new Exception("Invalid arguments");
+        }
+        catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
@@ -60,18 +65,9 @@ class BarcodeReader extends BaseJavaClass
 
     private static function loadImage($image)
     {
-        $is_path_to_image = false;
         try
         {
-            $is_path_to_image = file_exists($image);
-        } catch (Exception $e)
-        {
-            print "Warning " . $e->getMessage();
-        }
-
-        try
-        {
-            if ($is_path_to_image)
+            if (self::isPath($image))
             {
                 $imagedata = file_get_contents($image);
                 return base64_encode($imagedata);
@@ -84,6 +80,17 @@ class BarcodeReader extends BaseJavaClass
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
         }
+    }
+
+    private static function isPath($image)
+    {
+        if(strlen($image) < 256 && (strpos($image, "/") || strpos($image, "\\")))
+        {
+            if(file_exists($image))
+                return true;
+            throw new Exception("Path does not exist");
+        }
+        return false;
     }
 
     private static function convertToString($arg)
@@ -2210,7 +2217,7 @@ final class QualitySettings extends BaseJavaClass
      */
     public function setReadTinyBarcodes($value)
     {
-        getNativeObject()->setReadTinyBarcodes($value);
+        $this->getJavaClass()->setReadTinyBarcodes($value);
     }
 
     /**

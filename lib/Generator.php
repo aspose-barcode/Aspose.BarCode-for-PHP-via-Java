@@ -123,7 +123,7 @@ class BarcodeGenerator extends BaseJavaClass
      *
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      * $image = $generator->generateBarCodeImage(null);// if value = null, default image format PNG
-     * @return Barcode image.
+     * @return base64 representaton of image.
      */
     public function generateBarcodeImage($format_name)
     {
@@ -1686,26 +1686,6 @@ class CaptionParameters extends BaseJavaClass
 
     /**
      * 
-     * Caption font.
-     * Default value: Arial 8pt regular.
-     *
-     */
-    public function setFont(FontUnit $value): void
-    {
-        try
-        {
-            $this->font = $value;
-            $this->getJavaClass()->setFont($value->getJavaClass());
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * 
      * Caption text visibility.
      * Default value: false.
      *
@@ -1877,7 +1857,7 @@ class Unit extends BaseJavaClass
     private static function initUnit($source)
     {
         if($source instanceof Unit)
-            return $source->getNativeObject();
+            return $source->getJavaClass();
         return $source;
     }
 
