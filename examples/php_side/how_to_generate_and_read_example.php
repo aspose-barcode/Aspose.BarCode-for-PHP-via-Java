@@ -1,22 +1,6 @@
 <?php
 include_once('tests_assist.php');
 
-function set_license()
-{
-    $path_to_license_file = "lic/Aspose.BarCode.PHP.Java.lic";
-    $license = new License();
-    if (!is_exists($path_to_license_file))
-    {
-        print("Path \"" . $path_to_license_file . "\" doesn't exist\n");
-    }
-    else
-    {
-        $license->setLicense($path_to_license_file);
-    }
-    $is_licensed = $license->isLicensed();
-    prt_mess('is_licensed => ' . $is_licensed);
-}
-
 function generate_and_read()
 {
     set_license();

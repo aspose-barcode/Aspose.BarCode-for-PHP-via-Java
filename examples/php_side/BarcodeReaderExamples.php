@@ -228,6 +228,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
     }
 }
 
+set_license();
 $barcodeReaderTests = new BarcodeReaderExamples();
 $barcodeReaderTests->howToReadFromFile();
 $barcodeReaderTests->howToSetQualitySettings();

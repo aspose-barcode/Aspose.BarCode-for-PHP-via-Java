@@ -219,6 +219,7 @@ class BarcodeGeneratorExamples
     }
 }
 
+set_license();
 $barcodeGeneratorTests = new BarcodeGeneratorExamples();
 $barcodeGeneratorTests->howToGenerateBarcodeImage();
 $barcodeGeneratorTests->howToGetCodeText();

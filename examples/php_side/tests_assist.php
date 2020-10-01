@@ -4,6 +4,23 @@ require_once("http://localhost:8888/JavaBridge/java/Java.inc");
 include_once('../../lib/Generator.php');
 include_once('../../lib/Reader.php');
 include_once('../../lib/Complexbarcode.php');
+
+function set_license()
+{
+    $path_to_license_file = "lic/Aspose.BarCode.PHP.Java.lic";
+    $license = new License();
+    if (!is_exists($path_to_license_file))
+    {
+        print("Path \"" . $path_to_license_file . "\" doesn't exist\n");
+    }
+    else
+    {
+        $license->setLicense($path_to_license_file);
+    }
+    $is_licensed = $license->isLicensed();
+    prt_mess('is_licensed => ' . $is_licensed);
+}
+
 function loadImageByName($subFolder, $fileName)
 {
     $filePath = "$subFolder/$fileName";
