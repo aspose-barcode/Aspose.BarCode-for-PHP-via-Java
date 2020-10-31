@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.2</span>
+   &#160;<span id="projectnumber">20.10</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -108,14 +108,9 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aec7073f6e50ecc26c5de04ad405ae5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Specifies the Aztec symbol mode. </p><hr  />
-<blockquote class="doxtable">
-<pre>
-  <pre>
-  $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>("125", EncodeTypes::AZTEC);
-  $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAztec()-&gt;setAztecSymbolMode(AztecSymbolMode::RUNE);
-  $generator-&gt;save("test.png");
-    </pre> </pre></blockquote>
+<div class="textblock"><p>Specifies the Aztec symbol mode. </p><pre class="fragment"> $generator = new BarcodeGenerator(EncodeTypes::AZTEC);
+ $generator-&gt;setCodeText("125");
+</pre><p> $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAztec()-&gt;setAztecSymbolMode(AztecSymbolMode::RUNE); $generator-&gt;save("test.png", "PNG"); </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="afc8ac3fdd50bb3fd8396e2cedf91ac10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afc8ac3fdd50bb3fd8396e2cedf91ac10">&#9670;&nbsp;</a></span>AUTO</h2>

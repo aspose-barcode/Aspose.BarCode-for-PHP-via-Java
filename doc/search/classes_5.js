@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['graphicsunit_663',['GraphicsUnit',['../class_graphics_unit.html',1,'']]]
+  ['fontmode_705',['FontMode',['../class_font_mode.html',1,'']]],
+  ['fontunit_706',['FontUnit',['../class_font_unit.html',1,'']]]
 ];

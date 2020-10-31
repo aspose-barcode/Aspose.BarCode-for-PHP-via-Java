@@ -1,12 +1,11 @@
 var searchData=
 [
-  ['qrbillstandardversion_676',['QrBillStandardVersion',['../class_qr_bill_standard_version.html',1,'']]],
-  ['qrencodemode_677',['QREncodeMode',['../class_q_r_encode_mode.html',1,'']]],
-  ['qrencodetype_678',['QREncodeType',['../class_q_r_encode_type.html',1,'']]],
-  ['qrerrorlevel_679',['QRErrorLevel',['../class_q_r_error_level.html',1,'']]],
-  ['qrextendedparameters_680',['QRExtendedParameters',['../class_q_r_extended_parameters.html',1,'']]],
-  ['qrparameters_681',['QrParameters',['../class_qr_parameters.html',1,'']]],
-  ['qrversion_682',['QRVersion',['../class_q_r_version.html',1,'']]],
-  ['quadrangle_683',['Quadrangle',['../class_quadrangle.html',1,'']]],
-  ['qualitysettings_684',['QualitySettings',['../class_quality_settings.html',1,'']]]
+  ['padding_712',['Padding',['../class_padding.html',1,'']]],
+  ['patchcodeparameters_713',['PatchCodeParameters',['../class_patch_code_parameters.html',1,'']]],
+  ['patchformat_714',['PatchFormat',['../class_patch_format.html',1,'']]],
+  ['pdf417compactionmode_715',['Pdf417CompactionMode',['../class_pdf417_compaction_mode.html',1,'']]],
+  ['pdf417errorlevel_716',['Pdf417ErrorLevel',['../class_pdf417_error_level.html',1,'']]],
+  ['pdf417extendedparameters_717',['Pdf417ExtendedParameters',['../class_pdf417_extended_parameters.html',1,'']]],
+  ['pdf417parameters_718',['Pdf417Parameters',['../class_pdf417_parameters.html',1,'']]],
+  ['postalparameters_719',['PostalParameters',['../class_postal_parameters.html',1,'']]]
 ];

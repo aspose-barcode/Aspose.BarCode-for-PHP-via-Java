@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.2</span>
+   &#160;<span id="projectnumber">20.10</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -118,7 +118,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a40d8f74443056d42c1c345df4eb3d068"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Stores special data of Code128 recognized barcode Represents the recognized barcode's region and barcode angle This sample shows how to get code128 raw values $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::Code128, "12345"); $generator-&gt;save("test.png"); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); for($result : $reader-&gt;readBarCodes()) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("Code128 Data Portions: ".$result-&gt;getExtended()-&gt;getCode128()); } </p>
+<div class="textblock"><p>Stores special data of Code128 recognized barcode Represents the recognized barcode's region and barcode angle This sample shows how to get code128 raw values $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::Code128, "12345"); $generator-&gt;save("test.png"); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("Code128 Data Portions: ".$result-&gt;getExtended()-&gt;getCode128()); } </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af940b98888d0fc2a59c9a4dd85b0fb32"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af940b98888d0fc2a59c9a4dd85b0fb32">&#9670;&nbsp;</a></span>equals()</h2>

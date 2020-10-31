@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['onedextendedparameters_667',['OneDExtendedParameters',['../class_one_d_extended_parameters.html',1,'']]]
+  ['maxicodeparameters_710',['MaxiCodeParameters',['../class_maxi_code_parameters.html',1,'']]]
 ];

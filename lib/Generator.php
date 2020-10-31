@@ -2,9 +2,9 @@
 require_once('assist.php');
 
 /**
- * 
+ *
  *  BarcodeGenerator for backend barcode images generation.
- *  
+ *
  *  supported symbologies:
  *  1D:
  *  Codabar, Code11, Code128, Code39Standard, Code39Extended
@@ -13,7 +13,7 @@ require_once('assist.php');
  *  EAN14, SCC14, SSCC18, ITF14, SingaporePost ...
  *  2D:
  *  Aztec, DataMatrix, PDf417, QR code ...
- * 
+ *
  * <hr><blockquote><pre>
  *  This sample shows how to create and save a barcode image.
  * @code
@@ -179,7 +179,7 @@ class BarcodeGenerator extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Text to be encoded.
      *
      */
@@ -190,7 +190,7 @@ class BarcodeGenerator extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Barcode generation parameters.
  *
  */
@@ -218,6 +218,8 @@ class BarcodeParameters extends BaseJavaClass
     private $dotCode;
     private $padding;
     private $complexBarcode;
+    private $patchCode;
+    private $barWidthReduction;
 
     protected function init(): void
     {
@@ -244,6 +246,8 @@ class BarcodeParameters extends BaseJavaClass
         $this->padding = new Padding($this->getJavaClass()->getPadding());
         $this->complexBarcode = new ComplexBarcode($this->getJavaClass()->getComplexBarcode());
         $this->patchCode = new PatchCodeParameters($this->getJavaClass()->getPatchCode());
+        $this->barWidthReduction = new Unit($this->getJavaClass()->getBarWidthReduction());
+
     }
 
     /**
@@ -263,10 +267,10 @@ class BarcodeParameters extends BaseJavaClass
         $this->getJavaClass()->setPatchCode($value->getJavaClass());
     }
 
-    private $patchCode;
+
 
     /**
-     * 
+     *
      * x-dimension is the smallest width of the unit of BarCode bars or spaces.
      * Increase this will increase the whole barcode image width.
      * Ignored if AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
@@ -286,7 +290,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * x-dimension is the smallest width of the unit of BarCode bars or spaces.
      * Increase this will increase the whole barcode image width.
      * Ignored if AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
@@ -297,7 +301,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setXDimension($value);
+            $this->getJavaClass()->setXDimension($value->getJavaClass());
             $this->xDimension = $value;
         }
         catch (Exception $ex)
@@ -308,7 +312,41 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     * Get bars reduction value that is used to compensate ink spread while printing.
+     * @return Unit value of BarWidthReduction
+     */
+    public function getBarWidthReduction(): Unit
+    {
+        try
+        {
+            return $this->barWidthReduction;
+        }
+        catch (Exception $ex)
+        {
+            $barcode_exception = new BarcodeException($ex);
+            throw $barcode_exception;
+        }
+    }
+
+    /**
+     * Sets bars reduction value that is used to compensate ink spread while printing.
+     */
+    public function setBarWidthReduction(Unit $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setBarWidthReduction($value->getJavaClass());
+            $this->barWidthReduction = $value;
+        }
+        catch (Exception $ex)
+        {
+            $barcode_exception = new BarcodeException($ex);
+            throw $barcode_exception;
+        }
+    }
+
+    /**
+     *
      * Height of 1D barcodes' bars in Unit value.
      * Ignored if AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
      *
@@ -328,7 +366,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height of 1D barcodes' bars in Unit value.
      * Ignored if AutoSizeMode property is set to utoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
      *
@@ -349,7 +387,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specifies the different types of automatic sizing modes.
      * Default value: AutoSizeMode::NONE.
      * @deprecated "This method is obsolete. Call BaseGenerationParameters->getAutoSizeMode() instead."
@@ -370,7 +408,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specifies the different types of automatic sizing modes.
      * Default value: AutoSizeMode::NONE.
      * @deprecated "This method is obsolete. Call BaseGenerationParameters->setAutoSizeMode() instead."
@@ -391,7 +429,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * BarCode image height when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
      *
      * @deprecated "This method is obsolete. Call BaseGenerationParameters->getImageHeight() instead."
@@ -510,7 +548,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Barcode paddings.
      * Default value: 5pt 5pt 5pt 5pt.
      *
@@ -530,7 +568,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      *  Always display checksum digit in the human readable text for Code128 and GS1Code128 barcodes.
      *
      */
@@ -548,7 +586,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      *  Always display checksum digit in the human readable text for Code128 and GS1Code128 barcodes.
      *
      */
@@ -566,7 +604,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Enable checksum during generation 1D barcodes.
      * Default is treated as Yes for symbology which must contain checksum, as No where checksum only possible.
      * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN, Codabar
@@ -588,7 +626,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Enable checksum during generation 1D barcodes.
      * Default is treated as Yes for symbology which must contain checksum, as No where checksum only possible.
      * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN, Codabar
@@ -609,7 +647,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Indicates whether explains the character "\" as an escape character in CodeText property. Used for Pdf417, DataMatrix, Code128 only
      * If the EnableEscape is true, "\" will be explained as a special escape character. Otherwise, "\" acts as normal characters.
      *Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.
@@ -628,7 +666,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Indicates whether explains the character "\" as an escape character in CodeText property. Used for Pdf417, DataMatrix, Code128 only
      * If the EnableEscape is true, "\" will be explained as a special escape character. Otherwise, "\" acts as normal characters.
      *<hr>Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.</hr>
@@ -647,7 +685,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Wide bars to Narrow bars ratio.
      * Default value: 3, that is, wide bars are 3 times as wide as narrow bars.
      * Used for ITF, PZN, PharmaCode, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, IATA2of5, VIN, DeutschePost, OPC, Code32, DataLogic2of5, PatchCode, Code39Extended, Code39Standard
@@ -669,7 +707,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Wide bars to Narrow bars ratio.
      * Default value: 3, that is, wide bars are 3 times as wide as narrow bars.
      * Used for ITF, PZN, PharmaCode, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, IATA2of5, VIN, DeutschePost, OPC, Code32, DataLogic2of5, PatchCode, Code39Extended, Code39Standard
@@ -691,7 +729,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Codetext parameters.
      *
      */
@@ -709,7 +747,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets a value indicating whether bars filled.
      * Only for 1D barcodes.
      * Default value: true.
@@ -729,7 +767,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets a value indicating whether bars filled.
      * Only for 1D barcodes.
      * Default value: true.
@@ -749,7 +787,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Postal parameters. Used for Postnet, Planet.
      *
      */
@@ -767,7 +805,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * AustralianPost barcode parameters.
      *
      */
@@ -785,7 +823,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Databar parameters.
      *
      */
@@ -803,7 +841,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Codablock parameters.
      *
      */
@@ -821,7 +859,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * DataMatrix parameters.
      *
      */
@@ -839,7 +877,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Code16K parameters.
      *
      */
@@ -857,7 +895,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * DotCode parameters.
      *
      */
@@ -875,7 +913,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * ITF parameters.
      *
      */
@@ -893,7 +931,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * PDF417 parameters.
      *
      */
@@ -911,7 +949,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * QR parameters.
      *
      */
@@ -929,7 +967,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Supplement parameters. Used for Interleaved2of5, Standard2of5, EAN13, EAN8, UPCA, UPCE, ISBN, ISSN, ISMN.
      *
      */
@@ -947,7 +985,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * MaxiCode parameters.
      *
      */
@@ -965,7 +1003,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Aztec parameters.
      *
      */
@@ -983,7 +1021,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Codabar parameters.
      *
      */
@@ -1001,7 +1039,7 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Coupon parameters. Used for UpcaGs1DatabarCoupon, UpcaGs1Code128Coupon.
      *
      */
@@ -1022,7 +1060,7 @@ class BarcodeParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Barcode image generation parameters.
  *
  */
@@ -1043,7 +1081,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Background color of the barcode image.
      * Default value: #FFFFFF
      * See Color.
@@ -1066,7 +1104,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Background color of the barcode image.
      * Default value: #FFFFFF
      * See Color.
@@ -1086,7 +1124,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the resolution of the BarCode image.
      * One value for both dimensions.
      * Default value: 96 dpi.
@@ -1108,7 +1146,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets the resolution of the BarCode image.
      * One value for both dimensions.
      * Default value: 96 dpi.
@@ -1130,7 +1168,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
      *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
      *  Default value: 0.
@@ -1157,7 +1195,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
      *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
      *  Default value: 0.
@@ -1184,7 +1222,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption Above the BarCode image. See CaptionParameters.
      *
      */
@@ -1202,7 +1240,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption Above the BarCode image. See CaptionParameters.
      *
      */
@@ -1221,7 +1259,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption Below the BarCode image. See CaptionParameters.
      *
      */
@@ -1239,7 +1277,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption Below the BarCode image. See CaptionParameters.
      *
      */
@@ -1320,7 +1358,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the BarcodeParameters that contains all barcode properties.
      *
      */
@@ -1339,7 +1377,7 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the BorderParameters that contains all configuration properties for barcode border.
      *
      */
@@ -1359,7 +1397,7 @@ class BaseGenerationParameters extends BaseJavaClass
 
 
 /**
- * 
+ *
  * Barcode image border parameters
  *
  */
@@ -1381,7 +1419,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border visibility. If false than parameter Width is always ignored (0).
      * Default value: false.
      *
@@ -1400,7 +1438,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border visibility. If false than parameter Width is always ignored (0).
      * Default value: false.
      *
@@ -1419,7 +1457,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border width.
      * Default value: 0.
      * Ignored if Visible is set to false.
@@ -1439,7 +1477,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border width.
      * Default value: 0.
      * Ignored if Visible is set to false.
@@ -1460,7 +1498,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this BorderParameters.
      *
      * @return A string that represents this BorderParameters.
@@ -1479,7 +1517,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border dash style.
      * Default value: BorderDashStyle::SOLID.
      *
@@ -1498,7 +1536,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border dash style.
      * Default value: BorderDashStyle::SOLID.
      *
@@ -1517,7 +1555,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border color.
      * Default value: #000000
      *
@@ -1536,7 +1574,7 @@ class BorderParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border color.
      * Default value: #000000
      *
@@ -1602,7 +1640,7 @@ class  ChecksumValidation
 }
 
 /**
- * 
+ *
  * Caption parameters.
  *
  */
@@ -1628,7 +1666,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption text.
      * Default value: empty string.
      *
@@ -1647,7 +1685,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption text.
      * Default value: empty string.
      *
@@ -1666,7 +1704,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption font.
      * Default value: Arial 8pt regular.
      *
@@ -1685,7 +1723,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption text visibility.
      * Default value: false.
      *
@@ -1704,7 +1742,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption text visibility.
      * Default value: false.
      *
@@ -1723,7 +1761,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption text color.
      * Default value BLACK.
      *
@@ -1742,7 +1780,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption text color.
      * Default value BLACK.
      *
@@ -1761,7 +1799,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Captions paddings.
      * Default value for CaptionAbove: 5pt 5pt 0 5pt.
      * Default value for CaptionBelow: 0 5pt 5pt 5pt.
@@ -1781,7 +1819,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Captions paddings.
      * Default value for CaptionAbove: 5pt 5pt 0 5pt.
      * Default value for CaptionBelow: 0 5pt 5pt 5pt.
@@ -1802,7 +1840,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption test horizontal alignment.
      * Default value: StringAlignment.Center.
      *
@@ -1821,7 +1859,7 @@ class CaptionParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Caption test horizontal alignment.
      * Default value: StringAlignment.Center.
      *
@@ -1883,7 +1921,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets size value in pixels.
      *
      */
@@ -1901,7 +1939,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets size value in inches.
      *
      */
@@ -1919,7 +1957,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets size value in inches.
      *
      */
@@ -1937,7 +1975,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets size value in millimeters.
      *
      */
@@ -1955,7 +1993,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets size value in millimeters.
      *
      */
@@ -1973,7 +2011,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets size value in point.
      *
      */
@@ -1991,7 +2029,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets size value in point.
      *
      */
@@ -2009,7 +2047,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets size value in document units.
      *
      */
@@ -2027,7 +2065,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets size value in document units.
      *
      */
@@ -2045,7 +2083,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this Unit.
      *
      * @return A string that represents this Unit.
@@ -2064,7 +2102,7 @@ class Unit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Determines whether this instance and a specified object,
      * which must also be a Unit object, have the same value.
      *
@@ -2079,7 +2117,7 @@ class Unit extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Paddings parameters.
  *
  */
@@ -2101,7 +2139,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Top padding.
      *
      */
@@ -2119,7 +2157,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Top padding.
      *
      */
@@ -2138,7 +2176,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Bottom padding.
      *
      */
@@ -2156,7 +2194,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Bottom padding.
      *
      */
@@ -2175,7 +2213,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Right padding.
      *
      */
@@ -2193,7 +2231,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Right padding.
      *
      */
@@ -2212,7 +2250,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Left padding.
      *
      */
@@ -2230,7 +2268,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Left padding.
      *
      */
@@ -2249,7 +2287,7 @@ class Padding extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this Padding.
      *
      * @return A string that represents this Padding.
@@ -2269,7 +2307,7 @@ class Padding extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Codetext parameters.
  *
  */
@@ -2295,7 +2333,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Text that will be displayed instead of codetext in 2D barcodes.
      * Used for: Aztec, Pdf417, DataMatrix, QR, MaxiCode, DotCode
      *
@@ -2314,7 +2352,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Text that will be displayed instead of codetext in 2D barcodes.
      * Used for: Aztec, Pdf417, DataMatrix, QR, MaxiCode, DotCode
      *
@@ -2333,7 +2371,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify FontMode. If FontMode is set to Auto, font size will be calculated automatically based on xDimension value.
      * It is recommended to use FontMode::AUTO especially in AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      * Default value: FontMode::AUTO.
@@ -2353,7 +2391,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify FontMode. If FontMode is set to Auto, font size will be calculated automatically based on xDimension value.
      * It is recommended to use FontMode::AUTO especially in AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      * Default value: FontMode::AUTO.
@@ -2373,7 +2411,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify the displaying CodeText's font.
      * Default value: Arial 5pt regular.
      * Ignored if FontMode is set to FontMode::AUTO.
@@ -2393,7 +2431,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify the displaying CodeText's font.
      * Default value: Arial 5pt regular.
      * Ignored if FontMode is set to FontMode::AUTO.
@@ -2414,7 +2452,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Space between the CodeText and the BarCode in Unit value.
      * Default value: 2pt.
      * Ignored for EAN8, EAN13, UPCE, UPCA, ISBN, ISMN, ISSN, UpcaGs1DatabarCoupon.
@@ -2434,7 +2472,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Space between the CodeText and the BarCode in Unit value.
      * Default value: 2pt.
      * Ignored for EAN8, EAN13, UPCE, UPCA, ISBN, ISMN, ISSN, UpcaGs1DatabarCoupon.
@@ -2455,7 +2493,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets the alignment of the code text.
      * Default value: TextAlignment::CENTER.
      *
@@ -2474,7 +2512,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets the alignment of the code text.
      * Default value: TextAlignment::CENTER.
      *
@@ -2493,7 +2531,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify the displaying CodeText's Color.
      * Default value BLACK.
      *
@@ -2512,7 +2550,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify the displaying CodeText's Color.
      * Default value BLACK.
      *
@@ -2531,7 +2569,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify the displaying CodeText Location, set to CodeLocation::NONE to hide CodeText.
      * Default value:  CodeLocation::BELOW.
      *
@@ -2550,7 +2588,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Specify the displaying CodeText Location, set to  CodeLocation::NONE to hide CodeText.
      * Default value:  CodeLocation::BELOW.
      *
@@ -2569,7 +2607,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this CodetextParameters.
      *
      * @return A string that represents this CodetextParameters.
@@ -2594,7 +2632,7 @@ class CodetextParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Postal parameters. Used for Postnet, Planet.
  *
  */
@@ -2618,7 +2656,7 @@ class PostalParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Short bar's height of Postal barcodes.
      *
      */
@@ -2636,7 +2674,7 @@ class PostalParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Short bar's height of Postal barcodes.
      *
      */
@@ -2655,7 +2693,7 @@ class PostalParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this PostalParameters.
      *
      * @return A string that represents this PostalParameters.
@@ -2675,7 +2713,7 @@ class PostalParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * AustralianPost barcode parameters.
  *
  */
@@ -2697,7 +2735,7 @@ class AustralianPostParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Short bar's height of AustralianPost barcode.
      *
      */
@@ -2715,7 +2753,7 @@ class AustralianPostParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Short bar's height of AustralianPost barcode.
      *
      */
@@ -2734,7 +2772,7 @@ class AustralianPostParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
      *
      */
@@ -2752,7 +2790,7 @@ class AustralianPostParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
      *
      */
@@ -2770,7 +2808,7 @@ class AustralianPostParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this AustralianPostParameters.
      *
      * @return A string that represents this AustralianPostParameters.
@@ -2790,7 +2828,7 @@ class AustralianPostParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Codablock parameters.
  *
  */
@@ -2803,7 +2841,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -2821,7 +2859,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -2839,7 +2877,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -2857,7 +2895,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -2875,7 +2913,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -2893,7 +2931,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -2911,7 +2949,7 @@ class CodablockParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this CodablockParameters.
      *
      * @return A string that represents this CodablockParameters.
@@ -2931,7 +2969,7 @@ class CodablockParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Databar parameters.
  *
  */
@@ -2944,7 +2982,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -2962,7 +3000,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -2980,7 +3018,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -2998,7 +3036,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -3016,7 +3054,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      * Used for DataBar stacked.
      *
@@ -3035,7 +3073,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      * Used for DataBar stacked.
      *
@@ -3054,7 +3092,7 @@ class DataBarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this DataBarParameters.
      *
      * @return A string that represents this DataBarParameters.
@@ -3074,7 +3112,7 @@ class DataBarParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * DataMatrix parameters.
  *
  */
@@ -3087,7 +3125,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets a Datamatrix ECC type.
      * Default value: DataMatrixEccType::ECC_200.
      *
@@ -3106,7 +3144,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets a Datamatrix ECC type.
      * Default value: DataMatrixEccType::ECC_200.
      *
@@ -3125,7 +3163,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Encode mode of Datamatrix barcode.
      * Default value: DataMatrixEncodeMode::AUTO.
      *
@@ -3144,7 +3182,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Encode mode of Datamatrix barcode.
      * Default value: DataMatrixEncodeMode::AUTO.
      *
@@ -3163,7 +3201,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -3181,7 +3219,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -3199,7 +3237,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -3217,7 +3255,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -3235,7 +3273,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3253,7 +3291,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3271,7 +3309,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the encoding of codetext.
      *
      */
@@ -3289,7 +3327,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets the encoding of codetext.
      *
      */
@@ -3307,7 +3345,7 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this DataMatrixParameters.
      *
      * @return presentation of this DataMatrixParameters.
@@ -3330,7 +3368,7 @@ class DataMatrixParameters extends BaseJavaClass
 
 
 /**
- * 
+ *
  * Code16K parameters.
  *
  */
@@ -3343,7 +3381,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3361,7 +3399,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3379,7 +3417,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Size of the left quiet zone in xDimension.
      * Default value: 10, meaning if xDimension = 2px than left quiet zone will be 20px.
      *
@@ -3398,7 +3436,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Size of the left quiet zone in xDimension.
      * Default value: 10, meaning if xDimension = 2px than left quiet zone will be 20px.
      *
@@ -3417,7 +3455,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Size of the right quiet zone in xDimension.
      * Default value: 1, meaning if xDimension = 2px than right quiet zone will be 2px.
      *
@@ -3436,7 +3474,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Size of the right quiet zone in xDimension.
      * Default value: 1, meaning if xDimension = 2px than right quiet zone will be 2px.
      *
@@ -3455,7 +3493,7 @@ class Code16KParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this Code16KParameters.
      *
      * @return A string that represents this Code16KParameters.
@@ -3475,7 +3513,7 @@ class Code16KParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * DotCode parameters.
  *
  */
@@ -3488,7 +3526,7 @@ class DotCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Mask of Dotcode barcode.
      * Default value: -1.
      *
@@ -3507,7 +3545,7 @@ class DotCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Mask of Dotcode barcode.
      * Default value: -1.
      *
@@ -3526,7 +3564,7 @@ class DotCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3544,7 +3582,7 @@ class DotCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3562,7 +3600,7 @@ class DotCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this DotCodeParameters.
      *
      * @return A string that represents this DotCodeParameters.
@@ -3582,7 +3620,7 @@ class DotCodeParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * ITF parameters.
  *
  */
@@ -3598,7 +3636,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets an ITF border (bearer bar) thickness in Unit value.
      * Default value: 12pt.
      *
@@ -3617,7 +3655,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets an ITF border (bearer bar) thickness in Unit value.
      * Default value: 12pt.
      *
@@ -3637,7 +3675,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border type of ITF barcode.
      * Default value: ITF14BorderType::BAR.
      *
@@ -3656,7 +3694,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Border type of ITF barcode.
      * Default value: ITF14BorderType::BAR.
      *
@@ -3675,7 +3713,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Size of the quiet zones in xDimension.
      * Default value: 10, meaning if xDimension = 2px than quiet zones will be 20px.
      *
@@ -3696,7 +3734,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Size of the quiet zones in xDimension.
      * Default value: 10, meaning if xDimension = 2px than quiet zones will be 20px.
      *
@@ -3717,7 +3755,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this ITFParameters.
      *
      * @return A string that represents this ITFParameters.
@@ -3737,7 +3775,7 @@ class ITFParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * QR parameters.
  *
  */
@@ -3750,7 +3788,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
      * about the used references for encoding the data in the symbol.
      * Current implementation consists all well known charset encodings.
@@ -3770,7 +3808,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
      * about the used references for encoding the data in the symbol.
      * Current implementation consists all well known charset encodings.
@@ -3790,7 +3828,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * QR symbology type of BarCode's encoding mode.
      * Default value: QREncodeMode::AUTO.
      *
@@ -3809,7 +3847,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * QR symbology type of BarCode's encoding mode.
      * Default value: QREncodeMode::AUTO.
      *
@@ -3828,7 +3866,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
      *
      */
@@ -3836,7 +3874,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQrEncodeMode(), "integer");
+            return java_cast($this->getJavaClass()->getQrEncodeType(), "integer");
         }
         catch (Exception $ex)
         {
@@ -3846,7 +3884,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
      *
      */
@@ -3864,7 +3902,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      *  Level of Reed-Solomon error correction for QR barcode.
      *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H. see QRErrorLevel.
      *
@@ -3883,7 +3921,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      *  Level of Reed-Solomon error correction for QR barcode.
      *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H. see QRErrorLevel.
      *
@@ -3902,7 +3940,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Version of QR Code.
      * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
      * Default value is QRVersion::AUTO.
@@ -3922,7 +3960,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Version of QR Code.
      * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
      * Default value is QRVersion::AUTO.
@@ -3942,7 +3980,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3960,7 +3998,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -3978,7 +4016,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the encoding of codetext.
      *
      */
@@ -3996,7 +4034,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets the encoding of codetext.
      *
      */
@@ -4014,7 +4052,7 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this QrParameters.
      *
      * @return A string that represents this QrParameters.
@@ -4034,7 +4072,7 @@ class QrParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * PDF417 parameters.
  *
  */
@@ -4047,7 +4085,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Pdf417 symbology type of BarCode's compaction mode.
      * Default value: Pdf417CompactionMode::AUTO.
      *
@@ -4066,7 +4104,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Pdf417 symbology type of BarCode's compaction mode.
      * Default value: Pdf417CompactionMode::AUTO.
      *
@@ -4085,7 +4123,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets Pdf417 symbology type of BarCode's error correction level
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
@@ -4105,7 +4143,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets Pdf417 symbology type of BarCode's error correction level
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
@@ -4125,7 +4163,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
      *
      */
@@ -4143,7 +4181,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
      *
      */
@@ -4161,7 +4199,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -4179,7 +4217,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Columns count.
      *
      */
@@ -4197,7 +4235,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -4215,7 +4253,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Rows count.
      *
      */
@@ -4233,7 +4271,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -4251,7 +4289,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -4269,7 +4307,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Getsmacro Pdf417 barcode's file ID.
      * Used for MacroPdf417.
      *
@@ -4288,7 +4326,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets macro Pdf417 barcode's file ID.
      * Used for MacroPdf417.
      *
@@ -4307,7 +4345,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets macro Pdf417 barcode's segment ID, which starts from 0, to MacroSegmentsCount - 1.
      *
      */
@@ -4325,7 +4363,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets macro Pdf417 barcode's segment ID, which starts from 0, to MacroSegmentsCount - 1.
      *
      */
@@ -4343,7 +4381,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets macro Pdf417 barcode segments count.
      *
      */
@@ -4361,7 +4399,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets macro Pdf417 barcode segments count.
      *
      */
@@ -4379,7 +4417,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the encoding of codetext.
      *
      */
@@ -4397,7 +4435,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets the encoding of codetext.
      *
      */
@@ -4424,11 +4462,11 @@ class Pdf417Parameters extends BaseJavaClass
         return java_cast($this->getJavaClass()->getPdf417ECIEncoding(), "integer");
     }
 
-/**
- * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
- * about the used references for encoding the data in the symbol.
- * Current implementation consists all well known charset encodings.
- */
+    /**
+     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+     * about the used references for encoding the data in the symbol.
+     * Current implementation consists all well known charset encodings.
+     */
     public function setPdf417ECIEncoding($value) : void
     {
         $this->getJavaClass()->setPdf417ECIEncoding($value);
@@ -4456,7 +4494,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this Pdf417Parameters.
      *
      * @return A string that represents this Pdf417Parameters.
@@ -4476,7 +4514,7 @@ class Pdf417Parameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Supplement parameters. Used for Interleaved2of5, Standard2of5, EAN13, EAN8, UPCA, UPCE, ISBN, ISSN, ISMN.
  *
  */
@@ -4500,7 +4538,7 @@ class SupplementParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Supplement data following BarCode.
      *
      */
@@ -4518,7 +4556,7 @@ class SupplementParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Supplement data following BarCode.
      *
      */
@@ -4536,7 +4574,7 @@ class SupplementParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Space between main the BarCode and supplement BarCode in Unit value.
      *
      * @exception IllegalArgumentException
@@ -4556,7 +4594,7 @@ class SupplementParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this SupplementParameters.
      *
      * @return A string that represents this SupplementParameters.
@@ -4576,7 +4614,7 @@ class SupplementParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * MaxiCode parameters.
  *
  */
@@ -4589,7 +4627,7 @@ class MaxiCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets a MaxiCode encode mode.
      *
      */
@@ -4607,7 +4645,7 @@ class MaxiCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets a MaxiCode encode mode.
      *
      */
@@ -4625,7 +4663,7 @@ class MaxiCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -4643,7 +4681,7 @@ class MaxiCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -4661,7 +4699,7 @@ class MaxiCodeParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this MaxiCodeParameters.
      *
      * @return A string that represents this MaxiCodeParameters.
@@ -4681,7 +4719,7 @@ class MaxiCodeParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Aztec parameters.
  *
  */
@@ -4694,7 +4732,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Level of error correction of Aztec types of barcode.
      * Value should between 10 to 95.
      *
@@ -4713,7 +4751,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Level of error correction of Aztec types of barcode.
      * Value should between 10 to 95.
      *
@@ -4732,7 +4770,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets a Aztec Symbol mode.
      * Default value: AztecSymbolMode::AUTO.
      *
@@ -4751,7 +4789,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets or sets a Aztec Symbol mode.
      * Default value: AztecSymbolMode::AUTO.
      *
@@ -4770,7 +4808,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -4788,7 +4826,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Height/Width ratio of 2D BarCode module.
      *
      */
@@ -4806,7 +4844,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the encoding of codetext.
      *
      */
@@ -4824,7 +4862,7 @@ class AztecParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets the encoding of codetext.
      *
      */
@@ -4863,7 +4901,7 @@ class AztecParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Codabar parameters.
  *
  */
@@ -4876,7 +4914,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Get the checksum algorithm for Codabar barcodes.
      * Default value: CodabarChecksumMode::MOD_16.
      * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
@@ -4897,7 +4935,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Set the checksum algorithm for Codabar barcodes.
      * Default value: CodabarChecksumMode::MOD_16.
      * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
@@ -4918,7 +4956,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Start symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol::A
      *
@@ -4937,7 +4975,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Start symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol::A
      *
@@ -4956,7 +4994,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Stop symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol::A
      *
@@ -4975,7 +5013,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Stop symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol::A
      *
@@ -4994,7 +5032,7 @@ class CodabarParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this CodabarParameters.
      *
      * @return A string that represents this CodabarParameters.
@@ -5014,7 +5052,7 @@ class CodabarParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  * Coupon parameters. Used for UpcaGs1DatabarCoupon, UpcaGs1Code128Coupon.
  *
  */
@@ -5039,7 +5077,7 @@ class CouponParameters extends BaseJavaClass
 
 
     /**
-     * 
+     *
      * Space between main the BarCode and supplement BarCode in Unit value.
      *
      * @exception IllegalArgumentException
@@ -5059,7 +5097,7 @@ class CouponParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Space between main the BarCode and supplement BarCode in Unit value.
      *
      * @exception IllegalArgumentException
@@ -5080,7 +5118,7 @@ class CouponParameters extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Returns a human-readable string representation of this CouponParameters.
      *
      * @return A string that represents this CouponParameters.
@@ -5100,7 +5138,7 @@ class CouponParameters extends BaseJavaClass
 }
 
 /**
- * 
+ *
  *  Defines a particular format for text, including font face, size, and style attributes
  *  where size in Unit value property.
  * <hr><blockquote><pre>
@@ -5144,7 +5182,7 @@ final class FontUnit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets the face name of this Font.
      *
      */
@@ -5162,7 +5200,7 @@ final class FontUnit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets the face name of this Font.
      *
      */
@@ -5180,7 +5218,7 @@ final class FontUnit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets style information for this FontUnit.
      *
      */
@@ -5198,7 +5236,7 @@ final class FontUnit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Sets style information for this FontUnit.
      *
      */
@@ -5216,7 +5254,7 @@ final class FontUnit extends BaseJavaClass
     }
 
     /**
-     * 
+     *
      * Gets size of this FontUnit in Unit value.
      *
      * @exception IllegalArgumentException
@@ -5268,7 +5306,7 @@ class ExtCodetextBuilder extends BaseJavaClass
      * </p>
      */
     function clear() {
-    $this->getJavaClass()->clear();
+        $this->getJavaClass()->clear();
     }
 
     /**
@@ -5291,7 +5329,7 @@ class ExtCodetextBuilder extends BaseJavaClass
      * @param codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
      */
     function addECICodetext($ECIEncoding, $codetext) {
-    $this->getJavaClass()->addECICodetext($ECIEncoding, $codetext);
+        $this->getJavaClass()->addECICodetext($ECIEncoding, $codetext);
     }
 
     /**
@@ -5415,48 +5453,48 @@ class PatchCodeParameters extends BaseJavaClass
 
     private $extraBarcodeText;
 
-        /**
-         * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
-         */
-        public function getExtraBarcodeText()
+    /**
+     * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
+     */
+    public function getExtraBarcodeText()
     {
-            return java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
-        }
+        return java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
+    }
 
-        /**
-         * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
-         */
-        public function setExtraBarcodeText($value)
-        {
-            $this->getJavaClass()->setExtraBarcodeText($value);
-        }
+    /**
+     * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
+     */
+    public function setExtraBarcodeText($value)
+    {
+        $this->getJavaClass()->setExtraBarcodeText($value);
+    }
 
-        /**
-         * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
-         * Default value: PatchFormat::PATCH_ONLY
-         *
-         * @return
-         */
-        public function getPatchFormat()
-        {
-            return java_cast($this->getJavaClass()->getPatchFormat(), "integer");
-        }
+    /**
+     * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
+     * Default value: PatchFormat::PATCH_ONLY
+     *
+     * @return
+     */
+    public function getPatchFormat()
+    {
+        return java_cast($this->getJavaClass()->getPatchFormat(), "integer");
+    }
 
-        /**
-         * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
-         * Default value: PatchFormat::PATCH_ONLY
-         *
-         */
-        public function setPatchFormat($value)
-        {
-            $this->getJavaClass()->setPatchFormat($value);
-        }
+    /**
+     * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
+     * Default value: PatchFormat::PATCH_ONLY
+     *
+     */
+    public function setPatchFormat($value)
+    {
+        $this->getJavaClass()->setPatchFormat($value);
+    }
 
-        /**
-         * Returns a human-readable string representation of this <see cref="PatchCodeParameters"/>.
-         * @return A string that represents this <see cref="PatchCodeParameters"/>.
-         */
-        public function toString()
+    /**
+     * Returns a human-readable string representation of this <see cref="PatchCodeParameters"/>.
+     * @return A string that represents this <see cref="PatchCodeParameters"/>.
+     */
+    public function toString()
     {
         return java_cast($this->getJavaClass()->toString(), "string");
     }
@@ -5504,7 +5542,7 @@ final class FontStyle
 }
 
 /**
- * 
+ *
  * Specifies the start or stop symbol of the Codabar barcode specification.
  *
  */
@@ -5515,25 +5553,25 @@ final class CodabarSymbol
     }
 
     /**
-     * 
+     *
      * Specifies character A as the start or stop symbol of the Codabar barcode specification.
      *
      */
     const A = 65;
     /**
-     * 
+     *
      * Specifies character B as the start or stop symbol of the Codabar barcode specification.
      *
      */
     const B = 66;
     /**
-     * 
+     *
      * Specifies character C as the start or stop symbol of the Codabar barcode specification.
      *
      */
     const C = 67;
     /**
-     * 
+     *
      * Specifies character D as the start or stop symbol of the Codabar barcode specification.
      *
      */
@@ -5541,7 +5579,7 @@ final class CodabarSymbol
 }
 
 /**
- * 
+ *
  * DataMatrix encoder's encoding mode, default to AUTO
  *
  */
@@ -5549,25 +5587,25 @@ class  DataMatrixEncodeMode
 {
 
     /**
-     * 
+     *
      * Automatically pick up the best encode mode for datamatrix encoding
      *
      */
     const AUTO = "0";
     /**
-     * 
+     *
      * Encodes one alphanumeric or two numeric characters per byte
      *
      */
     const ASCII = "1";
     /**
-     * 
+     *
      * Encode 8 bit values
      *
      */
     const FULL = "6";
     /**
-     * 
+     *
      * Encode with the encoding specified in BarCodeBuilder.CodeTextEncoding
      *
      */
@@ -5575,14 +5613,14 @@ class  DataMatrixEncodeMode
 
 
     /**
-     * 
+     *
      * Uses C40 encoding. Encodes Upper-case alphanumeric, Lower case and special characters
      *
      */
     const C40 = "8";
 
     /**
-     * 
+     *
      * UUses TEXT encoding. Encodes Lower-case alphanumeric, Upper case and special characters
      *
      */
@@ -5601,39 +5639,39 @@ class  DataMatrixEncodeMode
 }
 
 /**
- * 
+ *
  * Specifies the style of dashed border lines.
  *
  */
 class BorderDashStyle
 {
     /**
-     * 
+     *
      * Specifies a solid line.
      *
      */
     const  SOLID = "0"; //DashStyle.Solid
     /**
-     * 
+     *
      * Specifies a line consisting of dashes.
      *
      */
     const   DASH = "1"; // DashStyle.Dash
     /**
-     * 
+     *
      * Specifies a line consisting of dots.
      *
      */
     const  DOT = "2"; //(DashStyle.Dot
 
     /**
-     * 
+     *
      * Specifies a line consisting of a repeating pattern of dash-dot.
      *
      */
     const  DASH_DOT = "3"; //DashStyle.DashDot
     /**
-     * 
+     *
      * Specifies a line consisting of a repeating pattern of dash-dot-dot.
      *
      */
@@ -5641,38 +5679,38 @@ class BorderDashStyle
 }
 
 /**
- * 
+ *
  * ITF14 barcode's border type
  *
  */
 class ITF14BorderType
 {
     /**
-     * 
+     *
      * NO border enclosing the barcode
      *
      */
     const NONE = "0";
     /**
-     * 
+     *
      * FRAME enclosing the barcode
      *
      */
     const FRAME = "1";
     /**
-     * 
+     *
      * Tow horizontal bars enclosing the barcode
      *
      */
     const BAR = "2";
     /**
-     * 
+     *
      * FRAME enclosing the barcode
      *
      */
     const FRAME_OUT = "3";
     /**
-     * 
+     *
      * Tow horizontal bars enclosing the barcode
      *
      */
@@ -5680,33 +5718,33 @@ class ITF14BorderType
 }
 
 /**
- * 
+ *
  * Encoding mode for QR barcodes. It is recomended to Use AUTO with CodeTextEncoding = Encoding.UTF8 for latin symbols or digits and UTF_8_BOM for unicode symbols.
  *
  */
 class QREncodeMode
 {
     /**
-     * 
+     *
      * Encode codetext as is non-unicode charset. If there is any unicode character, the codetext will be encoded with value which is set in CodeTextEncoding.
      *
      */
     const AUTO = 0;
     /**
-     * 
+     *
      * Encode codetext as plain bytes. If it detects any unicode character, the character will be encoded as two bytes, lower byte first.
      *
      */
     const BYTES = 1;
     //https://en.wikipedia.org/wiki/Byte_order_mark
     /**
-     * 
+     *
      * Encode codetext with UTF8 encoding with first ByteOfMark character.
      *
      */
     const UTF_8_BOM = 2;
     /**
-     * 
+     *
      * Encode codetext with UTF8 encoding with first ByteOfMark character. It can be problems with some barcode scaners.
      *
      */
@@ -5785,50 +5823,50 @@ class QREncodeMode
 
 
 /**
- * 
+ *
  * Specify the type of the ECC to encode.
  *
  */
 class  DataMatrixEccType
 {
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined by default Reed-Solomon error correction or ECC 200.
      *
      */
     const ECC_AUTO = "0";
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined ECC 000.
      *
      */
     const ECC_000 = "1";
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined ECC 050.
      *
      */
     const ECC_050 = "2";
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined ECC 080.
      *
      */
     const ECC_080 = "3";
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined ECC 100.
      *
      */
     const ECC_100 = "4";
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined ECC 140.
      *
      */
     const ECC_140 = "5";
     /**
-     * 
+     *
      * Specifies that encoded Ecc type is defined ECC 200. Recommended to use.
      *
      */
@@ -5836,7 +5874,7 @@ class  DataMatrixEccType
 }
 
 /**
- * 
+ *
  * Version of QR Code.
  * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
  *
@@ -5844,7 +5882,7 @@ class  DataMatrixEccType
 class QRVersion
 {
     /**
-     * 
+     *
      * Specifies to automatically pick up the best version for QR.
      * This is default value.
      *
@@ -5852,63 +5890,63 @@ class QRVersion
     const AUTO = "0";
 
     /**
-     * 
+     *
      * Specifies version 1 with 21 x 21 modules.
      *
      */
     const VERSION_01 = "1";
 
     /**
-     * 
+     *
      * Specifies version 2 with 25 x 25 modules.
      *
      */
     const VERSION_02 = "2";
 
     /**
-     * 
+     *
      * Specifies version 3 with 29 x 29 modules.
      *
      */
     const VERSION_03 = "3";
 
     /**
-     * 
+     *
      * Specifies version 4 with 33 x 33 modules.
      *
      */
     const VERSION_04 = "4";
 
     /**
-     * 
+     *
      * Specifies version 5 with 37 x 37 modules.
      *
      */
     const VERSION_05 = "5";
 
     /**
-     * 
+     *
      * Specifies version 6 with 41 x 41 modules.
      *
      */
     const VERSION_06 = "6";
 
     /**
-     * 
+     *
      * Specifies version 7 with 45 x 45 modules.
      *
      */
     const VERSION_07 = "7";
 
     /**
-     * 
+     *
      * Specifies version 8 with 49 x 49 modules.
      *
      */
     const VERSION_08 = "8";
 
     /**
-     * 
+     *
      * Specifies version 9 with 53 x 53 modules.
      *
      */
@@ -5916,112 +5954,112 @@ class QRVersion
 
 
     /**
-     * 
+     *
      * Specifies version 10 with 57 x 57 modules.
      *
      */
     const VERSION_10 = "10";
 
     /**
-     * 
+     *
      * Specifies version 11 with 61 x 61 modules.
      *
      */
     const VERSION_11 = "11";
 
     /**
-     * 
+     *
      * Specifies version 12 with 65 x 65 modules.
      *
      */
     const VERSION_12 = "12";
 
     /**
-     * 
+     *
      * Specifies version 13 with 69 x 69 modules.
      *
      */
     const VERSION_13 = "13";
 
     /**
-     * 
+     *
      * Specifies version 14 with 73 x 73 modules.
      *
      */
     const VERSION_14 = "14";
 
     /**
-     * 
+     *
      * Specifies version 15 with 77 x 77 modules.
      *
      */
     const VERSION_15 = "15";
 
     /**
-     * 
+     *
      * Specifies version 16 with 81 x 81 modules.
      *
      */
     const VERSION_16 = "16";
 
     /**
-     * 
+     *
      * Specifies version 17 with 85 x 85 modules.
      *
      */
     const VERSION_17 = "17";
 
     /**
-     * 
+     *
      * Specifies version 18 with 89 x 89 modules.
      *
      */
     const VERSION_18 = "18";
 
     /**
-     * 
+     *
      * Specifies version 19 with 93 x 93 modules.
      *
      */
     const VERSION_19 = "19";
 
     /**
-     * 
+     *
      * Specifies version 20 with 97 x 97 modules.
      *
      */
     const VERSION_20 = "20";
 
     /**
-     * 
+     *
      * Specifies version 21 with 101 x 101 modules.
      *
      */
     const VERSION_21 = "21";
 
     /**
-     * 
+     *
      * Specifies version 22 with 105 x 105 modules.
      *
      */
     const VERSION_22 = "22";
 
     /**
-     * 
+     *
      * Specifies version 23 with 109 x 109 modules.
      *
      */
     const VERSION_23 = "23";
 
     /**
-     * 
+     *
      * Specifies version 24 with 113 x 113 modules.
      *
      */
     const VERSION_24 = "24";
 
     /**
-     * 
+     *
      * Specifies version 25 with 117 x 117 modules.
      *
      */
@@ -6029,133 +6067,133 @@ class QRVersion
 
 
     /**
-     * 
+     *
      * Specifies version 26 with 121 x 121 modules.
      *
      */
     const VERSION_26 = "26";
 
     /**
-     * 
+     *
      * Specifies version 27 with 125 x 125 modules.
      *
      */
     const VERSION_27 = "27";
 
     /**
-     * 
+     *
      * Specifies version 28 with 129 x 129 modules.
      *
      */
     const VERSION_28 = "28";
 
     /**
-     * 
+     *
      * Specifies version 29 with 133 x 133 modules.
      *
      */
     const VERSION_29 = "29";
 
     /**
-     * 
+     *
      * Specifies version 30 with 137 x 137 modules.
      *
      */
     const VERSION_30 = "30";
 
     /**
-     * 
+     *
      * Specifies version 31 with 141 x 141 modules.
      *
      */
     const VERSION_31 = "31";
 
     /**
-     * 
+     *
      * Specifies version 32 with 145 x 145 modules.
      *
      */
     const VERSION_32 = "32";
 
     /**
-     * 
+     *
      * Specifies version 33 with 149 x 149 modules.
      *
      */
     const VERSION_33 = "33";
 
     /**
-     * 
+     *
      * Specifies version 34 with 153 x 153 modules.
      *
      */
     const VERSION_34 = "34";
 
     /**
-     * 
+     *
      * Specifies version 35 with 157 x 157 modules.
      *
      */
     const VERSION_35 = "35";
 
     /**
-     * 
+     *
      * Specifies version 36 with 161 x 161 modules.
      *
      */
     const VERSION_36 = "36";
 
     /**
-     * 
+     *
      * Specifies version 37 with 165 x 165 modules.
      *
      */
     const VERSION_37 = "37";
 
     /**
-     * 
+     *
      * Specifies version 38 with 169 x 169 modules.
      *
      */
     const VERSION_38 = "38";
 
     /**
-     * 
+     *
      * Specifies version 39 with 173 x 173 modules.
      *
      */
     const VERSION_39 = "39";
 
     /**
-     * 
+     *
      * Specifies version 40 with 177 x 177 modules.
      *
      */
     const VERSION_40 = "40";
 
     /**
-     * 
+     *
      * Specifies version M1 for Micro QR with 11 x 11 modules.
      *
      */
     const VERSION_M1 = "101";
 
     /**
-     * 
+     *
      * Specifies version M2 for Micro QR with 13 x 13 modules.
      *
      */
     const VERSION_M2 = "102";
 
     /**
-     * 
+     *
      * Specifies version M3 for Micro QR with 15 x 15 modules.
      *
      */
     const VERSION_M3 = "103";
 
     /**
-     * 
+     *
      * Specifies version M4 for Micro QR with 17 x 17 modules.
      *
      */
@@ -6163,7 +6201,7 @@ class QRVersion
 }
 
 /**
- * 
+ *
  * Specifies the Aztec symbol mode.
  *
  *      $generator = new BarcodeGenerator(EncodeTypes::AZTEC);
@@ -6174,28 +6212,28 @@ class QRVersion
 class  AztecSymbolMode
 {
     /**
-     * 
+     *
      * Specifies to automatically pick up the best symbol (COMPACT or FULL-range) for Aztec.
      * This is default value.
      *
      */
     const AUTO = "0";
     /**
-     * 
+     *
      * Specifies the COMPACT symbol for Aztec.
      * Aztec COMPACT symbol permits only 1, 2, 3 or 4 layers.
      *
      */
     const COMPACT = "1";
     /**
-     * 
+     *
      * Specifies the FULL-range symbol for Aztec.
      * Aztec FULL-range symbol permits from 1 to 32 layers.
      *
      */
     const FULL_RANGE = "2";
     /**
-     * 
+     *
      * Specifies the RUNE symbol for Aztec.
      * Aztec Runes are a series of small but distinct machine-readable marks. It permits only number value from 0 to 255.
      *
@@ -6204,7 +6242,7 @@ class  AztecSymbolMode
 }
 
 /**
- * 
+ *
  * pdf417 barcode's error correction level, from level 0 to level 9, level 0 means no error correction, level 9 means best error correction
  *
  */
@@ -6212,55 +6250,55 @@ class Pdf417ErrorLevel
 {
 
     /**
-     * 
+     *
      * level = 0.
      *
      */
     const LEVEL_0 = "0";
     /**
-     * 
+     *
      * level = 1.
      *
      */
     const LEVEL_1 = "1";
     /**
-     * 
+     *
      * level = 2.
      *
      */
     const LEVEL_2 = "2";
     /**
-     * 
+     *
      * level = 3.
      *
      */
     const LEVEL_3 = "3";
     /**
-     * 
+     *
      * level = 4.
      *
      */
     const LEVEL_4 = "4";
     /**
-     * 
+     *
      * level = 5.
      *
      */
     const LEVEL_5 = "5";
     /**
-     * 
+     *
      * level = 6.
      *
      */
     const LEVEL_6 = "6";
     /**
-     * 
+     *
      * level = 7.
      *
      */
     const LEVEL_7 = "7";
     /**
-     * 
+     *
      * level = 8.
      *
      */
@@ -6269,32 +6307,32 @@ class Pdf417ErrorLevel
 
 
 /**
- * 
+ *
  * Pdf417 barcode's compation mode
  *
  */
 class  Pdf417CompactionMode
 {
     /**
-     * 
+     *
      * auto detect compation mode
      *
      */
     const AUTO = "0";
     /**
-     * 
+     *
      * text compaction
      *
      */
     const TEXT = "1";
     /**
-     * 
+     *
      * numeric compaction mode
      *
      */
     const NUMERIC = "2";
     /**
-     * 
+     *
      * binary compaction mode
      *
      */
@@ -6302,32 +6340,32 @@ class  Pdf417CompactionMode
 }
 
 /**
- * 
+ *
  * Level of Reed-Solomon error correction. From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
  *
  */
 class QRErrorLevel
 {
     /**
-     * 
+     *
      * Allows recovery of 7% of the code text
      *
      */
     const LEVEL_L = "0";
     /**
-     * 
+     *
      * Allows recovery of 15% of the code text
      *
      */
     const LEVEL_M = "1";
     /**
-     * 
+     *
      * Allows recovery of 25% of the code text
      *
      */
     const LEVEL_Q = "2";
     /**
-     * 
+     *
      * Allows recovery of 30% of the code text
      *
      */
@@ -6336,7 +6374,7 @@ class QRErrorLevel
 
 
 /**
- * 
+ *
  * QR / MicroQR selector mode. Select FORCE_QR for standard QR symbols, AUTO for MicroQR.
  * FORCE_MICRO_QR is used for strongly MicroQR symbol generation if it is possible.
  *
@@ -6344,19 +6382,19 @@ class QRErrorLevel
 class  QREncodeType
 {
     /**
-     * 
+     *
      * Mode starts barcode version negotiation from MicroQR V1
      *
      */
     const AUTO = "0";
     /**
-     * 
+     *
      * Mode starts barcode version negotiation from QR V1
      *
      */
     const FORCE_QR = "1";
     /**
-     * 
+     *
      * Mode starts barcode version negotiation from from MicroQR V1 to V4. If data cannot be encoded into MicroQR, exception is thrown.
      *
      */
@@ -6364,7 +6402,7 @@ class  QREncodeType
 }
 
 /**
- * 
+ *
  * Specifies the checksum algorithm for Codabar
  *
  */
@@ -6372,14 +6410,14 @@ class CodabarChecksumMode
 {
 
     /**
-     * 
+     *
      * Specifies Mod 10 algorithm for Codabar.
      *
      */
     const MOD_10 = "0";
 
     /**
-     * 
+     *
      * Specifies Mod 16 algorithm for Codabar (recomended AIIM).
      *
      */
@@ -6387,28 +6425,28 @@ class CodabarChecksumMode
 }
 
 /**
- * 
+ *
  * Codetext location
  *
  */
 class  CodeLocation
 {
     /**
-     * 
+     *
      * Codetext below barcode.
      *
      */
     const BELOW = "0";
 
     /**
-     * 
+     *
      * Codetext above barcode.
      *
      */
     const ABOVE = "1";
 
     /**
-     * 
+     *
      * Hide codetext.
      *
      */
@@ -6417,21 +6455,21 @@ class  CodeLocation
 
 
 /**
- * 
+ *
  * Font size mode.
  *
  */
 class  FontMode
 {
     /**
-     * 
+     *
      * Automatically calculate Font size based on barcode size.
      *
      */
     const AUTO = "0";
 
     /**
-     * 
+     *
      * Use Font sized defined by user.
      *
      */
@@ -6439,28 +6477,28 @@ class  FontMode
 }
 
 /**
- * 
+ *
  * Text alignment.
  *
  */
 class  TextAlignment
 {
     /**
-     * 
+     *
      * Left position.
      *
      */
     const LEFT = "0";
 
     /**
-     * 
+     *
      * Center position.
      *
      */
     const CENTER = "1";
 
     /**
-     * 
+     *
      * Right position.
      *
      */
@@ -6483,14 +6521,14 @@ class  TextAlignment
 class  AutoSizeMode
 {
     /**
-     * 
+     *
      * Automatic resizing is disabled. Default value.
      *
      */
     const NONE = '0';  //or CUSTOM, or DEFAULT
 
     /**
-     * 
+     *
      * Barcode resizes to nearest lowest possible size
      * which are specified by BarCodeWidth and BarCodeHeight properties.
      *
@@ -6498,7 +6536,7 @@ class  AutoSizeMode
     const NEAREST = '1';
 
     /**
-     * 
+     *
      *  Resizes barcode to specified size with little scaling
      *  but it can be little damaged in some cases
      *  because using interpolation for scaling.
@@ -6531,235 +6569,235 @@ class GraphicsUnit
     /**
      * Specifies the unit of measure of the display device. Typically pixels for video displays, and 1/100 inch for printers.
      */
-        const DISPLAY = 1;
+    const DISPLAY = 1;
 
     /**
      * 	Specifies a device pixel as the unit of measure.
      */
-        const PIXEL = 2;
+    const PIXEL = 2;
 
     /**
      * Specifies a printer's point  = 1/72 inch) as the unit of measure.
      */
-        const POINT = 3;
+    const POINT = 3;
 
     /**
      * 	Specifies the inch as the unit of measure.
      */
-        const INCH = 4;
+    const INCH = 4;
 
     /**
      * Specifies the document unit  = 1/300 inch) as the unit of measure.
      */
-        const DOCUMENT = 5;
+    const DOCUMENT = 5;
 
     /**
      * Specifies the millimeter as the unit of measure.
      */
-        const MILLIMETER = 6;
+    const MILLIMETER = 6;
 }
 
 class EncodeTypes
 {
 
     /**
-     * 
+     *
      * Unspecified encode type.
      *
      */
     const  NONE = "-1";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with CODABAR barcode specification
      *
      */
     const  CODABAR = "0";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with CODE 11 barcode specification
      *
      */
     const  CODE_11 = "1";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Standard CODE 39 barcode specification
      *
      */
     const  CODE_39_STANDARD = "2";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Extended CODE 39 barcode specification
      *
      */
     const  CODE_39_EXTENDED = "3";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Standard CODE 93 barcode specification
      *
      */
     const  CODE_93_STANDARD = "4";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Extended CODE 93 barcode specification
      *
      */
     const  CODE_93_EXTENDED = "5";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with CODE 128 barcode specification
      *
      */
     const  CODE_128 = "6";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with GS1 Code 128 barcode specification. The codetext must contains parentheses for AI.
      *
      */
     const  GS_1_CODE_128 = "7";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with EAN-8 barcode specification
      *
      */
     const  EAN_8 = "8";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with EAN-13 barcode specification
      *
      */
     const  EAN_13 = "9";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with EAN14 barcode specification
      *
      */
     const  EAN_14 = "10";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with SCC14 barcode specification
      *
      */
     const  SCC_14 = "11";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with SSCC18 barcode specification
      *
      */
     const  SSCC_18 = "12";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with UPC-A barcode specification
      *
      */
     const  UPCA = "13";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with UPC-E barcode specification
      *
      */
     const  UPCE = "14";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with isBN barcode specification
      *
      */
     const  ISBN = "15";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with ISSN barcode specification
      *
      */
     const  ISSN = "16";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with ISMN barcode specification
      *
      */
     const  ISMN = "17";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Standard 2 of 5 barcode specification
      *
      */
     const  STANDARD_2_OF_5 = "18";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with INTERLEAVED 2 of 5 barcode specification
      *
      */
     const  INTERLEAVED_2_OF_5 = "19";
 
     /**
-     * 
+     *
      * Represents Matrix 2 of 5 BarCode
      *
      */
     const  MATRIX_2_OF_5 = "20";
 
     /**
-     * 
+     *
      * Represents Italian Post 25 barcode.
      *
      */
     const  ITALIAN_POST_25 = "21";
 
     /**
-     * 
+     *
      * Represents IATA 2 of 5 barcode.IATA (International Air Transport Assosiation) uses this barcode for the management of air cargo.
      *
      */
     const  IATA_2_OF_5 = "22";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with ITF14 barcode specification
      *
      */
     const  ITF_14 = "23";
 
     /**
-     * 
+     *
      * Represents ITF-6  Barcode.
      *
      */
     const  ITF_6 = "24";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with MSI Plessey barcode specification
      *
      */
     const  MSI = "25";
 
     /**
-     * 
+     *
      * Represents VIN (Vehicle Identification Number) Barcode.
      *
      */
     const  VIN = "26";
 
     /**
-     * 
+     *
      * Represents Deutsch Post barcode, This EncodeType is also known as Identcode,CodeIdentcode,German Postal 2 of 5 Identcode,
      * Deutsch Post AG Identcode, Deutsch Frachtpost Identcode,  Deutsch Post AG (DHL)
      *
@@ -6767,245 +6805,245 @@ class EncodeTypes
     const  DEUTSCHE_POST_IDENTCODE = "27";
 
     /**
-     * 
+     *
      * Represents Deutsch Post Leitcode Barcode,also known as German Postal 2 of 5 Leitcode, CodeLeitcode, Leitcode, Deutsch Post AG (DHL).
      *
      */
     const  DEUTSCHE_POST_LEITCODE = "28";
 
     /**
-     * 
+     *
      * Represents OPC(Optical Product Code) Barcode,also known as , VCA Barcode VCA OPC, Vision Council of America OPC Barcode.
      *
      */
     const  OPC = "29";
 
     /**
-     * 
+     *
      * Represents PZN barcode.This EncodeType is also known as Pharmacy central number, Pharmazentralnummer
      *
      */
     const  PZN = "30";
 
     /**
-     * 
+     *
      * Represents Code 16K barcode.
      *
      */
     const  CODE_16_K = "31";
 
     /**
-     * 
+     *
      * Represents Pharmacode barcode.
      *
      */
     const  PHARMACODE = "32";
 
     /**
-     * 
+     *
      * 2D barcode symbology DataMatrix
      *
      */
     const  DATA_MATRIX = "33";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with QR Code barcode specification
      *
      */
     const  QR = "34";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Aztec barcode specification
      *
      */
     const  AZTEC = "35";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Pdf417 barcode specification
      *
      */
     const  PDF_417 = "36";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with MacroPdf417 barcode specification
      *
      */
     const  MACRO_PDF_417 = "37";
 
     /**
-     * 
+     *
      * 2D barcode symbology DataMatrix with GS1 string format
      *
      */
     const  GS_1_DATA_MATRIX = "48";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with MicroPdf417 barcode specification
      *
      */
     const  MICRO_PDF_417 = "55";
 
     /**
-     * 
+     *
      * 2D barcode symbology QR with GS1 string format
      *
      */
     const  GS_1_QR = "56";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with MaxiCode barcode specification
      *
      */
     const  MAXI_CODE = "57";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with DotCode barcode specification
      *
      */
     const  DOT_CODE = "60";
 
     /**
-     * 
+     *
      * Represents Australia Post Customer BarCode
      *
      */
     const  AUSTRALIA_POST = "38";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Postnet barcode specification
      *
      */
     const  POSTNET = "39";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Planet barcode specification
      *
      */
     const  PLANET = "40";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with USPS OneCode barcode specification
      *
      */
     const  ONE_CODE = "41";
 
     /**
-     * 
+     *
      * Represents RM4SCC barcode. RM4SCC (Royal Mail 4-state Customer Code) is used for automated mail sort process in UK.
      *
      */
     const  RM_4_SCC = "42";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with GS1 Databar omni-directional barcode specification.
      *
      */
     const  DATABAR_OMNI_DIRECTIONAL = "43";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with GS1 Databar truncated barcode specification.
      *
      */
     const  DATABAR_TRUNCATED = "44";
 
     /**
-     * 
+     *
      * Represents GS1 DATABAR limited barcode.
      *
      */
     const  DATABAR_LIMITED = "45";
 
     /**
-     * 
+     *
      * Represents GS1 Databar expanded barcode.
      *
      */
     const  DATABAR_EXPANDED = "46";
 
     /**
-     * 
+     *
      * Represents GS1 Databar expanded stacked barcode.
      *
      */
     const  DATABAR_EXPANDED_STACKED = "52";
 
     /**
-     * 
+     *
      * Represents GS1 Databar stacked barcode.
      *
      */
     const  DATABAR_STACKED = "53";
 
     /**
-     * 
+     *
      * Represents GS1 Databar stacked omni-directional barcode.
      *
      */
     const  DATABAR_STACKED_OMNI_DIRECTIONAL = "54";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Singapore Post Barcode barcode specification
      *
      */
     const  SINGAPORE_POST = "47";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Australian Post Domestic eParcel Barcode barcode specification
      *
      */
     const  AUSTRALIAN_POSTE_PARCEL = "49";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Swiss Post Parcel Barcode barcode specification. Supported types: Domestic Mail, International Mail, Additional Services (new)
      *
      */
     const  SWISS_POST_PARCEL = "50";
 
     /**
-     * 
+     *
      * Represents Patch code barcode
      *
      */
     const  PATCH_CODE = "51";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Code32 barcode specification
      *
      */
     const  CODE_32 = "58";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with DataLogic 2 of 5 barcode specification
      *
      */
     const  DATA_LOGIC_2_OF_5 = "59";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Dutch KIX barcode specification
      *
      */
     const  DUTCH_KIX = "61";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with UPC coupon with GS1-128 Extended Code barcode specification.
      * An example of the input string:
      * BarCodeBuilder->setCodetext("514141100906(8102)03"),
@@ -7015,7 +7053,7 @@ class EncodeTypes
     const  UPCA_GS_1_CODE_128_COUPON = "62";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with UPC coupon with GS1 DataBar addition barcode specification.
      * An example of the input string:
      * BarCodeBuilder->setCodetext("514141100906(8110)106141416543213500110000310123196000"),
@@ -7026,14 +7064,14 @@ class EncodeTypes
     const  UPCA_GS_1_DATABAR_COUPON = "63";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with Codablock-F barcode specification.
      *
      */
     const  CODABLOCK_F = "64";
 
     /**
-     * 
+     *
      * Specifies that the data should be encoded with GS1 Codablock-F barcode specification. The codetext must contains parentheses for AI.
      *
      */

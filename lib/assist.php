@@ -53,12 +53,12 @@ function is_exists($file_path): bool
 {
     if (file_exists($file_path))
     {
-        prt_mess("File ".$file_path." exists");
+        prt_mess("File exists : ".$file_path);
         return true;
     }
     else
     {
-        prt_mess("File ".$file_path." doesn't exist");
+        prt_mess("File  doesn't exist :".$file_path);
         return false;
     }
 }
@@ -343,7 +343,7 @@ abstract class BaseJavaClass
  */
 class BarcodeException extends Exception
 {
-    const MAX_LINES = 4;
+    const MAX_LINES = 34;
 
     /**
      * BarcodeException constructor.

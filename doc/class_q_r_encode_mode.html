@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.2</span>
+   &#160;<span id="projectnumber">20.10</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -98,14 +98,18 @@ $(document).ready(function(){initNavTree('class_q_r_encode_mode.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afc8ac3fdd50bb3fd8396e2cedf91ac10"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#afc8ac3fdd50bb3fd8396e2cedf91ac10">AUTO</a> = &quot;0&quot;</td></tr>
+<tr class="memitem:afc8ac3fdd50bb3fd8396e2cedf91ac10"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#afc8ac3fdd50bb3fd8396e2cedf91ac10">AUTO</a> = 0</td></tr>
 <tr class="separator:afc8ac3fdd50bb3fd8396e2cedf91ac10"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7541c60644baaff129054157b13643b"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#ac7541c60644baaff129054157b13643b">BYTES</a> = &quot;1&quot;</td></tr>
+<tr class="memitem:ac7541c60644baaff129054157b13643b"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#ac7541c60644baaff129054157b13643b">BYTES</a> = 1</td></tr>
 <tr class="separator:ac7541c60644baaff129054157b13643b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9502475914e161dcec41d0aa5c767acd"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#a9502475914e161dcec41d0aa5c767acd">UTF_8_BOM</a> = &quot;2&quot;</td></tr>
+<tr class="memitem:a9502475914e161dcec41d0aa5c767acd"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#a9502475914e161dcec41d0aa5c767acd">UTF_8_BOM</a> = 2</td></tr>
 <tr class="separator:a9502475914e161dcec41d0aa5c767acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27d204c1cf995ddc9a199d4dc0b35766"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#a27d204c1cf995ddc9a199d4dc0b35766">UTF_16_BEBOM</a> = &quot;3&quot;</td></tr>
+<tr class="memitem:a27d204c1cf995ddc9a199d4dc0b35766"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#a27d204c1cf995ddc9a199d4dc0b35766">UTF_16_BEBOM</a> = 3</td></tr>
 <tr class="separator:a27d204c1cf995ddc9a199d4dc0b35766"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80a94086c2ffaf536edee5818791fed9"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#a80a94086c2ffaf536edee5818791fed9">ECI_ENCODING</a> = 4</td></tr>
+<tr class="separator:a80a94086c2ffaf536edee5818791fed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42db9786cb295efbe47265a19b02dca3"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_encode_mode.html#a42db9786cb295efbe47265a19b02dca3">EXTENDED_CODETEXT</a> = 5</td></tr>
+<tr class="separator:a42db9786cb295efbe47265a19b02dca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Encoding mode for QR barcodes. It is recomended to Use AUTO with CodeTextEncoding = Encoding.UTF8 for latin symbols or digits and UTF_8_BOM for unicode symbols. </p>
@@ -117,7 +121,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const AUTO = &quot;0&quot;</td>
+          <td class="memname">const AUTO = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -132,11 +136,59 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const BYTES = &quot;1&quot;</td>
+          <td class="memname">const BYTES = 1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Encode codetext as plain bytes. If it detects any unicode character, the character will be encoded as two bytes, lower byte first. </p>
+
+</div>
+</div>
+<a id="a80a94086c2ffaf536edee5818791fed9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80a94086c2ffaf536edee5818791fed9">&#9670;&nbsp;</a></span>ECI_ENCODING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ECI_ENCODING = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Encode codetext with value set in the ECI_ENCODING property. It can be problems with some old (pre 2006) barcode scaners. Example how to use ECI encoding </p><pre class="fragment">$generator = new BarcodeGenerator(EncodeTypes::QR);
+$generator-&gt;setCodeText("12345TEXT");
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeType(QREncodeType::FORCE_QR);
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrECIEncoding(ECIEncodings::UTF8);
+$generator-&gt;save("test.png", "PNG");
+</pre> 
+</div>
+</div>
+<a id="a42db9786cb295efbe47265a19b02dca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42db9786cb295efbe47265a19b02dca3">&#9670;&nbsp;</a></span>EXTENDED_CODETEXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const EXTENDED_CODETEXT = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes. It is better to use <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder</a> for extended codetext generation. Use Display2DText property to set visible text to removing managing characters. Encoding Principles: All symbols "\" must be doubled "\\" in the codetext. FNC1 in first position is set in codetext as as "&amp;lt;FNC1&amp;gt;" FNC1 in second position is set in codetext as as "&amp;lt;FNC1(value)&amp;gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99. Group Separator for FNC1 modes is set as 0x1D character '\u001D' If you need to insert "&amp;lt;FNC1&amp;gt;" string into barcode write it as "&amp;lt;\FNC1&amp;gt;" ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier TO disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000" All unicode characters after ECI identifier are automatically encoded into correct character codeset. Example how to use FNC1 first position in Extended Mode </p><pre class="fragment">$textBuilder = new QrExtCodetextBuilder();
+$textBuilder-&gt;addPlainCodetext("000%89%%0");
+$textBuilder-&gt;addFNC1GroupSeparator();
+$textBuilder-&gt;addPlainCodetext("12345&amp;lt;FNC1&amp;gt;");
+//generate barcode
+$generator = new BarcodeGenerator(EncodeTypes::QR);
+$generator-&gt;setCodeText($textBuilder-&gt;getExtendedCodetext());
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText("My Text");
+$generator-&gt;save("d:/test.png", "PNG");
+</pre><p>This sample shows how to use FNC1 second position in Extended Mode.</p>
+<p>//create codetext $textBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>; $textBuilder-&gt;addFNC1SecondPosition("12"); $textBuilder-&gt;addPlainCodetext("TRUE3456"); //generate barcode $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator(EncodeTypes::QR)</a>; $generator-&gt;setCodeText($textBuilder-&gt;getExtendedCodetext()); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText("My Text"); $generator-&gt;save("d:/test.png", "PNG");</p>
+<p>This sample shows how to use multi ECI mode in Extended Mode.</p>
+<p>//create codetext $textBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>; $textBuilder-&gt;addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a855798585d4595bc7b9f30114667d8b1">ECIEncodings::Win1251</a>, "Will"); $textBuilder-&gt;addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a016c76c9446dd24577b1054a932b2df3">ECIEncodings::UTF8</a>, "Right"); $textBuilder-&gt;addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a8f61cbd00e3c77916b2e764a535bd67b">ECIEncodings::UTF16BE</a>, "Power"); $textBuilder-&gt;addPlainCodetext("t\e\\st"); //generate barcode $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator(EncodeTypes::QR)</a>; $generator-&gt;setCodeText($textBuilder-&gt;getExtendedCodetext()); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText("My Text"); $generator-&gt;save("d:/test.png", "PNG"); </p>
 
 </div>
 </div>
@@ -147,7 +199,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const UTF_16_BEBOM = &quot;3&quot;</td>
+          <td class="memname">const UTF_16_BEBOM = 3</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -162,7 +214,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const UTF_8_BOM = &quot;2&quot;</td>
+          <td class="memname">const UTF_8_BOM = 2</td>
         </tr>
       </table>
 </div><div class="memdoc">

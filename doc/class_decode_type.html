@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.2</span>
+   &#160;<span id="projectnumber">20.10</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -242,7 +242,7 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a1eb79bf86b741055b4af5114922a9760"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Specify the type of barcode to read. This sample shows how to detect Code39 and Code128 barcodes. $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); for($result : $reader-&gt;readBarCodes()) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
+<div class="textblock"><p>Specify the type of barcode to read. This sample shows how to detect Code39 and Code128 barcodes. $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a97211ae0e407cf15eb98291e3e356ec3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97211ae0e407cf15eb98291e3e356ec3">&#9670;&nbsp;</a></span>ALL_SUPPORTED_TYPES</h2>

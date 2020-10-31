@@ -7,7 +7,6 @@ var class_caption_parameters =
     [ "getTextColor", "class_caption_parameters.html#a2156c3cc5f1fadbf8d7ac46fe602f2f7", null ],
     [ "getVisible", "class_caption_parameters.html#afd9abdc6ad9261029511c06c651571a3", null ],
     [ "setAlignment", "class_caption_parameters.html#a3c47c0ddae4e782a12a038ede2808276", null ],
-    [ "setFont", "class_caption_parameters.html#ae72617a10fef5eaa828bdb77edba6cea", null ],
     [ "setPadding", "class_caption_parameters.html#a7226d25759ecb2dde3b3131ed6f292fb", null ],
     [ "setText", "class_caption_parameters.html#ac36c817253547882a6c6367468dc18c3", null ],
     [ "setTextColor", "class_caption_parameters.html#abbd0edee3f2d089ec2dd352606e6519e", null ],

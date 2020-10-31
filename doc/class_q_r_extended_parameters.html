@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.2</span>
+   &#160;<span id="projectnumber">20.10</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -123,7 +123,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores a QR Structured Append information of recognized barcode This sample shows how to get QR Structured Append data</p>
-<p>$reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a4cc61b2d18cf716e4356642e1bce8753">DecodeType::QR</a>); for($result : $reader-&gt;readBarCodes()) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("QR Structured Append Quantity: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a0c289bb2a8dc69b4e6232444975e0542">getQRStructuredAppendModeBarCodesQuantity()</a>); print("QR Structured Append Index: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a586dce542f9fa3ee22380d8efbd3b4ad">getQRStructuredAppendModeBarCodeIndex()</a>); print("QR Structured Append ParityData: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a594bb4df8eb071db1f77460a6cc07010">getQRStructuredAppendModeParityData()</a>); } </p>
+<p>$reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a4cc61b2d18cf716e4356642e1bce8753">DecodeType::QR</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("QR Structured Append Quantity: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a0c289bb2a8dc69b4e6232444975e0542">getQRStructuredAppendModeBarCodesQuantity()</a>); print("QR Structured Append Index: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a586dce542f9fa3ee22380d8efbd3b4ad">getQRStructuredAppendModeBarCodeIndex()</a>); print("QR Structured Append ParityData: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a594bb4df8eb071db1f77460a6cc07010">getQRStructuredAppendModeParityData()</a>); } </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af940b98888d0fc2a59c9a4dd85b0fb32"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af940b98888d0fc2a59c9a4dd85b0fb32">&#9670;&nbsp;</a></span>equals()</h2>

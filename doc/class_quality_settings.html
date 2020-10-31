@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.2</span>
+   &#160;<span id="projectnumber">20.10</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -109,6 +109,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a97a2bc5de602cdaa1fc45d64c03f849a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acad86dcad17ae4dabe953d59f1c5fa37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quality_settings.html#acad86dcad17ae4dabe953d59f1c5fa37">setAllowIncorrectBarcodes</a> ($value)</td></tr>
 <tr class="separator:acad86dcad17ae4dabe953d59f1c5fa37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee75cdce6546729ebeaa0936a6bfec63"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quality_settings.html#aee75cdce6546729ebeaa0936a6bfec63">getReadTinyBarcodes</a> ()</td></tr>
+<tr class="separator:aee75cdce6546729ebeaa0936a6bfec63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27a993e75f9a325f34754fc43afc9d97"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quality_settings.html#a27a993e75f9a325f34754fc43afc9d97">setReadTinyBarcodes</a> ($value)</td></tr>
+<tr class="separator:a27a993e75f9a325f34754fc43afc9d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a029ebc94c1198128ed80acffef030570"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quality_settings.html#a029ebc94c1198128ed80acffef030570">getAllowComplexBackground</a> ()</td></tr>
 <tr class="separator:a029ebc94c1198128ed80acffef030570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74ced15dc9d71f0944b37312d5dd4d94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quality_settings.html#a74ced15dc9d71f0944b37312d5dd4d94">setAllowComplexBackground</a> ($value)</td></tr>
@@ -188,7 +192,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a936f473d1903a4adbed8ab6cd0a6a419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_quality_settings.html">QualitySettings</a> allows to configure recognition quality and speed manually. You can quickly set up <a class="el" href="class_quality_settings.html">QualitySettings</a> by embedded presets: HighPerformance, NormalQuality, HighQuality, MaxBarCodes or you can manually configure separate options. Default value of <a class="el" href="class_quality_settings.html">QualitySettings</a> is NormalQuality. This sample shows how to use <a class="el" href="class_quality_settings.html">QualitySettings</a> with BarCodeReader $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set high performance mode $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance()); for($result : $reader-&gt;readBarCodes()) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //normal quality mode is set by default for($result : $reader-&gt;readBarCodes()) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set high quality mode with low speed recognition $reader-&gt;setQualitySettings(QualitySettings::getHighQuality()); for($result : $reader-&gt;readBarCodes()) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set max barcodes mode, which tries to find all possible barcodes, even incorrect. The slowest recognition mode $reader-&gt;setQualitySettings(QualitySettings::getMaxBarCodes()); for($result : $reader-&gt;readBarCodes()) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set high performance mode $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance()); //set separate options $reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(true); $reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5); for($result : $reader-&gt;readBarCodes()) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //default mode is NormalQuality //set separate options $reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(true); $reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5); for($result : $reader-&gt;readBarCodes()) print("BarCode CodeText: ".$result-&gt;getCodeText()); </p>
+<div class="textblock"><p><a class="el" href="class_quality_settings.html">QualitySettings</a> allows to configure recognition quality and speed manually. You can quickly set up <a class="el" href="class_quality_settings.html">QualitySettings</a> by embedded presets: HighPerformance, NormalQuality, HighQuality, MaxBarCodes or you can manually configure separate options. Default value of <a class="el" href="class_quality_settings.html">QualitySettings</a> is NormalQuality. This sample shows how to use <a class="el" href="class_quality_settings.html">QualitySettings</a> with BarCodeReader $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set high performance mode $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance()); foreach($reader-&gt;readBarCodes() as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //normal quality mode is set by default foreach($reader-&gt;readBarCodes() as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set high quality mode with low speed recognition $reader-&gt;setQualitySettings(QualitySettings::getHighQuality()); foreach($reader-&gt;readBarCodes() as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set max barcodes mode, which tries to find all possible barcodes, even incorrect. The slowest recognition mode $reader-&gt;setQualitySettings(QualitySettings::getMaxBarCodes()); foreach($reader-&gt;readBarCodes() as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //set high performance mode $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance()); //set separate options $reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(true); $reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5); foreach($reader-&gt;readBarCodes() as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); //default mode is NormalQuality //set separate options $reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(true); $reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5); foreach($reader-&gt;readBarCodes() as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad7cd4e6318666226ae808101da838871"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7cd4e6318666226ae808101da838871">&#9670;&nbsp;</a></span>applyAll()</h2>
@@ -808,6 +812,24 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="aee75cdce6546729ebeaa0936a6bfec63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee75cdce6546729ebeaa0936a6bfec63">&#9670;&nbsp;</a></span>getReadTinyBarcodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">getReadTinyBarcodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False. </p><dl class="section return"><dt>Returns</dt><dd>If True, allows engine to recognize tiny barcodes on large images. </dd></dl>
+
+</div>
+</div>
 <a id="a74ced15dc9d71f0944b37312d5dd4d94"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74ced15dc9d71f0944b37312d5dd4d94">&#9670;&nbsp;</a></span>setAllowComplexBackground()</h2>
 
@@ -1240,6 +1262,30 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Window size for median smoothing. Typical values are 3 or 4. Default value is 3. AllowMedianSmoothing must be set. Value: Window size for median smoothing. </p>
+
+</div>
+</div>
+<a id="a27a993e75f9a325f34754fc43afc9d97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27a993e75f9a325f34754fc43afc9d97">&#9670;&nbsp;</a></span>setReadTinyBarcodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">setReadTinyBarcodes </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>If True, allows engine to recognize tiny barcodes on large images. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
