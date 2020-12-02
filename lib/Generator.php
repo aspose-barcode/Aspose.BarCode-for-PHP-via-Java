@@ -1876,6 +1876,22 @@ class CaptionParameters extends BaseJavaClass
             throw $barcode_exception;
         }
     }
+    /*
+     * Specify word wraps (line breaks) within text.
+     * @return bool
+     */
+    public function getNoWrap()
+    {
+        return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+    }
+
+    /*
+     * Specify word wraps (line breaks) within text.
+     */
+    public function setNoWrap($value)
+    {
+        $this->getJavaClass()->setNoWrap($value);
+    }
 }
 
 /**
@@ -2604,6 +2620,23 @@ class CodetextParameters extends BaseJavaClass
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
         }
+    }
+
+    /**
+     * Specify word wraps (line breaks) within text.
+     * @return bool
+     */
+    public function getNoWrap()
+    {
+        return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+    }
+
+    /**
+     * Specify word wraps (line breaks) within text.
+     */
+    public function setNoWrap($value)
+    {
+        $this->getJavaClass()->setNoWrap($value);
     }
 
     /**
@@ -5636,6 +5669,21 @@ class  DataMatrixEncodeMode
      */
     const ANSIX12 = 11;
 
+    /**
+     * ExtendedCodetext mode allows to manually switch encodation schemes in codetext.
+     * Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.
+     * Extended codetext example: @"\ansix12:ANSIX12TEXT\ascii:backslash must be \\ doubled\edifact:EdifactEncodedText"
+     * All backslashes (\) must be doubled in text.
+     * 
+     * This sample shows how to do codetext in Extended Mode.
+     * 
+     * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
+     * $generator->setCodeText("\\ansix12:ANSIX12TEXT\\ascii:backslash must be \\\\ doubled\\edifact:EdifactEncodedText");
+     * $generator->getParameters()->getBarcode()->getDataMatrix().setDataMatrixEncodeMode(DataMatrixEncodeMode.EXTENDED_CODETEXT);
+     * $generator->getParameters()->getBarcode()->getCodeTextParameters().setTwoDDisplayText("My Text");
+     * $generator->save("test.png");
+     */
+    const EXTENDED_CODETEXT = 12;
 }
 
 /**
