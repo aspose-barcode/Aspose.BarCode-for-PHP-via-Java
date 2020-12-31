@@ -5,6 +5,7 @@ var class_codetext_parameters =
     [ "getFont", "class_codetext_parameters.html#af2469ce4ebc6317428d2bf86fe7f205f", null ],
     [ "getFontMode", "class_codetext_parameters.html#a79f4349624f3b642f51c7eb3bdf9ad25", null ],
     [ "getLocation", "class_codetext_parameters.html#a270a747ff748def87f313beeef64f3b3", null ],
+    [ "getNoWrap", "class_codetext_parameters.html#adb924e2a86369c8edb28cfa3c2e2c18f", null ],
     [ "getSpace", "class_codetext_parameters.html#a70b4a06fba476f6a2762ee655fe6e952", null ],
     [ "getTwoDDisplayText", "class_codetext_parameters.html#a0a9be452dda7e87f378543d3b84195cb", null ],
     [ "setAlignment", "class_codetext_parameters.html#a3c47c0ddae4e782a12a038ede2808276", null ],
@@ -12,6 +13,7 @@ var class_codetext_parameters =
     [ "setFont", "class_codetext_parameters.html#ae72617a10fef5eaa828bdb77edba6cea", null ],
     [ "setFontMode", "class_codetext_parameters.html#aa63ed7b43dd90771f53f3df7124fd9ba", null ],
     [ "setLocation", "class_codetext_parameters.html#a3f5b85d38233b0e16b37e8ffc5e96a28", null ],
+    [ "setNoWrap", "class_codetext_parameters.html#a5eb88c921237563d39dca650cdb28ef6", null ],
     [ "setSpace", "class_codetext_parameters.html#a45c8787469162c362600317bb5da1f2f", null ],
     [ "setTwoDDisplayText", "class_codetext_parameters.html#aee3dd1b1d6bb24d8d45fa1345878d4b4", null ],
     [ "toString", "class_codetext_parameters.html#a5558c5d549f41597377fa1ea8a1cefa3", null ]

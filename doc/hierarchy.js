@@ -28,10 +28,9 @@ var hierarchy =
     [ "Code16KParameters", "class_code16_k_parameters.html", null ],
     [ "CodeLocation", "class_code_location.html", null ],
     [ "CodetextParameters", "class_codetext_parameters.html", null ],
-    [ "ComplexBarcodeGenerator", "class_complex_barcode_generator.html", null ],
-    [ "ComplexCodetextReader", "class_complex_codetext_reader.html", null ],
     [ "CouponParameters", "class_coupon_parameters.html", null ],
     [ "CustomerInformationInterpretingType", "class_customer_information_interpreting_type.html", null ],
+    [ "DataBarExtendedParameters", "class_data_bar_extended_parameters.html", null ],
     [ "DataBarParameters", "class_data_bar_parameters.html", null ],
     [ "DataMatrixEccType", "class_data_matrix_ecc_type.html", null ],
     [ "DataMatrixEncodeMode", "class_data_matrix_encode_mode.html", null ],
@@ -39,10 +38,13 @@ var hierarchy =
     [ "DecodeType", "class_decode_type.html", null ],
     [ "DotCodeParameters", "class_dot_code_parameters.html", null ],
     [ "ECIEncodings", "class_e_c_i_encodings.html", null ],
+    [ "EnableChecksum", "class_enable_checksum.html", null ],
+    [ "EncodeTypes", "class_encode_types.html", null ],
     [ "ExtCodetextBuilder", "class_ext_codetext_builder.html", [
       [ "QrExtCodetextBuilder", "class_qr_ext_codetext_builder.html", null ]
     ] ],
     [ "FontMode", "class_font_mode.html", null ],
+    [ "FontStyle", "class_font_style.html", null ],
     [ "FontUnit", "class_font_unit.html", null ],
     [ "GraphicsUnit", "class_graphics_unit.html", null ],
     [ "ITF14BorderType", "class_i_t_f14_border_type.html", null ],
@@ -57,7 +59,6 @@ var hierarchy =
     [ "Pdf417ExtendedParameters", "class_pdf417_extended_parameters.html", null ],
     [ "Pdf417Parameters", "class_pdf417_parameters.html", null ],
     [ "PostalParameters", "class_postal_parameters.html", null ],
-    [ "QrBillStandardVersion", "class_qr_bill_standard_version.html", null ],
     [ "QREncodeMode", "class_q_r_encode_mode.html", null ],
     [ "QREncodeType", "class_q_r_encode_type.html", null ],
     [ "QRErrorLevel", "class_q_r_error_level.html", null ],
@@ -67,8 +68,6 @@ var hierarchy =
     [ "Quadrangle", "class_quadrangle.html", null ],
     [ "QualitySettings", "class_quality_settings.html", null ],
     [ "SupplementParameters", "class_supplement_parameters.html", null ],
-    [ "SwissQRBill", "class_swiss_q_r_bill.html", null ],
-    [ "SwissQRCodetext", "class_swiss_q_r_codetext.html", null ],
     [ "TextAlignment", "class_text_alignment.html", null ],
     [ "Unit", "class_unit.html", null ]
 ];

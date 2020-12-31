@@ -68,6 +68,7 @@ var class_decode_type =
     [ "SUPPLEMENT", "class_decode_type.html#a70205ccea6ed67f5d481c3823647f9ae", null ],
     [ "SWISS_POST_PARCEL", "class_decode_type.html#a07a77f25b05b3ceffba510cafef00f77", null ],
     [ "TYPES_1D", "class_decode_type.html#a89c1c12a6d0500cdedfe586a1736180a", null ],
+    [ "TYPES_2D", "class_decode_type.html#a259b1baa8be486b1c49b9e2aa42772ff", null ],
     [ "UPCA", "class_decode_type.html#a0b86c85bed7275fa02cfacd648a1e4a9", null ],
     [ "UPCE", "class_decode_type.html#a782f71ff124008ced243aee550a8c6ce", null ],
     [ "VIN", "class_decode_type.html#a6806b3f944bb43826031ac8fb4377877", null ]

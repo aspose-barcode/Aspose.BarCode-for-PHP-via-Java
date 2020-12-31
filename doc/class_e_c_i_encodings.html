@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.10</span>
+   &#160;<span id="projectnumber">20.12</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -157,9 +157,9 @@ Public Attributes</h2></td></tr>
 <div class="textblock"><p>Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details about the used references for encoding the data in the symbol. Current implementation consists all well known charset encodings. Currently, it is used only for QR 2D barcode.</p>
 <p>Example how to use ECI encoding </p><pre class="fragment">$generator = new BarcodeGenerator(EncodeTypes::QR);
 generator-&gt;setCodeText("12345TEXT");
-generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::ECIEncoding);
-generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeType(QREncodeType::ForceQR);
-generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrECIEncoding(ECIEncodings::UTF8);
+generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeType(QREncodeType::FORCE_QR);
+generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrECIEncoding(ECIEncodings::UTF_8);
 generator-&gt;save("test.png", "PNG");
 </pre> </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="aecfdfedba5eb7398d02e12438a41466a"></a>

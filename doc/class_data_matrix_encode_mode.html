@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.10</span>
+   &#160;<span id="projectnumber">20.12</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -114,6 +114,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad7096c97b2311860eafd5fffe3c6a0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a526deba4f817102dda1b3a31ecfc1542"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_matrix_encode_mode.html#a526deba4f817102dda1b3a31ecfc1542">ANSIX12</a> = 11</td></tr>
 <tr class="separator:a526deba4f817102dda1b3a31ecfc1542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42db9786cb295efbe47265a19b02dca3"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_matrix_encode_mode.html#a42db9786cb295efbe47265a19b02dca3">EXTENDED_CODETEXT</a> = 12</td></tr>
+<tr class="separator:a42db9786cb295efbe47265a19b02dca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>DataMatrix encoder's encoding mode, default to AUTO </p>
@@ -208,6 +210,23 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a42db9786cb295efbe47265a19b02dca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42db9786cb295efbe47265a19b02dca3">&#9670;&nbsp;</a></span>EXTENDED_CODETEXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const EXTENDED_CODETEXT = 12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ExtendedCodetext mode allows to manually switch encodation schemes in codetext. Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto. Extended codetext example: "\ansix12:ANSIX12TEXT\ascii:backslash must be \ doubled\edifact:EdifactEncodedText" All backslashes () must be doubled in text.</p>
+<p>This sample shows how to do codetext in Extended Mode.</p>
+<p>$generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator(EncodeTypes::DATA_MATRIX)</a>; $generator-&gt;setCodeText("\\ansix12:ANSIX12TEXT\\ascii:backslash must be \\\\ doubled\\edifact:EdifactEncodedText"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDataMatrix().setDataMatrixEncodeMode(<a class="el" href="class_data_matrix_encode_mode.html#a42db9786cb295efbe47265a19b02dca3">DataMatrixEncodeMode.EXTENDED_CODETEXT</a>); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters().setTwoDDisplayText("My Text"); $generator-&gt;save("test.png"); </p>
+
+</div>
+</div>
 <a id="acd6dd9fdad4996fa7c449d4d9e18a23f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acd6dd9fdad4996fa7c449d4d9e18a23f">&#9670;&nbsp;</a></span>FULL</h2>
 
@@ -234,7 +253,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>UUses TEXT encoding. Encodes Lower-case alphanumeric, Upper case and special characters </p>
+<p>Uses TEXT encoding. Encodes Lower-case alphanumeric, Upper case and special characters </p>
 
 </div>
 </div>

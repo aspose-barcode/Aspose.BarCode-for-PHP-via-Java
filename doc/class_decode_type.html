@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.10</span>
+   &#160;<span id="projectnumber">20.12</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -89,6 +89,7 @@ $(document).ready(function(){initNavTree('class_decode_type.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_decode_type-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -96,6 +97,15 @@ $(document).ready(function(){initNavTree('class_decode_type.html','');});
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8e2ebf7e0f6d2a5bd78120409a6c2d4e"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decode_type.html#a8e2ebf7e0f6d2a5bd78120409a6c2d4e">is1D</a> ($symbology)</td></tr>
+<tr class="separator:a8e2ebf7e0f6d2a5bd78120409a6c2d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0756f08a328130191414629f05138d69"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decode_type.html#a0756f08a328130191414629f05138d69">isPostal</a> ($symbology)</td></tr>
+<tr class="separator:a0756f08a328130191414629f05138d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d24dbca6272a9e96d438f675c99998"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decode_type.html#a85d24dbca6272a9e96d438f675c99998">is2D</a> ($symbology)</td></tr>
+<tr class="separator:a85d24dbca6272a9e96d438f675c99998"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac62f1cfad2f7d0988d46057bf55d1e80"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decode_type.html#ac62f1cfad2f7d0988d46057bf55d1e80">NONE</a> = -1</td></tr>
@@ -240,10 +250,112 @@ Public Attributes</h2></td></tr>
 <tr class="separator:af2ad64c5812230ecc5ee5239a096d60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eb79bf86b741055b4af5114922a9760"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decode_type.html#a1eb79bf86b741055b4af5114922a9760">MOST_COMMON_TYPES</a> = 69</td></tr>
 <tr class="separator:a1eb79bf86b741055b4af5114922a9760"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a259b1baa8be486b1c49b9e2aa42772ff"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decode_type.html#a259b1baa8be486b1c49b9e2aa42772ff">TYPES_2D</a> = 70</td></tr>
+<tr class="separator:a259b1baa8be486b1c49b9e2aa42772ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Specify the type of barcode to read. This sample shows how to detect Code39 and Code128 barcodes. $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8e2ebf7e0f6d2a5bd78120409a6c2d4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e2ebf7e0f6d2a5bd78120409a6c2d4e">&#9670;&nbsp;</a></span>is1D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static is1D </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$symbology</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines if the specified BaseDecodeType contains any 1D barcode symbology </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">$symbology</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>string <b>true</b> if BaseDecodeType contains any 1D barcode symbology; otherwise, returns <b>false</b>. </dd></dl>
+
+</div>
+</div>
+<a id="a85d24dbca6272a9e96d438f675c99998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85d24dbca6272a9e96d438f675c99998">&#9670;&nbsp;</a></span>is2D()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static is2D </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$symbology</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines if the specified BaseDecodeType contains any 2D barcode symbology </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">symbology</td><td>The BaseDecodeType to test. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns <b>true</b> if BaseDecodeType contains any 2D barcode symbology; otherwise, returns <b>false</b>. </dd></dl>
+
+</div>
+</div>
+<a id="a0756f08a328130191414629f05138d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0756f08a328130191414629f05138d69">&#9670;&nbsp;</a></span>isPostal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static isPostal </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$symbology</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determines if the specified BaseDecodeType contains any Postal barcode symbology </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">symbology</td><td>The BaseDecodeType to test </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns <b>true</b> if BaseDecodeType contains any Postal barcode symbology; otherwise, returns <b>false</b>. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="a97211ae0e407cf15eb98291e3e356ec3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97211ae0e407cf15eb98291e3e356ec3">&#9670;&nbsp;</a></span>ALL_SUPPORTED_TYPES</h2>
 
@@ -1324,6 +1436,21 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Specifies that data will be checked with all of 1D barcode symbologies </p>
+
+</div>
+</div>
+<a id="a259b1baa8be486b1c49b9e2aa42772ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259b1baa8be486b1c49b9e2aa42772ff">&#9670;&nbsp;</a></span>TYPES_2D</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const TYPES_2D = 70</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Specifies that data will be checked with all of <b>2D</b> barcode symbologies </p>
 
 </div>
 </div>

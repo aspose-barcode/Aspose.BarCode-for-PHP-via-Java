@@ -1,7 +1,6 @@
 <?php
 
 /**
- * 
  * Address of creditor or debtor.
  * 
  * You can either set street, house number, postal code and town (type structured address)
@@ -28,7 +27,6 @@ final class Address extends BaseJavaClass
     }
 
     /**
-     *
      * Gets the address type.
      *
      * The address type is automatically set by either setting street / house number
@@ -40,14 +38,13 @@ final class Address extends BaseJavaClass
     public function getType(){ return java_cast($this->getJavaClass()->getType(), "integer"); }
 
     /**
-     * 
      * Gets the name, either the first and last name of a natural person or the
      * company name of a legal person.
      * Value: The name.
      */
     public function getName(){ return java_cast($this->getJavaClass()->getName(), "string"); }
+
     /**
-     * 
      * Sets the name, either the first and last name of a natural person or the
      * company name of a legal person.
      * Value: The name.
@@ -58,7 +55,6 @@ final class Address extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the address line 1.
      * 
      * Address line 1 contains street name, house number or P.O. box.
@@ -66,23 +62,20 @@ final class Address extends BaseJavaClass
      * 
      * Setting this field sets the address type to AddressType.CombinedElements unless it's already
      * AddressType.Structured, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for combined elements addresses and is optional.
      * 
      * Value: The address line 1.
      */
     public function getAddressLine1() { return java_cast($this->getJavaClass()->getAddressLine1(), "string"); }
+
     /**
-     * 
      * Sets the address line 1.
      * 
      * Address line 1 contains street name, house number or P.O. box.
      * 
-     * 
      * Setting this field sets the address type to AddressType.CombinedElements unless it's already
      * AddressType.Structured, in which case it becomes AddressType.Conflicting.
-     * 
      * 
      * This field is only used for combined elements addresses and is optional.
      * 
@@ -102,6 +95,7 @@ final class Address extends BaseJavaClass
      * Value: The address line 2.
      */
     public function getAddressLine2() { return java_cast($this->getJavaClass()->getAddressLine2(), "string"); }
+
     /**
      * Sets the address line 2.
      * Address line 2 contains postal code and town.
@@ -124,8 +118,8 @@ final class Address extends BaseJavaClass
      * Value: The street.
      */
     public function getStreet() { return java_cast($this->getJavaClass()->getStreet(), "string"); }
+
     /**
-     * 
      * Sets the street.
      * 
      * The street must be speicfied without house number.
@@ -133,7 +127,6 @@ final class Address extends BaseJavaClass
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
      * 
      * This field is only used for structured addresses and is optional.
      * 
@@ -145,26 +138,23 @@ final class Address extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the house number.
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for structured addresses and is optional.
      * 
      * Value: The house number.
      */
     public function getHouseNo() { return java_cast($this->getJavaClass()->getHouseNo(), "string"); }
+
     /**
-     * 
      * Sets the house number.
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for structured addresses and is optional.
      * 
      * Value: The house number.
@@ -175,26 +165,23 @@ final class Address extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the postal code.
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for structured addresses. For this type, it's mandatory.
      * 
      * Value: The postal code.
      */
     public function getPostalCode() { return java_cast($this->getJavaClass()->getPostalCode(), "string"); }
+
     /**
-     * 
      * Sets the postal code.
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for structured addresses. For this type, it's mandatory.
      * 
      * Value: The postal code.
@@ -205,26 +192,23 @@ final class Address extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the town or city.
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for structured addresses. For this type, it's mandatory.
      * 
      * Value: The town or city.
      */
     public function getTown() { return java_cast($this->getJavaClass()->getTown(), "string"); }
+
     /**
-     * 
      * Sets the town or city.
      * 
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
-     * 
+     *
      * This field is only used for structured addresses. For this type, it's mandatory.
      * 
      * Value: The town or city.
@@ -235,7 +219,6 @@ final class Address extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the two-letter ISO country code.
      *  
      * The country code is mandatory unless the entire address contains null or emtpy values.
@@ -243,8 +226,8 @@ final class Address extends BaseJavaClass
      * Value: The ISO country code.
      */
     public function getCountryCode(){ return java_cast($this->getJavaClass()->getCountryCode(), "string"); }
+
     /**
-     * 
      * Sets the two-letter ISO country code.
      *  
      * The country code is mandatory unless the entire address contains null or emtpy values.
@@ -254,9 +237,7 @@ final class Address extends BaseJavaClass
     public function setCountryCode($value){ $this->getJavaClass()->setCountryCode($value); }
 
     /**
-     * 
      * Clears all fields and sets the type to AddressType.Undetermined.
-     * 
      */
     public function clear()
     {
@@ -296,24 +277,26 @@ final class Address extends BaseJavaClass
 }
 
 /**
- * 
  * Address type
- * 
  */
 class  AddressType
 {
+
     /**
      * Undetermined
      */
     const UNDETERMINED = 0;
+
     /**
      * Structured address
      */
     const STRUCTURED = 1;
+
     /**
      * Combined address elements
      */
     const COMBINED_ELEMENTS = 2;
+
     /**
      * Conflicting
      */
@@ -332,7 +315,6 @@ final class AlternativeScheme extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the payment instruction for a given bill.
      * 
      * The instruction consists of a two letter abbreviation for the scheme, a separator characters
@@ -341,6 +323,7 @@ final class AlternativeScheme extends BaseJavaClass
      * Value: The payment instruction.
      */
     public function getInstruction(){ return java_cast($this->getJavaClass()->getInstruction(), "string"); }
+
     /**
      * Gets the payment instruction for a given bill.
      * The instruction consists of a two letter abbreviation for the scheme, a separator characters
@@ -378,23 +361,19 @@ final class AlternativeScheme extends BaseJavaClass
 }
 
 /**
- * 
  *  ComplexCodetextReader decodes codetext to specified complex barcode type.
- *  <hr><blockquote><pre>
+ *
  *  This sample shows how to recognize and decode SwissQR image.
  *  <pre>
  *  $cr = new BarCodeReader("SwissQRCodetext.png", DecodeType::QR);
  *  $cr->read();
  *  $result = ComplexCodetextReader::tryDecodeSwissQR($cr->getCodeText(false));
- * </pre>
- *  </pre></blockquote></hr>
  */
 final class ComplexCodetextReader
 {
     private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwComplexCodetextReader";
 
     /**
-     * 
      * Decodes SwissQR codetext.
      * 
      * @return decoded SwissQRCodetext or null.
@@ -408,23 +387,18 @@ final class ComplexCodetextReader
 }
 
 /**
- * 
  * SwissQR bill standard version
- * 
  */
 class QrBillStandardVersion
 {
     /**
-     * 
      * Version 2.0
-     * 
      */
     const V2_0 = 0;
 }
+
 /**
- * 
  * SwissQR bill data
- * 
  */
 final class SwissQRBill extends BaseJavaClass
 {
@@ -460,6 +434,7 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The SwissQR bill standard version.
      */
     public function getVersion(){ return java_cast($this->getJavaClass()->getVersion(), "integer"); }
+
     /**
      * Sets the version of the SwissQR bill standard.
      * Value: The SwissQR bill standard version.
@@ -467,7 +442,6 @@ final class SwissQRBill extends BaseJavaClass
     public function setVersion($value){ $this->getJavaClass()->setVersion($value); }
 
     /**
-     * 
      * Gets the payment amount.
      * 
      * Valid values are between 0.01 and 999,999,999.99.
@@ -475,8 +449,8 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The payment amount.
      */
     public function getAmount(){ return java_cast($this->getJavaClass()->getAmount(), "long"); }
+
     /**
-     * 
      * Sets the payment amount.
      * 
      * Valid values are between 0.01 and 999,999,999.99.
@@ -486,7 +460,6 @@ final class SwissQRBill extends BaseJavaClass
     public function setAmount($value){ $this->getJavaClass()->setAmount($value); }
 
     /**
-     * 
      * Gets the payment currency.
      * 
      * Valid values are "CHF" and "EUR".
@@ -494,8 +467,8 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The payment currency.
      */
     public function getCurrency(){ return java_cast($this->getJavaClass()->getCurrency(), "string"); }
+
     /**
-     * 
      * Sets the payment currency.
      * 
      * Valid values are "CHF" and "EUR".
@@ -505,7 +478,6 @@ final class SwissQRBill extends BaseJavaClass
     public function setCurrency($value){ $this->getJavaClass()->setCurrency($value); }
 
     /**
-     * 
      * Gets the creditor's account number.
      * 
      * Account numbers must be valid IBANs of a bank of Switzerland or
@@ -514,8 +486,8 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The creditor account number.
      */
     public function getAccount(){ return java_cast($this->getJavaClass()->getAccount(), "string"); }
+
     /**
-     * 
      * Sets the creditor's account number.
      * 
      * Account numbers must be valid IBANs of a bank of Switzerland or
@@ -526,13 +498,12 @@ final class SwissQRBill extends BaseJavaClass
     public function setAccount($value){ $this->getJavaClass()->setAccount($value); }
 
     /**
-     * 
      * Gets the creditor address.
      * Value: The creditor address.
      */
     public function getCreditor() : Address{ return $this->creditor; }
+
     /**
-     * 
      * Sets the creditor address.
      * Value: The creditor address.
      */
@@ -543,13 +514,11 @@ final class SwissQRBill extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the creditor payment reference.
      * 
      * The reference is mandatory for SwissQR IBANs, i.e.IBANs in the range
      * CHxx30000xxxxxx through CHxx31999xxxxx.
-     * 
-     * 
+     *
      * If specified, the reference must be either a valid SwissQR reference
      * (corresponding to ISR reference form) or a valid creditor reference
      * according to ISO 11649 ("RFxxxx"). Both may contain spaces for formatting.
@@ -557,14 +526,13 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The creditor payment reference.
      */
     public function getReference(){ return java_cast($this->getJavaClass()->getReference(), "string"); }
+
     /**
-     * 
      * Sets the creditor payment reference.
      * 
      * The reference is mandatory for SwissQR IBANs, i.e.IBANs in the range
      * CHxx30000xxxxxx through CHxx31999xxxxx.
-     * 
-     * 
+     *
      * If specified, the reference must be either a valid SwissQR reference
      * (corresponding to ISR reference form) or a valid creditor reference
      * according to ISO 11649 ("RFxxxx"). Both may contain spaces for formatting.
@@ -574,13 +542,11 @@ final class SwissQRBill extends BaseJavaClass
     public function setReference($value){ $this->getJavaClass()->setReference($value); }
 
     /**
-     * 
      * Creates and sets a ISO11649 creditor reference from a raw string by prefixing
      * the String with "RF" and the modulo 97 checksum.
      * 
      * Whitespace is removed from the reference
-     * 
-     * 
+     *
      * @exception ArgumentException rawReference contains invalid characters.
      * @param rawReference The raw reference.
      */
@@ -590,7 +556,6 @@ final class SwissQRBill extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the debtor address.
      * 
      * The debtor is optional. If it is omitted, both setting this field to
@@ -599,8 +564,8 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The debtor address.
      */
     public function getDebtor() : Address{ return $this->creditor; }
+
     /**
-     * 
      * Sets the debtor address.
      * 
      * The debtor is optional. If it is omitted, both setting this field to
@@ -615,33 +580,30 @@ final class SwissQRBill extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets the additional unstructured message.
      * Value: The unstructured message.
      */
     public function getUnstructuredMessage(){ return java_cast($this->getJavaClass()->getUnstructuredMessage(), "string"); }
+
     /**
-     * 
      * Sets the additional unstructured message.
      * Value: The unstructured message.
      */
     public function setUnstructuredMessage($value){ $this->getJavaClass()-> setUnstructuredMessage($value); }
 
     /**
-     * 
      * Gets the additional structured bill information.
      * Value: The structured bill information.
      */
     public function getBillInformation(){ return java_cast($this->getJavaClass()->getBillInformation(), "string"); }
+
     /**
-     * 
      * Sets the additional structured bill information.
      * Value: The structured bill information.
      */
     public function setBillInformation($value){ $this->getJavaClass()->setBillInformation($value); }
 
     /**
-     * 
      * Gets ors sets the alternative payment schemes.
      * 
      * A maximum of two schemes with parameters are allowed.
@@ -649,8 +611,8 @@ final class SwissQRBill extends BaseJavaClass
      * Value: The alternative payment schemes.
      */
     public function getAlternativeSchemes() :array { return $this->alternativeSchemes; }
+
     /**
-     * 
      * Gets ors sets the alternative payment schemes.
      * 
      * A maximum of two schemes with parameters are allowed.
@@ -692,9 +654,7 @@ final class SwissQRBill extends BaseJavaClass
 }
 
 /**
- * 
  * Class for encoding and decoding the text embedded in the SwissQR code.
- * 
  */
 final class SwissQRCodetext extends BaseJavaClass
 {
@@ -707,15 +667,12 @@ final class SwissQRCodetext extends BaseJavaClass
     }
 
     /**
-     * 
      * SwissQR bill data
-     * 
      */
     public function getBill():SwissQRBill
     { return $this->bill; }
 
     /**
-     * 
      * Creates an instance of SwissQRCodetext.
      * 
      * @param bill SwissQR bill data
@@ -743,7 +700,6 @@ final class SwissQRCodetext extends BaseJavaClass
     }
 
     /**
-     * 
      * Construct codetext from SwissQR bill data
      * 
      * @return Constructed codetext
@@ -754,7 +710,6 @@ final class SwissQRCodetext extends BaseJavaClass
     }
 
     /**
-     * 
      * Initializes Bill with constructed codetext.
      * 
      * @param constructedCodetext Constructed codetext.
@@ -765,7 +720,6 @@ final class SwissQRCodetext extends BaseJavaClass
     }
 
     /**
-     * 
      * Gets barcode type.
      * 
      * @return Barcode type.
@@ -776,19 +730,7 @@ final class SwissQRCodetext extends BaseJavaClass
     }
 }
 
-class ComplexBarcode extends BaseJavaClass
-{
-    protected function init(): void
-    {
-    }
-
-    public function getDrawSwissCross(){ return java_cast($this->getJavaClass()->getDrawSwissCross(), "boolean"); }
-
-    public function setDrawSwissCross($value){ $this->getJavaClass()->getDrawSwissCross($value); }
-}
-
 /**
- * 
  *  ComplexBarcodeGenerator for backend complex barcode (e.g. SwissQR) images generation.
  *  <hr><blockquote><pre>
  *  This sample shows how to create and save a SwissQR image.
@@ -813,8 +755,6 @@ class ComplexBarcode extends BaseJavaClass
  *    $swissQRCodetext->getBill()->getDebtor()->setCountryCode("Lux");
  *    $cg = new ComplexBarcodeGenerator($swissQRCodetext);
  *    $res = $cg->generateBarCodeImage();
- * 	</pre>
- *  </pre></blockquote></hr>
  */
 final class ComplexBarcodeGenerator extends BaseJavaClass
 {
@@ -827,16 +767,13 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
     }
 
     /**
-     * 
      * Generation parameters.
-     * 
      */
     public function getParameters() { return $this->parameters; }
 
     /**
-     * 
      * Creates an instance of ComplexBarcodeGenerator.
-     * 
+     *
      * @param complexCodetext Complex codetext
      */
     public function __construct($arg)
@@ -860,11 +797,17 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
         }
     }
 
-    public function generateBarcodeImage()
+    /**
+     * Generates complex barcode image under current settings.
+     *
+     * @param format_name image format name("PNG", "BMP", "JPEG", "GIF", "TIFF")
+     * @return  Barcode image. See {@code Bitmap}.
+     */
+    public function generateBarcodeImage($format_name) : string
     {
         try
         {
-            $base64Image = $this->getJavaClass()->generateBarcodeImage();
+            $base64Image = java_cast($this->getJavaClass()->generateBarcodeImage($format_name), "string");
             return ($base64Image);
         }
         catch (Exception $ex)
@@ -874,27 +817,22 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
         }
     }
 
-    public function save($filePath): void
+    /**
+     * Save barcode image to specific file in specific format.
+     * @param $filePath Path to save to.
+     * @param $format_name image format name("PNG", "BMP", "JPEG", "GIF", "TIFF")
+     *
+     * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
+     * $generator->save("file path", null);// if value = null, default image format PNG
+     */
+    public function save($filePath, $format_name): void  //TODO BARCODEPHP-87
     {
         try
         {
-            $image = $this->generateBarcodeImage();
-            file_put_contents($filePath, $image);
+            $image = $this->generateBarcodeImage($format_name); //TODO BARCODEPHP-87
+            file_put_contents($filePath, base64_decode($image));
         }
         catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    public function saveImageFormat($filePath, $format_name): void
-    {
-        try 
-        {
-            $image = $this->generateBarcodeImage($format_name);
-            file_put_contents($filePath, $image);
-        } catch (Exception $ex) 
         {
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;

@@ -15,7 +15,8 @@ var searchData=
   ['below_36',['BELOW',['../class_code_location.html#aeef0934e800a6e1920fb0af0aaf76e05',1,'CodeLocation']]],
   ['big5_37',['Big5',['../class_e_c_i_encodings.html#aecfdfedba5eb7398d02e12438a41466a',1,'ECIEncodings']]],
   ['binary_38',['BINARY',['../class_pdf417_compaction_mode.html#a1867376965f2ff908bfd19037eabaab6',1,'Pdf417CompactionMode']]],
-  ['borderdashstyle_39',['BorderDashStyle',['../class_border_dash_style.html',1,'']]],
-  ['borderparameters_40',['BorderParameters',['../class_border_parameters.html',1,'']]],
-  ['bytes_41',['BYTES',['../class_q_r_encode_mode.html#ac7541c60644baaff129054157b13643b',1,'QREncodeMode']]]
+  ['bold_39',['BOLD',['../class_font_style.html#a466dec8fb20c0821e6bfb70cf0c8e672',1,'FontStyle']]],
+  ['borderdashstyle_40',['BorderDashStyle',['../class_border_dash_style.html',1,'']]],
+  ['borderparameters_41',['BorderParameters',['../class_border_parameters.html',1,'']]],
+  ['bytes_42',['BYTES',['../class_q_r_encode_mode.html#ac7541c60644baaff129054157b13643b',1,'QREncodeMode']]]
 ];

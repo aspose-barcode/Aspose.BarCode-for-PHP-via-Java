@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.10</span>
+   &#160;<span id="projectnumber">20.12</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -128,7 +128,7 @@ Static Private Member Functions</h2></td></tr>
 <tr class="separator:a089f55e20b8a831a58f97317fa0c43b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Stores special data of 1D recognized barcode like separate codetext and checksum This sample shows how to get 1D barcode value and checksum $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::EAN_13, "1234567890128"); $generator-&gt;save("test.png"); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a824a1cd2f22fd270677e5183b052c062">DecodeType::EAN_13</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("BarCode Value: ".$result-&gt;getExtended()-&gt;getOneD()-&gt;<a class="el" href="class_one_d_extended_parameters.html#ac0bc18784b182c89fcfd276625aef435">getValue()</a>); print("BarCode Checksum: ".$result-&gt;getExtended()-&gt;getOneD()-&gt;<a class="el" href="class_one_d_extended_parameters.html#a8601af92dff139d71a475790b4b275ab">getCheckSum()</a>); } </p>
+<div class="textblock"><p>Stores special data of 1D recognized barcode like separate codetext and checksum This sample shows how to get 1D barcode value and checksum $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a824a1cd2f22fd270677e5183b052c062">EncodeTypes::EAN_13</a>, "1234567890128"); $generator-&gt;save("test.png"); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a824a1cd2f22fd270677e5183b052c062">DecodeType::EAN_13</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("BarCode Value: ".$result-&gt;getExtended()-&gt;getOneD()-&gt;<a class="el" href="class_one_d_extended_parameters.html#ac0bc18784b182c89fcfd276625aef435">getValue()</a>); print("BarCode Checksum: ".$result-&gt;getExtended()-&gt;getOneD()-&gt;<a class="el" href="class_one_d_extended_parameters.html#a8601af92dff139d71a475790b4b275ab">getCheckSum()</a>); } </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af940b98888d0fc2a59c9a4dd85b0fb32"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af940b98888d0fc2a59c9a4dd85b0fb32">&#9670;&nbsp;</a></span>equals()</h2>

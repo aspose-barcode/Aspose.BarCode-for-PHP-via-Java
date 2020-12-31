@@ -58,7 +58,7 @@ class BarcodeReader extends BaseJavaClass
      * @param mixed ...$decodeTypes Types to verify.
      * @return bool Value is a true if any types are included into.
      */
-    public function containsAny(...$decodeTypes)
+    public function containsAny(...$decodeTypes) : bool
     {
         return java_cast($this->getJavaClass()->containsAny($decodeTypes), "boolean");
     }
@@ -136,7 +136,7 @@ class BarcodeReader extends BaseJavaClass
      *
      * @return file name
      */
-    public function getFileName()
+    public function getFileName() : string
     {
         try
         {
@@ -158,7 +158,7 @@ class BarcodeReader extends BaseJavaClass
      *
      * @return The timeout.
      */
-    public function getTimeout()
+    public function getTimeout() : int
     {
         try
         {
@@ -180,7 +180,7 @@ class BarcodeReader extends BaseJavaClass
      *
      * @param value The timeout.
      */
-    public function setTimeout($value)
+    public function setTimeout($value): void
     {
         try
         {
@@ -222,7 +222,7 @@ class BarcodeReader extends BaseJavaClass
      * }
      * The checksum validation flag.
      */
-    public function getChecksumValidation()
+    public function getChecksumValidation() : bool
     {
         try
         {
@@ -235,7 +235,6 @@ class BarcodeReader extends BaseJavaClass
     }
 
     /**
-     *
      * Enable checksum validation during recognition for 1D barcodes.
      * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
      * Checksum never used: Codabar
@@ -266,7 +265,7 @@ class BarcodeReader extends BaseJavaClass
      * }
      * The checksum validation flag.
      */
-    public function setChecksumValidation($value)
+    public function setChecksumValidation($value) : void
     {
         try
         {
@@ -300,7 +299,7 @@ class BarcodeReader extends BaseJavaClass
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
      */
-    public function getStripFNC()
+    public function getStripFNC() : bool
     {
         try
         {
@@ -335,7 +334,7 @@ class BarcodeReader extends BaseJavaClass
      * }
      *
      */
-    public function setStripFNC($value)
+    public function setStripFNC($value) : void
     {
         try
         {
@@ -350,7 +349,7 @@ class BarcodeReader extends BaseJavaClass
     /**
      * Gets the Interpreting Type for the Customer Information of AustralianPost BarCode.Default is CustomerInformationInterpretingType::OTHER.
      */
-    public function getCustomerInformationInterpretingType()
+    public function getCustomerInformationInterpretingType() : int
     {
         try
         {
@@ -365,7 +364,7 @@ class BarcodeReader extends BaseJavaClass
     /**
      * Sets the Interpreting Type for the Customer Information of AustralianPost BarCode.Default is CustomerInformationInterpretingType::OTHER.
      */
-    public function setCustomerInformationInterpretingType($value)
+    public function setCustomerInformationInterpretingType($value):void
     {
         try
         {
@@ -505,7 +504,7 @@ class BarcodeReader extends BaseJavaClass
      *   print("BarCode CodeText: ".$result->getCodeText());
      * QualitySettings to configure recognition quality and speed.
      */
-    public function setQualitySettings(QualitySettings $value)
+    public function setQualitySettings(QualitySettings $value):void
     {
         try
         {
@@ -536,7 +535,7 @@ class BarcodeReader extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
      */
-    public function getDetectEncoding()
+    public function getDetectEncoding() : bool
     {
         try
         {
@@ -566,7 +565,7 @@ class BarcodeReader extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
      */
-    public function setDetectEncoding($value)
+    public function setDetectEncoding($value) : void
     {
         try
         {
@@ -597,7 +596,7 @@ class BarcodeReader extends BaseJavaClass
      * @param areas areas list for recognition
      * @throws BarcodeException
      */
-    public final function setBarCodeImage($image, ...$areas)
+    public final function setBarCodeImage($image, ...$areas) : void
     {
         try
         {
@@ -642,7 +641,7 @@ class BarcodeReader extends BaseJavaClass
      * }
      * @param barcodeTypes The SingleDecodeType type array to read.
      */
-    public function setBarCodeReadType(...$types)
+    public function setBarCodeReadType(...$types):void
     {
         try
         {
@@ -653,7 +652,7 @@ class BarcodeReader extends BaseJavaClass
         }
     }
 
-    public function getBarCodeDecodeType()
+    public function getBarCodeDecodeType() : int
     {
         try
         {
@@ -1431,9 +1430,9 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      * Scanning with small window size takes more time and provides more accuracy but may fail in detecting very big barcodes.
      * Combining of several window sizes can improve detection quality.
      */
-    public function getScanWindowSizes()
+    public function getScanWindowSizes() : array
     {
-        return $this->getJavaClass()->getScanWindowSizes();
+        return $this->scanWindowSizes;
     }
     /**
      * Scan window sizes in pixels.
@@ -1456,7 +1455,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      * Use low values to detect barcodes that ara partly damaged or not lighten evenly.
      * Similarity coefficient must be between [0.5, 0.9]
      */
-    public function getSimilarityCoef()
+    public function getSimilarityCoef() : int
     {
         return java_cast($this->getJavaClass()->getSimilarityCoef(), "integer");
     }
@@ -1482,7 +1481,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      * Use low values for images with many barcodes or for noisy images.
      * Low value may lead to a bigger recognition time.
      */
-    public function getRegionLikelihoodThresholdPercent()
+    public function getRegionLikelihoodThresholdPercent() : int
     {
         return java_cast($this->getJavaClass()->getRegionLikelihoodThresholdPercent(), "integer");
     }
@@ -1507,13 +1506,12 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      * Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
      * Enabling of diagonal search leads to a bigger detection time.
      */
-    public function getSkipDiagonalSearch()
+    public function getSkipDiagonalSearch() : bool
     {
         return java_cast($this->getJavaClass()->getSkipDiagonalSearch(), "boolean");
     }
 
     /**
-     *
      * Allows detector to skip search for diagonal barcodes.
      *
      * Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
@@ -1531,7 +1529,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      * Default value is 0.
      * Median filter window size must be between [0, 10]
      */
-    public function getMedianFilterWindowSize()
+    public function getMedianFilterWindowSize() : int
     {
         return java_cast($this->getJavaClass()->getMedianFilterWindowSize(), "integer");
     }
@@ -1553,7 +1551,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      *
      * Default for QualitySettings.PresetType.HighPerformance
      */
-    public static function getHighPerformance()
+    public static function getHighPerformance() : BarcodeSvmDetectorSettings
     {
         return new BarcodeSvmDetectorSettings(self::HighPerformance);
     }
@@ -1563,7 +1561,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      *
      * Default for QualitySettings::PresetType::NormalQuality
      */
-    public static function getNormalQuality()
+    public static function getNormalQuality() : BarcodeSvmDetectorSettings
     {
         return new BarcodeSvmDetectorSettings(self::NormalQuality);
     }
@@ -1573,7 +1571,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      *
      * Default for QualitySettings.PresetType.HighQualityDetection and QualitySettings.PresetType.HighQuality
      */
-    public static function getHighQuality()
+    public static function getHighQuality() : BarcodeSvmDetectorSettings
     {
         return new BarcodeSvmDetectorSettings(self::HighQuality);
     }
@@ -1583,7 +1581,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
      *
      * Default for QualitySettings.PresetType.MaxQualityDetection and QualitySettings.PresetType.MaxBarCodes
      */
-    public static function getMaxQuality()
+    public static function getMaxQuality() : BarcodeSvmDetectorSettings
     {
         return new BarcodeSvmDetectorSettings(self::MaxQuality);
     }
@@ -1619,7 +1617,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      *  Gets the reading quality. Works for 1D and postal barcodes. Value: The reading quality percent
      */
-    public function getReadingQuality()
+    public function getReadingQuality() : int
     {
         return java_cast($this->getJavaClass()->getReadingQuality(), "integer");
     }
@@ -1629,7 +1627,7 @@ final class BarCodeResult extends BaseJavaClass
      * could sometimes have fakes or incorrect codetext because this confidence level for barcodews with weak cheksum or even without it,
      * BarCodeConfidence.None always has incorrect codetext and could be fake recognitions
      */
-    public function getConfidence()
+    public function getConfidence() : int
     {
         return java_cast($this->getJavaClass()->getConfidence(), "integer");
     }
@@ -1637,7 +1635,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      *  Gets the code text Value: The code text of the barcode
      */
-    public function getCodeText()
+    public function getCodeText() : string
     {
         return java_cast($this->getJavaClass()->getCodeText(), "string");
     }
@@ -1645,7 +1643,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      *  Gets the encoded code bytes Value: The code bytes of the barcode
      */
-    public function getCodeBytes()
+    public function getCodeBytes() : array
     {
         return explode(",", $this->getJavaClass()->getCodeBytes());
     }
@@ -1653,7 +1651,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      *  Gets the barcode type Value: The type information of the recognized barcode
      */
-    public function getCodeType()
+    public function getCodeType() : int
     {
         return java_cast($this->getJavaClass()->getCodeType(), "integer");
     }
@@ -1661,7 +1659,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      *  Gets the name of the barcode type Value: The type name of the recognized barcode
      */
-    public function getCodeTypeName()
+    public function getCodeTypeName() : string
     {
         return java_cast($this->getJavaClass()->getCodeTypeName(), "string");
     }
@@ -1722,7 +1720,7 @@ final class BarCodeResult extends BaseJavaClass
      *
      * @return A 32-bit signed integer hash code.
      */
-    public function hashCode()
+    public function hashCode() : int
     {
         return java_cast($this->getJavaClass()->hashCode(), "integer");
     }
@@ -1732,7 +1730,7 @@ final class BarCodeResult extends BaseJavaClass
      *
      * @return A string that represents this BarCodeResult.
      */
-    public function toString()
+    public function toString() : string
     {
         return java_cast($this->getJavaClass()->toString(), "string");
     }
@@ -1742,7 +1740,7 @@ final class BarCodeResult extends BaseJavaClass
      *
      * @return Returns copy of BarCodeResult class.
      */
-    public function deepClone()
+    public function deepClone() : BarCodeResult
     {
         return new BarCodeResult($this);
     }
@@ -1804,7 +1802,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      *  Gets Quadrangle bounding barcode region Value: Returns Quadrangle bounding barcode region
      */
-    public function getQuadrangle()
+    public function getQuadrangle() : Quadrangle
     {
         return $this->quad;
     }
@@ -1812,7 +1810,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      *  Gets the angle of the barcode (0-360). Value: The angle for barcode (0-360).
      */
-    public function getAngle()
+    public function getAngle() : float
     {
         return java_cast($this->getJavaClass()->getAngle(), "float");
     }
@@ -1820,7 +1818,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      *  Gets Points array bounding barcode region Value: Returns Points array bounding barcode region
      */
-    public function getPoints()
+    public function getPoints() : array
     {
         return $this->points;
     }
@@ -1828,7 +1826,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      *  Gets Rectangle bounding barcode region Value: Returns Rectangle bounding barcode region
      */
-    public function getRectangle()
+    public function getRectangle() : Rectangle
     {
         return $this->rect;
     }
@@ -1873,7 +1871,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
      *
      * @return A 32-bit signed integer hash code.
      */
-    public function hashCode()
+    public function hashCode() : int
     {
         return java_cast($this->getJavaClass()->hashCode(), "integer");
     }
@@ -1883,7 +1881,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
      *
      * @return A string that represents this BarCodeRegionParameters.
      */
-    public function toString()
+    public function toString() : string
     {
         return java_cast($this->getJavaClass()->toString(), "string");
     }
@@ -1895,6 +1893,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     private $_code128Parameters;
     private $_qrParameters;
     private $_pdf417Parameters;
+    private $_dataBarParameters;
 
     protected function init(): void
     {
@@ -1902,11 +1901,20 @@ class BarCodeExtendedParameters extends BaseJavaClass
         $this->_code128Parameters = new Code128ExtendedParameters($this->getJavaClass()->getCode128());
         $this->_qrParameters = new QRExtendedParameters($this->getJavaClass()->getQR());
         $this->_pdf417Parameters = new Pdf417ExtendedParameters($this->getJavaClass()->getPdf417());
+        $this->_dataBarParameters = new DataBarExtendedParameters($this->getJavaClass()->getDataBar());
     }
 
     public function __construct($javaClass)
     {
         parent::__construct($javaClass);
+    }
+
+    /** Gets a DataBar additional information<see cref="DataBarExtendedParameters"/> of recognized barcode
+     * @return mixed A DataBar additional information<see cref="DataBarExtendedParameters"/> of recognized barcode
+     */
+    public function getDataBar() : DataBarExtendedParameters
+    {
+        return $this->_dataBarParameters;
     }
 
     /**
@@ -2107,7 +2115,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * HighQualityDetection recognition quality preset.
      */
-    public static function getHighQualityDetection()
+    public static function getHighQualityDetection() : QualitySettings
     {
         $qualitySettings = new QualitySettings(null);
         return new QualitySettings($qualitySettings->getJavaClass()->getHighQualityDetection());
@@ -2123,7 +2131,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * MaxQualityDetection recognition quality preset.
      */
-    public static function getMaxQualityDetection()
+    public static function getMaxQualityDetection() : QualitySettings
     {
         $qualitySettings = new QualitySettings(null);
         return new QualitySettings($qualitySettings->getJavaClass()->getMaxQualityDetection());
@@ -2165,7 +2173,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize inverse color image.
      */
-    public final function getAllowInvertImage()
+    public final function getAllowInvertImage() : bool
     {
         return java_cast($this->getJavaClass()->getAllowInvertImage(), "boolean");
     }
@@ -2175,7 +2183,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize inverse color image.
      */
-    public final function setAllowInvertImage($value)
+    public final function setAllowInvertImage($value) : void
     {
         $this->getJavaClass()->setAllowInvertImage($value);
     }
@@ -2186,7 +2194,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize incorrect barcodes.
      */
-    public final function getAllowIncorrectBarcodes()
+    public final function getAllowIncorrectBarcodes() : bool
     {
         return java_cast($this->getJavaClass()->getAllowIncorrectBarcodes(), "boolean");
     }
@@ -2197,7 +2205,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize incorrect barcodes.
      */
-    public final function setAllowIncorrectBarcodes($value)
+    public final function setAllowIncorrectBarcodes($value) : void
     {
         $this->getJavaClass()->setAllowIncorrectBarcodes($value);
     }
@@ -2206,7 +2214,7 @@ final class QualitySettings extends BaseJavaClass
      *  Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
      * @return If True, allows engine to recognize tiny barcodes on large images.
      */
-    public function getReadTinyBarcodes()
+    public function getReadTinyBarcodes() : bool
     {
         return java_cast($this->getJavaClass()->getReadTinyBarcodes(), "boolean");
     }
@@ -2215,7 +2223,7 @@ final class QualitySettings extends BaseJavaClass
      * Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
      * @param value If True, allows engine to recognize tiny barcodes on large images.
      */
-    public function setReadTinyBarcodes($value)
+    public function setReadTinyBarcodes($value) : void
     {
         $this->getJavaClass()->setReadTinyBarcodes($value);
     }
@@ -2225,7 +2233,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize color barcodes on color background.
      */
-    public final function getAllowComplexBackground()
+    public final function getAllowComplexBackground() : bool
     {
         return java_cast($this->getJavaClass()->getAllowComplexBackground(), "boolean");
     }
@@ -2235,7 +2243,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:v
      * Allows engine to recognize color barcodes on color background.
      */
-    public final function setAllowComplexBackground($value)
+    public final function setAllowComplexBackground($value) : void
     {
         $this->getJavaClass()->setAllowComplexBackground($value);
     }
@@ -2245,7 +2253,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to enable median smoothing.
      */
-    public final function getAllowMedianSmoothing()
+    public final function getAllowMedianSmoothing() : bool
     {
         return java_cast($this->getJavaClass()->getAllowMedianSmoothing(), "boolean");
     }
@@ -2255,7 +2263,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to enable median smoothing.
      */
-    public final function setAllowMedianSmoothing($value)
+    public final function setAllowMedianSmoothing($value) : void
     {
         $this->getJavaClass()->setAllowMedianSmoothing($value);
     }
@@ -2265,7 +2273,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Window size for median smoothing.
      */
-    public final function getMedianSmoothingWindowSize()
+    public final function getMedianSmoothingWindowSize() : int
     {
         return java_cast($this->getJavaClass()->getMedianSmoothingWindowSize(), "integer");
     }
@@ -2275,7 +2283,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Window size for median smoothing.
      */
-    public final function setMedianSmoothingWindowSize($value)
+    public final function setMedianSmoothingWindowSize($value) : void
     {
         $this->getJavaClass()->setMedianSmoothingWindowSize($value);
     }
@@ -2286,7 +2294,7 @@ final class QualitySettings extends BaseJavaClass
      * Allows to recognize regular image without any restorations.
      */
 
-    public final function getAllowRegularImage()
+    public final function getAllowRegularImage() : bool
     {
         return java_cast($this->getJavaClass()->getAllowRegularImage(), "boolean");
     }
@@ -2297,7 +2305,7 @@ final class QualitySettings extends BaseJavaClass
      * Allows to recognize regular image without any restorations.
      */
 
-    public final function setAllowRegularImage($value)
+    public final function setAllowRegularImage($value) : void
     {
         $this->getJavaClass()->setAllowRegularImage($value);
     }
@@ -2308,7 +2316,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize decreased image
      */
-    public final function getAllowDecreasedImage()
+    public final function getAllowDecreasedImage() : bool
     {
         return java_cast($this->getJavaClass()->getAllowDecreasedImage(), "boolean");
     }
@@ -2319,7 +2327,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize decreased image
      */
-    public final function setAllowDecreasedImage($value)
+    public final function setAllowDecreasedImage($value) : void
     {
         $this->getJavaClass()->setAllowDecreasedImage($value);
     }
@@ -2330,7 +2338,7 @@ final class QualitySettings extends BaseJavaClass
      * Allows engine to recognize image without small white spots.
      */
 
-    public final function getAllowWhiteSpotsRemoving()
+    public final function getAllowWhiteSpotsRemoving() : bool
     {
         return java_cast($this->getJavaClass()->getAllowWhiteSpotsRemoving(), "boolean");
     }
@@ -2340,7 +2348,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize image without small white spots.
      */
-    public function setAllowWhiteSpotsRemoving($value)
+    public function setAllowWhiteSpotsRemoving($value) : void
     {
         $this->getJavaClass()->setAllowWhiteSpotsRemoving($value);
     }
@@ -2350,7 +2358,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine for 1D barcodes to run additional scan.
      */
-    public final function getAllowOneDAdditionalScan()
+    public final function getAllowOneDAdditionalScan() : bool
     {
         return java_cast($this->getJavaClass()->getAllowOneDAdditionalScan(), "boolean");
     }
@@ -2371,7 +2379,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine for 1D barcodes to quickly recognize high quality barcodes.
      */
-    public final function getAllowOneDFastBarcodesDetector()
+    public final function getAllowOneDFastBarcodesDetector() : bool
     {
         return java_cast($this->getJavaClass()->getAllowOneDFastBarcodesDetector(), "boolean");
     }
@@ -2392,7 +2400,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine for Postal barcodes to recognize slightly noised images.
      */
-    public final function getAllowMicroWhiteSpotsRemoving()
+    public final function getAllowMicroWhiteSpotsRemoving() : bool
     {
         return java_cast($this->getJavaClass()->getAllowMicroWhiteSpotsRemoving(), "boolean");
     }
@@ -2414,7 +2422,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to recognize barcodes with salt and paper noise type.
      */
-    public final function getAllowSaltAndPaperFiltering()
+    public final function getAllowSaltAndPaperFiltering() : bool
     {
         return java_cast($this->getJavaClass()->getAllowSaltAndPaperFiltering(), "boolean");
     }
@@ -2437,7 +2445,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine to use gap between scans to increase recognition speed.
      */
-    public final function getAllowDetectScanGap()
+    public final function getAllowDetectScanGap() : bool
     {
         return java_cast($this->getJavaClass()->getAllowDetectScanGap(), "boolean");
     }
@@ -2459,7 +2467,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine for Datamatrix to recognize dashed industrial barcodes.
      */
-    public final function getAllowDatamatrixIndustrialBarcodes()
+    public final function getAllowDatamatrixIndustrialBarcodes() : bool
     {
         return java_cast($this->getJavaClass()->getAllowDatamatrixIndustrialBarcodes(), "boolean");
     }
@@ -2480,7 +2488,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
      */
-    public final function getAllowQRMicroQrRestoration()
+    public final function getAllowQRMicroQrRestoration() : bool
     {
         return java_cast($this->getJavaClass()->getAllowQRMicroQrRestoration(), "boolean");
     }
@@ -2500,7 +2508,7 @@ final class QualitySettings extends BaseJavaClass
      *  Value:
      * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
      */
-    public function getAllowOneDWipedBarsRestoration()
+    public function getAllowOneDWipedBarsRestoration() : bool
     {
         return java_cast($this->getJavaClass()->getAllowOneDWipedBarsRestoration(), "boolean");
     }
@@ -2527,7 +2535,7 @@ final class QualitySettings extends BaseJavaClass
      * Barcode detector settings.
      *
      */
-    public function setDetectorSettings(BarcodeSvmDetectorSettings $value)
+    public function setDetectorSettings(BarcodeSvmDetectorSettings $value) : void
     {
         $this->getJavaClass()->setDetectorSettings($value);
         $this->detectorSettings = $value;
@@ -2537,7 +2545,7 @@ final class QualitySettings extends BaseJavaClass
      * Function apply all values from Src setting to this
      * @param Src source settings
      */
-    public function applyAll(QualitySettings $Src)
+    public function applyAll(QualitySettings $Src) : void
     {
         $this->setAllowInvertImage($Src->getAllowInvertImage());
         $this->setAllowIncorrectBarcodes($Src->getAllowIncorrectBarcodes());
@@ -2586,7 +2594,7 @@ class Code128DataPortion extends BaseJavaClass
      *
      * @return The part of code text related to subtype
      */
-    public final function getData()
+    public final function getData() : string
     {
         return java_cast($this->getJavaClass()->getData(), "string");
     }
@@ -2606,7 +2614,7 @@ class Code128DataPortion extends BaseJavaClass
      *
      * @return The type of Code128 subset
      */
-    public final function getCode128SubType()
+    public final function getCode128SubType(): int
     {
         return java_cast($this->getJavaClass()->getCode128SubType(), "integer");
     }
@@ -2629,7 +2637,88 @@ class Code128DataPortion extends BaseJavaClass
      * Returns a human-readable string representation of this {@code Code128DataPortion}.
      * @return A string that represents this {@code Code128DataPortion}.
      */
-    public function toString()
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
+    }
+}
+
+/**
+ * Stores a DataBar additional information of recognized barcode
+ * BarCodeReader reader = new BarCodeReader("c:\\test.png", DecodeType.DATABAR_OMNI_DIRECTIONAL);
+ *
+ * for(BarCodeResult result : reader.readBarCodes())
+ * {
+ *    System.out.println("BarCode Type: " + result.getCodeTypeName());
+ *    System.out.println("BarCode CodeText: " + result.getCodeText());
+ *    System.out.println("QR Structured Append Quantity: " + result.getExtended().getQR().getQRStructuredAppendModeBarCodesQuantity());
+ * }
+ */
+class DataBarExtendedParameters extends BaseJavaClass
+{
+
+    protected function init(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    /**
+     * Gets the DataBar 2D composite component flag. Default value is false.
+     * @return The DataBar 2D composite component flag.
+     */
+    public function is2DCompositeComponent() : bool
+    {
+        return java_cast($this->getJavaClass()->is2DCompositeComponent(), "boolean");
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="DataBarExtendedParameters"/> value.
+     * @param obj An System.Object value to compare to this instance.
+     * @return <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public function equals($obj) : bool
+    {
+        return DataBarExtendedParameters::op_Equality($this, $obj);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether the first {@code BarCodeExtendedParameters} value is equal to the second.
+     * </p>
+     * @return {@code <b>true</b>} if first has the same value as second; otherwise, {@code <b>false</b>}.
+     * @param first A first compared value
+     * @param second A second compared value
+     */
+    public static function op_Equality($first, $second) : bool
+    {
+        return isEqual($first, $second);
+    }
+
+    /**
+     * Returns a value indicating if the first <see cref="DataBarExtendedParameters"/> value is different from the second.
+     * @param first A first compared value
+     * @param second A second compared value
+     * @return <b>true</b> if first has the different value from second; otherwise, <b>false</b>.
+     */
+    public static function op_Inequality($first, $second) : bool
+    {
+        return !DataBarExtendedParameters::op_Equality($first, $second);
+    }
+
+    /**
+     * Returns the hash code for this instance.
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashcode(): int
+    {
+        return java_cast($this->getJavaClass()->hashcode(), "integer");
+    }
+
+    /**
+     * Returns a human-readable string representation of this <see cref="DataBarExtendedParameters"/>.
+     * @return A string that represents this <see cref="DataBarExtendedParameters"/>.
+     */
+    public function toString(): string
     {
         return java_cast($this->getJavaClass()->toString(), "string");
     }
@@ -3002,10 +3091,50 @@ class DecodeType
      */
     const MOST_COMMON_TYPES = 69;
 
-    public static function containsAny(...$decodeTypes)
+    /**
+     * Specifies that data will be checked with all of <b>2D</b> barcode symbologies
+     */
+    const TYPES_2D = 70;
+
+
+    private const javaClassName = "com.aspose.mw.barcode.recognition.MwDecodeTypeUtils";
+
+    /**
+     * Determines if the specified <see cref="BaseDecodeType"/> contains any 1D barcode symbology
+     * @param $symbology
+     * @return string <b>true</b> if <see cref="BaseDecodeType"/> contains any 1D barcode symbology; otherwise, returns <b>false</b>.
+     */
+    public static function is1D($symbology) : bool
     {
-        $javaClassName = "com.aspose.barcode.barcoderecognition.DecodeType";
-        $javaClass = new java($javaClassName);
+        $javaClass = new java(DecodeType::javaClassName);
+        return java_cast($javaClass->is1D($symbology), "boolean");
+    }
+
+    /**
+     * Determines if the specified <see cref="BaseDecodeType"/> contains any Postal barcode symbology
+     * @param symbology The <see cref="BaseDecodeType"/> to test
+     * @return Returns <b>true</b> if <see cref="BaseDecodeType"/> contains any Postal barcode symbology; otherwise, returns <b>false</b>.
+     */
+    public static function isPostal($symbology) : bool
+    {
+        $javaClass = new java(DecodeType::javaClassName);
+        return java_cast($javaClass->isPostal($symbology), "boolean");
+    }
+
+    /**
+     * Determines if the specified <see cref="BaseDecodeType"/> contains any 2D barcode symbology
+     * @param symbology The <see cref="BaseDecodeType"/> to test.
+     * @return Returns <b>true</b> if <see cref="BaseDecodeType"/> contains any 2D barcode symbology; otherwise, returns <b>false</b>.
+     */
+    public static function is2D($symbology) : bool
+    {
+        $javaClass = new java(DecodeType::javaClassName);
+        return java_cast($javaClass->is2D($symbology), "boolean");
+    }
+
+    public static function containsAny($decodeType, ...$decodeTypes) : bool
+    {
+        $javaClass = new java(DecodeType::javaClassName);
         return java_cast($javaClass->containsAny(...$decodeTypes), "boolean");
     }
 }
@@ -3036,7 +3165,7 @@ class  CustomerInformationInterpretingType
 
     /**
      * Use C_TABLE to interpret the customer information. Allows A..Z, a..z, 1..9, space and # sing.
-     * $generator = new BarcodeGenerator(EncodeTypes::AustraliaPost, "5912345678ABCde");
+     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678ABCde");
      * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
      * $image = $generator->generateBarCodeImage();
      * $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST);
@@ -3051,7 +3180,7 @@ class  CustomerInformationInterpretingType
 
     /**
      * Use N_TABLE to interpret the customer information. Allows digits.
-     *  $generator = new BarcodeGenerator(EncodeTypes::AustraliaPost, "59123456781234567");
+     *  $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "59123456781234567");
      *  $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE);
      *  $image = $generator->generateBarCodeImage();
      *  $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST);

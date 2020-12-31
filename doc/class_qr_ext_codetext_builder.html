@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.10</span>
+   &#160;<span id="projectnumber">20.12</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -119,37 +119,35 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af379f444a164392f1f5c174aa051b400 inherit pub_methods_class_ext_codetext_builder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Extended codetext generator for 2D QR barcodes for ExtendedCodetext Mode of <a class="el" href="class_q_r_encode_mode.html">QREncodeMode</a></p>
-<p>Use Display2DText property of BarCodeBuilder to set visible text to removing managing characters.</p>
-<hr  />
+<div class="textblock"><p>Extended codetext generator for 2D QR barcodes for ExtendedCodetext Mode of <a class="el" href="class_q_r_encode_mode.html">QREncodeMode</a> Use Display2DText property of BarCodeBuilder to set visible text to removing managing characters. </p><hr  />
 <blockquote class="doxtable">
 <pre>
  Example how to generate FNC1 first position for Extended Mode
  <pre>
  //create codetext
- <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder</a> lTextBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>;
- lTextBuilder.addFNC1FirstPosition();
- lTextBuilder.addPlainCodetext("000%89%%0");
- lTextBuilder.addFNC1GroupSeparator();
- lTextBuilder.addPlainCodetext("12345&amp;lt;FNC1&amp;gt;");
+ $lTextBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>;
+ $lTextBuilder-&gt;<a class="el" href="class_qr_ext_codetext_builder.html#a8a8bf7e09fb492ab1abeef808d043fbf">addFNC1FirstPosition()</a>;
+ $lTextBuilder-&gt;addPlainCodetext("000%89%%0");
+ $lTextBuilder-&gt;<a class="el" href="class_qr_ext_codetext_builder.html#af232bf9629aa51caee2fdb49ea8c0f99">addFNC1GroupSeparator()</a>;
+ $lTextBuilder-&gt;addPlainCodetext("12345&amp;lt;FNC1&amp;gt;");
  //generate codetext
- String lCodetext = lTextBuilder.getExtendedCodetext();
+ $lCodetext = lTextBuilder-&gt;<a class="el" href="class_qr_ext_codetext_builder.html#ad620263f9843fdf419474ab5e144946f">getExtendedCodetext()</a>;
  </pre><p> Example how to generate FNC1 second position for Extended Mode </p><pre>
  //create codetext
- <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder</a> lTextBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>;
-lTextBuilder.addFNC1SecondPosition("12");
-lTextBuilder.addPlainCodetext("TRUE3456");
+ $lTextBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>;
+ $lTextBuilder-&gt;addFNC1SecondPosition("12");
+ $lTextBuilder-&gt;addPlainCodetext("TRUE3456");
  //generate codetext
-String lCodetext = lTextBuilder.getExtendedCodetext();
+ $lCodetext = lTextBuilder-&gt;<a class="el" href="class_qr_ext_codetext_builder.html#ad620263f9843fdf419474ab5e144946f">getExtendedCodetext()</a>;
  </pre><p> Example how to generate multi ECI mode for Extended Mode </p><pre>
  //create codetext
-<a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder</a> lTextBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>;
-lTextBuilder.addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a855798585d4595bc7b9f30114667d8b1">ECIEncodings.Win1251</a>, "Will");
-lTextBuilder.addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a016c76c9446dd24577b1054a932b2df3">ECIEncodings.UTF8</a>, "Right");
-lTextBuilder.addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a8f61cbd00e3c77916b2e764a535bd67b">ECIEncodings.UTF16BE</a>, "Power");
-lTextBuilder.addPlainCodetext("t\\e\\\\st");
+$lTextBuilder = new <a class="el" href="class_qr_ext_codetext_builder.html">QrExtCodetextBuilder()</a>;
+$lTextBuilder-&gt;addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a855798585d4595bc7b9f30114667d8b1">ECIEncodings::Win1251</a>, "Will");
+$lTextBuilder-&gt;addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a016c76c9446dd24577b1054a932b2df3">ECIEncodings::UTF8</a>, "Right");
+$lTextBuilder-&gt;addECICodetext(<a class="el" href="class_e_c_i_encodings.html#a8f61cbd00e3c77916b2e764a535bd67b">ECIEncodings::UTF16BE</a>, "Power");
+$lTextBuilder-&gt;addPlainCodetext("t\\e\\\\st");
  //generate codetext
- String lCodetext = lTextBuilder.getExtendedCodetext();
+$lCodetext = lTextBuilder-&gt;<a class="el" href="class_qr_ext_codetext_builder.html#ad620263f9843fdf419474ab5e144946f">getExtendedCodetext()</a>;
  </pre> </pre></blockquote>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8a8bf7e09fb492ab1abeef808d043fbf"></a>
@@ -203,7 +201,7 @@ lTextBuilder.addPlainCodetext("t\\e\\\\st");
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Adds FNC1 in second position to the extended codetext items </p>
+<p>Adds FNC1 in second position to the extended codetext items</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">codetext</td><td>Value of the FNC1 in the second position </td></tr>
@@ -227,7 +225,7 @@ lTextBuilder.addPlainCodetext("t\\e\\\\st");
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Generates Extended codetext from the extended codetext list. </p>
+<p>Generates Extended codetext from the extended codetext list.</p>
 <dl class="section return"><dt>Returns</dt><dd>Extended codetext as string </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_ext_codetext_builder.html#ad620263f9843fdf419474ab5e144946f">ExtCodetextBuilder</a>.</p>

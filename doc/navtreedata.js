@@ -41,8 +41,8 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "class_code128_data_portion.html#a470333612bd337d0d9a4f29c8c755b25",
-"class_padding.html#ac69f056fdd8d8f682eea8356fa4c77cc",
-"class_swiss_q_r_codetext.html#a6d5755f49cc5024222715b767fb26f62"
+"class_encode_types.html#a84c171b3835e82048ba3154b33749a57",
+"class_quadrangle.html#a442ce775f7cf8bf2a538b9698f58e01e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

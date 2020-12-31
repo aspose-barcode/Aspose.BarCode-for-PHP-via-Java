@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">20.10</span>
+   &#160;<span id="projectnumber">20.12</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -120,16 +120,10 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_barcode_generator.html">BarcodeGenerator</a> for backend barcode images generation.</p>
 <p>supported symbologies: 1D: Codabar, Code11, Code128, Code39Standard, Code39Extended Code93Standard, Code93Extended, EAN13, EAN8, Interleaved2of5, MSI, Standard2of5, UPCA, UPCE, ISBN, GS1Code128, Postnet, Planet EAN14, SCC14, SSCC18, ITF14, SingaporePost ... 2D: Aztec, DataMatrix, PDf417, QR code ...</p>
-<hr  />
-<blockquote class="doxtable">
-<pre>
- This sample shows how to create and save a barcode image.
-<div class="fragment"><div class="line">$encode_type = EncodeTypes::CODE_128;</div>
+<p>This sample shows how to create and save a barcode image. </p><div class="fragment"><div class="line">$encode_type = <a class="code" href="class_encode_types.html#a41328b786f3b20f23fe85e8954865aaa">EncodeTypes::CODE_128</a>;</div>
 <div class="line">$generator = <span class="keyword">new</span> <a class="code" href="class_barcode_generator.html">BarcodeGenerator</a>($encode_type);</div>
 <div class="line">$generator-&gt;setCodeText(<span class="stringliteral">&quot;123ABC&quot;</span>);</div>
-</div><!-- fragment -->
- </pre></blockquote>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acec70ebd12d6e167ee85cc409229f484"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acec70ebd12d6e167ee85cc409229f484">&#9670;&nbsp;</a></span>__construct()</h2>
 
@@ -157,7 +151,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p><a class="el" href="class_barcode_generator.html">BarcodeGenerator</a> constructor. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td>can take following combinations of arguments: 1) Barcode symbology type. Use EncodeTypes class to setup a symbology 2) type EncodeTypes, Text to be encoded. <div class="fragment"><div class="line">$barcodeGenerator = <span class="keyword">new</span> <a class="code" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::EAN_14, <span class="stringliteral">&quot;332211&quot;</span>);</div>
+    <tr><td class="paramname">args</td><td>can take following combinations of arguments: 1) Barcode symbology type. Use <a class="el" href="class_encode_types.html">EncodeTypes</a> class to setup a symbology 2) type <a class="el" href="class_encode_types.html">EncodeTypes</a>, Text to be encoded. <div class="fragment"><div class="line">$barcodeGenerator = <span class="keyword">new</span> <a class="code" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="code" href="class_encode_types.html#a2ae7c3df7df962b701cdbeced8483a63">EncodeTypes::EAN_14</a>, <span class="stringliteral">&quot;332211&quot;</span>);</div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
