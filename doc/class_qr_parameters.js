@@ -7,6 +7,7 @@ var class_qr_parameters =
     [ "getQrEncodeType", "class_qr_parameters.html#adb2f0d91cc45fa805b44f4ffc15c81b3", null ],
     [ "getQrErrorLevel", "class_qr_parameters.html#a98415b325b810d2d59224135643c3ae9", null ],
     [ "getQrVersion", "class_qr_parameters.html#ae534d408819981dd8eebfecfec20daf0", null ],
+    [ "getStructuredAppend", "class_qr_parameters.html#a37562836c5f4b83b2f23f5ca5b43b5da", null ],
     [ "setAspectRatio", "class_qr_parameters.html#a780706ed70f33bbf03cd68a2f923a84d", null ],
     [ "setCodeTextEncoding", "class_qr_parameters.html#a50b8ad5a3780f0d98e831483aaa5d30c", null ],
     [ "setQrECIEncoding", "class_qr_parameters.html#a717219db4766100ef56cf275b8ccaf69", null ],
@@ -14,5 +15,6 @@ var class_qr_parameters =
     [ "setQrEncodeType", "class_qr_parameters.html#a9883d9396c7852ae88dd367bc98eea6b", null ],
     [ "setQrErrorLevel", "class_qr_parameters.html#a3509d45d80340be8cc7330c32f1c311f", null ],
     [ "setQrVersion", "class_qr_parameters.html#ab090a00aea775af7440f71cab6405ba0", null ],
+    [ "setStructuredAppend", "class_qr_parameters.html#abd21aa98bdc7def155cf39e41cdf68ad", null ],
     [ "toString", "class_qr_parameters.html#a5558c5d549f41597377fa1ea8a1cefa3", null ]
 ];

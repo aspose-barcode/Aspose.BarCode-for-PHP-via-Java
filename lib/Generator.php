@@ -3016,7 +3016,7 @@ class DataMatrixParameters extends BaseJavaClass
      * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
      * Can be used only with DataMatrixEccType.Ecc200 or DataMatrixEccType.EccAuto.
      * Cannot be used with EncodeTypes.GS_1_DATA_MATRIX
-     * Default value: MacroCharacters.NONE.
+     * Default value: MacroCharacter.NONE.
      */
     public function getMacroCharacters() : int
     {
@@ -3030,7 +3030,7 @@ class DataMatrixParameters extends BaseJavaClass
      * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
      * Can be used only with DataMatrixEccType.Ecc200 or DataMatrixEccType.EccAuto.
      * Cannot be used with EncodeTypes.GS_1_DATA_MATRIX
-     * Default value: MacroCharacters.NONE.
+     * Default value: MacroCharacter.NONE.
      */
     public function setMacroCharacters($value) : void
     {
@@ -3565,10 +3565,29 @@ class ITFParameters extends BaseJavaClass
      */
 class QrParameters extends BaseJavaClass
 {
+    private $structuredAppend;
     // protected $javaClassName = "com.aspose.barcode.generation.QrParameters";
 
     protected function init(): void
     {
+        $this->structuredAppend = new QrStructuredAppendParameters($this->getJavaClass()->getStructuredAppend());
+    }
+
+    /**
+     * QR structured append parameters.
+     */
+    public function getStructuredAppend() : QrStructuredAppendParameters
+    {
+        return $this->structuredAppend;
+    }
+
+    /**
+     * QR structured append parameters.
+     */
+    public function setStructuredAppend(QrStructuredAppendParameters $value)
+    {
+        $this->structuredAppend = $value;
+        $this->getJavaClass()->setStructuredAppend($value->getJavaClass());
     }
 
     /**
@@ -5150,6 +5169,112 @@ class PatchCodeParameters extends BaseJavaClass
     }
 }
 
+/**
+ * QR structured append parameters.
+ */
+class QrStructuredAppendParameters extends BaseJavaClass
+{
+    protected function init(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    /**
+     *  Gets the QR structured append mode parity data.
+     */
+    public function getParityByte()
+    {
+        return java_cast($this->getJavaClass()->getParityByte(), "byte");
+    }
+
+    /**
+     *  Sets the QR structured append mode parity data.
+     */
+    public function setParityByte($value)
+    {
+        $this->getJavaClass()->setParityByte($value);
+    }
+
+    /**
+     * Gets the index of the QR structured append mode barcode. Index starts from 0.
+     */
+    public function getSequenceIndicator() : int
+    {
+        return java_cast($this->getJavaClass()->getSequenceIndicator(), "integer");
+    }
+
+    /**
+     * Sets the index of the QR structured append mode barcode. Index starts from 0.
+     */
+    public function setSequenceIndicator(int $value)
+    {
+        $this->getJavaClass()->setSequenceIndicator($value);
+    }
+
+    /**
+     * Gets the QR structured append mode barcodes quantity. Max value is 16.
+     */
+    public function getTotalCount() : int
+    {
+        return java_cast($this->getJavaClass()->getTotalCount(), "integer");
+    }
+
+    /**
+     * Sets the QR structured append mode barcodes quantity. Max value is 16.
+     */
+    public function setTotalCount(int $value)
+    {
+        $this->getJavaClass()->setSequenceIndicator($value);
+    }
+
+    function getStateHash() : int
+    {
+        return java_cast($this->getJavaClass()->getStateHash(), "integer");
+    }
+}
+
+
+/**
+ * Class BarcodeClassifications EncodeTypes classification
+ */
+final class BarcodeClassifications
+{
+    /**
+     * Unspecified classification
+     */
+    const NONE = 0;
+
+    /**
+     * Specifies 1D-barcode
+     */
+    const TYPE_1D = 1;
+
+    /**
+     * Specifies 2D-barcode
+     */
+    const TYPE_2D = 2;
+
+    /**
+     * Specifies POSTAL-barcode
+     */
+    const POSTAL = 3;
+
+    /**
+     * Specifies DataBar-barcode
+     */
+    const DATABAR = 4;
+
+    /**
+     * Specifies COUPON-barcode
+     */
+    const COUPON = 5;
+}
+
 final class MacroCharacter
 {
     /**
@@ -6574,5 +6699,41 @@ class EnableChecksum
      * Do not use checksum.
      */
      const NO = 2;
+}
+
+/**
+ * <p>
+ * Specifies the file format of the image.
+ * </p>
+ */
+class BarCodeImageFormat
+{
+    /**
+     * <p>
+     * Specifies the W3C Portable Network Graphics (PNG) image format.
+     * </p>
+     */
+    const PNG = "PNG";
+
+    /**
+     * <p>
+     * Specifies the Joint Photographic Experts Group (JPEG) image format.
+     * </p>
+     */
+    const JPEG = "JPEG";
+
+    /**
+     * <p>
+     * Specifies the bitmap (BMP) image format.
+     * </p>
+     */
+    const BMP = "BMP";
+
+    /**
+     * <p>
+     * Specifies the Graphics Interchange Format (GIF) image format.
+     * </p>
+     */
+    const GIF = "GIF";
 }
 ?>

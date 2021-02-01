@@ -26,7 +26,7 @@ class BarcodeReader extends BaseJavaClass
     /**
      * Initializes a new instance of the BarCodeReader
      * @param args can take following combinations of arguments:
-     *    1) image encoded as base64 string
+     *    1) image encoded as base64 string or path to image
      *    2) image encoded as base64 string and the array of objects by type DecodeType
      *    3) image encoded as base64 string, array of object by type Rectangle and the array of objects by DecodeType
      * @throws PhpBarcodeException
