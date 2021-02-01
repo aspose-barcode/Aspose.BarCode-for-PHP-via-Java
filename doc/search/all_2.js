@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['b_24',['B',['../class_codabar_symbol.html#a50a4cbdf63793e6a4650e0d8eebdbef3',1,'CodabarSymbol']]],
+  ['bar_25',['BAR',['../class_i_t_f14_border_type.html#acd623bf8b19f87d849e1e95f12e89228',1,'ITF14BorderType']]],
+  ['bar_5fout_26',['BAR_OUT',['../class_i_t_f14_border_type.html#ad1fc2254ed0c9df3a53c4a9faffc3969',1,'ITF14BorderType']]],
+  ['barcodeclassifications_27',['BarcodeClassifications',['../class_barcode_classifications.html',1,'']]],
+  ['barcodeconfidence_28',['BarCodeConfidence',['../class_bar_code_confidence.html',1,'']]],
+  ['barcodeexception_29',['BarcodeException',['../class_barcode_exception.html',1,'']]],
+  ['barcodegenerator_30',['BarcodeGenerator',['../class_barcode_generator.html',1,'']]],
+  ['barcodeimageformat_31',['BarCodeImageFormat',['../class_bar_code_image_format.html',1,'']]],
+  ['barcodeparameters_32',['BarcodeParameters',['../class_barcode_parameters.html',1,'']]],
+  ['barcodereader_33',['BarcodeReader',['../class_barcode_reader.html',1,'']]],
+  ['barcoderegionparameters_34',['BarCodeRegionParameters',['../class_bar_code_region_parameters.html',1,'']]],
+  ['barcoderesult_35',['BarCodeResult',['../class_bar_code_result.html',1,'']]],
+  ['barcodesvmdetectorsettings_36',['BarcodeSvmDetectorSettings',['../class_barcode_svm_detector_settings.html',1,'']]],
+  ['basegenerationparameters_37',['BaseGenerationParameters',['../class_base_generation_parameters.html',1,'']]],
+  ['below_38',['BELOW',['../class_code_location.html#aeef0934e800a6e1920fb0af0aaf76e05',1,'CodeLocation']]],
+  ['big5_39',['Big5',['../class_e_c_i_encodings.html#aecfdfedba5eb7398d02e12438a41466a',1,'ECIEncodings']]],
+  ['binary_40',['BINARY',['../class_pdf417_compaction_mode.html#a1867376965f2ff908bfd19037eabaab6',1,'Pdf417CompactionMode']]],
+  ['bmp_41',['BMP',['../class_bar_code_image_format.html#afb2253ebede1b18bbab40c812ba1ede5',1,'BarCodeImageFormat']]],
+  ['bold_42',['BOLD',['../class_font_style.html#a466dec8fb20c0821e6bfb70cf0c8e672',1,'FontStyle']]],
+  ['borderdashstyle_43',['BorderDashStyle',['../class_border_dash_style.html',1,'']]],
+  ['borderparameters_44',['BorderParameters',['../class_border_parameters.html',1,'']]],
+  ['bytes_45',['BYTES',['../class_q_r_encode_mode.html#ac7541c60644baaff129054157b13643b',1,'QREncodeMode']]]
+];
