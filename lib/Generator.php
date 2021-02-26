@@ -4154,6 +4154,108 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
+     * Gets macro Pdf417 barcode file name.
+     * @return
+     */
+    public function getPdf417MacroFileName() : string
+    {
+        return java_cast($this->getJavaClass()->getPdf417MacroFileName(), "string");
+    }
+
+    /**
+     * Sets macro Pdf417 barcode file name.
+     * @param value
+     */
+    public function setPdf417MacroFileName(string $value)
+    {
+        $this->getJavaClass()->setPdf417MacroFileName($value);
+    }
+
+    /**
+     * Gets macro Pdf417 barcode time stamp.
+     */
+    public function getPdf417MacroTimeStamp() : DateTime
+    {
+        return new DateTime('@'.java_cast($this->getJavaClass()->getPdf417MacroTimeStamp(), "string"));
+    }
+
+    /**
+     * Sets macro Pdf417 barcode time stamp.
+     */
+    public function setPdf417MacroTimeStamp(DateTime $value)
+    {
+        $this->getJavaClass()->setPdf417MacroTimeStamp($value->getTimestamp()."");
+    }
+
+    /**
+     * Gets macro Pdf417 barcode sender name.
+     */
+    public function getPdf417MacroSender() : string
+    {
+        return java_cast($this->getJavaClass()->getPdf417MacroSender(), "string");
+    }
+
+    /**
+     * Sets macro Pdf417 barcode sender name.
+     */
+    public function setPdf417MacroSender(string $value)
+    {
+        $this->getJavaClass()->setPdf417MacroSender($value);
+    }
+
+    /**
+     * Gets macro Pdf417 barcode addressee name.
+     */
+    public function getPdf417MacroAddressee() : string
+    {
+        return java_cast($this->getJavaClass()->getPdf417MacroAddressee(), "string");
+    }
+
+    /**
+     * Sets macro Pdf417 barcode addressee name.
+     */
+    public function setPdf417MacroAddressee(string $value)
+    {
+        $this->getJavaClass()->setPdf417MacroAddressee($value);
+    }
+
+    /**
+     * Gets or sets macro Pdf417 file size.
+     * @return The file size field contains the size in bytes of the entire source file.
+     */
+    public function getPdf417MacroFileSize() : int
+    {
+        return java_cast($this->getJavaClass()->getPdf417MacroFileSize(), "integer");
+    }
+
+    /**
+     * Gets or sets macro Pdf417 file size.
+     * @param value The file size field contains the size in bytes of the entire source file.
+     */
+    public function setPdf417MacroFileSize(int $value)
+    {
+        $this->getJavaClass()->setPdf417MacroFileSize($value);
+    }
+
+    /**
+     *  Gets macro Pdf417 barcode checksum.
+     * @return The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     */
+    public function getPdf417MacroChecksum() : int
+    {
+        return java_cast($this->getJavaClass()->getPdf417MacroChecksum(), "integer");
+    }
+
+    /**
+     *  Sets macro Pdf417 barcode checksum.
+     * @param value The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     */
+    public function setPdf417MacroChecksum(int $value)
+    {
+        $this->getJavaClass()->setPdf417MacroChecksum($value);
+    }
+
+    /**
      * Gets the encoding of codetext.
      */
     public function getCodeTextEncoding()
@@ -4187,7 +4289,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
-     * about the used references for encoding the data in the symbol.
+     * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
      * Current implementation consists all well known charset encodings.
      */
     public function getPdf417ECIEncoding() : int
@@ -4197,12 +4299,28 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
-     * about the used references for encoding the data in the symbol.
+     * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
      * Current implementation consists all well known charset encodings.
      */
     public function setPdf417ECIEncoding($value) : void
     {
         $this->getJavaClass()->setPdf417ECIEncoding($value);
+    }
+
+    /**
+     * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
+     */
+    public function getPdf417MacroECIEncoding() : int
+    {
+        return java_cast($this->getJavaClass()->getPdf417MacroECIEncoding(), "integer");
+    }
+
+    /**
+     * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
+     */
+    public function setPdf417MacroECIEncoding(int $value)
+    {
+        $this->getJavaClass()->setPdf417MacroECIEncoding($value);
     }
 
 
@@ -4227,9 +4345,9 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * Returns a human-readable string representation of this Pdf417Parameters.
+     * Returns a human-readable String representation of this Pdf417Parameters.
      *
-     * @return A string that represents this Pdf417Parameters.
+     * @return A String that represents this Pdf417Parameters.
      */
     public function toString() : string
     {
@@ -5189,7 +5307,7 @@ class QrStructuredAppendParameters extends BaseJavaClass
      */
     public function getParityByte()
     {
-        return java_cast($this->getJavaClass()->getParityByte(), "byte");
+        return java_cast($this->getJavaClass()->getParityByte(), "integer");
     }
 
     /**
@@ -5229,7 +5347,7 @@ class QrStructuredAppendParameters extends BaseJavaClass
      */
     public function setTotalCount(int $value)
     {
-        $this->getJavaClass()->setSequenceIndicator($value);
+        $this->getJavaClass()->setTotalCount($value);
     }
 
     function getStateHash() : int

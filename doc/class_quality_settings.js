@@ -16,6 +16,7 @@ var class_quality_settings =
     [ "getAllowRegularImage", "class_quality_settings.html#a4989c6d4468fc4dab1f792e6a65ae507", null ],
     [ "getAllowSaltAndPaperFiltering", "class_quality_settings.html#ae39a63ea1ea8031f6d3156b83d6100bf", null ],
     [ "getAllowWhiteSpotsRemoving", "class_quality_settings.html#ae8532e4432ead43dc520f12ad1115902", null ],
+    [ "getCheckMore1DVariants", "class_quality_settings.html#ab0ad3bed16b8acac8dd71b560566003f", null ],
     [ "getDetectorSettings", "class_quality_settings.html#a65295a46a9666e40426f1d5d102ef2d1", null ],
     [ "getMedianSmoothingWindowSize", "class_quality_settings.html#ae531615dd88936431f9006ccc1e31251", null ],
     [ "getReadTinyBarcodes", "class_quality_settings.html#aee75cdce6546729ebeaa0936a6bfec63", null ],
@@ -34,6 +35,7 @@ var class_quality_settings =
     [ "setAllowRegularImage", "class_quality_settings.html#aa4f4237989e64127006cd0a1bc9c19db", null ],
     [ "setAllowSaltAndPaperFiltering", "class_quality_settings.html#ab3f10b825135b5be573e958114baf0f7", null ],
     [ "setAllowWhiteSpotsRemoving", "class_quality_settings.html#ab4b7015f452ed560fb0ecb0a386d642c", null ],
+    [ "setCheckMore1DVariants", "class_quality_settings.html#a305d29e27eaeddcb35eedc6db728dcc0", null ],
     [ "setDetectorSettings", "class_quality_settings.html#a91300d8df243a139caae84f18066ef9c", null ],
     [ "setMedianSmoothingWindowSize", "class_quality_settings.html#a3e51ab8a250fc69dba1b8076ce023f5f", null ],
     [ "setReadTinyBarcodes", "class_quality_settings.html#a27a993e75f9a325f34754fc43afc9d97", null ]

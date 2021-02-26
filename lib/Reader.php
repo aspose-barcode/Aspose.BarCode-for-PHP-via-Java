@@ -1092,6 +1092,60 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     }
 
     /**
+     * Macro PDF417 file name (optional).
+     * @return File name.
+     */
+    public function getMacroPdf417FileName() : string
+    {
+        return java_cast($this->getJavaClass()->getMacroPdf417FileName(), "string");
+    }
+
+    /**
+     * Macro PDF417 file size (optional).
+     * @return File size.
+     */
+    public function getMacroPdf417FileSize() : int
+    {
+        return java_cast($this->getJavaClass()->getMacroPdf417FileSize(), "integer");
+    }
+
+    /**
+     * Macro PDF417 sender name (optional).
+     * @return Sender name
+     */
+    public function getMacroPdf417Sender() : string
+    {
+        return java_cast($this->getJavaClass()->getMacroPdf417Sender(), "string");
+    }
+
+    /**
+     * Macro PDF417 addressee name (optional).
+     * @return Addressee name.
+     */
+    public function getMacroPdf417Addressee() : string
+    {
+        return java_cast($this->getJavaClass()->getMacroPdf417Addressee(), "string");
+    }
+
+    /**
+     * Macro PDF417 time stamp (optional).
+     * @return Time stamp.
+     */
+    public function getMacroPdf417TimeStamp() : DateTime
+    {
+        return new DateTime('@'.java_cast($this->getJavaClass()->getMacroPdf417TimeStamp(), "string"));
+    }
+
+    /**
+     * Macro PDF417 checksum (optional).
+     * @return Checksum.
+     */
+    public function getMacroPdf417Checksum() : int
+    {
+        return java_cast($this->getJavaClass()->getMacroPdf417Checksum(), "integer");
+    }
+
+    /**
      * Tests whether all parameters has only default values
      * Value: Returns {@code <b>true</b>} if all parameters has only default values; otherwise, {@code <b>false</b>}.
      */
@@ -2226,6 +2280,24 @@ final class QualitySettings extends BaseJavaClass
     public function setReadTinyBarcodes($value) : void
     {
         $this->getJavaClass()->setReadTinyBarcodes($value);
+    }
+
+    /**
+     * Allows engine to recognize 1D barcodes with checksum by checking more recognition variants. Default value: False.
+     * @return If True, allows engine to recognize 1D barcodes with checksum.
+     */
+    public function getCheckMore1DVariants() : bool
+    {
+        return java_cast($this->getJavaClass()->getCheckMore1DVariants(), "boolean");
+    }
+
+    /**
+     * Allows engine to recognize 1D barcodes with checksum by checking more recognition variants. Default value: False.
+     * @param $value If True, allows engine to recognize 1D barcodes with checksum.
+     */
+    public function setCheckMore1DVariants(bool $value)
+    {
+        $this->getJavaClass()->setCheckMore1DVariants($value);
     }
 
     /**
