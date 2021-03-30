@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.2</span>
+   &#160;<span id="projectnumber">21.3</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -115,7 +115,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Use C_TABLE to interpret the customer information. Allows A..Z, a..z, 1..9, space and # sing. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a50bcd23c695bdbe64823c937e852d330">EncodeTypes::AUSTRALIA_POST</a>, "5912345678ABCde"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE); $image = $generator-&gt;generateBarCodeImage(); $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST); $reader-&gt;setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeType()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
+<p>Use C_TABLE to interpret the customer information. Allows A..Z, a..z, 1..9, space and # sing. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a50bcd23c695bdbe64823c937e852d330">EncodeTypes::AUSTRALIA_POST</a>, "5912345678ABCde"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE); $image = $generator-&gt;generateBarCodeImage(); $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader(image, DecodeType::AUSTRALIA_POST)</a>; $reader-&gt;setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeType()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
 
 </div>
 </div>
@@ -130,7 +130,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Use N_TABLE to interpret the customer information. Allows digits. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a50bcd23c695bdbe64823c937e852d330">EncodeTypes::AUSTRALIA_POST</a>, "59123456781234567"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE); $image = $generator-&gt;generateBarCodeImage(); $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST); $reader-&gt;setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeType()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
+<p>Use N_TABLE to interpret the customer information. Allows digits. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a50bcd23c695bdbe64823c937e852d330">EncodeTypes::AUSTRALIA_POST</a>, "59123456781234567"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE); $image = $generator-&gt;generateBarCodeImage(); $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader(image, DecodeType::AUSTRALIA_POST)</a>; $reader-&gt;setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeType()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
 
 </div>
 </div>
@@ -145,7 +145,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Do not interpret the customer information. Allows 0, 1, 2 or 3 symbol only. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a50bcd23c695bdbe64823c937e852d330">EncodeTypes::AUSTRALIA_POST</a>, "59123456780123012301230123"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::OTHER); $image = $generator-&gt;generateBarCodeImage(); $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST); $reader-&gt;<a class="el" href="class_customer_information_interpreting_type.html">CustomerInformationInterpretingType</a> = <a class="el" href="class_customer_information_interpreting_type.html#a8735716693fe762635680c4fe5d9ba07">CustomerInformationInterpretingType::OTHER</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeType()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
+<p>Do not interpret the customer information. Allows 0, 1, 2 or 3 symbol only. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a50bcd23c695bdbe64823c937e852d330">EncodeTypes::AUSTRALIA_POST</a>, "59123456780123012301230123"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::OTHER); $image = $generator-&gt;generateBarCodeImage(); $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader(image, DecodeType::AUSTRALIA_POST)</a>; $reader-&gt;<a class="el" href="class_customer_information_interpreting_type.html">CustomerInformationInterpretingType</a> = <a class="el" href="class_customer_information_interpreting_type.html#a8735716693fe762635680c4fe5d9ba07">CustomerInformationInterpretingType::OTHER</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeType()); print("BarCode CodeText: ".$result-&gt;getCodeText()); } </p>
 
 </div>
 </div>

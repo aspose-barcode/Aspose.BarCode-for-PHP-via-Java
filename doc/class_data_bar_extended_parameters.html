@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.2</span>
+   &#160;<span id="projectnumber">21.3</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_data_bar_extended_parameters.htm
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_data_bar_extended_parameters-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">DataBarExtendedParameters Class Reference</div>  </div>
@@ -99,26 +98,19 @@ $(document).ready(function(){initNavTree('class_data_bar_extended_parameters.htm
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b841d5a7be697a093cc97353abdea54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#a9b841d5a7be697a093cc97353abdea54">is2DCompositeComponent</a> ()</td></tr>
 <tr class="separator:a9b841d5a7be697a093cc97353abdea54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af940b98888d0fc2a59c9a4dd85b0fb32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#af940b98888d0fc2a59c9a4dd85b0fb32">equals</a> ($obj)</td></tr>
-<tr class="separator:af940b98888d0fc2a59c9a4dd85b0fb32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f6a207596a465b8c2557dd3326669c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#a36f6a207596a465b8c2557dd3326669c">equals</a> (<a class="el" href="class_data_bar_extended_parameters.html">DataBarExtendedParameters</a> $obj)</td></tr>
+<tr class="separator:a36f6a207596a465b8c2557dd3326669c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49fb42c7665b2d0b995961cadd9a8188"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#a49fb42c7665b2d0b995961cadd9a8188">hashcode</a> ()</td></tr>
 <tr class="separator:a49fb42c7665b2d0b995961cadd9a8188"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5558c5d549f41597377fa1ea8a1cefa3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#a5558c5d549f41597377fa1ea8a1cefa3">toString</a> ()</td></tr>
 <tr class="separator:a5558c5d549f41597377fa1ea8a1cefa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a854ebbcaa115cbc6e43fd35c6c5f4006"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#a854ebbcaa115cbc6e43fd35c6c5f4006">op_Equality</a> ($first, $second)</td></tr>
-<tr class="separator:a854ebbcaa115cbc6e43fd35c6c5f4006"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a359b8ba1545a9f4f5df929ea944603d4"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_data_bar_extended_parameters.html#a359b8ba1545a9f4f5df929ea944603d4">op_Inequality</a> ($first, $second)</td></tr>
-<tr class="separator:a359b8ba1545a9f4f5df929ea944603d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Stores a DataBar additional information of recognized barcode BarCodeReader reader = new BarCodeReader("c:\\test.png", <a class="el" href="class_decode_type.html#a418e897f8f02cee742124d95e14d1c0e">DecodeType.DATABAR_OMNI_DIRECTIONAL</a>);</p>
+<div class="textblock"><p>Stores a DataBar additional information of recognized barcode <a class="el" href="class_bar_code_reader.html">BarCodeReader</a> reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader</a>("c:\\test.png", <a class="el" href="class_decode_type.html#a418e897f8f02cee742124d95e14d1c0e">DecodeType.DATABAR_OMNI_DIRECTIONAL</a>);</p>
 <p>for(<a class="el" href="class_bar_code_result.html">BarCodeResult</a> result : reader.readBarCodes()) { System.out.println("BarCode Type: " + result.getCodeTypeName()); System.out.println("BarCode CodeText: " + result.getCodeText()); System.out.println("QR Structured Append Quantity: " + result.getExtended().getQR().getQRStructuredAppendModeBarCodesQuantity()); } </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af940b98888d0fc2a59c9a4dd85b0fb32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af940b98888d0fc2a59c9a4dd85b0fb32">&#9670;&nbsp;</a></span>equals()</h2>
+<a id="a36f6a207596a465b8c2557dd3326669c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f6a207596a465b8c2557dd3326669c">&#9670;&nbsp;</a></span>equals()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +118,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">equals </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="class_data_bar_extended_parameters.html">DataBarExtendedParameters</a>&#160;</td>
           <td class="paramname"><em>$obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -175,98 +167,6 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Gets the DataBar 2D composite component flag. Default value is false. </p><dl class="section return"><dt>Returns</dt><dd>The DataBar 2D composite component flag. </dd></dl>
-
-</div>
-</div>
-<a id="a854ebbcaa115cbc6e43fd35c6c5f4006"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a854ebbcaa115cbc6e43fd35c6c5f4006">&#9670;&nbsp;</a></span>op_Equality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Equality </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating whether the first</p><div class="fragment"><div class="line">BarCodeExtendedParameters </div>
-</div><!-- fragment --><p> value is equal to the second. </p>
-<dl class="section return"><dt>Returns</dt><dd><div class="fragment"><div class="line">&lt;b&gt;<span class="keyword">true</span>&lt;/b&gt; </div>
-</div><!-- fragment --> if first has the same value as second; otherwise,<div class="fragment"><div class="line">&lt;b&gt;<span class="keyword">false</span>&lt;/b&gt; </div>
-</div><!-- fragment --> . </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a359b8ba1545a9f4f5df929ea944603d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a359b8ba1545a9f4f5df929ea944603d4">&#9670;&nbsp;</a></span>op_Inequality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Inequality </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating if the first <a class="el" href="class_data_bar_extended_parameters.html">DataBarExtendedParameters</a> value is different from the second. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><b>true</b> if first has the different value from second; otherwise, <b>false</b>. </dd></dl>
 
 </div>
 </div>

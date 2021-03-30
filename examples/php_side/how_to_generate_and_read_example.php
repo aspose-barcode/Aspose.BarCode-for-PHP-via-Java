@@ -10,7 +10,7 @@ function generate_and_read()
 
     $image_bytes = file_get_contents($file_path);
     $image_data_base64 = base64_encode($image_bytes);
-    $reader = new BarcodeReader($image_data_base64, null, DecodeType::ALL_SUPPORTED_TYPES);
+    $reader = new BarCodeReader($image_data_base64, null, DecodeType::ALL_SUPPORTED_TYPES);
 
     if (sizeof($reader->readBarCodes()) > 0)
     {

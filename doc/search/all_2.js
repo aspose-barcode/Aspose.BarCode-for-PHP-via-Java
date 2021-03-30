@@ -9,7 +9,7 @@ var searchData=
   ['barcodegenerator_30',['BarcodeGenerator',['../class_barcode_generator.html',1,'']]],
   ['barcodeimageformat_31',['BarCodeImageFormat',['../class_bar_code_image_format.html',1,'']]],
   ['barcodeparameters_32',['BarcodeParameters',['../class_barcode_parameters.html',1,'']]],
-  ['barcodereader_33',['BarcodeReader',['../class_barcode_reader.html',1,'']]],
+  ['barcodereader_33',['BarCodeReader',['../class_bar_code_reader.html',1,'']]],
   ['barcoderegionparameters_34',['BarCodeRegionParameters',['../class_bar_code_region_parameters.html',1,'']]],
   ['barcoderesult_35',['BarCodeResult',['../class_bar_code_result.html',1,'']]],
   ['barcodesvmdetectorsettings_36',['BarcodeSvmDetectorSettings',['../class_barcode_svm_detector_settings.html',1,'']]],

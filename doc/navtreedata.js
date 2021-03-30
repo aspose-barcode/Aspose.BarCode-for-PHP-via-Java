@@ -43,8 +43,8 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "class_codabar_symbol.html#af33f4e85482e7ba78af07ce19d85cea8",
-"class_encode_types.html#a5ab95c2e52381d19780b6513f5fc20be",
-"class_q_r_version.html#aea7b87aeaba1c9c8cd7dae7086847c46"
+"class_encode_types.html#a4cc61b2d18cf716e4356642e1bce8753",
+"class_q_r_version.html#abcd3a97f3242d64e32a75dd3fe8db5e2"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

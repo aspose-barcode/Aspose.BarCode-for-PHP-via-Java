@@ -2,7 +2,7 @@ var class_quadrangle =
 [
     [ "__construct", "class_quadrangle.html#a6f7fbc4f2e00b8e37019bc121fe3ce5d", null ],
     [ "contains", "class_quadrangle.html#ae2263dc26bcec5fd7ed7c757afd12998", null ],
-    [ "containsPoint", "class_quadrangle.html#aabed63c7f05a0e9e397604709851b7b9", null ],
+    [ "containsPoint", "class_quadrangle.html#ae4a9cbea8e904db7a5f72746345c1c2e", null ],
     [ "containsQuadrangle", "class_quadrangle.html#a442ce775f7cf8bf2a538b9698f58e01e", null ],
     [ "containsRectangle", "class_quadrangle.html#a8d0542494f66bdc90bd8f26543f75c0e", null ],
     [ "equals", "class_quadrangle.html#a742f4a2dceab2ac50e24636fba057907", null ],

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.2</span>
+   &#160;<span id="projectnumber">21.3</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_code128_extended_parameters.html
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_code128_extended_parameters-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Code128ExtendedParameters Class Reference</div>  </div>
@@ -99,25 +98,18 @@ $(document).ready(function(){initNavTree('class_code128_extended_parameters.html
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aec9a4fdf0c5d206354bae5f9562ed775"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#aec9a4fdf0c5d206354bae5f9562ed775">getCode128DataPortions</a> ()</td></tr>
 <tr class="separator:aec9a4fdf0c5d206354bae5f9562ed775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af940b98888d0fc2a59c9a4dd85b0fb32"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#af940b98888d0fc2a59c9a4dd85b0fb32">equals</a> ($obj)</td></tr>
-<tr class="separator:af940b98888d0fc2a59c9a4dd85b0fb32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a69da8413f8ccb2482d385e40faae5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#a8a69da8413f8ccb2482d385e40faae5e">equals</a> (<a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> $obj)</td></tr>
+<tr class="separator:a8a69da8413f8ccb2482d385e40faae5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39bb44967a5d766b313b178049ef2c03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#a39bb44967a5d766b313b178049ef2c03">hashCode</a> ()</td></tr>
 <tr class="separator:a39bb44967a5d766b313b178049ef2c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5558c5d549f41597377fa1ea8a1cefa3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#a5558c5d549f41597377fa1ea8a1cefa3">toString</a> ()</td></tr>
 <tr class="separator:a5558c5d549f41597377fa1ea8a1cefa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a56e4008e40d2c57cf2f6fe89ab5252ef"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#a56e4008e40d2c57cf2f6fe89ab5252ef">op_Equality</a> (<a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> $first, <a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> $second)</td></tr>
-<tr class="separator:a56e4008e40d2c57cf2f6fe89ab5252ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40d8f74443056d42c1c345df4eb3d068"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_code128_extended_parameters.html#a40d8f74443056d42c1c345df4eb3d068">op_Inequality</a> (<a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> $first, <a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> $second)</td></tr>
-<tr class="separator:a40d8f74443056d42c1c345df4eb3d068"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Stores special data of Code128 recognized barcode Represents the recognized barcode's region and barcode angle This sample shows how to get code128 raw values $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::Code128, "12345"); $generator-&gt;save("test.png"); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("Code128 Data Portions: ".$result-&gt;getExtended()-&gt;getCode128()); } </p>
+<div class="textblock"><p>Stores special data of Code128 recognized barcode Represents the recognized barcode's region and barcode angle This sample shows how to get code128 raw values $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::Code128, "12345"); $generator-&gt;save("test.png"); $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader</a>("test.png", <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("Code128 Data Portions: ".$result-&gt;getExtended()-&gt;getCode128()); } </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af940b98888d0fc2a59c9a4dd85b0fb32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af940b98888d0fc2a59c9a4dd85b0fb32">&#9670;&nbsp;</a></span>equals()</h2>
+<a id="a8a69da8413f8ccb2482d385e40faae5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a69da8413f8ccb2482d385e40faae5e">&#9670;&nbsp;</a></span>equals()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +117,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">equals </td>
           <td>(</td>
-          <td class="paramtype">&#160;</td>
+          <td class="paramtype"><a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a>&#160;</td>
           <td class="paramname"><em>$obj</em></td><td>)</td>
           <td></td>
         </tr>
@@ -176,96 +168,6 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the hash code for this instance.</p>
 <dl class="section return"><dt>Returns</dt><dd>A 32-bit signed integer hash code. </dd></dl>
-
-</div>
-</div>
-<a id="a56e4008e40d2c57cf2f6fe89ab5252ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56e4008e40d2c57cf2f6fe89ab5252ef">&#9670;&nbsp;</a></span>op_Equality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Equality </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating whether the first <a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> value is equal to the second.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if first has the same value as second; otherwise, false. </dd></dl>
-
-</div>
-</div>
-<a id="a40d8f74443056d42c1c345df4eb3d068"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d8f74443056d42c1c345df4eb3d068">&#9670;&nbsp;</a></span>op_Inequality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Inequality </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating if the first <a class="el" href="class_code128_extended_parameters.html">Code128ExtendedParameters</a> value is different from the second.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if first has the different value from second; otherwise, false. </dd></dl>
 
 </div>
 </div>

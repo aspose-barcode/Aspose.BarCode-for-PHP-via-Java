@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.2</span>
+   &#160;<span id="projectnumber">21.3</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_bar_code_result.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_bar_code_result-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BarCodeResult Class Reference</div>  </div>
@@ -123,17 +122,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afc2f2491d6c7a2e81c7d2b99c4c9d39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c20a1ea81e7ab2c75c3f19650ca0dc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_result.html#a3c20a1ea81e7ab2c75c3f19650ca0dc4">__construct</a> ($javaClass)</td></tr>
 <tr class="separator:a3c20a1ea81e7ab2c75c3f19650ca0dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aaf9d1c863c11b466373b0f316dc29c4e"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_result.html#aaf9d1c863c11b466373b0f316dc29c4e">op_Equality</a> (<a class="el" href="class_bar_code_result.html">BarCodeResult</a> $first, <a class="el" href="class_bar_code_result.html">BarCodeResult</a> $second)</td></tr>
-<tr class="separator:aaf9d1c863c11b466373b0f316dc29c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32c39193cfbdc36eef655f338e40310f"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_result.html#a32c39193cfbdc36eef655f338e40310f">op_Inequality</a> (<a class="el" href="class_bar_code_result.html">BarCodeResult</a> $first, <a class="el" href="class_bar_code_result.html">BarCodeResult</a> $second)</td></tr>
-<tr class="separator:a32c39193cfbdc36eef655f338e40310f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores recognized barcode data like SingleDecodeType type,</p><div class="fragment"><div class="line"><span class="keywordtype">string</span> </div>
-</div><!-- fragment --><p> codetext, <a class="el" href="class_bar_code_region_parameters.html">BarCodeRegionParameters</a> region and other parameters This sample shows how to obtain <a class="el" href="class_bar_code_result.html">BarCodeResult</a>. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::Code128, "12345"); $generator-&gt;save("test.png"); $reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a74321c5174a3e07bb2d59fbf3f964ba0">getCodeTypeName()</a>); print("BarCode CodeText: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a1a24f85fbcc245ba73ee4970c7528bb8">getCodeText()</a>); print("BarCode Confidence: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a126db2c22a82a13806d6172a019f37ae">getConfidence()</a>); print("BarCode ReadingQuality: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a5e8bf057cc16af674828a56726faf975">getReadingQuality()</a>); print("BarCode Angle: ".$result-&gt;<a class="el" href="class_bar_code_result.html#ab955facad00afb9d014661f76cb2a659">getRegion()</a>-&gt;getAngle()); } </p>
+</div><!-- fragment --><p> codetext, <a class="el" href="class_bar_code_region_parameters.html">BarCodeRegionParameters</a> region and other parameters This sample shows how to obtain <a class="el" href="class_bar_code_result.html">BarCodeResult</a>. $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(EncodeTypes::Code128, "12345"); $generator-&gt;save("test.png"); $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader</a>("test.png", <a class="el" href="class_decode_type.html#a84c171b3835e82048ba3154b33749a57">DecodeType::CODE_39_STANDARD</a>, <a class="el" href="class_decode_type.html#a41328b786f3b20f23fe85e8954865aaa">DecodeType::CODE_128</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a74321c5174a3e07bb2d59fbf3f964ba0">getCodeTypeName()</a>); print("BarCode CodeText: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a1a24f85fbcc245ba73ee4970c7528bb8">getCodeText()</a>); print("BarCode Confidence: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a126db2c22a82a13806d6172a019f37ae">getConfidence()</a>); print("BarCode ReadingQuality: ".$result-&gt;<a class="el" href="class_bar_code_result.html#a5e8bf057cc16af674828a56726faf975">getReadingQuality()</a>); print("BarCode Angle: ".$result-&gt;<a class="el" href="class_bar_code_result.html#ab955facad00afb9d014661f76cb2a659">getRegion()</a>-&gt;getAngle()); } </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3c20a1ea81e7ab2c75c3f19650ca0dc4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c20a1ea81e7ab2c75c3f19650ca0dc4">&#9670;&nbsp;</a></span>__construct()</h2>
@@ -366,96 +358,6 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the hash code for this instance.</p>
 <dl class="section return"><dt>Returns</dt><dd>A 32-bit signed integer hash code. </dd></dl>
-
-</div>
-</div>
-<a id="aaf9d1c863c11b466373b0f316dc29c4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf9d1c863c11b466373b0f316dc29c4e">&#9670;&nbsp;</a></span>op_Equality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Equality </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_bar_code_result.html">BarCodeResult</a>&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_bar_code_result.html">BarCodeResult</a>&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating whether the first <a class="el" href="class_bar_code_result.html">BarCodeResult</a> value is equal to the second.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">$first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">$second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if first has the same value as second; otherwise, false. </dd></dl>
-
-</div>
-</div>
-<a id="a32c39193cfbdc36eef655f338e40310f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32c39193cfbdc36eef655f338e40310f">&#9670;&nbsp;</a></span>op_Inequality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Inequality </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_bar_code_result.html">BarCodeResult</a>&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_bar_code_result.html">BarCodeResult</a>&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating if the first <a class="el" href="class_bar_code_result.html">BarCodeResult</a> value is different from the second.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if first has the different value from second; otherwise, false. </dd></dl>
 
 </div>
 </div>

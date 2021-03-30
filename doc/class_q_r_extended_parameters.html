@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.2</span>
+   &#160;<span id="projectnumber">21.3</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_q_r_extended_parameters.html',''
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_q_r_extended_parameters-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">QRExtendedParameters Class Reference</div>  </div>
@@ -109,17 +108,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a39bb44967a5d766b313b178049ef2c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5558c5d549f41597377fa1ea8a1cefa3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_extended_parameters.html#a5558c5d549f41597377fa1ea8a1cefa3">toString</a> ()</td></tr>
 <tr class="separator:a5558c5d549f41597377fa1ea8a1cefa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a944685c9e301f25683b499fc0f136c1f"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_extended_parameters.html#a944685c9e301f25683b499fc0f136c1f">op_Equality</a> (<a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a> $first, <a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a> $second)</td></tr>
-<tr class="separator:a944685c9e301f25683b499fc0f136c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a8a622d0f36986a73cfb51ee77afbea"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_r_extended_parameters.html#a0a8a622d0f36986a73cfb51ee77afbea">op_Inequality</a> (<a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a> $first, <a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a> $second)</td></tr>
-<tr class="separator:a0a8a622d0f36986a73cfb51ee77afbea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores a QR Structured Append information of recognized barcode This sample shows how to get QR Structured Append data</p>
-<p>$reader = new BarCodeReader("test.png", <a class="el" href="class_decode_type.html#a4cc61b2d18cf716e4356642e1bce8753">DecodeType::QR</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("QR Structured Append Quantity: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a0c289bb2a8dc69b4e6232444975e0542">getQRStructuredAppendModeBarCodesQuantity()</a>); print("QR Structured Append Index: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a586dce542f9fa3ee22380d8efbd3b4ad">getQRStructuredAppendModeBarCodeIndex()</a>); print("QR Structured Append ParityData: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a594bb4df8eb071db1f77460a6cc07010">getQRStructuredAppendModeParityData()</a>); } </p>
+<p>$reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader</a>("test.png", <a class="el" href="class_decode_type.html#a4cc61b2d18cf716e4356642e1bce8753">DecodeType::QR</a>); foreach($reader-&gt;readBarCodes() as $result) { print("BarCode Type: ".$result-&gt;getCodeTypeName()); print("BarCode CodeText: ".$result-&gt;getCodeText()); print("QR Structured Append Quantity: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a0c289bb2a8dc69b4e6232444975e0542">getQRStructuredAppendModeBarCodesQuantity()</a>); print("QR Structured Append Index: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a586dce542f9fa3ee22380d8efbd3b4ad">getQRStructuredAppendModeBarCodeIndex()</a>); print("QR Structured Append ParityData: ".$result-&gt;getExtended()-&gt;getQR()-&gt;<a class="el" href="class_q_r_extended_parameters.html#a594bb4df8eb071db1f77460a6cc07010">getQRStructuredAppendModeParityData()</a>); } </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af940b98888d0fc2a59c9a4dd85b0fb32"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af940b98888d0fc2a59c9a4dd85b0fb32">&#9670;&nbsp;</a></span>equals()</h2>
@@ -217,96 +209,6 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns the hash code for this instance.</p>
 <dl class="section return"><dt>Returns</dt><dd>A 32-bit signed integer hash code. </dd></dl>
-
-</div>
-</div>
-<a id="a944685c9e301f25683b499fc0f136c1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a944685c9e301f25683b499fc0f136c1f">&#9670;&nbsp;</a></span>op_Equality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Equality </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating whether the first <a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a> value is equal to the second.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if first has the same value as second; otherwise, false. </dd></dl>
-
-</div>
-</div>
-<a id="a0a8a622d0f36986a73cfb51ee77afbea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a8a622d0f36986a73cfb51ee77afbea">&#9670;&nbsp;</a></span>op_Inequality()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static op_Inequality </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$first</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a>&#160;</td>
-          <td class="paramname"><em>$second</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a value indicating if the first <a class="el" href="class_q_r_extended_parameters.html">QRExtendedParameters</a> value is different from the second.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">first</td><td>A first compared value </td></tr>
-    <tr><td class="paramname">second</td><td>A second compared value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if first has the different value from second; otherwise, false. </dd></dl>
 
 </div>
 </div>
