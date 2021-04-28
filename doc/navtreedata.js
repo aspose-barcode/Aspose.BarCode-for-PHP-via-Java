@@ -42,9 +42,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_codabar_symbol.html#af33f4e85482e7ba78af07ce19d85cea8",
-"class_encode_types.html#a4cc61b2d18cf716e4356642e1bce8753",
-"class_q_r_version.html#abcd3a97f3242d64e32a75dd3fe8db5e2"
+"class_codablock_parameters.html",
+"class_encode_types.html#a4f4e707c73714efd2fa13ae928d796d8",
+"class_q_r_version.html#ac0aa6aa0752f9aefabffb0a62cb609c1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

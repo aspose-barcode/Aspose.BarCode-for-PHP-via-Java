@@ -102,17 +102,17 @@ class License extends BaseJavaClass
     }
 }
 
-class Point
+class Point extends BaseJavaClass
 {
-    /**
-     * The X coordinate.
-     */
-    public $x;
+    private const javaClassName = "java.awt.Point";
 
     /**
-     * The Y coordinate.
+     * Represents a Quadrangle structure with its properties left uninitialized.Value: Quadrangle
      */
-    public $y;
+    public static function EMPTY(): Point
+    {
+        return new Point(0, 0);
+    }
 
     /**
      * Rectangle constructor.
@@ -121,119 +121,132 @@ class Point
      */
     public function __construct($x, $y)
     {
-        $this->x = $x;
-        $this->y = $y;
+        parent::__construct(new java(self::javaClassName, $x, $y));
     }
 
-    public function toString()
+    static function construct(...$args) : Point
     {
-        return $this->x . ',' . $this->y;
+        $point = self::EMPTY();
+        $point->setJavaClass($args[0]);
+        return $point;
+    }
+
+    protected function init(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    public function getX():int
+    {
+        return java_cast($this->getJavaClass()->getX(), "integer");
+    }
+
+    public function getY():int
+    {
+        return java_cast($this->getJavaClass()->getY(), "integer");
+    }
+
+    public function setX(int $x):void
+    {
+        $this->getJavaClass()->x = $x;
+    }
+
+    public function setY(int $y):void
+    {
+        $this->getJavaClass()->y = $y;
+    }
+
+    public function toString() : string
+    {
+        return $this->getJavaClass()->getX() . ',' . $this->getJavaClass()->getY();
+    }
+
+    public function equals(Point $obj): bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
     }
 }
 
-class Rectangle
+class Rectangle extends BaseJavaClass
 {
+    private const javaClassName = "java.awt.Rectangle";
 
     /**
-     * The X coordinate of the upper-left corner of the <code>Rectangle</code>.
-     *
-     * @serial
-     * @see #setLocation(int, int)
-     * @see #getLocation()
-     * @since 1.0
+     * Represents a Quadrangle structure with its properties left uninitialized.Value: Quadrangle
      */
-    public $x;
-
-    /**
-     * The Y coordinate of the upper-left corner of the <code>Rectangle</code>.
-     *
-     * @serial
-     * @see #setLocation(int, int)
-     * @see #getLocation()
-     * @since 1.0
-     */
-    public $y;
-
-    /**
-     * The width of the <code>Rectangle</code>.
-     * @serial
-     * @see #setSize(int, int)
-     * @see #getSize()
-     * @since 1.0
-     */
-    public $width;
-
-    /**
-     * The height of the <code>Rectangle</code>.
-     *
-     * @serial
-     * @see #setSize(int, int)
-     * @see #getSize()
-     * @since 1.0
-     */
-    public $height;
+    public static function EMPTY(): Rectangle
+    {
+        return new Rectangle(0, 0,0,0);
+    }
 
     /**
      * Rectangle constructor.
      * @param $x
      * @param $y
-     * @param $width
-     * @param $height
      */
     public function __construct($x, $y, $width, $height)
     {
-        $this->x = $x;
-        $this->y = $y;
-        $this->width = $width;
-        $this->height = $height;
+        parent::__construct(new java(self::javaClassName, $x, $y, $width, $height));
     }
 
-    public function getX()
+    static function construct(...$args) : Rectangle
     {
-        return $this->x;
+        $rectangle = self::EMPTY();
+        $rectangle->setJavaClass($args[0]);
+        return $rectangle;
     }
 
-    public function getY()
+    public function getX() : int
     {
-        return $this->y;
+        return java_cast($this->getJavaClass()->getX(), "integer");
     }
 
-    public function getLeft()
+    public function getY() : int
+    {
+        return java_cast($this->getJavaClass()->getY(), "integer");
+    }
+
+    public function getLeft() : int
     {
         return $this->getX();
     }
 
-    public function getTop()
+    public function getTop() : int
     {
         return $this->getY();
     }
 
-    public function getRight()
+    public function getRight() : int
     {
         return $this->getX() + $this->getWidth();
     }
 
-    public function getBottom()
+    public function getBottom() : int
     {
         return $this->getY() + $this->getHeight();
     }
 
-    public function getWidth()
+    public function getWidth() : int
     {
-        return $this->width;
+        return java_cast($this->getJavaClass()->getWidth(), "integer");
     }
 
-    public function getHeight()
+    public function getHeight() : int
     {
-        return $this->height;
+        return java_cast($this->getJavaClass()->getHeight(), "integer");
     }
 
-    public function toString()
+    public function toString() : string
     {
-        return $this->x . ',' . $this->y . ',' . $this->width . ',' . $this->height;
+        return $this->getX() . ',' . $this->getY() . ',' . $this->getWidth() . ',' . $this->getHeight();
     }
 
-    private function intersectsWithInclusive(Rectangle $r)
+    public function equals(Rectangle $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    private function intersectsWithInclusive(Rectangle $r) : bool
     {
         return !(($this->getLeft() > $r->getRight()) || ($this->getRight() < $r->getLeft()) ||
             ($this->getTop() > $r->getBottom()) || ($this->getBottom() < $r->getTop()));
@@ -267,16 +280,21 @@ class Rectangle
      * and bottom coordinates.
      */
 
-    public static function fromLTRB($left, $top,
-                                    $right, $bottom): Rectangle
+    public static function fromLTRB(int $left, int $top,
+                                    int $right, int $bottom): Rectangle
     {
         return new Rectangle($left, $top, $right - $left,
             $bottom - $top);
     }
 
-    public function isEmpty()
+    public function isEmpty() : bool
     {
-        return ($this->width <= 0) || ($this->height <= 0);
+        return ($this->getWidth() <= 0) || ($this->getWidth() <= 0);
+    }
+
+    protected function init(): void
+    {
+        // TODO: Implement init() method.
     }
 }
 

@@ -106,23 +106,6 @@ class BarCodeReader extends BaseJavaClass
     }
 
     /**
-     * Gets file name which was assigned by user
-     *
-     * @return file name
-     */
-    public function getFileName() : string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getFileName(), "string");
-        } catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
      * Gets the timeout of recognition process in milliseconds.
      *
      * $reader = new BarCodeReader("test.png");
@@ -690,15 +673,15 @@ class Quadrangle extends BaseJavaClass
      */
     public function __construct(Point $leftTop, Point $rightTop, Point $rightBottom, Point $leftBottom)
     {
-        parent::__construct(new java(self::javaClassName,$leftTop->toString(), $rightTop->toString(), $rightBottom->toString(), $leftBottom->toString()));
+        parent::__construct(new java(self::javaClassName,$leftTop->getJavaClass(), $rightTop->getJavaClass(), $rightBottom->getJavaClass(), $leftBottom->getJavaClass()));
     }
 
     protected function init(): void
     {
-        $this->leftTop = new Point(java_cast($this->getJavaClass()->getLeftTop()->getX(), "integer"), java_cast($this->getJavaClass()->getLeftTop()->getY(), "integer"));
-        $this->rightTop = new Point(java_cast($this->getJavaClass()->getRightTop()->getX(), "integer"), java_cast($this->getJavaClass()->getRightTop()->getY(), "integer"));
-        $this->rightBottom = new Point(java_cast($this->getJavaClass()->getRightBottom()->getX(), "integer"), java_cast($this->getJavaClass()->getRightBottom()->getY(), "integer"));
-        $this->leftBottom = new Point(java_cast($this->getJavaClass()->getLeftBottom()->getX(), "integer"), java_cast($this->getJavaClass()->getLeftBottom()->getY(), "integer"));
+        $this->leftTop = Point::construct($this->getJavaClass()->getLeftTop());
+        $this->rightTop = Point::construct($this->getJavaClass()->getRightTop());
+        $this->rightBottom = Point::construct($this->getJavaClass()->getRightBottom());
+        $this->leftBottom = Point::construct($this->getJavaClass()->getLeftBottom());
     }
 
     /**
@@ -715,7 +698,7 @@ class Quadrangle extends BaseJavaClass
     public function setLeftTop(Point $value): void
     {
         $this->leftTop = $value;
-        $this->getJavaClass()->setLeftTop($value);
+        $this->getJavaClass()->setLeftTop($value->getJavaClass());
     }
 
     /**
@@ -732,7 +715,7 @@ class Quadrangle extends BaseJavaClass
     public function setRightTop(Point $value): void
     {
         $this->rightTop = $value;
-        $this->getJavaClass()->setRightTop($value);
+        $this->getJavaClass()->setRightTop($value->getJavaClass());
     }
 
     /**
@@ -749,7 +732,7 @@ class Quadrangle extends BaseJavaClass
     public function setRightBottom(Point $value): void
     {
         $this->rightBottom = $value;
-        $this->getJavaClass()->setRightBottom($value);
+        $this->getJavaClass()->setRightBottom($value->getJavaClass());
     }
 
     /**
@@ -766,7 +749,7 @@ class Quadrangle extends BaseJavaClass
     public function setLeftBottom(Point $value): void
     {
         $this->leftBottom = $value;
-        $this->getJavaClass()->setLeftBottom($value);
+        $this->getJavaClass()->setLeftBottom($value->getJavaClass());
     }
 
     /**
@@ -785,7 +768,7 @@ class Quadrangle extends BaseJavaClass
      */
     public function contains(Point $pt): bool
     {
-        return java_cast($this->getJavaClass()->contains($pt), "boolean");
+        return java_cast($this->getJavaClass()->contains($pt->getJavaClass()), "boolean");
     }
 
     /**
@@ -808,7 +791,7 @@ class Quadrangle extends BaseJavaClass
      */
     public function containsQuadrangle(Quadrangle $quad): bool
     {
-        return java_cast($this->getJavaClass()->contains($quad), "boolean");
+        return java_cast($this->getJavaClass()->contains($quad->getJavaClass()), "boolean");
     }
 
     /**
@@ -828,9 +811,9 @@ class Quadrangle extends BaseJavaClass
      * @param $other An Quadrangle value to compare to this instance.
      * @return true if obj has the same value as this instance; otherwise, false.
      */
-    public function equals(Quadrangle $other): bool
+    public function equals(Quadrangle $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($other->getJavaClass()), "boolean");
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
     }
 
     /**
@@ -850,7 +833,7 @@ class Quadrangle extends BaseJavaClass
      */
     public function toString(): string
     {
-        return java_cast($this->toString(), "string");
+        return java_cast($this->getJavaClass()->toString(), "string");
     }
 
     /**
@@ -860,10 +843,7 @@ class Quadrangle extends BaseJavaClass
      */
     public function getBoundingRectangle(): Rectangle
     {
-        return new Rectangle(java_cast($this->getJavaClass()->getBoundingRectangle()->getX(), "integer"),
-            java_cast($this->getJavaClass()->getBoundingRectangle()->getY(), "integer"),
-            java_cast($this->getJavaClass()->getBoundingRectangle()->getWidth(), "integer"),
-            java_cast($this->getJavaClass()->getBoundingRectangle()->getHeight(), "integer"));
+        return Rectangle::construct($this->getJavaClass()->getBoundingRectangle());
     }
 }
 
@@ -980,9 +960,9 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     /**
      * Gets the file ID of the barcode, only available with MacroPdf417.Value: The file ID for MacroPdf417
      */
-    public function getMacroPdf417FileID(): int
+    public function getMacroPdf417FileID(): string
     {
-        return java_cast($this->getJavaClass()->getMacroPdf417FileID(), "integer");
+        return java_cast($this->getJavaClass()->getMacroPdf417FileID(), "string");
     }
 
     /**
@@ -1180,7 +1160,7 @@ final class OneDExtendedParameters extends BaseJavaClass
  * Stores special data of Code128 recognized barcode
  * Represents the recognized barcode's region and barcode angle
  * This sample shows how to get code128 raw values
- * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
+ * $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12345");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_128);
  * foreach($reader->readBarCodes() as $result)
@@ -1479,9 +1459,9 @@ final class BarCodeResult extends BaseJavaClass
     /**
      *  Gets the reading quality. Works for 1D and postal barcodes. Value: The reading quality percent
      */
-    public function getReadingQuality() : int
+    public function getReadingQuality() : float
     {
-        return java_cast($this->getJavaClass()->getReadingQuality(), "integer");
+        return java_cast($this->getJavaClass()->getReadingQuality(), "double");
     }
 
     /**
@@ -1618,10 +1598,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     protected function init(): void
     {
         $this->quad = Quadrangle::construct($this->getJavaClass()->getQuadrangle());
-        $this->rect = new Rectangle(java_cast($this->getJavaClass()->getRectangle()->getX(), "integer"),
-            java_cast($this->getJavaClass()->getRectangle()->getY(), "integer"),
-            java_cast($this->getJavaClass()->getRectangle()->getWidth(), "integer"),
-            java_cast($this->getJavaClass()->getRectangle()->getHeight(), "integer"));
+        $this->rect = Rectangle::construct($this->getJavaClass()->getRectangle());
         $this->points = self::convertJavaPoints($this->getJavaClass()->getPoints());
         // TODO: Implement init() method.
     }
@@ -2013,7 +1990,7 @@ final class QualitySettings extends BaseJavaClass
      * Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
      * @param value If True, allows engine to recognize tiny barcodes on large images.
      */
-    public function setReadTinyBarcodes($value) : void
+    public function setReadTinyBarcodes(bool $value) : void
     {
         $this->getJavaClass()->setReadTinyBarcodes($value);
     }

@@ -6,7 +6,6 @@ var class_bar_code_reader =
     [ "getChecksumValidation", "class_bar_code_reader.html#a8b087d349791d0765afea0a103adf312", null ],
     [ "getCustomerInformationInterpretingType", "class_bar_code_reader.html#a4964d691c4cfa1d1fe690742cc0e1873", null ],
     [ "getDetectEncoding", "class_bar_code_reader.html#ae33150430ea5bba0558b0af90f643573", null ],
-    [ "getFileName", "class_bar_code_reader.html#afdeebfe3fcf5806fc79c074a6a3a6eb1", null ],
     [ "getFoundBarCodes", "class_bar_code_reader.html#a470da62939856eefb4cf77d3dc625e9f", null ],
     [ "getFoundCount", "class_bar_code_reader.html#addc3f60fa6ca8cb651ac442d701665a0", null ],
     [ "getQualitySettings", "class_bar_code_reader.html#a949aa6972902430e39172d9707298cb6", null ],

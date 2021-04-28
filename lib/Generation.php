@@ -30,7 +30,7 @@ class BarcodeGenerator extends BaseJavaClass
      * BarcodeGenerator constructor.
      * @param args can take following combinations of arguments:
      *    1) Barcode symbology type. Use EncodeTypes class to setup a symbology
-     *    2) type EncodeTypes, Text to be encoded.
+     *    2) Text to be encoded. Should be encoded in UTF-8 encoding
      * @code
      *   $barcodeGenerator = new BarcodeGenerator(EncodeTypes::EAN_14, "332211");
      * @endcode
@@ -503,7 +503,13 @@ class BarcodeParameters extends BaseJavaClass
      */
     public function getBarColor() : string
     {
-        return java_cast($this->getJavaClass()->getBarColor(), "string");
+        $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBarColor(), "integer")));
+        while (strlen($hexColor) < 6)
+        {
+            $hexColor = "0".$hexColor;
+        }
+        $hexColor = "#".$hexColor;
+        return $hexColor;
     }
 
     /**
@@ -512,7 +518,7 @@ class BarcodeParameters extends BaseJavaClass
      */
     public function setBarColor(string $value) : void
     {
-        $this->getJavaClass()->setBarColor($value);
+        $this->getJavaClass()->setBarColor(hexdec($value));
     }
 
     /**
@@ -1018,18 +1024,21 @@ class BaseGenerationParameters extends BaseJavaClass
      */
     public function getBackColor(): string
     {
-        $back_color = null;
         try
         {
-            $java_object = $this->getJavaClass()->getBackColor();
-            $back_color = java_cast($java_object, "string");
+            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBackColor(), "integer")));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0".$hexColor;
+            }
+            $hexColor = "#".$hexColor;
+            return $hexColor;
         }
         catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
         }
-        return $back_color;
     }
 
     /**
@@ -1041,7 +1050,7 @@ class BaseGenerationParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setBackColor($hexValue);
+            $this->getJavaClass()->setBackColor(hexdec($hexValue));
         }
         catch (Exception $ex)
         {
@@ -1459,7 +1468,13 @@ class BorderParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getColor(), "string");
+            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getColor(), "integer")));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0".$hexColor;
+            }
+            $hexColor = "#".$hexColor;
+            return $hexColor;
         }
         catch (Exception $ex)
         {
@@ -1476,7 +1491,7 @@ class BorderParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setColor($hexValue);
+            $this->getJavaClass()->setColor(hexdec($hexValue));
         }
         catch (Exception $ex)
         {
@@ -1650,7 +1665,13 @@ class CaptionParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getTextColor(), "string");
+            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getTextColor(), "integer")));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0".$hexColor;
+            }
+            $hexColor = "#".$hexColor;
+            return $hexColor;
         }
         catch (Exception $ex)
         {
@@ -1667,7 +1688,7 @@ class CaptionParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setTextColor($rgbValue);
+            $this->getJavaClass()->setTextColor(hexdec($rgbValue));
         }
         catch (Exception $ex)
         {
@@ -2365,7 +2386,13 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getColor(), "string");
+            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getColor(), "integer")));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0".$hexColor;
+            }
+            $hexColor = "#".$hexColor;
+            return $hexColor;
         }
         catch (Exception $ex)
         {
@@ -2382,7 +2409,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setColor($value);
+            $this->getJavaClass()->setColor(hexdec($value));
         }
         catch (Exception $ex)
         {
@@ -3929,11 +3956,11 @@ class Pdf417Parameters extends BaseJavaClass
     /**
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
      */
-    public function getPdf417Truncate() : int
+    public function getPdf417Truncate() : bool
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417Truncate(), "integer");
+            return java_cast($this->getJavaClass()->getPdf417Truncate(), "boolean");
         }
         catch (Exception $ex)
         {
@@ -3945,7 +3972,7 @@ class Pdf417Parameters extends BaseJavaClass
     /**
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
      */
-    public function setPdf417Truncate(int $value): void
+    public function setPdf417Truncate(bool $value): void
     {
         try
         {
@@ -4404,11 +4431,14 @@ class SupplementParameters extends BaseJavaClass
     /**
      * Supplement data following BarCode.
      */
-    public function getSupplementData() : string
+    public function getSupplementData() : ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getSupplementData(), "string");
+            $SupplementData = java_cast($this->getJavaClass()->getSupplementData(), "string");
+            if($SupplementData == "null")
+                return null;
+            return $SupplementData;
         }
         catch (Exception $ex)
         {
@@ -5182,7 +5212,7 @@ class ExtCodetextBuilder extends BaseJavaClass
  * $lTextBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
  * $lTextBuilder->addPlainCodetext("t\\e\\\\st");
  *  //generate codetext
- * $lCodetext = lTextBuilder->getExtendedCodetext();
+ * $lCodetext = $lTextBuilder->getExtendedCodetext();
  *  </pre>
  *  </pre></blockquote></hr>
  */
@@ -5259,9 +5289,12 @@ class PatchCodeParameters extends BaseJavaClass
     /**
      * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
      */
-    public function getExtraBarcodeText() : string
+    public function getExtraBarcodeText() : ?string
     {
-        return java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
+        $ExtraBarcodeText = java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
+        if($ExtraBarcodeText == "null")
+            return null;
+        return $ExtraBarcodeText;
     }
 
     /**
@@ -5363,11 +5396,6 @@ class QrStructuredAppendParameters extends BaseJavaClass
     public function setTotalCount(int $value)
     {
         $this->getJavaClass()->setTotalCount($value);
-    }
-
-    function getStateHash() : int
-    {
-        return java_cast($this->getJavaClass()->getStateHash(), "integer");
     }
 }
 
@@ -5534,30 +5562,30 @@ class  DataMatrixEncodeMode
     /**
      * Automatically pick up the best encode mode for datamatrix encoding
      */
-    const AUTO = "0";
+    const AUTO = 0;
     /**
      * Encodes one alphanumeric or two numeric characters per byte
      */
-    const ASCII = "1";
+    const ASCII = 1;
     /**
      * Encode 8 bit values
      */
-    const FULL = "6";
+    const FULL = 6;
     /**
      * Encode with the encoding specified in BarCodeBuilder.CodeTextEncoding
      */
-    const CUSTOM = "7";
+    const CUSTOM = 7;
 
 
     /**
      * Uses C40 encoding. Encodes Upper-case alphanumeric, Lower case and special characters
      */
-    const C40 = "8";
+    const C40 = 8;
 
     /**
      * Uses TEXT encoding. Encodes Lower-case alphanumeric, Upper case and special characters
      */
-    const TEXT = "9";
+    const TEXT = 9;
 
     /**
      * Uses EDIFACT encoding. Uses six bits per character, encodes digits, upper-case letters, and many punctuation marks, but has no support for lower-case letters.
@@ -6334,318 +6362,318 @@ class EncodeTypes
     /**
      * Unspecified encode type.
      */
-    const  NONE = "-1";
+    const  NONE = -1;
 
     /**
      * Specifies that the data should be encoded with CODABAR barcode specification
      */
-    const  CODABAR = "0";
+    const  CODABAR = 0;
 
     /**
      * Specifies that the data should be encoded with CODE 11 barcode specification
      */
-    const  CODE_11 = "1";
+    const  CODE_11 = 1;
 
     /**
      * Specifies that the data should be encoded with Standard CODE 39 barcode specification
      */
-    const  CODE_39_STANDARD = "2";
+    const  CODE_39_STANDARD = 2;
 
     /**
      * Specifies that the data should be encoded with Extended CODE 39 barcode specification
      */
-    const  CODE_39_EXTENDED = "3";
+    const  CODE_39_EXTENDED = 3;
 
     /**
      * Specifies that the data should be encoded with Standard CODE 93 barcode specification
      */
-    const  CODE_93_STANDARD = "4";
+    const  CODE_93_STANDARD = 4;
 
     /**
      * Specifies that the data should be encoded with Extended CODE 93 barcode specification
      */
-    const  CODE_93_EXTENDED = "5";
+    const  CODE_93_EXTENDED = 5;
 
     /**
      * Specifies that the data should be encoded with CODE 128 barcode specification
      */
-    const  CODE_128 = "6";
+    const  CODE_128 = 6;
 
     /**
      * Specifies that the data should be encoded with GS1 Code 128 barcode specification. The codetext must contains parentheses for AI.
      */
-    const  GS_1_CODE_128 = "7";
+    const  GS_1_CODE_128 = 7;
 
     /**
      * Specifies that the data should be encoded with EAN-8 barcode specification
      */
-    const  EAN_8 = "8";
+    const  EAN_8 = 8;
 
     /**
      * Specifies that the data should be encoded with EAN-13 barcode specification
      */
-    const  EAN_13 = "9";
+    const  EAN_13 = 9;
 
     /**
      * Specifies that the data should be encoded with EAN14 barcode specification
      */
-    const  EAN_14 = "10";
+    const  EAN_14 = 10;
 
     /**
      * Specifies that the data should be encoded with SCC14 barcode specification
      */
-    const  SCC_14 = "11";
+    const  SCC_14 = 11;
 
     /**
      * Specifies that the data should be encoded with SSCC18 barcode specification
      */
-    const  SSCC_18 = "12";
+    const  SSCC_18 = 12;
 
     /**
      * Specifies that the data should be encoded with UPC-A barcode specification
      */
-    const  UPCA = "13";
+    const  UPCA = 13;
 
     /**
      * Specifies that the data should be encoded with UPC-E barcode specification
      */
-    const  UPCE = "14";
+    const  UPCE = 14;
 
     /**
      * Specifies that the data should be encoded with isBN barcode specification
      */
-    const  ISBN = "15";
+    const  ISBN = 15;
 
     /**
      * Specifies that the data should be encoded with ISSN barcode specification
      */
-    const  ISSN = "16";
+    const  ISSN = 16;
 
     /**
      * Specifies that the data should be encoded with ISMN barcode specification
      */
-    const  ISMN = "17";
+    const  ISMN = 17;
 
     /**
      * Specifies that the data should be encoded with Standard 2 of 5 barcode specification
      */
-    const  STANDARD_2_OF_5 = "18";
+    const  STANDARD_2_OF_5 = 18;
 
     /**
      * Specifies that the data should be encoded with INTERLEAVED 2 of 5 barcode specification
      */
-    const  INTERLEAVED_2_OF_5 = "19";
+    const  INTERLEAVED_2_OF_5 = 19;
 
     /**
      * Represents Matrix 2 of 5 BarCode
      */
-    const  MATRIX_2_OF_5 = "20";
+    const  MATRIX_2_OF_5 = 20;
 
     /**
      * Represents Italian Post 25 barcode.
      */
-    const  ITALIAN_POST_25 = "21";
+    const  ITALIAN_POST_25 = 21;
 
     /**
      * Represents IATA 2 of 5 barcode.IATA (International Air Transport Assosiation) uses this barcode for the management of air cargo.
      */
-    const  IATA_2_OF_5 = "22";
+    const  IATA_2_OF_5 = 22;
 
     /**
      * Specifies that the data should be encoded with ITF14 barcode specification
      */
-    const  ITF_14 = "23";
+    const  ITF_14 = 23;
 
     /**
      * Represents ITF-6  Barcode.
      */
-    const  ITF_6 = "24";
+    const  ITF_6 = 24;
 
     /**
      * Specifies that the data should be encoded with MSI Plessey barcode specification
      */
-    const  MSI = "25";
+    const  MSI = 25;
 
     /**
      * Represents VIN (Vehicle Identification Number) Barcode.
      */
-    const  VIN = "26";
+    const  VIN = 26;
 
     /**
      * Represents Deutsch Post barcode, This EncodeType is also known as Identcode,CodeIdentcode,German Postal 2 of 5 Identcode,
      * Deutsch Post AG Identcode, Deutsch Frachtpost Identcode,  Deutsch Post AG (DHL)
      */
-    const  DEUTSCHE_POST_IDENTCODE = "27";
+    const  DEUTSCHE_POST_IDENTCODE = 27;
 
     /**
      * Represents Deutsch Post Leitcode Barcode,also known as German Postal 2 of 5 Leitcode, CodeLeitcode, Leitcode, Deutsch Post AG (DHL).
      */
-    const  DEUTSCHE_POST_LEITCODE = "28";
+    const  DEUTSCHE_POST_LEITCODE = 28;
 
     /**
      * Represents OPC(Optical Product Code) Barcode,also known as , VCA Barcode VCA OPC, Vision Council of America OPC Barcode.
      */
-    const  OPC = "29";
+    const  OPC = 29;
 
     /**
      * Represents PZN barcode.This EncodeType is also known as Pharmacy central number, Pharmazentralnummer
      */
-    const  PZN = "30";
+    const  PZN = 30;
 
     /**
      * Represents Code 16K barcode.
      */
-    const  CODE_16_K = "31";
+    const  CODE_16_K = 31;
 
     /**
      * Represents Pharmacode barcode.
      */
-    const  PHARMACODE = "32";
+    const  PHARMACODE = 32;
 
     /**
      * 2D barcode symbology DataMatrix
      */
-    const  DATA_MATRIX = "33";
+    const  DATA_MATRIX = 33;
 
     /**
      * Specifies that the data should be encoded with QR Code barcode specification
      */
-    const  QR = "34";
+    const  QR = 34;
 
     /**
      * Specifies that the data should be encoded with Aztec barcode specification
      */
-    const  AZTEC = "35";
+    const  AZTEC = 35;
 
     /**
      * Specifies that the data should be encoded with Pdf417 barcode specification
      */
-    const  PDF_417 = "36";
+    const  PDF_417 = 36;
 
     /**
      * Specifies that the data should be encoded with MacroPdf417 barcode specification
      */
-    const  MACRO_PDF_417 = "37";
+    const  MACRO_PDF_417 = 37;
 
     /**
      * 2D barcode symbology DataMatrix with GS1 string format
      */
-    const  GS_1_DATA_MATRIX = "48";
+    const  GS_1_DATA_MATRIX = 48;
 
     /**
      * Specifies that the data should be encoded with MicroPdf417 barcode specification
      */
-    const  MICRO_PDF_417 = "55";
+    const  MICRO_PDF_417 = 55;
 
     /**
      * 2D barcode symbology QR with GS1 string format
      */
-    const  GS_1_QR = "56";
+    const  GS_1_QR = 56;
 
     /**
      * Specifies that the data should be encoded with MaxiCode barcode specification
      */
-    const  MAXI_CODE = "57";
+    const  MAXI_CODE = 57;
 
     /**
      * Specifies that the data should be encoded with DotCode barcode specification
      */
-    const  DOT_CODE = "60";
+    const  DOT_CODE = 60;
 
     /**
      * Represents Australia Post Customer BarCode
      */
-    const  AUSTRALIA_POST = "38";
+    const  AUSTRALIA_POST = 38;
 
     /**
      * Specifies that the data should be encoded with Postnet barcode specification
      */
-    const  POSTNET = "39";
+    const  POSTNET = 39;
 
     /**
      * Specifies that the data should be encoded with Planet barcode specification
      */
-    const  PLANET = "40";
+    const  PLANET = 40;
 
     /**
      * Specifies that the data should be encoded with USPS OneCode barcode specification
      */
-    const  ONE_CODE = "41";
+    const  ONE_CODE = 41;
 
     /**
      * Represents RM4SCC barcode. RM4SCC (Royal Mail 4-state Customer Code) is used for automated mail sort process in UK.
      */
-    const  RM_4_SCC = "42";
+    const  RM_4_SCC = 42;
 
     /**
      * Specifies that the data should be encoded with GS1 Databar omni-directional barcode specification.
      */
-    const  DATABAR_OMNI_DIRECTIONAL = "43";
+    const  DATABAR_OMNI_DIRECTIONAL = 43;
 
     /**
      * Specifies that the data should be encoded with GS1 Databar truncated barcode specification.
      */
-    const  DATABAR_TRUNCATED = "44";
+    const  DATABAR_TRUNCATED = 44;
 
     /**
      * Represents GS1 DATABAR limited barcode.
      */
-    const  DATABAR_LIMITED = "45";
+    const  DATABAR_LIMITED = 45;
 
     /**
      * Represents GS1 Databar expanded barcode.
      */
-    const  DATABAR_EXPANDED = "46";
+    const  DATABAR_EXPANDED = 46;
 
     /**
      * Represents GS1 Databar expanded stacked barcode.
      */
-    const  DATABAR_EXPANDED_STACKED = "52";
+    const  DATABAR_EXPANDED_STACKED = 52;
 
     /**
      * Represents GS1 Databar stacked barcode.
      */
-    const  DATABAR_STACKED = "53";
+    const  DATABAR_STACKED = 53;
 
     /**
      * Represents GS1 Databar stacked omni-directional barcode.
      */
-    const  DATABAR_STACKED_OMNI_DIRECTIONAL = "54";
+    const  DATABAR_STACKED_OMNI_DIRECTIONAL = 54;
 
     /**
      * Specifies that the data should be encoded with Singapore Post Barcode barcode specification
      */
-    const  SINGAPORE_POST = "47";
+    const  SINGAPORE_POST = 47;
 
     /**
      * Specifies that the data should be encoded with Australian Post Domestic eParcel Barcode barcode specification
      */
-    const  AUSTRALIAN_POSTE_PARCEL = "49";
+    const  AUSTRALIAN_POSTE_PARCEL = 49;
 
     /**
      * Specifies that the data should be encoded with Swiss Post Parcel Barcode barcode specification. Supported types: Domestic Mail, International Mail, Additional Services (new)
      */
-    const  SWISS_POST_PARCEL = "50";
+    const  SWISS_POST_PARCEL = 50;
 
     /**
      * Represents Patch code barcode
      */
-    const  PATCH_CODE = "51";
+    const  PATCH_CODE = 51;
 
     /**
      * Specifies that the data should be encoded with Code32 barcode specification
      */
-    const  CODE_32 = "58";
+    const  CODE_32 = 58;
 
     /**
      * Specifies that the data should be encoded with DataLogic 2 of 5 barcode specification
      */
-    const  DATA_LOGIC_2_OF_5 = "59";
+    const  DATA_LOGIC_2_OF_5 = 59;
 
     /**
      * Specifies that the data should be encoded with Dutch KIX barcode specification
      */
-    const  DUTCH_KIX = "61";
+    const  DUTCH_KIX = 61;
 
     /**
      * Specifies that the data should be encoded with UPC coupon with GS1-128 Extended Code barcode specification.
@@ -6653,7 +6681,7 @@ class EncodeTypes
      * BarCodeBuilder->setCodetext("514141100906(8102)03"),
      * where UPCA part is "514141100906", GS1Code128 part is (8102)03.
      */
-    const  UPCA_GS_1_CODE_128_COUPON = "62";
+    const  UPCA_GS_1_CODE_128_COUPON = 62;
 
     /**
      * Specifies that the data should be encoded with UPC coupon with GS1 DataBar addition barcode specification.
@@ -6662,17 +6690,17 @@ class EncodeTypes
      * where UPCA part is "514141100906", DATABAR part is "(8110)106141416543213500110000310123196000".
      * To change the caption, use barCodeBuilder->getCaptionAbove()->setText("company prefix + offer code");
      */
-    const  UPCA_GS_1_DATABAR_COUPON = "63";
+    const  UPCA_GS_1_DATABAR_COUPON = 63;
 
     /**
      * Specifies that the data should be encoded with Codablock-F barcode specification.
      */
-    const  CODABLOCK_F = "64";
+    const  CODABLOCK_F = 64;
 
     /**
      * Specifies that the data should be encoded with GS1 Codablock-F barcode specification. The codetext must contains parentheses for AI.
      */
-    const  GS_1_CODABLOCK_F = "65";
+    const  GS_1_CODABLOCK_F = 65;
 }
 
 /**

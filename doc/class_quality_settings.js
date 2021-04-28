@@ -38,5 +38,5 @@ var class_quality_settings =
     [ "setCheckMore1DVariants", "class_quality_settings.html#a305d29e27eaeddcb35eedc6db728dcc0", null ],
     [ "setDetectorSettings", "class_quality_settings.html#a91300d8df243a139caae84f18066ef9c", null ],
     [ "setMedianSmoothingWindowSize", "class_quality_settings.html#a5452c1e88f729d7c66bbf2e048b6bdbc", null ],
-    [ "setReadTinyBarcodes", "class_quality_settings.html#a27a993e75f9a325f34754fc43afc9d97", null ]
+    [ "setReadTinyBarcodes", "class_quality_settings.html#a919fc0fe073ebb2c30301ea75d84d800", null ]
 ];

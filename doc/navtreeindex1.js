@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"class_codabar_symbol.html#af33f4e85482e7ba78af07ce19d85cea8":[1,0,23,2],
 "class_codablock_parameters.html":[1,0,24],
 "class_codablock_parameters.html#a3e2c31d44cae11e2a80ed8da2f17340b":[1,0,24,3],
 "class_codablock_parameters.html#a513d92194f1232b24edaa989e44d75d4":[1,0,24,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX1 =
 "class_encode_types.html#a41328b786f3b20f23fe85e8954865aaa":[1,0,42,6],
 "class_encode_types.html#a418e897f8f02cee742124d95e14d1c0e":[1,0,42,18],
 "class_encode_types.html#a472a553d7e353f4fab23eade8d488a43":[1,0,42,31],
-"class_encode_types.html#a4a3f5e5b24a76de08256b8f543da13c7":[1,0,42,41]
+"class_encode_types.html#a4a3f5e5b24a76de08256b8f543da13c7":[1,0,42,41],
+"class_encode_types.html#a4cc61b2d18cf716e4356642e1bce8753":[1,0,42,55]
 };

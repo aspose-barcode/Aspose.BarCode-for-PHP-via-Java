@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.3</span>
+   &#160;<span id="projectnumber">21.4</span>
    </div>
    <div id="projectbrief">Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -100,8 +100,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaf0ea0b3993aeaeb5357d720046c9ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79cc2d856e0cb29506f0ba8d0da40c83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_reader.html#a79cc2d856e0cb29506f0ba8d0da40c83">containsAny</a> (... $decodeTypes)</td></tr>
 <tr class="separator:a79cc2d856e0cb29506f0ba8d0da40c83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdeebfe3fcf5806fc79c074a6a3a6eb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_reader.html#afdeebfe3fcf5806fc79c074a6a3a6eb1">getFileName</a> ()</td></tr>
-<tr class="separator:afdeebfe3fcf5806fc79c074a6a3a6eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abac5019c5daf3a27d739aa3a249fdb31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_reader.html#abac5019c5daf3a27d739aa3a249fdb31">getTimeout</a> ()</td></tr>
 <tr class="separator:abac5019c5daf3a27d739aa3a249fdb31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23bc152a9677e9fcf939850ded2063f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bar_code_reader.html#a23bc152a9677e9fcf939850ded2063f1">setTimeout</a> (int $value)</td></tr>
@@ -301,25 +299,6 @@ foreach($reader-&gt;<a class="el" href="class_bar_code_reader.html#a0008899656ce
       </table>
 </div><div class="memdoc">
 <p>A flag which force engine to detect codetext encoding for Unicode codesets. This sample shows how to detect text encoding on the fly if DetectEncoding is enabled $image = "image.png"; $generator = new <a class="el" href="class_barcode_generator.html">BarcodeGenerator</a>(<a class="el" href="class_encode_types.html#a4cc61b2d18cf716e4356642e1bce8753">EncodeTypes::QR</a>, "пїЅпїЅпїЅпїЅпїЅ")) $generator-&gt;getParameters().getBarcode()-&gt;getQR()-&gt;setCodeTextEncoding("UTF-8"); $generator-&gt;save($image, BarCodeImageFormat.getPng()); //detects encoding for Unicode codesets is enabled $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader</a>($image, <a class="el" href="class_decode_type.html#a4cc61b2d18cf716e4356642e1bce8753">DecodeType::QR</a>); $reader-&gt;setDetectEncoding(true); foreach($reader-&gt;<a class="el" href="class_bar_code_reader.html#a0008899656ce306f469f1de6672172ec">readBarCodes()</a> as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); //detect encoding is disabled $reader = new <a class="el" href="class_bar_code_reader.html">BarCodeReader</a>($image, <a class="el" href="class_decode_type.html#a4cc61b2d18cf716e4356642e1bce8753">DecodeType::QR</a>); $reader-&gt;setDetectEncoding(false); foreach($reader-&gt;<a class="el" href="class_bar_code_reader.html#a0008899656ce306f469f1de6672172ec">readBarCodes()</a> as $result) print("BarCode CodeText: ".$result-&gt;getCodeText()); </p>
-
-</div>
-</div>
-<a id="afdeebfe3fcf5806fc79c074a6a3a6eb1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdeebfe3fcf5806fc79c074a6a3a6eb1">&#9670;&nbsp;</a></span>getFileName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">getFileName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Gets file name which was assigned by user</p>
-<dl class="section return"><dt>Returns</dt><dd>file name </dd></dl>
 
 </div>
 </div>

@@ -47,7 +47,7 @@ Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and 
 
 ### Install PHP application into J2SE
 
-1. Install Java 1.7 or above
+1. Install Java 1.8 or above
 2. Install PHP 7.0 or above into the operating system PATH.
 3. Put `aspose-barcode-php-xx.x.jar` to certain location, for example folder 'jar'
 4. Launch the JavaBridge by command

@@ -5,7 +5,7 @@ var class_quadrangle =
     [ "containsPoint", "class_quadrangle.html#ae4a9cbea8e904db7a5f72746345c1c2e", null ],
     [ "containsQuadrangle", "class_quadrangle.html#a442ce775f7cf8bf2a538b9698f58e01e", null ],
     [ "containsRectangle", "class_quadrangle.html#a8d0542494f66bdc90bd8f26543f75c0e", null ],
-    [ "equals", "class_quadrangle.html#a742f4a2dceab2ac50e24636fba057907", null ],
+    [ "equals", "class_quadrangle.html#a3e6614402db25509f5ae5b7f6c81fc91", null ],
     [ "getBoundingRectangle", "class_quadrangle.html#a8480c505938249f3df7c8359131ddc5b", null ],
     [ "getLeftBottom", "class_quadrangle.html#ae5e0c7a01a1dc4599f1f342278a5b4d0", null ],
     [ "getLeftTop", "class_quadrangle.html#a8e3e3d16467d70b316f8ba9749735f00", null ],

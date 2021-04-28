@@ -37,7 +37,7 @@ var class_pdf417_parameters =
     [ "setPdf417MacroSegmentsCount", "class_pdf417_parameters.html#a991d48ab8c27bbfd7fcdd07daa2e0959", null ],
     [ "setPdf417MacroSender", "class_pdf417_parameters.html#a6c9731f8bba49baaa35eae0ba4efe788", null ],
     [ "setPdf417MacroTimeStamp", "class_pdf417_parameters.html#a0cc071fc0b105d720b5fc514621ed3c6", null ],
-    [ "setPdf417Truncate", "class_pdf417_parameters.html#a1377f97ca698a7b01cc17b9c36290065", null ],
+    [ "setPdf417Truncate", "class_pdf417_parameters.html#a0241abdc827c4c5232dc53ff419c2c70", null ],
     [ "setReaderInitialization", "class_pdf417_parameters.html#a3f92bdea761fcafe2e7b70ed3c5c6724", null ],
     [ "setRows", "class_pdf417_parameters.html#a703d389abe2543aed9e07409f3ed9169", null ],
     [ "toString", "class_pdf417_parameters.html#a5558c5d549f41597377fa1ea8a1cefa3", null ]
