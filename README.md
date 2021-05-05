@@ -50,18 +50,22 @@ Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and 
 1. Install Java 1.8 or above
 2. Install PHP 7.0 or above into the operating system PATH.
 3. Put `aspose-barcode-php-xx.x.jar` to certain location, for example folder 'jar'
-4. Launch the JavaBridge by command
-`"%JAVA_HOME%\bin\java" -Djava.ext.dirs=../jar -jar JavaBridge.jar SERVLET_LOCAL:8888`
-where `-Djava.ext.dirs=../jar` points to the location of `aspose-barcode-php-xx.x.jar`
-You can appoint a port by your choice. We use `8888` just for example to differ from standard servers port numbers.
-5. Test the connection to JavaBridge
-`http://localhost:8888/JavaBridge/java/Java.inc`
-6. Deploy php files from folder `lib` to your web application on webserver
-For example to `C:/xampp/htdocs/Barcode`
-7. Add `require` statement to your php code
-`require_once("http://localhost:8888/JavaBridge/java/Java.inc");`
-You can find example in `examples/php_side/test_assist.php` file.
-8. Now you can use the PHP API supplied by Aspose.Barcode PHP classes.
+4. Prepare JavaBridge. You need to place JavaBridge.jar to a specific path and add it to the classpath.
+   Or you can just point the path to JavaBridge.jar via command
+   `-jar path/to/JavaBridge.jar`
+5. Launch the JavaBridge by command
+   `"%JAVA_HOME%\bin\java" -Djava.ext.dirs=../jar -jar JavaBridge.jar SERVLET_LOCAL:8888`
+   where `-Djava.ext.dirs=../jar` points to the location of `aspose-barcode-php-xx.x.jar`
+   and `-jar  JavaBridge.jar` points to the location of `JavaBridge.jar`
+   You can appoint a port by your choice. We use `8888` just for example to differ from standard servers port numbers.
+6. Test the connection to JavaBridge
+   `http://localhost:8888/JavaBridge/java/Java.inc`
+7. Deploy php files from folder `lib` to your web application on webserver
+   For example to `C:/xampp/htdocs/Barcode`
+8. Add `require` statement to your php code
+   `require_once("http://localhost:8888/JavaBridge/java/Java.inc");`
+   You can find example in `examples/php_side/test_assist.php` file.
+9. Now you can use the PHP API supplied by Aspose.Barcode PHP classes.
  
  
  ### Install PHP application by using Tomcat 
