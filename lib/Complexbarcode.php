@@ -42,7 +42,10 @@ final class Address extends BaseJavaClass
      * company name of a legal person.
      * Value: The name.
      */
-    public function getName(): string{ return java_cast($this->getJavaClass()->getName(), "string"); }
+    public function getName(): string
+    {
+        return java_cast($this->getJavaClass()->getName(), "string");
+    }
 
     /**
      * Sets the name, either the first and last name of a natural person or the
@@ -67,7 +70,10 @@ final class Address extends BaseJavaClass
      * 
      * Value: The address line 1.
      */
-    public function getAddressLine1(): string { return java_cast($this->getJavaClass()->getAddressLine1(), "string"); }
+    public function getAddressLine1(): string
+    {
+        return java_cast($this->getJavaClass()->getAddressLine1(), "string");
+    }
 
     /**
      * Sets the address line 1.
@@ -94,7 +100,10 @@ final class Address extends BaseJavaClass
      * This field is only used for combined elements addresses. For this type, it's mandatory.
      * Value: The address line 2.
      */
-    public function getAddressLine2(): string { return java_cast($this->getJavaClass()->getAddressLine2(), "string"); }
+    public function getAddressLine2(): string
+    {
+        return java_cast($this->getJavaClass()->getAddressLine2(), "string");
+    }
 
     /**
      * Sets the address line 2.
@@ -314,6 +323,13 @@ final class AlternativeScheme extends BaseJavaClass
         parent::__construct(new java(self::$javaClassName, $instruction));
     }
 
+    static function construct($javaClass)
+    {
+        $phpClass = new AlternativeScheme("");
+        $phpClass->setJavaClass($javaClass);
+        return $phpClass;
+    }
+
     /**
      * Gets the payment instruction for a given bill.
      * 
@@ -322,7 +338,10 @@ final class AlternativeScheme extends BaseJavaClass
      * 
      * Value: The payment instruction.
      */
-    public function getInstruction(): string{ return java_cast($this->getJavaClass()->getInstruction(), "string"); }
+    public function getInstruction(): string
+    {
+        return java_cast($this->getJavaClass()->getInstruction(), "string");
+    }
 
     /**
      * Gets the payment instruction for a given bill.
@@ -379,10 +398,10 @@ final class ComplexCodetextReader
      * @return decoded SwissQRCodetext or null.
      * @param encodedCodetext encoded codetext
      */
-    public static function tryDecodeSwissQR($encodedCodetext)
+    public static function tryDecodeSwissQR(string $encodedCodetext) : SwissQRCodetext
     {
-        $javaPhpComplexCodetextReader = new java(self::$javaClassName);
-        return new SwissQRCodetext($javaPhpComplexCodetextReader->tryDecodeSwissQR($encodedCodetext));
+        $javaPhpComplexCodetextReader = java(self::$javaClassName);
+        return SwissQRCodetext::construct($javaPhpComplexCodetextReader->tryDecodeSwissQR($encodedCodetext));
     }
 }
 
@@ -404,14 +423,11 @@ final class SwissQRBill extends BaseJavaClass
 {
     private $creditor;
     private $debtor;
-    private $alternativeSchemes;
 
     protected function init(): void
     {
         $this->creditor = new Address($this->getJavaClass()->getCreditor());
         $this->debtor = new Address($this->getJavaClass()->getDebtor());
-        $this->alternativeSchemes = self::convertAlternativeSchemes($this->getJavaClass()->getAlternativeSchemes());
-        // TODO: Implement init() method.
     }
 
     public function __construct($javaClass)
@@ -424,7 +440,7 @@ final class SwissQRBill extends BaseJavaClass
         $alternativeSchemes = array();
         for($i = 0; $i < java_cast($javaAlternativeSchemes->size(), "integer"); $i++)
         {
-            $alternativeSchemes[$i] = new AlternativeScheme($javaAlternativeSchemes->get($i));
+            $alternativeSchemes[$i] = AlternativeScheme::construct($javaAlternativeSchemes->get($i));
         }
         return $alternativeSchemes;
     }
@@ -448,7 +464,10 @@ final class SwissQRBill extends BaseJavaClass
      * 
      * Value: The payment amount.
      */
-    public function getAmount() : int{ return java_cast($this->getJavaClass()->getAmount(), "long"); }
+    public function getAmount() : float
+    {
+        return java_cast($this->getJavaClass()->getAmount(), "double");
+    }
 
     /**
      * Sets the payment amount.
@@ -457,7 +476,7 @@ final class SwissQRBill extends BaseJavaClass
      * 
      * Value: The payment amount.
      */
-    public function setAmount(int $value):void{ $this->getJavaClass()->setAmount($value); }
+    public function setAmount(float $value):void{ $this->getJavaClass()->setAmount($value); }
 
     /**
      * Gets the payment currency.
@@ -485,7 +504,10 @@ final class SwissQRBill extends BaseJavaClass
      * 
      * Value: The creditor account number.
      */
-    public function getAccount(): string{ return java_cast($this->getJavaClass()->getAccount(), "string"); }
+    public function getAccount(): string
+    {
+        return java_cast($this->getJavaClass()->getAccount(), "string");
+    }
 
     /**
      * Sets the creditor's account number.
@@ -525,7 +547,10 @@ final class SwissQRBill extends BaseJavaClass
      * 
      * Value: The creditor payment reference.
      */
-    public function getReference(): string{ return java_cast($this->getJavaClass()->getReference(), "string"); }
+    public function getReference(): string
+    {
+        return java_cast($this->getJavaClass()->getReference(), "string");
+    }
 
     /**
      * Sets the creditor payment reference.
@@ -563,7 +588,10 @@ final class SwissQRBill extends BaseJavaClass
      * 
      * Value: The debtor address.
      */
-    public function getDebtor() : Address{ return $this->creditor; }
+    public function getDebtor() : Address
+    {
+        return $this->debtor;
+    }
 
     /**
      * Sets the debtor address.
@@ -610,7 +638,10 @@ final class SwissQRBill extends BaseJavaClass
      * 
      * Value: The alternative payment schemes.
      */
-    public function getAlternativeSchemes() :array { return $this->alternativeSchemes; }
+    public function getAlternativeSchemes() :array
+    {
+        return self::convertAlternativeSchemes($this->getJavaClass()->getAlternativeSchemes());
+    }
 
     /**
      * Gets ors sets the alternative payment schemes.
@@ -621,16 +652,12 @@ final class SwissQRBill extends BaseJavaClass
      */
     public function setAlternativeSchemes(array $value):void
     {
-        $this->getJavaClass()->getAlternativeSchemes()->clear();
+        $javaArray = array();
         for($i = 0; $i < sizeof($value); $i++)
         {
-            $this->getJavaClass()->getAlternativeSchemes()->set($value[$i]->getJavaClass());
+            array_push($javaArray, $value[$i]->getJavaClass());
         }
-    }
-
-    public function addAlternativeScheme(AlternativeScheme $value): void
-    {
-        $this->getJavaClass()->getAlternativeSchemes()->add($value->getJavaClass());
+        $this->getJavaClass()->setAlternativeSchemes($javaArray);
     }
 
     /**
@@ -678,25 +705,25 @@ final class SwissQRCodetext extends BaseJavaClass
      * @param bill SwissQR bill data
      * @throws BarcodeException
      */
-    public function __construct($arg)
+    public function __construct(?SwissQRBill $bill)
     {
-        parent::__construct(self::initSwissQRCodetext($arg));
-    }
-
-    static function initSwissQRCodetext($arg)
-    {
-        if($arg instanceof SwissQRBill)
+        $javaBill = null;
+        if (is_null($bill))
         {
-            return new java(self::$javaClassName, $arg->getJavaClass());
-        }
-        elseif (is_null($arg))
-        {
-            return new java(self::$javaClassName);
+            $javaBill = new java(self::$javaClassName);
         }
         else
         {
-            return $arg;
+            $javaBill = new java(self::$javaClassName, $bill->getJavaClass());
         }
+        parent::__construct($javaBill);
+    }
+
+    static function construct($javaClass)
+    {
+        $phpClass = new SwissQRCodetext(null);
+        $phpClass->setJavaClass($javaClass);
+        return $phpClass;
     }
 
     /**
@@ -717,6 +744,7 @@ final class SwissQRCodetext extends BaseJavaClass
     public function initFromString(string $constructedCodetext):void
     {
         $this->getJavaClass()->initFromString($constructedCodetext);
+        $this->init();
     }
 
     /**
@@ -746,8 +774,7 @@ final class SwissQRCodetext extends BaseJavaClass
  *    $swissQRCodetext->getBill()->getCreditor()->setCountryCode("Nl");
  *    $swissQRCodetext->getBill()->setUnstructuredMessage("UnstructuredMessage");
  *    $swissQRCodetext->getBill()->setReference("Reference");
- *    $swissQRCodetext->getBill()->addalternativeScheme(new AlternativeScheme("AlternativeSchemeInstruction1"));
- *    $swissQRCodetext->getBill()->addalternativeScheme(new AlternativeScheme("AlternativeSchemeInstruction2"));
+ *    $swissQRCodetext->getBill()->setAlternativeSchemes(array(new AlternativeScheme("AlternativeSchemeInstruction1"),new AlternativeScheme("AlternativeSchemeInstruction2"));
  *    $swissQRCodetext->getBill()->setDebtor(new Address(null));
  *    $swissQRCodetext->getBill()->getDebtor()->setName("Debtor.Name");
  *    $swissQRCodetext->getBill()->getDebtor()->setAddressLine1("Debtor.AddressLine1");
@@ -776,25 +803,9 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      *
      * @param complexCodetext Complex codetext
      */
-    public function __construct($arg)
+    public function __construct(SwissQRCodetext $swissQRCodetext)
     {
-        parent::__construct(self::initComplexBarcodeGenerator($arg));
-        if($arg instanceof SwissQRCodetext)
-        {
-            return new java(self::$javaClassName, $arg->getJavaClass());
-        }
-    }
-
-    private static function initComplexBarcodeGenerator($arg)
-    {
-        if($arg instanceof SwissQRCodetext)
-        {
-            return new java(self::$javaClassName, $arg->getJavaClass());
-        }
-        else
-        {
-            return new java($arg);
-        }
+        parent::__construct(new java(self::$javaClassName, $swissQRCodetext->getJavaClass()));
     }
 
     /**
@@ -825,11 +836,11 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      * $generator->save("file path", null);// if value = null, default image format PNG
      */
-    public function save(string $filePath, string $format_name): void  //TODO BARCODEPHP-87
+    public function save(string $filePath, string $format_name): void
     {
         try
         {
-            $image = $this->generateBarcodeImage($format_name); //TODO BARCODEPHP-87
+            $image = $this->generateBarcodeImage($format_name);
             file_put_contents($filePath, base64_decode($image));
         }
         catch (Exception $ex)
