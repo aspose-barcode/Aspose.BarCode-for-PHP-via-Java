@@ -371,133 +371,6 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * Specifies the different types of automatic sizing modes.
-     * Default value: AutoSizeMode::NONE.
-     * @deprecated "This method is obsolete. Call BaseGenerationParameters->getAutoSizeMode() instead."
-     *
-     * @throws BarcodeException
-     */
-    public function getAutoSizeMode() : int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAutoSizeMode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Specifies the different types of automatic sizing modes.
-     * Default value: AutoSizeMode::NONE.
-     * @deprecated "This method is obsolete. Call BaseGenerationParameters->setAutoSizeMode() instead."
-     *
-     * @throws BarcodeException
-     */
-    public function setAutoSizeMode(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAutoSizeMode($value);
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * BarCode image height when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
-     *
-     * @deprecated "This method is obsolete. Call BaseGenerationParameters->getImageHeight() instead."
-     */
-    public function getBarCodeHeight(): Unit
-    {
-        try
-        {
-            return $this->barCodeHeight;
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * BarCode image height when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
-     * @deprecated "This method is obsolete. Call BaseGenerationParameters->setImageHeight() instead."
-     */
-    public function setBarCodeHeight(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setBarCodeHeight($value->getJavaClass());
-            $this->barCodeHeight = $value;
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * BarCode image width when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
-     * @deprecated "This method is obsolete. Call BaseGenerationParameters->getImageWidth() instead."
-     */
-    public function getBarCodeWidth(): Unit
-    {
-        try
-        {
-            return $this->barCodeWidth;
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * BarCode image width when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
-     * @deprecated "This method is obsolete. Call BaseGenerationParameters->setImageWidth() instead."
-     */
-    public function setBarCodeWidth(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setBarCodeWidth($value->getJavaClass());
-            $this->barCodeWidth = $value;
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
-    }
-
-    /**
-     * Bars color.
-     * Default value: #000000.
-     * @deprecated "This method is obsolete. Call BarcodeParameters->getBarColor() instead."
-     */
-    public function getForeColor() : string
-    { return $this->getBarColor(); }
-
-    /**
-     * Bars color.
-     * Default value Black.
-     * @deprecated "This method is obsolete. Call BarcodeParameters->setBarColor() instead."
-     */
-    public function setForeColor(string $value) : void
-    { $this->setBarColor($value); }
-
-    /**
      * Bars color.
      * Default value: #000000
      */
@@ -1008,6 +881,8 @@ class BaseGenerationParameters extends BaseJavaClass
     private $barcodeParameters;
     private $borderParameters;
 
+    private $imageWidth;
+    private $imageHeight;
 
     protected function init(): void
     {
@@ -1015,6 +890,8 @@ class BaseGenerationParameters extends BaseJavaClass
         $this->captionBelow = new CaptionParameters($this->getJavaClass()->getCaptionBelow());
         $this->barcodeParameters = new BarcodeParameters($this->getJavaClass()->getBarcode());
         $this->borderParameters = new BorderParameters($this->getJavaClass()->getBorder());
+        $this->imageWidth = new Unit($this->getJavaClass()->getImageWidth());
+        $this->imageHeight = new Unit($this->getJavaClass()->getImageHeight());
     }
 
     /**
@@ -1242,12 +1119,16 @@ class BaseGenerationParameters extends BaseJavaClass
      */
     public function getImageHeight() :Unit
     {
-        return $this->getBarcode()->getBarCodeHeight();
+        return $this->imageHeight;
     }
     /**
      * BarCode image height when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      */
-    public function setImageHeight(Unit $value) : void { $this->getBarcode()->setBarCodeHeight($value); }
+    public function setImageHeight(Unit $value) : void
+    {
+        $this->getJavaClass()->setImageHeight($value->getJavaClass());
+        $this->imageHeight = $value;
+    }
 
 
     /**
@@ -1255,14 +1136,15 @@ class BaseGenerationParameters extends BaseJavaClass
      */
     public function getImageWidth() : Unit
     {
-        return $this->getBarcode()->getBarCodeWidth();
+        return $this->imageWidth;
     }
     /**
      * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      */
     public function setImageWidth(Unit $value)
     {
-        $this->getBarcode()->setBarCodeWidth($value);
+        $this->getJavaClass()->setImageWidth($value->getJavaClass());
+        $this->imageWidth = $value;
     }
 
     /**
