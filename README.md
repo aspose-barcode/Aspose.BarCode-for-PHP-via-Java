@@ -86,4 +86,4 @@ You can find example in examples/php_side/test_assist.php file.
 
 You can find the installation instructions for php/Java bridge on http://php-java-bridge.sourceforge.net/pjb/installation.php.
 
-[Product](https://products.aspose.com/barcode) | [Documentation](https://products.aspose.com/barcode/php-java) | [Blog](https://blog.aspose.com/category/barcode/) | [API Reference](https://apireference.aspose.com/barcode/java) | [Free Support](https://forum.aspose.com/c/barcode) | [Temporary License](https://purchase.aspose.com/temporary-license)
+[Product](https://products.aspose.com/barcode) | [Documentation](https://products.aspose.com/barcode/php-java) | [Blog](https://blog.aspose.com/category/barcode/) | [API Reference](https://apireference.aspose.com/barcode/java) | [Search](https://search.aspose.com/) | [Free Support](https://forum.aspose.com/c/barcode) | [Temporary License](https://purchase.aspose.com/temporary-license)
