@@ -25,7 +25,6 @@
 var NAVTREE =
 [
   [ "Aspose.Barcode for PHP via Java", "index.html", [
-    [ "Deprecated List", "deprecated.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -42,9 +41,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"class_codablock_parameters.html",
-"class_encode_types.html#a4f4e707c73714efd2fa13ae928d796d8",
-"class_q_r_version.html#ac0aa6aa0752f9aefabffb0a62cb609c1"
+"class_code128_data_portion.html",
+"class_encode_types.html#a6806b3f944bb43826031ac8fb4377877",
+"class_q_r_version.html#aee39a255783cb47c777311a18acb0da7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

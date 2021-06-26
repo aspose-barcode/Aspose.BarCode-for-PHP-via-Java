@@ -116,17 +116,17 @@ class BarcodeGenerator extends BaseJavaClass
     /**
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
-     * @param $format_name image format name("PNG", "BMP", "JPEG", "GIF", "TIFF")
-     *
+     *  @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, TIFF)
+     * Example:
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
-     * $image = $generator->generateBarCodeImage(null);// if value = null, default image format PNG
-     * @return base64 representaton of image.
+     * $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+     * @return base64 representation of image.
      */
-    public function generateBarCodeImage(string $format_name) : string
+    public function generateBarCodeImage(int $format) : string
     {
         try
         {
-            $base64Image = java_cast($this->getJavaClass()->generateBarCodeImage($format_name), "string");
+            $base64Image = java_cast($this->getJavaClass()->generateBarCodeImage($format), "string");
             return ($base64Image);
         }
         catch (Exception $ex)
@@ -139,16 +139,16 @@ class BarcodeGenerator extends BaseJavaClass
     /**
      * Save barcode image to specific file in specific format.
      * @param $filePath Path to save to.
-     * @param $format_name image format name("PNG", "BMP", "JPEG", "GIF", "TIFF")
-     *
+     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, TIFF)
+     * Example:
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
-     * $generator->save("file path", null);// if value = null, default image format PNG
+     * $generator->save(file_path, BarCodeImageFormat::PNG);
      */
-    public function save(string $filePath,string  $format_name): void  //TODO BARCODEPHP-87
+    public function save(string $filePath, int $format): void  //TODO BARCODEPHP-87
     {
         try
         {
-            $image = $this->generateBarCodeImage($format_name); //TODO BARCODEPHP-87
+            $image = $this->generateBarCodeImage($format); //TODO BARCODEPHP-87
             file_put_contents($filePath, base64_decode($image));
         }
         catch (Exception $ex)
@@ -6782,27 +6782,27 @@ class BarCodeImageFormat
      * Specifies the W3C Portable Network Graphics (PNG) image format.
      * </p>
      */
-    const PNG = "PNG";
+    const BMP = 0;
 
     /**
      * <p>
      * Specifies the Joint Photographic Experts Group (JPEG) image format.
      * </p>
      */
-    const JPEG = "JPEG";
+    const GIF = 1;
 
     /**
      * <p>
      * Specifies the bitmap (BMP) image format.
      * </p>
      */
-    const BMP = "BMP";
+    const JPEG = 2;
 
     /**
      * <p>
      * Specifies the Graphics Interchange Format (GIF) image format.
      * </p>
      */
-    const GIF = "GIF";
+    const PNG = 3;
 }
 ?>

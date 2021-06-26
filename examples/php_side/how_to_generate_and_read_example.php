@@ -6,7 +6,7 @@ function generate_and_read()
     set_license();
     $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12367891011");
     $file_path = "resources/generating/setBarcodeType.png";
-    $generator->save($file_path, "PNG");
+    $generator->save($file_path, BarCodeImageFormat::PNG);
 
     $image_bytes = file_get_contents($file_path);
     $image_data_base64 = base64_encode($image_bytes);

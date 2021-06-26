@@ -810,15 +810,17 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
 
     /**
      * Generates complex barcode image under current settings.
-     *
-     * @param format_name image format name("PNG", "BMP", "JPEG", "GIF", "TIFF")
-     * @return  Barcode image. See {@code Bitmap}.
+     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, TIFF)
+     * Example:
+     * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
+     * $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+     * @return base64 representation of image.
      */
-    public function generateBarcodeImage(string $format_name) : string
+    public function generateBarcodeImage(int $format) : string
     {
         try
         {
-            $base64Image = java_cast($this->getJavaClass()->generateBarcodeImage($format_name), "string");
+            $base64Image = java_cast($this->getJavaClass()->generateBarcodeImage($format), "string");
             return ($base64Image);
         }
         catch (Exception $ex)
@@ -831,16 +833,16 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
     /**
      * Save barcode image to specific file in specific format.
      * @param $filePath Path to save to.
-     * @param $format_name image format name("PNG", "BMP", "JPEG", "GIF", "TIFF")
-     *
+    * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, TIFF)
+     * Example:
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
-     * $generator->save("file path", null);// if value = null, default image format PNG
+     * $generator->save(file_path, BarCodeImageFormat::PNG);
      */
-    public function save(string $filePath, string $format_name): void
+    public function save(string $filePath, int $format): void
     {
         try
         {
-            $image = $this->generateBarcodeImage($format_name);
+            $image = $this->generateBarcodeImage($format);
             file_put_contents($filePath, base64_decode($image));
         }
         catch (Exception $ex)
