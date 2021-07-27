@@ -116,7 +116,7 @@ class BarcodeGenerator extends BaseJavaClass
     /**
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
-     *  @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, TIFF)
+     *  @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
      * Example:
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      * $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
@@ -139,7 +139,7 @@ class BarcodeGenerator extends BaseJavaClass
     /**
      * Save barcode image to specific file in specific format.
      * @param $filePath Path to save to.
-     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, TIFF)
+     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
      * Example:
      * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      * $generator->save(file_path, BarCodeImageFormat::PNG);

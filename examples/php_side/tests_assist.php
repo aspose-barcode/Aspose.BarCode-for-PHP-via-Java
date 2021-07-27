@@ -3,7 +3,7 @@ require_once("http://localhost:8888/JavaBridge/java/Java.inc");
 //require_once("Java.inc"); // for case when port is 8080
 include_once('../../lib/Generation.php');
 include_once('../../lib/Recognition.php');
-include_once('../../lib/Complexbarcode.php');
+include_once('../../lib/ComplexBarcode.php');
 
 function set_license()
 {
