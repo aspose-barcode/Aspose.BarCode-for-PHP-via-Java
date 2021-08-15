@@ -1,0 +1,27 @@
+var classQuadrangle =
+[
+    [ "\u202A__construct", "d8/d57/classQuadrangle.html#a65f98a4b657e0b52bf828f8990b83a14", null ],
+    [ "\u202Acontains", "d8/d57/classQuadrangle.html#aca9671f6e3ec35badf19545b6d280f66", null ],
+    [ "\u202AcontainsPoint", "d8/d57/classQuadrangle.html#af112aec9adbb4b334b2e74dd51a7ea70", null ],
+    [ "\u202AcontainsQuadrangle", "d8/d57/classQuadrangle.html#a51dbd9d4b1d08e652e39cc141854dc7a", null ],
+    [ "\u202AcontainsRectangle", "d8/d57/classQuadrangle.html#a31be6d41fa6666baf9c5f79ba72c2bff", null ],
+    [ "\u202Aequals", "d8/d57/classQuadrangle.html#ae99bdc8987b8e28639a7bb6ab3f217f6", null ],
+    [ "\u202AgetBoundingRectangle", "d8/d57/classQuadrangle.html#acacfc577ad2a25c9f72ba5751bff96e3", null ],
+    [ "\u202AgetJavaClass", "d8/d57/classQuadrangle.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
+    [ "\u202AgetJavaClassName", "d8/d57/classQuadrangle.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
+    [ "\u202AgetLeftBottom", "d8/d57/classQuadrangle.html#a812f76365c86eaafc8d8874f5b0aaab9", null ],
+    [ "\u202AgetLeftTop", "d8/d57/classQuadrangle.html#a3d82eff62024c961d8dbaf6534f921d5", null ],
+    [ "\u202AgetRightBottom", "d8/d57/classQuadrangle.html#a9927f92e1089ecfe878ae2e06a9b39e0", null ],
+    [ "\u202AgetRightTop", "d8/d57/classQuadrangle.html#abce10314c441af8746e1ac6a0006de0c", null ],
+    [ "\u202AhashCode", "d8/d57/classQuadrangle.html#aa9e1f1f154ee8bd27b169eb30d4c7504", null ],
+    [ "\u202Ainit", "d8/d57/classQuadrangle.html#a84181988485ca28fd05e4362a669e105", null ],
+    [ "\u202AisEmpty", "d8/d57/classQuadrangle.html#a2921351d65d1cc64f1463d237453976a", null ],
+    [ "\u202AisNull", "d8/d57/classQuadrangle.html#a264c7345eb64c83446fded2fde8c2780", null ],
+    [ "\u202AprintJavaClassName", "d8/d57/classQuadrangle.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
+    [ "\u202AsetJavaClass", "d8/d57/classQuadrangle.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
+    [ "\u202AsetLeftBottom", "d8/d57/classQuadrangle.html#ac183c0bf4f1e41123d321cd031e4d98d", null ],
+    [ "\u202AsetLeftTop", "d8/d57/classQuadrangle.html#aa5f36324bcf24d09179d5ed4ee0393e9", null ],
+    [ "\u202AsetRightBottom", "d8/d57/classQuadrangle.html#a1cd237076403c318abfb21912b3fc313", null ],
+    [ "\u202AsetRightTop", "d8/d57/classQuadrangle.html#ae4cae36f5ab1307d914b85fdae19390f", null ],
+    [ "\u202AtoString", "d8/d57/classQuadrangle.html#a9faca6affdb0a44f638f54e5cbe9821e", null ]
+];
