@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['addecicodetext_774',['addECICodetext',['../class_ext_codetext_builder.html#af56e1bb63b700e21e85ab4abd6d15e46',1,'ExtCodetextBuilder']]],
-  ['addfnc1firstposition_775',['addFNC1FirstPosition',['../class_qr_ext_codetext_builder.html#a8a8bf7e09fb492ab1abeef808d043fbf',1,'QrExtCodetextBuilder']]],
-  ['addfnc1groupseparator_776',['addFNC1GroupSeparator',['../class_qr_ext_codetext_builder.html#af232bf9629aa51caee2fdb49ea8c0f99',1,'QrExtCodetextBuilder']]],
-  ['addfnc1secondposition_777',['addFNC1SecondPosition',['../class_qr_ext_codetext_builder.html#ada39cf6dd46eb2835dbfe3e7951eab96',1,'QrExtCodetextBuilder']]],
-  ['addplaincodetext_778',['addPlainCodetext',['../class_ext_codetext_builder.html#a31d799e137ac62d6e81dc3e80f234d2c',1,'ExtCodetextBuilder']]],
-  ['applyall_779',['applyAll',['../class_quality_settings.html#ad7cd4e6318666226ae808101da838871',1,'QualitySettings']]]
+  ['abort_889',['abort',['../d8/dae/classBarCodeReader.html#abe83dbe36111281f94ac6adb9008c555',1,'BarCodeReader']]],
+  ['addecicodetext_890',['addECICodetext',['../d0/dce/classExtCodetextBuilder.html#aee9aecf186264ba04902f2f82971cde9',1,'ExtCodetextBuilder']]],
+  ['addfnc1firstposition_891',['addFNC1FirstPosition',['../dd/dc2/classQrExtCodetextBuilder.html#a8557e3afa4c420901b718ee5ed5f6f84',1,'QrExtCodetextBuilder']]],
+  ['addfnc1groupseparator_892',['addFNC1GroupSeparator',['../dd/dc2/classQrExtCodetextBuilder.html#a368a181e893099238d14d39d99eff49c',1,'QrExtCodetextBuilder']]],
+  ['addfnc1secondposition_893',['addFNC1SecondPosition',['../dd/dc2/classQrExtCodetextBuilder.html#a25b09aeda7bd97cd5dcde762a1bcf2ea',1,'QrExtCodetextBuilder']]],
+  ['addplaincodetext_894',['addPlainCodetext',['../d0/dce/classExtCodetextBuilder.html#a7d6179bbfc660b5beb5c5ef1e5cd2ac2',1,'ExtCodetextBuilder']]],
+  ['applyall_895',['applyAll',['../d1/d04/classQualitySettings.html#a94b22ec27526ba88bdf4c5c7f210fbf1',1,'QualitySettings']]]
 ];

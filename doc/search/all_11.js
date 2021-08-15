@@ -1,8 +1,15 @@
 var searchData=
 [
-  ['readbarcodes_463',['readBarCodes',['../class_bar_code_reader.html#a0008899656ce306f469f1de6672172ec',1,'BarCodeReader']]],
-  ['regular_464',['REGULAR',['../class_font_style.html#a33ea4bff5b42555e0e997b7e871474fa',1,'FontStyle']]],
-  ['right_465',['RIGHT',['../class_text_alignment.html#a8e90c5c49ebb236cf6e5a2dfe09eca05',1,'TextAlignment']]],
-  ['rm_5f4_5fscc_466',['RM_4_SCC',['../class_encode_types.html#ac3a2cbd61e67cfa90966a63e41218196',1,'EncodeTypes\RM_4_SCC()'],['../class_decode_type.html#ac3a2cbd61e67cfa90966a63e41218196',1,'DecodeType\RM_4_SCC()']]],
-  ['rune_467',['RUNE',['../class_aztec_symbol_mode.html#aec7073f6e50ecc26c5de04ad405ae5e8',1,'AztecSymbolMode']]]
+  ['qr_516',['QR',['../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5',1,'EncodeTypes\QR()'],['../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7',1,'DecodeType\QR()']]],
+  ['qrbillstandardversion_517',['QrBillStandardVersion',['../d1/dff/classQrBillStandardVersion.html',1,'']]],
+  ['qrencodemode_518',['QREncodeMode',['../d9/d97/classQREncodeMode.html',1,'']]],
+  ['qrencodetype_519',['QREncodeType',['../d7/d8a/classQREncodeType.html',1,'']]],
+  ['qrerrorlevel_520',['QRErrorLevel',['../d3/d7d/classQRErrorLevel.html',1,'']]],
+  ['qrextcodetextbuilder_521',['QrExtCodetextBuilder',['../dd/dc2/classQrExtCodetextBuilder.html',1,'']]],
+  ['qrextendedparameters_522',['QRExtendedParameters',['../d6/daf/classQRExtendedParameters.html',1,'']]],
+  ['qrparameters_523',['QrParameters',['../da/ded/classQrParameters.html',1,'']]],
+  ['qrstructuredappendparameters_524',['QrStructuredAppendParameters',['../dc/da4/classQrStructuredAppendParameters.html',1,'']]],
+  ['qrversion_525',['QRVersion',['../d8/d37/classQRVersion.html',1,'']]],
+  ['quadrangle_526',['Quadrangle',['../d8/d57/classQuadrangle.html',1,'']]],
+  ['qualitysettings_527',['QualitySettings',['../d1/d04/classQualitySettings.html',1,'']]]
 ];

@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['clear_780',['clear',['../class_address.html#aa821bec12eaa7e0f649397c9675ff505',1,'Address\clear()'],['../class_ext_codetext_builder.html#aa821bec12eaa7e0f649397c9675ff505',1,'ExtCodetextBuilder\clear()']]],
-  ['contains_781',['contains',['../class_quadrangle.html#ae2263dc26bcec5fd7ed7c757afd12998',1,'Quadrangle']]],
-  ['containsany_782',['containsAny',['../class_bar_code_reader.html#a79cc2d856e0cb29506f0ba8d0da40c83',1,'BarCodeReader']]],
-  ['containspoint_783',['containsPoint',['../class_quadrangle.html#ae4a9cbea8e904db7a5f72746345c1c2e',1,'Quadrangle']]],
-  ['containsquadrangle_784',['containsQuadrangle',['../class_quadrangle.html#a442ce775f7cf8bf2a538b9698f58e01e',1,'Quadrangle']]],
-  ['containsrectangle_785',['containsRectangle',['../class_quadrangle.html#a8d0542494f66bdc90bd8f26543f75c0e',1,'Quadrangle']]]
+  ['clear_896',['clear',['../de/d6b/classAddress.html#acc5a9ad9510f257f94ddb02046080718',1,'Address\clear()'],['../d0/dce/classExtCodetextBuilder.html#aede1259337242e9c5402a21d7a89eff4',1,'ExtCodetextBuilder\clear()']]],
+  ['construct_897',['construct',['../dc/d4f/classPoint.html#a2cf017119330a07c70e6e96d3a755a2a',1,'Point\construct()'],['../de/d00/classRectangle.html#aa8789e2d1d2f9a604643313151c0ecef',1,'Rectangle\construct()'],['../d9/dae/classAlternativeScheme.html#ad8db0fd432acb78d55e17b860b805117',1,'AlternativeScheme\construct()'],['../dd/df6/classSwissQRCodetext.html#a40c9f26b6be33d0804c6a07eb1871f81',1,'SwissQRCodetext\construct()'],['../d4/d70/classMailmark2DCodetext.html#af23f0b23d41e02b3dc2a4b4507df8f17',1,'Mailmark2DCodetext\construct()'],['../d8/d57/classQuadrangle.html#ac236cd5104803ece21fed5063077ecc2',1,'Quadrangle\construct()'],['../d1/dd3/classCode128DataPortion.html#accdc23e3fe4cc62d61be835c5c9f6fa5',1,'Code128DataPortion\construct()']]],
+  ['contains_898',['contains',['../d8/d57/classQuadrangle.html#aca9671f6e3ec35badf19545b6d280f66',1,'Quadrangle']]],
+  ['containsany_899',['containsAny',['../d8/dae/classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a',1,'BarCodeReader\containsAny()'],['../d4/d26/classDecodeType.html#a0448c9696133a45e0b2364ed43e28183',1,'DecodeType\containsAny()']]],
+  ['containspoint_900',['containsPoint',['../d8/d57/classQuadrangle.html#af112aec9adbb4b334b2e74dd51a7ea70',1,'Quadrangle']]],
+  ['containsquadrangle_901',['containsQuadrangle',['../d8/d57/classQuadrangle.html#a51dbd9d4b1d08e652e39cc141854dc7a',1,'Quadrangle']]],
+  ['containsrectangle_902',['containsRectangle',['../d8/d57/classQuadrangle.html#a31be6d41fa6666baf9c5f79ba72c2bff',1,'Quadrangle']]],
+  ['createandsetcreditorreference_903',['createAndSetCreditorReference',['../de/d9a/classSwissQRBill.html#ae04b5b2f3708c5c1adf05f4eed277abf',1,'SwissQRBill']]]
 ];

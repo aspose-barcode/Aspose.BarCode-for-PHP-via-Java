@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deepclone_786',['deepClone',['../class_bar_code_result.html#afc2f2491d6c7a2e81c7d2b99c4c9d39b',1,'BarCodeResult']]]
+  ['deepclone_904',['deepClone',['../d2/d68/classBarCodeResult.html#a6e65d3ea7299e2e095d32bfe1b94f95c',1,'BarCodeResult']]]
 ];

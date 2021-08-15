@@ -1,16 +1,17 @@
 var searchData=
 [
-  ['macro_5fpdf_5f417_1281',['MACRO_PDF_417',['../class_encode_types.html#a4a3f5e5b24a76de08256b8f543da13c7',1,'EncodeTypes\MACRO_PDF_417()'],['../class_decode_type.html#a4a3f5e5b24a76de08256b8f543da13c7',1,'DecodeType\MACRO_PDF_417()']]],
-  ['manual_1282',['MANUAL',['../class_font_mode.html#a9499f57b2ed8387d0cfb713a9dacc601',1,'FontMode']]],
-  ['matrix_5f2_5fof_5f5_1283',['MATRIX_2_OF_5',['../class_encode_types.html#ad09f24643269b815d08f412f2bca6e8e',1,'EncodeTypes\MATRIX_2_OF_5()'],['../class_decode_type.html#ad09f24643269b815d08f412f2bca6e8e',1,'DecodeType\MATRIX_2_OF_5()']]],
-  ['maxi_5fcode_1284',['MAXI_CODE',['../class_encode_types.html#a339c9f6c1d5d683c2a7ab0e171b05bfa',1,'EncodeTypes\MAXI_CODE()'],['../class_decode_type.html#a339c9f6c1d5d683c2a7ab0e171b05bfa',1,'DecodeType\MAXI_CODE()']]],
-  ['micr_5fe_5f13_5fb_1285',['MICR_E_13_B',['../class_decode_type.html#a07fe6737a78e2ca9c244611cd5f179f9',1,'DecodeType']]],
-  ['micro_5fpdf_5f417_1286',['MICRO_PDF_417',['../class_encode_types.html#a240457184e2951d4815f51471f4bc44a',1,'EncodeTypes\MICRO_PDF_417()'],['../class_decode_type.html#a240457184e2951d4815f51471f4bc44a',1,'DecodeType\MICRO_PDF_417()']]],
-  ['micro_5fqr_1287',['MICRO_QR',['../class_decode_type.html#ad67d8cf6d1dbb99dff5dc67041b0574e',1,'DecodeType']]],
-  ['millimeter_1288',['MILLIMETER',['../class_graphics_unit.html#ae25dc715b5d71fdaf347e38f88f6127a',1,'GraphicsUnit']]],
-  ['mod_5f10_1289',['MOD_10',['../class_codabar_checksum_mode.html#a7b4dcb12ec3db1d3fb8542033d20d3f2',1,'CodabarChecksumMode']]],
-  ['mod_5f16_1290',['MOD_16',['../class_codabar_checksum_mode.html#a23b8060c84fe4603e5eeba8f8f7a4cfc',1,'CodabarChecksumMode']]],
-  ['moderate_1291',['MODERATE',['../class_bar_code_confidence.html#a3f5414553581c38b85a8b31c8d3d180a',1,'BarCodeConfidence']]],
-  ['most_5fcommon_5ftypes_1292',['MOST_COMMON_TYPES',['../class_decode_type.html#a1eb79bf86b741055b4af5114922a9760',1,'DecodeType']]],
-  ['msi_1293',['MSI',['../class_encode_types.html#a1143a7ea320c6b570a9ee33ed88576a3',1,'EncodeTypes\MSI()'],['../class_decode_type.html#a1143a7ea320c6b570a9ee33ed88576a3',1,'DecodeType\MSI()']]]
+  ['left_1457',['LEFT',['../dc/d31/classTextAlignment.html#aaefdbb0e1502b4bceec89728062b630f',1,'TextAlignment']]],
+  ['level_5f0_1458',['LEVEL_0',['../d7/d65/classPdf417ErrorLevel.html#aca70377e35d7d7ad8c5225e2dcf56f49',1,'Pdf417ErrorLevel']]],
+  ['level_5f1_1459',['LEVEL_1',['../d7/d65/classPdf417ErrorLevel.html#a6dffe1e274a4a9bd830953355fb6f236',1,'Pdf417ErrorLevel']]],
+  ['level_5f2_1460',['LEVEL_2',['../d7/d65/classPdf417ErrorLevel.html#a3200ff69a6f1338bb71f5887ee7cfa5f',1,'Pdf417ErrorLevel']]],
+  ['level_5f3_1461',['LEVEL_3',['../d7/d65/classPdf417ErrorLevel.html#a6ee1884bf1a52fa85b153723024fd453',1,'Pdf417ErrorLevel']]],
+  ['level_5f4_1462',['LEVEL_4',['../d7/d65/classPdf417ErrorLevel.html#a7618ac60406c0ccb59e3a6a9c392b395',1,'Pdf417ErrorLevel']]],
+  ['level_5f5_1463',['LEVEL_5',['../d7/d65/classPdf417ErrorLevel.html#a0c128b632109f0c26f15c0f382d840a8',1,'Pdf417ErrorLevel']]],
+  ['level_5f6_1464',['LEVEL_6',['../d7/d65/classPdf417ErrorLevel.html#afa6e7e9375bad43821a9e1a97a856b93',1,'Pdf417ErrorLevel']]],
+  ['level_5f7_1465',['LEVEL_7',['../d7/d65/classPdf417ErrorLevel.html#ae60a276498e1e8795e5abb4ec65ed4a2',1,'Pdf417ErrorLevel']]],
+  ['level_5f8_1466',['LEVEL_8',['../d7/d65/classPdf417ErrorLevel.html#a2972b9cfe966fdfbbe004cc5224ceba4',1,'Pdf417ErrorLevel']]],
+  ['level_5fh_1467',['LEVEL_H',['../d3/d7d/classQRErrorLevel.html#ae3f80a908f529d9494c038a4966c6d61',1,'QRErrorLevel']]],
+  ['level_5fl_1468',['LEVEL_L',['../d3/d7d/classQRErrorLevel.html#ae2276806595a58d13e0bf5724ab03f46',1,'QRErrorLevel']]],
+  ['level_5fm_1469',['LEVEL_M',['../d3/d7d/classQRErrorLevel.html#a637338b49fcfb964ef3ef19db2afc166',1,'QRErrorLevel']]],
+  ['level_5fq_1470',['LEVEL_Q',['../d3/d7d/classQRErrorLevel.html#a5795bdb127801fe1f2d91eb6048bb93f',1,'QRErrorLevel']]]
 ];

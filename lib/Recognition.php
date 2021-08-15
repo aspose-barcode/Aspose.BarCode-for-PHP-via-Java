@@ -4,15 +4,16 @@ require_once('assist.php');
 
 /**
  * BarCodeReader encapsulates an image which may contain one or several barcodes, it then can perform ReadBarCodes operation to detect barcodes.
- * <hr><blockquote><pre>
+ *
  * This sample shows how to detect Code39 and Code128 barcodes.
+ * @code
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode Type: ".$result->getCodeTypeName());
  *    print("BarCode CodeText: ".$result->getCodeText());
  * }
- * </pre></blockquote></hr>
+ * @endcode
  */
 class BarCodeReader extends BaseJavaClass
 {
@@ -108,12 +109,13 @@ class BarCodeReader extends BaseJavaClass
     /**
      * Gets the timeout of recognition process in milliseconds.
      *
+     *@code
      * $reader = new BarCodeReader("test.png");
      * $reader->setTimeout(5000);
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
-     *
-     * @return The timeout.
+     *@endcode
+     * @return timeout.
      */
     public function getTimeout() : int
     {
@@ -130,11 +132,12 @@ class BarCodeReader extends BaseJavaClass
     /**
      * Sets the timeout of recognition process in milliseconds.
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setTimeout(5000);
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
-     *
+     *@endcode
      * @param value The timeout.
      */
     public function setTimeout(int $value): void
@@ -157,6 +160,7 @@ class BarCodeReader extends BaseJavaClass
      * Checksum always used: Rest symbologies
      * This sample shows influence of ChecksumValidation on recognition quality and results
      *
+     * @code
      * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
      * $generator->save("test.png");
      * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
@@ -177,6 +181,7 @@ class BarCodeReader extends BaseJavaClass
      *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
      *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
      * }
+     * @endcode
      * The checksum validation flag.
      */
     public function getChecksumValidation() : int
@@ -199,7 +204,7 @@ class BarCodeReader extends BaseJavaClass
      * Checksum always used: Rest symbologies
      *
      * This sample shows influence of ChecksumValidation on recognition quality and results
-     *
+     *@code
      * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
      * $generator->save("test.png");
      * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
@@ -220,6 +225,7 @@ class BarCodeReader extends BaseJavaClass
      *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
      *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
      * }
+     * @endcode
      * The checksum validation flag.
      */
     public function setChecksumValidation(int $value) : void
@@ -239,6 +245,7 @@ class BarCodeReader extends BaseJavaClass
      *
      * This sample shows how to strip FNC characters
      *
+     * @code
      * $generator = new BarcodeGenerator(EncodeTypes::GS1Code128, "(02)04006664241007(37)1(400)7019590754");
      * $generator->save("test.png");
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_128);
@@ -255,6 +262,7 @@ class BarCodeReader extends BaseJavaClass
      * {
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      */
     public function getStripFNC() : bool
     {
@@ -272,7 +280,7 @@ class BarCodeReader extends BaseJavaClass
      * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
      *
      * This sample shows how to strip FNC characters
-     *
+     *@code
      * $generator = new BarcodeGenerator(EncodeTypes::GS1Code128, "(02)04006664241007(37)1(400)7019590754");
      * $generator->save("test.png");
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_128);
@@ -289,7 +297,7 @@ class BarCodeReader extends BaseJavaClass
      * {
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
-     *
+     *@endcode
      */
     public function setStripFNC(bool $value) : void
     {
@@ -347,13 +355,14 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Gets recognized BarCodeResult array
-     * This sample shows how to read barcodes with BarCodeReader
      *
+     * This sample shows how to read barcodes with BarCodeReader
+     *@code
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      *    print("BarCode CodeText: ". $reader->getFoundBarCodes()[i]->getCodeText());
-     *
+     *@endcode
      * Value: The recognized BarCodeResult array
      */
     public function getFoundBarCodes(): array
@@ -362,12 +371,15 @@ class BarCodeReader extends BaseJavaClass
     }
 
     /**
-     * Gets recognized barcodes count<hr><blockquote>
+     * Gets recognized barcodes count
+     *
      * This sample shows how to read barcodes with BarCodeReader
+     * @code
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
+     * @endcode
      * Value: The recognized barcodes count
      */
     public function getFoundCount(): int
@@ -377,7 +389,9 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Reads BarCodeResult from the image.
+     *
      * This sample shows how to read barcodes with BarCodeReader
+     * @code
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
@@ -385,7 +399,8 @@ class BarCodeReader extends BaseJavaClass
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
-     * @return Returns array of recognized {@code BarCodeResult}s on the image. If nothing is recognized, zero array is returned.
+     * @endcode
+     * @return array of recognized {@code BarCodeResult}s on the image. If nothing is recognized, zero array is returned.
      */
     public function readBarCodes(): array
     {
@@ -403,7 +418,7 @@ class BarCodeReader extends BaseJavaClass
      * Default value of QualitySettings is NormalQuality.
      *
      * This sample shows how to use QualitySettings with BarCodeReader
-     *
+     *@code
      * $reader = new BarCodeReader("test.png");
      *  //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
@@ -421,6 +436,7 @@ class BarCodeReader extends BaseJavaClass
      * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
+     *@endcode
      * QualitySettings to configure recognition quality and speed.
      */
     public final function getQualitySettings(): QualitySettings
@@ -442,6 +458,7 @@ class BarCodeReader extends BaseJavaClass
      * Default value of QualitySettings is NormalQuality.
      *
      * This sample shows how to use QualitySettings with BarCodeReader
+     *@code
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
@@ -459,6 +476,7 @@ class BarCodeReader extends BaseJavaClass
      * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
+     *@endcode
      * QualitySettings to configure recognition quality and speed.
      */
     public function setQualitySettings(QualitySettings $value):void
@@ -476,7 +494,9 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * A flag which force engine to detect codetext encoding for Unicode codesets.
+     *
      * This sample shows how to detect text encoding on the fly if DetectEncoding is enabled
+     * @code
      * $image = "image.png";
      * $generator = new BarcodeGenerator(EncodeTypes::QR, "пїЅпїЅпїЅпїЅпїЅ"))
      * $generator->getParameters().getBarcode()->getQR()->setCodeTextEncoding("UTF-8");
@@ -491,6 +511,7 @@ class BarCodeReader extends BaseJavaClass
      * $reader->setDetectEncoding(false);
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
+     *@endcode
      */
     public function getDetectEncoding() : bool
     {
@@ -506,7 +527,9 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * A flag which force engine to detect codetext encoding for Unicode codesets.
+     *
      * This sample shows how to detect text encoding on the fly if DetectEncoding is enabled
+     * @code
      * $image = "image.png";
      * $generator = new BarcodeGenerator(EncodeTypes::QR, "пїЅпїЅпїЅпїЅпїЅ");
      * $generator->getParameters().getBarcode()->getQR()->setCodeTextEncoding("UTF-8");
@@ -521,6 +544,7 @@ class BarCodeReader extends BaseJavaClass
      * $reader->setDetectEncoding(true);
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
+     *@endcode
      */
     public function setDetectEncoding(bool $value) : void
     {
@@ -537,7 +561,9 @@ class BarCodeReader extends BaseJavaClass
     /**
      * Sets bitmap image and areas for recognition.
      * Must be called before ReadBarCodes() method.
+     *
      * This sample shows how to detect Code39 and Code128 barcodes.
+     * @code
      * $bmp = "test.png";
      * $reader = new BarCodeReader();
      * $reader->setBarCodeReadType(DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
@@ -549,6 +575,7 @@ class BarCodeReader extends BaseJavaClass
      *    print("BarCode Type: ".$result->getCodeTypeName());
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      * @param value The bitmap image for recognition.
      * @param areas areas list for recognition
      * @throws BarcodeException
@@ -587,7 +614,9 @@ class BarCodeReader extends BaseJavaClass
     /**
      * Sets SingleDecodeType type array for recognition.
      * Must be called before readBarCodes() method.
+     *
      * This sample shows how to detect Code39 and Code128 barcodes.
+     * @code
      * $reader = new BarCodeReader();
      * $reader->setBarCodeReadType(DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * $reader->setBarCodeImage("test.png");
@@ -596,6 +625,7 @@ class BarCodeReader extends BaseJavaClass
      *     print("BarCode Type: ".$result->getCodeTypeName());
      *     print("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      * @param barcodeTypes The SingleDecodeType type array to read.
      */
     public function setBarCodeReadType(int ...$types):void
@@ -616,7 +646,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Exports BarCode properties to the xml-file specified
-     * @param xmlFile The name for the file
+     * @param $xmlFile The name for the file
      * @return Whether or not export completed successfully.
      * Returns True in case of success; False Otherwise
      */
@@ -666,10 +696,10 @@ class Quadrangle extends BaseJavaClass
     /**
      * Initializes a new instance of the Quadrangle structure with the describing points.
      *
-     * @param leftTop A Point that represents the left-top corner of the Quadrangle.
-     * @param rightTop A Point that represents the right-top corner of the Quadrangle.
-     * @param rightBottom A Point that represents the right-bottom corner of the Quadrangle.
-     * @param leftBottom A Point that represents the left-bottom corner of the Quadrangle.
+     * @param $leftTop A Point that represents the left-top corner of the Quadrangle.
+     * @param $rightTop A Point that represents the right-top corner of the Quadrangle.
+     * @param $rightBottom A Point that represents the right-bottom corner of the Quadrangle.
+     * @param $leftBottom A Point that represents the left-bottom corner of the Quadrangle.
      */
     public function __construct(Point $leftTop, Point $rightTop, Point $rightBottom, Point $leftBottom)
     {
@@ -774,8 +804,8 @@ class Quadrangle extends BaseJavaClass
     /**
      * Determines if the specified point is contained within this Quadrangle structure.
      *
-     * @param x The x point cordinate.
-     * @param y The y point cordinate.
+     * @param $x The x point cordinate.
+     * @param $y The y point cordinate.
      * @return Returns true if point is contained within this Quadrangle structure; otherwise, false.
      */
     public function containsPoint(int $x, int $y): bool
@@ -850,8 +880,9 @@ class Quadrangle extends BaseJavaClass
 /**
  *
  * Stores a QR Structured Append information of recognized barcode
- * This sample shows how to get QR Structured Append data
  *
+ * This sample shows how to get QR Structured Append data
+ *@code
  * $reader = new BarCodeReader("test.png", DecodeType::QR);
  * foreach($reader->readBarCodes() as $result)
  * {
@@ -861,6 +892,7 @@ class Quadrangle extends BaseJavaClass
  *    print("QR Structured Append Index: ".$result->getExtended()->getQR()->getQRStructuredAppendModeBarCodeIndex());
  *    print("QR Structured Append ParityData: ".$result->getExtended()->getQR()->getQRStructuredAppendModeParityData());
  * }
+ *@endcode
  */
 final class QRExtendedParameters extends BaseJavaClass
 {
@@ -934,7 +966,9 @@ final class QRExtendedParameters extends BaseJavaClass
 /**
  *
  * Stores a MacroPdf417 metadata information of recognized barcode
+ *
  * This sample shows how to get Macro Pdf417 metadata
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::MacroPdf417, "12345");
  * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroFileID(10);
  * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentsCount(2);
@@ -949,6 +983,7 @@ final class QRExtendedParameters extends BaseJavaClass
  *     print("Macro Pdf417 Segments: ".$result->getExtended()->getPdf417()->getMacroPdf417SegmentsCount());
  *     print("Macro Pdf417 SegmentID: ".$result->getExtended()->getPdf417()->getMacroPdf417SegmentID());
  * }
+ * @endcode
  */
 final class Pdf417ExtendedParameters extends BaseJavaClass
 {
@@ -1057,7 +1092,6 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Returns the hash code for this instance.
-     *
      * @return A 32-bit signed integer hash code.
      */
     public function hashCode(): int
@@ -1067,7 +1101,6 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Returns a human-readable string representation of this Pdf417ExtendedParameters.
-     *
      * @return A string that represents this Pdf417ExtendedParameters.
      */
     public function toString(): string
@@ -1079,7 +1112,9 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 /**
  *
  * Stores special data of 1D recognized barcode like separate codetext and checksum
+ *
  * This sample shows how to get 1D barcode value and checksum
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
@@ -1090,6 +1125,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
  *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
  *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
  * }
+ * @endcode
  */
 final class OneDExtendedParameters extends BaseJavaClass
 {
@@ -1159,7 +1195,9 @@ final class OneDExtendedParameters extends BaseJavaClass
  *
  * Stores special data of Code128 recognized barcode
  * Represents the recognized barcode's region and barcode angle
+ *
  * This sample shows how to get code128 raw values
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12345");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_128);
@@ -1169,6 +1207,7 @@ final class OneDExtendedParameters extends BaseJavaClass
  *    print("BarCode CodeText: ".$result->getCodeText());
  *    print("Code128 Data Portions: ".$result->getExtended()->getCode128());
  * }
+ * @endcode
  */
 final class Code128ExtendedParameters extends BaseJavaClass
 {
@@ -1432,7 +1471,9 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 /**
  * Stores recognized barcode data like SingleDecodeType type, {@code string} codetext,
  * BarCodeRegionParameters region and other parameters
+ *
  * This sample shows how to obtain BarCodeResult.
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
@@ -1444,6 +1485,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
  *     print("BarCode ReadingQuality: ".$result->getReadingQuality());
  *     print("BarCode Angle: ".$result->getRegion()->getAngle());
  * }
+ * @endcode
  */
 final class BarCodeResult extends BaseJavaClass
 {
@@ -1578,7 +1620,9 @@ final class BarCodeResult extends BaseJavaClass
 
 /**
  * Represents the recognized barcode's region and barcode angle
+ *
  * This sample shows how to get barcode Angle and bounding quadrangle values
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
@@ -1588,6 +1632,7 @@ final class BarCodeResult extends BaseJavaClass
  *    print("BarCode Angle: ".$result->getRegion()->getAngle());
  *    print("BarCode Quadrangle: ".$result->getRegion()->getQuadrangle());
  * }
+ * @endcode
  */
 final class BarCodeRegionParameters extends BaseJavaClass
 {
@@ -1700,8 +1745,8 @@ class BarCodeExtendedParameters extends BaseJavaClass
         parent::__construct($javaClass);
     }
 
-    /** Gets a DataBar additional information<see cref="DataBarExtendedParameters"/> of recognized barcode
-     * @return mixed A DataBar additional information<see cref="DataBarExtendedParameters"/> of recognized barcode
+    /** Gets a DataBar additional information DataBarExtendedParameters of recognized barcode
+     * @return mixed A DataBar additional information DataBarExtendedParameters of recognized barcode
      */
     public function getDataBar() : DataBarExtendedParameters
     {
@@ -1777,7 +1822,9 @@ class BarCodeExtendedParameters extends BaseJavaClass
  * You can quickly set up QualitySettings by embedded presets: HighPerformance, NormalQuality,
  * HighQuality, MaxBarCodes or you can manually configure separate options.
  * Default value of QualitySettings is NormalQuality.
+ *
  * This sample shows how to use QualitySettings with BarCodeReader
+ * @code
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
  * //set high performance mode
  * $reader->setQualitySettings(QualitySettings::getHighPerformance());
@@ -1812,6 +1859,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
  * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
  * foreach($reader->readBarCodes() as $result)
  *   print("BarCode CodeText: ".$result->getCodeText());
+ * @endcode
  */
 final class QualitySettings extends BaseJavaClass
 {
@@ -1846,8 +1894,10 @@ final class QualitySettings extends BaseJavaClass
     /**
      * HighPerformance recognition quality preset. High quality barcodes are recognized well in this mode.
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
+     * @endcode
      *
      *  Value:
      * HighPerformance recognition quality preset.
@@ -1861,8 +1911,10 @@ final class QualitySettings extends BaseJavaClass
     /**
      * NormalQuality recognition quality preset. Suitable for the most of barcodes
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getNormalQuality());
+     * @endcode
      *
      *  Value:
      * NormalQuality recognition quality preset.
@@ -1876,9 +1928,10 @@ final class QualitySettings extends BaseJavaClass
     /**
      * HighQualityDetection recognition quality preset. Same as NormalQuality but with high quality DetectorSettings
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getHighQualityDetection());     *
-     *
+     * @endcode
      *  Value:
      * HighQualityDetection recognition quality preset.
      */
@@ -1892,9 +1945,10 @@ final class QualitySettings extends BaseJavaClass
      * MaxQualityDetection recognition quality preset. Same as NormalQuality but with highest quality DetectorSettings.
      * Allows to detect diagonal and damaged barcodes.
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getMaxQualityDetection());
-     *
+     * @endcode
      *  Value:
      * MaxQualityDetection recognition quality preset.
      */
@@ -1907,8 +1961,10 @@ final class QualitySettings extends BaseJavaClass
     /**
      * HighQuality recognition quality preset. This preset is developed for low quality barcodes.
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getHighQuality());
+     * @endcode
      *
      *  Value:
      * HighQuality recognition quality preset.
@@ -1922,8 +1978,10 @@ final class QualitySettings extends BaseJavaClass
     /**
      * MaxBarCodes recognition quality preset. This preset is developed to recognize all possible barcodes, even incorrect barcodes.
      *
+     * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getMaxBarCodes());
+     * @endcode
      *
      *  Value:
      * MaxBarCodes recognition quality preset.
@@ -1978,7 +2036,7 @@ final class QualitySettings extends BaseJavaClass
     }
 
     /**
-     *  Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
+     *  Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False.
      * @return If True, allows engine to recognize tiny barcodes on large images.
      */
     public function getReadTinyBarcodes() : bool
@@ -1987,7 +2045,7 @@ final class QualitySettings extends BaseJavaClass
     }
 
     /**
-     * Allows engine to recognize tiny barcodes on large images. Ignored if <see cref="AllowIncorrectBarcodes"/> is set to True. Default value: False.
+     * Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False.
      * @param value If True, allows engine to recognize tiny barcodes on large images.
      */
     public function setReadTinyBarcodes(bool $value) : void
@@ -2356,9 +2414,8 @@ class Code128DataPortion extends BaseJavaClass
     private const javaClassName = "com.aspose.mw.barcode.recognition.MwCode128DataPortion";
 
     /**
-     * <p>
      * Creates a new instance of the {@code Code128DataPortion} class with start code symbol and decoded codetext.
-     * </p>
+     *
      * @param code128SubType A start encoding symbol
      * @param data A partial codetext
      */
@@ -2430,7 +2487,9 @@ class Code128DataPortion extends BaseJavaClass
 
 /**
  * Stores a DataBar additional information of recognized barcode
- * BarCodeReader reader = new BarCodeReader("c:\\test.png", DecodeType.DATABAR_OMNI_DIRECTIONAL);
+ *
+ * @code
+ * BarCodeReader reader = new BarCodeReader("test.png", DecodeType.DATABAR_OMNI_DIRECTIONAL);
  *
  * for(BarCodeResult result : reader.readBarCodes())
  * {
@@ -2438,6 +2497,7 @@ class Code128DataPortion extends BaseJavaClass
  *    System.out.println("BarCode CodeText: " + result.getCodeText());
  *    System.out.println("QR Structured Append Quantity: " + result.getExtended().getQR().getQRStructuredAppendModeBarCodesQuantity());
  * }
+ * @endcode
  */
 class DataBarExtendedParameters extends BaseJavaClass
 {
@@ -2457,7 +2517,7 @@ class DataBarExtendedParameters extends BaseJavaClass
     }
 
     /**
-     * Returns a value indicating whether this instance is equal to a specified <see cref="DataBarExtendedParameters"/> value.
+     * Returns a value indicating whether this instance is equal to a specified DataBarExtendedParameters value.
      * @param obj An System.Object value to compare to this instance.
      * @return <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
      */
@@ -2476,8 +2536,8 @@ class DataBarExtendedParameters extends BaseJavaClass
     }
 
     /**
-     * Returns a human-readable string representation of this <see cref="DataBarExtendedParameters"/>.
-     * @return A string that represents this <see cref="DataBarExtendedParameters"/>.
+     * Returns a human-readable string representation of this DataBarExtendedParameters.
+     * @return A string that represents this DataBarExtendedParameters.
      */
     public function toString(): string
     {
@@ -2487,13 +2547,16 @@ class DataBarExtendedParameters extends BaseJavaClass
 
 /**
  * Specify the type of barcode to read.
+ *
  * This sample shows how to detect Code39 and Code128 barcodes.
+ * @code
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode Type: ".$result->getCodeTypeName());
  *    print("BarCode CodeText: ".$result->getCodeText());
  * }
+ * @endcode
  */
 class DecodeType
 {
@@ -2861,9 +2924,9 @@ class DecodeType
     private const javaClassName = "com.aspose.mw.barcode.recognition.MwDecodeTypeUtils";
 
     /**
-     * Determines if the specified <see cref="BaseDecodeType"/> contains any 1D barcode symbology
+     * Determines if the specified BaseDecodeType contains any 1D barcode symbology
      * @param $symbology
-     * @return string <b>true</b> if <see cref="BaseDecodeType"/> contains any 1D barcode symbology; otherwise, returns <b>false</b>.
+     * @return string <b>true</b> if BaseDecodeType contains any 1D barcode symbology; otherwise, returns <b>false</b>.
      */
     public static function is1D($symbology) : bool
     {
@@ -2872,9 +2935,9 @@ class DecodeType
     }
 
     /**
-     * Determines if the specified <see cref="BaseDecodeType"/> contains any Postal barcode symbology
-     * @param symbology The <see cref="BaseDecodeType"/> to test
-     * @return Returns <b>true</b> if <see cref="BaseDecodeType"/> contains any Postal barcode symbology; otherwise, returns <b>false</b>.
+     * Determines if the specified BaseDecodeType contains any Postal barcode symbology
+     * @param symbology The BaseDecodeType to test
+     * @return Returns <b>true</b> if BaseDecodeType contains any Postal barcode symbology; otherwise, returns <b>false</b>.
      */
     public static function isPostal($symbology) : bool
     {
@@ -2883,9 +2946,9 @@ class DecodeType
     }
 
     /**
-     * Determines if the specified <see cref="BaseDecodeType"/> contains any 2D barcode symbology
-     * @param symbology The <see cref="BaseDecodeType"/> to test.
-     * @return Returns <b>true</b> if <see cref="BaseDecodeType"/> contains any 2D barcode symbology; otherwise, returns <b>false</b>.
+     * Determines if the specified BaseDecodeType contains any 2D barcode symbology
+     * @param symbology The BaseDecodeType to test.
+     * @return Returns <b>true</b> if BaseDecodeType contains any 2D barcode symbology; otherwise, returns <b>false</b>.
      */
     public static function is2D($symbology) : bool
     {
@@ -2926,6 +2989,8 @@ class  CustomerInformationInterpretingType
 
     /**
      * Use C_TABLE to interpret the customer information. Allows A..Z, a..z, 1..9, space and # sing.
+     *
+     * @code
      * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678ABCde");
      * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
      * $image = $generator->generateBarCodeImage();
@@ -2936,11 +3001,14 @@ class  CustomerInformationInterpretingType
      *     print("BarCode Type: ".$result->getCodeType());
      *     print("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      */
     const C_TABLE = 0;
 
     /**
      * Use N_TABLE to interpret the customer information. Allows digits.
+     *
+     * @code
      *  $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "59123456781234567");
      *  $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE);
      *  $image = $generator->generateBarCodeImage();
@@ -2951,11 +3019,14 @@ class  CustomerInformationInterpretingType
      *     print("BarCode Type: ".$result->getCodeType());
      *     print("BarCode CodeText: ".$result->getCodeText());
      *  }
+     * @endcode
      */
     const N_TABLE = 1;
 
     /**
      * Do not interpret the customer information. Allows 0, 1, 2 or 3 symbol only.
+     *
+     * @code
      * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "59123456780123012301230123");
      * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::OTHER);
      * $image = $generator->generateBarCodeImage();
@@ -2966,14 +3037,18 @@ class  CustomerInformationInterpretingType
      *    print("BarCode Type: ".$result->getCodeType());
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      */
     const OTHER = 2;
 }
 
 /**
  * Contains recognition confidence level
+ *
  * This sample shows how BarCodeConfidence changed, depending on barcode type
- * //Moderate confidence
+ *
+ * Moderate confidence
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12345");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
@@ -2984,7 +3059,9 @@ class  CustomerInformationInterpretingType
  *    print("BarCode Confidence: ".$result->getConfidence());
  *    print("BarCode ReadingQuality: ".$result->getReadingQuality());
  * }
- * //Strong confidence
+ * @endcode
+ * Strong confidence
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::QR, "12345");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::QR);
@@ -2995,6 +3072,7 @@ class  CustomerInformationInterpretingType
  *     print("BarCode Confidence: ".$result->getConfidence());
  *     print("BarCode ReadingQuality: ".$result->getReadingQuality());
  * }
+ *@endcode
  */
 class BarCodeConfidence
 {

@@ -380,13 +380,14 @@ final class AlternativeScheme extends BaseJavaClass
 }
 
 /**
- *  ComplexCodetextReader decodes codetext to specified complex barcode type.
+ * ComplexCodetextReader decodes codetext to specified complex barcode type.
  *
- *  This sample shows how to recognize and decode SwissQR image.
- *  <pre>
+ * This sample shows how to recognize and decode SwissQR image.
+ * @code
  *  $cr = new BarCodeReader("SwissQRCodetext.png", DecodeType::QR);
  *  $cr->read();
  *  $result = ComplexCodetextReader::tryDecodeSwissQR($cr->getCodeText(false));
+ * @endcode
  */
 final class ComplexCodetextReader
 {
@@ -402,6 +403,17 @@ final class ComplexCodetextReader
     {
         $javaPhpComplexCodetextReader = java(self::$javaClassName);
         return SwissQRCodetext::construct($javaPhpComplexCodetextReader->tryDecodeSwissQR($encodedCodetext));
+    }
+
+    /**
+     * Decodes Royal Mail Mailmark 2D codetext.
+     * @param $encodedCodetext encoded codetext
+     * @return decoded Royal Mail Mailmark 2D or null.
+     */
+    public static function tryDecodeMailmark2D(string $encodedCodetext): Mailmark2DCodetext
+    {
+        $javaPhpComplexCodetextReader = java(self::$javaClassName);
+        return Mailmark2DCodetext::construct($javaPhpComplexCodetextReader->tryDecodeMailmark2D($encodedCodetext));
     }
 }
 
@@ -683,7 +695,7 @@ final class SwissQRBill extends BaseJavaClass
 /**
  * Class for encoding and decoding the text embedded in the SwissQR code.
  */
-final class SwissQRCodetext extends BaseJavaClass
+final class SwissQRCodetext extends IComplexCodetext
 {
     private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwSwissQRCodetext";
     private $bill;
@@ -760,14 +772,15 @@ final class SwissQRCodetext extends BaseJavaClass
 
 /**
  *  ComplexBarcodeGenerator for backend complex barcode (e.g. SwissQR) images generation.
- *  <hr><blockquote><pre>
+ *
  *  This sample shows how to create and save a SwissQR image.
- *  Example:
+ *  @code
  *    $swissQRCodetext = new SwissQRCodetext(null);
  *    $swissQRCodetext->getBill()->setAccount("Account");
  *    $swissQRCodetext->getBill()->setBillInformation("BillInformation");
  *    $cg = new ComplexBarcodeGenerator($swissQRCodetext);
  *    $res = $cg->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *  @endcode
  */
 final class ComplexBarcodeGenerator extends BaseJavaClass
 {
@@ -782,16 +795,19 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
     /**
      * Generation parameters.
      */
-    public function getParameters() : BaseGenerationParameters { return $this->parameters; }
+    public function getParameters(): BaseGenerationParameters
+    {
+        return $this->parameters;
+    }
 
     /**
      * Creates an instance of ComplexBarcodeGenerator.
      *
-     * @param SwissQRCodetext complexCodetext Complex codetext
+     * @param IComplexCodetext $complexCodetext complexCodetext Complex codetext
      */
-    public function __construct(SwissQRCodetext $swissQRCodetext)
+    public function __construct(IComplexCodetext $complexCodetext)
     {
-        parent::__construct(new java(self::$javaClassName, $swissQRCodetext->getJavaClass()));
+        parent::__construct(new java(self::$javaClassName, $complexCodetext->getJavaClass()));
     }
 
     /**
@@ -805,15 +821,12 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      *    $res = $cg->generateBarCodeImage(BarcodeImageFormat::PNG);
      * @return string base64 representation of image.
      */
-    public function generateBarcodeImage(int $format) : string
+    public function generateBarcodeImage(int $format): string
     {
-        try
-        {
+        try {
             $base64Image = java_cast($this->getJavaClass()->generateBarcodeImage($format), "string");
             return ($base64Image);
-        }
-        catch (Exception $ex)
-        {
+        } catch (Exception $ex) {
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
         }
@@ -832,16 +845,430 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      */
     public function save(string $filePath, int $format): void
     {
-        try
-        {
+        try {
             $image = $this->generateBarcodeImage($format);
             file_put_contents($filePath, base64_decode($image));
-        }
-        catch (Exception $ex)
-        {
+        } catch (Exception $ex) {
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
         }
     }
+}
+
+/**
+ * Class for encoding and decoding the text embedded in the Royal Mail 2D Mailmark code.
+ */
+final class Mailmark2DCodetext extends IComplexCodetext
+{
+
+    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwMailmark2DCodetext";
+
+    static function construct($javaClass)
+    {
+        $phpClass = new Mailmark2DCodetext();
+        $phpClass->setJavaClass($javaClass);
+        return $phpClass;
+    }
+
+    /**
+     * Identifies the UPU Country ID.Max length: 4 characters.
+     * @return string Country ID
+     */
+    public function getUPUCountryID() :string
+    {
+        return java_cast($this->getJavaClass()->getUPUCountryID(), "string");
+    }
+
+    /**
+     * Identifies the UPU Country ID.Max length: 4 characters.
+     * @param string $value Country ID
+     */
+    public function  setUPUCountryID(string $value) : void {
+        $this->getJavaClass()->setUPUCountryID($value);
+    }
+
+    /**
+     * Identifies the Royal Mail Mailmark barcode payload for each product type.
+     * Valid Values:
+     *
+     * “0” - Domestic Sorted &amp; Unsorted
+     * “A” - Online Postage
+     * “B” - Franking
+     * “C” - Consolidation
+     *
+     * @return string Information type ID
+     */
+    public function getInformationTypeID():string
+    {
+        return java_cast($this->getJavaClass()->getInformationTypeID(), "string");
+    }
+
+    /**
+     * Identifies the Royal Mail Mailmark barcode payload for each product type.
+     * Valid Values:
+     *
+     * “0” - Domestic Sorted &amp; Unsorted
+     * “A” - Online Postage
+     * “B” - Franking
+     * “C” - Consolidation
+     *
+     * @param string $value Information type ID
+     */
+    public function  setInformationTypeID(string $value) : void
+    {
+        $this->getJavaClass()->setInformationTypeID($value);
+    }
+
+
+    /**
+     * Identifies the  barcode version as relevant to each Information Type ID.
+     * Valid Values:
+     *
+     * Currently “1”.
+     * “0” &amp; “2” to “9” and “A” to “Z” spare reserved for potential future use.
+     *
+     * @return string Version ID
+     */
+    public function getVersionID():string
+    {
+        return java_cast($this->getJavaClass()->getVersionID(), "string");
+    }
+
+    /**
+     * Identifies the  barcode version as relevant to each Information Type ID.
+     * Valid Values:
+     *
+     * Currently “1”.
+     * “0” &amp; “2” to “9” and “A” to “Z” spare reserved for potential future use.
+     *
+     * @param string $value Version ID
+     */
+    public function  setVersionID(string $value) : void
+    {
+        $this->getJavaClass()->setVersionID($value);
+    }
+
+    /**
+     * Identifies the class of the item.
+     *
+     * Valid Values:
+     * “1” - 1C (Retail)
+     * “2” - 2C (Retail)
+     * “3” - Economy (Retail)
+     * “5” - Deffered (Retail)
+     * “8” - Premium (Network Access)
+     * “9” - Standard (Network Access)
+     *
+     * @return string class of the item
+     */
+    public function getclass():string
+    {
+        return java_cast($this->getJavaClass()->getclass(), "string");
+    }
+
+    /**
+     * Identifies the class of the item.
+     *
+     * Valid Values:
+     * “1” - 1C (Retail)
+     * “2” - 2C (Retail)
+     * “3” - Economy (Retail)
+     * “5” - Deffered (Retail)
+     * “8” - Premium (Network Access)
+     * “9” - Standard (Network Access)
+     *
+     * @param string $value  class of the item
+     */
+    public function  setclass(string $value) : void
+    {
+        $this->getJavaClass()->setclass($value);
+    }
+
+    /**
+     * Identifies the unique group of customers involved in the mailing.
+     * Max value: 9999999.
+     *
+     * @return int Supply chain ID
+     */
+    public function getSupplyChainID():int
+    {
+        return java_cast($this->getJavaClass()->getSupplyChainID(), "integer");
+    }
+
+    /**
+     * Identifies the unique group of customers involved in the mailing.
+     * Max value: 9999999.
+     *
+     * @param int $value Supply chain ID
+     */
+    public function  setSupplyChainID(int $value) : void
+    {
+        $this->getJavaClass()->setSupplyChainID($value);
+    }
+
+    /**
+     * Identifies the unique item within the Supply Chain ID.
+     * Every Mailmark barcode is required to carry an ID
+     * so it can be uniquely identified for at least 90 days.
+     * Max value: 99999999.
+     *
+     * @return int item within the Supply Chain ID
+     */
+    public function getItemID(): int
+    {
+        return java_cast($this->getJavaClass()->getItemID(), "integer");
+    }
+
+    /**
+     * Identifies the unique item within the Supply Chain ID.
+     * Every Mailmark barcode is required to carry an ID
+     * so it can be uniquely identified for at least 90 days.
+     * Max value: 99999999.
+     *
+     * @param int $value item within the Supply Chain ID
+     */
+    public function  setItemID(int $value) : void
+    {
+        $this->getJavaClass()->setItemID($value);
+    }
+
+    /**
+     * Contains the Postcode of the Delivery Address with DPS
+     * If inland the Postcode/DP contains the following number of characters.
+     * Area (1 or 2 characters) District(1 or 2 characters)
+     * Sector(1 character) Unit(2 characters) DPS (2 characters).
+     * The Postcode and DPS must comply with a valid PAF® format.
+     *
+     * @return string the Postcode of the Delivery Address with DPS
+     */
+    public function getDestinationPostCodeAndDPS(): string
+    {
+        return java_cast($this->getJavaClass()->getDestinationPostCodeAndDPS(), "string");
+    }
+
+    /**
+     * Contains the Postcode of the Delivery Address with DPS
+     * If inland the Postcode/DP contains the following number of characters.
+     * Area (1 or 2 characters) District(1 or 2 characters)
+     * Sector(1 character) Unit(2 characters) DPS (2 characters).
+     * The Postcode and DPS must comply with a valid PAF® format.
+     *
+     * @param string $value the Postcode of the Delivery Address with DPS
+     */
+    public function  setDestinationPostCodeAndDPS(string $value) : void
+    {
+        $this->getJavaClass()->setDestinationPostCodeAndDPS($value);
+    }
+
+    /**
+     * Flag which indicates what level of Return to Sender service is being requested.
+     *
+     * @return string RTS Flag
+     */
+    public function getRTSFlag(): string
+    {
+        return java_cast($this->getJavaClass()->getRTSFlag(), "string");
+    }
+
+    /**
+     * Flag which indicates what level of Return to Sender service is being requested.
+     *
+     * @param string $value RTS Flag
+     */
+    public function setRTSFlag(string $value) : void
+    {
+        $this->getJavaClass()->setRTSFlag($value);
+    }
+
+    /**
+     * Contains the Return to Sender Post Code but no DPS.
+     * The PC(without DPS) must comply with a PAF® format.
+     *
+     * @return string Return to Sender Post Code but no DPS
+     */
+    public function getReturnToSenderPostCode(): string
+    {
+        return java_cast($this->getJavaClass()->getReturnToSenderPostCode(), "string");
+    }
+
+    /**
+     * Contains the Return to Sender Post Code but no DPS.
+     * The PC(without DPS) must comply with a PAF® format.
+     *
+     * @param string $value Return to Sender Post Code but no DPS
+     */
+    public function setReturnToSenderPostCode(string $value) : void
+    {
+        $this->getJavaClass()->setReturnToSenderPostCode($value);
+    }
+
+    /**
+     * Optional space for use by customer.
+     *
+     * Max length by Type:
+     * Type 7: 6 characters
+     * Type 9: 45 characters
+     * Type 29: 25 characters
+     *
+     * @return string Customer content
+     */
+    public function getCustomerContent(): string
+    {
+        return java_cast($this->getJavaClass()->getCustomerContent(), "string");
+    }
+
+    /**
+     * Optional space for use by customer.
+     *
+     * Max length by Type:
+     * Type 7: 6 characters
+     * Type 9: 45 characters
+     * Type 29: 25 characters
+     *
+     * @param string $value  Customer content
+     */
+    public function  setCustomerContent(string $value) : void
+    {
+        $this->getJavaClass()->setCustomerContent($value);
+    }
+
+    /**
+     * Encode mode of Datamatrix barcode.
+     * Default value: DataMatrixEncodeMode.C40.
+     *
+     * @return int Encode mode of Datamatrix barcode.
+     */
+    public function getCustomerContentEncodeMode(): int
+    {
+        return java_cast($this->getJavaClass()->getCustomerContentEncodeMode(), "integer");
+    }
+
+    /**
+     * Encode mode of Datamatrix barcode.
+     * Default value: DataMatrixEncodeMode.C40.
+     *
+     * @param int $value Encode mode of Datamatrix barcode.
+     */
+    public function setCustomerContentEncodeMode(int $value) : void
+    {
+        $this->getJavaClass()->setCustomerContentEncodeMode($value);
+    }
+
+    /**
+     * 2D Mailmark Type defines size of Data Matrix barcode.
+     *
+     * @return int Size of Data Matrix barcode
+     */
+    public function getDataMatrixType(): int
+    {
+        return java_cast($this->getJavaClass()->getDataMatrixType(), "integer");
+    }
+
+    /**
+     * 2D Mailmark Type defines size of Data Matrix barcode.
+     *
+     * @param int $value  Size of Data Matrix barcode
+     */
+    public function setDataMatrixType(int $value) : void
+    {
+        $this->getJavaClass()->setDataMatrixType($value);
+    }
+
+    /**
+     * Create default instance of Mailmark2DCodetext class.
+     */
+    public function __construct()
+    {
+        parent::__construct(new java(self::$javaClassName));
+    }
+
+    public function init(): void
+    {}
+
+    /**
+     * Construct codetext from Mailmark data.
+     * @return string Constructed codetext
+     */
+    public function getConstructedCodetext(): string {
+
+        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+    }
+
+    /**
+     * Initializes Mailmark data from constructed codetext.
+     * @param string $constructedCodetext Constructed codetext.
+     */
+    public function  initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * Gets barcode type.
+     * @return int Barcode type.
+     */
+    public function getBarcodeType() : int {
+        return EncodeTypes::DATA_MATRIX;
+    }
+}
+
+/**
+ * <p>
+ * Interface for complex codetext used with ComplexBarcodeGenerator.
+ * </p>
+ */
+abstract class IComplexCodetext extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    /**
+     * Construct codetext for complex barcode
+     * @return string Constructed codetext
+     */
+    abstract function getConstructedCodetext() : string;
+
+    /**
+     * Initializes instance with constructed codetext.
+     * @param string $constructedCodetext Constructed codetext.
+     */
+    abstract function initFromString(string $constructedCodetext) : void;
+
+    /**
+     * Gets barcode type.
+     * @return int Barcode type.
+     */
+    abstract function getBarcodeType():int;
+}
+
+/**
+ * 2D Mailmark Type defines size of Data Matrix barcode
+ */
+class Mailmark2DType
+{
+    /**
+     * Auto determine
+     */
+    const AUTO = 0;
+
+    /**
+     * 24 x 24 modules
+     */
+    const TYPE_7 = 1;
+
+    /**
+     * 32 x 32 modules
+     */
+    const TYPE_9 = 2;
+
+    /// <summary>
+    ///
+    /// </summary>
+    /**
+     * 16 x 48 modules
+     */
+    const TYPE_29 = 3;
 }
 ?>

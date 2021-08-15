@@ -117,9 +117,10 @@ class BarcodeGenerator extends BaseJavaClass
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
      *  @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
-     * Example:
-     * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
-     * $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+     * @code
+     *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
+     *  $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+     * @endcode
      * @return base64 representation of image.
      */
     public function generateBarCodeImage(int $format) : string
@@ -140,9 +141,10 @@ class BarcodeGenerator extends BaseJavaClass
      * Save barcode image to specific file in specific format.
      * @param $filePath Path to save to.
      * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
-     * Example:
-     * $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
-     * $generator->save(file_path, BarCodeImageFormat::PNG);
+     * @code
+     *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
+     *  $generator->save(file_path, BarCodeImageFormat::PNG);
+     * @endcode
      */
     public function save(string $filePath, int $format): void  //TODO BARCODEPHP-87
     {
@@ -503,7 +505,7 @@ class BarcodeParameters extends BaseJavaClass
     /**
      * Indicates whether explains the character "\" as an escape character in CodeText property. Used for Pdf417, DataMatrix, Code128 only
      * If the EnableEscape is true, "\" will be explained as a special escape character. Otherwise, "\" acts as normal characters.
-     *Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.
+     * Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.
      */
     public function getEnableEscape() : bool
     {
@@ -897,7 +899,7 @@ class BaseGenerationParameters extends BaseJavaClass
     /**
      * Background color of the barcode image.
      * Default value: #FFFFFF
-     * See Color.
+     * @return vaue of background color.
      */
     public function getBackColor(): string
     {
@@ -921,7 +923,7 @@ class BaseGenerationParameters extends BaseJavaClass
     /**
      * Background color of the barcode image.
      * Default value: #FFFFFF
-     * See Color.
+     * @see Color.
      */
     public function setBackColor(string $hexValue): void
     {
@@ -982,14 +984,13 @@ class BaseGenerationParameters extends BaseJavaClass
      *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
      *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
      *  Default value: 0.
-     * <hr><blockquote><pre>
+     *
      *  This sample shows how to create and save a BarCode image.
-     *  <pre>
+     *  @code
      *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
      *     $generator->getParameters()->setRotationAngle(7);
      *     $generator->save("test.png");
-     *    </pre>
-     *  </pre></blockquote></hr>
+     *  @endcode
      */
     public function getRotationAngle() : float
     {
@@ -1008,14 +1009,14 @@ class BaseGenerationParameters extends BaseJavaClass
      *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
      *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
      *  Default value: 0.
-     * <hr><blockquote><pre>
+     *
      *  This sample shows how to create and save a BarCode image.
-     *  <pre>
+     * @code
      *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
      *     $generator->getParameters()->setRotationAngle(7);
      *     $generator->save("test.png");
-     *    </pre>
-     *  </pre></blockquote></hr>
+     * @endcode
+     *
      */
     public function setRotationAngle(float $value): void
     {
@@ -1031,7 +1032,8 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * Caption Above the BarCode image. See CaptionParameters.
+     * Caption Above the BarCode image.
+     * @see CaptionParameters.
      */
     public function getCaptionAbove(): CaptionParameters
     {
@@ -1047,7 +1049,8 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * Caption Above the BarCode image. See CaptionParameters.
+     * Caption Above the BarCode image.
+     * @see CaptionParameters.
      */
     public function setCaptionAbove(CaptionParameters $value): void
     {
@@ -1064,7 +1067,8 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * Caption Below the BarCode image. See CaptionParameters.
+     * Caption Below the BarCode image.
+     * @see CaptionParameters.
      */
     public function getCaptionBelow(): CaptionParameters
     {
@@ -1080,7 +1084,8 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * Caption Below the BarCode image. See CaptionParameters.
+     * Caption Below the BarCode image.
+     * @see CaptionParameters.
      */
     function setCaptionBelow(CaptionParameters $value): void
     {
@@ -1389,7 +1394,9 @@ class BorderParameters extends BaseJavaClass
  * Checksum never used: Codabar
  * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
  * Checksum always used: Rest symbologies
+ *
  * This sample shows influence of ChecksumValidation on recognition quality and results
+ * @code
  * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
  * $generator->save("test.png");
  * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
@@ -1410,6 +1417,7 @@ class BorderParameters extends BaseJavaClass
  *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
  *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
  * }
+ * @endcode
  */
 class  ChecksumValidation
 {
@@ -1669,10 +1677,13 @@ class CaptionParameters extends BaseJavaClass
 
 /**
  *  Specifies the size value in different units (Pixel, Inches, etc.).
- *  This sample shows how to create and save a BarCode image.
- *    $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
+ *
+ * This sample shows how to create and save a BarCode image.
+ * @code
+ *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
  *    $generator->getParameters()->getBarcode()->getBarHeight()->setMillimeters(10);
  *    $generator->save("test.png");
+ * @endcode
  */
 class Unit extends BaseJavaClass
 {
@@ -1856,7 +1867,7 @@ class Unit extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this Unit.
      *
-     * @return A string that represents this Unit.
+     * @return string that represents this Unit.
      */
     public function toString() : string
     {
@@ -2446,9 +2457,8 @@ class PostalParameters extends BaseJavaClass
 }
 
 /**
- *
  * AustralianPost barcode parameters.
-     */
+*/
 class AustralianPostParameters extends BaseJavaClass
 {
     private $australianPostShortBarHeight;
@@ -2661,7 +2671,7 @@ class CodablockParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this CodablockParameters.
      *
-     * @return A string that represents this CodablockParameters.
+     * @return string that represents this CodablockParameters.
      */
     public function toString() : string
     {
@@ -2821,7 +2831,7 @@ class DataBarParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this DataBarParameters.
      *
-     * @return A string that represents this DataBarParameters.
+     * @return string that represents this DataBarParameters.
      */
     public function toString() : string
     {
@@ -2843,8 +2853,6 @@ class DataBarParameters extends BaseJavaClass
      */
 class DataMatrixParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.DataMatrixParameters";
-
     protected function init(): void
     {
     }
@@ -3308,7 +3316,7 @@ class DotCodeParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this DotCodeParameters.
      *
-     * @return A string that represents this DotCodeParameters.
+     * @return string that represents this DotCodeParameters.
      */
     public function toString() : string
     {
@@ -3325,9 +3333,8 @@ class DotCodeParameters extends BaseJavaClass
 }
 
 /**
- *
  * ITF parameters.
-     */
+ */
 class ITFParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.ITFParameters";
@@ -3451,7 +3458,7 @@ class ITFParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this ITFParameters.
      *
-     * @return A string that represents this ITFParameters.
+     * @return string that represents this ITFParameters.
      */
     public function toString() : string
     {
@@ -3602,7 +3609,8 @@ class QrParameters extends BaseJavaClass
 
     /**
      *  Level of Reed-Solomon error correction for QR barcode.
-     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H. see QRErrorLevel.
+     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
+     *  @see QRErrorLevel.
      */
     public function getQrErrorLevel() : int
     {
@@ -3619,7 +3627,8 @@ class QrParameters extends BaseJavaClass
 
     /**
      *  Level of Reed-Solomon error correction for QR barcode.
-     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H. see QRErrorLevel.
+     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
+     *  @see QRErrorLevel.
      */
     public function setQrErrorLevel(int $value): void
     {
@@ -3737,7 +3746,7 @@ class QrParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this QrParameters.
      *
-     * @return A string that represents this QrParameters.
+     * @return string that represents this QrParameters.
      */
     public function toString() : string
     {
@@ -3759,8 +3768,6 @@ class QrParameters extends BaseJavaClass
      */
 class Pdf417Parameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.Pdf417Parameters";
-
     protected function init(): void
     {
     }
@@ -4129,7 +4136,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      * Gets or sets macro Pdf417 file size.
-     * @return The file size field contains the size in bytes of the entire source file.
+     * @return file size field contains the size in bytes of the entire source file.
      */
     public function getPdf417MacroFileSize() : int
     {
@@ -4147,7 +4154,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      *  Gets macro Pdf417 barcode checksum.
-     * @return The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     * @return checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
      */
     public function getPdf417MacroChecksum() : int
     {
@@ -4271,7 +4278,7 @@ class Pdf417Parameters extends BaseJavaClass
     /**
      * Returns a human-readable String representation of this Pdf417Parameters.
      *
-     * @return A String that represents this Pdf417Parameters.
+     * @return string that represents this Pdf417Parameters.
      */
     public function toString() : string
     {
@@ -4288,13 +4295,10 @@ class Pdf417Parameters extends BaseJavaClass
 }
 
 /**
- *
  * Supplement parameters. Used for Interleaved2of5, Standard2of5, EAN13, EAN8, UPCA, UPCE, ISBN, ISSN, ISMN.
-     */
+*/
 class SupplementParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.SupplementParameters";
-
     private $_space;
 
     protected function init(): void
@@ -4367,7 +4371,7 @@ class SupplementParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this SupplementParameters.
      *
-     * @return A string that represents this SupplementParameters.
+     * @return string that represents this SupplementParameters.
      */
     public function toString() : string
     {
@@ -4384,13 +4388,10 @@ class SupplementParameters extends BaseJavaClass
 }
 
 /**
- *
  * MaxiCode parameters.
-     */
+*/
 class MaxiCodeParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.MaxiCodeParameters";
-
     protected function init(): void
     {
     }
@@ -4462,7 +4463,7 @@ class MaxiCodeParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this MaxiCodeParameters.
      *
-     * @return A string that represents this MaxiCodeParameters.
+     * @return string that represents this MaxiCodeParameters.
      */
     public function toString() : string
     {
@@ -4479,9 +4480,8 @@ class MaxiCodeParameters extends BaseJavaClass
 }
 
 /**
- *
  * Aztec parameters.
-     */
+ */
 class AztecParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.AztecParameters";
@@ -4642,9 +4642,8 @@ class AztecParameters extends BaseJavaClass
 }
 
 /**
- *
  * Codabar parameters.
-     */
+*/
 class CodabarParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.CodabarParameters";
@@ -4657,7 +4656,7 @@ class CodabarParameters extends BaseJavaClass
      * Get the checksum algorithm for Codabar barcodes.
      * Default value: CodabarChecksumMode::MOD_16.
      * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
-     * See CodabarChecksumMode.
+     * @see CodabarChecksumMode.
      */
     public function getCodabarChecksumMode() : int
     {
@@ -4676,7 +4675,7 @@ class CodabarParameters extends BaseJavaClass
      * Set the checksum algorithm for Codabar barcodes.
      * Default value: CodabarChecksumMode::MOD_16.
      * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
-     * See CodabarChecksumMode.
+     * @see CodabarChecksumMode.
      */
     public function setCodabarChecksumMode(int $value): void
     {
@@ -4762,7 +4761,7 @@ class CodabarParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this CodabarParameters.
      *
-     * @return A string that represents this CodabarParameters.
+     * @return string that represents this CodabarParameters.
      */
     public function toString() : string
     {
@@ -4779,13 +4778,10 @@ class CodabarParameters extends BaseJavaClass
 }
 
 /**
- *
  * Coupon parameters. Used for UpcaGs1DatabarCoupon, UpcaGs1Code128Coupon.
-     */
+ */
 class CouponParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.CouponParameters";
-
     private $_space;
 
     protected function init(): void
@@ -4844,7 +4840,7 @@ class CouponParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this CouponParameters.
      *
-     * @return A string that represents this CouponParameters.
+     * @return string that represents this CouponParameters.
      */
     public function toString() : string
     {
@@ -4864,16 +4860,15 @@ class CouponParameters extends BaseJavaClass
  *
  *  Defines a particular format for text, including font face, size, and style attributes
  *  where size in Unit value property.
- * <hr><blockquote><pre>
+ *
  *  This sample shows how to create and save a BarCode image.
- *  <pre>
+ * @code
  *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
  *   $generator->getParameters()->getCaptionAbove()->setText("CAPTION ABOOVE");
  *   $generator->getParameters()->getCaptionAbove()->setVisible(true);
  *   $generator->getParameters()->getCaptionAbove()->getFont()->setStyle(FontStyle::ITALIC);
  *   $generator->getParameters()->getCaptionAbove()->getFont()->getSize()->setPoint(25);
- *    </pre>
- *  </pre></blockquote></hr>
+ * @endcode
  */
 final class FontUnit extends BaseJavaClass
 {
@@ -5004,7 +4999,6 @@ class ExtCodetextBuilder extends BaseJavaClass
     }
     /**
      * Checks necessity to shield previous item by "\000000"
-     * 
      *
      * @param Index Index in m_List
      * @return Necessity to shield
@@ -5026,7 +5020,6 @@ class ExtCodetextBuilder extends BaseJavaClass
     /**
      * 
      * Adds plain codetext to the extended codetext items
-     * 
      *
      * @param codetext Codetext in unicode to add as extended codetext item
      */
@@ -5038,7 +5031,6 @@ class ExtCodetextBuilder extends BaseJavaClass
     /**
      * 
      * Adds codetext with Extended Channel Identifier
-     * 
      *
      * @param ECIEncoding Extended Channel Identifier
      * @param codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
@@ -5050,7 +5042,6 @@ class ExtCodetextBuilder extends BaseJavaClass
 
     /**
      * Generate extended codetext from generation items list
-     * 
      *
      * @return Return string of extended codetext
      */
@@ -5064,9 +5055,9 @@ class ExtCodetextBuilder extends BaseJavaClass
 /**
  * Extended codetext generator for 2D QR barcodes for ExtendedCodetext Mode of QREncodeMode
  * Use Display2DText property of BarCodeBuilder to set visible text to removing managing characters.
- * <hr><blockquote><pre>
+ *
  *  Example how to generate FNC1 first position for Extended Mode
- *  <pre>
+ * @code
  *  //create codetext
  *  $lTextBuilder = new QrExtCodetextBuilder();
  *  $lTextBuilder->addFNC1FirstPosition();
@@ -5075,18 +5066,20 @@ class ExtCodetextBuilder extends BaseJavaClass
  *  $lTextBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
  *  //generate codetext
  *  $lCodetext = lTextBuilder->getExtendedCodetext();
- *  </pre>
- *  Example how to generate FNC1 second position for Extended Mode
- *  <pre>
+ * @endcode
+ *
+ * Example how to generate FNC1 second position for Extended Mode
+ * @code
  *  //create codetext
  *  $lTextBuilder = new QrExtCodetextBuilder();
  *  $lTextBuilder->addFNC1SecondPosition("12");
  *  $lTextBuilder->addPlainCodetext("TRUE3456");
  *  //generate codetext
  *  $lCodetext = lTextBuilder->getExtendedCodetext();
- *  </pre>
+ * @endcode
+ *
  * Example how to generate multi ECI mode for Extended Mode
- *  <pre>
+ * @code
  *  //create codetext
  * $lTextBuilder = new QrExtCodetextBuilder();
  * $lTextBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
@@ -5095,8 +5088,7 @@ class ExtCodetextBuilder extends BaseJavaClass
  * $lTextBuilder->addPlainCodetext("t\\e\\\\st");
  *  //generate codetext
  * $lCodetext = $lTextBuilder->getExtendedCodetext();
- *  </pre>
- *  </pre></blockquote></hr>
+ * @endcode
  */
 class QrExtCodetextBuilder extends ExtCodetextBuilder
 {
@@ -5112,9 +5104,7 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
     }
 
     /**
-     * 
      * Adds FNC1 in first position to the extended codetext items
-     * 
      */
     function addFNC1FirstPosition() : void
     {
@@ -5122,9 +5112,7 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
     }
 
     /**
-     * 
      * Adds FNC1 in second position to the extended codetext items
-     * 
      *
      * @param codetext Value of the FNC1 in the second position
      */
@@ -5134,9 +5122,7 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
     }
 
     /**
-     * 
      * Adds Group Separator (GS - '\\u001D') to the extended codetext items
-     * 
      */
     function addFNC1GroupSeparator()  : void {
         $this->getJavaClass()->addFNC1GroupSeparator();
@@ -5145,7 +5131,6 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
     /**
      * 
      * Generates Extended codetext from the extended codetext list.
-     * 
      *
      * @return Extended codetext as string
      */
@@ -5163,7 +5148,6 @@ class PatchCodeParameters extends BaseJavaClass
 {
     protected function init(): void
     {
-        // TODO: Implement init() method.
     }
 
     private $extraBarcodeText;
@@ -5208,8 +5192,8 @@ class PatchCodeParameters extends BaseJavaClass
     }
 
     /**
-     * Returns a human-readable string representation of this <see cref="PatchCodeParameters"/>.
-     * @return A string that represents this <see cref="PatchCodeParameters"/>.
+     * Returns a human-readable string representation of this PatchCodeParameters.
+     * @return A string that represents this PatchCodeParameters.
      */
     public function toString() : string
     {
@@ -5224,7 +5208,6 @@ class QrStructuredAppendParameters extends BaseJavaClass
 {
     protected function init(): void
     {
-        // TODO: Implement init() method.
     }
 
     function __construct($javaClass)
@@ -5330,12 +5313,14 @@ final class MacroCharacter
      * GS1 Data Identifier ISO 15434
      * Character is translated to "[)>\u001E05\u001D" as decoded data header and "\u001E\u0004" as decoded data trailer.
      *
+     * @code
      * //to generate autoidentified GS1 message like this "(10)123ABC(10)123ABC" in ISO 15434 format you need:
      * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, "10123ABC\u001D10123ABC");
      * $generator->getParameters()->getBarcode()->getDataMatrix()->setMacroCharacters(MacroCharacter::MACRO_05);
      * $reader = new BarCodeReader($generator->generateBarCodeImage(), DecodeType::GS_1_DATA_MATRIX);
      * foreach($reader->readBarCodes() as $result)
      *     print("BarCode CodeText: ".$result->getCodeText());
+     * @endcode
      */
     const MACRO_05 = 5;
 
@@ -5486,12 +5471,13 @@ class  DataMatrixEncodeMode
      * All backslashes (\) must be doubled in text.
      * 
      * This sample shows how to do codetext in Extended Mode.
-     * 
+     * @code
      * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
      * $generator->setCodeText("\\ansix12:ANSIX12TEXT\\ascii:backslash must be \\\\ doubled\\edifact:EdifactEncodedText");
      * $generator->getParameters()->getBarcode()->getDataMatrix().setDataMatrixEncodeMode(DataMatrixEncodeMode.EXTENDED_CODETEXT);
      * $generator->getParameters()->getBarcode()->getCodeTextParameters().setTwoDDisplayText("My Text");
      * $generator->save("test.png");
+     * @endcode
      */
     const EXTENDED_CODETEXT = 12;
 }
@@ -5578,14 +5564,16 @@ class QREncodeMode
     const UTF_16_BEBOM = 3;
     /**
      * Encode codetext with value set in the ECI_ENCODING property. It can be problems with some old (pre 2006) barcode scaners.
-     * Example how to use ECI encoding
      *
+     * Example how to use ECI encoding
+     *@code
      *     $generator = new BarcodeGenerator(EncodeTypes::QR);
      *     $generator->setCodeText("12345TEXT");
      *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
      *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeType(QREncodeType::FORCE_QR);
      *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF8);
      *     $generator->save("test.png", "PNG");
+     * @endcode
      */
     const ECI_ENCODING = 4;
     /**
@@ -5601,8 +5589,9 @@ class QREncodeMode
      * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
      * TO disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"
      * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
-     *  Example how to use FNC1 first position in Extended Mode
      *
+     * Example how to use FNC1 first position in Extended Mode
+     *@code
      *      $textBuilder = new QrExtCodetextBuilder();
      *      $textBuilder->addPlainCodetext("000%89%%0");
      *      $textBuilder->addFNC1GroupSeparator();
@@ -5613,10 +5602,10 @@ class QREncodeMode
      *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
      *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
      *      $generator->save("d:/test.png", "PNG");
-     *
+     *@endcode
      *
      * This sample shows how to use FNC1 second position in Extended Mode.
-     *
+     *@code
      *    //create codetext
      *    $textBuilder = new QrExtCodetextBuilder();
      *    $textBuilder->addFNC1SecondPosition("12");
@@ -5626,9 +5615,10 @@ class QREncodeMode
      *    $generator->setCodeText($textBuilder->getExtendedCodetext());
      *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
      *    $generator->save("d:/test.png", "PNG");
+     *@endcode
      *
      *    This sample shows how to use multi ECI mode in Extended Mode.
-     *
+     *@code
      *   //create codetext
      *   $textBuilder = new QrExtCodetextBuilder();
      *   $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
@@ -5641,6 +5631,7 @@ class QREncodeMode
      *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
      *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
      *   $generator->save("d:/test.png", "PNG");
+     *@endcode
      */
     const EXTENDED_CODETEXT = 5;
 
@@ -5684,10 +5675,9 @@ class  DataMatrixEccType
 }
 
 /**
- *
  * Version of QR Code.
  * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
-     */
+*/
 class QRVersion
 {
     /**
@@ -5923,10 +5913,12 @@ class QRVersion
  *
  * Specifies the Aztec symbol mode.
  *
- *      $generator = new BarcodeGenerator(EncodeTypes::AZTEC);
- *      $generator->setCodeText("125");
+ * @code
+ *  $generator = new BarcodeGenerator(EncodeTypes::AZTEC);
+ *  $generator->setCodeText("125");
  *  $generator->getParameters()->getBarcode()->getAztec()->setAztecSymbolMode(AztecSymbolMode::RUNE);
- *      $generator->save("test.png", "PNG");
+ *  $generator->save("test.png", "PNG");
+ * @endcode
  */
 class  AztecSymbolMode
 {
@@ -5953,9 +5945,8 @@ class  AztecSymbolMode
 }
 
 /**
- *
  * pdf417 barcode's error correction level, from level 0 to level 9, level 0 means no error correction, level 9 means best error correction
-     */
+ */
 class Pdf417ErrorLevel
 {
 
@@ -6151,15 +6142,15 @@ class  TextAlignment
 /**
  * Specifies the different types of automatic sizing modes.
  * Default value is AutoSizeMode::NONE.
- * <hr><blockquote><pre>
+ *
  *  This sample shows how to create and save a BarCode image.
- *  <pre>
+ * @code
  *  $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
  *  $generator->setAutoSizeMode(AutoSizeMode.NEAREST);
  *  $generator->getBarCodeWidth().setMillimeters(50);
  *  $generator->getBarCodeHeight().setInches(1.3f);
  *  $generator->save("test.png");
- *  </blockquote></hr>
+ * @endcode
  */
 class  AutoSizeMode
 {
@@ -6180,16 +6171,15 @@ class  AutoSizeMode
      *  because using interpolation for scaling.
      *  Size can be specified by BarcodeGenerator.BarCodeWidth
      *  and BarcodeGenerator.BarCodeHeight properties.
-     * <hr><blockquote><pre>
+     *
      *  This sample shows how to create and save a BarCode image in Scale mode.
-     *  <pre>
+     * @code
      *      $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
      *      $generator->getParameters()->getBarcode()->setAutoSizeMode(AutoSizeMode::INTERPOLATION);
      *      $generator->getParameters()->getBarcode()->getBarCodeWidth()->setMillimeters(50);
      *      $generator->getParameters()->getBarcode()->getBarCodeHeight()->setInches(1.3);
      *      $generator->save("test.png", "PNG);
-     *    </pre>
-     *  </pre></blockquote></hr>
+     * @endcode
      */
     const INTERPOLATION = '2';
 }
@@ -6567,10 +6557,13 @@ class EncodeTypes
 
     /**
      * Specifies that the data should be encoded with UPC coupon with GS1 DataBar addition barcode specification.
+     *
      * An example of the input string:
+     * @code
      * BarCodeBuilder->setCodetext("514141100906(8110)106141416543213500110000310123196000"),
      * where UPCA part is "514141100906", DATABAR part is "(8110)106141416543213500110000310123196000".
      * To change the caption, use barCodeBuilder->getCaptionAbove()->setText("company prefix + offer code");
+     * @endcode
      */
     const  UPCA_GS_1_DATABAR_COUPON = 63;
 
@@ -6592,13 +6585,14 @@ class EncodeTypes
  * Currently, it is used only for QR 2D barcode.
  *
  * Example how to use ECI encoding
- *
+ * @code
  *     $generator = new BarcodeGenerator(EncodeTypes::QR);
- *     generator->setCodeText("12345TEXT");
- *     generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
- *     generator->getParameters()->getBarcode()->getQR()->setQrEncodeType(QREncodeType::FORCE_QR);
- *     generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF_8);
- *     generator->save("test.png", "PNG");
+ *     $generator->setCodeText("12345TEXT");
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeType(QREncodeType::FORCE_QR);
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF_8);
+ *     $generator->save("test.png", "PNG");
+ * @endcode
      */
 class ECIEncodings
 {
@@ -6765,7 +6759,7 @@ class Code128Emulation
     const CODE_904 = 904;
 
     /**
-     * UCC/EAN-128 emulation. Implied “01” AI and 14-digit codetext.
+     * UCC/EAN-128 emulation. Implied '01' AI and 14-digit codetext.
      */
     const CODE_905 = 905;
 }

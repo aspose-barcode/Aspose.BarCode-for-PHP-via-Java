@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['maxicodeparameters_750',['MaxiCodeParameters',['../class_maxi_code_parameters.html',1,'']]]
+  ['license_856',['License',['../d8/d8c/classLicense.html',1,'']]]
 ];

@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['gb18030_1235',['GB18030',['../class_e_c_i_encodings.html#a2c1fda907ef5192baa97240578f68905',1,'ECIEncodings']]],
-  ['gif_1236',['GIF',['../class_bar_code_image_format.html#a74ff3b35d1da410aa9e690f8734aa53f',1,'BarCodeImageFormat']]],
-  ['gs_5f1_5fcodablock_5ff_1237',['GS_1_CODABLOCK_F',['../class_encode_types.html#a579800e256b4933e94d4e5792099deb0',1,'EncodeTypes']]],
-  ['gs_5f1_5fcode_5f128_1238',['GS_1_CODE_128',['../class_encode_types.html#adac86265835d5ad5d3b055d9a85dfe3a',1,'EncodeTypes\GS_1_CODE_128()'],['../class_decode_type.html#adac86265835d5ad5d3b055d9a85dfe3a',1,'DecodeType\GS_1_CODE_128()']]],
-  ['gs_5f1_5fdata_5fmatrix_1239',['GS_1_DATA_MATRIX',['../class_encode_types.html#a472a553d7e353f4fab23eade8d488a43',1,'EncodeTypes\GS_1_DATA_MATRIX()'],['../class_decode_type.html#a472a553d7e353f4fab23eade8d488a43',1,'DecodeType\GS_1_DATA_MATRIX()']]],
-  ['gs_5f1_5fqr_1240',['GS_1_QR',['../class_encode_types.html#a17df93e5df4ca88964caa9266da073ab',1,'EncodeTypes\GS_1_QR()'],['../class_decode_type.html#a17df93e5df4ca88964caa9266da073ab',1,'DecodeType\GS_1_QR()']]]
+  ['force_5fmicro_5fqr_1418',['FORCE_MICRO_QR',['../d7/d8a/classQREncodeType.html#a7ae556f56caa178c323cc620cb7c6ac7',1,'QREncodeType']]],
+  ['force_5fqr_1419',['FORCE_QR',['../d7/d8a/classQREncodeType.html#ac044db57e6b3f6c3b565055d6135e80c',1,'QREncodeType']]],
+  ['frame_1420',['FRAME',['../d3/de2/classITF14BorderType.html#ace72494037ad1088993eb77081b5e02e',1,'ITF14BorderType']]],
+  ['frame_5fout_1421',['FRAME_OUT',['../d3/de2/classITF14BorderType.html#a1b6ab99e23d05ba3a4d9705fddac2879',1,'ITF14BorderType']]],
+  ['full_1422',['FULL',['../d1/d09/classDataMatrixEncodeMode.html#a13d539deffbc223050836b0cd5052730',1,'DataMatrixEncodeMode']]],
+  ['full_5frange_1423',['FULL_RANGE',['../d1/d1b/classAztecSymbolMode.html#aa78e59673a82bb4e1472ac02c94c6ecf',1,'AztecSymbolMode']]]
 ];

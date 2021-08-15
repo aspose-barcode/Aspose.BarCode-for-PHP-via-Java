@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['unit_772',['Unit',['../class_unit.html',1,'']]]
+  ['supplementparameters_883',['SupplementParameters',['../d8/d05/classSupplementParameters.html',1,'']]],
+  ['swissqrbill_884',['SwissQRBill',['../de/d9a/classSwissQRBill.html',1,'']]],
+  ['swissqrcodetext_885',['SwissQRCodetext',['../dd/df6/classSwissQRCodetext.html',1,'']]]
 ];
