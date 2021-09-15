@@ -709,7 +709,8 @@ class BarCodeReader extends BaseJavaClass
         try
         {
             $xmlData = (file_get_contents($xmlFile));
-            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml(substr($xmlData,6,strlen($xmlData) -6)));
+            $offset = 3;
+            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml(substr($xmlData,$offset,strlen($xmlData) -$offset)));
         }
         catch (Exception $ex)
         {
