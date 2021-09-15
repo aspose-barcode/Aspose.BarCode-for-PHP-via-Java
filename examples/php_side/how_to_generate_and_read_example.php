@@ -1,5 +1,5 @@
 <?php
-include_once('tests_assist.php');
+include_once('ExamplesAssist.php');
 
 function generate_and_read()
 {

@@ -1,5 +1,5 @@
 <?php
-require_once('assist.php');
+require_once('Joint.php');
 
 /**
  *  BarcodeGenerator for backend barcode images generation.
@@ -470,11 +470,11 @@ class BarcodeParameters extends BaseJavaClass
      * Checksum always used: Rest symbology
      */
 
-    public function isChecksumEnabled() : bool
+    public function isChecksumEnabled() : int
     {
         try
         {
-            return java_cast($this->getJavaClass()->isChecksumEnabled(), "boolean");
+            return java_cast($this->getJavaClass()->isChecksumEnabled(), "integer");
         }
         catch (Exception $ex)
         {
@@ -489,7 +489,7 @@ class BarcodeParameters extends BaseJavaClass
      * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN, Codabar
      * Checksum always used: Rest symbology
      */
-    public function setChecksumEnabled(bool $value): void
+    public function setChecksumEnabled(int $value): void
     {
         try
         {
@@ -1424,7 +1424,7 @@ class  ChecksumValidation
     /**
      *    If checksum is required by the specification - it will be validated.
      */
-    const default = 0;
+    const DEFAULT = 0;
 
     /**
      *    Always validate checksum if possible.

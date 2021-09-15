@@ -1,6 +1,6 @@
 <?php
 
-require_once('assist.php');
+require_once('Joint.php');
 
 /**
  * BarCodeReader encapsulates an image which may contain one or several barcodes, it then can perform ReadBarCodes operation to detect barcodes.
@@ -18,8 +18,8 @@ require_once('assist.php');
 class BarCodeReader extends BaseJavaClass
 {
     private $qualitySettings;
-    private $code128DataPortions;
     private $recognizedResults;
+    private $barcodeSettings;
 
     private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.recognition.MwBarCodeReader";
 
@@ -40,7 +40,11 @@ class BarCodeReader extends BaseJavaClass
                 $rectangles = array($rectangles);
             if(!is_null($decodeTypes) && !is_array($decodeTypes))
                 $decodeTypes = array($decodeTypes);
-            $java_class = new java(self::JAVA_CLASS_NAME, self::loadImage($image), $rectangles, $decodeTypes);
+            $java_class = null;
+            if($image == null && $rectangles == null && $image == null)
+                $java_class = new java(self::JAVA_CLASS_NAME);
+            else
+                $java_class = new java(self::JAVA_CLASS_NAME, self::loadImage($image), $rectangles, $decodeTypes);
             parent::__construct($java_class);
         }
         catch (java_InternalException $ex)
@@ -52,6 +56,13 @@ class BarCodeReader extends BaseJavaClass
             $barcode_exception = new BarcodeException($ex);
             throw $barcode_exception;
         }
+    }
+
+    static function construct($javaClass) : BarCodeReader
+    {
+        $barcodeReader = new BarCodeReader(null, null, null);
+        $barcodeReader->setJavaClass($javaClass);
+        return $barcodeReader;
     }
 
     /**
@@ -99,6 +110,7 @@ class BarCodeReader extends BaseJavaClass
         try
         {
             $this->qualitySettings = new QualitySettings($this->getJavaClass()->getQualitySettings());
+            $this->barcodeSettings = BarcodeSettings::construct($this->getJavaClass()->getBarcodeSettings());
         } catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
@@ -404,11 +416,22 @@ class BarCodeReader extends BaseJavaClass
      */
     public function readBarCodes(): array
     {
-        $this->recognizedResults = array();
-        $javaReadBarcodes = java_values($this->getJavaClass()->readBarCodes());
-        for ($i = 0; $i < sizeof($javaReadBarcodes); $i++)
-            $this->recognizedResults[$i] = new BarCodeResult($javaReadBarcodes[$i]);
-        return $this->recognizedResults;
+        try
+        {
+            $this->recognizedResults = array();
+            $javaReadBarcodes = java_values($this->getJavaClass()->readBarCodes());
+            for ($i = 0; $i < sizeof($javaReadBarcodes); $i++)
+                $this->recognizedResults[$i] = new BarCodeResult($javaReadBarcodes[$i]);
+            return $this->recognizedResults;
+        }
+        catch (Exception $e)
+        {
+            if(strpos($e->getMessage(),"RecognitionAbortedException"))
+            {
+                throw new RecognitionAbortedException($e->getMessage(), null);
+            }
+            throw $e;
+        }
     }
 
     /**
@@ -493,12 +516,21 @@ class BarCodeReader extends BaseJavaClass
     }
 
     /**
+     * The main BarCode decoding parameters. Contains parameters which make influence on recognized data.
+     * @return  BarCode decoding parameters
+     */
+    public function getBarcodeSettings() : BarcodeSettings
+    {
+        return $this->barcodeSettings;
+    }
+
+    /**
      * A flag which force engine to detect codetext encoding for Unicode codesets.
      *
      * This sample shows how to detect text encoding on the fly if DetectEncoding is enabled
      * @code
      * $image = "image.png";
-     * $generator = new BarcodeGenerator(EncodeTypes::QR, "пїЅпїЅпїЅпїЅпїЅ"))
+     * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово"))
      * $generator->getParameters().getBarcode()->getQR()->setCodeTextEncoding("UTF-8");
      * $generator->save($image, BarCodeImageFormat.getPng());
      *     //detects encoding for Unicode codesets is enabled
@@ -531,7 +563,7 @@ class BarCodeReader extends BaseJavaClass
      * This sample shows how to detect text encoding on the fly if DetectEncoding is enabled
      * @code
      * $image = "image.png";
-     * $generator = new BarcodeGenerator(EncodeTypes::QR, "пїЅпїЅпїЅпїЅпїЅ");
+     * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово");
      * $generator->getParameters().getBarcode()->getQR()->setCodeTextEncoding("UTF-8");
      * $generator->save($image, BarCodeImageFormat.getPng());
      * //detects encoding for Unicode codesets is enabled
@@ -650,11 +682,15 @@ class BarCodeReader extends BaseJavaClass
      * @return Whether or not export completed successfully.
      * Returns True in case of success; False Otherwise
      */
-    public function exportToXml(string $xmlFile)
+    public function exportToXml(string $xmlFile) : bool
     {
         try
         {
-            return $this->getJavaClass()->exportToXml($xmlFile);
+            $xmlData = java_cast($this->getJavaClass()->exportToXml(), "string");
+            $isSaved = $xmlData != null;
+            if($isSaved)
+                file_put_contents($xmlFile, $xmlData);
+            return $isSaved;
         } catch (Exception $ex)
         {
             $barcode_exception = new BarcodeException($ex);
@@ -662,6 +698,25 @@ class BarCodeReader extends BaseJavaClass
         }
     }
 
+    /**
+     * Exports BarCode properties to the xml-file specified
+     * @param $xmlFile The name for the file
+     * @return Whether or not export completed successfully.
+     * Returns True in case of success; False Otherwise
+     */
+    public static function importFromXml(string $xmlFile) : BarCodeReader
+    {
+        try
+        {
+            $xmlData = (file_get_contents($xmlFile));
+            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml(substr($xmlData,6,strlen($xmlData) -6)));
+        }
+        catch (Exception $ex)
+        {
+            $barcode_exception = new BarcodeException($ex);
+            throw $barcode_exception;
+        }
+    }
 }
 
 /**
@@ -2489,13 +2544,13 @@ class Code128DataPortion extends BaseJavaClass
  * Stores a DataBar additional information of recognized barcode
  *
  * @code
- * BarCodeReader reader = new BarCodeReader("test.png", DecodeType.DATABAR_OMNI_DIRECTIONAL);
+ * $reader = new BarCodeReader("test.png", DecodeType::DATABAR_OMNI_DIRECTIONAL);
  *
- * for(BarCodeResult result : reader.readBarCodes())
+ * foreach($reader->readBarCodes() as $result)
  * {
- *    System.out.println("BarCode Type: " + result.getCodeTypeName());
- *    System.out.println("BarCode CodeText: " + result.getCodeText());
- *    System.out.println("QR Structured Append Quantity: " + result.getExtended().getQR().getQRStructuredAppendModeBarCodesQuantity());
+ *    print("BarCode Type: ".result->getCodeTypeName());
+ *    print("BarCode CodeText: ".result->getCodeText());
+ *    print("QR Structured Append Quantity: ".result->getExtended()->getQR()->getQRStructuredAppendModeBarCodesQuantity());
  * }
  * @endcode
  */
@@ -2542,6 +2597,356 @@ class DataBarExtendedParameters extends BaseJavaClass
     public function toString(): string
     {
         return java_cast($this->getJavaClass()->toString(), "string");
+    }
+}
+
+/**
+ * AustraliaPost decoding parameters. Contains parameters which make influence on recognized data of AustraliaPost symbology.
+ */
+class AustraliaPostSettings extends BaseJavaClass
+{
+    private const javaClassName = "com.aspose.mw.barcode.recognition.MwAustraliaPostSettings";
+
+    protected function init(): void
+    {
+    }
+
+    /**
+     * AustraliaPostSettings constructor
+     */
+    public function __construct(?AustraliaPostSettings $settings)
+    {
+        if ($settings != null) {
+            parent::__construct($settings->getJavaClass());
+        } else {
+            parent::__construct(new java(self::javaClassName));
+        }
+    }
+    static function construct($javaClass) : AustraliaPostSettings
+    {
+        $australiaPostSettings = new AustraliaPostSettings(null);
+        $australiaPostSettings->setJavaClass($javaClass);
+        return $australiaPostSettings;
+    }
+
+    /**
+     * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
+     * @return The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
+     */
+    public function getCustomerInformationInterpretingType(): int
+    {
+        return java_cast($this->getJavaClass()->getCustomerInformationInterpretingType(), "integer");
+    }
+
+    /**
+     * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
+     * @param $value The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
+     */
+    public function setCustomerInformationInterpretingType(int $value): void
+    {
+        $this->getJavaClass()->setCustomerInformationInterpretingType($value);
+    }
+
+    /**
+     * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
+     * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
+     *
+     * Example
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
+     * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
+     * $image = generator->generateBarCodeImage(BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader($image, null, DecodeType::AUSTRALIA_POST);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setIgnoreEndingFillingPatternsForCTable(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo("BarCode Type: ".$result->getCodeType());
+     *     echo("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * @return The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
+     */
+    public function getIgnoreEndingFillingPatternsForCTable(): bool
+    {
+        return java_cast($this->getJavaClass()->getIgnoreEndingFillingPatternsForCTable(), "boolean");
+    }
+
+    public function setIgnoreEndingFillingPatternsForCTable(bool $value): void
+    {
+        $this->getJavaClass()->setIgnoreEndingFillingPatternsForCTable($value);
+    }
+}
+
+ class BarcodeSettings extends BaseJavaClass
+{
+
+    private $_australiaPost;
+
+    private const javaClassName = "com.aspose.mw.barcode.recognition.MwBarcodeSettings";
+
+    /**
+     * BarcodeSettings copy constructor
+     * @param $settings The source of the data
+     */
+    public function __construct(?BarcodeSettings $settings)
+    {
+        if($settings != null)
+        {
+            parent::__construct($settings->getJavaClass());
+        }
+        else
+        {
+            parent::__construct(new java(self::javaClassName));
+        }
+    }
+
+    /**
+      * BarcodeSettings copy constructor
+      * @param $settings The source of the data
+      */
+     static function construct($javaClass) : BarcodeSettings
+     {
+         $barcodeSettings = new BarcodeSettings(null);
+         $barcodeSettings->setJavaClass($javaClass);
+         return $barcodeSettings;
+     }
+
+    protected function init() : void
+    {
+        $this->_australiaPost = AustraliaPostSettings::construct($this->getJavaClass()->getAustraliaPost());
+    }
+
+    /**
+     * Enable checksum validation during recognition for 1D and Postal barcodes.
+     * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
+     * Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5
+     * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
+     * Checksum always used: Rest symbologies
+     *
+     * Example
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::EAN_13);
+     * //checksum disabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: ".$result->getCodeText());
+     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
+     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     * }
+     * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
+     * //checksum enabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: " + result.CodeText);
+     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
+     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     * }
+     * @return Enable checksum validation during recognition for 1D and Postal barcodes.
+     */
+    public function getChecksumValidation(): int
+    {
+        return java_cast($this->getJavaClass()->getChecksumValidation(), "int");
+    }
+
+    /**
+     * Enable checksum validation during recognition for 1D and Postal barcodes.
+     * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
+     * Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5
+     * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
+     * Checksum always used: Rest symbologies
+     *
+     * Example
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::EAN_13);
+     * //checksum disabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: ".$result->getCodeText());
+     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
+     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     * }
+     * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
+     * //checksum enabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: " + result.CodeText);
+     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
+     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     * }
+     * @param value  Enable checksum validation during recognition for 1D and Postal barcodes.
+     */
+    public function setChecksumValidation(int $value): void
+    {
+        $this->getJavaClass()->setChecksumValidation($value);
+    }
+
+    /**
+     * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     *
+     * Example
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC disabled
+     * $reader->getBarcodeSettings()->setStripFNC(false);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC enabled
+     * $reader->getBarcodeSettings()->setStripFNC(true);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * @return Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     */
+    public function getStripFNC() : bool
+    {
+        return java_cast($this->getJavaClass()->getStripFNC(), "bool");
+    }
+
+    /**
+     * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     *
+     * Example
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC disabled
+     * $reader->getBarcodeSettings()->setStripFNC(false);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC enabled
+     * $reader->getBarcodeSettings()->setStripFNC(true);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * @param value  Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     */
+    public function setStripFNC(bool $value): void
+    {
+        $this->getJavaClass()->setStripFNC($value);
+    }
+
+    /**
+     * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
+     *
+     * Example
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово"))
+     * $im = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
+     *
+     * //detects encoding for Unicode codesets is enabled
+     * $reader = new BarCodeReader($im, DecodeType::QR);
+     * $reader->getBarcodeSettings()->setDetectEncoding(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     *
+     * //detect encoding is disabled
+     * $reader = new BarCodeReader($im, DecodeType::QR);
+     * $reader->getBarcodeSettings()->setDetectEncoding(false);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     *
+     * @return The flag which force engine to detect codetext encoding for Unicode codesets
+     */
+    public function getDetectEncoding(): bool
+    {
+        return java_cast($this->getJavaClass()->getDetectEncoding(), "boolean");
+    }
+
+    public function setDetectEncoding(bool $value): void
+    {
+        $this->getJavaClass()->setDetectEncoding($value);
+    }
+
+    /**
+     * Gets AustraliaPost decoding parameters
+     * @return The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology
+     */
+    public function getAustraliaPost(): AustraliaPostSettings
+    {
+        return $this->_australiaPost;
+    }
+}
+
+class RecognitionAbortedException extends Exception
+{
+    private const javaClassName = "com.aspose.mw.barcode.recognition.MwRecognitionAbortedException";
+    private $javaClass;
+
+    /**
+     * Gets the execution time of current recognition session
+     * @return The execution time of current recognition session
+     */
+    public function getExecutionTime() : int
+    {
+        return java_cast($this->javaClass->getExecutionTime(), "integer");
+    }
+
+    /**
+     * Sets the execution time of current recognition session
+     * @param $value The execution time of current recognition session
+     */
+    public function setExecutionTime(int $value): void
+    {
+        $this->javaClass->setExecutionTime($value);
+    }
+
+    /**
+     * Initializes a new instance of the <see cref="RecognitionAbortedException" /> class with specified recognition abort message.
+     * @param $message The error message of the exception.
+     * @param $executionTime The execution time of current recognition session.
+     */
+    public function __construct(?String $message, ?int $executionTime)
+    {
+        parent::__construct($message);
+        if($message != null && $executionTime != null)
+        {
+            $this->javaClass = new java(self::javaClassName, $message, $executionTime);
+        }
+        elseif ($executionTime != null)
+        {
+            $this->javaClass = new java(self::javaClassName, $executionTime);
+        }
+        else
+            $this->javaClass = new java(self::javaClassName);
+    }
+
+    static function construct($javaClass) : RecognitionAbortedException
+    {
+        $exception = new RecognitionAbortedException(null, null);
+        $exception->javaClass = $javaClass;
+        return$exception;
+    }
+
+    protected function init() : void
+    {
+
     }
 }
 
@@ -2993,8 +3398,8 @@ class  CustomerInformationInterpretingType
      * @code
      * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678ABCde");
      * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
-     * $image = $generator->generateBarCodeImage();
-     * $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST);
+     * $image = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader($image, DecodeType::AUSTRALIA_POST);
      * $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
      * foreach($reader->readBarCodes() as $result)
      * {
@@ -3011,8 +3416,8 @@ class  CustomerInformationInterpretingType
      * @code
      *  $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "59123456781234567");
      *  $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE);
-     *  $image = $generator->generateBarCodeImage();
-     *  $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST);
+     *  $image = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
+     *  $reader = new BarCodeReader($image, DecodeType::AUSTRALIA_POST);
      *  $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE);
      *  foreach($reader->readBarCodes() as $result)
      *  {
@@ -3029,9 +3434,9 @@ class  CustomerInformationInterpretingType
      * @code
      * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "59123456780123012301230123");
      * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::OTHER);
-     * $image = $generator->generateBarCodeImage();
-     * $reader = new BarCodeReader(image, DecodeType::AUSTRALIA_POST);
-     * $reader->CustomerInformationInterpretingType = CustomerInformationInterpretingType::OTHER);
+     * $image = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader($image, DecodeType::AUSTRALIA_POST);
+     * $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::OTHER));
      * foreach($reader->readBarCodes() as $result)
      * {
      *    print("BarCode Type: ".$result->getCodeType());

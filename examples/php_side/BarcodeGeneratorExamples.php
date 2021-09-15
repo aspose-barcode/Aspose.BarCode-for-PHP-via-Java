@@ -1,5 +1,5 @@
 <?php
-include_once('tests_assist.php');
+include_once('ExamplesAssist.php');
 
 class BarcodeGeneratorExamples
 {
@@ -7,7 +7,7 @@ class BarcodeGeneratorExamples
 
     function howToGenerateBarcodeImage()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $encode_type = EncodeTypes::CODE_128;
         $generator = new BarcodeGenerator($encode_type, null);
         $generator->setCodeText("123ABC");
@@ -18,7 +18,7 @@ class BarcodeGeneratorExamples
 
     function howToSave()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $type_expected = EncodeTypes::AZTEC;
         $code_text_expected = "123678943";
         $generator = new BarcodeGenerator($type_expected, $code_text_expected);
@@ -29,7 +29,7 @@ class BarcodeGeneratorExamples
 
     function howToSetBarcodeType()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12367891011");
         $type_expected = EncodeTypes::CODABAR;
         $generator->setBarcodeType($type_expected);
@@ -43,7 +43,7 @@ class BarcodeGeneratorExamples
 
     function howToGetCodeText()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $expected = "1234567890DCBV";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_128, $expected);
         $path = $this->subfolder . "howToGetCodeText.png";
@@ -55,7 +55,7 @@ class BarcodeGeneratorExamples
 
     function howToGenerateOneD()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $codeText = '01234567';
         $encodeType = EncodeTypes::CODE_39_STANDARD;
         $generator = new BarcodeGenerator($encodeType, $codeText);
@@ -66,7 +66,7 @@ class BarcodeGeneratorExamples
 
     function howToGenerateTwoD()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $codeText = '01234567';
         $encodeType = EncodeTypes::QR;
         $generator = new BarcodeGenerator($encodeType, $codeText);
@@ -77,7 +77,7 @@ class BarcodeGeneratorExamples
 
     function howToSetBackColor()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#FF0000";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $generator->getParameters()->setBackColor($color_expected);
@@ -92,7 +92,7 @@ class BarcodeGeneratorExamples
 
     function howToGetDefaultBackColor()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#FFFFFF";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $color_actual = $generator->getParameters()->getBackColor();
@@ -105,7 +105,7 @@ class BarcodeGeneratorExamples
 
     function howToGetDefaultForeColor()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#000000";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $color_actual = $generator->getParameters()->getBarcode()->getBarColor();
@@ -118,7 +118,7 @@ class BarcodeGeneratorExamples
 
     function howToSetForeColor()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#FA00AA";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $generator->getParameters()->getBarcode()->setBarColor($color_expected);
@@ -133,7 +133,7 @@ class BarcodeGeneratorExamples
 
     function howToSetCodeText()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $encode_type = EncodeTypes::CODE_128;
         $generator = new BarcodeGenerator($encode_type, null);
         $expected = "555777";
@@ -149,7 +149,7 @@ class BarcodeGeneratorExamples
 
     function howToGetBarcodeTypeAndCodeText()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $encode_type_expected = EncodeTypes::AZTEC;
         $code_text_expected = "444555777665";
         $generator = new BarcodeGenerator($encode_type_expected, $code_text_expected);
@@ -166,7 +166,7 @@ class BarcodeGeneratorExamples
 
     function howToGetDefaultDashStyle()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $dash_style_expected = BorderDashStyle::SOLID;
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $dash_style_actual = $generator->getParameters()->getBorder()->getDashStyle();
@@ -179,7 +179,7 @@ class BarcodeGeneratorExamples
 
     function howToDefaultBorderColor()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $border_color_expected = "#000000";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $border_color_actual = $generator->getParameters()->getBorder()->getColor();
@@ -192,7 +192,7 @@ class BarcodeGeneratorExamples
 
     function howToSetBorderColor()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $border_color_expected = "#AA00BB";
         $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
         $generator->getParameters()->getBorder()->setColor($border_color_expected);
@@ -206,7 +206,7 @@ class BarcodeGeneratorExamples
 
     function howToSetFont()
     {
-        print("\n---\nfunction '" . __FUNCTION__ . "'\n");
+        print("\nfunction '" . __FUNCTION__ . "'\n");
         $generator = new BarcodeGenerator(EncodeTypes::CODE_128, null);
         $generator->getParameters()->getCaptionAbove()->setText("CAPTION ABOOVE");
         $generator->getParameters()->getCaptionAbove()->setVisible(true);

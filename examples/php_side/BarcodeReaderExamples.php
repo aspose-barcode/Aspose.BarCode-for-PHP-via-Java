@@ -1,5 +1,5 @@
 <?php
-include_once("tests_assist.php");
+include_once("ExamplesAssist.php");
 
 class BarCodeReaderExamples
 {
@@ -7,10 +7,10 @@ class BarCodeReaderExamples
 
     public function howToReadFromFile()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $file_name = "code11.png";
         $full_path = $this->subfolder.$file_name;
-        print(file_exists($full_path));
+        print(file_exists($full_path)."\n");
         $reader = new BarCodeReader($full_path, null, null);
         forEach($reader->readBarCodes() as $res)
         {
@@ -22,10 +22,10 @@ class BarCodeReaderExamples
 
     public function howToSetQualitySettings()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $file_name = "code11.png";
         $full_path = $this->subfolder.$file_name;
-        print(file_exists($full_path));
+        print(file_exists($full_path)."\n");
         $reader = new BarCodeReader($full_path, null, null);
         $reader->setQualitySettings(QualitySettings::getHighPerformance());
         $reader->getQualitySettings()->setAllowMedianSmoothing(true);
@@ -42,7 +42,7 @@ class BarCodeReaderExamples
 
     public function howToGetCodeBytes()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $fileName = "example2.jpg";
         $reader = new BarCodeReader(loadImageByName($this->subfolder, $fileName), null, null);
        forEach($reader->readBarCodes() as $res)
@@ -54,7 +54,7 @@ class BarCodeReaderExamples
 
     public function howToRecognitionCode128()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         try
         {
             $fileName = "code128.jpg";
@@ -75,7 +75,7 @@ class BarCodeReaderExamples
 
     public function howToRecognitionCode11()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         try
         {
             $fileName = "code11.png";
@@ -95,7 +95,7 @@ class BarCodeReaderExamples
 
   public function howToRecognitionCodeAllSupportedTypes()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         try
         {
             $fileName = "example2.jpg";
@@ -115,7 +115,7 @@ class BarCodeReaderExamples
 
 public function howToRecognitionCodeAllSupportedTypes2()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         try
         {
             $fileName = "example1.png";
@@ -135,7 +135,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
 
     public function howToRecognitionSetBarCodeImage()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $fileName = "code128.jpg";
         $reader = new BarCodeReader(loadImageByName($this->subfolder, $fileName), null, DecodeType::ALL_SUPPORTED_TYPES);
         $reader->setBarCodeImage($this->subfolder . "code11.png", null);
@@ -150,7 +150,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
 
     public function howToMacroPdf417()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $gen = new BarcodeGenerator(EncodeTypes::MACRO_PDF_417, null);
         $gen->setCodeText("codeSomecode");
         $gen->getParameters()->getBarcode()->getPdf417()->setPdf417MacroFileID(15900);
@@ -171,7 +171,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
 
     public function howToDetectEncodingEnabled()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $gen = new BarcodeGenerator(EncodeTypes::QR, null);
         $gen->setCodeText("Слово");
         $gen->getParameters()->getBarcode()->getQR()->setCodeTextEncoding("UTF-8");
@@ -188,7 +188,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
 
     public function howToCustomerInformationInterpretingType1()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, null);
         $generator->setCodeText("59123456781234567");
         $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE);
@@ -207,7 +207,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
 
   public function howToCustomerInformationInterpretingType2()
     {
-        print("\n---\nfunction '".__FUNCTION__."'\n");
+        print("\nfunction '".__FUNCTION__."'\n");
         $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, null);
         $generator->setCodeText("6212345678ABCdef123#");
         $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
