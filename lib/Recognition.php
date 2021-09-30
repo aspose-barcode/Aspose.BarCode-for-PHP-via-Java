@@ -709,7 +709,7 @@ class BarCodeReader extends BaseJavaClass
         try
         {
             $xmlData = (file_get_contents($xmlFile));
-            $offset = 3;
+            $offset = 6;
             return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml(substr($xmlData,$offset,strlen($xmlData) -$offset)));
         }
         catch (Exception $ex)
@@ -2312,6 +2312,24 @@ final class QualitySettings extends BaseJavaClass
     public final function setAllowMicroWhiteSpotsRemoving(bool $value)
     {
         $this->getJavaClass()->setAllowMicroWhiteSpotsRemoving($value);
+    }
+
+    /**
+     * Allows engine for 1D barcodes to quickly recognize middle slice of an image and return result without using any time-consuming algorithms.
+     * @return Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     */
+    public final function getFastScanOnly() : bool
+    {
+        return java_cast($this->getJavaClass()->getFastScanOnly(), "boolean");
+    }
+
+    /**
+     * Allows engine for 1D barcodes to quickly recognize middle slice of an image and return result without using any time-consuming algorithms.
+     * @param value Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     */
+    public final function setFastScanOnly(bool $value)
+    {
+        $this->getJavaClass()->setFastScanOnly($value);
     }
 
     //OneD uses, PDF417 and QR can use

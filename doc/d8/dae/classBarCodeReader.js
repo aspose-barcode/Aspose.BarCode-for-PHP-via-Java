@@ -5,6 +5,7 @@ var classBarCodeReader =
     [ "\u202AcontainsAny", "d8/dae/classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a", null ],
     [ "\u202AexportToXml", "d8/dae/classBarCodeReader.html#a45d21023b4389685c0582579161ad165", null ],
     [ "\u202AgetBarCodeDecodeType", "d8/dae/classBarCodeReader.html#ab5bac98ecba871ef3f643a98de1e9dc3", null ],
+    [ "\u202AgetBarcodeSettings", "d8/dae/classBarCodeReader.html#a8a5f182659b3554715d76b9e2828be4a", null ],
     [ "\u202AgetChecksumValidation", "d8/dae/classBarCodeReader.html#a71fc428e964af4a659d68e06edddffe3", null ],
     [ "\u202AgetCustomerInformationInterpretingType", "d8/dae/classBarCodeReader.html#a33d0482da4f76d363826677243dd8ed0", null ],
     [ "\u202AgetDetectEncoding", "d8/dae/classBarCodeReader.html#aaae47053c156ae74bddec4d165dadf0c", null ],

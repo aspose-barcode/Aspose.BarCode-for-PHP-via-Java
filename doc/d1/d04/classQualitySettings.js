@@ -19,6 +19,7 @@ var classQualitySettings =
     [ "\u202AgetAllowWhiteSpotsRemoving", "d1/d04/classQualitySettings.html#add83fce706e32fa8c6e65d13c0337f71", null ],
     [ "\u202AgetCheckMore1DVariants", "d1/d04/classQualitySettings.html#ad33a0c19c31327c41dabba37d44c3dd6", null ],
     [ "\u202AgetDetectorSettings", "d1/d04/classQualitySettings.html#a9e6040642a278aa8bf0c3340dd62c86c", null ],
+    [ "\u202AgetFastScanOnly", "d1/d04/classQualitySettings.html#afb5fa05038b1131e2d70d948ed7c4bde", null ],
     [ "\u202AgetJavaClass", "d1/d04/classQualitySettings.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "d1/d04/classQualitySettings.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetMedianSmoothingWindowSize", "d1/d04/classQualitySettings.html#adc74750964e901d70ddb95e37344cb34", null ],
@@ -43,6 +44,7 @@ var classQualitySettings =
     [ "\u202AsetAllowWhiteSpotsRemoving", "d1/d04/classQualitySettings.html#a4516450431948d903acde21d34e423a2", null ],
     [ "\u202AsetCheckMore1DVariants", "d1/d04/classQualitySettings.html#adc7673ecc96bd47ddab36e5e9de2babc", null ],
     [ "\u202AsetDetectorSettings", "d1/d04/classQualitySettings.html#a4068af34eefedc34b21346a1d3961f8a", null ],
+    [ "\u202AsetFastScanOnly", "d1/d04/classQualitySettings.html#a96a3adc4518fc34be0d94d2891b76a58", null ],
     [ "\u202AsetJavaClass", "d1/d04/classQualitySettings.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetMedianSmoothingWindowSize", "d1/d04/classQualitySettings.html#acfb66f96daf73f6651b0ab6abce5c54b", null ],
     [ "\u202AsetReadTinyBarcodes", "d1/d04/classQualitySettings.html#ae22596dd61488fc656e537257f3af7c1", null ]

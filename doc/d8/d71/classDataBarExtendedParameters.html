@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.8</span>
+   &#160;<span id="projectnumber">21.10</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -123,13 +123,13 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR">Stores a DataBar additional information of recognized barcode</p>
-<div class="fragment"><div class="line"><a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html">DecodeType</a>.<a class="code" href="../../d4/d26/classDecodeType.html#a77d65582823a0b91b3ea63988841d73c">DATABAR_OMNI_DIRECTIONAL</a>);</div>
+<div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a77d65582823a0b91b3ea63988841d73c">DecodeType::DATABAR_OMNI_DIRECTIONAL</a>);</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordflow">for</span>(<a class="code" href="../../d2/d68/classBarCodeResult.html">BarCodeResult</a> result : reader.<a class="code" href="../../d8/dae/classBarCodeReader.html#aae4045c6bed7e300b6d5f6f7bb3e7ab6">readBarCodes</a>())</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
-<div class="line">   System.out.println(<span class="stringliteral">&quot;BarCode Type: &quot;</span> + result.getCodeTypeName());</div>
-<div class="line">   System.out.println(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> + result.getCodeText());</div>
-<div class="line">   System.out.println(<span class="stringliteral">&quot;QR Structured Append Quantity: &quot;</span> + result.getExtended().getQR().getQRStructuredAppendModeBarCodesQuantity());</div>
+<div class="line">   print(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.result-&gt;getCodeTypeName());</div>
+<div class="line">   print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.result-&gt;getCodeText());</div>
+<div class="line">   print(<span class="stringliteral">&quot;QR Structured Append Quantity: &quot;</span>.result-&gt;getExtended()-&gt;getQR()-&gt;getQRStructuredAppendModeBarCodesQuantity());</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aeb839179ff3a46613bb17f128936599f"></a>

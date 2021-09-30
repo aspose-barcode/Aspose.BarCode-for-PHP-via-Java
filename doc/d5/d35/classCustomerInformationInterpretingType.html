@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.8</span>
+   &#160;<span id="projectnumber">21.10</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -118,8 +118,8 @@ Public Attributes</h2></td></tr>
 <p class="DocNodeLTR">Use C_TABLE to interpret the customer information. Allows A..Z, a..z, 1..9, space and # sing.</p>
 <div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610">EncodeTypes::AUSTRALIA_POST</a>, <span class="stringliteral">&quot;5912345678ABCde&quot;</span>);</div>
 <div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#ae5a5ecbb0c3de4738c615cc8ce68ce3d">CustomerInformationInterpretingType::C_TABLE</a>);</div>
-<div class="line">$image = $generator-&gt;generateBarCodeImage();</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(image, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
+<div class="line">$image = $generator-&gt;generateBarcodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($image, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
 <div class="line">$reader-&gt;setCustomerInformationInterpretingType(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#ae5a5ecbb0c3de4738c615cc8ce68ce3d">CustomerInformationInterpretingType::C_TABLE</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
@@ -143,8 +143,8 @@ Public Attributes</h2></td></tr>
 <p class="DocNodeLTR">Use N_TABLE to interpret the customer information. Allows digits.</p>
 <div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610">EncodeTypes::AUSTRALIA_POST</a>, <span class="stringliteral">&quot;59123456781234567&quot;</span>);</div>
 <div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#a5558480d706534739f0d88035a288841">CustomerInformationInterpretingType::N_TABLE</a>);</div>
-<div class="line">$image = $generator-&gt;generateBarCodeImage();</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(image, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
+<div class="line">$image = $generator-&gt;generateBarcodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($image, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
 <div class="line">$reader-&gt;setCustomerInformationInterpretingType(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#a5558480d706534739f0d88035a288841">CustomerInformationInterpretingType::N_TABLE</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
@@ -168,9 +168,9 @@ Public Attributes</h2></td></tr>
 <p class="DocNodeLTR">Do not interpret the customer information. Allows 0, 1, 2 or 3 symbol only.</p>
 <div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610">EncodeTypes::AUSTRALIA_POST</a>, <span class="stringliteral">&quot;59123456780123012301230123&quot;</span>);</div>
 <div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5">CustomerInformationInterpretingType::OTHER</a>);</div>
-<div class="line">$image = $generator-&gt;generateBarCodeImage();</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(image, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
-<div class="line">$reader-&gt;CustomerInformationInterpretingType = <a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5">CustomerInformationInterpretingType::OTHER</a>);</div>
+<div class="line">$image = $generator-&gt;generateBarcodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($image, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
+<div class="line">$reader-&gt;setCustomerInformationInterpretingType(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5">CustomerInformationInterpretingType::OTHER</a>));</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.$result-&gt;getCodeType());</div>

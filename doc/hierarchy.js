@@ -9,6 +9,7 @@ var hierarchy =
     [ "\u202ABaseJavaClass", "de/d5e/classBaseJavaClass.html", [
       [ "\u202AAddress", "de/d6b/classAddress.html", null ],
       [ "\u202AAlternativeScheme", "d9/dae/classAlternativeScheme.html", null ],
+      [ "\u202AAustraliaPostSettings", "dc/d9a/classAustraliaPostSettings.html", null ],
       [ "\u202AAustralianPostParameters", "dc/d1d/classAustralianPostParameters.html", null ],
       [ "\u202AAztecParameters", "d1/dcc/classAztecParameters.html", null ],
       [ "\u202ABarCodeExtendedParameters", "dc/dc5/classBarCodeExtendedParameters.html", null ],
@@ -17,6 +18,7 @@ var hierarchy =
       [ "\u202ABarCodeResult", "d2/d68/classBarCodeResult.html", null ],
       [ "\u202ABarcodeGenerator", "d0/dfb/classBarcodeGenerator.html", null ],
       [ "\u202ABarcodeParameters", "dd/dfd/classBarcodeParameters.html", null ],
+      [ "\u202ABarcodeSettings", "d2/df3/classBarcodeSettings.html", null ],
       [ "\u202ABarcodeSvmDetectorSettings", "d3/ddf/classBarcodeSvmDetectorSettings.html", null ],
       [ "\u202ABaseGenerationParameters", "de/d44/classBaseGenerationParameters.html", null ],
       [ "\u202ABorderParameters", "da/dc1/classBorderParameters.html", null ],
@@ -77,7 +79,8 @@ var hierarchy =
     [ "\u202AEnableChecksum", "d8/d3f/classEnableChecksum.html", null ],
     [ "\u202AEncodeTypes", "d5/d0f/classEncodeTypes.html", null ],
     [ "\u202AException", null, [
-      [ "\u202ABarcodeException", "d8/d71/classBarcodeException.html", null ]
+      [ "\u202ABarcodeException", "d8/d71/classBarcodeException.html", null ],
+      [ "\u202ARecognitionAbortedException", "db/d9c/classRecognitionAbortedException.html", null ]
     ] ],
     [ "\u202AFontMode", "dd/d60/classFontMode.html", null ],
     [ "\u202AFontStyle", "d4/d42/classFontStyle.html", null ],

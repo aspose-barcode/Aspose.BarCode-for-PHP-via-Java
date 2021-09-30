@@ -36,7 +36,7 @@ var classBarcodeParameters =
     [ "\u202AsetBarHeight", "dd/dfd/classBarcodeParameters.html#ac72477178c0b43ebb6a03a5165170166", null ],
     [ "\u202AsetBarWidthReduction", "dd/dfd/classBarcodeParameters.html#a6297ecd5ae22dd81eb0e8ea6b462f91e", null ],
     [ "\u202AsetChecksumAlwaysShow", "dd/dfd/classBarcodeParameters.html#a62cf5a8aa984ea91a7947722c6779c96", null ],
-    [ "\u202AsetChecksumEnabled", "dd/dfd/classBarcodeParameters.html#ac524da1dc0bfd4c2500a61b0ea27eeca", null ],
+    [ "\u202AsetChecksumEnabled", "dd/dfd/classBarcodeParameters.html#ac41ac2d0850b3a61299aa09d9044b4f7", null ],
     [ "\u202AsetEnableEscape", "dd/dfd/classBarcodeParameters.html#ab13230bbf100fdf65e9516196381b3ec", null ],
     [ "\u202AsetFilledBars", "dd/dfd/classBarcodeParameters.html#a0605c73f6255caaabbf3929495292334", null ],
     [ "\u202AsetJavaClass", "dd/dfd/classBarcodeParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
