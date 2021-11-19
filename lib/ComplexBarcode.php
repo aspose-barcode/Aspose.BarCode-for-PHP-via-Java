@@ -1,8 +1,9 @@
 <?php
 require_once('Joint.php');
+
 /**
  * Address of creditor or debtor.
- * 
+ *
  * You can either set street, house number, postal code and town (type structured address)
  * or address line 1 and 2 (type combined address elements). The type is automatically set
  * once any of these fields is set. Before setting the fields, the address type is undetermined.
@@ -12,6 +13,7 @@ require_once('Joint.php');
 final class Address extends BaseJavaClass
 {
     private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwAddress";
+
     public function __construct($arg)
     {
         parent::__construct(self::initAddress($arg));
@@ -19,11 +21,18 @@ final class Address extends BaseJavaClass
 
     private static function initAddress($arg)
     {
-        if(is_null($arg))
+        try
         {
-            return new java(self::$javaClassName);
+            if (is_null($arg))
+            {
+                return new java(self::$javaClassName);
+            }
+            return $arg;
         }
-        return $arg;
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -32,10 +41,13 @@ final class Address extends BaseJavaClass
      * The address type is automatically set by either setting street / house number
      * or address line 1 and 2. Before setting the fields, the address type is Undetermined.
      * If fields of both types are set, the address type becomes Conflicting.
-     * 
+     *
      * Value: The address type.
      */
-    public function getType() : int{ return java_cast($this->getJavaClass()->getType(), "integer"); }
+    public function getType(): int
+    {
+        return java_cast($this->getJavaClass()->getType(), "integer");
+    }
 
     /**
      * Gets the name, either the first and last name of a natural person or the
@@ -44,7 +56,14 @@ final class Address extends BaseJavaClass
      */
     public function getName(): string
     {
-        return java_cast($this->getJavaClass()->getName(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getName(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -54,42 +73,63 @@ final class Address extends BaseJavaClass
      */
     public function setName(string $value): void
     {
-        $this->getJavaClass()->setName($value);
+        try
+        {
+            $this->getJavaClass()->setName($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the address line 1.
-     * 
+     *
      * Address line 1 contains street name, house number or P.O. box.
-     * 
-     * 
+     *
+     *
      * Setting this field sets the address type to AddressType.CombinedElements unless it's already
      * AddressType.Structured, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for combined elements addresses and is optional.
-     * 
+     *
      * Value: The address line 1.
      */
     public function getAddressLine1(): string
     {
-        return java_cast($this->getJavaClass()->getAddressLine1(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getAddressLine1(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Sets the address line 1.
-     * 
+     *
      * Address line 1 contains street name, house number or P.O. box.
-     * 
+     *
      * Setting this field sets the address type to AddressType.CombinedElements unless it's already
      * AddressType.Structured, in which case it becomes AddressType.Conflicting.
-     * 
+     *
      * This field is only used for combined elements addresses and is optional.
-     * 
+     *
      * Value: The address line 1.
      */
-    public function setAddressLine1(string $value):void
+    public function setAddressLine1(string $value): void
     {
-        $this->getJavaClass()->setAddressLine1($value);
+        try
+        {
+            $this->getJavaClass()->setAddressLine1($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -102,7 +142,14 @@ final class Address extends BaseJavaClass
      */
     public function getAddressLine2(): string
     {
-        return java_cast($this->getJavaClass()->getAddressLine2(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getAddressLine2(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -113,9 +160,16 @@ final class Address extends BaseJavaClass
      * This field is only used for combined elements addresses. For this type, it's mandatory.
      * Value: The address line 2.
      */
-    public function setAddressLine2(string $value):void
+    public function setAddressLine2(string $value): void
     {
-        $this->getJavaClass()->setAddressLine2($value);
+        try
+        {
+            $this->getJavaClass()->setAddressLine2($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -126,157 +180,266 @@ final class Address extends BaseJavaClass
      * This field is only used for structured addresses and is optional.
      * Value: The street.
      */
-    public function getStreet() : string { return java_cast($this->getJavaClass()->getStreet(), "string"); }
+    public function getStreet(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getStreet(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the street.
-     * 
+     *
      * The street must be speicfied without house number.
-     * 
-     * 
+     *
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
-     * 
+     *
      * This field is only used for structured addresses and is optional.
-     * 
+     *
      * Value: The street.
      */
-    public function setStreet(string $value):void
+    public function setStreet(string $value): void
     {
-        $this->getJavaClass()->setStreet($value);
+        try
+        {
+            $this->getJavaClass()->setStreet($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the house number.
-     * 
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for structured addresses and is optional.
-     * 
+     *
      * Value: The house number.
      */
-    public function getHouseNo(): string { return java_cast($this->getJavaClass()->getHouseNo(), "string"); }
+    public function getHouseNo(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getHouseNo(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the house number.
-     * 
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for structured addresses and is optional.
-     * 
+     *
      * Value: The house number.
      */
-    public function setHouseNo(string $value):void
+    public function setHouseNo(string $value): void
     {
-        $this->getJavaClass()->setHouseNo($value);
+        try
+        {
+            $this->getJavaClass()->setHouseNo($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the postal code.
-     * 
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
-     * 
+     *
      * Value: The postal code.
      */
-    public function getPostalCode(): string { return java_cast($this->getJavaClass()->getPostalCode(), "string"); }
+    public function getPostalCode(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getPostalCode(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the postal code.
-     * 
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
-     * 
+     *
      * Value: The postal code.
      */
-    public function setPostalCode(string $value):void
+    public function setPostalCode(string $value): void
     {
-        $this->getJavaClass()->setPostalCode($value);
+        try
+        {
+            $this->getJavaClass()->setPostalCode($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the town or city.
-     * 
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
-     * 
+     *
      * Value: The town or city.
      */
-    public function getTown(): string { return java_cast($this->getJavaClass()->getTown(), "string"); }
+    public function getTown(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getTown(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the town or city.
-     * 
+     *
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
-     * 
+     *
      * Value: The town or city.
      */
-    public function setTown(string $value):void
+    public function setTown(string $value): void
     {
-        $this->getJavaClass()->setTown($value);
+        try
+        {
+            $this->getJavaClass()->setTown($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the two-letter ISO country code.
-     *  
+     *
      * The country code is mandatory unless the entire address contains null or emtpy values.
-     * 
+     *
      * Value: The ISO country code.
      */
-    public function getCountryCode(): string{ return java_cast($this->getJavaClass()->getCountryCode(), "string"); }
+    public function getCountryCode(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getCountryCode(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the two-letter ISO country code.
-     *  
+     *
      * The country code is mandatory unless the entire address contains null or emtpy values.
-     * 
+     *
      * Value: The ISO country code.
      */
-    public function setCountryCode(string $value):void{ $this->getJavaClass()->setCountryCode($value); }
+    public function setCountryCode(string $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setCountryCode($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Clears all fields and sets the type to AddressType.Undetermined.
      */
-    public function clear():void
+    public function clear(): void
     {
-        $this->setName(null);
-        $this->setAddressLine1(null);
-        $this->setaddressLine2(null);
-        $this->setStreet(null);
-        $this->setHouseNo(null);
-        $this->setPostalCode(null);
-        $this->setTown(null);
-        $this->setCountryCode(null);
+        try
+        {
+            $this->setName(null);
+            $this->setAddressLine1(null);
+            $this->setaddressLine2(null);
+            $this->setStreet(null);
+            $this->setHouseNo(null);
+            $this->setPostalCode(null);
+            $this->setTown(null);
+            $this->setCountryCode(null);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Determines whether the specified object is equal to the current object.
-     * @return true if the specified object is equal to the current object; otherwise, false.
      * @param obj The object to compare with the current object.
+     * @return true if the specified object is equal to the current object; otherwise, false.
      */
-    public function equals(Address $obj) : bool
+    public function equals(Address $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the hash code for this instance.
      * @return A hash code for the current object.
      */
-    public function hashCode() : int
+    public function hashCode(): int
     {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->hashCode(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     protected function init(): void
@@ -318,29 +481,51 @@ class  AddressType
 final class AlternativeScheme extends BaseJavaClass
 {
     private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwAlternativeScheme";
+
     public function __construct($instruction)
     {
-        parent::__construct(new java(self::$javaClassName, $instruction));
+        try
+        {
+            parent::__construct(new java(self::$javaClassName, $instruction));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     static function construct($javaClass)
     {
-        $phpClass = new AlternativeScheme("");
-        $phpClass->setJavaClass($javaClass);
-        return $phpClass;
+        try
+        {
+            $phpClass = new AlternativeScheme("");
+            $phpClass->setJavaClass($javaClass);
+            return $phpClass;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the payment instruction for a given bill.
-     * 
+     *
      * The instruction consists of a two letter abbreviation for the scheme, a separator characters
      * and a sequence of parameters(separated by the character at index 2).
-     * 
+     *
      * Value: The payment instruction.
      */
     public function getInstruction(): string
     {
-        return java_cast($this->getJavaClass()->getInstruction(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getInstruction(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -349,28 +534,49 @@ final class AlternativeScheme extends BaseJavaClass
      * and a sequence of parameters(separated by the character at index 2).
      * Value: The payment instruction.
      */
-    public function setInstruction(string $value):void
+    public function setInstruction(string $value): void
     {
-        $this->getJavaClass()->setInstruction($value);
+        try
+        {
+            $this->getJavaClass()->setInstruction($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Determines whether the specified object is equal to the current object.
-     * @return true if the specified object is equal to the current object; otherwise, false.
      * @param obj The object to compare with the current object.
+     * @return true if the specified object is equal to the current object; otherwise, false.
      */
-    public function equals(AlternativeScheme $obj) : bool
+    public function equals(AlternativeScheme $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the hash code for this instance.
      * @return  hash code for the current object.
      */
-    public function hashCode() : int
+    public function hashCode(): int
     {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->hashCode(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     protected function init(): void
@@ -395,14 +601,21 @@ final class ComplexCodetextReader
 
     /**
      * Decodes SwissQR codetext.
-     * 
-     * @return decoded SwissQRCodetext or null.
+     *
      * @param encodedCodetext encoded codetext
+     * @return decoded SwissQRCodetext or null.
      */
-    public static function tryDecodeSwissQR(string $encodedCodetext) : SwissQRCodetext
+    public static function tryDecodeSwissQR(string $encodedCodetext): SwissQRCodetext
     {
-        $javaPhpComplexCodetextReader = java(self::$javaClassName);
-        return SwissQRCodetext::construct($javaPhpComplexCodetextReader->tryDecodeSwissQR($encodedCodetext));
+        try
+        {
+            $javaPhpComplexCodetextReader = java(self::$javaClassName);
+            return SwissQRCodetext::construct($javaPhpComplexCodetextReader->tryDecodeSwissQR($encodedCodetext));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -412,8 +625,15 @@ final class ComplexCodetextReader
      */
     public static function tryDecodeMailmark2D(string $encodedCodetext): Mailmark2DCodetext
     {
-        $javaPhpComplexCodetextReader = java(self::$javaClassName);
-        return Mailmark2DCodetext::construct($javaPhpComplexCodetextReader->tryDecodeMailmark2D($encodedCodetext));
+        try
+        {
+            $javaPhpComplexCodetextReader = java(self::$javaClassName);
+            return Mailmark2DCodetext::construct($javaPhpComplexCodetextReader->tryDecodeMailmark2D($encodedCodetext));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
@@ -438,248 +658,445 @@ final class SwissQRBill extends BaseJavaClass
 
     protected function init(): void
     {
-        $this->creditor = new Address($this->getJavaClass()->getCreditor());
-        $this->debtor = new Address($this->getJavaClass()->getDebtor());
+        try
+        {
+            $this->creditor = new Address($this->getJavaClass()->getCreditor());
+            $this->debtor = new Address($this->getJavaClass()->getDebtor());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     public function __construct($javaClass)
     {
-        parent::__construct($javaClass);
+        try
+        {
+            parent::__construct($javaClass);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     private static function convertAlternativeSchemes($javaAlternativeSchemes)
     {
-        $alternativeSchemes = array();
-        for($i = 0; $i < java_cast($javaAlternativeSchemes->size(), "integer"); $i++)
+        try
         {
-            $alternativeSchemes[$i] = AlternativeScheme::construct($javaAlternativeSchemes->get($i));
+            $alternativeSchemes = array();
+            for ($i = 0; $i < java_cast($javaAlternativeSchemes->size(), "integer"); $i++)
+            {
+                $alternativeSchemes[$i] = AlternativeScheme::construct($javaAlternativeSchemes->get($i));
+            }
+            return $alternativeSchemes;
         }
-        return $alternativeSchemes;
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the version of the SwissQR bill standard.
      * Value: The SwissQR bill standard version.
      */
-    public function getVersion() : int{ return java_cast($this->getJavaClass()->getVersion(), "integer"); }
+    public function getVersion(): int
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getVersion(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the version of the SwissQR bill standard.
      * Value: The SwissQR bill standard version.
      */
-    public function setVersion(int $value):void{ $this->getJavaClass()->setVersion($value); }
+    public function setVersion(int $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setVersion($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Gets the payment amount.
-     * 
+     *
      * Valid values are between 0.01 and 999,999,999.99.
-     * 
+     *
      * Value: The payment amount.
      */
-    public function getAmount() : float
+    public function getAmount(): float
     {
-        return java_cast($this->getJavaClass()->getAmount(), "double");
+        try
+        {
+            return java_cast($this->getJavaClass()->getAmount(), "double");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Sets the payment amount.
-     * 
+     *
      * Valid values are between 0.01 and 999,999,999.99.
-     * 
+     *
      * Value: The payment amount.
      */
-    public function setAmount(float $value):void{ $this->getJavaClass()->setAmount($value); }
+    public function setAmount(float $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setAmount($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Gets the payment currency.
-     * 
+     *
      * Valid values are "CHF" and "EUR".
-     * 
+     *
      * Value: The payment currency.
      */
-    public function getCurrency(): string{ return java_cast($this->getJavaClass()->getCurrency(), "string"); }
+    public function getCurrency(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getCurrency(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the payment currency.
-     * 
+     *
      * Valid values are "CHF" and "EUR".
-     * 
+     *
      * Value: The payment currency.
      */
-    public function setCurrency(string $value):void{ $this->getJavaClass()->setCurrency($value); }
+    public function setCurrency(string $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setCurrency($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Gets the creditor's account number.
-     * 
+     *
      * Account numbers must be valid IBANs of a bank of Switzerland or
      * Liechtenstein. Spaces are allowed in the account number.
-     * 
+     *
      * Value: The creditor account number.
      */
     public function getAccount(): string
     {
-        return java_cast($this->getJavaClass()->getAccount(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getAccount(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Sets the creditor's account number.
-     * 
+     *
      * Account numbers must be valid IBANs of a bank of Switzerland or
      * Liechtenstein. Spaces are allowed in the account number.
-     * 
+     *
      * Value: The creditor account number.
      */
-    public function setAccount(string $value):void{ $this->getJavaClass()->setAccount($value); }
+    public function setAccount(string $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setAccount($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Gets the creditor address.
      * Value: The creditor address.
      */
-    public function getCreditor() : Address{ return $this->creditor; }
+    public function getCreditor(): Address
+    {
+        return $this->creditor;
+    }
 
     /**
      * Sets the creditor address.
      * Value: The creditor address.
      */
-    public function setCreditor(Address $value):void
+    public function setCreditor(Address $value): void
     {
-        $this->creditor = $value;
-        $this->getJavaClass()->setCreditor($value->getJavaClass());
+        try
+        {
+            $this->creditor = $value;
+            $this->getJavaClass()->setCreditor($value->getJavaClass());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the creditor payment reference.
-     * 
+     *
      * The reference is mandatory for SwissQR IBANs, i.e.IBANs in the range
      * CHxx30000xxxxxx through CHxx31999xxxxx.
      *
      * If specified, the reference must be either a valid SwissQR reference
      * (corresponding to ISR reference form) or a valid creditor reference
      * according to ISO 11649 ("RFxxxx"). Both may contain spaces for formatting.
-     * 
+     *
      * Value: The creditor payment reference.
      */
     public function getReference(): string
     {
-        return java_cast($this->getJavaClass()->getReference(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getReference(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Sets the creditor payment reference.
-     * 
+     *
      * The reference is mandatory for SwissQR IBANs, i.e.IBANs in the range
      * CHxx30000xxxxxx through CHxx31999xxxxx.
      *
      * If specified, the reference must be either a valid SwissQR reference
      * (corresponding to ISR reference form) or a valid creditor reference
      * according to ISO 11649 ("RFxxxx"). Both may contain spaces for formatting.
-     * 
+     *
      * Value: The creditor payment reference.
      */
-    public function setReference(string $value):void{ $this->getJavaClass()->setReference($value); }
+    public function setReference(string $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setReference($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Creates and sets a ISO11649 creditor reference from a raw string by prefixing
      * the String with "RF" and the modulo 97 checksum.
-     * 
+     *
      * Whitespace is removed from the reference
      *
      * @exception ArgumentException rawReference contains invalid characters.
      * @param rawReference The raw reference.
      */
-    public function createAndSetCreditorReference(string $rawReference):void
+    public function createAndSetCreditorReference(string $rawReference): void
     {
-        $this->getJavaClass()->createAndSetCreditorReference($rawReference);
+        try
+        {
+            $this->getJavaClass()->createAndSetCreditorReference($rawReference);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the debtor address.
-     * 
+     *
      * The debtor is optional. If it is omitted, both setting this field to
      * null or setting an address with all null or empty values is ok.
-     * 
+     *
      * Value: The debtor address.
      */
-    public function getDebtor() : Address
+    public function getDebtor(): Address
     {
         return $this->debtor;
     }
 
     /**
      * Sets the debtor address.
-     * 
+     *
      * The debtor is optional. If it is omitted, both setting this field to
      * null or setting an address with all null or empty values is ok.
-     * 
+     *
      * Value: The debtor address.
      */
-    public function setDebtor(Address $value):void
+    public function setDebtor(Address $value): void
     {
-        $this->debtor = $value;
-        $this->getJavaClass()->setDebtor($value->getJavaClass());
+        try
+        {
+            $this->debtor = $value;
+            $this->getJavaClass()->setDebtor($value->getJavaClass());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the additional unstructured message.
      * Value: The unstructured message.
      */
-    public function getUnstructuredMessage(): string{ return java_cast($this->getJavaClass()->getUnstructuredMessage(), "string"); }
+    public function getUnstructuredMessage(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getUnstructuredMessage(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the additional unstructured message.
      * Value: The unstructured message.
      */
-    public function setUnstructuredMessage(string $value):void{ $this->getJavaClass()-> setUnstructuredMessage($value); }
+    public function setUnstructuredMessage(string $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setUnstructuredMessage($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Gets the additional structured bill information.
      * Value: The structured bill information.
      */
-    public function getBillInformation(): string{ return java_cast($this->getJavaClass()->getBillInformation(), "string"); }
+    public function getBillInformation(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getBillInformation(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Sets the additional structured bill information.
      * Value: The structured bill information.
      */
-    public function setBillInformation(string $value):void{ $this->getJavaClass()->setBillInformation($value); }
-
-    /**
-     * Gets ors sets the alternative payment schemes.
-     * 
-     * A maximum of two schemes with parameters are allowed.
-     * 
-     * Value: The alternative payment schemes.
-     */
-    public function getAlternativeSchemes() :array
+    public function setBillInformation(string $value): void
     {
-        return self::convertAlternativeSchemes($this->getJavaClass()->getAlternativeSchemes());
+        try
+        {
+            $this->getJavaClass()->setBillInformation($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets ors sets the alternative payment schemes.
-     * 
+     *
      * A maximum of two schemes with parameters are allowed.
-     * 
+     *
      * Value: The alternative payment schemes.
      */
-    public function setAlternativeSchemes(array $value):void
+    public function getAlternativeSchemes(): array
     {
-        $javaArray = array();
-        for($i = 0; $i < sizeof($value); $i++)
+        try
         {
-            array_push($javaArray, $value[$i]->getJavaClass());
+            return self::convertAlternativeSchemes($this->getJavaClass()->getAlternativeSchemes());
         }
-        $this->getJavaClass()->setAlternativeSchemes($javaArray);
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets ors sets the alternative payment schemes.
+     *
+     * A maximum of two schemes with parameters are allowed.
+     *
+     * Value: The alternative payment schemes.
+     */
+    public function setAlternativeSchemes(array $value): void
+    {
+        try
+        {
+            $javaArray = array();
+            for ($i = 0; $i < sizeof($value); $i++)
+            {
+                array_push($javaArray, $value[$i]->getJavaClass());
+            }
+            $this->getJavaClass()->setAlternativeSchemes($javaArray);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Determines whether the specified object is equal to the current object.
-     * @return true if the specified object is equal to the current object; otherwise, false.
      * @param obj The object to compare with the current object.
+     * @return true if the specified object is equal to the current object; otherwise, false.
      */
-    public function equals(SwissQRBill $obj) : bool
+    public function equals(SwissQRBill $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -688,7 +1105,14 @@ final class SwissQRBill extends BaseJavaClass
      */
     public function hashCode(): int
     {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->hashCode(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
@@ -702,71 +1126,115 @@ final class SwissQRCodetext extends IComplexCodetext
 
     protected function init(): void
     {
-        $this->bill = new SwissQRBill($this->getJavaClass()->getBill());
+        try
+        {
+            $this->bill = new SwissQRBill($this->getJavaClass()->getBill());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * SwissQR bill data
      */
-    public function getBill():SwissQRBill
-    { return $this->bill; }
+    public function getBill(): SwissQRBill
+    {
+        return $this->bill;
+    }
 
     /**
      * Creates an instance of SwissQRCodetext.
-     * 
+     *
      * @param bill SwissQR bill data
      * @throws BarcodeException
      */
     public function __construct(?SwissQRBill $bill)
     {
-        $javaBill = null;
-        if (is_null($bill))
+        try
         {
-            $javaBill = new java(self::$javaClassName);
+            $javaBill = null;
+            if (is_null($bill))
+            {
+                $javaBill = new java(self::$javaClassName);
+            }
+            else
+            {
+                $javaBill = new java(self::$javaClassName, $bill->getJavaClass());
+            }
+            parent::__construct($javaBill);
         }
-        else
+        catch (Exception $ex)
         {
-            $javaBill = new java(self::$javaClassName, $bill->getJavaClass());
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-        parent::__construct($javaBill);
     }
 
     static function construct($javaClass)
     {
-        $phpClass = new SwissQRCodetext(null);
-        $phpClass->setJavaClass($javaClass);
-        return $phpClass;
+        try
+        {
+            $phpClass = new SwissQRCodetext(null);
+            $phpClass->setJavaClass($javaClass);
+            return $phpClass;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Construct codetext from SwissQR bill data
-     * 
+     *
      * @return Constructed codetext
      */
     public function getConstructedCodetext(): string
     {
-        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Initializes Bill with constructed codetext.
-     * 
+     *
      * @param constructedCodetext Constructed codetext.
      */
-    public function initFromString(string $constructedCodetext):void
+    public function initFromString(string $constructedCodetext): void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
-        $this->init();
+        try
+        {
+            $this->getJavaClass()->initFromString($constructedCodetext);
+            $this->init();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets barcode type.
-     * 
+     *
      * @return Barcode type.
      */
-    public function getBarcodeType() : int
+    public function getBarcodeType(): int
     {
-        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
@@ -774,13 +1242,13 @@ final class SwissQRCodetext extends IComplexCodetext
  *  ComplexBarcodeGenerator for backend complex barcode (e.g. SwissQR) images generation.
  *
  *  This sample shows how to create and save a SwissQR image.
- *  @code
+ * @code
  *    $swissQRCodetext = new SwissQRCodetext(null);
  *    $swissQRCodetext->getBill()->setAccount("Account");
  *    $swissQRCodetext->getBill()->setBillInformation("BillInformation");
  *    $cg = new ComplexBarcodeGenerator($swissQRCodetext);
  *    $res = $cg->generateBarCodeImage(BarcodeImageFormat::PNG);
- *  @endcode
+ * @endcode
  */
 final class ComplexBarcodeGenerator extends BaseJavaClass
 {
@@ -789,7 +1257,14 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
 
     protected function init(): void
     {
-        $this->parameters = new BaseGenerationParameters($this->getJavaClass()->getParameters());
+        try
+        {
+            $this->parameters = new BaseGenerationParameters($this->getJavaClass()->getParameters());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -807,7 +1282,14 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      */
     public function __construct(IComplexCodetext $complexCodetext)
     {
-        parent::__construct(new java(self::$javaClassName, $complexCodetext->getJavaClass()));
+        try
+        {
+            parent::__construct(new java(self::$javaClassName, $complexCodetext->getJavaClass()));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -823,12 +1305,14 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      */
     public function generateBarcodeImage(int $format): string
     {
-        try {
+        try
+        {
             $base64Image = java_cast($this->getJavaClass()->generateBarcodeImage($format), "string");
             return ($base64Image);
-        } catch (Exception $ex) {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -845,12 +1329,14 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      */
     public function save(string $filePath, int $format): void
     {
-        try {
+        try
+        {
             $image = $this->generateBarcodeImage($format);
             file_put_contents($filePath, base64_decode($image));
-        } catch (Exception $ex) {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -865,16 +1351,23 @@ final class Mailmark2DCodetext extends IComplexCodetext
 
     static function construct($javaClass)
     {
-        $phpClass = new Mailmark2DCodetext();
-        $phpClass->setJavaClass($javaClass);
-        return $phpClass;
+        try
+        {
+            $phpClass = new Mailmark2DCodetext();
+            $phpClass->setJavaClass($javaClass);
+            return $phpClass;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Identifies the UPU Country ID.Max length: 4 characters.
      * @return string Country ID
      */
-    public function getUPUCountryID() :string
+    public function getUPUCountryID(): string
     {
         return java_cast($this->getJavaClass()->getUPUCountryID(), "string");
     }
@@ -883,8 +1376,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Identifies the UPU Country ID.Max length: 4 characters.
      * @param string $value Country ID
      */
-    public function  setUPUCountryID(string $value) : void {
-        $this->getJavaClass()->setUPUCountryID($value);
+    public function setUPUCountryID(string $value): void
+    {
+        try
+        {
+            $this->getJavaClass()->setUPUCountryID($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -898,9 +1399,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @return string Information type ID
      */
-    public function getInformationTypeID():string
+    public function getInformationTypeID(): string
     {
-        return java_cast($this->getJavaClass()->getInformationTypeID(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getInformationTypeID(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -914,11 +1422,17 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param string $value Information type ID
      */
-    public function  setInformationTypeID(string $value) : void
+    public function setInformationTypeID(string $value): void
     {
-        $this->getJavaClass()->setInformationTypeID($value);
+        try
+        {
+            $this->getJavaClass()->setInformationTypeID($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
-
 
     /**
      * Identifies the  barcode version as relevant to each Information Type ID.
@@ -929,9 +1443,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @return string Version ID
      */
-    public function getVersionID():string
+    public function getVersionID(): string
     {
-        return java_cast($this->getJavaClass()->getVersionID(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getVersionID(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -943,9 +1464,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param string $value Version ID
      */
-    public function  setVersionID(string $value) : void
+    public function setVersionID(string $value): void
     {
-        $this->getJavaClass()->setVersionID($value);
+        try
+        {
+            $this->getJavaClass()->setVersionID($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -961,9 +1489,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @return string class of the item
      */
-    public function getclass():string
+    public function getclass(): string
     {
-        return java_cast($this->getJavaClass()->getclass(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getclass(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -977,11 +1512,18 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * “8” - Premium (Network Access)
      * “9” - Standard (Network Access)
      *
-     * @param string $value  class of the item
+     * @param string $value class of the item
      */
-    public function  setclass(string $value) : void
+    public function setclass(string $value): void
     {
-        $this->getJavaClass()->setclass($value);
+        try
+        {
+            $this->getJavaClass()->setclass($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -990,9 +1532,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @return int Supply chain ID
      */
-    public function getSupplyChainID():int
+    public function getSupplyChainID(): int
     {
-        return java_cast($this->getJavaClass()->getSupplyChainID(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getSupplyChainID(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1001,9 +1550,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param int $value Supply chain ID
      */
-    public function  setSupplyChainID(int $value) : void
+    public function setSupplyChainID(int $value): void
     {
-        $this->getJavaClass()->setSupplyChainID($value);
+        try
+        {
+            $this->getJavaClass()->setSupplyChainID($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1016,7 +1572,14 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getItemID(): int
     {
-        return java_cast($this->getJavaClass()->getItemID(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getItemID(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1027,9 +1590,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param int $value item within the Supply Chain ID
      */
-    public function  setItemID(int $value) : void
+    public function setItemID(int $value): void
     {
-        $this->getJavaClass()->setItemID($value);
+        try
+        {
+            $this->getJavaClass()->setItemID($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1043,7 +1613,14 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getDestinationPostCodeAndDPS(): string
     {
-        return java_cast($this->getJavaClass()->getDestinationPostCodeAndDPS(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getDestinationPostCodeAndDPS(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1055,9 +1632,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param string $value the Postcode of the Delivery Address with DPS
      */
-    public function  setDestinationPostCodeAndDPS(string $value) : void
+    public function setDestinationPostCodeAndDPS(string $value): void
     {
-        $this->getJavaClass()->setDestinationPostCodeAndDPS($value);
+        try
+        {
+            $this->getJavaClass()->setDestinationPostCodeAndDPS($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1067,7 +1651,14 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getRTSFlag(): string
     {
-        return java_cast($this->getJavaClass()->getRTSFlag(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getRTSFlag(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1075,9 +1666,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param string $value RTS Flag
      */
-    public function setRTSFlag(string $value) : void
+    public function setRTSFlag(string $value): void
     {
-        $this->getJavaClass()->setRTSFlag($value);
+        try
+        {
+            $this->getJavaClass()->setRTSFlag($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1088,7 +1686,14 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getReturnToSenderPostCode(): string
     {
-        return java_cast($this->getJavaClass()->getReturnToSenderPostCode(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getReturnToSenderPostCode(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1097,9 +1702,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param string $value Return to Sender Post Code but no DPS
      */
-    public function setReturnToSenderPostCode(string $value) : void
+    public function setReturnToSenderPostCode(string $value): void
     {
-        $this->getJavaClass()->setReturnToSenderPostCode($value);
+        try
+        {
+            $this->getJavaClass()->setReturnToSenderPostCode($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1114,7 +1726,14 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getCustomerContent(): string
     {
-        return java_cast($this->getJavaClass()->getCustomerContent(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getCustomerContent(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1125,11 +1744,18 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Type 9: 45 characters
      * Type 29: 25 characters
      *
-     * @param string $value  Customer content
+     * @param string $value Customer content
      */
-    public function  setCustomerContent(string $value) : void
+    public function setCustomerContent(string $value): void
     {
-        $this->getJavaClass()->setCustomerContent($value);
+        try
+        {
+            $this->getJavaClass()->setCustomerContent($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1140,7 +1766,14 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getCustomerContentEncodeMode(): int
     {
-        return java_cast($this->getJavaClass()->getCustomerContentEncodeMode(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getCustomerContentEncodeMode(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1149,9 +1782,16 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param int $value Encode mode of Datamatrix barcode.
      */
-    public function setCustomerContentEncodeMode(int $value) : void
+    public function setCustomerContentEncodeMode(int $value): void
     {
-        $this->getJavaClass()->setCustomerContentEncodeMode($value);
+        try
+        {
+            $this->getJavaClass()->setCustomerContentEncodeMode($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1161,17 +1801,31 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getDataMatrixType(): int
     {
-        return java_cast($this->getJavaClass()->getDataMatrixType(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getDataMatrixType(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * 2D Mailmark Type defines size of Data Matrix barcode.
      *
-     * @param int $value  Size of Data Matrix barcode
+     * @param int $value Size of Data Matrix barcode
      */
-    public function setDataMatrixType(int $value) : void
+    public function setDataMatrixType(int $value): void
     {
-        $this->getJavaClass()->setDataMatrixType($value);
+        try
+        {
+            $this->getJavaClass()->setDataMatrixType($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -1179,35 +1833,58 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function __construct()
     {
-        parent::__construct(new java(self::$javaClassName));
+        try
+        {
+            parent::__construct(new java(self::$javaClassName));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     public function init(): void
-    {}
+    {
+    }
 
     /**
      * Construct codetext from Mailmark data.
      * @return string Constructed codetext
      */
-    public function getConstructedCodetext(): string {
-
-        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+    public function getConstructedCodetext(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Initializes Mailmark data from constructed codetext.
      * @param string $constructedCodetext Constructed codetext.
      */
-    public function  initFromString(string $constructedCodetext) : void
+    public function initFromString(string $constructedCodetext): void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
+        try
+        {
+            $this->getJavaClass()->initFromString($constructedCodetext);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets barcode type.
      * @return int Barcode type.
      */
-    public function getBarcodeType() : int {
+    public function getBarcodeType(): int
+    {
         return EncodeTypes::DATA_MATRIX;
     }
 }
@@ -1221,26 +1898,33 @@ abstract class IComplexCodetext extends BaseJavaClass
 {
     function __construct($javaClass)
     {
-        parent::__construct($javaClass);
+        try
+        {
+            parent::__construct($javaClass);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Construct codetext for complex barcode
      * @return string Constructed codetext
      */
-    abstract function getConstructedCodetext() : string;
+    abstract function getConstructedCodetext(): string;
 
     /**
      * Initializes instance with constructed codetext.
      * @param string $constructedCodetext Constructed codetext.
      */
-    abstract function initFromString(string $constructedCodetext) : void;
+    abstract function initFromString(string $constructedCodetext): void;
 
     /**
      * Gets barcode type.
      * @return int Barcode type.
      */
-    abstract function getBarcodeType():int;
+    abstract function getBarcodeType(): int;
 }
 
 /**
@@ -1271,4 +1955,5 @@ class Mailmark2DType
      */
     const TYPE_29 = 3;
 }
+
 ?>

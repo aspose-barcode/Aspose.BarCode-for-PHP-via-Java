@@ -16,10 +16,10 @@ class License extends BaseJavaClass
         {
             $file_data = self::openFile($filePath);
             $this->getJavaClass()->setLicense($file_data);
-        } catch (Exception $ex)
+        }
+        catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -28,21 +28,40 @@ class License extends BaseJavaClass
         try
         {
             $this->getJavaClass()->resetLicense();
-        } catch (Exception $ex)
+        }
+        catch (Exception $ex)
         {
-            throw new BarcodeException($ex);
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     public function isLicensed(): string
     {
-        $is_licensed = $this->getJavaClass()->isLicensed();
-        return strval($is_licensed);
+        try
+        {
+            $is_licensed = $this->getJavaClass()->isLicensed();
+            return strval($is_licensed);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     private static function openFile($filename)
     {
-        return unpack("C*", file_get_contents($filename));
+        try
+        {
+            return unpack("C*", file_get_contents($filename));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     protected function init(): void
@@ -70,14 +89,32 @@ class Point extends BaseJavaClass
      */
     public function __construct($x, $y)
     {
-        parent::__construct(new java(self::javaClassName, $x, $y));
+        try
+        {
+            parent::__construct(new java(self::javaClassName, $x, $y));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     static function construct(...$args) : Point
     {
-        $point = self::EMPTY();
-        $point->setJavaClass($args[0]);
-        return $point;
+        try
+        {
+            $point = self::EMPTY();
+            $point->setJavaClass($args[0]);
+            return $point;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     protected function init(): void
@@ -87,32 +124,86 @@ class Point extends BaseJavaClass
 
     public function getX():int
     {
-        return java_cast($this->getJavaClass()->getX(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getX(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function getY():int
     {
-        return java_cast($this->getJavaClass()->getY(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getY(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function setX(int $x):void
     {
-        $this->getJavaClass()->x = $x;
+        try
+        {
+            $this->getJavaClass()->x = $x;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function setY(int $y):void
     {
-        $this->getJavaClass()->y = $y;
+        try
+        {
+            $this->getJavaClass()->y = $y;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function toString() : string
     {
-        return $this->getJavaClass()->getX() . ',' . $this->getJavaClass()->getY();
+        try
+        {
+            return $this->getJavaClass()->getX() . ',' . $this->getJavaClass()->getY();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function equals(Point $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 }
 
@@ -125,7 +216,16 @@ class Rectangle extends BaseJavaClass
      */
     public static function EMPTY(): Rectangle
     {
-        return new Rectangle(0, 0,0,0);
+        try
+        {
+            return new Rectangle(0, 0,0,0);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     /**
@@ -135,24 +235,61 @@ class Rectangle extends BaseJavaClass
      */
     public function __construct($x, $y, $width, $height)
     {
-        parent::__construct(new java(self::javaClassName, $x, $y, $width, $height));
+        try
+        {
+            parent::__construct(new java(self::javaClassName, $x, $y, $width, $height));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     static function construct(...$args) : Rectangle
     {
-        $rectangle = self::EMPTY();
-        $rectangle->setJavaClass($args[0]);
-        return $rectangle;
+        try
+        {
+            $rectangle = self::EMPTY();
+            $rectangle->setJavaClass($args[0]);
+            return $rectangle;
+
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function getX() : int
     {
-        return java_cast($this->getJavaClass()->getX(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getX(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function getY() : int
     {
-        return java_cast($this->getJavaClass()->getY(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getY(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function getLeft() : int
@@ -177,28 +314,73 @@ class Rectangle extends BaseJavaClass
 
     public function getWidth() : int
     {
-        return java_cast($this->getJavaClass()->getWidth(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getWidth(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function getHeight() : int
     {
-        return java_cast($this->getJavaClass()->getHeight(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getHeight(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function toString() : string
     {
-        return $this->getX() . ',' . $this->getY() . ',' . $this->getWidth() . ',' . $this->getHeight();
+        try
+        {
+            return $this->getX() . ',' . $this->getY() . ',' . $this->getWidth() . ',' . $this->getHeight();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function equals(Rectangle $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     private function intersectsWithInclusive(Rectangle $r) : bool
     {
-        return !(($this->getLeft() > $r->getRight()) || ($this->getRight() < $r->getLeft()) ||
-            ($this->getTop() > $r->getBottom()) || ($this->getBottom() < $r->getTop()));
+        try
+        {
+            return !(($this->getLeft() > $r->getRight()) || ($this->getRight() < $r->getLeft()) ||
+                ($this->getTop() > $r->getBottom()) || ($this->getBottom() < $r->getTop()));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     /**
@@ -209,18 +391,27 @@ class Rectangle extends BaseJavaClass
 
     public static function intersect(Rectangle $a, Rectangle $b): Rectangle
     {
-        // MS.NET returns a non-empty rectangle if the two rectangles
-        // touch each other
-        if (!$a->intersectsWithInclusive($b))
+        try
         {
-            return new Rectangle(0, 0, 0, 0);
+            // MS.NET returns a non-empty rectangle if the two rectangles
+            // touch each other
+            if (!$a->intersectsWithInclusive($b))
+            {
+                return new Rectangle(0, 0, 0, 0);
+            }
+
+            return Rectangle::fromLTRB(
+                max($a->getLeft(), $b->getLeft()),
+                max($a->getTop(), $b->getTop()),
+                min($a->getRight(), $b->getRight()),
+                min($a->getBottom(), $b->getBottom()));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
 
-        return Rectangle::fromLTRB(
-            max($a->getLeft(), $b->getLeft()),
-            max($a->getTop(), $b->getTop()),
-            min($a->getRight(), $b->getRight()),
-            min($a->getBottom(), $b->getBottom()));
+
     }
 
     /**
@@ -229,16 +420,32 @@ class Rectangle extends BaseJavaClass
      * and bottom coordinates.
      */
 
-    public static function fromLTRB(int $left, int $top,
-                                    int $right, int $bottom): Rectangle
+    public static function fromLTRB(int $left, int $top,  int $right, int $bottom): Rectangle
     {
-        return new Rectangle($left, $top, $right - $left,
-            $bottom - $top);
+        try
+        {
+            return new Rectangle($left, $top, $right - $left,$bottom - $top);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function isEmpty() : bool
     {
-        return ($this->getWidth() <= 0) || ($this->getWidth() <= 0);
+        try
+        {
+            return ($this->getWidth() <= 0) || ($this->getWidth() <= 0);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     protected function init(): void
@@ -263,45 +470,76 @@ abstract class BaseJavaClass
             {
                 $this->javaClassName = $this->javaClass->__signature;
             }
-        } catch (Exception $ex)
+        }
+        catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     protected abstract function init(): void;
 
-    /**
-     * @return mixed
-     */
+
     public function getJavaClass()
     {
         return $this->javaClass;
     }
 
-    /**
-     * @return mixed
-     */
     protected function setJavaClass($javaClass)
     {
-        $this->javaClass= $javaClass;
-        $this->init();
+        try
+        {
+            $this->javaClass= $javaClass;
+            $this->init();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function getJavaClassName(): string
     {
-        return $this->javaClassName;
+        try
+        {
+            return $this->javaClassName;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function isNull(): bool
     {
-        return java_cast($this->javaClass->isNull(), "boolean");
+        try
+        {
+            return java_cast($this->javaClass->isNull(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 
     public function printJavaClassName()
     {
-        print("Java class name => '" . $this->javaClassName . "'");
+        try
+        {
+            print("Java class name => '" . $this->javaClassName . "'");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+
+
     }
 }
 
@@ -316,17 +554,19 @@ class BarcodeException extends Exception
      * BarcodeException constructor.
      * @param  $exc exception's instance
      */
-    public function __construct($exc)
+    public function __construct($message = "", $file="",$line="",$code = 0, Throwable $previous = null)
     {
-        if (is_string($exc))
+        print "Exception occurred:".$message." at ".$file.":".$line."\n";
+        parent::__construct($code, $code, $previous);
+        if (is_string($message))
         {
-            $this->setMessage($exc);
+            $this->setMessage($message);
             return;
         }
         $line = $this->getLine();
         $file = $this->getFile();
         $exc_message = "Exception occured in $file:$line" . nl;
-        $details = $this->getDetails($exc);
+        $details = $this->getDetails($message);
 
         if (empty($details))
         {
@@ -375,9 +615,7 @@ class BarcodeException extends Exception
         return $details;
     }
 
-    /**
-     * @param mixed $message
-     */
+
     public function setMessage($message): void
     {
         $this->message = $message;

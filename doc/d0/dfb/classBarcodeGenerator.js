@@ -1,6 +1,6 @@
 var classBarcodeGenerator =
 [
-    [ "\u202A__construct", "d0/dfb/classBarcodeGenerator.html#aa631863361fd14be7173b530098b622b", null ],
+    [ "\u202A__construct", "d0/dfb/classBarcodeGenerator.html#a08ebdba42bae6c6001eaf85a3befa123", null ],
     [ "\u202AgenerateBarCodeImage", "d0/dfb/classBarcodeGenerator.html#ad0e8c024e0956835801aa33c6530246a", null ],
     [ "\u202AgetBarcodeType", "d0/dfb/classBarcodeGenerator.html#a1db7141dbca0f2a9d5f1e9c6c4553ef6", null ],
     [ "\u202AgetCodeText", "d0/dfb/classBarcodeGenerator.html#a0aa8b6743e9d1e70353898f1243d3ef9", null ],

@@ -36,7 +36,7 @@ class BarcodeGenerator extends BaseJavaClass
      * @endcode
      * @throws BarcodeException
      */
-    public function __construct(?int $encodeType,?string $codeText)
+    public function __construct(?int $encodeType, ?string $codeText)
     {
         try
         {
@@ -45,8 +45,7 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -58,8 +57,7 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -75,16 +73,14 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-
 
     /**
      * Barcode symbology type.
      */
-    public function getBarcodeType() : int
+    public function getBarcodeType(): int
     {
         try
         {
@@ -92,8 +88,7 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -108,22 +103,21 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
-     *  @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
+     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
      * @code
      *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      *  $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
      * @endcode
      * @return base64 representation of image.
      */
-    public function generateBarCodeImage(int $format) : string
+    public function generateBarCodeImage(int $format): string
     {
         try
         {
@@ -132,8 +126,7 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -155,8 +148,7 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -171,10 +163,8 @@ class BarcodeGenerator extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-
     }
 
     /**
@@ -182,7 +172,14 @@ class BarcodeGenerator extends BaseJavaClass
      */
     public function setCodeText(string $value): void
     {
-        $this->getJavaClass()->setCodeText($value);
+        try
+        {
+            $this->getJavaClass()->setCodeText($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
@@ -217,36 +214,42 @@ class BarcodeParameters extends BaseJavaClass
 
     protected function init(): void
     {
-        $this->xDimension = new Unit($this->getJavaClass()->getXDimension());
-        $this->barHeight = new Unit($this->getJavaClass()->getBarHeight());
-        $this->barCodeWidth = new Unit($this->getJavaClass()->getBarCodeWidth());
-        $this->barCodeHeight = new Unit($this->getJavaClass()->getBarCodeHeight());
-        $this->codeTextParameters = new CodetextParameters($this->getJavaClass()->getCodeTextParameters());
-        $this->postal = new PostalParameters($this->getJavaClass()->getPostal());
-        $this->australianPost = new AustralianPostParameters($this->getJavaClass()->getAustralianPost());
-        $this->codablock = new CodablockParameters($this->getJavaClass()->getCodablock());
-        $this->dataBar = new DataBarParameters($this->getJavaClass()->getDataBar());
-        $this->dataMatrix = new DataMatrixParameters($this->getJavaClass()->getDataMatrix());
-        $this->code16K = new Code16KParameters($this->getJavaClass()->getCode16K());
-        $this->itf = new ITFParameters($this->getJavaClass()->getITF());
-        $this->qr = new QrParameters($this->getJavaClass()->getQR());
-        $this->pdf417 = new Pdf417Parameters($this->getJavaClass()->getPdf417());
-        $this->maxiCode = new MaxiCodeParameters($this->getJavaClass()->getMaxiCode());
-        $this->aztec = new AztecParameters($this->getJavaClass()->getAztec());
-        $this->codabar = new CodabarParameters($this->getJavaClass()->getCodabar());
-        $this->coupon = new CouponParameters($this->getJavaClass()->getCoupon());
-        $this->supplement = new SupplementParameters($this->getJavaClass()->getSupplement());
-        $this->dotCode = new DotCodeParameters($this->getJavaClass()->getDotCode());
-        $this->padding = new Padding($this->getJavaClass()->getPadding());
-        $this->patchCode = new PatchCodeParameters($this->getJavaClass()->getPatchCode());
-        $this->barWidthReduction = new Unit($this->getJavaClass()->getBarWidthReduction());
-
+        try
+        {
+            $this->xDimension = new Unit($this->getJavaClass()->getXDimension());
+            $this->barHeight = new Unit($this->getJavaClass()->getBarHeight());
+            $this->barCodeWidth = new Unit($this->getJavaClass()->getBarCodeWidth());
+            $this->barCodeHeight = new Unit($this->getJavaClass()->getBarCodeHeight());
+            $this->codeTextParameters = new CodetextParameters($this->getJavaClass()->getCodeTextParameters());
+            $this->postal = new PostalParameters($this->getJavaClass()->getPostal());
+            $this->australianPost = new AustralianPostParameters($this->getJavaClass()->getAustralianPost());
+            $this->codablock = new CodablockParameters($this->getJavaClass()->getCodablock());
+            $this->dataBar = new DataBarParameters($this->getJavaClass()->getDataBar());
+            $this->dataMatrix = new DataMatrixParameters($this->getJavaClass()->getDataMatrix());
+            $this->code16K = new Code16KParameters($this->getJavaClass()->getCode16K());
+            $this->itf = new ITFParameters($this->getJavaClass()->getITF());
+            $this->qr = new QrParameters($this->getJavaClass()->getQR());
+            $this->pdf417 = new Pdf417Parameters($this->getJavaClass()->getPdf417());
+            $this->maxiCode = new MaxiCodeParameters($this->getJavaClass()->getMaxiCode());
+            $this->aztec = new AztecParameters($this->getJavaClass()->getAztec());
+            $this->codabar = new CodabarParameters($this->getJavaClass()->getCodabar());
+            $this->coupon = new CouponParameters($this->getJavaClass()->getCoupon());
+            $this->supplement = new SupplementParameters($this->getJavaClass()->getSupplement());
+            $this->dotCode = new DotCodeParameters($this->getJavaClass()->getDotCode());
+            $this->padding = new Padding($this->getJavaClass()->getPadding());
+            $this->patchCode = new PatchCodeParameters($this->getJavaClass()->getPatchCode());
+            $this->barWidthReduction = new Unit($this->getJavaClass()->getBarWidthReduction());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * PatchCode parameters.
      */
-    public function getPatchCode() : PatchCodeParameters
+    public function getPatchCode(): PatchCodeParameters
     {
         return $this->patchCode;
     }
@@ -256,8 +259,15 @@ class BarcodeParameters extends BaseJavaClass
      */
     private function setPatchCode(PatchCodeParameters $value)
     {
-        $this->patchCode = $value;
-        $this->getJavaClass()->setPatchCode($value->getJavaClass());
+        try
+        {
+            $this->patchCode = $value;
+            $this->getJavaClass()->setPatchCode($value->getJavaClass());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -273,8 +283,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -294,8 +303,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -311,8 +319,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -328,8 +335,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -347,8 +353,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -367,8 +372,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -376,24 +380,38 @@ class BarcodeParameters extends BaseJavaClass
      * Bars color.
      * Default value: #000000
      */
-    public function getBarColor() : string
+    public function getBarColor(): string
     {
-        $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBarColor(), "integer")));
-        while (strlen($hexColor) < 6)
+        try
         {
-            $hexColor = "0".$hexColor;
+            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBarColor(), "integer")));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0" . $hexColor;
+            }
+            $hexColor = "#" . $hexColor;
+            return $hexColor;
         }
-        $hexColor = "#".$hexColor;
-        return $hexColor;
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Bars color.
      * Default value: #000000.
      */
-    public function setBarColor(string $value) : void
+    public function setBarColor(string $value): void
     {
-        $this->getJavaClass()->setBarColor(hexdec($value));
+        try
+        {
+            $this->getJavaClass()->setBarColor(hexdec($value));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -408,8 +426,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -426,15 +443,14 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      *  Always display checksum digit in the human readable text for Code128 and GS1Code128 barcodes.
      */
-    public function getChecksumAlwaysShow() : int
+    public function getChecksumAlwaysShow(): int
     {
         try
         {
@@ -442,8 +458,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -458,8 +473,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -470,7 +484,7 @@ class BarcodeParameters extends BaseJavaClass
      * Checksum always used: Rest symbology
      */
 
-    public function isChecksumEnabled() : int
+    public function isChecksumEnabled(): int
     {
         try
         {
@@ -478,8 +492,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -497,8 +510,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -507,7 +519,7 @@ class BarcodeParameters extends BaseJavaClass
      * If the EnableEscape is true, "\" will be explained as a special escape character. Otherwise, "\" acts as normal characters.
      * Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.
      */
-    public function getEnableEscape() : bool
+    public function getEnableEscape(): bool
     {
         try
         {
@@ -515,8 +527,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -533,8 +544,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -546,7 +556,7 @@ class BarcodeParameters extends BaseJavaClass
      * @exception IllegalArgumentException
      * The WideNarrowRatio parameter value is less than or equal to 0.
      */
-    public function getWideNarrowRatio() : float
+    public function getWideNarrowRatio(): float
     {
         try
         {
@@ -554,8 +564,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -575,8 +584,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -591,8 +599,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -601,7 +608,7 @@ class BarcodeParameters extends BaseJavaClass
      * Only for 1D barcodes.
      * Default value: true.
      */
-    public function getFilledBars() : bool
+    public function getFilledBars(): bool
     {
         try
         {
@@ -609,8 +616,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -627,8 +633,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -643,8 +648,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -659,8 +663,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -675,8 +678,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -691,8 +693,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -707,8 +708,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -723,8 +723,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -739,8 +738,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -755,8 +753,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -771,8 +768,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -787,8 +783,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -803,8 +798,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -819,8 +813,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -835,8 +828,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -851,8 +843,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -867,8 +858,7 @@ class BarcodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -888,12 +878,19 @@ class BaseGenerationParameters extends BaseJavaClass
 
     protected function init(): void
     {
-        $this->captionAbove = new CaptionParameters($this->getJavaClass()->getCaptionAbove());
-        $this->captionBelow = new CaptionParameters($this->getJavaClass()->getCaptionBelow());
-        $this->barcodeParameters = new BarcodeParameters($this->getJavaClass()->getBarcode());
-        $this->borderParameters = new BorderParameters($this->getJavaClass()->getBorder());
-        $this->imageWidth = new Unit($this->getJavaClass()->getImageWidth());
-        $this->imageHeight = new Unit($this->getJavaClass()->getImageHeight());
+        try
+        {
+            $this->captionAbove = new CaptionParameters($this->getJavaClass()->getCaptionAbove());
+            $this->captionBelow = new CaptionParameters($this->getJavaClass()->getCaptionBelow());
+            $this->barcodeParameters = new BarcodeParameters($this->getJavaClass()->getBarcode());
+            $this->borderParameters = new BorderParameters($this->getJavaClass()->getBorder());
+            $this->imageWidth = new Unit($this->getJavaClass()->getImageWidth());
+            $this->imageHeight = new Unit($this->getJavaClass()->getImageHeight());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -908,15 +905,14 @@ class BaseGenerationParameters extends BaseJavaClass
             $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBackColor(), "integer")));
             while (strlen($hexColor) < 6)
             {
-                $hexColor = "0".$hexColor;
+                $hexColor = "0" . $hexColor;
             }
-            $hexColor = "#".$hexColor;
+            $hexColor = "#" . $hexColor;
             return $hexColor;
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -933,8 +929,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -946,7 +941,7 @@ class BaseGenerationParameters extends BaseJavaClass
      * @exception IllegalArgumentException
      * The Resolution parameter value is less than or equal to 0.
      */
-    public function getResolution() : float
+    public function getResolution(): float
     {
         try
         {
@@ -954,8 +949,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -975,8 +969,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -986,13 +979,13 @@ class BaseGenerationParameters extends BaseJavaClass
      *  Default value: 0.
      *
      *  This sample shows how to create and save a BarCode image.
-     *  @code
+     * @code
      *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
      *     $generator->getParameters()->setRotationAngle(7);
      *     $generator->save("test.png");
-     *  @endcode
+     * @endcode
      */
-    public function getRotationAngle() : float
+    public function getRotationAngle(): float
     {
         try
         {
@@ -1000,8 +993,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1026,8 +1018,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1043,8 +1034,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1061,8 +1051,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1078,8 +1067,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1096,8 +1084,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1105,44 +1092,66 @@ class BaseGenerationParameters extends BaseJavaClass
      * Specifies the different types of automatic sizing modes.
      * Default value: AutoSizeMode::NONE.
      */
-    public function getAutoSizeMode() : int
+    public function getAutoSizeMode(): int
     {
-        return java_cast($this->getJavaClass()->getAutoSizeMode(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getAutoSizeMode(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
+
     /**
      * Specifies the different types of automatic sizing modes.
      * Default value: AutoSizeMode::NONE.
      */
     public function setAutoSizeMode(int $value)
     {
-        $this->getJavaClass()->setAutoSizeMode($value);
+        try
+        {
+            $this->getJavaClass()->setAutoSizeMode($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
-
 
     /**
      * BarCode image height when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
      */
-    public function getImageHeight() :Unit
+    public function getImageHeight(): Unit
     {
         return $this->imageHeight;
     }
+
     /**
      * BarCode image height when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      */
-    public function setImageHeight(Unit $value) : void
+    public function setImageHeight(Unit $value): void
     {
-        $this->getJavaClass()->setImageHeight($value->getJavaClass());
-        $this->imageHeight = $value;
+        try
+        {
+            $this->getJavaClass()->setImageHeight($value->getJavaClass());
+            $this->imageHeight = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
-
 
     /**
      * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      */
-    public function getImageWidth() : Unit
+    public function getImageWidth(): Unit
     {
         return $this->imageWidth;
     }
+
     /**
      * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      */
@@ -1163,8 +1172,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1180,8 +1188,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1196,8 +1203,7 @@ class BaseGenerationParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -1205,7 +1211,7 @@ class BaseGenerationParameters extends BaseJavaClass
 /**
  *
  * Barcode image border parameters
-     */
+ */
 class BorderParameters extends BaseJavaClass
 {
     private $width;
@@ -1218,8 +1224,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1227,7 +1232,7 @@ class BorderParameters extends BaseJavaClass
      * Border visibility. If false than parameter Width is always ignored (0).
      * Default value: false.
      */
-    public function getVisible() : bool
+    public function getVisible(): bool
     {
         try
         {
@@ -1235,8 +1240,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1252,8 +1256,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1270,8 +1273,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1290,8 +1292,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1300,7 +1301,7 @@ class BorderParameters extends BaseJavaClass
      *
      * @return A string that represents this BorderParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -1308,8 +1309,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1317,7 +1317,7 @@ class BorderParameters extends BaseJavaClass
      * Border dash style.
      * Default value: BorderDashStyle::SOLID.
      */
-    public function getDashStyle() : int
+    public function getDashStyle(): int
     {
         try
         {
@@ -1325,8 +1325,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1342,8 +1341,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1351,22 +1349,21 @@ class BorderParameters extends BaseJavaClass
      * Border color.
      * Default value: #000000
      */
-    public function getColor() : string
+    public function getColor(): string
     {
         try
         {
             $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getColor(), "integer")));
             while (strlen($hexColor) < 6)
             {
-                $hexColor = "0".$hexColor;
+                $hexColor = "0" . $hexColor;
             }
-            $hexColor = "#".$hexColor;
+            $hexColor = "#" . $hexColor;
             return $hexColor;
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1382,8 +1379,7 @@ class BorderParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -1440,7 +1436,7 @@ class  ChecksumValidation
 /**
  *
  * Caption parameters.
-     */
+ */
 class CaptionParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.CaptionParameters";
@@ -1457,8 +1453,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1466,7 +1461,7 @@ class CaptionParameters extends BaseJavaClass
      * Caption text.
      * Default value: empty string.
      */
-    public function getText() : string
+    public function getText(): string
     {
         try
         {
@@ -1474,8 +1469,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1491,8 +1485,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1500,7 +1493,7 @@ class CaptionParameters extends BaseJavaClass
      * Caption font.
      * Default value: Arial 8pt regular.
      */
-    public function getFont() : FontUnit
+    public function getFont(): FontUnit
     {
         try
         {
@@ -1508,8 +1501,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1517,7 +1509,7 @@ class CaptionParameters extends BaseJavaClass
      * Caption text visibility.
      * Default value: false.
      */
-    public function getVisible() : bool
+    public function getVisible(): bool
     {
         try
         {
@@ -1525,8 +1517,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1542,8 +1533,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1551,22 +1541,21 @@ class CaptionParameters extends BaseJavaClass
      * Caption text color.
      * Default value BLACK.
      */
-    public function getTextColor() : string
+    public function getTextColor(): string
     {
         try
         {
             $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getTextColor(), "integer")));
             while (strlen($hexColor) < 6)
             {
-                $hexColor = "0".$hexColor;
+                $hexColor = "0" . $hexColor;
             }
-            $hexColor = "#".$hexColor;
+            $hexColor = "#" . $hexColor;
             return $hexColor;
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1582,8 +1571,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1592,7 +1580,7 @@ class CaptionParameters extends BaseJavaClass
      * Default value for CaptionAbove: 5pt 5pt 0 5pt.
      * Default value for CaptionBelow: 0 5pt 5pt 5pt.
      */
-    public function getPadding() : Padding
+    public function getPadding(): Padding
     {
         try
         {
@@ -1600,8 +1588,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1619,8 +1606,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1628,7 +1614,7 @@ class CaptionParameters extends BaseJavaClass
      * Caption test horizontal alignment.
      * Default value: StringAlignment.Center.
      */
-    public function getAlignment() : int
+    public function getAlignment(): int
     {
         try
         {
@@ -1636,8 +1622,7 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1653,25 +1638,39 @@ class CaptionParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
     /*
      * Specify word wraps (line breaks) within text.
      * @return bool
      */
-    public function getNoWrap() : bool
+    public function getNoWrap(): bool
     {
-        return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /*
      * Specify word wraps (line breaks) within text.
      */
-    public function setNoWrap(bool $value) : void
+    public function setNoWrap(bool $value): void
     {
-        $this->getJavaClass()->setNoWrap($value);
+        try
+        {
+            $this->getJavaClass()->setNoWrap($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
@@ -1689,13 +1688,22 @@ class Unit extends BaseJavaClass
 {
     public function __construct($source)
     {
-        parent::__construct(self::initUnit($source));
+        try
+        {
+            parent::__construct(self::initUnit($source));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     private static function initUnit($source)
     {
-        if($source instanceof Unit)
+        if ($source instanceof Unit)
+        {
             return $source->getJavaClass();
+        }
         return $source;
     }
 
@@ -1707,7 +1715,7 @@ class Unit extends BaseJavaClass
     /**
      * Gets size value in pixels.
      */
-    public function getPixels() : float
+    public function getPixels(): float
     {
         try
         {
@@ -1715,8 +1723,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1731,15 +1738,14 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets size value in inches.
      */
-    public function getInches() : float
+    public function getInches(): float
     {
         try
         {
@@ -1747,8 +1753,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1763,15 +1768,14 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets size value in millimeters.
      */
-    public function getMillimeters() : float
+    public function getMillimeters(): float
     {
         try
         {
@@ -1779,8 +1783,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1795,15 +1798,14 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets size value in point.
      */
-    public function getPoint() : float
+    public function getPoint(): float
     {
         try
         {
@@ -1811,8 +1813,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1827,15 +1828,14 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets size value in document units.
      */
-    public function getDocument() : float
+    public function getDocument(): float
     {
         try
         {
@@ -1843,8 +1843,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1859,8 +1858,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1869,7 +1867,7 @@ class Unit extends BaseJavaClass
      *
      * @return string that represents this Unit.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -1877,8 +1875,7 @@ class Unit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1890,16 +1887,23 @@ class Unit extends BaseJavaClass
      * @return true if obj is a Unit and its value is the same as this instance;
      * otherwise, false. If obj is null, the method returns false.
      */
-    public function equals($obj) : bool
+    public function equals($obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
 /**
  *
  * Paddings parameters.
-     */
+ */
 class Padding extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.Padding";
@@ -1920,7 +1924,7 @@ class Padding extends BaseJavaClass
     /**
      * Top padding.
      */
-    public function getTop() : Unit
+    public function getTop(): Unit
     {
         try
         {
@@ -1928,8 +1932,7 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1945,15 +1948,14 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Bottom padding.
      */
-    public function getBottom() : Unit
+    public function getBottom(): Unit
     {
         try
         {
@@ -1961,8 +1963,7 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -1978,15 +1979,14 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Right padding.
      */
-    public function getRight() : Unit
+    public function getRight(): Unit
     {
         try
         {
@@ -1994,8 +1994,7 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2011,15 +2010,14 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Left padding.
      */
-    public function getLeft() : Unit
+    public function getLeft(): Unit
     {
         try
         {
@@ -2027,8 +2025,7 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2044,8 +2041,7 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2054,7 +2050,7 @@ class Padding extends BaseJavaClass
      *
      * @return A string that represents this Padding.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -2062,8 +2058,7 @@ class Padding extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -2071,7 +2066,7 @@ class Padding extends BaseJavaClass
 /**
  *
  * Codetext parameters.
-     */
+ */
 class CodetextParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.CodetextParameters";
@@ -2088,8 +2083,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2097,7 +2091,7 @@ class CodetextParameters extends BaseJavaClass
      * Text that will be displayed instead of codetext in 2D barcodes.
      * Used for: Aztec, Pdf417, DataMatrix, QR, MaxiCode, DotCode
      */
-    public function getTwoDDisplayText() : string
+    public function getTwoDDisplayText(): string
     {
         try
         {
@@ -2105,8 +2099,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2122,8 +2115,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2132,7 +2124,7 @@ class CodetextParameters extends BaseJavaClass
      * It is recommended to use FontMode::AUTO especially in AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
      * Default value: FontMode::AUTO.
      */
-    public function getFontMode() : int
+    public function getFontMode(): int
     {
         try
         {
@@ -2140,8 +2132,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2158,8 +2149,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2168,17 +2158,9 @@ class CodetextParameters extends BaseJavaClass
      * Default value: Arial 5pt regular.
      * Ignored if FontMode is set to FontMode::AUTO.
      */
-    public function getFont() : FontUnit
+    public function getFont(): FontUnit
     {
-        try
-        {
-            return $this->font;
-        }
-        catch (Exception $ex)
-        {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
-        }
+        return $this->font;
     }
 
     /**
@@ -2195,8 +2177,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2205,7 +2186,7 @@ class CodetextParameters extends BaseJavaClass
      * Default value: 2pt.
      * Ignored for EAN8, EAN13, UPCE, UPCA, ISBN, ISMN, ISSN, UpcaGs1DatabarCoupon.
      */
-    public function getSpace() : Unit
+    public function getSpace(): Unit
     {
         try
         {
@@ -2213,8 +2194,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2232,8 +2212,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2241,7 +2220,7 @@ class CodetextParameters extends BaseJavaClass
      * Gets or sets the alignment of the code text.
      * Default value: TextAlignment::CENTER.
      */
-    public function getAlignment() : int
+    public function getAlignment(): int
     {
         try
         {
@@ -2249,8 +2228,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2266,8 +2244,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2275,22 +2252,21 @@ class CodetextParameters extends BaseJavaClass
      * Specify the displaying CodeText's Color.
      * Default value BLACK.
      */
-    public function getColor() : string
+    public function getColor(): string
     {
         try
         {
             $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getColor(), "integer")));
             while (strlen($hexColor) < 6)
             {
-                $hexColor = "0".$hexColor;
+                $hexColor = "0" . $hexColor;
             }
-            $hexColor = "#".$hexColor;
+            $hexColor = "#" . $hexColor;
             return $hexColor;
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2306,8 +2282,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2315,7 +2290,7 @@ class CodetextParameters extends BaseJavaClass
      * Specify the displaying CodeText Location, set to CodeLocation::NONE to hide CodeText.
      * Default value:  CodeLocation::BELOW.
      */
-    public function getLocation() : int
+    public function getLocation(): int
     {
         try
         {
@@ -2323,8 +2298,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2340,8 +2314,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2349,17 +2322,31 @@ class CodetextParameters extends BaseJavaClass
      * Specify word wraps (line breaks) within text.
      * @return bool
      */
-    public function getNoWrap() : bool
+    public function getNoWrap(): bool
     {
-        return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Specify word wraps (line breaks) within text.
      */
-    public function setNoWrap(bool $value) : void
+    public function setNoWrap(bool $value): void
     {
-        $this->getJavaClass()->setNoWrap($value);
+        try
+        {
+            $this->getJavaClass()->setNoWrap($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -2367,7 +2354,7 @@ class CodetextParameters extends BaseJavaClass
      *
      * @return A string that represents this CodetextParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -2375,8 +2362,7 @@ class CodetextParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -2384,7 +2370,7 @@ class CodetextParameters extends BaseJavaClass
 /**
  *
  * Postal parameters. Used for Postnet, Planet.
-     */
+ */
 class PostalParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.PostalParameters";
@@ -2399,15 +2385,14 @@ class PostalParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Short bar's height of Postal barcodes.
      */
-    public function getPostalShortBarHeight() : Unit
+    public function getPostalShortBarHeight(): Unit
     {
         try
         {
@@ -2415,8 +2400,7 @@ class PostalParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2432,8 +2416,7 @@ class PostalParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2442,7 +2425,7 @@ class PostalParameters extends BaseJavaClass
      *
      * @return A string that represents this PostalParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -2450,15 +2433,14 @@ class PostalParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
 
 /**
  * AustralianPost barcode parameters.
-*/
+ */
 class AustralianPostParameters extends BaseJavaClass
 {
     private $australianPostShortBarHeight;
@@ -2471,15 +2453,14 @@ class AustralianPostParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Short bar's height of AustralianPost barcode.
      */
-    public function getAustralianPostShortBarHeight() : Unit
+    public function getAustralianPostShortBarHeight(): Unit
     {
         try
         {
@@ -2487,8 +2468,7 @@ class AustralianPostParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2504,15 +2484,14 @@ class AustralianPostParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
      */
-    public function getAustralianPostEncodingTable() : int
+    public function getAustralianPostEncodingTable(): int
     {
         try
         {
@@ -2520,8 +2499,7 @@ class AustralianPostParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2536,8 +2514,7 @@ class AustralianPostParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2546,7 +2523,7 @@ class AustralianPostParameters extends BaseJavaClass
      *
      * @return A string that represents this AustralianPostParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -2554,8 +2531,7 @@ class AustralianPostParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -2563,7 +2539,7 @@ class AustralianPostParameters extends BaseJavaClass
 /**
  *
  * Codablock parameters.
-     */
+ */
 class CodablockParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.CodablockParameters";
@@ -2575,7 +2551,7 @@ class CodablockParameters extends BaseJavaClass
     /**
      * Columns count.
      */
-    public function getColumns() : int
+    public function getColumns(): int
     {
         try
         {
@@ -2583,8 +2559,7 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2599,15 +2574,14 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Rows count.
      */
-    public function getRows() : int
+    public function getRows(): int
     {
         try
         {
@@ -2615,8 +2589,7 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2631,15 +2604,14 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -2647,8 +2619,7 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2663,8 +2634,7 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2673,7 +2643,7 @@ class CodablockParameters extends BaseJavaClass
      *
      * @return string that represents this CodablockParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -2681,8 +2651,7 @@ class CodablockParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -2701,39 +2670,67 @@ class DataBarParameters extends BaseJavaClass
     /**
      * Enables flag of 2D composite component with DataBar barcode
      */
-    public function is2DCompositeComponent() : bool
+    public function is2DCompositeComponent(): bool
     {
-        return java_cast($this->getJavaClass()->is2DCompositeComponent(), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->is2DCompositeComponent(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
-   /**
-    * Enables flag of 2D composite component with DataBar barcode
-    */
-    public function set2DCompositeComponent(bool $value) : void
+    /**
+     * Enables flag of 2D composite component with DataBar barcode
+     */
+    public function set2DCompositeComponent(bool $value): void
     {
-        $this->getJavaClass()->set2DCompositeComponent($value);
+        try
+        {
+            $this->getJavaClass()->set2DCompositeComponent($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * If this flag is set, it allows only GS1 encoding standard for Databar barcode types
      */
-    public function isAllowOnlyGS1Encoding() : bool
+    public function isAllowOnlyGS1Encoding(): bool
     {
-        return java_cast($this->getJavaClass()->isAllowOnlyGS1Encoding(), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->isAllowOnlyGS1Encoding(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * If this flag is set, it allows only GS1 encoding standard for Databar barcode types
      */
-    public function setAllowOnlyGS1Encoding(bool $value) : void
+    public function setAllowOnlyGS1Encoding(bool $value): void
     {
-        $this->getJavaClass()->setAllowOnlyGS1Encoding($value);
+        try
+        {
+            $this->getJavaClass()->setAllowOnlyGS1Encoding($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Columns count.
      */
-    public function getColumns() : int
+    public function getColumns(): int
     {
         try
         {
@@ -2741,8 +2738,7 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2757,15 +2753,14 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Rows count.
      */
-    public function getRows() : int
+    public function getRows(): int
     {
         try
         {
@@ -2773,8 +2768,7 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2789,8 +2783,7 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2798,7 +2791,7 @@ class DataBarParameters extends BaseJavaClass
      * Height/Width ratio of 2D BarCode module.
      * Used for DataBar stacked.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -2806,8 +2799,7 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2823,8 +2815,7 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2833,7 +2824,7 @@ class DataBarParameters extends BaseJavaClass
      *
      * @return string that represents this DataBarParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -2841,8 +2832,7 @@ class DataBarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -2850,7 +2840,7 @@ class DataBarParameters extends BaseJavaClass
 /**
  *
  * DataMatrix parameters.
-     */
+ */
 class DataMatrixParameters extends BaseJavaClass
 {
     protected function init(): void
@@ -2861,7 +2851,7 @@ class DataMatrixParameters extends BaseJavaClass
      * Gets a Datamatrix ECC type.
      * Default value: DataMatrixEccType::ECC_200.
      */
-    public function getDataMatrixEcc() : int
+    public function getDataMatrixEcc(): int
     {
         try
         {
@@ -2869,8 +2859,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2886,8 +2875,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2895,7 +2883,7 @@ class DataMatrixParameters extends BaseJavaClass
      * Encode mode of Datamatrix barcode.
      * Default value: DataMatrixEncodeMode::AUTO.
      */
-    public function getDataMatrixEncodeMode() : int
+    public function getDataMatrixEncodeMode(): int
     {
         try
         {
@@ -2903,8 +2891,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2920,8 +2907,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2934,9 +2920,16 @@ class DataMatrixParameters extends BaseJavaClass
      * Cannot be used with EncodeTypes.GS_1_DATA_MATRIX
      * Default value: MacroCharacter.NONE.
      */
-    public function getMacroCharacters() : int
+    public function getMacroCharacters(): int
     {
-        return java_cast($this->getJavaClass()->getMacroCharacters(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getMacroCharacters(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -2948,16 +2941,22 @@ class DataMatrixParameters extends BaseJavaClass
      * Cannot be used with EncodeTypes.GS_1_DATA_MATRIX
      * Default value: MacroCharacter.NONE.
      */
-    public function setMacroCharacters(int $value) : void
+    public function setMacroCharacters(int $value): void
     {
-        $this->getJavaClass()->setMacroCharacters($value);
+        try
+        {
+            $this->getJavaClass()->setMacroCharacters($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
-
 
     /**
      * Columns count.
      */
-    public function getColumns() : int
+    public function getColumns(): int
     {
         try
         {
@@ -2965,8 +2964,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -2981,15 +2979,14 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Rows count.
      */
-    public function getRows() : int
+    public function getRows(): int
     {
         try
         {
@@ -2997,8 +2994,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3013,15 +3009,14 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -3029,8 +3024,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3045,15 +3039,14 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets the encoding of codetext.
      */
-    public function getCodeTextEncoding() : string
+    public function getCodeTextEncoding(): string
     {
         try
         {
@@ -3061,8 +3054,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3077,8 +3069,7 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3095,19 +3086,16 @@ class DataMatrixParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
-
 }
-
 
 /**
  *
  * Code16K parameters.
-     */
+ */
 class Code16KParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.Code16KParameters";
@@ -3119,7 +3107,7 @@ class Code16KParameters extends BaseJavaClass
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -3127,8 +3115,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3143,8 +3130,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3152,7 +3138,7 @@ class Code16KParameters extends BaseJavaClass
      * Size of the left quiet zone in xDimension.
      * Default value: 10, meaning if xDimension = 2px than left quiet zone will be 20px.
      */
-    public function getQuietZoneLeftCoef() : int
+    public function getQuietZoneLeftCoef(): int
     {
         try
         {
@@ -3160,8 +3146,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3177,8 +3162,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3186,7 +3170,7 @@ class Code16KParameters extends BaseJavaClass
      * Size of the right quiet zone in xDimension.
      * Default value: 1, meaning if xDimension = 2px than right quiet zone will be 2px.
      */
-    public function getQuietZoneRightCoef() : int
+    public function getQuietZoneRightCoef(): int
     {
         try
         {
@@ -3194,8 +3178,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3211,8 +3194,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3221,7 +3203,7 @@ class Code16KParameters extends BaseJavaClass
      *
      * @return A string that represents this Code16KParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -3229,8 +3211,7 @@ class Code16KParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -3238,7 +3219,7 @@ class Code16KParameters extends BaseJavaClass
 /**
  *
  * DotCode parameters.
-     */
+ */
 class DotCodeParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.";
@@ -3251,7 +3232,7 @@ class DotCodeParameters extends BaseJavaClass
      * Mask of Dotcode barcode.
      * Default value: -1.
      */
-    public function getDotCodeMask() : int
+    public function getDotCodeMask(): int
     {
         try
         {
@@ -3259,8 +3240,7 @@ class DotCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3276,15 +3256,14 @@ class DotCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -3292,8 +3271,7 @@ class DotCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3308,8 +3286,7 @@ class DotCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3318,7 +3295,7 @@ class DotCodeParameters extends BaseJavaClass
      *
      * @return string that represents this DotCodeParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -3326,8 +3303,7 @@ class DotCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -3343,7 +3319,14 @@ class ITFParameters extends BaseJavaClass
 
     protected function init(): void
     {
-        $this->itfBorderThickness = new Unit($this->getJavaClass()->getItfBorderThickness());
+        try
+        {
+            $this->itfBorderThickness = new Unit($this->getJavaClass()->getItfBorderThickness());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -3358,8 +3341,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3376,8 +3358,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3385,7 +3366,7 @@ class ITFParameters extends BaseJavaClass
      * Border type of ITF barcode.
      * Default value: ITF14BorderType::BAR.
      */
-    public function getItfBorderType() : int
+    public function getItfBorderType(): int
     {
         try
         {
@@ -3393,8 +3374,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3410,8 +3390,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3422,7 +3401,7 @@ class ITFParameters extends BaseJavaClass
      * @exception IllegalArgumentException
      * The QuietZoneCoef parameter value is less than 10.
      */
-    public function getQuietZoneCoef() : int
+    public function getQuietZoneCoef(): int
     {
         try
         {
@@ -3430,8 +3409,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3450,8 +3428,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3460,7 +3437,7 @@ class ITFParameters extends BaseJavaClass
      *
      * @return string that represents this ITFParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -3468,8 +3445,7 @@ class ITFParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -3477,21 +3453,29 @@ class ITFParameters extends BaseJavaClass
 /**
  *
  * QR parameters.
-     */
+ */
 class QrParameters extends BaseJavaClass
 {
     private $structuredAppend;
+
     // protected $javaClassName = "com.aspose.barcode.generation.QrParameters";
 
     protected function init(): void
     {
-        $this->structuredAppend = new QrStructuredAppendParameters($this->getJavaClass()->getStructuredAppend());
+        try
+        {
+            $this->structuredAppend = new QrStructuredAppendParameters($this->getJavaClass()->getStructuredAppend());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * QR structured append parameters.
      */
-    public function getStructuredAppend() : QrStructuredAppendParameters
+    public function getStructuredAppend(): QrStructuredAppendParameters
     {
         return $this->structuredAppend;
     }
@@ -3501,8 +3485,15 @@ class QrParameters extends BaseJavaClass
      */
     public function setStructuredAppend(QrStructuredAppendParameters $value)
     {
-        $this->structuredAppend = $value;
-        $this->getJavaClass()->setStructuredAppend($value->getJavaClass());
+        try
+        {
+            $this->structuredAppend = $value;
+            $this->getJavaClass()->setStructuredAppend($value->getJavaClass());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -3510,7 +3501,7 @@ class QrParameters extends BaseJavaClass
      * about the used references for encoding the data in the symbol.
      * Current implementation consists all well known charset encodings.
      */
-    public function getQrECIEncoding() : int
+    public function getQrECIEncoding(): int
     {
         try
         {
@@ -3518,8 +3509,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3536,8 +3526,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3545,7 +3534,7 @@ class QrParameters extends BaseJavaClass
      * QR symbology type of BarCode's encoding mode.
      * Default value: QREncodeMode::AUTO.
      */
-    public function getQrEncodeMode() : int
+    public function getQrEncodeMode(): int
     {
         try
         {
@@ -3553,8 +3542,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3570,15 +3558,14 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
      */
-    public function getQrEncodeType() : int
+    public function getQrEncodeType(): int
     {
         try
         {
@@ -3586,8 +3573,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3602,17 +3588,16 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      *  Level of Reed-Solomon error correction for QR barcode.
      *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     *  @see QRErrorLevel.
+     * @see QRErrorLevel.
      */
-    public function getQrErrorLevel() : int
+    public function getQrErrorLevel(): int
     {
         try
         {
@@ -3620,15 +3605,14 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      *  Level of Reed-Solomon error correction for QR barcode.
      *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     *  @see QRErrorLevel.
+     * @see QRErrorLevel.
      */
     public function setQrErrorLevel(int $value): void
     {
@@ -3638,8 +3622,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3648,7 +3631,7 @@ class QrParameters extends BaseJavaClass
      * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
      * Default value is QRVersion::AUTO.
      */
-    public function getQrVersion() : int
+    public function getQrVersion(): int
     {
         try
         {
@@ -3656,8 +3639,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3674,15 +3656,14 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -3690,8 +3671,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3706,15 +3686,14 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets the encoding of codetext.
      */
-    public function getCodeTextEncoding() : string
+    public function getCodeTextEncoding(): string
     {
         try
         {
@@ -3722,15 +3701,14 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Sets the encoding of codetext.
      */
-    public function setCodeTextEncoding(string $value) : void
+    public function setCodeTextEncoding(string $value): void
     {
         try
         {
@@ -3738,8 +3716,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3748,7 +3725,7 @@ class QrParameters extends BaseJavaClass
      *
      * @return string that represents this QrParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -3756,8 +3733,7 @@ class QrParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -3765,7 +3741,7 @@ class QrParameters extends BaseJavaClass
 /**
  *
  * PDF417 parameters.
-     */
+ */
 class Pdf417Parameters extends BaseJavaClass
 {
     protected function init(): void
@@ -3776,7 +3752,7 @@ class Pdf417Parameters extends BaseJavaClass
      * Pdf417 symbology type of BarCode's compaction mode.
      * Default value: Pdf417CompactionMode::AUTO.
      */
-    public function getPdf417CompactionMode() : int
+    public function getPdf417CompactionMode(): int
     {
         try
         {
@@ -3784,8 +3760,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3801,8 +3776,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3811,7 +3785,7 @@ class Pdf417Parameters extends BaseJavaClass
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
      */
-    public function getPdf417ErrorLevel() : int
+    public function getPdf417ErrorLevel(): int
     {
         try
         {
@@ -3819,8 +3793,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3837,15 +3810,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
      */
-    public function getPdf417Truncate() : bool
+    public function getPdf417Truncate(): bool
     {
         try
         {
@@ -3853,8 +3825,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3869,15 +3840,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Columns count.
      */
-    public function getColumns() : int
+    public function getColumns(): int
     {
         try
         {
@@ -3885,8 +3855,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3901,15 +3870,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Rows count.
      */
-    public function getRows() : int
+    public function getRows(): int
     {
         try
         {
@@ -3917,8 +3885,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3933,15 +3900,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -3949,8 +3915,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3965,8 +3930,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3974,7 +3938,7 @@ class Pdf417Parameters extends BaseJavaClass
      * Getsmacro Pdf417 barcode's file ID.
      * Used for MacroPdf417.
      */
-    public function getPdf417MacroFileID() : int
+    public function getPdf417MacroFileID(): int
     {
         try
         {
@@ -3982,8 +3946,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -3999,15 +3962,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets macro Pdf417 barcode's segment ID, which starts from 0, to MacroSegmentsCount - 1.
      */
-    public function getPdf417MacroSegmentID() : int
+    public function getPdf417MacroSegmentID(): int
     {
         try
         {
@@ -4015,8 +3977,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4031,15 +3992,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets macro Pdf417 barcode segments count.
      */
-    public function getPdf417MacroSegmentsCount() : int
+    public function getPdf417MacroSegmentsCount(): int
     {
         try
         {
@@ -4047,8 +4007,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4063,8 +4022,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4072,9 +4030,16 @@ class Pdf417Parameters extends BaseJavaClass
      * Gets macro Pdf417 barcode file name.
      * @return
      */
-    public function getPdf417MacroFileName() : string
+    public function getPdf417MacroFileName(): string
     {
-        return java_cast($this->getJavaClass()->getPdf417MacroFileName(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroFileName(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4083,15 +4048,29 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroFileName(string $value)
     {
-        $this->getJavaClass()->setPdf417MacroFileName($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroFileName($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets macro Pdf417 barcode time stamp.
      */
-    public function getPdf417MacroTimeStamp() : DateTime
+    public function getPdf417MacroTimeStamp(): DateTime
     {
-        return new DateTime('@'.java_cast($this->getJavaClass()->getPdf417MacroTimeStamp(), "string"));
+        try
+        {
+            return new DateTime('@' . java_cast($this->getJavaClass()->getPdf417MacroTimeStamp(), "string"));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4099,15 +4078,29 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroTimeStamp(DateTime $value)
     {
-        $this->getJavaClass()->setPdf417MacroTimeStamp($value->getTimestamp()."");
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroTimeStamp($value->getTimestamp() . "");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets macro Pdf417 barcode sender name.
      */
-    public function getPdf417MacroSender() : string
+    public function getPdf417MacroSender(): string
     {
-        return java_cast($this->getJavaClass()->getPdf417MacroSender(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroSender(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4115,15 +4108,29 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroSender(string $value)
     {
-        $this->getJavaClass()->setPdf417MacroSender($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroSender($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets macro Pdf417 barcode addressee name.
      */
-    public function getPdf417MacroAddressee() : string
+    public function getPdf417MacroAddressee(): string
     {
-        return java_cast($this->getJavaClass()->getPdf417MacroAddressee(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroAddressee(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4131,16 +4138,30 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroAddressee(string $value)
     {
-        $this->getJavaClass()->setPdf417MacroAddressee($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroAddressee($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets or sets macro Pdf417 file size.
      * @return file size field contains the size in bytes of the entire source file.
      */
-    public function getPdf417MacroFileSize() : int
+    public function getPdf417MacroFileSize(): int
     {
-        return java_cast($this->getJavaClass()->getPdf417MacroFileSize(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroFileSize(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4149,16 +4170,30 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroFileSize(int $value)
     {
-        $this->getJavaClass()->setPdf417MacroFileSize($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroFileSize($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      *  Gets macro Pdf417 barcode checksum.
      * @return checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
      */
-    public function getPdf417MacroChecksum() : int
+    public function getPdf417MacroChecksum(): int
     {
-        return java_cast($this->getJavaClass()->getPdf417MacroChecksum(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroChecksum(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4167,13 +4202,20 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroChecksum(int $value)
     {
-        $this->getJavaClass()->setPdf417MacroChecksum($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroChecksum($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the encoding of codetext.
      */
-    public function getCodeTextEncoding() : string
+    public function getCodeTextEncoding(): string
     {
         try
         {
@@ -4181,15 +4223,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Sets the encoding of codetext.
      */
-    public function setCodeTextEncoding(string $value) : void
+    public function setCodeTextEncoding(string $value): void
     {
         try
         {
@@ -4197,8 +4238,7 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4207,9 +4247,16 @@ class Pdf417Parameters extends BaseJavaClass
      * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
      * Current implementation consists all well known charset encodings.
      */
-    public function getPdf417ECIEncoding() : int
+    public function getPdf417ECIEncoding(): int
     {
-        return java_cast($this->getJavaClass()->getPdf417ECIEncoding(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417ECIEncoding(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4217,17 +4264,31 @@ class Pdf417Parameters extends BaseJavaClass
      * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
      * Current implementation consists all well known charset encodings.
      */
-    public function setPdf417ECIEncoding(int $value) : void
+    public function setPdf417ECIEncoding(int $value): void
     {
-        $this->getJavaClass()->setPdf417ECIEncoding($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417ECIEncoding($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
      */
-    public function getPdf417MacroECIEncoding() : int
+    public function getPdf417MacroECIEncoding(): int
     {
-        return java_cast($this->getJavaClass()->getPdf417MacroECIEncoding(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroECIEncoding(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4235,18 +4296,31 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setPdf417MacroECIEncoding(int $value)
     {
-        $this->getJavaClass()->setPdf417MacroECIEncoding($value);
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroECIEncoding($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
-
 
     /**
      * Used to instruct the reader to interpret the data contained within the symbol
      * as programming for reader initialization
      * @return
      */
-    public function isReaderInitialization() : bool
+    public function isReaderInitialization(): bool
     {
-        return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4254,17 +4328,31 @@ class Pdf417Parameters extends BaseJavaClass
      * as programming for reader initialization
      * @param value
      */
-    public function setReaderInitialization(bool $value) : void
+    public function setReaderInitialization(bool $value): void
     {
-        $this->getJavaClass()->setReaderInitialization($value);
+        try
+        {
+            $this->getJavaClass()->setReaderInitialization($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      *  Function codeword for Code 128 emulation. Applied for MicroPDF417 only.  Ignored for PDF417 and MacroPDF417 barcodes.
      */
-    public function getCode128Emulation() : int
+    public function getCode128Emulation(): int
     {
-        return java_cast($this->getJavaClass()->getCode128Emulation(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getCode128Emulation(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4272,7 +4360,14 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setCode128Emulation(int $value): void
     {
-        $this->getJavaClass()->setCode128Emulation($value);
+        try
+        {
+            $this->getJavaClass()->setCode128Emulation($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -4280,7 +4375,7 @@ class Pdf417Parameters extends BaseJavaClass
      *
      * @return string that represents this Pdf417Parameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -4288,15 +4383,14 @@ class Pdf417Parameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
 
 /**
  * Supplement parameters. Used for Interleaved2of5, Standard2of5, EAN13, EAN8, UPCA, UPCE, ISBN, ISSN, ISMN.
-*/
+ */
 class SupplementParameters extends BaseJavaClass
 {
     private $_space;
@@ -4309,27 +4403,27 @@ class SupplementParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Supplement data following BarCode.
      */
-    public function getSupplementData() : ?string
+    public function getSupplementData(): ?string
     {
         try
         {
             $SupplementData = java_cast($this->getJavaClass()->getSupplementData(), "string");
-            if($SupplementData == "null")
+            if ($SupplementData == "null")
+            {
                 return null;
+            }
             return $SupplementData;
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4344,8 +4438,7 @@ class SupplementParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4355,7 +4448,7 @@ class SupplementParameters extends BaseJavaClass
      * @exception IllegalArgumentException
      * The Space parameter value is less than 0.
      */
-    public function getSupplementSpace() : Unit
+    public function getSupplementSpace(): Unit
     {
         try
         {
@@ -4363,8 +4456,7 @@ class SupplementParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4373,7 +4465,7 @@ class SupplementParameters extends BaseJavaClass
      *
      * @return string that represents this SupplementParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -4381,15 +4473,14 @@ class SupplementParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
 
 /**
  * MaxiCode parameters.
-*/
+ */
 class MaxiCodeParameters extends BaseJavaClass
 {
     protected function init(): void
@@ -4399,7 +4490,7 @@ class MaxiCodeParameters extends BaseJavaClass
     /**
      * Gets a MaxiCode encode mode.
      */
-    public function getMaxiCodeEncodeMode() : int
+    public function getMaxiCodeEncodeMode(): int
     {
         try
         {
@@ -4407,8 +4498,7 @@ class MaxiCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4423,15 +4513,14 @@ class MaxiCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : float
+    public function getAspectRatio(): float
     {
         try
         {
@@ -4439,8 +4528,7 @@ class MaxiCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4455,8 +4543,7 @@ class MaxiCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4465,7 +4552,7 @@ class MaxiCodeParameters extends BaseJavaClass
      *
      * @return string that represents this MaxiCodeParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -4473,8 +4560,7 @@ class MaxiCodeParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -4494,7 +4580,7 @@ class AztecParameters extends BaseJavaClass
      * Level of error correction of Aztec types of barcode.
      * Value should between 10 to 95.
      */
-    public function getAztecErrorLevel() : int
+    public function getAztecErrorLevel(): int
     {
         try
         {
@@ -4502,8 +4588,7 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4519,8 +4604,7 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4528,7 +4612,7 @@ class AztecParameters extends BaseJavaClass
      * Gets or sets a Aztec Symbol mode.
      * Default value: AztecSymbolMode::AUTO.
      */
-    public function getAztecSymbolMode() : int
+    public function getAztecSymbolMode(): int
     {
         try
         {
@@ -4536,8 +4620,7 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4553,15 +4636,14 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Height/Width ratio of 2D BarCode module.
      */
-    public function getAspectRatio() : int
+    public function getAspectRatio(): int
     {
         try
         {
@@ -4569,8 +4651,7 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4585,15 +4666,14 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets the encoding of codetext.
      */
-    public function getCodeTextEncoding() : string
+    public function getCodeTextEncoding(): string
     {
         try
         {
@@ -4601,15 +4681,14 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Sets the encoding of codetext.
      */
-    public function setCodeTextEncoding(string $value) : void
+    public function setCodeTextEncoding(string $value): void
     {
         try
         {
@@ -4617,8 +4696,7 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4627,7 +4705,7 @@ class AztecParameters extends BaseJavaClass
      *
      * @return string that represents this  AztecParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -4635,15 +4713,14 @@ class AztecParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
 
 /**
  * Codabar parameters.
-*/
+ */
 class CodabarParameters extends BaseJavaClass
 {
     // protected $javaClassName = "com.aspose.barcode.generation.CodabarParameters";
@@ -4658,7 +4735,7 @@ class CodabarParameters extends BaseJavaClass
      * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
      * @see CodabarChecksumMode.
      */
-    public function getCodabarChecksumMode() : int
+    public function getCodabarChecksumMode(): int
     {
         try
         {
@@ -4666,8 +4743,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4685,8 +4761,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4694,7 +4769,7 @@ class CodabarParameters extends BaseJavaClass
      * Start symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol::A
      */
-    public function getCodabarStartSymbol() : int
+    public function getCodabarStartSymbol(): int
     {
         try
         {
@@ -4702,8 +4777,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4719,8 +4793,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4728,7 +4801,7 @@ class CodabarParameters extends BaseJavaClass
      * Stop symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol::A
      */
-    public function getCodabarStopSymbol() : int
+    public function getCodabarStopSymbol(): int
     {
         try
         {
@@ -4736,8 +4809,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4753,8 +4825,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4763,7 +4834,7 @@ class CodabarParameters extends BaseJavaClass
      *
      * @return string that represents this CodabarParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -4771,8 +4842,7 @@ class CodabarParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -4792,11 +4862,9 @@ class CouponParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-
 
     /**
      * Space between main the BarCode and supplement BarCode in Unit value.
@@ -4804,7 +4872,7 @@ class CouponParameters extends BaseJavaClass
      * @exception IllegalArgumentException
      * The Space parameter value is less than 0.
      */
-    public function getSupplementSpace() : Unit
+    public function getSupplementSpace(): Unit
     {
         try
         {
@@ -4812,8 +4880,7 @@ class CouponParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4832,8 +4899,7 @@ class CouponParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4842,7 +4908,7 @@ class CouponParameters extends BaseJavaClass
      *
      * @return string that represents this CouponParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -4850,8 +4916,7 @@ class CouponParameters extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -4881,8 +4946,10 @@ final class FontUnit extends BaseJavaClass
 
     private static function initFontUnit($source)
     {
-        if($source instanceof FontUnit)
+        if ($source instanceof FontUnit)
+        {
             return $source->getJavaClass();
+        }
         return $source;
     }
 
@@ -4894,15 +4961,14 @@ final class FontUnit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets the face name of this Font.
      */
-    public function getFamilyName() : string
+    public function getFamilyName(): string
     {
         try
         {
@@ -4910,8 +4976,7 @@ final class FontUnit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4926,15 +4991,14 @@ final class FontUnit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Gets style information for this FontUnit.
      */
-    public function getStyle() : int
+    public function getStyle(): int
     {
         try
         {
@@ -4942,8 +5006,7 @@ final class FontUnit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4958,8 +5021,7 @@ final class FontUnit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -4969,7 +5031,7 @@ final class FontUnit extends BaseJavaClass
      * @exception IllegalArgumentException
      * The Size parameter value is less than or equal to 0.
      */
-    public function getSize() : Unit
+    public function getSize(): Unit
     {
         try
         {
@@ -4977,8 +5039,7 @@ final class FontUnit extends BaseJavaClass
         }
         catch (Exception $ex)
         {
-            $barcode_exception = new BarcodeException($ex);
-            throw $barcode_exception;
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
@@ -4986,7 +5047,7 @@ final class FontUnit extends BaseJavaClass
 /**
  *
  * Helper class for automatic codetext generation of the Extended Codetext Mode
- * 
+ *
  */
 class ExtCodetextBuilder extends BaseJavaClass
 {
@@ -4995,49 +5056,79 @@ class ExtCodetextBuilder extends BaseJavaClass
         parent::__construct($javaClass);
     }
 
-    function init(): void {
+    function init(): void
+    {
     }
+
     /**
      * Checks necessity to shield previous item by "\000000"
      *
      * @param Index Index in m_List
      * @return Necessity to shield
      */
-    public function isNeedToShieldItemFromPrevECI($Index) : bool
+    public function isNeedToShieldItemFromPrevECI($Index): bool
     {
-        return java_cast($this->getJavaClass()->isNeedToShieldItemFromPrevECI($Index), "boolean");
+        try
+        {
+            return java_cast($this->getJavaClass()->isNeedToShieldItemFromPrevECI($Index), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Clears extended codetext items
-     * 
+     *
      */
-    public function clear()  : void
+    public function clear(): void
     {
-        $this->getJavaClass()->clear();
+        try
+        {
+            $this->getJavaClass()->clear();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * 
+     *
      * Adds plain codetext to the extended codetext items
      *
      * @param codetext Codetext in unicode to add as extended codetext item
      */
-    public function addPlainCodetext(string $codetext) : void
+    public function addPlainCodetext(string $codetext): void
     {
-        $this->getJavaClass()->addPlainCodetext($codetext);
+        try
+        {
+            $this->getJavaClass()->addPlainCodetext($codetext);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * 
+     *
      * Adds codetext with Extended Channel Identifier
      *
      * @param ECIEncoding Extended Channel Identifier
      * @param codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
      */
-    public function addECICodetext(int $ECIEncoding,string $codetext) : void
+    public function addECICodetext(int $ECIEncoding, string $codetext): void
     {
-        $this->getJavaClass()->addECICodetext($ECIEncoding, $codetext);
+        try
+        {
+            $this->getJavaClass()->addECICodetext($ECIEncoding, $codetext);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -5045,9 +5136,16 @@ class ExtCodetextBuilder extends BaseJavaClass
      *
      * @return Return string of extended codetext
      */
-    public function getExtendedCodetext() : string
+    public function getExtendedCodetext(): string
     {
-        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
 }
@@ -5096,19 +5194,34 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
 
     function __construct()
     {
-        $java_class = new java(self::JAVA_CLASS_NAME);
-        parent::__construct($java_class);
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
-    function init():void {
+    function init(): void
+    {
     }
 
     /**
      * Adds FNC1 in first position to the extended codetext items
      */
-    function addFNC1FirstPosition() : void
+    function addFNC1FirstPosition(): void
     {
-        $this->getJavaClass()->addFNC1FirstPosition();
+        try
+        {
+            $this->getJavaClass()->addFNC1FirstPosition();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -5116,27 +5229,49 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
      *
      * @param codetext Value of the FNC1 in the second position
      */
-    function addFNC1SecondPosition($codetext)  : void
+    function addFNC1SecondPosition($codetext): void
     {
-        $this->getJavaClass()->addFNC1SecondPosition($codetext);
+        try
+        {
+            $this->getJavaClass()->addFNC1SecondPosition($codetext);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Adds Group Separator (GS - '\\u001D') to the extended codetext items
      */
-    function addFNC1GroupSeparator()  : void {
-        $this->getJavaClass()->addFNC1GroupSeparator();
+    function addFNC1GroupSeparator(): void
+    {
+        try
+        {
+            $this->getJavaClass()->addFNC1GroupSeparator();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * 
+     *
      * Generates Extended codetext from the extended codetext list.
      *
      * @return Extended codetext as string
      */
-    function getExtendedCodetext() : string
+    function getExtendedCodetext(): string
     {
-        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
 }
@@ -5155,20 +5290,36 @@ class PatchCodeParameters extends BaseJavaClass
     /**
      * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
      */
-    public function getExtraBarcodeText() : ?string
+    public function getExtraBarcodeText(): ?string
     {
-        $ExtraBarcodeText = java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
-        if($ExtraBarcodeText == "null")
-            return null;
-        return $ExtraBarcodeText;
+        try
+        {
+            $ExtraBarcodeText = java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
+            if ($ExtraBarcodeText == "null")
+            {
+                return null;
+            }
+            return $ExtraBarcodeText;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
      */
-    public function setExtraBarcodeText(string $value) : void
+    public function setExtraBarcodeText(string $value): void
     {
-        $this->getJavaClass()->setExtraBarcodeText($value);
+        try
+        {
+            $this->getJavaClass()->setExtraBarcodeText($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -5177,27 +5328,48 @@ class PatchCodeParameters extends BaseJavaClass
      *
      * @return
      */
-    public function getPatchFormat() : int
+    public function getPatchFormat(): int
     {
-        return java_cast($this->getJavaClass()->getPatchFormat(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getPatchFormat(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
      * Default value: PatchFormat::PATCH_ONLY
      */
-    public function setPatchFormat(int $value) : void
+    public function setPatchFormat(int $value): void
     {
-        $this->getJavaClass()->setPatchFormat($value);
+        try
+        {
+            $this->getJavaClass()->setPatchFormat($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Returns a human-readable string representation of this PatchCodeParameters.
      * @return A string that represents this PatchCodeParameters.
      */
-    public function toString() : string
+    public function toString(): string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        try
+        {
+            return java_cast($this->getJavaClass()->toString(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
 
@@ -5212,15 +5384,29 @@ class QrStructuredAppendParameters extends BaseJavaClass
 
     function __construct($javaClass)
     {
-        parent::__construct($javaClass);
+        try
+        {
+            parent::__construct($javaClass);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      *  Gets the QR structured append mode parity data.
      */
-    public function getParityByte() : int
+    public function getParityByte(): int
     {
-        return java_cast($this->getJavaClass()->getParityByte(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getParityByte(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -5228,15 +5414,29 @@ class QrStructuredAppendParameters extends BaseJavaClass
      */
     public function setParityByte(int $value)
     {
-        $this->getJavaClass()->setParityByte($value);
+        try
+        {
+            $this->getJavaClass()->setParityByte($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the index of the QR structured append mode barcode. Index starts from 0.
      */
-    public function getSequenceIndicator() : int
+    public function getSequenceIndicator(): int
     {
-        return java_cast($this->getJavaClass()->getSequenceIndicator(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getSequenceIndicator(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -5244,15 +5444,29 @@ class QrStructuredAppendParameters extends BaseJavaClass
      */
     public function setSequenceIndicator(int $value)
     {
-        $this->getJavaClass()->setSequenceIndicator($value);
+        try
+        {
+            $this->getJavaClass()->setSequenceIndicator($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
      * Gets the QR structured append mode barcodes quantity. Max value is 16.
      */
-    public function getTotalCount() : int
+    public function getTotalCount(): int
     {
-        return java_cast($this->getJavaClass()->getTotalCount(), "integer");
+        try
+        {
+            return java_cast($this->getJavaClass()->getTotalCount(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -5260,10 +5474,16 @@ class QrStructuredAppendParameters extends BaseJavaClass
      */
     public function setTotalCount(int $value)
     {
-        $this->getJavaClass()->setTotalCount($value);
+        try
+        {
+            $this->getJavaClass()->setTotalCount($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 }
-
 
 /**
  * Class BarcodeClassifications EncodeTypes classification
@@ -5332,7 +5552,6 @@ final class MacroCharacter
     const MACRO_06 = 6;
 }
 
-
 /**
  * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders
  */
@@ -5394,7 +5613,7 @@ final class FontStyle
 /**
  *
  * Specifies the start or stop symbol of the Codabar barcode specification.
-     */
+ */
 final class CodabarSymbol
 {
     private function __construct()
@@ -5422,7 +5641,7 @@ final class CodabarSymbol
 /**
  *
  * DataMatrix encoder's encoding mode, default to AUTO
-     */
+ */
 class  DataMatrixEncodeMode
 {
 
@@ -5442,7 +5661,6 @@ class  DataMatrixEncodeMode
      * Encode with the encoding specified in BarCodeBuilder.CodeTextEncoding
      */
     const CUSTOM = 7;
-
 
     /**
      * Uses C40 encoding. Encodes Upper-case alphanumeric, Lower case and special characters
@@ -5469,7 +5687,7 @@ class  DataMatrixEncodeMode
      * Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.
      * Extended codetext example: @"\ansix12:ANSIX12TEXT\ascii:backslash must be \\ doubled\edifact:EdifactEncodedText"
      * All backslashes (\) must be doubled in text.
-     * 
+     *
      * This sample shows how to do codetext in Extended Mode.
      * @code
      * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
@@ -5485,7 +5703,7 @@ class  DataMatrixEncodeMode
 /**
  *
  * Specifies the style of dashed border lines.
-     */
+ */
 class BorderDashStyle
 {
     /**
@@ -5514,7 +5732,7 @@ class BorderDashStyle
 /**
  *
  * ITF14 barcode's border type
-     */
+ */
 class ITF14BorderType
 {
     /**
@@ -5542,7 +5760,7 @@ class ITF14BorderType
 /**
  *
  * Encoding mode for QR barcodes. It is recomended to Use AUTO with CodeTextEncoding = Encoding.UTF8 for latin symbols or digits and UTF_8_BOM for unicode symbols.
-     */
+ */
 class QREncodeMode
 {
     /**
@@ -5566,7 +5784,7 @@ class QREncodeMode
      * Encode codetext with value set in the ECI_ENCODING property. It can be problems with some old (pre 2006) barcode scaners.
      *
      * Example how to use ECI encoding
-     *@code
+     * @code
      *     $generator = new BarcodeGenerator(EncodeTypes::QR);
      *     $generator->setCodeText("12345TEXT");
      *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
@@ -5591,7 +5809,7 @@ class QREncodeMode
      * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
      *
      * Example how to use FNC1 first position in Extended Mode
-     *@code
+     * @code
      *      $textBuilder = new QrExtCodetextBuilder();
      *      $textBuilder->addPlainCodetext("000%89%%0");
      *      $textBuilder->addFNC1GroupSeparator();
@@ -5602,10 +5820,10 @@ class QREncodeMode
      *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
      *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
      *      $generator->save("d:/test.png", "PNG");
-     *@endcode
+     * @endcode
      *
      * This sample shows how to use FNC1 second position in Extended Mode.
-     *@code
+     * @code
      *    //create codetext
      *    $textBuilder = new QrExtCodetextBuilder();
      *    $textBuilder->addFNC1SecondPosition("12");
@@ -5615,10 +5833,10 @@ class QREncodeMode
      *    $generator->setCodeText($textBuilder->getExtendedCodetext());
      *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
      *    $generator->save("d:/test.png", "PNG");
-     *@endcode
+     * @endcode
      *
      *    This sample shows how to use multi ECI mode in Extended Mode.
-     *@code
+     * @code
      *   //create codetext
      *   $textBuilder = new QrExtCodetextBuilder();
      *   $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
@@ -5631,17 +5849,16 @@ class QREncodeMode
      *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
      *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
      *   $generator->save("d:/test.png", "PNG");
-     *@endcode
+     * @endcode
      */
     const EXTENDED_CODETEXT = 5;
 
 }
 
-
 /**
  *
  * Specify the type of the ECC to encode.
-     */
+ */
 class  DataMatrixEccType
 {
     /**
@@ -5677,7 +5894,7 @@ class  DataMatrixEccType
 /**
  * Version of QR Code.
  * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
-*/
+ */
 class QRVersion
 {
     /**
@@ -5730,7 +5947,6 @@ class QRVersion
      * Specifies version 9 with 53 x 53 modules.
      */
     const VERSION_09 = "9";
-
 
     /**
      * Specifies version 10 with 57 x 57 modules.
@@ -5811,7 +6027,6 @@ class QRVersion
      * Specifies version 25 with 117 x 117 modules.
      */
     const VERSION_25 = "25";
-
 
     /**
      * Specifies version 26 with 121 x 121 modules.
@@ -5988,11 +6203,10 @@ class Pdf417ErrorLevel
     const LEVEL_8 = "8";
 }
 
-
 /**
  *
  * Pdf417 barcode's compation mode
-     */
+ */
 class  Pdf417CompactionMode
 {
     /**
@@ -6016,7 +6230,7 @@ class  Pdf417CompactionMode
 /**
  *
  * Level of Reed-Solomon error correction. From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     */
+ */
 class QRErrorLevel
 {
     /**
@@ -6037,12 +6251,11 @@ class QRErrorLevel
     const LEVEL_H = "3";
 }
 
-
 /**
  *
  * QR / MicroQR selector mode. Select FORCE_QR for standard QR symbols, AUTO for MicroQR.
  * FORCE_MICRO_QR is used for strongly MicroQR symbol generation if it is possible.
-     */
+ */
 class  QREncodeType
 {
     /**
@@ -6062,7 +6275,7 @@ class  QREncodeType
 /**
  *
  * Specifies the checksum algorithm for Codabar
-     */
+ */
 class CodabarChecksumMode
 {
 
@@ -6080,7 +6293,7 @@ class CodabarChecksumMode
 /**
  *
  * Codetext location
-     */
+ */
 class  CodeLocation
 {
     /**
@@ -6099,11 +6312,10 @@ class  CodeLocation
     const NONE = "2";
 }
 
-
 /**
  *
  * Font size mode.
-     */
+ */
 class  FontMode
 {
     /**
@@ -6120,7 +6332,7 @@ class  FontMode
 /**
  *
  * Text alignment.
-     */
+ */
 class  TextAlignment
 {
     /**
@@ -6200,7 +6412,7 @@ class GraphicsUnit
     const DISPLAY = 1;
 
     /**
-     * 	Specifies a device pixel as the unit of measure.
+     *    Specifies a device pixel as the unit of measure.
      */
     const PIXEL = 2;
 
@@ -6210,7 +6422,7 @@ class GraphicsUnit
     const POINT = 3;
 
     /**
-     * 	Specifies the inch as the unit of measure.
+     *    Specifies the inch as the unit of measure.
      */
     const INCH = 4;
 
@@ -6593,7 +6805,7 @@ class EncodeTypes
  *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF_8);
  *     $generator->save("test.png", "PNG");
  * @endcode
-     */
+ */
 class ECIEncodings
 {
 
@@ -6735,7 +6947,7 @@ class EnableChecksum
     /**
      * Do not use checksum.
      */
-     const NO = 2;
+    const NO = 2;
 }
 
 /**
@@ -6799,4 +7011,5 @@ class BarCodeImageFormat
      */
     const PNG = 3;
 }
+
 ?>
