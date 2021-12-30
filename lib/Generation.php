@@ -28,11 +28,10 @@ class BarcodeGenerator extends BaseJavaClass
 
     /**
      * BarcodeGenerator constructor.
-     * @param args can take following combinations of arguments:
-     *    1) Barcode symbology type. Use EncodeTypes class to setup a symbology
-     *    2) Text to be encoded. Should be encoded in UTF-8 encoding
+     * @param int|null $encodeType Barcode symbology type. Use EncodeTypes class to setup a symbology
+     * @param string|null $codeText Text to be encoded. Should be encoded in UTF-8 encoding
      * @code
-     *   $barcodeGenerator = new BarcodeGenerator(EncodeTypes::EAN_14, "332211");
+     *      $barcodeGenerator = new BarcodeGenerator(EncodeTypes::EAN_14, "332211");
      * @endcode
      * @throws BarcodeException
      */
@@ -110,12 +109,16 @@ class BarcodeGenerator extends BaseJavaClass
     /**
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
-     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
+     *
+     * @param int $format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, EMF)
+     * @return string base64 representation of image.
+     *
      * @code
      *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      *  $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
      * @endcode
-     * @return base64 representation of image.
+     *
+     * @throws BarcodeException
      */
     public function generateBarCodeImage(int $format): string
     {
@@ -132,12 +135,14 @@ class BarcodeGenerator extends BaseJavaClass
 
     /**
      * Save barcode image to specific file in specific format.
-     * @param $filePath Path to save to.
-     * @param format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
+     * @param string $filePath Path to save to.
+     * @param int $format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, EMF)
+     *
      * @code
      *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
      *  $generator->save(file_path, BarCodeImageFormat::PNG);
      * @endcode
+     * @throws BarcodeException
      */
     public function save(string $filePath, int $format): void  //TODO BARCODEPHP-87
     {
@@ -574,7 +579,7 @@ class BarcodeParameters extends BaseJavaClass
      * Used for ITF, PZN, PharmaCode, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, IATA2of5, VIN, DeutschePost, OPC, Code32, DataLogic2of5, PatchCode, Code39Extended, Code39Standard
      *
      * @exception IllegalArgumentException
-     * The WideNarrowRatio parameter value is less than or equal to 0.
+     * @param float $value The WideNarrowRatio parameter value is less than or equal to 0.
      */
     public function setWideNarrowRatio(float $value): void
     {
@@ -604,9 +609,10 @@ class BarcodeParameters extends BaseJavaClass
     }
 
     /**
-     * Gets a value indicating whether bars filled.
+     *
      * Only for 1D barcodes.
-     * Default value: true.
+     * @return bool Gets a value indicating whether bars filled.
+     * @throws BarcodeException
      */
     public function getFilledBars(): bool
     {
@@ -623,7 +629,8 @@ class BarcodeParameters extends BaseJavaClass
     /**
      * Sets a value indicating whether bars filled.
      * Only for 1D barcodes.
-     * Default value: true.
+     * @param bool $value Sets a value indicating whether bars filled.
+     * @throws BarcodeException
      */
     public function setFilledBars(bool $value): void
     {
@@ -896,7 +903,7 @@ class BaseGenerationParameters extends BaseJavaClass
     /**
      * Background color of the barcode image.
      * Default value: #FFFFFF
-     * @return vaue of background color.
+     * @return string value of background color.
      */
     public function getBackColor(): string
     {
@@ -919,7 +926,8 @@ class BaseGenerationParameters extends BaseJavaClass
     /**
      * Background color of the barcode image.
      * Default value: #FFFFFF
-     * @see Color.
+     * @param string $hexValue  value of background color.
+     * @throws BarcodeException
      */
     public function setBackColor(string $hexValue): void
     {
@@ -937,9 +945,8 @@ class BaseGenerationParameters extends BaseJavaClass
      * Gets the resolution of the BarCode image.
      * One value for both dimensions.
      * Default value: 96 dpi.
-     *
-     * @exception IllegalArgumentException
-     * The Resolution parameter value is less than or equal to 0.
+     * @return float The Resolution parameter value is less than or equal to 0.
+     * @throws BarcodeException
      */
     public function getResolution(): float
     {
@@ -957,9 +964,8 @@ class BaseGenerationParameters extends BaseJavaClass
      * Sets the resolution of the BarCode image.
      * One value for both dimensions.
      * Default value: 96 dpi.
-     *
-     * @exception IllegalArgumentException
-     * The Resolution parameter value is less than or equal to 0.
+     * @param float $value The Resolution parameter value is less than or equal to 0.
+     * @throws BarcodeException
      */
     public function setResolution(float $value): void
     {
@@ -1008,7 +1014,6 @@ class BaseGenerationParameters extends BaseJavaClass
      *     $generator->getParameters()->setRotationAngle(7);
      *     $generator->save("test.png");
      * @endcode
-     *
      */
     public function setRotationAngle(float $value): void
     {
@@ -1209,7 +1214,6 @@ class BaseGenerationParameters extends BaseJavaClass
 }
 
 /**
- *
  * Barcode image border parameters
  */
 class BorderParameters extends BaseJavaClass
@@ -1299,7 +1303,7 @@ class BorderParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this BorderParameters.
      *
-     * @return A string that represents this BorderParameters.
+     * @return string A string that represents this BorderParameters.
      */
     public function toString(): string
     {
@@ -1434,13 +1438,10 @@ class  ChecksumValidation
 }
 
 /**
- *
  * Caption parameters.
  */
 class CaptionParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.CaptionParameters";
-
     private $font;
     private $padding;
 
@@ -1628,7 +1629,7 @@ class CaptionParameters extends BaseJavaClass
 
     /**
      * Caption test horizontal alignment.
-     * Default value: StringAlignment.Center.
+     * Default value: StringAlignment.CENTER.
      */
     public function setAlignment(int $value): void
     {
@@ -1883,11 +1884,11 @@ class Unit extends BaseJavaClass
      * Determines whether this instance and a specified object,
      * which must also be a Unit object, have the same value.
      *
-     * @param obj The Unit to compare to this instance.
+     * @param Unit $obj The Unit to compare to this instance.
      * @return true if obj is a Unit and its value is the same as this instance;
      * otherwise, false. If obj is null, the method returns false.
      */
-    public function equals($obj): bool
+    public function equals(Unit $obj): bool
     {
         try
         {
@@ -1901,12 +1902,10 @@ class Unit extends BaseJavaClass
 }
 
 /**
- *
  * Paddings parameters.
  */
 class Padding extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.Padding";
 
     private $top;
     private $bottom;
@@ -2048,7 +2047,7 @@ class Padding extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this Padding.
      *
-     * @return A string that represents this Padding.
+     * @return string A string that represents this Padding.
      */
     public function toString(): string
     {
@@ -2064,12 +2063,10 @@ class Padding extends BaseJavaClass
 }
 
 /**
- *
  * Codetext parameters.
  */
 class CodetextParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.CodetextParameters";
 
     private $font;
     private $space;
@@ -2352,7 +2349,7 @@ class CodetextParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this CodetextParameters.
      *
-     * @return A string that represents this CodetextParameters.
+     * @return string A string that represents this CodetextParameters.
      */
     public function toString(): string
     {
@@ -2373,7 +2370,6 @@ class CodetextParameters extends BaseJavaClass
  */
 class PostalParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.PostalParameters";
 
     private $postalShortBarHeight;
 
@@ -2423,7 +2419,7 @@ class PostalParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this PostalParameters.
      *
-     * @return A string that represents this PostalParameters.
+     * @return string A string that represents this PostalParameters.
      */
     public function toString(): string
     {
@@ -2521,7 +2517,7 @@ class AustralianPostParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this AustralianPostParameters.
      *
-     * @return A string that represents this AustralianPostParameters.
+     * @return string A string that represents this AustralianPostParameters.
      */
     public function toString(): string
     {
@@ -2537,12 +2533,10 @@ class AustralianPostParameters extends BaseJavaClass
 }
 
 /**
- *
  * Codablock parameters.
  */
 class CodablockParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.CodablockParameters";
 
     protected function init(): void
     {
@@ -2661,7 +2655,6 @@ class CodablockParameters extends BaseJavaClass
  */
 class DataBarParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.DataBarParameters";
 
     protected function init(): void
     {
@@ -2838,7 +2831,6 @@ class DataBarParameters extends BaseJavaClass
 }
 
 /**
- *
  * DataMatrix parameters.
  */
 class DataMatrixParameters extends BaseJavaClass
@@ -3076,7 +3068,7 @@ class DataMatrixParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this DataMatrixParameters.
      *
-     * @return presentation of this DataMatrixParameters.
+     * @return string presentation of this DataMatrixParameters.
      */
     public function toString(): string
     {
@@ -3093,12 +3085,10 @@ class DataMatrixParameters extends BaseJavaClass
 }
 
 /**
- *
  * Code16K parameters.
  */
 class Code16KParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.Code16KParameters";
 
     protected function init(): void
     {
@@ -3201,7 +3191,7 @@ class Code16KParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this Code16KParameters.
      *
-     * @return A string that represents this Code16KParameters.
+     * @return string A string that represents this Code16KParameters.
      */
     public function toString(): string
     {
@@ -3217,7 +3207,6 @@ class Code16KParameters extends BaseJavaClass
 }
 
 /**
- *
  * DotCode parameters.
  */
 class DotCodeParameters extends BaseJavaClass
@@ -3313,7 +3302,6 @@ class DotCodeParameters extends BaseJavaClass
  */
 class ITFParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.ITFParameters";
 
     private $itfBorderThickness;
 
@@ -3399,7 +3387,7 @@ class ITFParameters extends BaseJavaClass
      * Default value: 10, meaning if xDimension = 2px than quiet zones will be 20px.
      *
      * @exception IllegalArgumentException
-     * The QuietZoneCoef parameter value is less than 10.
+     * @return int The QuietZoneCoef parameter value is less than 10.
      */
     public function getQuietZoneCoef(): int
     {
@@ -3418,7 +3406,7 @@ class ITFParameters extends BaseJavaClass
      * Default value: 10, meaning if xDimension = 2px than quiet zones will be 20px.
      *
      * @exception IllegalArgumentException
-     * The QuietZoneCoef parameter value is less than 10.
+     * @param int The QuietZoneCoef parameter value is less than 10.
      */
     public function setQuietZoneCoef(int $value): void
     {
@@ -3451,14 +3439,11 @@ class ITFParameters extends BaseJavaClass
 }
 
 /**
- *
  * QR parameters.
  */
 class QrParameters extends BaseJavaClass
 {
     private $structuredAppend;
-
-    // protected $javaClassName = "com.aspose.barcode.generation.QrParameters";
 
     protected function init(): void
     {
@@ -3739,7 +3724,6 @@ class QrParameters extends BaseJavaClass
 }
 
 /**
- *
  * PDF417 parameters.
  */
 class Pdf417Parameters extends BaseJavaClass
@@ -4044,7 +4028,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      * Sets macro Pdf417 barcode file name.
-     * @param value
+     * @param string $value
      */
     public function setPdf417MacroFileName(string $value)
     {
@@ -4150,7 +4134,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      * Gets or sets macro Pdf417 file size.
-     * @return file size field contains the size in bytes of the entire source file.
+     * @return int file size field contains the size in bytes of the entire source file.
      */
     public function getPdf417MacroFileSize(): int
     {
@@ -4166,7 +4150,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      * Gets or sets macro Pdf417 file size.
-     * @param value The file size field contains the size in bytes of the entire source file.
+     * @param int $value The file size field contains the size in bytes of the entire source file.
      */
     public function setPdf417MacroFileSize(int $value)
     {
@@ -4182,7 +4166,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      *  Gets macro Pdf417 barcode checksum.
-     * @return checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     * @return int checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
      */
     public function getPdf417MacroChecksum(): int
     {
@@ -4198,7 +4182,7 @@ class Pdf417Parameters extends BaseJavaClass
 
     /**
      *  Sets macro Pdf417 barcode checksum.
-     * @param value The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     * @param int $value The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
      */
     public function setPdf417MacroChecksum(int $value)
     {
@@ -4326,7 +4310,7 @@ class Pdf417Parameters extends BaseJavaClass
     /**
      * Used to instruct the reader to interpret the data contained within the symbol
      * as programming for reader initialization
-     * @param value
+     * @param bool $value
      */
     public function setReaderInitialization(bool $value): void
     {
@@ -4570,7 +4554,6 @@ class MaxiCodeParameters extends BaseJavaClass
  */
 class AztecParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.AztecParameters";
 
     protected function init(): void
     {
@@ -4723,7 +4706,6 @@ class AztecParameters extends BaseJavaClass
  */
 class CodabarParameters extends BaseJavaClass
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.CodabarParameters";
 
     protected function init(): void
     {
@@ -5045,9 +5027,7 @@ final class FontUnit extends BaseJavaClass
 }
 
 /**
- *
  * Helper class for automatic codetext generation of the Extended Codetext Mode
- *
  */
 class ExtCodetextBuilder extends BaseJavaClass
 {
@@ -5061,26 +5041,7 @@ class ExtCodetextBuilder extends BaseJavaClass
     }
 
     /**
-     * Checks necessity to shield previous item by "\000000"
-     *
-     * @param Index Index in m_List
-     * @return Necessity to shield
-     */
-    public function isNeedToShieldItemFromPrevECI($Index): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->isNeedToShieldItemFromPrevECI($Index), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Clears extended codetext items
-     *
      */
     public function clear(): void
     {
@@ -5095,10 +5056,9 @@ class ExtCodetextBuilder extends BaseJavaClass
     }
 
     /**
-     *
      * Adds plain codetext to the extended codetext items
      *
-     * @param codetext Codetext in unicode to add as extended codetext item
+     * @param string $codetext Codetext in unicode to add as extended codetext item
      */
     public function addPlainCodetext(string $codetext): void
     {
@@ -5113,11 +5073,10 @@ class ExtCodetextBuilder extends BaseJavaClass
     }
 
     /**
-     *
      * Adds codetext with Extended Channel Identifier
      *
-     * @param ECIEncoding Extended Channel Identifier
-     * @param codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
+     * @param int ECIEncoding Extended Channel Identifier
+     * @param string codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
      */
     public function addECICodetext(int $ECIEncoding, string $codetext): void
     {
@@ -5134,7 +5093,7 @@ class ExtCodetextBuilder extends BaseJavaClass
     /**
      * Generate extended codetext from generation items list
      *
-     * @return Return string of extended codetext
+     * @return string Return string of extended codetext
      */
     public function getExtendedCodetext(): string
     {
@@ -5227,9 +5186,9 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
     /**
      * Adds FNC1 in second position to the extended codetext items
      *
-     * @param codetext Value of the FNC1 in the second position
+     * @param string $codetext Value of the FNC1 in the second position
      */
-    function addFNC1SecondPosition($codetext): void
+    function addFNC1SecondPosition(string $codetext): void
     {
         try
         {
@@ -5257,10 +5216,9 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
     }
 
     /**
-     *
      * Generates Extended codetext from the extended codetext list.
      *
-     * @return Extended codetext as string
+     * @return string Extended codetext as string
      */
     function getExtendedCodetext(): string
     {
@@ -5284,8 +5242,6 @@ class PatchCodeParameters extends BaseJavaClass
     protected function init(): void
     {
     }
-
-    private $extraBarcodeText;
 
     /**
      * Specifies codetext for an extra QR barcode, when PatchCode is generated in page mode.
@@ -5358,7 +5314,7 @@ class PatchCodeParameters extends BaseJavaClass
 
     /**
      * Returns a human-readable string representation of this PatchCodeParameters.
-     * @return A string that represents this PatchCodeParameters.
+     * @return string A string that represents this PatchCodeParameters.
      */
     public function toString(): string
     {
@@ -5701,7 +5657,6 @@ class  DataMatrixEncodeMode
 }
 
 /**
- *
  * Specifies the style of dashed border lines.
  */
 class BorderDashStyle
@@ -5730,7 +5685,6 @@ class BorderDashStyle
 }
 
 /**
- *
  * ITF14 barcode's border type
  */
 class ITF14BorderType
@@ -5758,7 +5712,6 @@ class ITF14BorderType
 }
 
 /**
- *
  * Encoding mode for QR barcodes. It is recomended to Use AUTO with CodeTextEncoding = Encoding.UTF8 for latin symbols or digits and UTF_8_BOM for unicode symbols.
  */
 class QREncodeMode
@@ -5856,7 +5809,6 @@ class QREncodeMode
 }
 
 /**
- *
  * Specify the type of the ECC to encode.
  */
 class  DataMatrixEccType
@@ -6204,7 +6156,6 @@ class Pdf417ErrorLevel
 }
 
 /**
- *
  * Pdf417 barcode's compation mode
  */
 class  Pdf417CompactionMode
@@ -6228,7 +6179,6 @@ class  Pdf417CompactionMode
 }
 
 /**
- *
  * Level of Reed-Solomon error correction. From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
  */
 class QRErrorLevel
@@ -6252,7 +6202,6 @@ class QRErrorLevel
 }
 
 /**
- *
  * QR / MicroQR selector mode. Select FORCE_QR for standard QR symbols, AUTO for MicroQR.
  * FORCE_MICRO_QR is used for strongly MicroQR symbol generation if it is possible.
  */
@@ -6273,7 +6222,6 @@ class  QREncodeType
 }
 
 /**
- *
  * Specifies the checksum algorithm for Codabar
  */
 class CodabarChecksumMode
@@ -6291,7 +6239,6 @@ class CodabarChecksumMode
 }
 
 /**
- *
  * Codetext location
  */
 class  CodeLocation
@@ -6313,7 +6260,6 @@ class  CodeLocation
 }
 
 /**
- *
  * Font size mode.
  */
 class  FontMode
@@ -6330,7 +6276,6 @@ class  FontMode
 }
 
 /**
- *
  * Text alignment.
  */
 class  TextAlignment
@@ -6690,6 +6635,11 @@ class EncodeTypes
     const  RM_4_SCC = 42;
 
     /**
+     * Represents Royal Mail Mailmark barcode.
+     */
+    const MAILMARK = 71;
+
+    /**
      * Specifies that the data should be encoded with GS1 Databar omni-directional barcode specification.
      */
     const  DATABAR_OMNI_DIRECTIONAL = 43;
@@ -6772,10 +6722,10 @@ class EncodeTypes
      *
      * An example of the input string:
      * @code
-     * BarCodeBuilder->setCodetext("514141100906(8110)106141416543213500110000310123196000"),
+     * BarcodeGenerator->setCodetext("514141100906(8110)106141416543213500110000310123196000"),
+     * @endcode
      * where UPCA part is "514141100906", DATABAR part is "(8110)106141416543213500110000310123196000".
      * To change the caption, use barCodeBuilder->getCaptionAbove()->setText("company prefix + offer code");
-     * @endcode
      */
     const  UPCA_GS_1_DATABAR_COUPON = 63;
 
@@ -6977,9 +6927,7 @@ class Code128Emulation
 }
 
 /**
- * <p>
  * Specifies the file format of the image.
- * </p>
  */
 class BarCodeImageFormat
 {
@@ -7010,6 +6958,12 @@ class BarCodeImageFormat
      * </p>
      */
     const PNG = 3;
+
+    /**
+     * Specifies the Enhanced Metafile (EMF) image format.
+     * (Supported only on Windows platform, on *nix platforms is saved as PNG)
+     */
+    const EMF = 6;
 }
 
 ?>

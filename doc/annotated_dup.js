@@ -63,6 +63,7 @@ var annotated_dup =
     [ "\u202AMacroCharacter", "dc/daf/classMacroCharacter.html", "dc/daf/classMacroCharacter" ],
     [ "\u202AMailmark2DCodetext", "d4/d70/classMailmark2DCodetext.html", "d4/d70/classMailmark2DCodetext" ],
     [ "\u202AMailmark2DType", "d7/d21/classMailmark2DType.html", "d7/d21/classMailmark2DType" ],
+    [ "\u202AMailmarkCodetext", "d0/d1f/classMailmarkCodetext.html", "d0/d1f/classMailmarkCodetext" ],
     [ "\u202AMaxiCodeParameters", "d6/dd0/classMaxiCodeParameters.html", "d6/dd0/classMaxiCodeParameters" ],
     [ "\u202AOneDExtendedParameters", "dc/dbd/classOneDExtendedParameters.html", "dc/dbd/classOneDExtendedParameters" ],
     [ "\u202APadding", "d0/d63/classPadding.html", "d0/d63/classPadding" ],

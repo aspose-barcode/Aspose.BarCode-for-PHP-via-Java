@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.11</span>
+   &#160;<span id="projectnumber">21.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -163,7 +163,8 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a> constructor. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">args</td><td>&#x202A;can take following combinations of arguments: 1) Barcode symbology type. Use <a class="el" href="../../d5/d0f/classEncodeTypes.html">EncodeTypes</a> class to setup a symbology 2) Text to be encoded. Should be encoded in UTF-8 encoding <div class="fragment"><div class="line">$barcodeGenerator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a648c6b1fc293a4140b06825b1bcee509">EncodeTypes::EAN_14</a>, <span class="stringliteral">&quot;332211&quot;</span>);</div>
+    <tr><td class="paramtype">int&#160;|&#160;null</td><td class="paramname">$encodeType</td><td>&#x202A;Barcode symbology type. Use <a class="el" href="../../d5/d0f/classEncodeTypes.html">EncodeTypes</a> class to setup a symbology </td></tr>
+    <tr><td class="paramtype">string&#160;|&#160;null</td><td class="paramname">$codeText</td><td>&#x202A;Text to be encoded. Should be encoded in UTF-8 encoding <div class="fragment"><div class="line">$barcodeGenerator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a648c6b1fc293a4140b06825b1bcee509">EncodeTypes::EAN_14</a>, <span class="stringliteral">&quot;332211&quot;</span>);</div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
@@ -193,15 +194,22 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Generate the barcode image under current settings. This sample shows how to create and save a barcode image. </p><dl class="params"><dt>Parameters</dt><dd>
+<p class="DocNodeLTR">Generate the barcode image under current settings. This sample shows how to create and save a barcode image.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">format</td><td>&#x202A;value of <a class="el" href="../../d7/d7c/classBarCodeImageFormat.html">BarCodeImageFormat</a> (PNG, BMP, JPEG, GIF) <div class="fragment"><div class="line">$generator = <span class="keyword">new</span> BarCodeGenerator(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a54e1794f088d79314ab5ddfaf3038ef6">EncodeTypes::CODE_128</a>);</div>
-<div class="line">$image = $generator-&gt;generateBarCodeImage(<a class="code" href="../../d7/d7c/classBarCodeImageFormat.html#a07f661390cabae97572bc6db85b8640d">BarCodeImageFormat::PNG</a>);</div>
-</div><!-- fragment --> </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$format</td><td>&#x202A;value of <a class="el" href="../../d7/d7c/classBarCodeImageFormat.html">BarCodeImageFormat</a> (PNG, BMP, JPEG, GIF, EMF) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;base64 representation of image. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;string base64 representation of image.</dd></dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> BarCodeGenerator(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a54e1794f088d79314ab5ddfaf3038ef6">EncodeTypes::CODE_128</a>);</div>
+<div class="line">$image = $generator-&gt;generateBarCodeImage(<a class="code" href="../../d7/d7c/classBarCodeImageFormat.html#a07f661390cabae97572bc6db85b8640d">BarCodeImageFormat::PNG</a>);</div>
+</div><!-- fragment --><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d8/d71/classBarcodeException.html">BarcodeException</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -413,10 +421,16 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Save barcode image to specific file in specific format. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$filePath</td><td>&#x202A;Path to save to. </td></tr>
-    <tr><td class="paramname">format</td><td>&#x202A;value of <a class="el" href="../../d7/d7c/classBarCodeImageFormat.html">BarCodeImageFormat</a> (PNG, BMP, JPEG, GIF) <div class="fragment"><div class="line">$generator = <span class="keyword">new</span> BarCodeGenerator(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a54e1794f088d79314ab5ddfaf3038ef6">EncodeTypes::CODE_128</a>);</div>
+    <tr><td class="paramtype">string</td><td class="paramname">$filePath</td><td>&#x202A;Path to save to. </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$format</td><td>&#x202A;value of <a class="el" href="../../d7/d7c/classBarCodeImageFormat.html">BarCodeImageFormat</a> (PNG, BMP, JPEG, GIF, EMF)</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> BarCodeGenerator(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a54e1794f088d79314ab5ddfaf3038ef6">EncodeTypes::CODE_128</a>);</div>
 <div class="line">$generator-&gt;save(file_path, <a class="code" href="../../d7/d7c/classBarCodeImageFormat.html#a07f661390cabae97572bc6db85b8640d">BarCodeImageFormat::PNG</a>);</div>
-</div><!-- fragment --> </td></tr>
+</div><!-- fragment --> <dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d8/d71/classBarcodeException.html">BarcodeException</a></td><td></td></tr>
   </table>
   </dd>
 </dl>

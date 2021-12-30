@@ -41,6 +41,7 @@ var hierarchy =
       [ "\u202AFontUnit", "d1/d76/classFontUnit.html", null ],
       [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", [
         [ "\u202AMailmark2DCodetext", "d4/d70/classMailmark2DCodetext.html", null ],
+        [ "\u202AMailmarkCodetext", "d0/d1f/classMailmarkCodetext.html", null ],
         [ "\u202ASwissQRCodetext", "dd/df6/classSwissQRCodetext.html", null ]
       ] ],
       [ "\u202AITFParameters", "db/d00/classITFParameters.html", null ],

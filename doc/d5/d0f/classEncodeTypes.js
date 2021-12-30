@@ -42,6 +42,7 @@ var classEncodeTypes =
     [ "\u202AITF_14", "d5/d0f/classEncodeTypes.html#ac176d1dd8c1912f45f16f8f5b8637ece", null ],
     [ "\u202AITF_6", "d5/d0f/classEncodeTypes.html#a96dccb45c146a3d2a691f736fe6a6ef3", null ],
     [ "\u202AMACRO_PDF_417", "d5/d0f/classEncodeTypes.html#a4aee1630839ea3550b643eb84e7e3626", null ],
+    [ "\u202AMAILMARK", "d5/d0f/classEncodeTypes.html#a7a213d97ed95e113c5d6242f7cde820e", null ],
     [ "\u202AMATRIX_2_OF_5", "d5/d0f/classEncodeTypes.html#a33eb6ee83e7a4b85a6e9315af0d2e9a0", null ],
     [ "\u202AMAXI_CODE", "d5/d0f/classEncodeTypes.html#a353fc282a845181933c8c15da5dfed69", null ],
     [ "\u202AMICRO_PDF_417", "d5/d0f/classEncodeTypes.html#ad4b82d08a2c66da031451ab2e61f4ebe", null ],

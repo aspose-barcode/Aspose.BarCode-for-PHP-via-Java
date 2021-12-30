@@ -1,6 +1,6 @@
 var classQRExtendedParameters =
 [
-    [ "\u202Aequals", "d6/daf/classQRExtendedParameters.html#a33f3717c1c68655bfd75c89b31f5d51f", null ],
+    [ "\u202Aequals", "d6/daf/classQRExtendedParameters.html#a5dbf259fa1e10aab13e2855593ee80c8", null ],
     [ "\u202AgetJavaClass", "d6/daf/classQRExtendedParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "d6/daf/classQRExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetQRStructuredAppendModeBarCodeIndex", "d6/daf/classQRExtendedParameters.html#ad21abde47468bfe638d6edab60c3f165", null ],

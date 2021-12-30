@@ -1,7 +1,7 @@
 var classUnit =
 [
     [ "\u202A__construct", "df/dd9/classUnit.html#acafa3615de9d2d871e1fad52e5674c3c", null ],
-    [ "\u202Aequals", "df/dd9/classUnit.html#a849f1f9d16a6a05ad7f9249ebd3ec437", null ],
+    [ "\u202Aequals", "df/dd9/classUnit.html#a303d62d0e7d4101a3211c98704d411a8", null ],
     [ "\u202AgetDocument", "df/dd9/classUnit.html#af4a3b84611ea35d45059538ae3989e3c", null ],
     [ "\u202AgetInches", "df/dd9/classUnit.html#a8bdeeaa3c91440afc9235c30f1d14933", null ],
     [ "\u202AgetJavaClass", "df/dd9/classUnit.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],

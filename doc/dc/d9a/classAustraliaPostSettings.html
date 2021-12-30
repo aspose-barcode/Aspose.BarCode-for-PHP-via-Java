@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.11</span>
+   &#160;<span id="projectnumber">21.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -192,7 +192,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is <a class="el" href="../../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5">CustomerInformationInterpretingType.OTHER</a>. </p><dl class="section return"><dt>Returns</dt><dd>&#x202A;The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode </dd></dl>
+<p class="DocNodeLTR">Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is <a class="el" href="../../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5">CustomerInformationInterpretingType.OTHER</a>. </p><dl class="section return"><dt>Returns</dt><dd>&#x202A;int The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode </dd></dl>
 
 </div>
 </div>
@@ -211,9 +211,17 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method. CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".</p>
-<p class="DocNodeLTR">Example</p>
-<p class="DocNodeLTR">$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610">EncodeTypes::AUSTRALIA_POST</a>, "5912345678AB"); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE); $image = generator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG); $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($image, null, <a class="el" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>); $reader-&gt;getBarcodeSettings()-&gt;getAustraliaPost()-&gt;setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE); $reader-&gt;getBarcodeSettings()-&gt;getAustraliaPost()-&gt;setIgnoreEndingFillingPatternsForCTable(true); foreach($reader-&gt;readBarCodes() as $result) echo("BarCode Type: ".$result-&gt;getCodeType()); echo("BarCode CodeText: ".$result-&gt;getCodeText()); }</p>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding </dd></dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610">EncodeTypes::AUSTRALIA_POST</a>, <span class="stringliteral">&quot;5912345678AB&quot;</span>);</div>
+<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#ae5a5ecbb0c3de4738c615cc8ce68ce3d">CustomerInformationInterpretingType::C_TABLE</a>);</div>
+<div class="line">$image = generator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($image, <span class="keyword">null</span>, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;getAustraliaPost()-&gt;setCustomerInformationInterpretingType(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#ae5a5ecbb0c3de4738c615cc8ce68ce3d">CustomerInformationInterpretingType::C_TABLE</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;getAustraliaPost()-&gt;setIgnoreEndingFillingPatternsForCTable(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.$result-&gt;getCodeType());</div>
+<div class="line">    echo(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>&#x202A;bool The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding </dd></dl>
 
 </div>
 </div>
@@ -361,7 +369,7 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is <a class="el" href="../../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5">CustomerInformationInterpretingType.OTHER</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$value</td><td>&#x202A;The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$value</td><td>&#x202A;The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode </td></tr>
   </table>
   </dd>
 </dl>
@@ -383,6 +391,29 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p class="DocNodeLTR">The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method. CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".</p>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610">EncodeTypes::AUSTRALIA_POST</a>, <span class="stringliteral">&quot;5912345678AB&quot;</span>);</div>
+<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getAustralianPost()-&gt;setAustralianPostEncodingTable(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#ae5a5ecbb0c3de4738c615cc8ce68ce3d">CustomerInformationInterpretingType::C_TABLE</a>);</div>
+<div class="line">$image = generator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($image, <span class="keyword">null</span>, <a class="code" href="../../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593">DecodeType::AUSTRALIA_POST</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;getAustraliaPost()-&gt;setCustomerInformationInterpretingType(<a class="code" href="../../d5/d35/classCustomerInformationInterpretingType.html#ae5a5ecbb0c3de4738c615cc8ce68ce3d">CustomerInformationInterpretingType::C_TABLE</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;getAustraliaPost()-&gt;setIgnoreEndingFillingPatternsForCTable(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.$result-&gt;getCodeType());</div>
+<div class="line">    echo(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">bool</td><td class="paramname">$value</td><td>&#x202A;The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d8/d71/classBarcodeException.html">BarcodeException</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

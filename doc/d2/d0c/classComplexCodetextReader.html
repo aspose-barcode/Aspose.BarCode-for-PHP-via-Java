@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.11</span>
+   &#160;<span id="projectnumber">21.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -98,6 +98,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a2b90f615d6de83d366f68db5e78930f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f80fc7a8f2299477b67f6ac3b3accd6"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html#a8f80fc7a8f2299477b67f6ac3b3accd6">tryDecodeMailmark2D</a> (string $encodedCodetext)</td></tr>
 <tr class="separator:a8f80fc7a8f2299477b67f6ac3b3accd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef1023158290a10c1ce408f8bfed6384"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html#aef1023158290a10c1ce408f8bfed6384">tryDecodeMailmark</a> (string $encodedCodetext)</td></tr>
+<tr class="separator:aef1023158290a10c1ce408f8bfed6384"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html">ComplexCodetextReader</a> decodes codetext to specified complex barcode type.</p>
@@ -105,6 +107,39 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">$cr-&gt;read();</div>
 <div class="line">$result = <a class="code" href="../../d2/d0c/classComplexCodetextReader.html#a2b90f615d6de83d366f68db5e78930f6">ComplexCodetextReader::tryDecodeSwissQR</a>($cr-&gt;getCodeText(<span class="keyword">false</span>));</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="aef1023158290a10c1ce408f8bfed6384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef1023158290a10c1ce408f8bfed6384">&#9670;&nbsp;</a></span>tryDecodeMailmark()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static ComplexCodetextReader::tryDecodeMailmark </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>$encodedCodetext</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Decodes Mailmark Barcode C and L codetext. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">string</td><td class="paramname">$encodedCodetext</td><td>&#x202A;encoded codetext </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;MailmarkCodetext|null Mailmark Barcode C and L or null. </dd></dl>
+
+</div>
+</div>
 <a id="a8f80fc7a8f2299477b67f6ac3b3accd6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8f80fc7a8f2299477b67f6ac3b3accd6">&#9670;&nbsp;</a></span>tryDecodeMailmark2D()</h2>
 
@@ -130,11 +165,11 @@ Static Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Decodes Royal Mail Mailmark 2D codetext. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$encodedCodetext</td><td>&#x202A;encoded codetext </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$encodedCodetext</td><td>&#x202A;encoded codetext </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;decoded Royal Mail Mailmark 2D or null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;<a class="el" href="../../d4/d70/classMailmark2DCodetext.html">Mailmark2DCodetext</a> decoded Royal Mail Mailmark 2D or null. </dd></dl>
 
 </div>
 </div>
@@ -164,11 +199,11 @@ Static Public Member Functions</h2></td></tr>
 <p class="DocNodeLTR">Decodes SwissQR codetext.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">encodedCodetext</td><td>&#x202A;encoded codetext </td></tr>
+    <tr><td class="paramname">string</td><td>&#x202A;encodedCodetext encoded codetext </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;decoded <a class="el" href="../../dd/df6/classSwissQRCodetext.html">SwissQRCodetext</a> or null. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;<a class="el" href="../../dd/df6/classSwissQRCodetext.html">SwissQRCodetext</a> decoded <a class="el" href="../../dd/df6/classSwissQRCodetext.html">SwissQRCodetext</a> or null. </dd></dl>
 
 </div>
 </div>

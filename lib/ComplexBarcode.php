@@ -42,7 +42,7 @@ final class Address extends BaseJavaClass
      * or address line 1 and 2. Before setting the fields, the address type is Undetermined.
      * If fields of both types are set, the address type becomes Conflicting.
      *
-     * Value: The address type.
+     * @return int The address type.
      */
     public function getType(): int
     {
@@ -52,7 +52,7 @@ final class Address extends BaseJavaClass
     /**
      * Gets the name, either the first and last name of a natural person or the
      * company name of a legal person.
-     * Value: The name.
+     * @return string The name.
      */
     public function getName(): string
     {
@@ -69,7 +69,7 @@ final class Address extends BaseJavaClass
     /**
      * Sets the name, either the first and last name of a natural person or the
      * company name of a legal person.
-     * Value: The name.
+     * @param string $value  The name.
      */
     public function setName(string $value): void
     {
@@ -94,7 +94,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for combined elements addresses and is optional.
      *
-     * Value: The address line 1.
+     * @return string The address line 1.
      */
     public function getAddressLine1(): string
     {
@@ -118,7 +118,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for combined elements addresses and is optional.
      *
-     * Value: The address line 1.
+     * @param string $value The address line 1.
      */
     public function setAddressLine1(string $value): void
     {
@@ -138,7 +138,7 @@ final class Address extends BaseJavaClass
      * Setting this field sets the address type to AddressType.CombinedElements unless it's already
      * AddressType.Structured, in which case it becomes AddressType.Conflicting.
      * This field is only used for combined elements addresses. For this type, it's mandatory.
-     * Value: The address line 2.
+     * @return string The address line 2.
      */
     public function getAddressLine2(): string
     {
@@ -158,7 +158,7 @@ final class Address extends BaseJavaClass
      * Setting this field sets the address type to AddressType.CombinedElements unless it's already
      * AddressType.Structured, in which case it becomes AddressType.Conflicting.
      * This field is only used for combined elements addresses. For this type, it's mandatory.
-     * Value: The address line 2.
+     * @param string $value The address line 2.
      */
     public function setAddressLine2(string $value): void
     {
@@ -178,7 +178,7 @@ final class Address extends BaseJavaClass
      * Setting this field sets the address type to AddressType.Structured unless it's already
      * AddressType.CombinedElements, in which case it becomes AddressType.Conflicting.
      * This field is only used for structured addresses and is optional.
-     * Value: The street.
+     * @return string The street.
      */
     public function getStreet(): string
     {
@@ -203,7 +203,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses and is optional.
      *
-     * Value: The street.
+     * @param string $value The street.
      */
     public function setStreet(string $value): void
     {
@@ -225,7 +225,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses and is optional.
      *
-     * Value: The house number.
+     * @return string The house number.
      */
     public function getHouseNo(): string
     {
@@ -247,7 +247,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses and is optional.
      *
-     * Value: The house number.
+     * @param string $value The house number.
      */
     public function setHouseNo(string $value): void
     {
@@ -269,7 +269,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
      *
-     * Value: The postal code.
+     * @param string The postal code.
      */
     public function getPostalCode(): string
     {
@@ -291,7 +291,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
      *
-     * Value: The postal code.
+     * @param string $value The postal code.
      */
     public function setPostalCode(string $value): void
     {
@@ -313,7 +313,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
      *
-     * Value: The town or city.
+     * @return string The town or city.
      */
     public function getTown(): string
     {
@@ -335,7 +335,7 @@ final class Address extends BaseJavaClass
      *
      * This field is only used for structured addresses. For this type, it's mandatory.
      *
-     * Value: The town or city.
+     * @param string $value The town or city.
      */
     public function setTown(string $value): void
     {
@@ -354,7 +354,7 @@ final class Address extends BaseJavaClass
      *
      * The country code is mandatory unless the entire address contains null or emtpy values.
      *
-     * Value: The ISO country code.
+     * @return  string The ISO country code.
      */
     public function getCountryCode(): string
     {
@@ -373,7 +373,7 @@ final class Address extends BaseJavaClass
      *
      * The country code is mandatory unless the entire address contains null or emtpy values.
      *
-     * Value: The ISO country code.
+     * @param string $value The ISO country code.
      */
     public function setCountryCode(string $value): void
     {
@@ -411,8 +411,8 @@ final class Address extends BaseJavaClass
 
     /**
      * Determines whether the specified object is equal to the current object.
-     * @param obj The object to compare with the current object.
-     * @return true if the specified object is equal to the current object; otherwise, false.
+     * @param Address $obj The object to compare with the current object.
+     * @return bool true if the specified object is equal to the current object; otherwise, false.
      */
     public function equals(Address $obj): bool
     {
@@ -428,7 +428,7 @@ final class Address extends BaseJavaClass
 
     /**
      * Gets the hash code for this instance.
-     * @return A hash code for the current object.
+     * @return int A hash code for the current object.
      */
     public function hashCode(): int
     {
@@ -548,8 +548,8 @@ final class AlternativeScheme extends BaseJavaClass
 
     /**
      * Determines whether the specified object is equal to the current object.
-     * @param obj The object to compare with the current object.
-     * @return true if the specified object is equal to the current object; otherwise, false.
+     * @param AlternativeScheme $obj The object to compare with the current object.
+     * @return bool true if the specified object is equal to the current object; otherwise, false.
      */
     public function equals(AlternativeScheme $obj): bool
     {
@@ -565,7 +565,7 @@ final class AlternativeScheme extends BaseJavaClass
 
     /**
      * Gets the hash code for this instance.
-     * @return  hash code for the current object.
+     * @return int hash code for the current object.
      */
     public function hashCode(): int
     {
@@ -602,8 +602,8 @@ final class ComplexCodetextReader
     /**
      * Decodes SwissQR codetext.
      *
-     * @param encodedCodetext encoded codetext
-     * @return decoded SwissQRCodetext or null.
+     * @param string encodedCodetext encoded codetext
+     * @return SwissQRCodetext decoded SwissQRCodetext or null.
      */
     public static function tryDecodeSwissQR(string $encodedCodetext): SwissQRCodetext
     {
@@ -620,8 +620,8 @@ final class ComplexCodetextReader
 
     /**
      * Decodes Royal Mail Mailmark 2D codetext.
-     * @param $encodedCodetext encoded codetext
-     * @return decoded Royal Mail Mailmark 2D or null.
+     * @param string $encodedCodetext encoded codetext
+     * @return Mailmark2DCodetext decoded Royal Mail Mailmark 2D or null.
      */
     public static function tryDecodeMailmark2D(string $encodedCodetext): Mailmark2DCodetext
     {
@@ -634,6 +634,25 @@ final class ComplexCodetextReader
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * Decodes Mailmark Barcode C and L codetext.
+     * @param string $encodedCodetext encoded codetext
+     * @return MailmarkCodetext|null Mailmark Barcode C and L or null.
+     */
+    public static function tryDecodeMailmark(string $encodedCodetext) :?MailmarkCodetext
+    {
+        $res = new MailmarkCodetext(null);
+        try
+        {
+            $res->initFromString($encodedCodetext);
+        }
+        catch (Exception $e)
+        {
+            return null;
+        }
+        return $res;
     }
 }
 
@@ -831,8 +850,8 @@ final class SwissQRBill extends BaseJavaClass
      *
      * Account numbers must be valid IBANs of a bank of Switzerland or
      * Liechtenstein. Spaces are allowed in the account number.
-     *
-     * Value: The creditor account number.
+     * @param string $value Value: The creditor account number.
+     * @throws BarcodeException
      */
     public function setAccount(string $value): void
     {
@@ -848,7 +867,7 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Gets the creditor address.
-     * Value: The creditor address.
+     * @return Address The creditor address.
      */
     public function getCreditor(): Address
     {
@@ -857,7 +876,8 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Sets the creditor address.
-     * Value: The creditor address.
+     * @param Address $value The creditor address.
+     * @throws BarcodeException
      */
     public function setCreditor(Address $value): void
     {
@@ -882,7 +902,7 @@ final class SwissQRBill extends BaseJavaClass
      * (corresponding to ISR reference form) or a valid creditor reference
      * according to ISO 11649 ("RFxxxx"). Both may contain spaces for formatting.
      *
-     * Value: The creditor payment reference.
+     * @return string The creditor payment reference.
      */
     public function getReference(): string
     {
@@ -906,7 +926,7 @@ final class SwissQRBill extends BaseJavaClass
      * (corresponding to ISR reference form) or a valid creditor reference
      * according to ISO 11649 ("RFxxxx"). Both may contain spaces for formatting.
      *
-     * Value: The creditor payment reference.
+     * @param string $value The creditor payment reference.
      */
     public function setReference(string $value): void
     {
@@ -927,7 +947,7 @@ final class SwissQRBill extends BaseJavaClass
      * Whitespace is removed from the reference
      *
      * @exception ArgumentException rawReference contains invalid characters.
-     * @param rawReference The raw reference.
+     * @param string $rawReference The raw reference.
      */
     public function createAndSetCreditorReference(string $rawReference): void
     {
@@ -947,7 +967,7 @@ final class SwissQRBill extends BaseJavaClass
      * The debtor is optional. If it is omitted, both setting this field to
      * null or setting an address with all null or empty values is ok.
      *
-     * Value: The debtor address.
+     * return Address The debtor address.
      */
     public function getDebtor(): Address
     {
@@ -960,7 +980,7 @@ final class SwissQRBill extends BaseJavaClass
      * The debtor is optional. If it is omitted, both setting this field to
      * null or setting an address with all null or empty values is ok.
      *
-     * Value: The debtor address.
+     * @param Address The debtor address.
      */
     public function setDebtor(Address $value): void
     {
@@ -977,7 +997,7 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Gets the additional unstructured message.
-     * Value: The unstructured message.
+     * @return string The unstructured message.
      */
     public function getUnstructuredMessage(): string
     {
@@ -993,7 +1013,7 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Sets the additional unstructured message.
-     * Value: The unstructured message.
+     * @param string $value The unstructured message.
      */
     public function setUnstructuredMessage(string $value): void
     {
@@ -1009,7 +1029,7 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Gets the additional structured bill information.
-     * Value: The structured bill information.
+     * @return string The structured bill information.
      */
     public function getBillInformation(): string
     {
@@ -1025,7 +1045,7 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Sets the additional structured bill information.
-     * Value: The structured bill information.
+     * @param string The structured bill information.
      */
     public function setBillInformation(string $value): void
     {
@@ -1044,7 +1064,7 @@ final class SwissQRBill extends BaseJavaClass
      *
      * A maximum of two schemes with parameters are allowed.
      *
-     * Value: The alternative payment schemes.
+     * @return array The alternative payment schemes.
      */
     public function getAlternativeSchemes(): array
     {
@@ -1063,7 +1083,7 @@ final class SwissQRBill extends BaseJavaClass
      *
      * A maximum of two schemes with parameters are allowed.
      *
-     * Value: The alternative payment schemes.
+     * @param array $value The alternative payment schemes.
      */
     public function setAlternativeSchemes(array $value): void
     {
@@ -1084,8 +1104,8 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Determines whether the specified object is equal to the current object.
-     * @param obj The object to compare with the current object.
-     * @return true if the specified object is equal to the current object; otherwise, false.
+     * @param SwissQRBill $obj The object to compare with the current object.
+     * @return bool true if the specified object is equal to the current object; otherwise, false.
      */
     public function equals(SwissQRBill $obj): bool
     {
@@ -1101,7 +1121,7 @@ final class SwissQRBill extends BaseJavaClass
 
     /**
      * Gets the hash code for this instance.
-     * @return A hash code for the current object.
+     * @return int A hash code for the current object.
      */
     public function hashCode(): int
     {
@@ -1147,7 +1167,7 @@ final class SwissQRCodetext extends IComplexCodetext
     /**
      * Creates an instance of SwissQRCodetext.
      *
-     * @param bill SwissQR bill data
+     * @param SwissQRBill $bill SwissQR bill data
      * @throws BarcodeException
      */
     public function __construct(?SwissQRBill $bill)
@@ -1188,7 +1208,7 @@ final class SwissQRCodetext extends IComplexCodetext
     /**
      * Construct codetext from SwissQR bill data
      *
-     * @return Constructed codetext
+     * @return string Constructed codetext
      */
     public function getConstructedCodetext(): string
     {
@@ -1205,9 +1225,9 @@ final class SwissQRCodetext extends IComplexCodetext
     /**
      * Initializes Bill with constructed codetext.
      *
-     * @param constructedCodetext Constructed codetext.
+     * @param string $constructedCodetext Constructed codetext.
      */
-    public function initFromString(string $constructedCodetext): void
+    public function initFromString($constructedCodetext): void
     {
         try
         {
@@ -1223,7 +1243,7 @@ final class SwissQRCodetext extends IComplexCodetext
     /**
      * Gets barcode type.
      *
-     * @return Barcode type.
+     * @return int Barcode type.
      */
     public function getBarcodeType(): int
     {
@@ -1295,12 +1315,13 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
     /**
      * Generates complex barcode image under current settings.
      * @param int format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
-     * Example:
+     * @code
      *    $swissQRCodetext = new SwissQRCodetext(null);
      *    $swissQRCodetext->getBill()->setAccount("Account");
      *    $swissQRCodetext->getBill()->setBillInformation("BillInformation");
      *    $cg = new ComplexBarcodeGenerator($swissQRCodetext);
      *    $res = $cg->generateBarCodeImage(BarcodeImageFormat::PNG);
+     * @endcode
      * @return string base64 representation of image.
      */
     public function generateBarcodeImage(int $format): string
@@ -1320,12 +1341,13 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      * Save barcode image to specific file in specific format.
      * @param $filePath string Path to save to.
      * @param int format  value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
-     * Example:
+     * @code:
      *    $swissQRCodetext = new SwissQRCodetext(null);
      *    $swissQRCodetext->getBill()->setAccount("Account");
      *    $swissQRCodetext->getBill()->setBillInformation("BillInformation");
      *    $cg = new ComplexBarcodeGenerator($swissQRCodetext);
      *    $res = $cg->save("filePath.png", BarcodeImageFormat::PNG);
+     * @endcode
      */
     public function save(string $filePath, int $format): void
     {
@@ -1338,6 +1360,149 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+}
+
+
+/**
+ * Class for encoding and decoding the text embedded in the 4-state Royal Mailmark code.
+ */
+final class MailmarkCodetext extends IComplexCodetext
+{
+    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwMailmarkCodetext";
+    /**
+     * "0" – Null or Test
+     * "1" – Letter
+     * "2" – Large Letter
+     */
+    public function getFormat():int { return java_cast($this->getJavaClass()->getFormat(), "int"); }
+    /**
+     * "0" – Null or Test
+     * "1" – LetterN
+     * "2" – Large Letter
+     */
+    public function setFormat(int $value){ $this->getJavaClass()->setFormat($value); }
+
+    /**
+     * Currently "1" – For Mailmark barcode (0 and 2 to 9 and A to Z spare for future use)
+     */
+    public function getVersionID():int{ return java_cast($this->getJavaClass()->getVersionID(), "int"); }
+
+    /**
+     * Currently "1" – For Mailmark barcode (0 and 2 to 9 and A to Z spare for future use)
+     */
+    public function setVersionID(int $value){ $this->getJavaClass()->setVersionID($value); }
+
+    /**
+     * "0" - Null or Test
+     * "1" - 1C (Retail)
+     * "2" - 2C (Retail)
+     * "3" - 3C (Retail)
+     * "4" - Premium (RetailPublishing Mail) (for potential future use)
+     * "5" - Deferred (Retail)
+     * "6" - Air (Retail) (for potential future use)
+     * "7" - Surface (Retail) (for potential future use)
+     * "8" - Premium (Network Access)
+     * "9" - Standard (Network Access)
+     */
+    public function  getClass_():string{ return java_cast($this->getJavaClass()->getClass_(), "string"); }
+
+    /**
+     * "0" - Null or Test
+     * "1" - 1C (Retail)
+     * "2" - 2C (Retail)
+     * "3" - 3C (Retail)
+     * "4" - Premium (RetailPublishing Mail) (for potential future use)
+     * "5" - Deferred (Retail)
+     * "6" - Air (Retail) (for potential future use)
+     * "7" - Surface (Retail) (for potential future use)
+     * "8" - Premium (Network Access)
+     * "9" - Standard (Network Access)
+     */
+    public function setClass(string $value){ $this->getJavaClass()->setClass($value); }
+
+    /**
+     * Maximum values are 99 for Barcode C and 999999 for Barcode L.
+     */
+    public function getSupplychainID():int{ return java_cast($this->getJavaClass()->getSupplychainID(), "int"); }
+    /**
+     * Maximum values are 99 for Barcode C and 999999 for Barcode L.
+     */
+    public function setSupplychainID(int $value){ $this->getJavaClass()->setSupplychainID($value); }
+
+    /**
+     * Maximum value is 99999999.
+     */
+    public function getItemID():int{ return java_cast($this->getJavaClass()->getItemID(), "int"); }
+    /**
+     * Maximum value is 99999999.
+     */
+    public function setItemID(int $value){ $this->getJavaClass()->setItemID($value); }
+
+    /**
+     * The PC and DP must comply with a PAF format.
+     * Nine character string denoting international "XY11     " (note the 5 trailing spaces) or a pattern
+     * of characters denoting a domestic sorting code.
+     * A domestic sorting code consists of an outward postcode, an inward postcode, and a Delivery Point Suffix.
+     */
+    public function getDestinationPostCodePlusDPS():string{ return java_cast($this->getJavaClass()->getDestinationPostCodePlusDPS(), "string"); }
+
+    /**
+     * The PC and DP must comply with a PAF format.
+     * Nine character string denoting international "XY11     " (note the 5 trailing spaces) or a pattern
+     * of characters denoting a domestic sorting code.
+     * A domestic sorting code consists of an outward postcode, an inward postcode, and a Delivery Point Suffix.
+     */
+    public function setDestinationPostCodePlusDPS(string $value){ $this->getJavaClass()->setDestinationPostCodePlusDPS($value); }
+
+    /**
+     * Initializes a new instance of the {@code MailmarkCodetext} class.
+     */
+    public function __construct(?MailmarkCodetext $mailmarkCodetext)
+    {
+        $javaClass = null;
+        if (is_null($mailmarkCodetext))
+        {
+            $javaClass = new java(self::$javaClassName);
+        }
+        else
+        {
+            $javaClass = new java(self::$javaClassName, $mailmarkCodetext->getJavaClass());
+        }
+        parent::__construct($javaClass);
+    }
+
+    protected function init():void {}
+
+    /**
+     * Construct codetext from Mailmark data.
+     *
+     * @return string Constructed codetext
+     */
+    public function getConstructedCodetext():string
+    {
+        return $this->getJavaClass()->getConstructedCodetext();
+    }
+
+    /**
+     * Initializes Mailmark data from constructed codetext.
+     *
+     * @param string $constructedCodetext Constructed codetext.
+     */
+    public function initFromString($constructedCodetext):void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * Gets barcode type.
+     *
+     * @return int Barcode type.
+     */
+    public function getBarcodeType():int
+    {
+        $barcode_type = java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        return $barcode_type;
     }
 }
 
@@ -1867,7 +2032,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Initializes Mailmark data from constructed codetext.
      * @param string $constructedCodetext Constructed codetext.
      */
-    public function initFromString(string $constructedCodetext): void
+    public function initFromString($constructedCodetext): void
     {
         try
         {
@@ -1885,7 +2050,8 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getBarcodeType(): int
     {
-        return EncodeTypes::DATA_MATRIX;
+        $barcode_type = java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        return $barcode_type;
     }
 }
 
@@ -1918,13 +2084,13 @@ abstract class IComplexCodetext extends BaseJavaClass
      * Initializes instance with constructed codetext.
      * @param string $constructedCodetext Constructed codetext.
      */
-    abstract function initFromString(string $constructedCodetext): void;
+    public abstract function initFromString(string $constructedCodetext): void;
 
     /**
      * Gets barcode type.
      * @return int Barcode type.
      */
-    abstract function getBarcodeType(): int;
+    abstract function getBarcodeType():int;
 }
 
 /**
@@ -1947,9 +2113,6 @@ class Mailmark2DType
      */
     const TYPE_9 = 2;
 
-    /// <summary>
-    ///
-    /// </summary>
     /**
      * 16 x 48 modules
      */

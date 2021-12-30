@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.11</span>
+   &#160;<span id="projectnumber">21.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -135,7 +135,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a657e3148b4c9d6c9a872e254d4bc4c8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d5e/classBaseJavaClass.html#a657e3148b4c9d6c9a872e254d4bc4c8b">setJavaClass</a> ($javaClass)</td></tr>
 <tr class="separator:a657e3148b4c9d6c9a872e254d4bc4c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p class="DocNodeLTR">The main BarCode decoding parameters. Contains parameters which make influence on recognized data. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af3d7dd085c6dc70204f4b57957f4b3b7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3d7dd085c6dc70204f4b57957f4b3b7">&#9670;&nbsp;</a></span>__construct()</h2>
 
@@ -153,7 +155,13 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR"><a class="el" href="../../d2/df3/classBarcodeSettings.html">BarcodeSettings</a> copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">$settings</td><td>&#x202A;The source of the data </td></tr>
+    <tr><td class="paramtype"><a class="el" href="../../d2/df3/classBarcodeSettings.html">BarcodeSettings</a>&#160;|&#160;null</td><td class="paramname">$settings</td><td>&#x202A;The source of the data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d8/d71/classBarcodeException.html">BarcodeException</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -184,12 +192,6 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR"><a class="el" href="../../d2/df3/classBarcodeSettings.html">BarcodeSettings</a> copy constructor </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">$settings</td><td>&#x202A;The source of the data </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -207,7 +209,7 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Gets AustraliaPost decoding parameters </p><dl class="section return"><dt>Returns</dt><dd>&#x202A;The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology </dd></dl>
+<p class="DocNodeLTR">Gets AustraliaPost decoding parameters </p><dl class="section return"><dt>Returns</dt><dd>&#x202A;<a class="el" href="../../dc/d9a/classAustraliaPostSettings.html">AustraliaPostSettings</a> The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology </dd></dl>
 
 </div>
 </div>
@@ -226,8 +228,27 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Enable checksum validation during recognition for 1D and Postal barcodes. Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible. Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5 Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN Checksum always used: Rest symbologies</p>
-<p class="DocNodeLTR">Example</p>
-<p class="DocNodeLTR">$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a036247fd98d10ee2b9422c6f246b029b">EncodeTypes::EAN_13</a>, "1234567890128"); $generator-&gt;save("c:/test.png", BarcodeImageFormat::PNG); $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:/test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>); //checksum disabled $reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(ChecksumValidation::OFF); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: ".$result-&gt;getCodeText()); echo ("BarCode Value: " + result.getExtended().getOneD().getValue()); echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum()); } $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:\test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>); //checksum enabled $reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(ChecksumValidation::ON); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: " + result.CodeText); echo ("BarCode Value: " + result.getExtended().getOneD().getValue()); echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum()); } </p><dl class="section return"><dt>Returns</dt><dd>&#x202A;Enable checksum validation during recognition for 1D and Postal barcodes. </dd></dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a036247fd98d10ee2b9422c6f246b029b">EncodeTypes::EAN_13</a>, <span class="stringliteral">&quot;1234567890128&quot;</span>);</div>
+<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;c:/test.png&quot;</span>, BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:/test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>);</div>
+<div class="line"><span class="comment">//checksum disabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(<a class="code" href="../../d1/d68/classChecksumValidation.html#af4a502322ca4e78ca492e5166c72df84">ChecksumValidation::OFF</a>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + result.getExtended().getOneD().getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + result.getExtended().getOneD().getCheckSum());</div>
+<div class="line">}</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">@&quot;c:\test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>);</div>
+<div class="line"><span class="comment">//checksum enabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(<a class="code" href="../../d1/d68/classChecksumValidation.html#a06a83657c4a45e3ee746800324d06c3a">ChecksumValidation::ON</a>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> + result.CodeText);</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + result.getExtended().getOneD().getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + result.getExtended().getOneD().getCheckSum());</div>
+<div class="line">}</div>
+</div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>&#x202A;int Enable checksum validation during recognition for 1D and Postal barcodes. </dd></dl>
 
 </div>
 </div>
@@ -246,11 +267,21 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.</p>
-<p class="DocNodeLTR">Example</p>
-<p class="DocNodeLTR">$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5">EncodeTypes::QR</a>, "Слово")) $im = $generator-&gt;generateBarcodeImage(BarcodeImageFormat::PNG);</p>
-<p class="DocNodeLTR">//detects encoding for Unicode codesets is enabled $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($im, <a class="el" href="../../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7">DecodeType::QR</a>); $reader-&gt;getBarcodeSettings()-&gt;setDetectEncoding(true); foreach($reader-&gt;readBarCodes() as $result) echo ("BarCode CodeText: ".$result-&gt;getCodeText());</p>
-<p class="DocNodeLTR">//detect encoding is disabled $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($im, <a class="el" href="../../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7">DecodeType::QR</a>); $reader-&gt;getBarcodeSettings()-&gt;setDetectEncoding(false); foreach($reader-&gt;readBarCodes() as $result) echo ("BarCode CodeText: ".$result-&gt;getCodeText());</p>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;The flag which force engine to detect codetext encoding for Unicode codesets </dd></dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5">EncodeTypes::QR</a>, <span class="stringliteral">&quot;Слово&quot;</span>))</div>
+<div class="line">$im = $generator-&gt;generateBarcodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//detects encoding for Unicode codesets is enabled</span></div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($im, <a class="code" href="../../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7">DecodeType::QR</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setDetectEncoding(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//detect encoding is disabled</span></div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($im, <a class="code" href="../../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7">DecodeType::QR</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setDetectEncoding(<span class="keyword">false</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>&#x202A;bool The flag which force engine to detect codetext encoding for Unicode codesets </dd></dl>
 
 </div>
 </div>
@@ -319,12 +350,26 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.</p>
-<p class="DocNodeLTR">Example</p>
-<p class="DocNodeLTR">$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a1e8684410a29a9a17837984e655c69a7">EncodeTypes::GS_1_CODE_128</a>, "(02)04006664241007(37)1(400)7019590754"); $generator-&gt;save("c:/test.png", BarcodeImageFormat::PNG); $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:/test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</p>
-<p class="DocNodeLTR">//StripFNC disabled $reader-&gt;getBarcodeSettings()-&gt;setStripFNC(false); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: ".$result-&gt;getCodeText()); }</p>
-<p class="DocNodeLTR">$reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:/test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</p>
-<p class="DocNodeLTR">//StripFNC enabled $reader-&gt;getBarcodeSettings()-&gt;setStripFNC(true); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: ".$result-&gt;getCodeText()); }</p>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false. </dd></dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a1e8684410a29a9a17837984e655c69a7">EncodeTypes::GS_1_CODE_128</a>, <span class="stringliteral">&quot;(02)04006664241007(37)1(400)7019590754&quot;</span>);</div>
+<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;c:/test.png&quot;</span>, BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:/test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//StripFNC disabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setStripFNC(<span class="keyword">false</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:/test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//StripFNC enabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setStripFNC(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>&#x202A;bool Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false. </dd></dl>
 
 </div>
 </div>
@@ -421,10 +466,29 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Enable checksum validation during recognition for 1D and Postal barcodes. Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible. Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5 Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN Checksum always used: Rest symbologies</p>
-<p class="DocNodeLTR">Example</p>
-<p class="DocNodeLTR">$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a036247fd98d10ee2b9422c6f246b029b">EncodeTypes::EAN_13</a>, "1234567890128"); $generator-&gt;save("c:/test.png", BarcodeImageFormat::PNG); $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:/test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>); //checksum disabled $reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(ChecksumValidation::OFF); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: ".$result-&gt;getCodeText()); echo ("BarCode Value: " + result.getExtended().getOneD().getValue()); echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum()); } $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:\test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>); //checksum enabled $reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(ChecksumValidation::ON); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: " + result.CodeText); echo ("BarCode Value: " + result.getExtended().getOneD().getValue()); echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum()); } </p><dl class="params"><dt>Parameters</dt><dd>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a036247fd98d10ee2b9422c6f246b029b">EncodeTypes::EAN_13</a>, <span class="stringliteral">&quot;1234567890128&quot;</span>);</div>
+<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;c:/test.png&quot;</span>, BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:/test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>);</div>
+<div class="line"><span class="comment">//checksum disabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(<a class="code" href="../../d1/d68/classChecksumValidation.html#af4a502322ca4e78ca492e5166c72df84">ChecksumValidation::OFF</a>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + result.getExtended().getOneD().getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + result.getExtended().getOneD().getCheckSum());</div>
+<div class="line">}</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">@&quot;c:\test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>);</div>
+<div class="line"><span class="comment">//checksum enabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(<a class="code" href="../../d1/d68/classChecksumValidation.html#a06a83657c4a45e3ee746800324d06c3a">ChecksumValidation::ON</a>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> + result.CodeText);</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + result.getExtended().getOneD().getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + result.getExtended().getOneD().getCheckSum());</div>
+<div class="line">}</div>
+</div><!-- fragment --> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>&#x202A;Enable checksum validation during recognition for 1D and Postal barcodes. </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$value</td><td>&#x202A;Enable checksum validation during recognition for 1D and Postal barcodes. </td></tr>
   </table>
   </dd>
 </dl>
@@ -491,14 +555,28 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.</p>
-<p class="DocNodeLTR">Example</p>
-<p class="DocNodeLTR">$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a1e8684410a29a9a17837984e655c69a7">EncodeTypes::GS_1_CODE_128</a>, "(02)04006664241007(37)1(400)7019590754"); $generator-&gt;save("c:/test.png", BarcodeImageFormat::PNG); $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:/test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</p>
-<p class="DocNodeLTR">//StripFNC disabled $reader-&gt;getBarcodeSettings()-&gt;setStripFNC(false); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: ".$result-&gt;getCodeText()); }</p>
-<p class="DocNodeLTR">$reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:/test.png", <a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</p>
-<p class="DocNodeLTR">//StripFNC enabled $reader-&gt;getBarcodeSettings()-&gt;setStripFNC(true); foreach($reader-&gt;readBarCodes() as $result) { echo ("BarCode CodeText: ".$result-&gt;getCodeText()); }</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a1e8684410a29a9a17837984e655c69a7">EncodeTypes::GS_1_CODE_128</a>, <span class="stringliteral">&quot;(02)04006664241007(37)1(400)7019590754&quot;</span>);</div>
+<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;c:/test.png&quot;</span>, BarcodeImageFormat::PNG);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:/test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//StripFNC disabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setStripFNC(<span class="keyword">false</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:/test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//StripFNC enabled</span></div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setStripFNC(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">{</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>&#x202A;Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false. </td></tr>
+    <tr><td class="paramtype">bool</td><td class="paramname">$value</td><td>&#x202A;Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false. </td></tr>
   </table>
   </dd>
 </dl>

@@ -24,14 +24,13 @@ class BarCodeReader extends BaseJavaClass
     private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.recognition.MwBarCodeReader";
 
     /**
-     * Initializes a new instance of the BarCodeReader
-     * @param args can take following combinations of arguments:
-     *    1) image encoded as base64 string or path to image
-     *    2) image encoded as base64 string and the array of objects by type DecodeType
-     *    3) image encoded as base64 string, array of object by type Rectangle and the array of objects by DecodeType
-     * @throws PhpBarcodeException
+     * BarCodeReader constructor. Initializes a new instance of the BarCodeReader
+     * @param string $image image encoded as base64 string or path to image
+     * @param int|array|null $rectangles array of object by type Rectangle
+     * @param int|array|null $decodeTypes array of decode types
+     * @throws BarcodeException
      */
-    public function __construct($image, $rectangles, $decodeTypes)
+    public function __construct(?string $image, $rectangles, $decodeTypes)
     {
         try
         {
@@ -51,13 +50,9 @@ class BarCodeReader extends BaseJavaClass
             else
             {
                 $image_base64 = self::loadImage($image);
+                $java_class = new java(self::JAVA_CLASS_NAME, $image_base64, $rectangles, $decodeTypes);
             }
-            $java_class = new java(self::JAVA_CLASS_NAME, $image_base64, $rectangles, $decodeTypes);
             parent::__construct($java_class);
-        }
-        catch (java_InternalException $ex)
-        {
-            throw new BarcodeException("Incorrect arguments are passed to BarCodeReader constructor", __FILE__, __LINE__);
         }
         catch (Exception $ex)
         {
@@ -74,7 +69,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Determines whether any of the given decode types is included into
-     * @param ...$decodeTypes Types to verify.
+     * @param $decodeTypes Types to verify.
      * @return bool Value is a true if any types are included into.
      */
     public function containsAny(...$decodeTypes): bool
@@ -419,8 +414,8 @@ class BarCodeReader extends BaseJavaClass
     /**
      * Reads BarCodeResult from the image.
      *
-     * This sample shows how to read barcodes with BarCodeReader
      * @code
+     * This sample shows how to read barcodes with BarCodeReader
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
@@ -428,8 +423,10 @@ class BarCodeReader extends BaseJavaClass
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
-     * @endcode
+     *
      * @return array of recognized {@code BarCodeResult}s on the image. If nothing is recognized, zero array is returned.
+     * @throws BarcodeException
+     * @throws RecognitionAbortedException
      */
     public function readBarCodes(): array
     {
@@ -452,15 +449,14 @@ class BarCodeReader extends BaseJavaClass
             throw $e;
         }
     }
-
     /**
      * QualitySettings allows to configure recognition quality and speed manually.
      * You can quickly set up QualitySettings by embedded presets: HighPerformance, NormalQuality,
      * HighQuality, MaxBarCodes or you can manually configure separate options.
      * Default value of QualitySettings is NormalQuality.
-     *
-     * This sample shows how to use QualitySettings with BarCodeReader
      * @code
+     * This sample shows how to use QualitySettings with BarCodeReader
+     *
      * $reader = new BarCodeReader("test.png");
      *  //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
@@ -478,8 +474,9 @@ class BarCodeReader extends BaseJavaClass
      * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
-     * @endcode
-     * QualitySettings to configure recognition quality and speed.
+     *
+     * @return QualitySettings to configure recognition quality and speed.
+     * @throws BarcodeException
      */
     public final function getQualitySettings(): QualitySettings
     {
@@ -498,11 +495,11 @@ class BarCodeReader extends BaseJavaClass
      * You can quickly set up QualitySettings by embedded presets: HighPerformance, NormalQuality,
      * HighQuality, MaxBarCodes or you can manually configure separate options.
      * Default value of QualitySettings is NormalQuality.
-     *
-     * This sample shows how to use QualitySettings with BarCodeReader
      * @code
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
-     * //set high performance mode
+     * This sample shows how to use QualitySettings with BarCodeReader
+     *
+     * $reader = new BarCodeReader("test.png");
+     *  //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
@@ -511,15 +508,16 @@ class BarCodeReader extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
-     *  //set high performance mode
+     * //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * //set separate options
      * $reader->getQualitySettings()->setAllowMedianSmoothing(true);
      * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
-     * @endcode
-     * QualitySettings to configure recognition quality and speed.
+     *
+     * @param QualitySettings $value QualitySettings to configure recognition quality and speed.
+     * @throws BarcodeException
      */
     public function setQualitySettings(QualitySettings $value): void
     {
@@ -536,7 +534,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * The main BarCode decoding parameters. Contains parameters which make influence on recognized data.
-     * @return  BarCode decoding parameters
+     * @return BarcodeSettings  BarCode decoding parameters
      */
     public function getBarcodeSettings(): BarcodeSettings
     {
@@ -627,8 +625,8 @@ class BarCodeReader extends BaseJavaClass
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
      * @endcode
-     * @param value The bitmap image for recognition.
-     * @param areas areas list for recognition
+     * @param string $image The bitmap image for recognition.
+     * @param Rectangle|null $areas areas list for recognition
      * @throws BarcodeException
      */
     public final function setBarCodeImage(string $image, ?Rectangle ...$areas): void
@@ -666,6 +664,7 @@ class BarCodeReader extends BaseJavaClass
      * Must be called before readBarCodes() method.
      *
      * This sample shows how to detect Code39 and Code128 barcodes.
+     *
      * @code
      * $reader = new BarCodeReader();
      * $reader->setBarCodeReadType(DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
@@ -676,7 +675,8 @@ class BarCodeReader extends BaseJavaClass
      *     print("BarCode CodeText: ".$result->getCodeText());
      * }
      * @endcode
-     * @param barcodeTypes The SingleDecodeType type array to read.
+     *
+     * @param array $types The SingleDecodeType type array to read.
      */
     public function setBarCodeReadType(int ...$types): void
     {
@@ -697,8 +697,8 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Exports BarCode properties to the xml-file specified
-     * @param $xmlFile The name for the file
-     * @return Whether or not export completed successfully.
+     * @param string $xmlFile The name for the file
+     * @return bool Whether or not export completed successfully.
      * Returns True in case of success; False Otherwise
      */
     public function exportToXml(string $xmlFile): bool
@@ -721,8 +721,8 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Exports BarCode properties to the xml-file specified
-     * @param $xmlFile The name for the file
-     * @return Whether or not export completed successfully.
+     * @param string $xmlFile The name for the file
+     * @return bool Whether or not export completed successfully.
      * Returns True in case of success; False Otherwise
      */
     public static function importFromXml(string $xmlFile): BarCodeReader
@@ -771,10 +771,10 @@ class Quadrangle extends BaseJavaClass
     /**
      * Initializes a new instance of the Quadrangle structure with the describing points.
      *
-     * @param $leftTop A Point that represents the left-top corner of the Quadrangle.
-     * @param $rightTop A Point that represents the right-top corner of the Quadrangle.
-     * @param $rightBottom A Point that represents the right-bottom corner of the Quadrangle.
-     * @param $leftBottom A Point that represents the left-bottom corner of the Quadrangle.
+     * @param Point $leftTop A Point that represents the left-top corner of the Quadrangle.
+     * @param Point $rightTop A Point that represents the right-top corner of the Quadrangle.
+     * @param Point $rightBottom A Point that represents the right-bottom corner of the Quadrangle.
+     * @param Point $leftBottom A Point that represents the left-bottom corner of the Quadrangle.
      */
     public function __construct(Point $leftTop, Point $rightTop, Point $rightBottom, Point $leftBottom)
     {
@@ -896,8 +896,8 @@ class Quadrangle extends BaseJavaClass
     /**
      * Determines if the specified Point is contained within this Quadrangle structure.
      *
-     * @param pt The Point to test.
-     * @return Returns true if Point is contained within this Quadrangle structure; otherwise, false.
+     * @param Point pt The Point to test.
+     * @return bool Returns true if Point is contained within this Quadrangle structure; otherwise, false.
      */
     public function contains(Point $pt): bool
     {
@@ -914,9 +914,9 @@ class Quadrangle extends BaseJavaClass
     /**
      * Determines if the specified point is contained within this Quadrangle structure.
      *
-     * @param $x The x point cordinate.
-     * @param $y The y point cordinate.
-     * @return Returns true if point is contained within this Quadrangle structure; otherwise, false.
+     * @param int $x The x point cordinate.
+     * @param int $y The y point cordinate.
+     * @return bool Returns true if point is contained within this Quadrangle structure; otherwise, false.
      */
     public function containsPoint(int $x, int $y): bool
     {
@@ -933,8 +933,8 @@ class Quadrangle extends BaseJavaClass
     /**
      * Determines if the specified Quadrangle is contained or intersect this Quadrangle structure.
      *
-     * @param quad The Quadrangle to test.
-     * @return Returns true if Quadrangle is contained or intersect this Quadrangle structure; otherwise, false.
+     * @param Quadrangle quad The Quadrangle to test.
+     * @return bool Returns true if Quadrangle is contained or intersect this Quadrangle structure; otherwise, false.
      */
     public function containsQuadrangle(Quadrangle $quad): bool
     {
@@ -951,8 +951,8 @@ class Quadrangle extends BaseJavaClass
     /**
      * Determines if the specified Rectangle is contained or intersect this Quadrangle structure.
      *
-     * @param rect The Rectangle to test.
-     * @return Returns true if Rectangle is contained or intersect this Quadrangle structure; otherwise, false.
+     * @param Rectangle rect The Rectangle to test.
+     * @return bool Returns true if Rectangle is contained or intersect this Quadrangle structure; otherwise, false.
      */
     public function containsRectangle(Rectangle $rect): bool
     {
@@ -969,8 +969,8 @@ class Quadrangle extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified Quadrangle value.
      *
-     * @param $other An Quadrangle value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param Quadrangle $other An Quadrangle value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public function equals(Quadrangle $obj): bool
     {
@@ -987,7 +987,7 @@ class Quadrangle extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -997,7 +997,7 @@ class Quadrangle extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this Quadrangle.
      *
-     * @return A string that represents this Quadrangle.
+     * @return string A string that represents this Quadrangle.
      */
     public function toString(): string
     {
@@ -1014,7 +1014,7 @@ class Quadrangle extends BaseJavaClass
     /**
      * Creates Rectangle bounding this Quadrangle
      *
-     * @return returns Rectangle bounding this Quadrangle
+     * @return Rectangle returns Rectangle bounding this Quadrangle
      */
     public function getBoundingRectangle(): Rectangle
     {
@@ -1114,10 +1114,10 @@ final class QRExtendedParameters extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified QRExtendedParameters value.
      *
-     * @param obj An object value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param QRExtendedParameters $obj An object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
-    public function equals($obj): bool
+    public function equals(QRExtendedParameters $obj): bool
     {
         try
         {
@@ -1132,7 +1132,7 @@ final class QRExtendedParameters extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -1142,7 +1142,7 @@ final class QRExtendedParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this QRExtendedParameters.
      *
-     * @return A string that represents this QRExtendedParameters.
+     * @return string A string that represents this QRExtendedParameters.
      */
     public function toString(): string
     {
@@ -1233,7 +1233,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Macro PDF417 file name (optional).
-     * @return File name.
+     * @return string File name.
      */
     public function getMacroPdf417FileName(): string
     {
@@ -1249,7 +1249,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Macro PDF417 file size (optional).
-     * @return File size.
+     * @return int File size.
      */
     public function getMacroPdf417FileSize(): int
     {
@@ -1265,7 +1265,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Macro PDF417 sender name (optional).
-     * @return Sender name
+     * @return string Sender name
      */
     public function getMacroPdf417Sender(): string
     {
@@ -1281,7 +1281,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Macro PDF417 addressee name (optional).
-     * @return Addressee name.
+     * @return string Addressee name.
      */
     public function getMacroPdf417Addressee(): string
     {
@@ -1297,7 +1297,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Macro PDF417 time stamp (optional).
-     * @return Time stamp.
+     * @return DateTime Time stamp.
      */
     public function getMacroPdf417TimeStamp(): DateTime
     {
@@ -1313,7 +1313,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Macro PDF417 checksum (optional).
-     * @return Checksum.
+     * @return int Checksum.
      */
     public function getMacroPdf417Checksum(): int
     {
@@ -1329,7 +1329,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Tests whether all parameters has only default values
-     * Value: Returns {@code <b>true</b>} if all parameters has only default values; otherwise, {@code <b>false</b>}.
+     * Value: Returns { <b>true</b>} if all parameters has only default values; otherwise, { <b>false</b>}.
      */
     public function isEmpty(): bool
     {
@@ -1346,8 +1346,8 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified Pdf417ExtendedParameters value.
      *
-     * @param obj An System.Object value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param Pdf417ExtendedParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public /*override*/ function equals(Pdf417ExtendedParameters $obj): bool
     {
@@ -1363,7 +1363,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Returns the hash code for this instance.
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -1372,7 +1372,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
 
     /**
      * Returns a human-readable string representation of this Pdf417ExtendedParameters.
-     * @return A string that represents this Pdf417ExtendedParameters.
+     * @return int A string that represents this Pdf417ExtendedParameters.
      */
     public function toString(): string
     {
@@ -1444,7 +1444,8 @@ final class OneDExtendedParameters extends BaseJavaClass
 
     /**
      * Tests whether all parameters has only default values
-     * Value: Returns {@code <b>true</b>} if all parameters has only default values; otherwise, {@code <b>false</b>}.
+     * @return bool Returns { <b>true</b>} if all parameters has only default values; otherwise, { <b>false</b>}.
+     * @throws BarcodeException
      */
     public function isEmpty(): bool
     {
@@ -1461,8 +1462,8 @@ final class OneDExtendedParameters extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified OneDExtendedParameters value.
      *
-     * @param obj An System.Object value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param OneDExtendedParameters obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public /*override*/ function equals(OneDExtendedParameters $obj): bool
     {
@@ -1479,7 +1480,7 @@ final class OneDExtendedParameters extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -1489,7 +1490,7 @@ final class OneDExtendedParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this OneDExtendedParameters.
      *
-     * @return A string that represents this OneDExtendedParameters.
+     * @return string A string that represents this OneDExtendedParameters.
      */
     public function toString(): string
     {
@@ -1579,8 +1580,8 @@ final class Code128ExtendedParameters extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified Code128ExtendedParameters value.
      *
-     * @param obj An System.Object value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param Code128ExtendedParameters obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public function equals(Code128ExtendedParameters $obj): bool
     {
@@ -1597,7 +1598,7 @@ final class Code128ExtendedParameters extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -1607,7 +1608,7 @@ final class Code128ExtendedParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this Code128ExtendedParameters.
      *
-     * @return A string that represents this Code128ExtendedParameters.
+     * @return string A string that represents this Code128ExtendedParameters.
      */
     public function toString(): string
     {
@@ -1623,9 +1624,7 @@ final class Code128ExtendedParameters extends BaseJavaClass
 }
 
 /**
- *
  * Barcode detector settings.
- *
  */
 final class BarcodeSvmDetectorSettings extends BaseJavaClass
 {
@@ -1711,10 +1710,10 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Similarity coefficient depends on how homogeneous barcodes are.
-     *
-     * Use high value for for clear barcodes.
+     * @param int $value Use high value for for clear barcodes.
      * Use low values to detect barcodes that ara partly damaged or not lighten evenly.
      * Similarity coefficient must be between [0.5, 0.9]
+     * @throws BarcodeException
      */
     public function setSimilarityCoef(int $value)
     {
@@ -1730,12 +1729,12 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Sets threshold for detected regions that may contain barcodes.
-     *
-     * Value 0.7 means that bottom 70% of possible regions are filtered out and not processed further.
+     * @return int Value 0.7 means that bottom 70% of possible regions are filtered out and not processed further.
      * Region likelihood threshold must be between [0.05, 0.9]
      * Use high values for clear images with few barcodes.
      * Use low values for images with many barcodes or for noisy images.
      * Low value may lead to a bigger recognition time.
+     * @throws BarcodeException
      */
     public function getRegionLikelihoodThresholdPercent(): int
     {
@@ -1751,12 +1750,12 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Sets threshold for detected regions that may contain barcodes.
-     *
-     * Value 0.7 means that bottom 70% of possible regions are filtered out and not processed further.
+     * @param float $value Value 0.7 means that bottom 70% of possible regions are filtered out and not processed further.
      * Region likelihood threshold must be between [0.05, 0.9]
      * Use high values for clear images with few barcodes.
      * Use low values for images with many barcodes or for noisy images.
      * Low value may lead to a bigger recognition time.
+     * @throws BarcodeException
      */
     public function setRegionLikelihoodThresholdPercent(float $value)
     {
@@ -1772,9 +1771,9 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Allows detector to skip search for diagonal barcodes.
-     *
-     * Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
+     * @return bool Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
      * Enabling of diagonal search leads to a bigger detection time.
+     * @throws BarcodeException
      */
     public function getSkipDiagonalSearch(): bool
     {
@@ -1791,8 +1790,9 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
     /**
      * Allows detector to skip search for diagonal barcodes.
      *
-     * Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
+     * @param bool $value Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
      * Enabling of diagonal search leads to a bigger detection time.
+     * @throws BarcodeException
      */
     public function setSkipDiagonalSearch(bool $value)
     {
@@ -1808,10 +1808,10 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Window size for median smoothing.
-     *
-     * Typical values are 3 or 4. 0 means no median smoothing.
+     * @return int Typical values are 3 or 4. 0 means no median smoothing.
      * Default value is 0.
      * Median filter window size must be between [0, 10]
+     * @throws BarcodeException
      */
     public function getMedianFilterWindowSize(): int
     {
@@ -1826,11 +1826,15 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
     }
 
     /**
-     * Window size for median smoothing.
      *
-     * Typical values are 3 or 4. 0 means no median smoothing.
+     *
+     */
+    /**
+     * Window size for median smoothing.
+     * @param int $value Typical values are 3 or 4. 0 means no median smoothing.
      * Default value is 0.
      * Median filter window size must be between [0, 10]
+     * @throws BarcodeException
      */
     public function setMedianFilterWindowSize(int $value)
     {
@@ -1846,8 +1850,8 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * High performance detection preset.
-     *
-     * Default for QualitySettings.PresetType.HighPerformance
+     * @return BarcodeSvmDetectorSettings Default for QualitySettings::PresetType::HighPerformance
+     * @throws BarcodeException
      */
     public static function getHighPerformance(): BarcodeSvmDetectorSettings
     {
@@ -1863,8 +1867,8 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Normal quality detection preset.
-     *
-     * Default for QualitySettings::PresetType::NormalQuality
+     * @return BarcodeSvmDetectorSettings Default for QualitySettings::PresetType::NormalQuality
+     * @throws BarcodeException
      */
     public static function getNormalQuality(): BarcodeSvmDetectorSettings
     {
@@ -1880,8 +1884,8 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * High quality detection preset.
-     *
-     * Default for QualitySettings.PresetType.HighQualityDetection and QualitySettings.PresetType.HighQuality
+     * @return BarcodeSvmDetectorSettings Default for QualitySettings.PresetType.HighQualityDetection and QualitySettings::PresetType::HighQuality
+     * @throws BarcodeException
      */
     public static function getHighQuality(): BarcodeSvmDetectorSettings
     {
@@ -1897,8 +1901,8 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 
     /**
      * Max quality detection preset.
-     *
-     * Default for QualitySettings.PresetType.MaxQualityDetection and QualitySettings.PresetType.MaxBarCodes
+     * @return BarcodeSvmDetectorSettings Default for QualitySettings.PresetType.MaxQualityDetection and QualitySettings::PresetType::MaxBarCodes
+     * @throws BarcodeException
      */
     public static function getMaxQuality(): BarcodeSvmDetectorSettings
     {
@@ -1914,7 +1918,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
 }
 
 /**
- * Stores recognized barcode data like SingleDecodeType type, {@code string} codetext,
+ * Stores recognized barcode data like SingleDecodeType type, {string} codetext,
  * BarCodeRegionParameters region and other parameters
  *
  * This sample shows how to obtain BarCodeResult.
@@ -1951,7 +1955,8 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets the reading quality. Works for 1D and postal barcodes. Value: The reading quality percent
+     * @return float Gets the reading quality. Works for 1D and postal barcodes. Value: The reading quality percent
+     * @throws BarcodeException
      */
     public function getReadingQuality(): float
     {
@@ -1966,9 +1971,10 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets recognition confidence level of the recognized barcode Value: BarCodeConfidence.Strong does not have fakes or misrecognitions, BarCodeConfidence.Moderate
+     * @return int Gets recognition confidence level of the recognized barcode Value: BarCodeConfidence.Strong does not have fakes or misrecognitions, BarCodeConfidence.Moderate
      * could sometimes have fakes or incorrect codetext because this confidence level for barcodews with weak cheksum or even without it,
      * BarCodeConfidence.None always has incorrect codetext and could be fake recognitions
+     * @throws BarcodeException
      */
     public function getConfidence(): int
     {
@@ -1983,7 +1989,8 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets the code text Value: The code text of the barcode
+     * @return string Gets the code text Value: The code text of the barcode
+     * @throws BarcodeException
      */
     public function getCodeText(): string
     {
@@ -1998,7 +2005,8 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets the encoded code bytes Value: The code bytes of the barcode
+     * @return array Gets the encoded code bytes Value: The code bytes of the barcode
+     * @throws BarcodeException
      */
     public function getCodeBytes(): array
     {
@@ -2013,7 +2021,8 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets the barcode type Value: The type information of the recognized barcode
+     * @return int Gets the barcode type Value: The type information of the recognized barcode
+     * @throws BarcodeException
      */
     public function getCodeType(): int
     {
@@ -2028,7 +2037,8 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets the name of the barcode type Value: The type name of the recognized barcode
+     * @return string Gets the name of the barcode type Value: The type name of the recognized barcode
+     * @throws BarcodeException
      */
     public function getCodeTypeName(): string
     {
@@ -2043,7 +2053,8 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets the barcode region Value: The region of the recognized barcode
+     * @return BarCodeRegionParameters Gets the barcode region Value: The region of the recognized barcode
+     * @throws BarcodeException
      */
     public function getRegion(): BarCodeRegionParameters
     {
@@ -2058,7 +2069,7 @@ final class BarCodeResult extends BaseJavaClass
     }
 
     /**
-     *  Gets extended parameters of recognized barcode Value: The extended parameters of recognized barcode
+     * @return BarCodeExtendedParameters Gets extended parameters of recognized barcode Value: The extended parameters of recognized barcode
      */
     public function getExtended(): BarCodeExtendedParameters
     {
@@ -2067,9 +2078,9 @@ final class BarCodeResult extends BaseJavaClass
 
     /**
      * Returns a value indicating whether this instance is equal to a specified BarCodeResult value.
-     *
-     * @param other An BarCodeResult value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param BarCodeResult $other An BarCodeResult value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     * @throws BarcodeException
      */
     public function equals(BarCodeResult $other): bool
     {
@@ -2086,7 +2097,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -2096,7 +2107,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this BarCodeResult.
      *
-     * @return A string that represents this BarCodeResult.
+     * @return string A string that represents this BarCodeResult.
      */
     public function toString(): string
     {
@@ -2113,7 +2124,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      * Creates a copy of BarCodeResult class.
      *
-     * @return Returns copy of BarCodeResult class.
+     * @return BarCodeResult Returns copy of BarCodeResult class.
      */
     public function deepClone(): BarCodeResult
     {
@@ -2123,7 +2134,7 @@ final class BarCodeResult extends BaseJavaClass
     /**
      * Creates a a copy of the BarCodeResult class.
      *
-     * @param result An copy BarCodeResult instance.
+     * @param result An copy BarCodeResult instance.TODO
      */
     public function __construct($javaClass)
     {
@@ -2187,7 +2198,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets Quadrangle bounding barcode region Value: Returns Quadrangle bounding barcode region
+     * @return Quadrangle Gets Quadrangle bounding barcode region Value: Returns Quadrangle bounding barcode region
      */
     public function getQuadrangle(): Quadrangle
     {
@@ -2195,7 +2206,8 @@ final class BarCodeRegionParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets the angle of the barcode (0-360). Value: The angle for barcode (0-360).
+     * @return float Gets the angle of the barcode (0-360). Value: The angle for barcode (0-360).
+     * @throws BarcodeException
      */
     public function getAngle(): float
     {
@@ -2210,7 +2222,10 @@ final class BarCodeRegionParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets Points array bounding barcode region Value: Returns Points array bounding barcode region
+     *
+     */
+    /**
+     * @return array Gets Points array bounding barcode region Value: Returns Points array bounding barcode region
      */
     public function getPoints(): array
     {
@@ -2218,7 +2233,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets Rectangle bounding barcode region Value: Returns Rectangle bounding barcode region
+     * @return Rectangle Gets Rectangle bounding barcode region Value: Returns Rectangle bounding barcode region
      */
     public function getRectangle(): Rectangle
     {
@@ -2228,8 +2243,8 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified BarCodeRegionParameters value.
      *
-     * @param obj An System.Object value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param BarCodeRegionParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public function equals(BarCodeRegionParameters $obj): bool
     {
@@ -2246,7 +2261,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashCode(): int
     {
@@ -2263,7 +2278,7 @@ final class BarCodeRegionParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this BarCodeRegionParameters.
      *
-     * @return A string that represents this BarCodeRegionParameters.
+     * @return string A string that represents this BarCodeRegionParameters.
      */
     public function toString(): string
     {
@@ -2315,7 +2330,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     }
 
     /** Gets a DataBar additional information DataBarExtendedParameters of recognized barcode
-     * @return  A DataBar additional information DataBarExtendedParameters of recognized barcode
+     * @return DataBarExtendedParameters A DataBar additional information DataBarExtendedParameters of recognized barcode
      */
     public function getDataBar(): DataBarExtendedParameters
     {
@@ -2323,7 +2338,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets a special data OneDExtendedParameters of 1D recognized barcode Value: A special data OneDExtendedParameters of 1D recognized barcode
+     * @return OneDExtendedParameters Gets a special data OneDExtendedParameters of 1D recognized barcode Value: A special data OneDExtendedParameters of 1D recognized barcode
      */
     public function getOneD(): OneDExtendedParameters
     {
@@ -2331,7 +2346,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets a special data Code128ExtendedParameters of Code128 recognized barcode Value: A special data Code128ExtendedParameters of Code128 recognized barcode
+     * @return Code128ExtendedParameters Gets a special data Code128ExtendedParameters of Code128 recognized barcode Value: A special data Code128ExtendedParameters of Code128 recognized barcode
      */
     public function getCode128(): Code128ExtendedParameters
     {
@@ -2339,7 +2354,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets a QR Structured Append information QRExtendedParameters of recognized barcode Value: A QR Structured Append information QRExtendedParameters of recognized barcode
+     * @return QRExtendedParameters Gets a QR Structured Append information QRExtendedParameters of recognized barcode Value: A QR Structured Append information QRExtendedParameters of recognized barcode
      */
     public function getQR(): QRExtendedParameters
     {
@@ -2347,7 +2362,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     }
 
     /**
-     *  Gets a MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode Value: A MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode
+     * @return Pdf417ExtendedParameters Gets a MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode Value: A MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode
      */
     public function getPdf417(): Pdf417ExtendedParameters
     {
@@ -2357,8 +2372,8 @@ class BarCodeExtendedParameters extends BaseJavaClass
     /**
      * Returns a value indicating whether this instance is equal to a specified BarCodeExtendedParameters value.
      *
-     * @param obj An System.Object value to compare to this instance.
-     * @return true if obj has the same value as this instance; otherwise, false.
+     * @param BarCodeExtendedParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public function equals(BarCodeExtendedParameters $obj): bool
     {
@@ -2375,7 +2390,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     /**
      * Returns the hash code for this instance.
      *
-     * @return A 32-bit signed integer hash code.
+     * @return bool A 32-bit signed integer hash code.
      */
     public function hashCode(): bool
     {
@@ -2392,7 +2407,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     /**
      * Returns a human-readable string representation of this BarCodeExtendedParameters.
      *
-     * @return A string that represents this BarCodeExtendedParameters.
+     * @return string A string that represents this BarCodeExtendedParameters.
      */
     public function toString(): string
     {
@@ -2502,10 +2517,9 @@ final class QualitySettings extends BaseJavaClass
      * @code
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
+     * @return QualitySettings HighPerformance recognition quality preset.
      * @endcode
-     *
-     *  Value:
-     * HighPerformance recognition quality preset.
+     * @throws BarcodeException
      */
     public static function getHighPerformance(): QualitySettings
     {
@@ -2528,8 +2542,8 @@ final class QualitySettings extends BaseJavaClass
      * $reader->setQualitySettings(QualitySettings::getNormalQuality());
      * @endcode
      *
-     *  Value:
-     * NormalQuality recognition quality preset.
+     * @return QualitySettings NormalQuality recognition quality preset.
+     * @throws BarcodeException
      */
     public static function getNormalQuality(): QualitySettings
     {
@@ -2549,10 +2563,10 @@ final class QualitySettings extends BaseJavaClass
      *
      * @code
      * $reader = new BarCodeReader("test.png");
-     * $reader->setQualitySettings(QualitySettings::getHighQualityDetection());     *
+     * $reader->setQualitySettings(QualitySettings::getHighQualityDetection());
      * @endcode
-     *  Value:
-     * HighQualityDetection recognition quality preset.
+     * @return QualitySettings HighQualityDetection recognition quality preset.
+     * @throws BarcodeException
      */
     public static function getHighQualityDetection(): QualitySettings
     {
@@ -2575,8 +2589,8 @@ final class QualitySettings extends BaseJavaClass
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getMaxQualityDetection());
      * @endcode
-     *  Value:
-     * MaxQualityDetection recognition quality preset.
+     * @return QualitySettings MaxQualityDetection recognition quality preset.
+     * @throws BarcodeException
      */
     public static function getMaxQualityDetection(): QualitySettings
     {
@@ -2598,9 +2612,8 @@ final class QualitySettings extends BaseJavaClass
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getHighQuality());
      * @endcode
-     *
-     *  Value:
-     * HighQuality recognition quality preset.
+     * @return QualitySettings HighQuality recognition quality preset.
+     * @throws BarcodeException
      */
     public static function getHighQuality(): QualitySettings
     {
@@ -2622,9 +2635,8 @@ final class QualitySettings extends BaseJavaClass
      * $reader = new BarCodeReader("test.png");
      * $reader->setQualitySettings(QualitySettings::getMaxBarCodes());
      * @endcode
-     *
-     *  Value:
-     * MaxBarCodes recognition quality preset.
+     * @return QualitySettings MaxBarCodes recognition quality preset.
+     * @throws BarcodeException
      */
     public static function getMaxBarCodes(): QualitySettings
     {
@@ -2641,8 +2653,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize inverse color image as additional scan. Mode can be used when barcode is white on black background.
-     *  Value:
-     * Allows engine to recognize inverse color image.
+     * @return bool Allows engine to recognize inverse color image.
+     * @throws BarcodeException
      */
     public final function getAllowInvertImage(): bool
     {
@@ -2658,8 +2670,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize inverse color image as additional scan. Mode can be used when barcode is white on black background.
-     *  Value:
-     * Allows engine to recognize inverse color image.
+     * @param bool $value Allows engine to recognize inverse color image.
+     * @throws BarcodeException
      */
     public final function setAllowInvertImage(bool $value): void
     {
@@ -2676,8 +2688,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values.
      * Mode can be used to recognize damaged barcodes with incorrect text.
-     *  Value:
-     * Allows engine to recognize incorrect barcodes.
+     * @return bool Allows engine to recognize incorrect barcodes.
+     * @throws BarcodeException
      */
     public final function getAllowIncorrectBarcodes(): bool
     {
@@ -2694,8 +2706,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values.
      * Mode can be used to recognize damaged barcodes with incorrect text.
-     *  Value:
-     * Allows engine to recognize incorrect barcodes.
+     * @param bool $value Allows engine to recognize incorrect barcodes.
+     * @throws BarcodeException
      */
     public final function setAllowIncorrectBarcodes(bool $value): void
     {
@@ -2711,7 +2723,7 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      *  Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False.
-     * @return If True, allows engine to recognize tiny barcodes on large images.
+     * @return bool If True, allows engine to recognize tiny barcodes on large images.
      */
     public function getReadTinyBarcodes(): bool
     {
@@ -2727,7 +2739,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False.
-     * @param value If True, allows engine to recognize tiny barcodes on large images.
+     * @param bool $value If True, allows engine to recognize tiny barcodes on large images.
+     * @throws BarcodeException
      */
     public function setReadTinyBarcodes(bool $value): void
     {
@@ -2743,7 +2756,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize 1D barcodes with checksum by checking more recognition variants. Default value: False.
-     * @return If True, allows engine to recognize 1D barcodes with checksum.
+     * @return bool If True, allows engine to recognize 1D barcodes with checksum.
+     * @throws BarcodeException
      */
     public function getCheckMore1DVariants(): bool
     {
@@ -2759,7 +2773,7 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize 1D barcodes with checksum by checking more recognition variants. Default value: False.
-     * @param $value If True, allows engine to recognize 1D barcodes with checksum.
+     * @param bool $value If True, allows engine to recognize 1D barcodes with checksum.
      */
     public function setCheckMore1DVariants(bool $value)
     {
@@ -2775,8 +2789,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize color barcodes on color background as additional scan. Extremely slow mode.
-     *  Value:
-     * Allows engine to recognize color barcodes on color background.
+     * @return bool Allows engine to recognize color barcodes on color background.
+     * @throws BarcodeException
      */
     public final function getAllowComplexBackground(): bool
     {
@@ -2792,8 +2806,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize color barcodes on color background as additional scan. Extremely slow mode.
-     *  Value:v
-     * Allows engine to recognize color barcodes on color background.
+     * @param bool $value Allows engine to recognize color barcodes on color background.
+     * @throws BarcodeException
      */
     public final function setAllowComplexBackground(bool $value): void
     {
@@ -2809,8 +2823,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to enable median smoothing as additional scan. Mode helps to recognize noised barcodes.
-     *  Value:
-     * Allows engine to enable median smoothing.
+     * @return bool Allows engine to enable median smoothing.
+     * @throws BarcodeException
      */
     public final function getAllowMedianSmoothing(): bool
     {
@@ -2826,8 +2840,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to enable median smoothing as additional scan. Mode helps to recognize noised barcodes.
-     *  Value:
-     * Allows engine to enable median smoothing.
+     * @param bool $value Allows engine to enable median smoothing.
+     * @throws BarcodeException
      */
     public final function setAllowMedianSmoothing(bool $value): void
     {
@@ -2843,8 +2857,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Window size for median smoothing. Typical values are 3 or 4. Default value is 3. AllowMedianSmoothing must be set.
-     *  Value:
-     * Window size for median smoothing.
+     * @return int  Window size for median smoothing.
+     * @throws BarcodeException
      */
     public final function getMedianSmoothingWindowSize(): int
     {
@@ -2860,8 +2874,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Window size for median smoothing. Typical values are 3 or 4. Default value is 3. AllowMedianSmoothing must be set.
-     *  Value:
-     * Window size for median smoothing.
+     * @param int $value Window size for median smoothing.
+     * @throws BarcodeException
      */
     public final function setMedianSmoothingWindowSize(int $value): void
     {
@@ -2877,10 +2891,9 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize regular image without any restorations as main scan. Mode to recognize image as is.
-     *  Value:
-     * Allows to recognize regular image without any restorations.
+     * @return bool Allows to recognize regular image without any restorations.
+     * @throws BarcodeException
      */
-
     public final function getAllowRegularImage(): bool
     {
         try
@@ -2895,10 +2908,9 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize regular image without any restorations as main scan. Mode to recognize image as is.
-     *  Value:
-     * Allows to recognize regular image without any restorations.
+     * @param bool $value Allows to recognize regular image without any restorations.
+     * @throws BarcodeException
      */
-
     public final function setAllowRegularImage(bool $value): void
     {
         try
@@ -2914,8 +2926,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine to recognize decreased image as additional scan. Size for decreasing is selected by internal engine algorithms.
      * Mode helps to recognize barcodes which are noised and blurred but captured with high resolution.
-     *  Value:
-     * Allows engine to recognize decreased image
+     * @return bool Allows engine to recognize decreased image
+     * @throws BarcodeException
      */
     public final function getAllowDecreasedImage(): bool
     {
@@ -2932,8 +2944,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine to recognize decreased image as additional scan. Size for decreasing is selected by internal engine algorithms.
      * Mode helps to recognize barcodes which are noised and blurred but captured with high resolution.
-     *  Value:
-     * Allows engine to recognize decreased image
+     * @param bool $value Allows engine to recognize decreased image
+     * @throws BarcodeException
      */
     public final function setAllowDecreasedImage(bool $value): void
     {
@@ -2949,10 +2961,9 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize image without small white spots as additional scan. Mode helps to recognize noised image as well as median smoothing filtering.
-     *  Value:
-     * Allows engine to recognize image without small white spots.
+     * @return bool Allows engine to recognize image without small white spots.
+     * @throws BarcodeException
      */
-
     public final function getAllowWhiteSpotsRemoving(): bool
     {
         try
@@ -2967,8 +2978,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize image without small white spots as additional scan. Mode helps to recognize noised image as well as median smoothing filtering.
-     *  Value:
-     * Allows engine to recognize image without small white spots.
+     * @param bool $value Allows engine to recognize image without small white spots.
+     * @throws BarcodeException
      */
     public function setAllowWhiteSpotsRemoving(bool $value): void
     {
@@ -2984,8 +2995,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for 1D barcodes to recognize regular image with different params as additional scan. Mode helps to recongize low height 1D barcodes.
-     *  Value:
-     * Allows engine for 1D barcodes to run additional scan.
+     * @return bool Allows engine for 1D barcodes to run additional scan.
+     * @throws BarcodeException
      */
     public final function getAllowOneDAdditionalScan(): bool
     {
@@ -3001,8 +3012,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for 1D barcodes to recognize regular image with different params as additional scan. Mode helps to recongize low height 1D barcodes.
-     *  Value:
-     * Allows engine for 1D barcodes to run additional scan.
+     * @param bool $value Allows engine for 1D barcodes to run additional scan.
+     * @throws BarcodeException
      */
     public final function setAllowOneDAdditionalScan(bool $value)
     {
@@ -3019,8 +3030,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine for 1D barcodes to quickly recognize high quality barcodes which fill almost whole image.
      * Mode helps to quickly recognize generated barcodes from Internet.
-     *  Value:
-     * Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     * @return bool Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     * @throws BarcodeException
      */
     public final function getAllowOneDFastBarcodesDetector(): bool
     {
@@ -3037,8 +3048,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine for 1D barcodes to quickly recognize high quality barcodes which fill almost whole image.
      * Mode helps to quickly recognize generated barcodes from Internet.
-     *  Value:
-     * Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     * @param bool $value Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     * @throws BarcodeException
      */
     public final function setAllowOneDFastBarcodesDetector(bool $value)
     {
@@ -3054,8 +3065,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for Postal barcodes to recognize slightly noised images. Mode helps to recognize sligtly damaged Postal barcodes.
-     *  Value:
-     * Allows engine for Postal barcodes to recognize slightly noised images.
+     * @return bool Allows engine for Postal barcodes to recognize slightly noised images.
+     * @throws BarcodeException
      */
     public final function getAllowMicroWhiteSpotsRemoving(): bool
     {
@@ -3071,8 +3082,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for Postal barcodes to recognize slightly noised images. Mode helps to recognize sligtly damaged Postal barcodes.
-     *  Value:
-     * Allows engine for Postal barcodes to recognize slightly noised images.
+     * @param bool $value Allows engine for Postal barcodes to recognize slightly noised images.
+     * @throws BarcodeException
      */
     public final function setAllowMicroWhiteSpotsRemoving(bool $value)
     {
@@ -3088,7 +3099,7 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for 1D barcodes to quickly recognize middle slice of an image and return result without using any time-consuming algorithms.
-     * @return Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     * @return bool Allows engine for 1D barcodes to quickly recognize high quality barcodes.
      */
     public final function getFastScanOnly(): bool
     {
@@ -3104,7 +3115,7 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for 1D barcodes to quickly recognize middle slice of an image and return result without using any time-consuming algorithms.
-     * @param value Allows engine for 1D barcodes to quickly recognize high quality barcodes.
+     * @param bool value Allows engine for 1D barcodes to quickly recognize high quality barcodes.
      */
     public final function setFastScanOnly(bool $value)
     {
@@ -3122,8 +3133,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize barcodes with salt and paper noise type. Mode can remove small noise with white and black dots.
-     *  Value:
-     * Allows engine to recognize barcodes with salt and paper noise type.
+     * @return bool Allows engine to recognize barcodes with salt and paper noise type.
+     * @throws BarcodeException
      */
     public final function getAllowSaltAndPaperFiltering(): bool
     {
@@ -3140,8 +3151,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to recognize barcodes with salt and paper noise type. Mode can remove small noise with white and black dots.
-     *  Value:
-     * Allows engine to recognize barcodes with salt and paper noise type.
+     * @param bool $value Allows engine to recognize barcodes with salt and paper noise type.
+     * @throws BarcodeException
      */
     public final function setAllowSaltAndPaperFiltering(bool $value)
     {
@@ -3159,8 +3170,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to use gap between scans to increase recognition speed. Mode can make recognition problems with low height barcodes.
-     *  Value:
-     * Allows engine to use gap between scans to increase recognition speed.
+     * @return bool Allows engine to use gap between scans to increase recognition speed.
+     * @throws BarcodeException
      */
     public final function getAllowDetectScanGap(): bool
     {
@@ -3177,8 +3188,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine to use gap between scans to increase recognition speed. Mode can make recognition problems with low height barcodes.
-     *  Value:
-     * Allows engine to use gap between scans to increase recognition speed.
+     * @param bool $value Allows engine to use gap between scans to increase recognition speed.
+     * @throws BarcodeException
      */
     public final function setAllowDetectScanGap(bool $value)
     {
@@ -3195,8 +3206,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine for Datamatrix to recognize dashed industrial Datamatrix barcodes.
      * Slow mode which helps only for dashed barcodes which consist from spots.
-     *  Value:
-     * Allows engine for Datamatrix to recognize dashed industrial barcodes.
+     * @return bool Allows engine for Datamatrix to recognize dashed industrial barcodes.
+     * @throws BarcodeException
      */
     public final function getAllowDatamatrixIndustrialBarcodes(): bool
     {
@@ -3213,8 +3224,8 @@ final class QualitySettings extends BaseJavaClass
     /**
      * Allows engine for Datamatrix to recognize dashed industrial Datamatrix barcodes.
      * Slow mode which helps only for dashed barcodes which consist from spots.
-     *  Value:
-     * Allows engine for Datamatrix to recognize dashed industrial barcodes.
+     * @param bool $value Allows engine for Datamatrix to recognize dashed industrial barcodes.
+     * @throws BarcodeException
      */
     public final function setAllowDatamatrixIndustrialBarcodes(bool $value)
     {
@@ -3230,8 +3241,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
-     *  Value:
-     * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
+     * @return bool Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
+     * @throws BarcodeException
      */
     public final function getAllowQRMicroQrRestoration(): bool
     {
@@ -3247,8 +3258,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
-     *  Value:
-     * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
+     * @param bool $value Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
+     * @throws BarcodeException
      */
     public final function setAllowQRMicroQrRestoration(bool $value)
     {
@@ -3264,8 +3275,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
-     *  Value:
-     * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
+     * @return bool Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
+     * @throws BarcodeException
      */
     public function getAllowOneDWipedBarsRestoration(): bool
     {
@@ -3281,8 +3292,8 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
-     *  Value:
-     * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
+     * @param bool $value Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
+     * @throws BarcodeException
      */
     public function setAllowOneDWipedBarsRestoration(bool $value)
     {
@@ -3306,7 +3317,6 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Barcode detector settings.
-     *
      */
     public function setDetectorSettings(BarcodeSvmDetectorSettings $value): void
     {
@@ -3323,7 +3333,7 @@ final class QualitySettings extends BaseJavaClass
 
     /**
      * Function apply all values from Src setting to this
-     * @param Src source settings
+     * @param QualitySettings Src source settings
      */
     public function applyAll(QualitySettings $Src): void
     {
@@ -3351,12 +3361,12 @@ class Code128DataPortion extends BaseJavaClass
     private const javaClassName = "com.aspose.mw.barcode.recognition.MwCode128DataPortion";
 
     /**
-     * Creates a new instance of the {@code Code128DataPortion} class with start code symbol and decoded codetext.
+     * Creates a new instance of the {Code128DataPortion} class with start code symbol and decoded codetext.
      *
-     * @param code128SubType A start encoding symbol
-     * @param data A partial codetext
+     * @param int $code128SubType A start encoding symbol
+     * @param string $data A partial codetext
      */
-    public function __construct($code128SubType, $data)
+    public function __construct(int $code128SubType, string $data)
     {
         try
         {
@@ -3385,7 +3395,7 @@ class Code128DataPortion extends BaseJavaClass
     /**
      * Gets the part of code text related to subtype.
      *
-     * @return The part of code text related to subtype
+     * @return string The part of code text related to subtype
      */
     public final function getData(): string
     {
@@ -3402,7 +3412,7 @@ class Code128DataPortion extends BaseJavaClass
     /**
      * Gets the part of code text related to subtype.
      *
-     * @return The part of code text related to subtype
+     * @return string The part of code text related to subtype
      */
     public final function setData(string $value)
     {
@@ -3419,7 +3429,7 @@ class Code128DataPortion extends BaseJavaClass
     /**
      * Gets the type of Code128 subset
      *
-     * @return The type of Code128 subset
+     * @return int The type of Code128 subset
      */
     public final function getCode128SubType(): int
     {
@@ -3453,8 +3463,8 @@ class Code128DataPortion extends BaseJavaClass
     }
 
     /**
-     * Returns a human-readable string representation of this {@code Code128DataPortion}.
-     * @return A string that represents this {@code Code128DataPortion}.
+     * Returns a human-readable string representation of this {Code128DataPortion}.
+     * @return string A string that represents this {Code128DataPortion}.
      */
     public function toString(): string
     {
@@ -3493,7 +3503,7 @@ class DataBarExtendedParameters extends BaseJavaClass
 
     /**
      * Gets the DataBar 2D composite component flag. Default value is false.
-     * @return The DataBar 2D composite component flag.
+     * @return bool The DataBar 2D composite component flag.
      */
     public function is2DCompositeComponent(): bool
     {
@@ -3509,8 +3519,8 @@ class DataBarExtendedParameters extends BaseJavaClass
 
     /**
      * Returns a value indicating whether this instance is equal to a specified DataBarExtendedParameters value.
-     * @param obj An System.Object value to compare to this instance.
-     * @return <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     * @param DataBarExtendedParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, <b>false</b>.
      */
     public function equals(DataBarExtendedParameters $obj): bool
     {
@@ -3526,7 +3536,7 @@ class DataBarExtendedParameters extends BaseJavaClass
 
     /**
      * Returns the hash code for this instance.
-     * @return A 32-bit signed integer hash code.
+     * @return int A 32-bit signed integer hash code.
      */
     public function hashcode(): int
     {
@@ -3542,7 +3552,7 @@ class DataBarExtendedParameters extends BaseJavaClass
 
     /**
      * Returns a human-readable string representation of this DataBarExtendedParameters.
-     * @return A string that represents this DataBarExtendedParameters.
+     * @return string A string that represents this DataBarExtendedParameters.
      */
     public function toString(): string
     {
@@ -3599,7 +3609,7 @@ class AustraliaPostSettings extends BaseJavaClass
 
     /**
      * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
-     * @return The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
+     * @return int The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
      */
     public function getCustomerInformationInterpretingType(): int
     {
@@ -3615,7 +3625,7 @@ class AustraliaPostSettings extends BaseJavaClass
 
     /**
      * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
-     * @param $value The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
+     * @param int $value The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
      */
     public function setCustomerInformationInterpretingType(int $value): void
     {
@@ -3633,7 +3643,7 @@ class AustraliaPostSettings extends BaseJavaClass
      * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
      * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
      *
-     * Example
+     * @code
      *
      * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
      * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
@@ -3645,8 +3655,9 @@ class AustraliaPostSettings extends BaseJavaClass
      *     echo("BarCode Type: ".$result->getCodeType());
      *     echo("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      *
-     * @return The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
+     * @return bool The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
      */
     public function getIgnoreEndingFillingPatternsForCTable(): bool
     {
@@ -3660,6 +3671,27 @@ class AustraliaPostSettings extends BaseJavaClass
         }
     }
 
+    /**
+     * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
+     * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
+     * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
+     * $image = generator->generateBarCodeImage(BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader($image, null, DecodeType::AUSTRALIA_POST);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setIgnoreEndingFillingPatternsForCTable(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo("BarCode Type: ".$result->getCodeType());
+     *     echo("BarCode CodeText: ".$result->getCodeText());
+     * }
+     * @endcode
+     *
+     * @param bool $value The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
+     * @throws BarcodeException
+     */
     public function setIgnoreEndingFillingPatternsForCTable(bool $value): void
     {
         try
@@ -3673,6 +3705,9 @@ class AustraliaPostSettings extends BaseJavaClass
     }
 }
 
+/**
+ * The main BarCode decoding parameters. Contains parameters which make influence on recognized data.
+ */
 class BarcodeSettings extends BaseJavaClass
 {
 
@@ -3682,7 +3717,8 @@ class BarcodeSettings extends BaseJavaClass
 
     /**
      * BarcodeSettings copy constructor
-     * @param $settings The source of the data
+     * @param BarcodeSettings|null $settings The source of the data
+     * @throws BarcodeException
      */
     public function __construct(?BarcodeSettings $settings)
     {
@@ -3703,10 +3739,6 @@ class BarcodeSettings extends BaseJavaClass
         }
     }
 
-    /**
-     * BarcodeSettings copy constructor
-     * @param $settings The source of the data
-     */
     static function construct($javaClass): BarcodeSettings
     {
         $barcodeSettings = new BarcodeSettings(null);
@@ -3733,7 +3765,7 @@ class BarcodeSettings extends BaseJavaClass
      * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
      * Checksum always used: Rest symbologies
      *
-     * Example
+     * @code
      *
      * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
      * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
@@ -3755,7 +3787,8 @@ class BarcodeSettings extends BaseJavaClass
      *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
      *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
      * }
-     * @return Enable checksum validation during recognition for 1D and Postal barcodes.
+     * @endcode
+     * @return int Enable checksum validation during recognition for 1D and Postal barcodes.
      */
     public function getChecksumValidation(): int
     {
@@ -3776,7 +3809,7 @@ class BarcodeSettings extends BaseJavaClass
      * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
      * Checksum always used: Rest symbologies
      *
-     * Example
+     * @code
      *
      * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
      * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
@@ -3798,7 +3831,8 @@ class BarcodeSettings extends BaseJavaClass
      *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
      *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
      * }
-     * @param value  Enable checksum validation during recognition for 1D and Postal barcodes.
+     * @endcode
+     * @param int $value  Enable checksum validation during recognition for 1D and Postal barcodes.
      */
     public function setChecksumValidation(int $value): void
     {
@@ -3815,7 +3849,7 @@ class BarcodeSettings extends BaseJavaClass
     /**
      * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
      *
-     * Example
+     * @code
      *
      * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
      * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
@@ -3836,8 +3870,9 @@ class BarcodeSettings extends BaseJavaClass
      * {
      *     echo ("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      *
-     * @return Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     * @return bool Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
      */
     public function getStripFNC(): bool
     {
@@ -3854,7 +3889,7 @@ class BarcodeSettings extends BaseJavaClass
     /**
      * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
      *
-     * Example
+     * @code
      *
      * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
      * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
@@ -3875,8 +3910,9 @@ class BarcodeSettings extends BaseJavaClass
      * {
      *     echo ("BarCode CodeText: ".$result->getCodeText());
      * }
+     * @endcode
      *
-     * @param value  Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     * @param bool $value  Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
      */
     public function setStripFNC(bool $value): void
     {
@@ -3893,7 +3929,7 @@ class BarcodeSettings extends BaseJavaClass
     /**
      * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
      *
-     * Example
+     * @code
      *
      * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово"))
      * $im = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
@@ -3909,8 +3945,9 @@ class BarcodeSettings extends BaseJavaClass
      * $reader->getBarcodeSettings()->setDetectEncoding(false);
      * foreach($reader->readBarCodes() as $result)
      *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * @endcode
      *
-     * @return The flag which force engine to detect codetext encoding for Unicode codesets
+     * @return bool The flag which force engine to detect codetext encoding for Unicode codesets
      */
     public function getDetectEncoding(): bool
     {
@@ -3931,7 +3968,7 @@ class BarcodeSettings extends BaseJavaClass
 
     /**
      * Gets AustraliaPost decoding parameters
-     * @return The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology
+     * @return AustraliaPostSettings The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology
      */
     public function getAustraliaPost(): AustraliaPostSettings
     {
@@ -3946,7 +3983,7 @@ class RecognitionAbortedException extends Exception
 
     /**
      * Gets the execution time of current recognition session
-     * @return The execution time of current recognition session
+     * @return int The execution time of current recognition session
      */
     public function getExecutionTime(): int
     {
@@ -3962,7 +3999,7 @@ class RecognitionAbortedException extends Exception
 
     /**
      * Sets the execution time of current recognition session
-     * @param $value The execution time of current recognition session
+     * @param int $value The execution time of current recognition session
      */
     public function setExecutionTime(int $value): void
     {
@@ -3978,8 +4015,8 @@ class RecognitionAbortedException extends Exception
 
     /**
      * Initializes a new instance of the <see cref="RecognitionAbortedException" /> class with specified recognition abort message.
-     * @param $message The error message of the exception.
-     * @param $executionTime The execution time of current recognition session.
+     * @param $message null|string The error message of the exception.
+     * @param $executionTime null|int The execution time of current recognition session.
      */
     public function __construct(?string $message, ?int $executionTime)
     {
@@ -4038,339 +4075,338 @@ class DecodeType
     const NONE = -1;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>CODABAR</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>CODABAR</b>} barcode specification
      */
     const CODABAR = 0;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>CODE 11</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>CODE 11</b>} barcode specification
      */
     const CODE_11 = 1;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Standard CODE 39</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Standard CODE 39</b>} barcode specification
      */
     const CODE_39_STANDARD = 2;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Extended CODE 39</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Extended CODE 39</b>} barcode specification
      */
     const CODE_39_EXTENDED = 3;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Standard CODE 93</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Standard CODE 93</b>} barcode specification
      */
     const CODE_93_STANDARD = 4;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Extended CODE 93</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Extended CODE 93</b>} barcode specification
      */
     const CODE_93_EXTENDED = 5;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>CODE 128</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>CODE 128</b>} barcode specification
      */
     const CODE_128 = 6;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 CODE 128</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 CODE 128</b>} barcode specification
      */
     const GS_1_CODE_128 = 7;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>EAN-8</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>EAN-8</b>} barcode specification
      */
     const EAN_8 = 8;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>EAN-13</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>EAN-13</b>} barcode specification
      */
     const EAN_13 = 9;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>EAN14</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>EAN14</b>} barcode specification
      */
     const EAN_14 = 10;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>SCC14</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>SCC14</b>} barcode specification
      */
     const SCC_14 = 11;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>SSCC18</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>SSCC18</b>} barcode specification
      */
     const SSCC_18 = 12;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>UPC-A</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>UPC-A</b>} barcode specification
      */
     const UPCA = 13;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>UPC-E</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>UPC-E</b>} barcode specification
      */
     const UPCE = 14;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>ISBN</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>ISBN</b>} barcode specification
      */
     const ISBN = 15;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Standard 2 of 5</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Standard 2 of 5</b>} barcode specification
      */
     const STANDARD_2_OF_5 = 16;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>INTERLEAVED 2 of 5</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>INTERLEAVED 2 of 5</b>} barcode specification
      */
     const INTERLEAVED_2_OF_5 = 17;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Matrix 2 of 5</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Matrix 2 of 5</b>} barcode specification
      */
     const MATRIX_2_OF_5 = 18;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Italian Post 25</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Italian Post 25</b>} barcode specification
      */
     const ITALIAN_POST_25 = 19;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>IATA 2 of 5</b>} barcode specification. IATA (International Air Transport Association) uses this barcode for the management of air cargo.
+     * Specifies that the data should be decoded with { <b>IATA 2 of 5</b>} barcode specification. IATA (International Air Transport Association) uses this barcode for the management of air cargo.
      */
     const IATA_2_OF_5 = 20;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>ITF14</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>ITF14</b>} barcode specification
      */
     const ITF_14 = 21;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>ITF6</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>ITF6</b>} barcode specification
      */
     const ITF_6 = 22;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>MSI Plessey</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>MSI Plessey</b>} barcode specification
      */
     const MSI = 23;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>VIN</b>} (Vehicle Identification Number) barcode specification
+     * Specifies that the data should be decoded with { <b>VIN</b>} (Vehicle Identification Number) barcode specification
      */
     const VIN = 24;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>DeutschePost Ident code</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>DeutschePost Ident code</b>} barcode specification
      */
     const DEUTSCHE_POST_IDENTCODE = 25;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>DeutschePost Leit code</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>DeutschePost Leit code</b>} barcode specification
      */
     const DEUTSCHE_POST_LEITCODE = 26;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>OPC</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>OPC</b>} barcode specification
      */
     const OPC = 27;
 
     /**
-     *  Specifies that the data should be decoded with {@code <b>PZN</b>} barcode specification. This symbology is also known as Pharma Zentral Nummer
+     *  Specifies that the data should be decoded with { <b>PZN</b>} barcode specification. This symbology is also known as Pharma Zentral Nummer
      */
     const PZN = 28;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Pharmacode</b>} barcode. This symbology is also known as Pharmaceutical BINARY Code
+     * Specifies that the data should be decoded with { <b>Pharmacode</b>} barcode. This symbology is also known as Pharmaceutical BINARY Code
      */
     const PHARMACODE = 29;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>DataMatrix</b>} barcode symbology
+     * Specifies that the data should be decoded with { <b>DataMatrix</b>} barcode symbology
      */
     const DATA_MATRIX = 30;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1DataMatrix</b>} barcode symbology
+     * Specifies that the data should be decoded with { <b>GS1DataMatrix</b>} barcode symbology
      */
     const GS_1_DATA_MATRIX = 31;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>QR Code</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>QR Code</b>} barcode specification
      */
     const QR = 32;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Aztec</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Aztec</b>} barcode specification
      */
     const AZTEC = 33;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Pdf417</b>} barcode symbology
+     * Specifies that the data should be decoded with { <b>Pdf417</b>} barcode symbology
      */
     const PDF_417 = 34;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>MacroPdf417</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>MacroPdf417</b>} barcode specification
      */
     const MACRO_PDF_417 = 35;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>MicroPdf417</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>MicroPdf417</b>} barcode specification
      */
     const MICRO_PDF_417 = 36;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>CodablockF</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>CodablockF</b>} barcode specification
      */
     const CODABLOCK_F = 65;
+    /**
+     * Specifies that the data should be decoded with <b>Royal Mail Mailmark</b> barcode specification.
+     */
+    const MAILMARK = 66;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Australia Post</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Australia Post</b>} barcode specification
      */
     const AUSTRALIA_POST = 37;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Postnet</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Postnet</b>} barcode specification
      */
     const POSTNET = 38;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Planet</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Planet</b>} barcode specification
      */
     const PLANET = 39;
 
     /**
-     * Specifies that the data should be decoded with USPS {@code <b>OneCode</b>} barcode specification
+     * Specifies that the data should be decoded with USPS { <b>OneCode</b>} barcode specification
      */
     const ONE_CODE = 40;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>RM4SCC</b>} barcode specification. RM4SCC (Royal Mail 4-state Customer Code) is used for automated mail sort process in UK.
+     * Specifies that the data should be decoded with { <b>RM4SCC</b>} barcode specification. RM4SCC (Royal Mail 4-state Customer Code) is used for automated mail sort process in UK.
      */
     const RM_4_SCC = 41;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR omni-directional</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR omni-directional</b>} barcode specification
      */
     const DATABAR_OMNI_DIRECTIONAL = 42;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR truncated</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR truncated</b>} barcode specification
      */
     const DATABAR_TRUNCATED = 43;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR limited</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR limited</b>} barcode specification
      */
     const DATABAR_LIMITED = 44;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR expanded</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR expanded</b>} barcode specification
      */
     const DATABAR_EXPANDED = 45;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR stacked omni-directional</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR stacked omni-directional</b>} barcode specification
      */
     const DATABAR_STACKED_OMNI_DIRECTIONAL = 53;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR stacked</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR stacked</b>} barcode specification
      */
     const DATABAR_STACKED = 54;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 DATABAR expanded stacked</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 DATABAR expanded stacked</b>} barcode specification
      */
     const DATABAR_EXPANDED_STACKED = 55;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Patch code</b>} barcode specification. Barcode symbology is used for automated scanning
+     * Specifies that the data should be decoded with { <b>Patch code</b>} barcode specification. Barcode symbology is used for automated scanning
      */
     const PATCH_CODE = 46;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>ISSN</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>ISSN</b>} barcode specification
      */
     const ISSN = 47;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>ISMN</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>ISMN</b>} barcode specification
      */
     const ISMN = 48;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Supplement(EAN2, EAN5)</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Supplement(EAN2, EAN5)</b>} barcode specification
      */
     const SUPPLEMENT = 49;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Australian Post Domestic eParcel Barcode</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Australian Post Domestic eParcel Barcode</b>} barcode specification
      */
     const AUSTRALIAN_POSTE_PARCEL = 50;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Swiss Post Parcel Barcode</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>Swiss Post Parcel Barcode</b>} barcode specification
      */
     const SWISS_POST_PARCEL = 51;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>SCode16K</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>SCode16K</b>} barcode specification
      */
     const CODE_16_K = 52;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>MicroQR Code</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>MicroQR Code</b>} barcode specification
      */
     const MICRO_QR = 56;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>CompactPdf417</b>} (Pdf417Truncated) barcode specification
+     * Specifies that the data should be decoded with { <b>CompactPdf417</b>} (Pdf417Truncated) barcode specification
      */
     const COMPACT_PDF_417 = 57;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>GS1 QR</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>GS1 QR</b>} barcode specification
      */
     const GS_1_QR = 58;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>MaxiCode</b>} barcode specification
+     * Specifies that the data should be decoded with { <b>MaxiCode</b>} barcode specification
      */
     const MAXI_CODE = 59;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>MICR E-13B</b>} blank specification
+     * Specifies that the data should be decoded with { <b>MICR E-13B</b>} blank specification
      */
     const MICR_E_13_B = 60;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>Code32</b>} blank specification
+     * Specifies that the data should be decoded with { <b>Code32</b>} blank specification
      */
     const CODE_32 = 61;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>DataLogic 2 of 5</b>} blank specification
+     * Specifies that the data should be decoded with { <b>DataLogic 2 of 5</b>} blank specification
      */
     const DATA_LOGIC_2_OF_5 = 62;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>DotCode</b>} blank specification
+     * Specifies that the data should be decoded with { <b>DotCode</b>} blank specification
      */
     const DOT_CODE = 63;
 
     /**
-     * Specifies that the data should be decoded with {@code <b>DotCode</b>} blank specification
+     * Specifies that the data should be decoded with { <b>DotCode</b>} blank specification
      */
     const DUTCH_KIX = 64;
-
-    /**
-     * Specifies that data will be checked with all available symbologies
-     */
-    const ALL_SUPPORTED_TYPES = 66;
 
     /**
      * Specifies that data will be checked with all of  1D  barcode symbologies
@@ -4392,14 +4428,19 @@ class DecodeType
      */
     const TYPES_2D = 70;
 
+    /**
+     * Specifies that data will be checked with all available symbologies
+     */
+    const ALL_SUPPORTED_TYPES = 71;
+
     private const javaClassName = "com.aspose.mw.barcode.recognition.MwDecodeTypeUtils";
 
     /**
      * Determines if the specified BaseDecodeType contains any 1D barcode symbology
-     * @param $symbology
-     * @return string <b>true</b> if BaseDecodeType contains any 1D barcode symbology; otherwise, returns <b>false</b>.
+     * @param int $symbology barcode symbology
+     * @return bool <b>true</b> if BaseDecodeType contains any 1D barcode symbology; otherwise, returns <b>false</b>.
      */
-    public static function is1D($symbology): bool
+    public static function is1D(int $symbology): bool
     {
         try
         {
@@ -4414,10 +4455,10 @@ class DecodeType
 
     /**
      * Determines if the specified BaseDecodeType contains any Postal barcode symbology
-     * @param symbology The BaseDecodeType to test
-     * @return Returns <b>true</b> if BaseDecodeType contains any Postal barcode symbology; otherwise, returns <b>false</b>.
+     * @param int symbology The BaseDecodeType to test
+     * @return bool Returns <b>true</b> if BaseDecodeType contains any Postal barcode symbology; otherwise, returns <b>false</b>.
      */
-    public static function isPostal($symbology): bool
+    public static function isPostal(int $symbology): bool
     {
         try
         {
@@ -4432,10 +4473,10 @@ class DecodeType
 
     /**
      * Determines if the specified BaseDecodeType contains any 2D barcode symbology
-     * @param symbology The BaseDecodeType to test.
-     * @return Returns <b>true</b> if BaseDecodeType contains any 2D barcode symbology; otherwise, returns <b>false</b>.
+     * @param int symbology The BaseDecodeType to test.
+     * @return bool Returns <b>true</b> if BaseDecodeType contains any 2D barcode symbology; otherwise, returns <b>false</b>.
      */
-    public static function is2D($symbology): bool
+    public static function is2D(int $symbology): bool
     {
         try
         {
@@ -4448,12 +4489,19 @@ class DecodeType
         }
     }
 
-    public static function containsAny($decodeType, ...$decodeTypes): bool
+    /**
+     * Determines if the BaseDecodeType array contains specified barcode symbology
+     * @param int $decodeType specified barcode symbology
+     * @param array $decodeTypes the BaseDecodeType array
+     * @return bool
+     * @throws BarcodeException
+     */
+    public static function containsAny(int $decodeType, array $decodeTypes): bool
     {
         try
         {
             $javaClass = new java(DecodeType::javaClassName);
-            return java_cast($javaClass->containsAny(...$decodeTypes), "boolean");
+            return java_cast($javaClass->containsAny($decodeType, $decodeTypes), "boolean");
         }
         catch (Exception $ex)
         {
@@ -4462,6 +4510,9 @@ class DecodeType
     }
 }
 
+/**
+ * Contains types of Code128 subset
+ */
 class Code128SubType
 {
     /**
@@ -4559,6 +4610,7 @@ class  CustomerInformationInterpretingType
  *    print("BarCode ReadingQuality: ".$result->getReadingQuality());
  * }
  * @endcode
+ *
  * Strong confidence
  * @code
  * $generator = new BarcodeGenerator(EncodeTypes::QR, "12345");

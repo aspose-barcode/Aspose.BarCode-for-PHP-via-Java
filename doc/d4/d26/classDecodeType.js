@@ -43,6 +43,7 @@ var classDecodeType =
     [ "\u202AITF_14", "d4/d26/classDecodeType.html#a4ff40a45aee877647e7dd70fedd92704", null ],
     [ "\u202AITF_6", "d4/d26/classDecodeType.html#ae86f5de6166ed1ed873453aea47cfde1", null ],
     [ "\u202AMACRO_PDF_417", "d4/d26/classDecodeType.html#a4fb594e15aa03d713d77c68a400ac9ec", null ],
+    [ "\u202AMAILMARK", "d4/d26/classDecodeType.html#ad1846f1f77e2cc09663f4b40a642ed95", null ],
     [ "\u202AMATRIX_2_OF_5", "d4/d26/classDecodeType.html#aecf5077a3d6ec7272b464f9b44e0ef9f", null ],
     [ "\u202AMAXI_CODE", "d4/d26/classDecodeType.html#aba465ece9cb4035c922de062a6dfbd7d", null ],
     [ "\u202AMICR_E_13_B", "d4/d26/classDecodeType.html#af560fc437ed366f9b1dca30b16e10dc6", null ],

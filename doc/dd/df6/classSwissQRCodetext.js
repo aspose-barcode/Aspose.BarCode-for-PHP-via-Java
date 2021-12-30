@@ -7,7 +7,8 @@ var classSwissQRCodetext =
     [ "\u202AgetJavaClass", "dd/df6/classSwissQRCodetext.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "dd/df6/classSwissQRCodetext.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202Ainit", "dd/df6/classSwissQRCodetext.html#a0e4ae82ef1b6300d405e899a522b7247", null ],
-    [ "\u202AinitFromString", "dd/df6/classSwissQRCodetext.html#a718db60aa2c4e9f1a6b23511c71649c5", null ],
+    [ "\u202AinitFromString", "dd/df6/classSwissQRCodetext.html#a66ddf3e3ea2d7eb3606d36714528a06d", null ],
+    [ "\u202AinitFromString", "dd/df6/classSwissQRCodetext.html#a34b7a338fd06fc74e70f5f238a5b4796", null ],
     [ "\u202AisNull", "dd/df6/classSwissQRCodetext.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "dd/df6/classSwissQRCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetJavaClass", "dd/df6/classSwissQRCodetext.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ]

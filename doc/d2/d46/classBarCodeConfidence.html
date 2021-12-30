@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.11</span>
+   &#160;<span id="projectnumber">21.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -114,7 +114,7 @@ Public Attributes</h2></td></tr>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode Confidence: &quot;</span>.$result-&gt;getConfidence());</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode ReadingQuality: &quot;</span>.$result-&gt;getReadingQuality());</div>
 <div class="line">}</div>
-</div><!-- fragment --><p class="DocNodeLTR"> Strong confidence </p><div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5">EncodeTypes::QR</a>, <span class="stringliteral">&quot;12345&quot;</span>);</div>
+</div><!-- fragment --><p class="DocNodeLTR">Strong confidence </p><div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5">EncodeTypes::QR</a>, <span class="stringliteral">&quot;12345&quot;</span>);</div>
 <div class="line">$generator-&gt;save(<span class="stringliteral">&quot;test.png&quot;</span>);</div>
 <div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7">DecodeType::QR</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>

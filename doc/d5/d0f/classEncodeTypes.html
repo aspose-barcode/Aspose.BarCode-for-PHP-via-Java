@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.11</span>
+   &#160;<span id="projectnumber">21.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -192,6 +192,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a904b440bf8c57f9364961c429c65d076"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59cf39aea772d8a8f86e759deccea35f"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0f/classEncodeTypes.html#a59cf39aea772d8a8f86e759deccea35f">RM_4_SCC</a> = 42</td></tr>
 <tr class="separator:a59cf39aea772d8a8f86e759deccea35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a213d97ed95e113c5d6242f7cde820e"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0f/classEncodeTypes.html#a7a213d97ed95e113c5d6242f7cde820e">MAILMARK</a> = 71</td></tr>
+<tr class="separator:a7a213d97ed95e113c5d6242f7cde820e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57180134836d814924aea42ac7e315a"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0f/classEncodeTypes.html#ae57180134836d814924aea42ac7e315a">DATABAR_OMNI_DIRECTIONAL</a> = 43</td></tr>
 <tr class="separator:ae57180134836d814924aea42ac7e315a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5242438f52af27a5cf29ec33f19d49cf"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d0f/classEncodeTypes.html#a5242438f52af27a5cf29ec33f19d49cf">DATABAR_TRUNCATED</a> = 44</td></tr>
@@ -862,6 +864,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a7a213d97ed95e113c5d6242f7cde820e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a213d97ed95e113c5d6242f7cde820e">&#9670;&nbsp;</a></span>MAILMARK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const EncodeTypes::MAILMARK = 71</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Represents Royal Mail Mailmark barcode. </p>
+
+</div>
+</div>
 <a id="a33eb6ee83e7a4b85a6e9315af0d2e9a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33eb6ee83e7a4b85a6e9315af0d2e9a0">&#9670;&nbsp;</a></span>MATRIX_2_OF_5</h2>
 
@@ -1204,10 +1221,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Specifies that the data should be encoded with UPC coupon with GS1 DataBar addition barcode specification.</p>
-<p class="DocNodeLTR">An example of the input string: </p><div class="fragment"><div class="line">BarCodeBuilder-&gt;setCodetext(<span class="stringliteral">&quot;514141100906(8110)106141416543213500110000310123196000&quot;</span>),</div>
-<div class="line">where <a class="code" href="../../d5/d0f/classEncodeTypes.html#a3763de920d74dd651d96816f808f80c1">UPCA</a> part is <span class="stringliteral">&quot;514141100906&quot;</span>, DATABAR part is <span class="stringliteral">&quot;(8110)106141416543213500110000310123196000&quot;</span>.</div>
-<div class="line">To change the caption, use barCodeBuilder-&gt;getCaptionAbove()-&gt;setText(<span class="stringliteral">&quot;company prefix + offer code&quot;</span>);</div>
-</div><!-- fragment --> 
+<p class="DocNodeLTR">An example of the input string: </p><div class="fragment"><div class="line"><a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>-&gt;setCodetext(<span class="stringliteral">&quot;514141100906(8110)106141416543213500110000310123196000&quot;</span>),</div>
+</div><!-- fragment --><p class="DocNodeLTR"> where UPCA part is "514141100906", DATABAR part is "(8110)106141416543213500110000310123196000". To change the caption, use barCodeBuilder-&gt;getCaptionAbove()-&gt;setText("company prefix + offer code"); </p>
+
 </div>
 </div>
 <a id="ab700e2a11164a7a3d8ef4cd360261eb0"></a>
