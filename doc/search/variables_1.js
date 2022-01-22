@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['a_1372',['A',['../d0/d4a/classCodabarSymbol.html#a84dacb9a6f692d7f8c849aac337c0cb7',1,'CodabarSymbol']]],
-  ['a4_1373',['A4',['../d0/d26/classPatchFormat.html#a66cf044418d2e350f082a2b72fcd6d58',1,'PatchFormat']]],
-  ['a4_5flandscape_1374',['A4_LANDSCAPE',['../d0/d26/classPatchFormat.html#a19fe60f929dc2a83147718a681be6a28',1,'PatchFormat']]],
-  ['above_1375',['ABOVE',['../d8/df0/classCodeLocation.html#a06d5f8205a3f34462e3422825e19631f',1,'CodeLocation']]],
-  ['all_5fsupported_5ftypes_1376',['ALL_SUPPORTED_TYPES',['../d4/d26/classDecodeType.html#a03403d45781d2e49923d4dc7033ad856',1,'DecodeType']]],
-  ['ansix12_1377',['ANSIX12',['../d1/d09/classDataMatrixEncodeMode.html#aac10542ca5fdd998af68dec51efbefa0',1,'DataMatrixEncodeMode']]],
-  ['ascii_1378',['ASCII',['../d1/d09/classDataMatrixEncodeMode.html#a14f52ea3e3e8aadb1c0886eb6b3fa579',1,'DataMatrixEncodeMode']]],
-  ['australia_5fpost_1379',['AUSTRALIA_POST',['../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610',1,'EncodeTypes\AUSTRALIA_POST()'],['../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593',1,'DecodeType\AUSTRALIA_POST()']]],
-  ['australian_5fposte_5fparcel_1380',['AUSTRALIAN_POSTE_PARCEL',['../d5/d0f/classEncodeTypes.html#a499844e5e9416ea8126f4e1f3495a139',1,'EncodeTypes\AUSTRALIAN_POSTE_PARCEL()'],['../d4/d26/classDecodeType.html#a0e3d62af911a33c81e55b18e35092b86',1,'DecodeType\AUSTRALIAN_POSTE_PARCEL()']]],
-  ['auto_1381',['AUTO',['../d7/d21/classMailmark2DType.html#a09a1e385a643aeb76d68042f1839c464',1,'Mailmark2DType\AUTO()'],['../d1/d09/classDataMatrixEncodeMode.html#a0eee1303b22dc74bb6f378c3b337c9f4',1,'DataMatrixEncodeMode\AUTO()'],['../d9/d97/classQREncodeMode.html#a9fdeb3f2e94446ea0cfdb608685ca6d0',1,'QREncodeMode\AUTO()'],['../d8/d37/classQRVersion.html#a308fdff10878208d81ddea66fcd6877e',1,'QRVersion\AUTO()'],['../d1/d1b/classAztecSymbolMode.html#a1eec94cd9752011bb97853179b806fe2',1,'AztecSymbolMode\AUTO()'],['../d2/d92/classPdf417CompactionMode.html#a65ebe49db30d8e8fbbfa04ee41ed3355',1,'Pdf417CompactionMode\AUTO()'],['../d7/d8a/classQREncodeType.html#ab26aecd90a56472ed689f51e37b979b7',1,'QREncodeType\AUTO()'],['../dd/d60/classFontMode.html#a22921b4d8c55bb21e722b9039a23372c',1,'FontMode\AUTO()']]],
-  ['aztec_1382',['AZTEC',['../d5/d0f/classEncodeTypes.html#acb8302f492ff74162bc25191c6d18846',1,'EncodeTypes\AZTEC()'],['../d4/d26/classDecodeType.html#a6195a92897c17b6d555cac2ddac52775',1,'DecodeType\AZTEC()']]]
+  ['a_1375',['A',['../d0/d4a/classCodabarSymbol.html#a84dacb9a6f692d7f8c849aac337c0cb7',1,'CodabarSymbol']]],
+  ['a4_1376',['A4',['../d0/d26/classPatchFormat.html#a66cf044418d2e350f082a2b72fcd6d58',1,'PatchFormat']]],
+  ['a4_5flandscape_1377',['A4_LANDSCAPE',['../d0/d26/classPatchFormat.html#a19fe60f929dc2a83147718a681be6a28',1,'PatchFormat']]],
+  ['above_1378',['ABOVE',['../d8/df0/classCodeLocation.html#a06d5f8205a3f34462e3422825e19631f',1,'CodeLocation']]],
+  ['all_5fsupported_5ftypes_1379',['ALL_SUPPORTED_TYPES',['../d4/d26/classDecodeType.html#a03403d45781d2e49923d4dc7033ad856',1,'DecodeType']]],
+  ['ansix12_1380',['ANSIX12',['../d1/d09/classDataMatrixEncodeMode.html#aac10542ca5fdd998af68dec51efbefa0',1,'DataMatrixEncodeMode']]],
+  ['ascii_1381',['ASCII',['../d1/d09/classDataMatrixEncodeMode.html#a14f52ea3e3e8aadb1c0886eb6b3fa579',1,'DataMatrixEncodeMode']]],
+  ['australia_5fpost_1382',['AUSTRALIA_POST',['../d5/d0f/classEncodeTypes.html#a3846ddf10b50f52b10815efc9698f610',1,'EncodeTypes\AUSTRALIA_POST()'],['../d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593',1,'DecodeType\AUSTRALIA_POST()']]],
+  ['australian_5fposte_5fparcel_1383',['AUSTRALIAN_POSTE_PARCEL',['../d5/d0f/classEncodeTypes.html#a499844e5e9416ea8126f4e1f3495a139',1,'EncodeTypes\AUSTRALIAN_POSTE_PARCEL()'],['../d4/d26/classDecodeType.html#a0e3d62af911a33c81e55b18e35092b86',1,'DecodeType\AUSTRALIAN_POSTE_PARCEL()']]],
+  ['auto_1384',['AUTO',['../d7/d21/classMailmark2DType.html#a09a1e385a643aeb76d68042f1839c464',1,'Mailmark2DType\AUTO()'],['../d1/d09/classDataMatrixEncodeMode.html#a0eee1303b22dc74bb6f378c3b337c9f4',1,'DataMatrixEncodeMode\AUTO()'],['../d9/d97/classQREncodeMode.html#a9fdeb3f2e94446ea0cfdb608685ca6d0',1,'QREncodeMode\AUTO()'],['../d8/d37/classQRVersion.html#a308fdff10878208d81ddea66fcd6877e',1,'QRVersion\AUTO()'],['../d1/d1b/classAztecSymbolMode.html#a1eec94cd9752011bb97853179b806fe2',1,'AztecSymbolMode\AUTO()'],['../d2/d92/classPdf417CompactionMode.html#a65ebe49db30d8e8fbbfa04ee41ed3355',1,'Pdf417CompactionMode\AUTO()'],['../d7/d8a/classQREncodeType.html#ab26aecd90a56472ed689f51e37b979b7',1,'QREncodeType\AUTO()'],['../dd/d60/classFontMode.html#a22921b4d8c55bb21e722b9039a23372c',1,'FontMode\AUTO()']]],
+  ['aztec_1385',['AZTEC',['../d5/d0f/classEncodeTypes.html#acb8302f492ff74162bc25191c6d18846',1,'EncodeTypes\AZTEC()'],['../d4/d26/classDecodeType.html#a6195a92897c17b6d555cac2ddac52775',1,'DecodeType\AZTEC()']]]
 ];

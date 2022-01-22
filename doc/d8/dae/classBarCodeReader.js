@@ -17,7 +17,7 @@ var classBarCodeReader =
     [ "\u202Ainit", "d8/dae/classBarCodeReader.html#adbd0a70ac50ecd94ae5052320e555c24", null ],
     [ "\u202AisNull", "d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d8/dae/classBarCodeReader.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
-    [ "\u202AsetBarCodeImage", "d8/dae/classBarCodeReader.html#a0a1e90363e60b3f84b24c702689a14b2", null ],
+    [ "\u202AsetBarCodeImage", "d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082", null ],
     [ "\u202AsetBarCodeReadType", "d8/dae/classBarCodeReader.html#a0142d9361114f67098a1cf01fdf1d12f", null ],
     [ "\u202AsetChecksumValidation", "d8/dae/classBarCodeReader.html#ad6d5eea5b50b17cd3b03ecf4cdc8812b", null ],
     [ "\u202AsetCustomerInformationInterpretingType", "d8/dae/classBarCodeReader.html#aab4317d961a85412544bebfeb87d2261", null ],

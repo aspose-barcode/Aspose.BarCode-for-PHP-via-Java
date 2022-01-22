@@ -25,7 +25,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * BarCodeReader constructor. Initializes a new instance of the BarCodeReader
-     * @param string $image image encoded as base64 string or path to image
+     * @param string $resource image encoded as base64 string or path to image resource located in the file system or via http
      * @param int|array|null $rectangles array of object by type Rectangle
      * @param int|array|null $decodeTypes array of decode types
      * @throws BarcodeException
@@ -49,7 +49,7 @@ class BarCodeReader extends BaseJavaClass
             }
             else
             {
-                $image_base64 = self::loadImage($image);
+                $image_base64 = convertResourceToBase64String($image);
                 $java_class = new java(self::JAVA_CLASS_NAME, $image_base64, $rectangles, $decodeTypes);
             }
             parent::__construct($java_class);
@@ -82,39 +82,6 @@ class BarCodeReader extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-    }
-
-    private static function loadImage($image)
-    {
-        try
-        {
-            if (self::isPath($image))
-            {
-                $imagedata = file_get_contents($image);
-                return base64_encode($imagedata);
-            }
-            else
-            {
-                return $image;
-            }
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    private static function isPath($image)
-    {
-        if (strlen($image) < 256 && (strpos($image, "/") || strpos($image, "\\")))
-        {
-            if (file_exists($image))
-            {
-                return true;
-            }
-            throw new BarcodeException("Path does not exist", __FILE__, __LINE__);
-        }
-        return false;
     }
 
     protected function init(): void
@@ -385,7 +352,9 @@ class BarCodeReader extends BaseJavaClass
      * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
-     *    print("BarCode CodeText: ". $reader->getFoundBarCodes()[i]->getCodeText());
+     * {
+     *    print("BarCode CodeText: ". $reader->getFoundBarCodes()[$i]->getCodeText());
+     * }
      * @endcode
      * Value: The recognized BarCodeResult array
      */
@@ -625,15 +594,15 @@ class BarCodeReader extends BaseJavaClass
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
      * @endcode
-     * @param string $image The bitmap image for recognition.
+     * @param string $resource image encoded as base64 string or path to image resource located in the file system or via http
      * @param Rectangle|null $areas areas list for recognition
      * @throws BarcodeException
      */
-    public final function setBarCodeImage(string $image, ?Rectangle ...$areas): void
+    public final function setBarCodeImage(string $resource, ?Rectangle ...$areas): void
     {
         try
         {
-            $image = self::loadImage($image);
+            $image = convertResourceToBase64String($resource);
             $stringAreas = array();
             $isAllRectanglesNotNull = false;
             if (!is_null($areas) && sizeof($areas) > 0)
@@ -697,7 +666,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Exports BarCode properties to the xml-file specified
-     * @param string $xmlFile The name for the file
+     * @param string $xmlFile The path to xml file
      * @return bool Whether or not export completed successfully.
      * Returns True in case of success; False Otherwise
      */
@@ -720,18 +689,21 @@ class BarCodeReader extends BaseJavaClass
     }
 
     /**
-     * Exports BarCode properties to the xml-file specified
-     * @param string $xmlFile The name for the file
-     * @return bool Whether or not export completed successfully.
-     * Returns True in case of success; False Otherwise
+     * Import BarCode properties from xml file
+     * @param string $resource The name of the xml file or path to http resource
+     * @return BarCodeReader
+     * @throws BarcodeException
      */
-    public static function importFromXml(string $xmlFile): BarCodeReader
+    public static function importFromXml($resource): BarCodeReader
     {
         try
         {
-            $xmlData = (file_get_contents($xmlFile));
+            if(isPath($resource))
+                $resource = fopen($resource, "r");
+            $xmlData = (stream_get_contents($resource));
             $offset = 6;
-            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml(substr($xmlData, $offset, strlen($xmlData) - $offset)));
+            $xmlData = substr($xmlData, $offset, strlen($xmlData) - $offset);
+            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml($xmlData));
         }
         catch (Exception $ex)
         {

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">21.12</span>
+   &#160;<span id="projectnumber">22.1</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -128,8 +128,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaae47053c156ae74bddec4d165dadf0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09ee2b98ce642af81bcdf237c3e28ac9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a09ee2b98ce642af81bcdf237c3e28ac9">setDetectEncoding</a> (bool $value)</td></tr>
 <tr class="separator:a09ee2b98ce642af81bcdf237c3e28ac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a1e90363e60b3f84b24c702689a14b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a0a1e90363e60b3f84b24c702689a14b2">setBarCodeImage</a> (string $image, ?<a class="el" href="../../de/d00/classRectangle.html">Rectangle</a> ... $areas)</td></tr>
-<tr class="separator:a0a1e90363e60b3f84b24c702689a14b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5120780f5597119fe96747d3400e2082"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082">setBarCodeImage</a> (string $resource, ?<a class="el" href="../../de/d00/classRectangle.html">Rectangle</a> ... $areas)</td></tr>
+<tr class="separator:a5120780f5597119fe96747d3400e2082"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0142d9361114f67098a1cf01fdf1d12f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a0142d9361114f67098a1cf01fdf1d12f">setBarCodeReadType</a> (int ... $types)</td></tr>
 <tr class="separator:a0142d9361114f67098a1cf01fdf1d12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5bac98ecba871ef3f643a98de1e9dc3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#ab5bac98ecba871ef3f643a98de1e9dc3">getBarCodeDecodeType</a> ()</td></tr>
@@ -149,8 +149,8 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3f3f86f021e5753a6d7bd35a37817bb6"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a3f3f86f021e5753a6d7bd35a37817bb6">construct</a> ($javaClass)</td></tr>
 <tr class="separator:a3f3f86f021e5753a6d7bd35a37817bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88c01d83c2e0413c57e9bf95fa987c0d"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a88c01d83c2e0413c57e9bf95fa987c0d">importFromXml</a> (string $xmlFile)</td></tr>
-<tr class="separator:a88c01d83c2e0413c57e9bf95fa987c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60f6ee41580b1b1389d4247eafb6cd9a"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dae/classBarCodeReader.html#a60f6ee41580b1b1389d4247eafb6cd9a">importFromXml</a> ($resource)</td></tr>
+<tr class="separator:a60f6ee41580b1b1389d4247eafb6cd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -201,7 +201,7 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR"><a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> constructor. Initializes a new instance of the <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">string</td><td class="paramname">$image</td><td>&#x202A;image encoded as base64 string or path to image </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$resource</td><td>&#x202A;image encoded as base64 string or path to image resource located in the file system or via http </td></tr>
     <tr><td class="paramtype">int&#160;|&#160;array&#160;|&#160;null</td><td class="paramname">$rectangles</td><td>&#x202A;array of object by type <a class="el" href="../../de/d00/classRectangle.html">Rectangle</a> </td></tr>
     <tr><td class="paramtype">int&#160;|&#160;array&#160;|&#160;null</td><td class="paramname">$decodeTypes</td><td>&#x202A;array of decode types </td></tr>
   </table>
@@ -302,7 +302,7 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Exports BarCode properties to the xml-file specified </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">string</td><td class="paramname">$xmlFile</td><td>&#x202A;The name for the file </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$xmlFile</td><td>&#x202A;The path to xml file </td></tr>
   </table>
   </dd>
 </dl>
@@ -566,7 +566,9 @@ Protected Member Functions</h2></td></tr>
 <p class="DocNodeLTR">This sample shows how to read barcodes with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line">$reader-&gt;readBarCodes();</div>
 <div class="line"><span class="keywordflow">for</span>($i = 0; $reader-&gt;getFoundCount() &gt; $i; ++$i)</div>
-<div class="line">   print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>. $reader-&gt;getFoundBarCodes()[i]-&gt;getCodeText());</div>
+<div class="line">{</div>
+<div class="line">   print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>. $reader-&gt;getFoundBarCodes()[$i]-&gt;getCodeText());</div>
+<div class="line">}</div>
 </div><!-- fragment --><p class="DocNodeLTR"> Value: The recognized <a class="el" href="../../d2/d68/classBarCodeResult.html">BarCodeResult</a> array </p>
 
 </div>
@@ -702,8 +704,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a88c01d83c2e0413c57e9bf95fa987c0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88c01d83c2e0413c57e9bf95fa987c0d">&#9670;&nbsp;</a></span>importFromXml()</h2>
+<a id="a60f6ee41580b1b1389d4247eafb6cd9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60f6ee41580b1b1389d4247eafb6cd9a">&#9670;&nbsp;</a></span>importFromXml()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -714,8 +716,8 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static BarCodeReader::importFromXml </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>$xmlFile</em></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$resource</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -725,13 +727,19 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Exports BarCode properties to the xml-file specified </p><dl class="params"><dt>Parameters</dt><dd>
+<p class="DocNodeLTR">Import BarCode properties from xml file </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">string</td><td class="paramname">$xmlFile</td><td>&#x202A;The name for the file </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$resource</td><td>&#x202A;The name of the xml file or path to http resource </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>&#x202A;bool Whether or not export completed successfully. Returns True in case of success; False Otherwise </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;<a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d8/d71/classBarcodeException.html">BarcodeException</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -812,8 +820,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0a1e90363e60b3f84b24c702689a14b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a1e90363e60b3f84b24c702689a14b2">&#9670;&nbsp;</a></span>setBarCodeImage()</h2>
+<a id="a5120780f5597119fe96747d3400e2082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5120780f5597119fe96747d3400e2082">&#9670;&nbsp;</a></span>setBarCodeImage()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -825,7 +833,7 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">BarCodeReader::setBarCodeImage </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>$image</em>, </td>
+          <td class="paramname"><em>$resource</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -851,7 +859,7 @@ Protected Member Functions</h2></td></tr>
 <div class="line">$reader-&gt;setBarCodeReadType(<a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line">$width, $height;</div>
 <div class="line">list($width, $height) = getimagesize(<span class="stringliteral">&#39;path_to_image&#39;</span>)</div>
-<div class="line">$reader-&gt;<a class="code" href="../../d8/dae/classBarCodeReader.html#a0a1e90363e60b3f84b24c702689a14b2">setBarCodeImage</a>($bmp, new <a class="code" href="../../de/d00/classRectangle.html">Rectangle</a>[] { <span class="keyword">new</span> <a class="code" href="../../de/d00/classRectangle.html">Rectangle</a>(0, 0, $width, $height) });</div>
+<div class="line">$reader-&gt;<a class="code" href="../../d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082">setBarCodeImage</a>($bmp, new <a class="code" href="../../de/d00/classRectangle.html">Rectangle</a>[] { <span class="keyword">new</span> <a class="code" href="../../de/d00/classRectangle.html">Rectangle</a>(0, 0, $width, $height) });</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.$result-&gt;getCodeTypeName());</div>
@@ -859,7 +867,7 @@ Protected Member Functions</h2></td></tr>
 <div class="line">}</div>
 </div><!-- fragment --> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">string</td><td class="paramname">$image</td><td>&#x202A;The bitmap image for recognition. </td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$resource</td><td>&#x202A;image encoded as base64 string or path to image resource located in the file system or via http </td></tr>
     <tr><td class="paramtype"><a class="el" href="../../de/d00/classRectangle.html">Rectangle</a>&#160;|&#160;null</td><td class="paramname">$areas</td><td>&#x202A;areas list for recognition </td></tr>
   </table>
   </dd>

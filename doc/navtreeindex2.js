@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d5/d0f/classEncodeTypes.html#a2134a892e148810c295687455ad7eb69":[0,0,50,10],
 "d5/d0f/classEncodeTypes.html#a332d3728f9681b946e98be67711d2f13":[0,0,50,46],
 "d5/d0f/classEncodeTypes.html#a33eb6ee83e7a4b85a6e9315af0d2e9a0":[0,0,50,43],
 "d5/d0f/classEncodeTypes.html#a353fc282a845181933c8c15da5dfed69":[0,0,50,44],
@@ -169,8 +170,11 @@ var NAVTREEINDEX2 =
 "d7/d7c/classBarCodeImageFormat.html":[0,0,13],
 "d7/d7c/classBarCodeImageFormat.html#a07f661390cabae97572bc6db85b8640d":[0,0,13,4],
 "d7/d7c/classBarCodeImageFormat.html#a093e7bbad5bef69e45e3fdf45b907ed8":[0,0,13,3],
+"d7/d7c/classBarCodeImageFormat.html#a201216809a67776d015abb84cbff5a67":[0,0,13,7],
 "d7/d7c/classBarCodeImageFormat.html#a45ac92c8d2cabfd87b5d471dfab03713":[0,0,13,2],
+"d7/d7c/classBarCodeImageFormat.html#a85b532c0992949aaa4980212df495fbb":[0,0,13,6],
 "d7/d7c/classBarCodeImageFormat.html#ab56501a54f6ec558ab22b857f42849ea":[0,0,13,1],
+"d7/d7c/classBarCodeImageFormat.html#abe1388beb8a0110658a5d07ad4f46f9d":[0,0,13,5],
 "d7/d7c/classBarCodeImageFormat.html#adb38924e64207186adf50410c7da7e29":[0,0,13,0],
 "d7/d8a/classQREncodeType.html":[0,0,77],
 "d7/d8a/classQREncodeType.html#a7ae556f56caa178c323cc620cb7c6ac7":[0,0,77,1],
@@ -245,9 +249,5 @@ var NAVTREEINDEX2 =
 "d8/d37/classQRVersion.html#a55d91aeec93c46ad3bb8e7e93e810d0c":[0,0,83,31],
 "d8/d37/classQRVersion.html#a576e555997bcfcbc7ce92c54496c2a66":[0,0,83,10],
 "d8/d37/classQRVersion.html#a5f5bd6766989be2404bdd3ba3ebd0739":[0,0,83,14],
-"d8/d37/classQRVersion.html#a619ba7ae53393ecab0e093c1b4fc493f":[0,0,83,4],
-"d8/d37/classQRVersion.html#a62d5d49b47bd196923fe2c482c323b0c":[0,0,83,36],
-"d8/d37/classQRVersion.html#a65789392c56f1cd25b60bfdb604475bc":[0,0,83,2],
-"d8/d37/classQRVersion.html#a6a22cc015c8a860967268aa45408dd0a":[0,0,83,26],
-"d8/d37/classQRVersion.html#a6a3a2f277614120ba7266d3229a7d9b8":[0,0,83,3]
+"d8/d37/classQRVersion.html#a619ba7ae53393ecab0e093c1b4fc493f":[0,0,83,4]
 };

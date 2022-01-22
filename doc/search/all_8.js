@@ -1,8 +1,8 @@
 var searchData=
 [
   ['gb18030_166',['GB18030',['../d8/d37/classECIEncodings.html#adb83432d33db635f3a6c9800b3c0d246',1,'ECIEncodings']]],
-  ['generatebarcodeimage_167',['generateBarCodeImage',['../d0/dfb/classBarcodeGenerator.html#ad0e8c024e0956835801aa33c6530246a',1,'BarcodeGenerator']]],
-  ['generatebarcodeimage_168',['generateBarcodeImage',['../df/d7b/classComplexBarcodeGenerator.html#a474e19d97bed9adf0618f7503d67b3c3',1,'ComplexBarcodeGenerator']]],
+  ['generatebarcodeimage_167',['generateBarcodeImage',['../df/d7b/classComplexBarcodeGenerator.html#a474e19d97bed9adf0618f7503d67b3c3',1,'ComplexBarcodeGenerator']]],
+  ['generatebarcodeimage_168',['generateBarCodeImage',['../d0/dfb/classBarcodeGenerator.html#ad0e8c024e0956835801aa33c6530246a',1,'BarcodeGenerator']]],
   ['getaccount_169',['getAccount',['../de/d9a/classSwissQRBill.html#a4c3490bf71079ce8f2bd884006f55a43',1,'SwissQRBill']]],
   ['getaddressline1_170',['getAddressLine1',['../de/d6b/classAddress.html#a39b0f9046bb4bf47d5d48b1e00adfbca',1,'Address']]],
   ['getaddressline2_171',['getAddressLine2',['../de/d6b/classAddress.html#aaf0a0f17ac7a1fc6eda892da65ea57c1',1,'Address']]],
@@ -218,8 +218,8 @@ var searchData=
   ['getsupplement_381',['getSupplement',['../dd/dfd/classBarcodeParameters.html#a71bd33f704b69eb9c970d23731bb6875',1,'BarcodeParameters']]],
   ['getsupplementdata_382',['getSupplementData',['../d8/d05/classSupplementParameters.html#ae3ff6b0302d52db20b3ab7a5f13bc842',1,'SupplementParameters']]],
   ['getsupplementspace_383',['getSupplementSpace',['../d8/d05/classSupplementParameters.html#a71aea028f892945581b9955b02a4b1f2',1,'SupplementParameters\getSupplementSpace()'],['../da/d5d/classCouponParameters.html#adb3992b311c19e22157a9cbeb836dfe5',1,'CouponParameters\getSupplementSpace()']]],
-  ['getsupplychainid_384',['getSupplychainID',['../d0/d1f/classMailmarkCodetext.html#ade3ce7d502f5fa73439cbd6992903b2a',1,'MailmarkCodetext']]],
-  ['getsupplychainid_385',['getSupplyChainID',['../d4/d70/classMailmark2DCodetext.html#a324f14c7317347c31f3b448a25553766',1,'Mailmark2DCodetext']]],
+  ['getsupplychainid_384',['getSupplyChainID',['../d4/d70/classMailmark2DCodetext.html#a324f14c7317347c31f3b448a25553766',1,'Mailmark2DCodetext']]],
+  ['getsupplychainid_385',['getSupplychainID',['../d0/d1f/classMailmarkCodetext.html#ade3ce7d502f5fa73439cbd6992903b2a',1,'MailmarkCodetext']]],
   ['gettext_386',['getText',['../d2/de9/classCaptionParameters.html#a70742ca98846c0ce376a3537c5b13f8e',1,'CaptionParameters']]],
   ['gettextcolor_387',['getTextColor',['../d2/de9/classCaptionParameters.html#a4c656360e3d4d9df85014d6333867304',1,'CaptionParameters']]],
   ['gettimeout_388',['getTimeout',['../d8/dae/classBarCodeReader.html#ac43c19a411f7d48ca6b1b75caf9c45b0',1,'BarCodeReader']]],

@@ -1,5 +1,9 @@
 var NAVTREEINDEX3 =
 {
+"d8/d37/classQRVersion.html#a62d5d49b47bd196923fe2c482c323b0c":[0,0,83,36],
+"d8/d37/classQRVersion.html#a65789392c56f1cd25b60bfdb604475bc":[0,0,83,2],
+"d8/d37/classQRVersion.html#a6a22cc015c8a860967268aa45408dd0a":[0,0,83,26],
+"d8/d37/classQRVersion.html#a6a3a2f277614120ba7266d3229a7d9b8":[0,0,83,3],
 "d8/d37/classQRVersion.html#a7e49d0fc3b0398c9da70af808b931764":[0,0,83,24],
 "d8/d37/classQRVersion.html#a8151ab5c5633278c171e2a2a227a9d2f":[0,0,83,22],
 "d8/d37/classQRVersion.html#a825c814a830bb68d245998c56d5000a4":[0,0,83,18],
@@ -88,13 +92,13 @@ var NAVTREEINDEX3 =
 "d8/dae/classBarCodeReader.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,15,10],
 "d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325":[0,0,15,24],
 "d8/dae/classBarCodeReader.html#a09ee2b98ce642af81bcdf237c3e28ac9":[0,0,15,21],
-"d8/dae/classBarCodeReader.html#a0a1e90363e60b3f84b24c702689a14b2":[0,0,15,17],
 "d8/dae/classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94":[0,0,15,8],
 "d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780":[0,0,15,15],
 "d8/dae/classBarCodeReader.html#a2777cf2247a8af68be6968f9f3f64943":[0,0,15,23],
 "d8/dae/classBarCodeReader.html#a33d0482da4f76d363826677243dd8ed0":[0,0,15,6],
 "d8/dae/classBarCodeReader.html#a45d21023b4389685c0582579161ad165":[0,0,15,3],
 "d8/dae/classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a":[0,0,15,2],
+"d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082":[0,0,15,17],
 "d8/dae/classBarCodeReader.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,15,22],
 "d8/dae/classBarCodeReader.html#a71fc428e964af4a659d68e06edddffe3":[0,0,15,5],
 "d8/dae/classBarCodeReader.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,15,11],
@@ -245,9 +249,5 @@ var NAVTREEINDEX3 =
 "db/d4c/classDataBarParameters.html#a0dda58188180be9ddb4afd719ee84d4a":[0,0,42,10],
 "db/d4c/classDataBarParameters.html#a130c29c933e71318ee33a8d0c961212d":[0,0,42,4],
 "db/d4c/classDataBarParameters.html#a264c7345eb64c83446fded2fde8c2780":[0,0,42,8],
-"db/d4c/classDataBarParameters.html#a4be8aef2dbaa86862fda5468c0593628":[0,0,42,15],
-"db/d4c/classDataBarParameters.html#a6161fbb9d353e0b3f6fdc0db0f2f087a":[0,0,42,6],
-"db/d4c/classDataBarParameters.html#a643940380e8e139d56ea39177500699a":[0,0,42,11],
-"db/d4c/classDataBarParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,42,14],
-"db/d4c/classDataBarParameters.html#a74154467b9d97ca55f4d8b7b796ca708":[0,0,42,16]
+"db/d4c/classDataBarParameters.html#a4be8aef2dbaa86862fda5468c0593628":[0,0,42,15]
 };

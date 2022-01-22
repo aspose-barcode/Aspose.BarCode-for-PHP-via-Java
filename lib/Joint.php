@@ -1,6 +1,39 @@
 <?php
 define('nl', chr(10));
 
+function isPath($file)
+{
+    if (strlen($file) < 256 && (strpos($file, "/") || strpos($file, "\\")))
+    {
+        if (file_exists($file))
+        {
+            return true;
+        }
+        throw new BarcodeException("Path does not exist", __FILE__, __LINE__);
+    }
+    return false;
+}
+
+function convertResourceToBase64String($resource)
+{
+    try
+    {
+        if (isPath($resource))
+        {
+            $resourceData = file_get_contents($resource);
+            return base64_encode($resourceData);
+        }
+        else
+        {
+            return $resource;
+        }
+    }
+    catch (Exception $ex)
+    {
+        throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+    }
+}
+
 class License extends BaseJavaClass
 {
     protected $javaClassName = "com.aspose.php.barcode.license.PhpLicense";
