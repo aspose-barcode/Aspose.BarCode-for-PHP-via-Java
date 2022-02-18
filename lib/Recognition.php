@@ -1321,7 +1321,7 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
      * @param Pdf417ExtendedParameters $obj An System.Object value to compare to this instance.
      * @return bool true if obj has the same value as this instance; otherwise, false.
      */
-    public /*override*/ function equals(Pdf417ExtendedParameters $obj): bool
+    public function equals(Pdf417ExtendedParameters $obj): bool
     {
         try
         {
@@ -1437,7 +1437,7 @@ final class OneDExtendedParameters extends BaseJavaClass
      * @param OneDExtendedParameters obj An System.Object value to compare to this instance.
      * @return bool true if obj has the same value as this instance; otherwise, false.
      */
-    public /*override*/ function equals(OneDExtendedParameters $obj): bool
+    public   function equals(OneDExtendedParameters $obj): bool
     {
         try
         {
