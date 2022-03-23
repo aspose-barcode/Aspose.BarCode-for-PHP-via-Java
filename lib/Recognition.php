@@ -1600,12 +1600,38 @@ final class Code128ExtendedParameters extends BaseJavaClass
  */
 final class BarcodeSvmDetectorSettings extends BaseJavaClass
 {
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwBarcodeSvmDetectorSettings";
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.recognition.MwBarcodeSvmDetectorSettings";
     private const HighPerformance = 0;
     private const NormalQuality = 1;
     private const HighQuality = 2;
     private const MaxQuality = 3;
     private $scanWindowSizes;
+
+
+    public function __construct(int $aType)
+    {
+        $javaClass = new java(self::JAVA_CLASS_NAME, self::NormalQuality);
+        switch ($aType)
+        {
+            case self::HighPerformance:
+                $javaClass = new java(self::JAVA_CLASS_NAME, self::HighPerformance);
+                break;
+            case self::HighQuality:
+                $javaClass = new java(self::JAVA_CLASS_NAME, self::HighQuality);
+                break;
+            case self::MaxQuality:
+                $javaClass = new java(self::JAVA_CLASS_NAME, self::MaxQuality);
+                break;
+        }
+        parent::__construct($javaClass);
+    }
+
+    static function construct($javaClass) : BarcodeSvmDetectorSettings
+    {
+        $barcodeSvmDetectorSettings = new BarcodeSvmDetectorSettings(self::NormalQuality);
+        $barcodeSvmDetectorSettings->setJavaClass($javaClass);
+        return $barcodeSvmDetectorSettings;
+    }
 
     protected function init(): void
     {
@@ -2475,7 +2501,7 @@ final class QualitySettings extends BaseJavaClass
     {
         try
         {
-            $this->detectorSettings = new BarcodeSvmDetectorSettings($this->getJavaClass()->getDetectorSettings());
+            $this->detectorSettings = BarcodeSvmDetectorSettings::construct($this->getJavaClass()->getDetectorSettings());
         }
         catch (Exception $ex)
         {
@@ -3036,6 +3062,43 @@ final class QualitySettings extends BaseJavaClass
     }
 
     /**
+     * <p>
+     * Switches to the old barcode detector.
+     * </p>Value:
+     * Switches to the old barcode detector.
+     */
+    public function getUseOldBarcodeDetector()
+    {
+        try
+        {
+            $this->getJavaClass()->getUseOldBarcodeDetector();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>
+     * Switches to the old barcode detector.
+     * </p>Value:
+     * Switches to the old barcode detector.
+     */
+    //@XmlSerialization (type = XmlSerializationType.Element)
+    public function setUseOldBarcodeDetector(bool $value)
+    {
+        try
+        {
+            $this->getJavaClass()->setUseOldBarcodeDetector($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
      * Allows engine for Postal barcodes to recognize slightly noised images. Mode helps to recognize sligtly damaged Postal barcodes.
      * @return bool Allows engine for Postal barcodes to recognize slightly noised images.
      * @throws BarcodeException
@@ -3294,7 +3357,7 @@ final class QualitySettings extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setDetectorSettings($value);
+            $this->getJavaClass()->setDetectorSettings($value->getJavaClass());
             $this->detectorSettings = $value;
         }
         catch (Exception $ex)

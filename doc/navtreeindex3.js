@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"d8/d37/classQRVersion.html#a576e555997bcfcbc7ce92c54496c2a66":[0,0,83,10],
+"d8/d37/classQRVersion.html#a5f5bd6766989be2404bdd3ba3ebd0739":[0,0,83,14],
+"d8/d37/classQRVersion.html#a619ba7ae53393ecab0e093c1b4fc493f":[0,0,83,4],
 "d8/d37/classQRVersion.html#a62d5d49b47bd196923fe2c482c323b0c":[0,0,83,36],
 "d8/d37/classQRVersion.html#a65789392c56f1cd25b60bfdb604475bc":[0,0,83,2],
 "d8/d37/classQRVersion.html#a6a22cc015c8a860967268aa45408dd0a":[0,0,83,26],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "db/d4c/classDataBarParameters.html":[0,0,42],
 "db/d4c/classDataBarParameters.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,42,2],
 "db/d4c/classDataBarParameters.html#a08b5780bc7b8710fd713023fc0067486":[0,0,42,12],
-"db/d4c/classDataBarParameters.html#a0dda58188180be9ddb4afd719ee84d4a":[0,0,42,10],
-"db/d4c/classDataBarParameters.html#a130c29c933e71318ee33a8d0c961212d":[0,0,42,4],
-"db/d4c/classDataBarParameters.html#a264c7345eb64c83446fded2fde8c2780":[0,0,42,8],
-"db/d4c/classDataBarParameters.html#a4be8aef2dbaa86862fda5468c0593628":[0,0,42,15]
+"db/d4c/classDataBarParameters.html#a0dda58188180be9ddb4afd719ee84d4a":[0,0,42,10]
 };

@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['b_1386',['B',['../d0/d4a/classCodabarSymbol.html#ab7783dd6dd37ae4cb5631818e3338249',1,'CodabarSymbol']]],
-  ['bar_1387',['BAR',['../d3/de2/classITF14BorderType.html#afde969e3ac28c0fa39406bca7324353e',1,'ITF14BorderType']]],
-  ['bar_5fout_1388',['BAR_OUT',['../d3/de2/classITF14BorderType.html#acd6580466b18b148d6cf93c7caa8bd1c',1,'ITF14BorderType']]],
-  ['below_1389',['BELOW',['../d8/df0/classCodeLocation.html#a398b45dae24fdcc80774a80c0ce9dadd',1,'CodeLocation']]],
-  ['big5_1390',['Big5',['../d8/d37/classECIEncodings.html#a0ae0dbcad988f67ada6f2f749e2e303e',1,'ECIEncodings']]],
-  ['binary_1391',['BINARY',['../d2/d92/classPdf417CompactionMode.html#a89eef78cce2843bba15873d135bbdcea',1,'Pdf417CompactionMode']]],
-  ['bmp_1392',['BMP',['../d7/d7c/classBarCodeImageFormat.html#adb38924e64207186adf50410c7da7e29',1,'BarCodeImageFormat']]],
-  ['bold_1393',['BOLD',['../d4/d42/classFontStyle.html#a3afe29fddc2dbc4bcc57474a3c7bbed0',1,'FontStyle']]],
-  ['bytes_1394',['BYTES',['../d9/d97/classQREncodeMode.html#a05c2b6bb3312c7d43e4b88440de4aae9',1,'QREncodeMode']]]
+  ['b_1390',['B',['../d0/d4a/classCodabarSymbol.html#ab7783dd6dd37ae4cb5631818e3338249',1,'CodabarSymbol']]],
+  ['bar_1391',['BAR',['../d3/de2/classITF14BorderType.html#afde969e3ac28c0fa39406bca7324353e',1,'ITF14BorderType']]],
+  ['bar_5fout_1392',['BAR_OUT',['../d3/de2/classITF14BorderType.html#acd6580466b18b148d6cf93c7caa8bd1c',1,'ITF14BorderType']]],
+  ['below_1393',['BELOW',['../d8/df0/classCodeLocation.html#a398b45dae24fdcc80774a80c0ce9dadd',1,'CodeLocation']]],
+  ['big5_1394',['Big5',['../d8/d37/classECIEncodings.html#a0ae0dbcad988f67ada6f2f749e2e303e',1,'ECIEncodings']]],
+  ['binary_1395',['BINARY',['../d2/d92/classPdf417CompactionMode.html#a89eef78cce2843bba15873d135bbdcea',1,'Pdf417CompactionMode']]],
+  ['bmp_1396',['BMP',['../d7/d7c/classBarCodeImageFormat.html#adb38924e64207186adf50410c7da7e29',1,'BarCodeImageFormat']]],
+  ['bold_1397',['BOLD',['../d4/d42/classFontStyle.html#a3afe29fddc2dbc4bcc57474a3c7bbed0',1,'FontStyle']]],
+  ['bytes_1398',['BYTES',['../d9/d97/classQREncodeMode.html#a05c2b6bb3312c7d43e4b88440de4aae9',1,'QREncodeMode']]]
 ];

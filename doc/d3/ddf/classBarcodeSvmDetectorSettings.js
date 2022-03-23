@@ -1,5 +1,6 @@
 var classBarcodeSvmDetectorSettings =
 [
+    [ "\u202A__construct", "d3/ddf/classBarcodeSvmDetectorSettings.html#a0314ca8833ae4db80509e1b75f4e95a2", null ],
     [ "\u202AgetJavaClass", "d3/ddf/classBarcodeSvmDetectorSettings.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "d3/ddf/classBarcodeSvmDetectorSettings.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetMedianFilterWindowSize", "d3/ddf/classBarcodeSvmDetectorSettings.html#a4473471f414c608542bd6c9d2b6b93d5", null ],
