@@ -11,7 +11,11 @@ include_once($libs_root.'Joint.php');
 function set_license()
 {
     print("set license\n");
-    $path_to_license_file = "lic/Aspose.BarCode.PHP.Java.lic";
+    $path_to_license_file = readProperty("license_path");
+    if (empty($path_to_license_file))
+    {
+        $path_to_license_file = "lic/Aspose.BarCode.PHP.Java.lic";
+    }
     $license = new License();
     if (!file_exists($path_to_license_file))
     {
@@ -23,6 +27,13 @@ function set_license()
     }
     $is_licensed = $license->isLicensed();
     print('is_licensed => ' . $is_licensed."\n");
+}
+
+function readProperty(string $propertyName)
+{
+    $ini_file_path = "assist.ini";
+    $ini_array = parse_ini_file($ini_file_path);
+    return $ini_array[$propertyName];
 }
 
 function loadImageByName($subFolder, $fileName)

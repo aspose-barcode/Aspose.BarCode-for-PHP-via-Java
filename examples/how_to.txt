@@ -12,7 +12,9 @@ Launch examples procedure:
 
 1. You can obtain the temporary license file at https://purchase.aspose.com/temporary-license
 and put the license file Aspose.BarCode.PHP.Java.lic to folder lic.
-If you launch examples without license the functionality will be partially restricted according with licensing rules.
+The expected license file name is Aspose.BarCode.PHP.Java.lic.
+If the license file has another name you should update the file name in the file assist.ini.
+If you launch examples without license the functionality will be partially restricted according to licensing rules.
 
 2. Run JavaBridge server. The easiest way is to launch the script 'run-bridge.bat'.
 It will be launched on port 8080. If you wish to change the port number just appoint another port number in 'run-bridge.bat'.
