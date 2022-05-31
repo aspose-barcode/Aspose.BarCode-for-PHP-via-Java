@@ -25,7 +25,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * BarCodeReader constructor. Initializes a new instance of the BarCodeReader
-     * @param string $resource image encoded as base64 string or path to image resource located in the file system or via http
+     * @param string $resource image encoded as base64 string or path to image resource (located in the file system or via http)
      * @param int|array|null $rectangles array of object by type Rectangle
      * @param int|array|null $decodeTypes array of decode types
      * @throws BarcodeException
@@ -42,20 +42,33 @@ class BarCodeReader extends BaseJavaClass
             {
                 $decodeTypes = array($decodeTypes);
             }
-            $java_class = null;
-            if ($image == null && $rectangles == null && $image == null)
+
+
+            if ($image == null && $rectangles == null && $decodeTypes == null)
             {
                 $java_class = new java(self::JAVA_CLASS_NAME);
+                parent::__construct($java_class);
+                return;
             }
-            else
+            if (isBase64Encoded($image))
             {
-                $image_base64 = convertResourceToBase64String($image);
-                $java_class = new java(self::JAVA_CLASS_NAME, $image_base64, $rectangles, $decodeTypes);
+                $java_class = new java(self::JAVA_CLASS_NAME, $image, $rectangles, $decodeTypes);
+                parent::__construct($java_class);
+                return;
             }
-            parent::__construct($java_class);
+            if (isPath($image))
+            {
+                $image_base64 = convertImagePathToBase64String($image);
+                $java_class = new java(self::JAVA_CLASS_NAME, $image_base64, $rectangles, $decodeTypes);
+                parent::__construct($java_class);
+                return;
+            }
+            throw new BarcodeException("Passed argument should be path to image file or Base64 encoded image");
+
         }
         catch (Exception $ex)
         {
+            println($ex->getMessage());
             throw new BarcodeException("Incorrect arguments are passed to BarCodeReader constructor", __FILE__, __LINE__);
         }
     }
@@ -418,6 +431,7 @@ class BarCodeReader extends BaseJavaClass
             throw $e;
         }
     }
+
     /**
      * QualitySettings allows to configure recognition quality and speed manually.
      * You can quickly set up QualitySettings by embedded presets: HighPerformance, NormalQuality,
@@ -649,6 +663,11 @@ class BarCodeReader extends BaseJavaClass
      */
     public function setBarCodeReadType(int ...$types): void
     {
+        foreach($types as $type)
+            if(!is_int($type))
+            {
+                throw new TypeError("Argument 1 passed to BarCodeReader::setBarCodeReadType() must be of the type int, string given");
+            }
         $this->getJavaClass()->setBarcodeReadType($types);
     }
 
@@ -698,8 +717,10 @@ class BarCodeReader extends BaseJavaClass
     {
         try
         {
-            if(isPath($resource))
+            if (isPath($resource))
+            {
                 $resource = fopen($resource, "r");
+            }
             $xmlData = (stream_get_contents($resource));
             $offset = 6;
             $xmlData = substr($xmlData, $offset, strlen($xmlData) - $offset);
@@ -1437,7 +1458,7 @@ final class OneDExtendedParameters extends BaseJavaClass
      * @param OneDExtendedParameters obj An System.Object value to compare to this instance.
      * @return bool true if obj has the same value as this instance; otherwise, false.
      */
-    public   function equals(OneDExtendedParameters $obj): bool
+    public function equals(OneDExtendedParameters $obj): bool
     {
         try
         {
@@ -1626,7 +1647,7 @@ final class BarcodeSvmDetectorSettings extends BaseJavaClass
         parent::__construct($javaClass);
     }
 
-    static function construct($javaClass) : BarcodeSvmDetectorSettings
+    static function construct($javaClass): BarcodeSvmDetectorSettings
     {
         $barcodeSvmDetectorSettings = new BarcodeSvmDetectorSettings(self::NormalQuality);
         $barcodeSvmDetectorSettings->setJavaClass($javaClass);
@@ -3067,11 +3088,11 @@ final class QualitySettings extends BaseJavaClass
      * </p>Value:
      * Switches to the old barcode detector.
      */
-    public function getUseOldBarcodeDetector()
+    public function getUseOldBarcodeDetector() : bool
     {
         try
         {
-            $this->getJavaClass()->getUseOldBarcodeDetector();
+            return java_cast($this->getJavaClass()->getUseOldBarcodeDetector(), "boolean");
         }
         catch (Exception $ex)
         {
@@ -3867,7 +3888,7 @@ class BarcodeSettings extends BaseJavaClass
      *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
      * }
      * @endcode
-     * @param int $value  Enable checksum validation during recognition for 1D and Postal barcodes.
+     * @param int $value Enable checksum validation during recognition for 1D and Postal barcodes.
      */
     public function setChecksumValidation(int $value): void
     {
@@ -3947,7 +3968,7 @@ class BarcodeSettings extends BaseJavaClass
      * }
      * @endcode
      *
-     * @param bool $value  Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     * @param bool $value Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
      */
     public function setStripFNC(bool $value): void
     {

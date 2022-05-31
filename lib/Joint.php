@@ -1,6 +1,11 @@
 <?php
 define('nl', chr(10));
 
+function println(string $string = '')
+{
+    print($string . PHP_EOL);
+}
+
 function isPath($file)
 {
     if (strlen($file) < 256 && (strpos($file, "/") || strpos($file, "\\")))
@@ -9,9 +14,23 @@ function isPath($file)
         {
             return true;
         }
-        throw new BarcodeException("Path does not exist", __FILE__, __LINE__);
+        println("The passed argument seems like a path but doesn't exist");
+        return false;
     }
     return false;
+}
+
+function convertImagePathToBase64String($imagePath)
+{
+    try
+    {
+        $imageData = file_get_contents($imagePath);
+        return base64_encode($imageData);
+    }
+    catch (Exception $ex)
+    {
+        throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+    }
 }
 
 function convertResourceToBase64String($resource)
@@ -31,6 +50,31 @@ function convertResourceToBase64String($resource)
     catch (Exception $ex)
     {
         throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+    }
+}
+
+function isBase64Encoded($str)
+{
+    try
+    {
+        $decoded = base64_decode($str, true);
+        if (!$decoded)
+        {
+            return false;
+        }
+        if (base64_encode($decoded) === $str)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    catch (Exception $e)
+    {
+        // If exception is caught, then it is not a base64 encoded string
+        return false;
     }
 }
 
@@ -56,7 +100,7 @@ class License extends BaseJavaClass
         }
     }
 
-     public function resetLicense()
+    public function resetLicense()
     {
         try
         {
@@ -134,7 +178,7 @@ class Point extends BaseJavaClass
 
     }
 
-    static function construct(...$args) : Point
+    static function construct(...$args): Point
     {
         try
         {
@@ -155,7 +199,7 @@ class Point extends BaseJavaClass
         // TODO: Implement init() method.
     }
 
-    public function getX():int
+    public function getX(): int
     {
         try
         {
@@ -169,7 +213,7 @@ class Point extends BaseJavaClass
 
     }
 
-    public function getY():int
+    public function getY(): int
     {
         try
         {
@@ -183,7 +227,7 @@ class Point extends BaseJavaClass
 
     }
 
-    public function setX(int $x):void
+    public function setX(int $x): void
     {
         try
         {
@@ -197,7 +241,7 @@ class Point extends BaseJavaClass
 
     }
 
-    public function setY(int $y):void
+    public function setY(int $y): void
     {
         try
         {
@@ -211,7 +255,7 @@ class Point extends BaseJavaClass
 
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -251,7 +295,7 @@ class Rectangle extends BaseJavaClass
     {
         try
         {
-            return new Rectangle(0, 0,0,0);
+            return new Rectangle(0, 0, 0, 0);
         }
         catch (Exception $ex)
         {
@@ -280,7 +324,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    static function construct(...$args) : Rectangle
+    static function construct(...$args): Rectangle
     {
         try
         {
@@ -297,7 +341,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function getX() : int
+    public function getX(): int
     {
         try
         {
@@ -311,7 +355,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function getY() : int
+    public function getY(): int
     {
         try
         {
@@ -325,27 +369,27 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function getLeft() : int
+    public function getLeft(): int
     {
         return $this->getX();
     }
 
-    public function getTop() : int
+    public function getTop(): int
     {
         return $this->getY();
     }
 
-    public function getRight() : int
+    public function getRight(): int
     {
         return $this->getX() + $this->getWidth();
     }
 
-    public function getBottom() : int
+    public function getBottom(): int
     {
         return $this->getY() + $this->getHeight();
     }
 
-    public function getWidth() : int
+    public function getWidth(): int
     {
         try
         {
@@ -359,7 +403,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function getHeight() : int
+    public function getHeight(): int
     {
         try
         {
@@ -373,7 +417,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function toString() : string
+    public function toString(): string
     {
         try
         {
@@ -387,7 +431,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function equals(Rectangle $obj) : bool
+    public function equals(Rectangle $obj): bool
     {
         try
         {
@@ -401,7 +445,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    private function intersectsWithInclusive(Rectangle $r) : bool
+    private function intersectsWithInclusive(Rectangle $r): bool
     {
         try
         {
@@ -453,11 +497,11 @@ class Rectangle extends BaseJavaClass
      * and bottom coordinates.
      */
 
-    public static function fromLTRB(int $left, int $top,  int $right, int $bottom): Rectangle
+    public static function fromLTRB(int $left, int $top, int $right, int $bottom): Rectangle
     {
         try
         {
-            return new Rectangle($left, $top, $right - $left,$bottom - $top);
+            return new Rectangle($left, $top, $right - $left, $bottom - $top);
         }
         catch (Exception $ex)
         {
@@ -467,7 +511,7 @@ class Rectangle extends BaseJavaClass
 
     }
 
-    public function isEmpty() : bool
+    public function isEmpty(): bool
     {
         try
         {
@@ -522,7 +566,7 @@ abstract class BaseJavaClass
     {
         try
         {
-            $this->javaClass= $javaClass;
+            $this->javaClass = $javaClass;
             $this->init();
         }
         catch (Exception $ex)
@@ -587,9 +631,9 @@ class BarcodeException extends Exception
      * BarcodeException constructor.
      * @param  $exc exception's instance
      */
-    public function __construct($message = "", $file="",$line="",$code = 0, Throwable $previous = null)
+    public function __construct($message = "", $file = "", $line = "", $code = 0, Throwable $previous = null)
     {
-        print "Exception occurred:".$message." at ".$file.":".$line."\n";
+        print "Exception occurred:" . $message . " at " . $file . ":" . $line . "\n";
         parent::__construct($code, $code, $previous);
         if (is_string($message))
         {

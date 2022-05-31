@@ -1481,7 +1481,7 @@ final class MailmarkCodetext extends IComplexCodetext
      */
     public function getConstructedCodetext():string
     {
-        return $this->getJavaClass()->getConstructedCodetext();
+        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
     }
 
     /**
