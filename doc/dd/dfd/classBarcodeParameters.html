@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">22.5</span>
+   &#160;<span id="projectnumber">22.6</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -147,6 +147,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae3954ad8f573b5582f5db6bb5be3741e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada8859a2139381b1f9ee832ae672c46c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfd/classBarcodeParameters.html#ada8859a2139381b1f9ee832ae672c46c">getDataBar</a> ()</td></tr>
 <tr class="separator:ada8859a2139381b1f9ee832ae672c46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc9314cc8561b7967999670ddd9acd72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">getGS1CompositeBar</a> ()</td></tr>
+<tr class="separator:afc9314cc8561b7967999670ddd9acd72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade44c3863a60f9f587b274735ded2119"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfd/classBarcodeParameters.html#ade44c3863a60f9f587b274735ded2119">setGS1CompositeBar</a> (<a class="el" href="../../dc/d33/classGS1CompositeBarParameters.html">GS1CompositeBarParameters</a> $value)</td></tr>
+<tr class="separator:ade44c3863a60f9f587b274735ded2119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa333ae68ea54a61658ecb94fa34ffae2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfd/classBarcodeParameters.html#aa333ae68ea54a61658ecb94fa34ffae2">getCodablock</a> ()</td></tr>
 <tr class="separator:aa333ae68ea54a61658ecb94fa34ffae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad284de3281c2061264910ec358711e47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfd/classBarcodeParameters.html#ad284de3281c2061264910ec358711e47">getDataMatrix</a> ()</td></tr>
@@ -487,6 +491,30 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="afc9314cc8561b7967999670ddd9acd72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc9314cc8561b7967999670ddd9acd72">&#9670;&nbsp;</a></span>getGS1CompositeBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BarcodeParameters::getGS1CompositeBar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">GS1 Composite Bar parameters.</p>
+<p class="DocNodeLTR">This sample shows how to create and save a GS1 Composite Bar image. Note that 1D codetext and 2D codetext are separated by symbol '/'</p>
+<p class="DocNodeLTR">$codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8"; $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#ae696dc46ecf27750d4f0d9083d70f522">EncodeTypes::GS_1_COMPOSITE_BAR</a>, $codetext);</p>
+<p class="DocNodeLTR">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">getGS1CompositeBar()</a>-&gt;setLinearComponentType(EncodeTypes::GS_1_CODE_128); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">getGS1CompositeBar()</a>-&gt;setTwoDComponentType(TwoDComponentType::CC_A);</p>
+<p class="DocNodeLTR">// Aspect ratio of 2D component $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#aa48c76e60e702e70135167d822a0d96d">getPdf417()</a>-&gt;setAspectRatio(3);</p>
+<p class="DocNodeLTR">// X-Dimension of 1D and 2D components $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#af2fa3ed2d244ff39e6903aa52dd3d165">getXDimension()</a>-&gt;setPixels(3); /// // Height of 1D component $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#a8fb6f385ce9f59b63d4c213cd26e4269">getBarHeight()</a>-&gt;setPixels(100); /// $generator-&gt;save("test.png", BarcodeImageFormat::PNG);</p>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;<a class="el" href="../../dc/d33/classGS1CompositeBarParameters.html">GS1CompositeBarParameters</a> GS1 Composite Bar parameters. </dd></dl>
 
 </div>
 </div>
@@ -969,6 +997,30 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ade44c3863a60f9f587b274735ded2119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade44c3863a60f9f587b274735ded2119">&#9670;&nbsp;</a></span>setGS1CompositeBar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BarcodeParameters::setGS1CompositeBar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d33/classGS1CompositeBarParameters.html">GS1CompositeBarParameters</a>&#160;</td>
+          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">GS1 Composite Bar parameters.</p>
+<p class="DocNodeLTR">This sample shows how to create and save a GS1 Composite Bar image. Note that 1D codetext and 2D codetext are separated by symbol '/'</p>
+<p class="DocNodeLTR">$codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8"; $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#ae696dc46ecf27750d4f0d9083d70f522">EncodeTypes::GS_1_COMPOSITE_BAR</a>, $codetext);</p>
+<p class="DocNodeLTR">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">getGS1CompositeBar()</a>-&gt;setLinearComponentType(EncodeTypes::GS_1_CODE_128); $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">getGS1CompositeBar()</a>-&gt;setTwoDComponentType(TwoDComponentType::CC_A);</p>
+<p class="DocNodeLTR">// Aspect ratio of 2D component $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#aa48c76e60e702e70135167d822a0d96d">getPdf417()</a>-&gt;setAspectRatio(3);</p>
+<p class="DocNodeLTR">// X-Dimension of 1D and 2D components $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#af2fa3ed2d244ff39e6903aa52dd3d165">getXDimension()</a>-&gt;setPixels(3); /// // Height of 1D component $generator-&gt;getParameters()-&gt;getBarcode()-&gt;<a class="el" href="../../dd/dfd/classBarcodeParameters.html#a8fb6f385ce9f59b63d4c213cd26e4269">getBarHeight()</a>-&gt;setPixels(100); /// $generator-&gt;save("test.png", BarcodeImageFormat::PNG); </p>
 
 </div>
 </div>

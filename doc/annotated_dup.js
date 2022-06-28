@@ -56,6 +56,7 @@ var annotated_dup =
     [ "\u202AFontStyle", "d4/d42/classFontStyle.html", "d4/d42/classFontStyle" ],
     [ "\u202AFontUnit", "d1/d76/classFontUnit.html", "d1/d76/classFontUnit" ],
     [ "\u202AGraphicsUnit", "da/d63/classGraphicsUnit.html", "da/d63/classGraphicsUnit" ],
+    [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", "dc/d33/classGS1CompositeBarParameters" ],
     [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", "d7/d9b/classIComplexCodetext" ],
     [ "\u202AITF14BorderType", "d3/de2/classITF14BorderType.html", "d3/de2/classITF14BorderType" ],
     [ "\u202AITFParameters", "db/d00/classITFParameters.html", "db/d00/classITFParameters" ],
@@ -92,5 +93,6 @@ var annotated_dup =
     [ "\u202ASwissQRBill", "de/d9a/classSwissQRBill.html", "de/d9a/classSwissQRBill" ],
     [ "\u202ASwissQRCodetext", "dd/df6/classSwissQRCodetext.html", "dd/df6/classSwissQRCodetext" ],
     [ "\u202ATextAlignment", "dc/d31/classTextAlignment.html", "dc/d31/classTextAlignment" ],
+    [ "\u202ATwoDComponentType", "de/d98/classTwoDComponentType.html", "de/d98/classTwoDComponentType" ],
     [ "\u202AUnit", "df/dd9/classUnit.html", "df/dd9/classUnit" ]
 ];

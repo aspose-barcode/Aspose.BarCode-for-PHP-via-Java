@@ -31,6 +31,7 @@ var classEncodeTypes =
     [ "\u202AEAN_8", "d5/d0f/classEncodeTypes.html#a5c87e168095a00f14e6c8464bdcadf98", null ],
     [ "\u202AGS_1_CODABLOCK_F", "d5/d0f/classEncodeTypes.html#aa5a8dbad9d276a2e8575df1045349d6d", null ],
     [ "\u202AGS_1_CODE_128", "d5/d0f/classEncodeTypes.html#a1e8684410a29a9a17837984e655c69a7", null ],
+    [ "\u202AGS_1_COMPOSITE_BAR", "d5/d0f/classEncodeTypes.html#ae696dc46ecf27750d4f0d9083d70f522", null ],
     [ "\u202AGS_1_DATA_MATRIX", "d5/d0f/classEncodeTypes.html#ad82e317c64fc0c25906e740560bfd1f9", null ],
     [ "\u202AGS_1_QR", "d5/d0f/classEncodeTypes.html#ad5c4bdf9d5bc5a934a3a5f03add39c79", null ],
     [ "\u202AIATA_2_OF_5", "d5/d0f/classEncodeTypes.html#a942846e79f985421e0e3128745baf1ac", null ],

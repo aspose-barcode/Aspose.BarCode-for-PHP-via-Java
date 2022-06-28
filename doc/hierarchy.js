@@ -39,6 +39,7 @@ var hierarchy =
         [ "\u202AQrExtCodetextBuilder", "dd/dc2/classQrExtCodetextBuilder.html", null ]
       ] ],
       [ "\u202AFontUnit", "d1/d76/classFontUnit.html", null ],
+      [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", null ],
       [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", [
         [ "\u202AMailmark2DCodetext", "d4/d70/classMailmark2DCodetext.html", null ],
         [ "\u202AMailmarkCodetext", "d0/d1f/classMailmarkCodetext.html", null ],
@@ -97,5 +98,6 @@ var hierarchy =
     [ "\u202AQREncodeType", "d7/d8a/classQREncodeType.html", null ],
     [ "\u202AQRErrorLevel", "d3/d7d/classQRErrorLevel.html", null ],
     [ "\u202AQRVersion", "d8/d37/classQRVersion.html", null ],
-    [ "\u202ATextAlignment", "dc/d31/classTextAlignment.html", null ]
+    [ "\u202ATextAlignment", "dc/d31/classTextAlignment.html", null ],
+    [ "\u202ATwoDComponentType", "de/d98/classTwoDComponentType.html", null ]
 ];

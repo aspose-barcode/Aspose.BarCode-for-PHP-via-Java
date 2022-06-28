@@ -256,6 +256,7 @@ class BarcodeParameters extends BaseJavaClass
     private $australianPost;
     private $codablock;
     private $dataBar;
+    private $gs1CompositeBar;
     private $dataMatrix;
     private $code16K;
     private $itf;
@@ -284,6 +285,7 @@ class BarcodeParameters extends BaseJavaClass
             $this->australianPost = new AustralianPostParameters($this->getJavaClass()->getAustralianPost());
             $this->codablock = new CodablockParameters($this->getJavaClass()->getCodablock());
             $this->dataBar = new DataBarParameters($this->getJavaClass()->getDataBar());
+            $this->gs1CompositeBar = new GS1CompositeBarParameters($this->getJavaClass()->getGS1CompositeBar());
             $this->dataMatrix = new DataMatrixParameters($this->getJavaClass()->getDataMatrix());
             $this->code16K = new Code16KParameters($this->getJavaClass()->getCode16K());
             $this->itf = new ITFParameters($this->getJavaClass()->getITF());
@@ -741,6 +743,65 @@ class BarcodeParameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * GS1 Composite Bar parameters.
+     *
+     * This sample shows how to create and save a GS1 Composite Bar image.
+     * Note that 1D codetext and 2D codetext are separated by symbol '/'
+     *
+     * $codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8";
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_COMPOSITE_BAR, $codetext);
+     *
+     * $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setLinearComponentType(EncodeTypes::GS_1_CODE_128);
+     * $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setTwoDComponentType(TwoDComponentType::CC_A);
+     *
+     * // Aspect ratio of 2D component
+     * $generator->getParameters()->getBarcode()->getPdf417()->setAspectRatio(3);
+     *
+     * // X-Dimension of 1D and 2D components
+     * $generator->getParameters()->getBarcode()->getXDimension()->setPixels(3);
+     * ///
+     * // Height of 1D component
+     * $generator->getParameters()->getBarcode()->getBarHeight()->setPixels(100);
+     * ///
+     * $generator->save("test.png", BarcodeImageFormat::PNG);
+     *
+     * @return GS1CompositeBarParameters GS1 Composite Bar parameters.
+     */
+    public function getGS1CompositeBar() : GS1CompositeBarParameters
+    {
+        return $this->gs1CompositeBar;
+    }
+
+    /**
+     * GS1 Composite Bar parameters.
+     *
+     * This sample shows how to create and save a GS1 Composite Bar image.
+     * Note that 1D codetext and 2D codetext are separated by symbol '/'
+     *
+     * $codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8";
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_COMPOSITE_BAR, $codetext);
+     *
+     * $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setLinearComponentType(EncodeTypes::GS_1_CODE_128);
+     * $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setTwoDComponentType(TwoDComponentType::CC_A);
+     *
+     * // Aspect ratio of 2D component
+     * $generator->getParameters()->getBarcode()->getPdf417()->setAspectRatio(3);
+     *
+     * // X-Dimension of 1D and 2D components
+     * $generator->getParameters()->getBarcode()->getXDimension()->setPixels(3);
+     * ///
+     * // Height of 1D component
+     * $generator->getParameters()->getBarcode()->getBarHeight()->setPixels(100);
+     * ///
+     * $generator->save("test.png", BarcodeImageFormat::PNG);
+     */
+    public function setGS1CompositeBar(GS1CompositeBarParameters $value) : void
+    {
+        $this->gs1CompositeBar = $value;
+        $this->getJavaClass()->setGS1CompositeBar($value->getJavaClass());
     }
 
     /**
@@ -3348,6 +3409,54 @@ class DotCodeParameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+}
+
+class GS1CompositeBarParameters extends BaseJavaClass
+{
+    protected function init(): void
+    {
+    }
+
+    /**
+     * Linear component type
+     */
+    public function getLinearComponentType():int
+    {
+        return java_cast($this->getJavaClass()->getLinearComponentType(), "integer");
+    }
+
+    /**
+     * Linear component type
+     */
+    public function setLinearComponentType(int $value): void
+    {
+        $this->getJavaClass()->setLinearComponentType($value);
+    }
+
+    /**
+     * 2D component type
+     */
+    public function getTwoDComponentType(): int
+    {
+        return java_cast($this->getJavaClass()->getTwoDComponentType(), "integer");
+    }
+
+    /**
+     * 2D component type
+     */
+    public function setTwoDComponentType(int $value) : void
+    {
+        $this->getJavaClass()->setTwoDComponentType($value);
+    }
+
+    /**
+     * Returns a human-readable string representation of this <see cref="DataBarParameters"/>.
+     * @return A string that represents this <see cref="DataBarParameters"/>
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
     }
 }
 
@@ -6792,6 +6901,11 @@ class EncodeTypes
      * Specifies that the data should be encoded with GS1 Codablock-F barcode specification. The codetext must contains parentheses for AI.
      */
     const  GS_1_CODABLOCK_F = 65;
+
+    /**
+     * Specifies that the data should be encoded with <b>GS1 Composite Bar</b> barcode specification. The codetext must contains parentheses for AI. 1D codetext and 2D codetext must be separated with symbol '/'
+     */
+    const GS_1_COMPOSITE_BAR = 71;
 }
 
 /**
@@ -7027,4 +7141,26 @@ class BarCodeImageFormat
      const SVG = 7;
 }
 
+class TwoDComponentType
+{
+    /**
+     * Auto select type of 2D component
+     */
+    const AUTO = 0;
+
+    /**
+     * CC-A type of 2D component. It is a structural variant of MicroPDF417
+     */
+    const CC_A = 1;
+
+    /**
+     * CC-B type of 2D component. It is a MicroPDF417 symbol.
+     */
+    const CC_B = 2;
+
+    /**
+     * CC-C type of 2D component. It is a PDF417 symbol.
+     */
+    const CC_C = 3;
+}
 ?>
