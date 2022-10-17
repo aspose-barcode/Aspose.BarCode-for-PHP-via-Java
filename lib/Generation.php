@@ -4454,6 +4454,38 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
+     * Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
+     * Applied only for Macro PDF417.
+     */
+    public function getPdf417MacroTerminator(): int
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getPdf417MacroTerminator(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
+     * Applied only for Macro PDF417.
+     */
+    public function setPdf417MacroTerminator(int $value)
+    {
+        try
+        {
+            $this->getJavaClass()->setPdf417MacroTerminator($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
      * Used to instruct the reader to interpret the data contained within the symbol
      * as programming for reader initialization
      * @return
@@ -7162,5 +7194,28 @@ class TwoDComponentType
      * CC-C type of 2D component. It is a PDF417 symbol.
      */
     const CC_C = 3;
+}
+
+/**
+ *  Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
+ *  Applied only for Macro PDF417.
+ */
+class Pdf417MacroTerminator
+{
+    /**
+     * The terminator will be added automatically if the number of segments is provided
+     * and the current segment is the last one. In other cases, the terminator will not be added.
+     */
+    const AUTO = 0;
+
+    /**
+     * The terminator will not be added.
+     */
+    const NONE = 1;
+
+    /**
+     * The terminator will be added.
+     */
+    const SET = 2;
 }
 ?>

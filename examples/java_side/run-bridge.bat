@@ -1,1 +1,2 @@
-"%JAVA_HOME%\bin\java" -Djava.ext.dirs=../../jar -jar JavaBridge.jar SERVLET_LOCAL:8888
+set port=8088
+"%JAVA_HOME%\bin\java" -jar ../../lib/aspose-barcode-php-22.10.jar %port%

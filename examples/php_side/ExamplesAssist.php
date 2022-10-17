@@ -1,19 +1,30 @@
 <?php
-require_once("http://localhost:8888/JavaBridge/java/Java.inc");
-//require_once("Java.inc"); // for case when port is 8080
-$libs_root = '../../../lib/php7/';
+
+$port = readProperty("port");
+print("port number = ".$port."\n");
+$java_inc_path = "http://localhost:".$port."/JavaBridge/java/Java.inc";
+require_once($java_inc_path);
+$libs_root = '../../../../../../publish/lib/php7/';
+if(!is_dir($libs_root))
+{
+    $libs_root = '../../lib/';
+}
+print("libs_root = ".$libs_root."\n");
 
 include_once($libs_root.'Generation.php');
 include_once($libs_root.'Recognition.php');
 include_once($libs_root.'ComplexBarcode.php');
 include_once($libs_root.'Joint.php');
 
+
 function set_license()
 {
     print("set license\n");
     $path_to_license_file = readProperty("license_path");
+    print("value path_to_license_file from ini file ".$path_to_license_file)."\n";
     if (empty($path_to_license_file))
     {
+        print("value path_to_license_file from ini file was not read. Set default value"."\n");
         $path_to_license_file = "lic/Aspose.BarCode.PHP.Java.lic";
     }
     $license = new License();
@@ -23,6 +34,7 @@ function set_license()
     }
     else
     {
+        print("Path \"" . $path_to_license_file . "\" exists\n");
         $license->setLicense($path_to_license_file);
     }
     $is_licensed = $license->isLicensed();
@@ -31,7 +43,7 @@ function set_license()
 
 function readProperty(string $propertyName)
 {
-    $ini_file_path = "assist.ini";
+    $ini_file_path = "examples.ini";
     $ini_array = parse_ini_file($ini_file_path);
     return $ini_array[$propertyName];
 }
@@ -55,5 +67,18 @@ function saveBase64Image($base64Image, $filePath)
     print("Image will be saved to : $filePath"."\n");
     file_put_contents($filePath, base64_decode($base64Image));
 }
+
+
+function parse_examples_ini()
+{
+    $ini_array = parse_ini_file("examples.ini");
+    print($ini_array['port']."\n");
+    print( $ini_array['license_path']."\n");
+    define('port', $ini_array['port']);
+    define('license_name', $ini_array['license_path']);
+}
+
+//parse_examples_ini();
+//set_license();
 
 ?>

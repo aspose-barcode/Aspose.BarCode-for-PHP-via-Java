@@ -1321,6 +1321,22 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     }
 
     /**
+     * Indicates whether the segment is the last segment of a Macro PDF417 file.
+     * @return Terminator.
+     */
+    public function getMacroPdf417Terminator() : bool
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getMacroPdf417Terminator(), "boolean");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
      * Tests whether all parameters has only default values
      * Value: Returns { <b>true</b>} if all parameters has only default values; otherwise, { <b>false</b>}.
      */
