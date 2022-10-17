@@ -24,15 +24,15 @@
 */
 var NAVTREE =
 [
-  [ "\u202AAspose.Barcode for PHP via Java", "index.html", [
-    [ "\u202AClasses", "annotated.html", [
-      [ "\u202AClass List", "annotated.html", "annotated_dup" ],
-      [ "\u202AClass Index", "classes.html", null ],
-      [ "\u202AClass Hierarchy", "hierarchy.html", "hierarchy" ],
-      [ "\u202AClass Members", "functions.html", [
-        [ "\u202AAll", "functions.html", "functions_dup" ],
-        [ "\u202AFunctions", "functions_func.html", "functions_func" ],
-        [ "\u202AVariables", "functions_vars.html", "functions_vars" ]
+  [ "Aspose.Barcode for PHP via Java", "index.html", [
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ]
   ] ]
@@ -41,11 +41,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d2/d94/classCodetextParameters.html",
-"d5/d0f/classEncodeTypes.html#a152b4b42a55515810d1a7627a371de34",
-"d8/d37/classQRVersion.html#a55d91aeec93c46ad3bb8e7e93e810d0c",
-"db/d4c/classDataBarParameters.html#a0dda58188180be9ddb4afd719ee84d4a",
-"de/d00/classRectangle.html#a84e85c1c4572b615f9424d141b2dcf7b"
+"classBarcodeSettings.html#a58c8c67a99c489f22bcae72442105d73",
+"classDataMatrixParameters.html#a219ea4bdfb7f5aa42d7f774e231e0a5b",
+"classITFParameters.html#a4b0e61a182d760cba8a6ed1e00f229ed",
+"classQRVersion.html#a62d5d49b47bd196923fe2c482c323b0c",
+"functions_func_h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
