@@ -1,0 +1,27 @@
+var classBarCodeReader =
+[
+    [ "__construct", "classBarCodeReader.html#affe7a1bad3abad6b26b8a172fbd50e3c", null ],
+    [ "abort", "classBarCodeReader.html#abe83dbe36111281f94ac6adb9008c555", null ],
+    [ "containsAny", "classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a", null ],
+    [ "exportToXml", "classBarCodeReader.html#a45d21023b4389685c0582579161ad165", null ],
+    [ "getBarCodeDecodeType", "classBarCodeReader.html#ab5bac98ecba871ef3f643a98de1e9dc3", null ],
+    [ "getChecksumValidation", "classBarCodeReader.html#a71fc428e964af4a659d68e06edddffe3", null ],
+    [ "getCustomerInformationInterpretingType", "classBarCodeReader.html#a33d0482da4f76d363826677243dd8ed0", null ],
+    [ "getDetectEncoding", "classBarCodeReader.html#aaae47053c156ae74bddec4d165dadf0c", null ],
+    [ "getFoundBarCodes", "classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94", null ],
+    [ "getFoundCount", "classBarCodeReader.html#aff425380baac223ec86c7e9a43aa990b", null ],
+    [ "getStripFNC", "classBarCodeReader.html#ae5bc623d9269ce165fcc845942e67c8d", null ],
+    [ "getTimeout", "classBarCodeReader.html#ac43c19a411f7d48ca6b1b75caf9c45b0", null ],
+    [ "init", "classBarCodeReader.html#adbd0a70ac50ecd94ae5052320e555c24", null ],
+    [ "setBarCodeImage", "classBarCodeReader.html#a5120780f5597119fe96747d3400e2082", null ],
+    [ "setBarCodeReadType", "classBarCodeReader.html#a0142d9361114f67098a1cf01fdf1d12f", null ],
+    [ "setChecksumValidation", "classBarCodeReader.html#ad6d5eea5b50b17cd3b03ecf4cdc8812b", null ],
+    [ "setCustomerInformationInterpretingType", "classBarCodeReader.html#aab4317d961a85412544bebfeb87d2261", null ],
+    [ "setDetectEncoding", "classBarCodeReader.html#a09ee2b98ce642af81bcdf237c3e28ac9", null ],
+    [ "setStripFNC", "classBarCodeReader.html#a2777cf2247a8af68be6968f9f3f64943", null ],
+    [ "setTimeout", "classBarCodeReader.html#a078a44b766cc363223eebb1050529325", null ],
+    [ "$barcodeSettings", "classBarCodeReader.html#a155cb037fb0d8592b650672c154a1bc6", null ],
+    [ "$qualitySettings", "classBarCodeReader.html#a6824f82cc4240176700f212089e82da4", null ],
+    [ "$recognizedResults", "classBarCodeReader.html#a754612f6f100e5c92237d3ba3fa7accd", null ],
+    [ "JAVA_CLASS_NAME", "classBarCodeReader.html#a86e52099da133a85002d25f61b664f7a", null ]
+];
