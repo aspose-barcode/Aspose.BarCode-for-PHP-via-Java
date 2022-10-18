@@ -1,15 +1,22 @@
 <?php
 
 $port = readProperty("port");
-print("port number = ".$port."\n");
+print("port number is ".$port."\n");
 $java_inc_path = "http://localhost:".$port."/JavaBridge/java/Java.inc";
+print("java_inc_path is ".$java_inc_path."\n");
 require_once($java_inc_path);
 $libs_root = '../../../../../../publish/lib/php7/';
 if(!is_dir($libs_root))
 {
+    $libs_root = '../../lib/php7/';
+}
+
+if(!is_dir($libs_root))
+{
     $libs_root = '../../lib/';
 }
-print("libs_root = ".$libs_root."\n");
+
+print("libs_root is ".$libs_root."\n");
 
 include_once($libs_root.'Generation.php');
 include_once($libs_root.'Recognition.php');
