@@ -117,6 +117,7 @@ class License extends BaseJavaClass
         try
         {
             $is_licensed = java_cast($this->getJavaClass()->isLicensed(), "string");
+//            return strval($is_licensed);
             return $is_licensed;
         }
         catch (Exception $ex)

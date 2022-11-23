@@ -1103,7 +1103,7 @@ class BaseGenerationParameters extends BaseJavaClass
      * @code
      *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
      *     $generator->getParameters()->setRotationAngle(7);
-     *     $generator->save("test.png");
+     *     $generator->save("test.png", BarcodeImageFormat::PNG);
      * @endcode
      */
     public function getRotationAngle(): float
@@ -1127,7 +1127,7 @@ class BaseGenerationParameters extends BaseJavaClass
      * @code
      *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
      *     $generator->getParameters()->setRotationAngle(7);
-     *     $generator->save("test.png");
+     *     $generator->save("test.png", BarcodeImageFormat::PNG);
      * @endcode
      */
     public function setRotationAngle(float $value): void
@@ -1513,17 +1513,17 @@ class BorderParameters extends BaseJavaClass
  * This sample shows influence of ChecksumValidation on recognition quality and results
  * @code
  * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
- * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
+ * $generator->save("test.png", BarcodeImageFormat::PNG);
+ * $reader = new BarCodeReader("test.png", null, DecodeType::EAN_13);
  * //checksum disabled
- * $reader.setChecksumValidation(ChecksumValidation::OFF);
+ * $reader->setChecksumValidation(ChecksumValidation::OFF);
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode CodeText: ".$result->getCodeText());
  *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
  *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
  * }
- * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
+ * $reader = new BarCodeReader("test.png", null, DecodeType::EAN_13);
  * //checksum enabled
  * $reader->setChecksumValidation(ChecksumValidation::ON);
  * foreach($reader->readBarCodes() as $result)
@@ -1797,7 +1797,7 @@ class CaptionParameters extends BaseJavaClass
  * @code
  *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
  *    $generator->getParameters()->getBarcode()->getBarHeight()->setMillimeters(10);
- *    $generator->save("test.png");
+ *    $generator->save("test.png", BarcodeImageFormat::PNG);
  * @endcode
  */
 class Unit extends BaseJavaClass
@@ -3024,7 +3024,7 @@ class DataMatrixParameters extends BaseJavaClass
      * 11.3 Protocol for Macro characters in the first position (ECC 200 only)
      * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
      * Can be used only with DataMatrixEccType.Ecc200 or DataMatrixEccType.EccAuto.
-     * Cannot be used with EncodeTypes.GS_1_DATA_MATRIX
+     * Cannot be used with EncodeTypes::GS_1_DATA_MATRIX
      * Default value: MacroCharacter.NONE.
      */
     public function getMacroCharacters(): int
@@ -3045,7 +3045,7 @@ class DataMatrixParameters extends BaseJavaClass
      * 11.3 Protocol for Macro characters in the first position (ECC 200 only)
      * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
      * Can be used only with DataMatrixEccType.Ecc200 or DataMatrixEccType.EccAuto.
-     * Cannot be used with EncodeTypes.GS_1_DATA_MATRIX
+     * Cannot be used with EncodeTypes::GS_1_DATA_MATRIX
      * Default value: MacroCharacter.NONE.
      */
     public function setMacroCharacters(int $value): void
@@ -4669,6 +4669,22 @@ class MaxiCodeParameters extends BaseJavaClass
     /**
      * Gets a MaxiCode encode mode.
      */
+    public function getMaxiCodeMode() : int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeMode(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode encode mode.
+     */
+    public function setMaxiCodeMode(int $maxiCodeMode) : void
+    {
+        $this->getJavaClass()->setMaxiCodeMode($maxiCodeMode);
+    }
+
+    /**
+     * Gets a MaxiCode encode mode.
+     */
     public function getMaxiCodeEncodeMode(): int
     {
         try
@@ -4694,6 +4710,64 @@ class MaxiCodeParameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * Gets ECI encoding. Used when MaxiCodeEncodeMode is AUTO.
+     * Default value: ISO-8859-1
+     */
+    public function getECIEncoding() : int
+    {
+        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
+    }
+
+    /**
+     * Sets ECI encoding. Used when MaxiCodeEncodeMode is AUTO.
+     * Default value: ISO-8859-1
+     */
+    public function setECIEncoding(int $ECIEncoding) : void
+    {
+        $this->getJavaClass()->setECIEncoding($ECIEncoding);
+    }
+
+    /**
+     * Gets a MaxiCode barcode id in structured append mode.
+     * ID must be a value between 1 and 8.
+     * Default value: 0
+     */
+    public function getMaxiCodeStructuredAppendModeBarcodeId() : int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodeId(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode barcode id in structured append mode.
+     * ID must be a value between 1 and 8.
+     * Default value: 0
+     */
+    public function setMaxiCodeStructuredAppendModeBarcodeId(int $maxiCodeStructuredAppendModeBarcodeId) : void
+    {
+        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodeId($maxiCodeStructuredAppendModeBarcodeId);
+    }
+
+    /**
+     * Gets a MaxiCode barcodes count in structured append mode.
+     * Count number must be a value between 2 and 8 (maximum barcodes count).
+     * Default value: -1
+     */
+    public function getMaxiCodeStructuredAppendModeBarcodesCount() : int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodesCount(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode barcodes count in structured append mode.
+     * Count number must be a value between 2 and 8 (maximum barcodes count).
+     * Default value: -1
+     */
+    public function setMaxiCodeStructuredAppendModeBarcodesCount(int $maxiCodeStructuredAppendModeBarcodesCount) : void
+    {
+        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodesCount($maxiCodeStructuredAppendModeBarcodesCount);
     }
 
     /**
@@ -5637,6 +5711,60 @@ class QrStructuredAppendParameters extends BaseJavaClass
 }
 
 /**
+ * Extended codetext generator for MaxiCode barcodes for ExtendedCodetext Mode of MaxiCodeEncodeMode
+ * Use TwoDDisplayText property of BarcodeGenerator to set visible text to removing managing characters.
+ *
+ * This sample shows how to use MaxiCodeExtCodetextBuilder in Extended Mode.
+ *
+ * @code
+ * //create codetext
+ * $textBuilder = new MaxiCodeExtCodetextBuilder();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ *
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ *
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
+ * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ * $generator->save("test.bmp", BarcodeImageFormat.BMP);
+ * @endcode
+ */
+class MaxiCodeExtCodetextBuilder extends ExtCodetextBuilder
+{
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwMaxiCodeExtCodetextBuilder";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    function init(): void
+    {
+    }
+
+    /**
+     * Generates Extended codetext from the extended codetext list.
+     * @return string Extended codetext as string
+     */
+    public function getExtendedCodetext() : string
+    {
+        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+    }
+}
+
+/**
  * Class BarcodeClassifications EncodeTypes classification
  */
 final class BarcodeClassifications
@@ -5688,7 +5816,7 @@ final class MacroCharacter
      * //to generate autoidentified GS1 message like this "(10)123ABC(10)123ABC" in ISO 15434 format you need:
      * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, "10123ABC\u001D10123ABC");
      * $generator->getParameters()->getBarcode()->getDataMatrix()->setMacroCharacters(MacroCharacter::MACRO_05);
-     * $reader = new BarCodeReader($generator->generateBarCodeImage(), DecodeType::GS_1_DATA_MATRIX);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_DATA_MATRIX);
      * foreach($reader->readBarCodes() as $result)
      *     print("BarCode CodeText: ".$result->getCodeText());
      * @endcode
@@ -5843,9 +5971,9 @@ class  DataMatrixEncodeMode
      * @code
      * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
      * $generator->setCodeText("\\ansix12:ANSIX12TEXT\\ascii:backslash must be \\\\ doubled\\edifact:EdifactEncodedText");
-     * $generator->getParameters()->getBarcode()->getDataMatrix().setDataMatrixEncodeMode(DataMatrixEncodeMode.EXTENDED_CODETEXT);
-     * $generator->getParameters()->getBarcode()->getCodeTextParameters().setTwoDDisplayText("My Text");
-     * $generator->save("test.png");
+     * $generator->getParameters()->getBarcode()->getDataMatrix()->setDataMatrixEncodeMode(DataMatrixEncodeMode.EXTENDED_CODETEXT);
+     * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+     * $generator->save("test.png", BarcodeImageFormat::PNG);
      * @endcode
      */
     const EXTENDED_CODETEXT = 12;
@@ -5938,7 +6066,7 @@ class QREncodeMode
      *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
      *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeType(QREncodeType::FORCE_QR);
      *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF8);
-     *     $generator->save("test.png", "PNG");
+     *     $generator->save("test.png", BarcodeImageFormat::PNG);
      * @endcode
      */
     const ECI_ENCODING = 4;
@@ -5967,7 +6095,7 @@ class QREncodeMode
      *      $generator->setCodeText($textBuilder->getExtendedCodetext());
      *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
      *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     *      $generator->save("d:/test.png", "PNG");
+     *      $generator->save("d:/test.png", BarcodeImageFormat::PNG);
      * @endcode
      *
      * This sample shows how to use FNC1 second position in Extended Mode.
@@ -5980,7 +6108,7 @@ class QREncodeMode
      *    $generator = new BarcodeGenerator(EncodeTypes::QR);
      *    $generator->setCodeText($textBuilder->getExtendedCodetext());
      *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     *    $generator->save("d:/test.png", "PNG");
+     *    $generator->save("d:/test.png", BarcodeImageFormat::PNG);
      * @endcode
      *
      *    This sample shows how to use multi ECI mode in Extended Mode.
@@ -5996,7 +6124,7 @@ class QREncodeMode
      *   $generator->setCodeText($textBuilder->getExtendedCodetext());
      *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
      *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     *   $generator->save("d:/test.png", "PNG");
+     *   $generator->save("d:/test.png", BarcodeImageFormat::PNG);
      * @endcode
      */
     const EXTENDED_CODETEXT = 5;
@@ -6499,12 +6627,12 @@ class  TextAlignment
  * @code
  *  $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
  *  $generator->setAutoSizeMode(AutoSizeMode.NEAREST);
- *  $generator->getBarCodeWidth().setMillimeters(50);
- *  $generator->getBarCodeHeight().setInches(1.3f);
+ *  $generator->getBarCodeWidth()->setMillimeters(50);
+ *  $generator->getBarCodeHeight()->setInches(1.3f);
  *  $generator->save("test.png");
  * @endcode
  */
-class  AutoSizeMode
+class AutoSizeMode
 {
     /**
      * Automatic resizing is disabled. Default value.
@@ -7217,5 +7345,179 @@ class Pdf417MacroTerminator
      * The terminator will be added.
      */
     const SET = 2;
+}
+
+/**
+ * Encoding mode for MaxiCode barcodes.
+ *
+ * @code
+ * //Auto mode
+ * $codetext = "犬Right狗";
+ * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext))
+ * {
+ *     $generator->getParameters()->getBarcode()->getMaxiCode()->setECIEncoding(ECIEncodings::UTF8);
+ *     $generator->save("test.bmp");
+ * }
+ *
+ * //Bytes mode
+ * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
+ *
+ * //encode array to string
+ * $strBld = "";
+ * foreach($encodedArr as $bval)
+ *     strBld.= bval;
+ * $codetext = $strBld;
+ *
+ * $generator1 = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext))
+ * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode.BYTES);
+ * $generator->save("test.bmp");
+ *
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new MaxiCodeExtCodetextBuilder();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ *
+ * // generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ *
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::MaxiCode, $codetext);
+ * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode::EXTENDED_CODETEXT);
+ * $generator->getParameters()->getBarcode()->getMaxiCode()->setTwoDDisplayText("My Text");
+ * $generator->save("test.bmp");
+ * @endcode
+ */
+class MaxiCodeEncodeMode
+{
+    
+    /**
+     * Encode codetext with value set in the ECIEncoding property.
+     */
+    const AUTO = 0;
+    
+    /**
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     */
+    const BYTES = 1;
+    
+    /**
+     * Extended mode which supports multi ECI modes.
+     * It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.
+     * Use Display2DText property to set visible text to removing managing characters.
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
+     */
+    const EXTENDED_CODETEXT = 2;
+}
+
+/**
+ * Encoding mode for MaxiCode barcodes.
+ *
+ * This sample shows how to genereate MaxiCode barcodes using ComplexBarcodeGenerator
+ * @code
+ * //Mode 2 with standart second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode2();
+ * $maxiCodeCodetext->setPostalCode("524032140");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
+ * $maxiCodeStandartSecondMessage->setMessage("Test message");
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 2 with structured second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode2();
+ * $maxiCodeCodetext->setPostalCode("524032140");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
+ * $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
+ * $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
+ * $maxiCodeStructuredSecondMessage->add("PA");
+ * $maxiCodeStructuredSecondMessage->setYear(99);
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 3 with standart second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode3();
+ * $maxiCodeCodetext->setPostalCode("B1050");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * $maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
+ * $maxiCodeStandartSecondMessage->setMessage("Test message");
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 3 with structured second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode3();
+ * $maxiCodeCodetext->setPostalCode("B1050");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * $maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
+ * $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
+ * $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
+ * $maxiCodeStructuredSecondMessage->add("PA");
+ * $maxiCodeStructuredSecondMessage->setYear(99);
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 4
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_4);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 5
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_5);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext())
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 6
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_6);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ * @endcode
+ */
+class MaxiCodeMode
+{
+    /**
+     * Mode 2 encodes postal information in first message and data in second message.
+     * Has 9 digits postal code (used only in USA).
+     */
+    const MODE_2 = 2;
+    
+    /**
+     * Mode 3 encodes postal information in first message and data in second message.
+     * Has 6 alphanumeric postal code, used in the world.
+     */
+    const MODE_3 = 3;
+    
+    /**
+     *  Mode 4 encodes data in first and second message, with short ECC correction.
+     */
+    const MODE_4 = 4;
+
+    /**
+     * Mode 5 encodes data in first and second message, with long ECC correction.
+     */
+    const MODE_5 = 5;
+
+    /**
+     * Mode 6 encodes data in first and second message, with short ECC correction.
+     * Used to encode device.
+     */
+    const MODE_6 = 6;
 }
 ?>

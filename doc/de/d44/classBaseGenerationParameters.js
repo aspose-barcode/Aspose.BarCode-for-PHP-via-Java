@@ -1,0 +1,28 @@
+var classBaseGenerationParameters =
+[
+    [ "\u202AgetAutoSizeMode", "de/d44/classBaseGenerationParameters.html#a214ed96ace5e4d2254e4d3ea6f04c01b", null ],
+    [ "\u202AgetBackColor", "de/d44/classBaseGenerationParameters.html#a12f59bcf38c3e4b50701f561fe8b5656", null ],
+    [ "\u202AgetBarcode", "de/d44/classBaseGenerationParameters.html#a37eb8c9fe86732227cb77959b2210dc5", null ],
+    [ "\u202AgetBorder", "de/d44/classBaseGenerationParameters.html#a84ae94e4f4a57c829a0cfa4886aac8e8", null ],
+    [ "\u202AgetCaptionAbove", "de/d44/classBaseGenerationParameters.html#a8e15f2c555f1e72488d93270d5a39488", null ],
+    [ "\u202AgetCaptionBelow", "de/d44/classBaseGenerationParameters.html#ae369481be4c465a9fc8fe5c4d47ee32b", null ],
+    [ "\u202AgetImageHeight", "de/d44/classBaseGenerationParameters.html#a3264517ad6f059f83e5aecd5f96ab6a3", null ],
+    [ "\u202AgetImageWidth", "de/d44/classBaseGenerationParameters.html#a979bfcf470247f6436403bbefcc63c1a", null ],
+    [ "\u202AgetJavaClass", "de/d44/classBaseGenerationParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
+    [ "\u202AgetJavaClassName", "de/d44/classBaseGenerationParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
+    [ "\u202AgetResolution", "de/d44/classBaseGenerationParameters.html#a9e62c5eed64fa3c4705640314efa43b1", null ],
+    [ "\u202AgetRotationAngle", "de/d44/classBaseGenerationParameters.html#a96857b3ac8975c3d8bde691c1cdf4495", null ],
+    [ "\u202Ainit", "de/d44/classBaseGenerationParameters.html#a38e47dc35f70ec90a5f7519ffbabdf8a", null ],
+    [ "\u202AisNull", "de/d44/classBaseGenerationParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
+    [ "\u202AprintJavaClassName", "de/d44/classBaseGenerationParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
+    [ "\u202AsetAutoSizeMode", "de/d44/classBaseGenerationParameters.html#a908844ddf3f2166cbaa97c12b8835ce7", null ],
+    [ "\u202AsetBackColor", "de/d44/classBaseGenerationParameters.html#a1e7e84f5fa100afc53ec31dd641e0283", null ],
+    [ "\u202AsetBarcode", "de/d44/classBaseGenerationParameters.html#ad799b156131255893d7099eb7fcec02d", null ],
+    [ "\u202AsetCaptionAbove", "de/d44/classBaseGenerationParameters.html#ae919eac8970f7ca7f13fbc4d75b435d4", null ],
+    [ "\u202AsetCaptionBelow", "de/d44/classBaseGenerationParameters.html#acef921d85db6998a38fc1209e2a11837", null ],
+    [ "\u202AsetImageHeight", "de/d44/classBaseGenerationParameters.html#a8b04c7d78ebd48237434fce261150629", null ],
+    [ "\u202AsetImageWidth", "de/d44/classBaseGenerationParameters.html#a55bab1727db610209c23fe8d2731c178", null ],
+    [ "\u202AsetJavaClass", "de/d44/classBaseGenerationParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
+    [ "\u202AsetResolution", "de/d44/classBaseGenerationParameters.html#adb2f3105e64754fa24a93ce6b517eec0", null ],
+    [ "\u202AsetRotationAngle", "de/d44/classBaseGenerationParameters.html#af44a70c3c9d59082baf5b717746bcde5", null ]
+];

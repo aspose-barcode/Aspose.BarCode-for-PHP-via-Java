@@ -2335,6 +2335,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     private $_qrParameters;
     private $_pdf417Parameters;
     private $_dataBarParameters;
+    private $_maxiCodeParameters;
 
     protected function init(): void
     {
@@ -2345,6 +2346,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
             $this->_qrParameters = new QRExtendedParameters($this->getJavaClass()->getQR());
             $this->_pdf417Parameters = new Pdf417ExtendedParameters($this->getJavaClass()->getPdf417());
             $this->_dataBarParameters = new DataBarExtendedParameters($this->getJavaClass()->getDataBar());
+            $this->_maxiCodeParameters = new MaxiCodeExtendedParameters($this->getJavaClass()->getMaxiCode());
         }
         catch (Exception $ex)
         {
@@ -2370,6 +2372,16 @@ class BarCodeExtendedParameters extends BaseJavaClass
     public function getDataBar(): DataBarExtendedParameters
     {
         return $this->_dataBarParameters;
+    }
+
+    /**
+     * Gets a MaxiCode additional information<see cref="MaxiCodeExtendedParameters"/> of recognized barcode
+     *
+     * @return MaxiCodeExtendedParameters A MaxiCode additional information<see cref="MaxiCodeExtendedParameters"/> of recognized barcode
+     */
+    public function getMaxiCode() : MaxiCodeExtendedParameters
+    {
+        return $this->_maxiCodeParameters;
     }
 
     /**
@@ -4123,6 +4135,104 @@ class RecognitionAbortedException extends Exception
 
     protected function init(): void
     {
+    }
+}
+
+/**
+ * Stores a MaxiCode additional information of recognized barcode
+ */
+class MaxiCodeExtendedParameters extends BaseJavaClass
+{
+
+    public function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    protected function init() : void
+    {
+    }
+
+    /**
+     * Gets a MaxiCode encode mode.
+     *  Default value: Mode4
+     */
+    public function getMaxiCodeMode(): int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeMode(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode encode mode.
+     *  Default value: Mode4
+     */
+    public function setMaxiCodeMode(int $maxiCodeMode) : void
+    {
+        $this->getJavaClass()->setMaxiCodeMode($maxiCodeMode);
+    }
+
+    /**
+     * Gets a MaxiCode barcode id in structured append mode.
+     * Default value: 0
+     */
+    public function getMaxiCodeStructuredAppendModeBarcodeId() : int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodeId(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode barcode id in structured append mode.
+     * Default value: 0
+     */
+    public function setMaxiCodeStructuredAppendModeBarcodeId(int $value) : void
+    {
+        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodeId($value);
+    }
+
+    /**
+     * Gets a MaxiCode barcodes count in structured append mode.
+     * Default value: -1
+     */
+    public function getMaxiCodeStructuredAppendModeBarcodesCount() : int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodesCount(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode barcodes count in structured append mode.
+     * Default value: -1
+     */
+    public function setMaxiCodeStructuredAppendModeBarcodesCount(int $value) : void
+    {
+        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodesCount($value);
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeExtendedParameters"/> value.
+     * @param object $obj An System.Object value to compare to this instance.
+     * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj), "integer");
+    }
+
+    /**
+     * Returns the hash code for this instance.
+     * @return int A 32-bit signed integer hash code.
+     */
+    public function getHashCode() : int
+    {
+        return java_cast($this->getJavaClass()->getHashCode(), "integer");
+    }
+
+    /**
+     * Returns a human-readable string representation of this <see cref="MaxiCodeExtendedParameters"/>.
+     * @return string A string that represents this <see cref="MaxiCodeExtendedParameters"/>.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
     }
 }
 

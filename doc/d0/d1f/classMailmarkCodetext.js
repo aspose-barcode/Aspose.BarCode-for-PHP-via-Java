@@ -1,0 +1,26 @@
+var classMailmarkCodetext =
+[
+    [ "\u202A__construct", "d0/d1f/classMailmarkCodetext.html#a2b10ab9663bf500336346d04bb8b2fff", null ],
+    [ "\u202AgetBarcodeType", "d0/d1f/classMailmarkCodetext.html#a9a9be82b121e4657417e6dd3025a76d0", null ],
+    [ "\u202AgetClass_", "d0/d1f/classMailmarkCodetext.html#a27420ba9ccdffa9ce0eeaec28db78708", null ],
+    [ "\u202AgetConstructedCodetext", "d0/d1f/classMailmarkCodetext.html#a014b327390e1117a2f667c6c681f86e4", null ],
+    [ "\u202AgetDestinationPostCodePlusDPS", "d0/d1f/classMailmarkCodetext.html#a9f23b8aace31d644347f5c5f724a8598", null ],
+    [ "\u202AgetFormat", "d0/d1f/classMailmarkCodetext.html#a1ec9ebf8db7e779f1dbe53c0a2ede655", null ],
+    [ "\u202AgetItemID", "d0/d1f/classMailmarkCodetext.html#ad1c435a61166a6717c0f32d9fb0614f7", null ],
+    [ "\u202AgetJavaClass", "d0/d1f/classMailmarkCodetext.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
+    [ "\u202AgetJavaClassName", "d0/d1f/classMailmarkCodetext.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
+    [ "\u202AgetSupplychainID", "d0/d1f/classMailmarkCodetext.html#ade3ce7d502f5fa73439cbd6992903b2a", null ],
+    [ "\u202AgetVersionID", "d0/d1f/classMailmarkCodetext.html#a3322f290838e051d74169b738dc92ac8", null ],
+    [ "\u202Ainit", "d0/d1f/classMailmarkCodetext.html#a1d2a9e2582b58dedcf862cc9a1ddf855", null ],
+    [ "\u202AinitFromString", "d0/d1f/classMailmarkCodetext.html#abef0ba6f43ea6064e43d35b6f2b276bb", null ],
+    [ "\u202AinitFromString", "d0/d1f/classMailmarkCodetext.html#a34b7a338fd06fc74e70f5f238a5b4796", null ],
+    [ "\u202AisNull", "d0/d1f/classMailmarkCodetext.html#a264c7345eb64c83446fded2fde8c2780", null ],
+    [ "\u202AprintJavaClassName", "d0/d1f/classMailmarkCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
+    [ "\u202AsetClass", "d0/d1f/classMailmarkCodetext.html#aed9a3c0be9cffcd4acca2b319e7fd04d", null ],
+    [ "\u202AsetDestinationPostCodePlusDPS", "d0/d1f/classMailmarkCodetext.html#a90711898bd8795af4135dcd60e7e5772", null ],
+    [ "\u202AsetFormat", "d0/d1f/classMailmarkCodetext.html#a514b0c0b1ab44a0dbceddbc419a11a0a", null ],
+    [ "\u202AsetItemID", "d0/d1f/classMailmarkCodetext.html#a1547180d4e7413027f184b1405ef4cad", null ],
+    [ "\u202AsetJavaClass", "d0/d1f/classMailmarkCodetext.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
+    [ "\u202AsetSupplychainID", "d0/d1f/classMailmarkCodetext.html#aa25f6508bb5849e860d3d3122ccec115", null ],
+    [ "\u202AsetVersionID", "d0/d1f/classMailmarkCodetext.html#a70765900e27da89c77b9f911438ce75c", null ]
+];

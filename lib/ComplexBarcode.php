@@ -654,6 +654,33 @@ final class ComplexCodetextReader
         }
         return $res;
     }
+
+    /**
+     * Decodes MaxiCode codetext.
+     * @param int maxiCodeMode MaxiCode mode
+     * @param string encodedCodetext encoded codetext
+     * @return MaxiCodeCodetext Decoded MaxiCode codetext.
+     */
+    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext) : MaxiCodeCodetext
+    {
+        $javaComplexCodetextReaderClass = java(self::$javaClassName);
+        $javaMaxiCodeCodetextMode2Class = java(MaxiCodeCodetextMode2::JAVA_CLASS_NAME);
+        $javaMaxiCodeCodetextMode3Class = java(MaxiCodeCodetextMode3::JAVA_CLASS_NAME);
+        $javaMaxiCodeCodetext =  $javaComplexCodetextReaderClass->tryDecodeMaxiCode($maxiCodeMode, $encodedCodetext);
+
+        if(java_instanceof($javaMaxiCodeCodetext, $javaMaxiCodeCodetextMode2Class))
+        {
+            return MaxiCodeCodetextMode2::construct($javaMaxiCodeCodetext);
+        }
+        elseif(java_instanceof($javaMaxiCodeCodetext, $javaMaxiCodeCodetextMode3Class))
+        {
+            return MaxiCodeCodetextMode3::construct($javaMaxiCodeCodetext);
+        }
+        else
+        {
+            return MaxiCodeStandardCodetext::construct($javaMaxiCodeCodetext);
+        }
+    }
 }
 
 /**
@@ -2091,6 +2118,749 @@ abstract class IComplexCodetext extends BaseJavaClass
      * @return int Barcode type.
      */
     abstract function getBarcodeType():int;
+}
+
+/**
+ * Base class for encoding and decoding the text embedded in the MaxiCode code.
+ *
+ * This sample shows how to decode raw MaxiCode codetext to MaxiCodeCodetext instance.
+ *
+ * @code
+ * $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *      $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *      print("BarCode Type: ".$resultMaxiCodeCodetext->getBarcodeType());
+ *      print("MaxiCode mode: ".$resultMaxiCodeCodetext->getMode());
+ *      print("BarCode CodeText: ".$resultMaxiCodeCodetext->getConstructedCodetext());
+ * }
+ * @endcode
+ */
+abstract class MaxiCodeCodetext extends IComplexCodetext
+{
+    /**
+     * Gets MaxiCode mode.
+     * @return MaxiCode mode
+     */
+    public abstract function getMode() : int;
+
+    /**
+     * Gets a MaxiCode encode mode.
+     */
+    public function getMaxiCodeEncodeMode() : int
+    {
+        return java_cast($this->getJavaClass()->getMaxiCodeEncodeMode(), "integer");
+    }
+
+    /**
+     * Sets a MaxiCode encode mode.
+     */
+    public function setMaxiCodeEncodeMode(int $value) : void
+    {
+        $this->getJavaClass()->setMaxiCodeEncodeMode($value);
+    }
+
+
+
+    /**
+     * Gets ECI encoding. Used when MaxiCodeEncodeMode is AUTO.
+     */
+    public function getECIEncoding() : int
+    {
+        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
+    }
+
+    /**
+     * Sets ECI encoding. Used when MaxiCodeEncodeMode is AUTO.
+     */
+    public function setECIEncoding(int $value) : void
+    {
+        $this->getJavaClass()->setECIEncoding($value);
+    }
+
+    /**
+     * Gets barcode type.
+     * @return Barcode type
+     */
+    public function getBarcodeType() : int
+    {
+        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+    }
+}
+
+/**
+ * Class for encoding and decoding the text embedded in the MaxiCode code for modes 2.
+ *
+ *  <example>
+ *  This sample shows how to encode and decode MaxiCode codetext for mode 2.
+ *  @code
+ *  //Mode 2 with standart second message
+ *  $maxiCodeCodetext = new MaxiCodeCodetextMode2();
+ *  $maxiCodeCodetext->setPostalCode("524032140");
+ *  $maxiCodeCodetext->setCountryCode(056);
+ *  $maxiCodeCodetext->setServiceCategory(999);
+ *  $maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
+ *  $maxiCodeStandartSecondMessage->setMessage("Test message");
+ *  $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ *  $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ *  $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ *  //Mode 2 with structured second message
+ *  $maxiCodeCodetext = new MaxiCodeCodetextMode2();
+ *  $maxiCodeCodetext->setPostalCode("524032140");
+ *  $maxiCodeCodetext->setCountryCode(056);
+ *  $maxiCodeCodetext->setServiceCategory(999);
+ *  $maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
+ *  $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
+ *  $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
+ *  $maxiCodeStructuredSecondMessage->add("PA");
+ *  $maxiCodeStructuredSecondMessage->setYear(99);
+ *  $maxiCodeCodetext->setSecondMessage(maxiCodeStructuredSecondMessage);
+ *  $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ *  $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ *  //Decoding raw codetext with standart second message
+ *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ *  {
+ *       foreach($reader->readBarCodes() as $result)
+ *      {
+ *          $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *          if ($resultMaxiCodeCodetext instanceof MaxiCodeCodetextMode2)
+ *          {
+ *              $maxiCodeStructuredCodetext = $resultMaxiCodeCodetext;
+ *              print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
+ *              print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
+ *              print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
+ *              if ($maxiCodeStructuredCodetext->getSecondMessage() instanceof MaxiCodeStandartSecondMessage){
+ *                  $secondMessage = $maxiCodeStructuredCodetext->getSecondMessage();
+ *                  print("Message: ".$secondMessage->getMessage());
+ *              }
+ *          }
+ *      }
+ *  }
+ *  //Decoding raw codetext with structured second message
+ *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ *  {
+ *       foreach($reader->readBarCodes() as $result)
+ *      {
+ *          $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *          if ($resultMaxiCodeCodetext instanceof MaxiCodeCodetextMode2){
+ *              $maxiCodeStructuredCodetext = $resultMaxiCodeCodetext;
+ *              print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
+ *              print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
+ *              print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
+ *              if ($maxiCodeStructuredCodetext->getSecondMessage() instanceof MaxiCodeStructuredSecondMessage)
+ *              {
+ *                  $secondMessage = $maxiCodeStructuredCodetext->getSecondMessage();
+ *                  print("Message:");
+ *                  for ($secondMessage->getIdentifiers() as $identifier){
+ *                      print($identifier);
+ *                  }
+ *              }
+ *          }
+ *      }
+ *  }
+ *  @endcode
+ *  </example>
+ */
+class MaxiCodeCodetextMode2 extends MaxiCodeStructuredCodetext
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeCodetextMode2";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    static function construct($javaClass)
+    {
+        $_class = new MaxiCodeCodetextMode2();
+        $_class->setJavaClass($javaClass);
+
+        return $_class;
+    }
+
+    /**
+     * Gets MaxiCode mode.
+     * @return int MaxiCode mode
+     */
+    public function getMode() : int
+    {
+        return java_cast($this->getJavaClass()->getMode(), "integer");
+    }
+
+    protected function init() : void
+    {
+        parent::init();
+    }
+}
+
+/**
+ * Class for encoding and decoding the text embedded in the MaxiCode code for modes 3.
+ * This sample shows how to encode and decode MaxiCode codetext for mode 3.
+ * @code
+ *  //Mode 3 with standart second message
+ *  $maxiCodeCodetext = new MaxiCodeCodetextMode3();
+ *  $maxiCodeCodetext->setPostalCode("B1050");
+ *  $maxiCodeCodetext->setCountryCode(056);
+ *  $maxiCodeCodetext->setServiceCategory(999);
+ *  MaxiCodeStandartSecondMessage maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
+ *  maxiCodeStandartSecondMessage->setMessage("Test message");
+ *  $maxiCodeCodetext->setSecondMessage(maxiCodeStandartSecondMessage);
+ *  ComplexBarcodeGenerator complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ *  complexGenerator.generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ *  //Mode 3 with structured second message
+ *  MaxiCodeCodetextMode3 $maxiCodeCodetext = new MaxiCodeCodetextMode3();
+ *  $maxiCodeCodetext->setPostalCode("B1050");
+ *  $maxiCodeCodetext->setCountryCode(056);
+ *  $maxiCodeCodetext->setServiceCategory(999);
+ *  $maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
+ *  $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
+ *  $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
+ *  $maxiCodeStructuredSecondMessage->add("PA");
+ *  $maxiCodeStructuredSecondMessage->setYear(99);
+ *  $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
+ *  $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ *  $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ *  //Decoding raw codetext with standart second message
+ *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *      $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *      if ($resultMaxiCodeCodetext instanceOf MaxiCodeCodetextMode3)
+ *      {
+ *          MaxiCodeCodetextMode3 maxiCodeStructuredCodetext = (MaxiCodeCodetextMode3)$resultMaxiCodeCodetext;
+ *          print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
+ *          print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
+ *          print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
+ *          if ($maxiCodeStructuredCodetext->getSecondMessage() instanceOf MaxiCodeStandartSecondMessage)
+ *          {
+ *              $secondMessage = maxiCodeStructuredCodetext->getSecondMessage();
+ *              print("Message: ".$secondMessage->getMessage());
+ *          }
+ *      }
+ *  }
+ *  //Decoding raw codetext with structured second message
+ *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *      $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *      if ($resultMaxiCodeCodetext instanceOf MaxiCodeCodetextMode3)
+ *      {
+ *          maxiCodeStructuredCodetext = $resultMaxiCodeCodetext;
+ *          print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
+ *          print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
+ *          print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
+ *          if (maxiCodeStructuredCodetext->getSecondMessage() instanceOf MaxiCodeStructuredSecondMessage)
+ *          {
+ *              $secondMessage = $maxiCodeStructuredCodetext->getSecondMessage();
+ *              print("Message:");
+ *              foreach($secondMessage->getIdentifiers() as $identifier)
+ *              {
+ *                  print($identifier);
+ *              }
+ *          }
+ *      }
+ *  }
+ *  @endcode
+ */
+class MaxiCodeCodetextMode3 extends MaxiCodeStructuredCodetext
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeCodetextMode3";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    static function construct($javaClass)
+    {
+        $_class = new MaxiCodeCodetextMode3();
+        $_class->setJavaClass($javaClass);
+
+        return $_class;
+    }
+
+    /**
+     * Gets MaxiCode mode.
+     * @return int MaxiCode mode
+     */
+    public function getMode() : int
+    {
+        return java_cast($this->getJavaClass()->getMode(), "integer");
+    }
+
+    protected function init() : void
+    {
+        parent::init();
+    }
+}
+
+/**
+ * Base class for encoding and decoding second message for MaxiCode barcode.
+ */
+abstract class MaxiCodeSecondMessage extends BaseJavaClass
+{
+    /**
+     * Gets constructed second message
+     * @return string Constructed second message
+     */
+    public abstract function getMessage() : string;
+}
+
+/**
+ * Class for encoding and decoding MaxiCode codetext for modes 4, 5 and 6.
+ * @code
+ * //Mode 4
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_4);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext());
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 5
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_5);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * ComplexBarcodeGenerator complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext());
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 6
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_6);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext());
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ * @endcode
+ */
+class MaxiCodeStandardCodetext extends MaxiCodeCodetext
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandardCodetext";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    static function construct($javaClass)
+    {
+        $_class = new MaxiCodeStandardCodetext();
+        $_class->setJavaClass($javaClass);
+
+        return $_class;
+    }
+
+    /**
+     * Gets message.
+     */
+    public function getMessage() : string
+    {
+        return java_cast($this->getJavaClass()->getMessage(), "string");
+    }
+
+    /**
+     * Sets message.
+     */
+    public function setMessage(string $value) : void
+    {
+        $this->getJavaClass()->setMessage($value);
+    }
+
+    /**
+     * Sets MaxiCode mode. Standart codetext can be used only with modes 4, 5 and 6.
+     */
+    public function setMode(int $mode) : void
+    {
+        $this->getJavaClass()->setMode($mode);
+    }
+
+    /**
+     * Gets MaxiCode mode.
+     * @return int MaxiCode mode
+     */
+    public function getMode() : int
+    {
+        return java_cast($this->getJavaClass()->getMode(),"integer");
+    }
+
+    /**
+     * Constructs codetext
+     * @return string Constructed codetext
+     */
+    public function getConstructedCodetext() : string
+    {
+        return java_cast($this->getJavaClass()->getConstructedCodetext(),"string");
+    }
+
+    /**
+     * Initializes instance from constructed codetext.
+     * @param string constructedCodetext Constructed codetext.
+     */
+    public function initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStandardCodetext"/> value.
+     * @param object obj An <see cref="MaxiCodeStandardCodetext"/> value to compare to this instance.
+     * @return bool if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * Returns the hash code for this instance.
+     * @return int A 32-bit signed integer hash code
+     */
+    public function getHashCode() : int
+    {
+        return java_cast($this->getJavaClass()->getHashCode(), "integer");
+    }
+
+    protected function init() : void
+    {
+
+    }
+}
+
+/**
+ * Class for encoding and decoding standart second message for MaxiCode barcode.
+ */
+class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
+{
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandartSecondMessage";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Sets second message
+     */
+    public function setMessage(string $value)
+    {
+        $this->getJavaClass()->setMessage($value);
+    }
+
+    /**
+     * Gets constructed second message
+     * @return string Constructed second message
+     */
+    public function getMessage() : string
+    {
+        return java_cast($this->getJavaClass()->getMessage(), "string");
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStandartSecondMessage"/> value.
+     * @param object obj An <see cref="MaxiCodeStandartSecondMessage"/> value to compare to this instance
+     * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * Returns the hash code for this instance.
+     * @return int A 32-bit signed integer hash code.
+     */
+    public function getHashCode() : int
+    {
+        return java_cast($this->getJavaClass()->getHashCode(), "function");
+    }
+
+    protected function init() : void
+    {
+    }
+}
+
+
+/**
+ * Base class for encoding and decoding the text embedded in the MaxiCode code for modes 2 and 3.
+ *
+ *  This sample shows how to decode raw MaxiCode codetext to MaxiCodeStructuredCodetext instance.
+ *  @code
+ *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *      $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *      if ($resultMaxiCodeCodetext instanceof MaxiCodeStructuredCodetext)
+ *      {
+ *          $maxiCodeStructuredCodetext = $resultMaxiCodeCodetext;
+ *          print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
+ *          print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
+ *          print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
+ *      }
+ *  }
+ *  @endcode
+ */
+abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
+{
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredCodetext";
+
+    private $maxiCodeSecondMessage;
+
+    function __construct($javaClass)
+    {
+        try
+        {
+            parent::__construct($javaClass);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    protected function init() : void
+    {
+        $javaMaxiCodeSecondMessage = $this->getJavaClass()->getSecondMessage();
+        $javaMaxiCodeStandartSecondMessage=new java_class("com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandartSecondMessage");
+        $javaMaxiCodeStructuredSecondMessage=new java_class("com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredSecondMessage");
+
+        if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStandartSecondMessage))
+        {
+            $this->maxiCodeSecondMessage = new MaxiCodeStandartSecondMessage($this->getJavaClass()->getSecondMessage());
+        }
+        else if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStructuredSecondMessage))
+        {
+            $this->maxiCodeSecondMessage = new MaxiCodeStructuredSecondMessage($this->getJavaClass()->getSecondMessage());
+        }
+    }
+
+    /**
+     * Identifies the postal code. Must be 9 digits in mode 2 or
+     * 6 alphanumeric symbols in mode 3.
+     */
+    public function getPostalCode() : string
+    {
+        return java_cast($this->getJavaClass()->getPostalCode(), "string");
+    }
+
+    /**
+     * Identifies 3 digit country code.
+     */
+    public function getCountryCode() : int
+    {
+        return java_cast($this->getJavaClass()->getCountryCode(), "integer");
+    }
+
+    /**
+     * Identifies 3 digit country code.
+     */
+    public function setCountryCode(int $value) : void
+    {
+        $this->getJavaClass()->setCountryCode($value);
+    }
+
+    /**
+     * Identifies 3 digit service category.
+     */
+    public function getServiceCategory() : int
+    {
+        return java_cast($this->getJavaClass()->getServiceCategory(), "integer");
+    }
+
+    /**
+     * Identifies 3 digit service category.
+     */
+    public function setServiceCategory(int $value) : void
+    {
+        $this->getJavaClass()->setServiceCategory($value);
+    }
+
+    /**
+     * Identifies second message of the barcode.
+     */
+    public function getSecondMessage() : MaxiCodeSecondMessage
+    {
+        return $this->maxiCodeSecondMessage;
+    }
+
+    /**
+     * Identifies second message of the barcode.
+     */
+    public function setSecondMessage(MaxiCodeSecondMessage $value)
+    {
+        $this->maxiCodeSecondMessage = $value;
+        $this->getJavaClass()->setSecondMessage($value->getJavaClass());
+    }
+
+    /**
+     * Constructs codetext
+     * @return string Constructed codetext
+     */
+    public function getConstructedCodetext() : string
+    {
+        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+    }
+
+    /**
+     * Initializes instance from constructed codetext.
+     * @param string $constructedCodetext Constructed codetext.
+     */
+    public function initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStructuredCodetext"/> value.
+     * @param object $obj An <see cref="MaxiCodeStructuredCodetext"/> value to compare to this instance.
+     * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * Returns the hash code for this instance.
+     * @return int A 32-bit signed integer hash code.
+     */
+    public function getHashCode() : int
+    {
+        return $this->getJavaClass()->getHashCode();
+    }
+}
+
+/**
+ * Class for encoding and decoding structured second message for MaxiCode barcode.
+ */
+class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
+{
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredSecondMessage";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     *  Gets year. Year must be 2 digit integer value.
+     */
+    public function getYear() : int
+    {
+        return java_cast($this->getJavaClass()->getYear(), "integer");
+    }
+
+    /**
+     *  Sets year. Year must be 2 digit integer value.
+     */
+    public function setYear(int $value) : void
+    {
+        $this->getJavaClass()->setYear($value);
+    }
+
+    /**
+     * Gets identifiers list
+     * @return array List of identifiers
+     */
+    public function getIdentifiers() : array
+    {
+        $identifiers_string = java_cast($this->getJavaClass()->getIdentifiers(), "string");
+        $delimeter = "\\/\\";
+        $identifiers = explode($delimeter, $identifiers_string);
+
+        return $identifiers;
+    }
+
+    /**
+     * Adds new identifier
+     * @param string $identifier Identifier to be added
+     */
+    public function add(string $identifier) : void
+    {
+        $this->getJavaClass()->add($identifier);
+    }
+
+    /**
+     * Clear identifiers list
+     */
+    public function clear() : void
+    {
+        $this->getJavaClass()->clear();
+    }
+
+    /**
+     * Gets constructed second message
+     * @return string Constructed second message
+     */
+    public function getMessage() : string
+    {
+        return java_cast($this->getJavaClass()->getMessage(), "string");
+    }
+    
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStructuredSecondMessage"/> value.
+     * @param object $obj An <see cref="MaxiCodeStructuredSecondMessage"/> value to compare to this instance.
+     * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * Returns the hash code for this instance.
+     * @return int A 32-bit signed integer hash code.
+     */
+    public function getHashCode() : int
+    {
+        return java_cast($this->getJavaClass()->getHashCode(), "integer");
+    }
+
+    protected function init() : void
+    {
+
+    }
 }
 
 /**
