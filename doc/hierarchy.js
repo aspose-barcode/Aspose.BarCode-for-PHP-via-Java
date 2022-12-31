@@ -34,14 +34,23 @@ var hierarchy =
       [ "\u202ADataBarExtendedParameters", "d8/d71/classDataBarExtendedParameters.html", null ],
       [ "\u202ADataBarParameters", "db/d4c/classDataBarParameters.html", null ],
       [ "\u202ADataMatrixParameters", "dc/df2/classDataMatrixParameters.html", null ],
+      [ "\u202ADotCodeExtendedParameters", "d1/d0b/classDotCodeExtendedParameters.html", null ],
       [ "\u202ADotCodeParameters", "de/de2/classDotCodeParameters.html", null ],
       [ "\u202AExtCodetextBuilder", "d0/dce/classExtCodetextBuilder.html", [
+        [ "\u202ADotCodeExtCodetextBuilder", "d1/d82/classDotCodeExtCodetextBuilder.html", null ],
         [ "\u202AMaxiCodeExtCodetextBuilder", "de/dc3/classMaxiCodeExtCodetextBuilder.html", null ],
         [ "\u202AQrExtCodetextBuilder", "dd/dc2/classQrExtCodetextBuilder.html", null ]
       ] ],
       [ "\u202AFontUnit", "d1/d76/classFontUnit.html", null ],
       [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", null ],
+      [ "\u202AHIBCPASRecord", "d3/de4/classHIBCPASRecord.html", null ],
       [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", [
+        [ "\u202AHIBCLICComplexCodetext", "da/d57/classHIBCLICComplexCodetext.html", [
+          [ "\u202AHIBCLICCombinedCodetext", "df/d90/classHIBCLICCombinedCodetext.html", null ],
+          [ "\u202AHIBCLICPrimaryDataCodetext", "dd/d96/classHIBCLICPrimaryDataCodetext.html", null ],
+          [ "\u202AHIBCLICSecondaryAndAdditionalDataCodetext", "db/d50/classHIBCLICSecondaryAndAdditionalDataCodetext.html", null ]
+        ] ],
+        [ "\u202AHIBCPASCodetext", "df/ddc/classHIBCPASCodetext.html", null ],
         [ "\u202AMailmark2DCodetext", "d4/d70/classMailmark2DCodetext.html", null ],
         [ "\u202AMailmarkCodetext", "d0/d1f/classMailmarkCodetext.html", null ],
         [ "\u202AMaxiCodeCodetext", "dd/d22/classMaxiCodeCodetext.html", [
@@ -68,12 +77,14 @@ var hierarchy =
       [ "\u202APdf417Parameters", "d5/d2c/classPdf417Parameters.html", null ],
       [ "\u202APoint", "dc/d4f/classPoint.html", null ],
       [ "\u202APostalParameters", "d6/dfb/classPostalParameters.html", null ],
+      [ "\u202APrimaryData", "d1/dc6/classPrimaryData.html", null ],
       [ "\u202AQRExtendedParameters", "d6/daf/classQRExtendedParameters.html", null ],
       [ "\u202AQrParameters", "da/ded/classQrParameters.html", null ],
       [ "\u202AQrStructuredAppendParameters", "dc/da4/classQrStructuredAppendParameters.html", null ],
       [ "\u202AQuadrangle", "d8/d57/classQuadrangle.html", null ],
       [ "\u202AQualitySettings", "d1/d04/classQualitySettings.html", null ],
       [ "\u202ARectangle", "de/d00/classRectangle.html", null ],
+      [ "\u202ASecondaryAndAdditionalData", "dd/d2f/classSecondaryAndAdditionalData.html", null ],
       [ "\u202ASupplementParameters", "d8/d05/classSupplementParameters.html", null ],
       [ "\u202ASwissQRBill", "de/d9a/classSwissQRBill.html", null ],
       [ "\u202AUnit", "df/dd9/classUnit.html", null ]
@@ -90,6 +101,7 @@ var hierarchy =
     [ "\u202ADataMatrixEccType", "df/d47/classDataMatrixEccType.html", null ],
     [ "\u202ADataMatrixEncodeMode", "d1/d09/classDataMatrixEncodeMode.html", null ],
     [ "\u202ADecodeType", "d4/d26/classDecodeType.html", null ],
+    [ "\u202ADotCodeEncodeMode", "df/d22/classDotCodeEncodeMode.html", null ],
     [ "\u202AECIEncodings", "d8/d37/classECIEncodings.html", null ],
     [ "\u202AEnableChecksum", "d8/d3f/classEnableChecksum.html", null ],
     [ "\u202AEncodeTypes", "d5/d0f/classEncodeTypes.html", null ],
@@ -100,6 +112,9 @@ var hierarchy =
     [ "\u202AFontMode", "dd/d60/classFontMode.html", null ],
     [ "\u202AFontStyle", "d4/d42/classFontStyle.html", null ],
     [ "\u202AGraphicsUnit", "da/d63/classGraphicsUnit.html", null ],
+    [ "\u202AHIBCLICDateFormat", "d9/d6d/classHIBCLICDateFormat.html", null ],
+    [ "\u202AHIBCPASDataLocation", "d8/dbf/classHIBCPASDataLocation.html", null ],
+    [ "\u202AHIBCPASDataType", "d9/d1b/classHIBCPASDataType.html", null ],
     [ "\u202AITF14BorderType", "d3/de2/classITF14BorderType.html", null ],
     [ "\u202AMacroCharacter", "dc/daf/classMacroCharacter.html", null ],
     [ "\u202AMailmark2DType", "d7/d21/classMailmark2DType.html", null ],

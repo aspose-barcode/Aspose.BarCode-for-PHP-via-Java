@@ -2336,6 +2336,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     private $_pdf417Parameters;
     private $_dataBarParameters;
     private $_maxiCodeParameters;
+    private $_dotCodeExtendedParameters;
 
     protected function init(): void
     {
@@ -2347,6 +2348,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
             $this->_pdf417Parameters = new Pdf417ExtendedParameters($this->getJavaClass()->getPdf417());
             $this->_dataBarParameters = new DataBarExtendedParameters($this->getJavaClass()->getDataBar());
             $this->_maxiCodeParameters = new MaxiCodeExtendedParameters($this->getJavaClass()->getMaxiCode());
+            $this->_dotCodeExtendedParameters = new DotCodeExtendedParameters($this->getJavaClass()->getDotCode());
         }
         catch (Exception $ex)
         {
@@ -2382,6 +2384,14 @@ class BarCodeExtendedParameters extends BaseJavaClass
     public function getMaxiCode() : MaxiCodeExtendedParameters
     {
         return $this->_maxiCodeParameters;
+    }
+
+    /**
+     * <p>Gets a DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode</p>Value: A DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode
+     */
+    public function getDotCode() : DotCodeExtendedParameters
+    {
+        return $this->_dotCodeExtendedParameters;
     }
 
     /**
@@ -3853,23 +3863,23 @@ class BarcodeSettings extends BaseJavaClass
      *
      * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
      * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader("c:/test.png", DecodeType::EAN_13);
+     * $reader = new BarCodeReader("c:/test.png", null, DecodeType::EAN_13);
      * //checksum disabled
      * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
      * foreach($reader->readBarCodes() as $result)
      * {
      *      echo ("BarCode CodeText: ".$result->getCodeText());
-     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
-     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
      * }
-     * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
+     * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::EAN_13);
      * //checksum enabled
      * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
      * foreach($reader->readBarCodes() as $result)
      * {
-     *      echo ("BarCode CodeText: " + result.CodeText);
-     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
-     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     *      echo ("BarCode CodeText: " + $result->CodeText);
+     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
      * }
      * @endcode
      * @return int Enable checksum validation during recognition for 1D and Postal barcodes.
@@ -3903,17 +3913,17 @@ class BarcodeSettings extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      * {
      *      echo ("BarCode CodeText: ".$result->getCodeText());
-     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
-     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
      * }
      * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
      * //checksum enabled
      * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
      * foreach($reader->readBarCodes() as $result)
      * {
-     *      echo ("BarCode CodeText: " + result.CodeText);
-     *      echo ("BarCode Value: " + result.getExtended().getOneD().getValue());
-     *      echo ("BarCode Checksum: " + result.getExtended().getOneD().getCheckSum());
+     *      echo ("BarCode CodeText: " + $result->CodeText);
+     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
      * }
      * @endcode
      * @param int $value Enable checksum validation during recognition for 1D and Postal barcodes.
@@ -4233,6 +4243,98 @@ class MaxiCodeExtendedParameters extends BaseJavaClass
     public function toString() : string
     {
         return java_cast($this->getJavaClass()->toString(), "string");
+    }
+}
+
+/**
+ * <p>
+ * Stores special data of DotCode recognized barcode
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to get DotCode raw values
+ * <pre>
+ *
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, "12345");
+ * {
+ *     $generator->save("c:\\test.png", BarCodeImageFormat::PNG);
+ * }
+ * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::DOT_CODE);
+ * {
+ *     foreach($reader->readBarCodes() as $result)
+ *     {
+ *         print("BarCode type: " . $result->getCodeTypeName());
+ *         print("BarCode codetext: " . $result->getCodeText());
+ *         print("DotCode barcode ID: " . $result->getExtended()->getDotCode()->getDotCodeStructuredAppendModeBarcodeId());
+ *         print("DotCode barcodes count: " . $result->getExtended()->getDotCode()->getDotCodeStructuredAppendModeBarcodesCount());
+ *     }
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class DotCodeExtendedParameters extends BaseJavaClass
+{
+    public function construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    /**
+     * <p>Gets the DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.</p>Value: The count of the DotCode structured append mode barcode.
+     */
+    public function getDotCodeStructuredAppendModeBarcodesCount() : int
+    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodesCount(), "integer"); }
+
+    /**
+     * <p>Gets the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.</p>Value: The ID of the DotCode structured append mode barcode.
+     */
+    public function getDotCodeStructuredAppendModeBarcodeId() : int
+    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodeId(), "integer"); }
+
+    /**
+     * <p>
+     * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
+     * Default value is false.
+     * </p>
+     */
+    public function getDotCodeIsReaderInitialization() : bool
+    { return java_cast($this->getJavaClass()->getDotCodeIsReaderInitialization(), "boolean"); }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code DotCodeExtendedParameters} value.
+     * </p>
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param obj An System.Object value to compare to this instance.
+     */
+    public function equals(DotCodeExtendedParameters $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code DotCodeExtendedParameters}.
+     * </p>
+     * @return A string that represents this {@code DotCodeExtendedParameters}.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
+    }
+
+    protected function init() : void
+    {
+        // TODO: Implement init() method.
     }
 }
 
@@ -4586,34 +4688,111 @@ class DecodeType
     const DOT_CODE = 63;
 
     /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>GS1 DotCode</b>} blank specification
+     * </p>
+     */
+    const GS_1_DOT_CODE = 77;
+
+    /**
      * Specifies that the data should be decoded with { <b>DotCode</b>} blank specification
      */
     const DUTCH_KIX = 64;
 
     /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC LIC Code39</b>} blank specification
+     * </p>
+     */
+    const HIBC_CODE_39_LIC = 67;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC LIC Code128</b>} blank specification
+     * </p>
+     */
+    const HIBC_CODE_128_LIC = 68;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC LIC Aztec</b>} blank specification
+     * </p>
+     */
+    const HIBC_AZTEC_LIC = 69;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC LIC DataMatrix</b>} blank specification
+     * </p>
+     */
+    const HIBC_DATA_MATRIX_LIC = 70;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC LIC QR</b>} blank specification
+     * </p>
+     */
+    const HIBCQRLIC = 71;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC PAS Code39</b>} blank specification
+     * </p>
+     */
+    const HIBC_CODE_39_PAS = 72;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC PAS Code128</b>} blank specification
+     * </p>
+     */
+    const HIBC_CODE_128_PAS = 73;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC PAS Aztec</b>} blank specification
+     * </p>
+     */
+    const HIBC_AZTEC_PAS = 74;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC PAS DataMatrix</b>} blank specification
+     * </p>
+     */
+    const HIBC_DATA_MATRIX_PAS = 75;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>HIBC PAS QR</b>} blank specification
+     * </p>
+     */
+    const HIBCQRPAS = 76;
+
+    /**
      * Specifies that data will be checked with all of  1D  barcode symbologies
      */
-    const TYPES_1D = 67;
+    const TYPES_1D = 97;
 
     /**
      * Specifies that data will be checked with all of  1.5D POSTAL  barcode symbologies, like  Planet, Postnet, AustraliaPost, OneCode, RM4SCC, DutchKIX
      */
-    const POSTAL_TYPES = 68;
+    const POSTAL_TYPES = 95;
 
     /**
      * Specifies that data will be checked with most commonly used symbologies
      */
-    const MOST_COMMON_TYPES = 69;
+    const MOST_COMMON_TYPES = 96;
 
     /**
      * Specifies that data will be checked with all of <b>2D</b> barcode symbologies
      */
-    const TYPES_2D = 70;
+    const TYPES_2D = 98;
 
     /**
      * Specifies that data will be checked with all available symbologies
      */
-    const ALL_SUPPORTED_TYPES = 71;
+    const ALL_SUPPORTED_TYPES = 99;
 
     private const javaClassName = "com.aspose.mw.barcode.recognition.MwDecodeTypeUtils";
 

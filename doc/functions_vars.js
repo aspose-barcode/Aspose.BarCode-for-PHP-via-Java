@@ -8,6 +8,7 @@ var functions_vars =
     [ "\u202Ae", "functions_vars_e.html", null ],
     [ "\u202Af", "functions_vars_f.html", null ],
     [ "\u202Ag", "functions_vars_g.html", null ],
+    [ "\u202Ah", "functions_vars_h.html", null ],
     [ "\u202Ai", "functions_vars_i.html", null ],
     [ "\u202Aj", "functions_vars_j.html", null ],
     [ "\u202Al", "functions_vars_l.html", null ],
@@ -22,5 +23,6 @@ var functions_vars =
     [ "\u202Au", "functions_vars_u.html", null ],
     [ "\u202Av", "functions_vars_v.html", null ],
     [ "\u202Aw", "functions_vars_w.html", null ],
+    [ "\u202Ax", "functions_vars_x.html", null ],
     [ "\u202Ay", "functions_vars_y.html", null ]
 ];

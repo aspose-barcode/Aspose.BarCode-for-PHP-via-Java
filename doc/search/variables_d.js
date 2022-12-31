@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['off_1648',['OFF',['../d1/d68/classChecksumValidation.html#af4a502322ca4e78ca492e5166c72df84',1,'ChecksumValidation']]],
-  ['on_1649',['ON',['../d1/d68/classChecksumValidation.html#a06a83657c4a45e3ee746800324d06c3a',1,'ChecksumValidation']]],
-  ['one_5fcode_1650',['ONE_CODE',['../d5/d0f/classEncodeTypes.html#a904b440bf8c57f9364961c429c65d076',1,'EncodeTypes\ONE_CODE()'],['../d4/d26/classDecodeType.html#a21cc3e752517e44ac5a5b7157f3ac7b8',1,'DecodeType\ONE_CODE()']]],
-  ['opc_1651',['OPC',['../d5/d0f/classEncodeTypes.html#abca00af5cb7d158a8168e4e493c2caac',1,'EncodeTypes\OPC()'],['../d4/d26/classDecodeType.html#a41c4291a35fba3ccfbd0a2659240801d',1,'DecodeType\OPC()']]],
-  ['other_1652',['OTHER',['../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5',1,'CustomerInformationInterpretingType']]]
+  ['n_5ftable_1849',['N_TABLE',['../d5/d35/classCustomerInformationInterpretingType.html#a5558480d706534739f0d88035a288841',1,'CustomerInformationInterpretingType']]],
+  ['nearest_1850',['NEAREST',['../d6/d8e/classAutoSizeMode.html#a34dc6a2b120d92293711b640813e225b',1,'AutoSizeMode']]],
+  ['no_1851',['NO',['../d8/d3f/classEnableChecksum.html#a2f90d04c130dc4dbc9fa29965ff4aa53',1,'EnableChecksum']]],
+  ['none_1852',['NONE',['../d9/d6d/classHIBCLICDateFormat.html#af9a4d94ada7e4e66df2fa1ebbd4e3ad3',1,'HIBCLICDateFormat\NONE()'],['../d2/d59/classBarcodeClassifications.html#af0f070e765973994132f3459f18db69b',1,'BarcodeClassifications\NONE()'],['../dc/daf/classMacroCharacter.html#a597b875de941366d8f031ce1db14f4da',1,'MacroCharacter\NONE()'],['../d3/de2/classITF14BorderType.html#ad20af4c03f2e91306c1c166940f43a51',1,'ITF14BorderType\NONE()'],['../d8/df0/classCodeLocation.html#aa76f940dd0b0888dcb6a56dfad2210a8',1,'CodeLocation\NONE()'],['../d6/d8e/classAutoSizeMode.html#a6c3849acc14c18f225a80fedaf12bc7d',1,'AutoSizeMode\NONE()'],['../d5/d0f/classEncodeTypes.html#a7312c32db1be9ae5a915fd5fcaea823b',1,'EncodeTypes\NONE()'],['../d8/d37/classECIEncodings.html#a7479a7685db4a130cdab2e4daab0f43d',1,'ECIEncodings\NONE()'],['../dd/db6/classCode128Emulation.html#aa4ba7f90ceaa2e7eecddaf9de12ff9ee',1,'Code128Emulation\NONE()'],['../d7/de1/classPdf417MacroTerminator.html#a6734b6d4209f92614d62eabcccca8088',1,'Pdf417MacroTerminator\NONE()'],['../d4/d26/classDecodeType.html#a6523fc12cebe0c82ea45eea4083c4e68',1,'DecodeType\NONE()'],['../d2/d46/classBarCodeConfidence.html#aec326bf195fee0cbf1d7a6bc47921cc5',1,'BarCodeConfidence\NONE()']]],
+  ['numeric_1853',['NUMERIC',['../d2/d92/classPdf417CompactionMode.html#aba5a2b3910352047ee16785ad4c30dc3',1,'Pdf417CompactionMode']]]
 ];

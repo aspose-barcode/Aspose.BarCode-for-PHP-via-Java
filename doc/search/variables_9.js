@@ -1,5 +1,31 @@
 var searchData=
 [
-  ['java_5fclass_5fname_1605',['JAVA_CLASS_NAME',['../d7/d3d/classMaxiCodeCodetextMode2.html#a5eb9fd14a69365bb151aad4bada34f83',1,'MaxiCodeCodetextMode2\JAVA_CLASS_NAME()'],['../d6/db9/classMaxiCodeCodetextMode3.html#a65d1f9ba75bb5d8c84dadf0fead4c93f',1,'MaxiCodeCodetextMode3\JAVA_CLASS_NAME()'],['../d3/dd9/classMaxiCodeStandardCodetext.html#a9608c8066acbe1b2e40009c60939b16d',1,'MaxiCodeStandardCodetext\JAVA_CLASS_NAME()']]],
-  ['jpeg_1606',['JPEG',['../d7/d7c/classBarCodeImageFormat.html#a093e7bbad5bef69e45e3fdf45b907ed8',1,'BarCodeImageFormat']]]
+  ['iata_5f2_5fof_5f5_1775',['IATA_2_OF_5',['../d5/d0f/classEncodeTypes.html#a942846e79f985421e0e3128745baf1ac',1,'EncodeTypes\IATA_2_OF_5()'],['../d4/d26/classDecodeType.html#a265368ed1218f64186d24e3ad39a561b',1,'DecodeType\IATA_2_OF_5()']]],
+  ['identification_5fcard_1776',['IDENTIFICATION_CARD',['../d8/dbf/classHIBCPASDataLocation.html#ab1d987323483d6f0ef6f8630d1eba802',1,'HIBCPASDataLocation']]],
+  ['implantable_5fproduct_5finformation_1777',['IMPLANTABLE_PRODUCT_INFORMATION',['../d9/d1b/classHIBCPASDataType.html#a9aed2de75e854a50c6fa008b718d824a',1,'HIBCPASDataType']]],
+  ['inch_1778',['INCH',['../da/d63/classGraphicsUnit.html#a8a8aac89d5e54e687cf4d359d6c2b31a',1,'GraphicsUnit']]],
+  ['interleaved_5f2_5fof_5f5_1779',['INTERLEAVED_2_OF_5',['../d5/d0f/classEncodeTypes.html#a51cd2e10f89c8a410807846712f96faf',1,'EncodeTypes\INTERLEAVED_2_OF_5()'],['../d4/d26/classDecodeType.html#ac124cae26af4d141f19024cdc3a0a735',1,'DecodeType\INTERLEAVED_2_OF_5()']]],
+  ['interpolation_1780',['INTERPOLATION',['../d6/d8e/classAutoSizeMode.html#a38c151216a62fedab0b259e8faa0e744',1,'AutoSizeMode']]],
+  ['isbn_1781',['ISBN',['../d5/d0f/classEncodeTypes.html#a903a8a6bc0f0009e4bdb2f7a9fb85e26',1,'EncodeTypes\ISBN()'],['../d4/d26/classDecodeType.html#a2b42d82d3d902d678dd11917f1ba60da',1,'DecodeType\ISBN()']]],
+  ['ismn_1782',['ISMN',['../d5/d0f/classEncodeTypes.html#a12c8051609fd4f3fe73ca53fc34eb081',1,'EncodeTypes\ISMN()'],['../d4/d26/classDecodeType.html#aed5b13cf5c33fdb27bf037f1bf60960f',1,'DecodeType\ISMN()']]],
+  ['iso_5f8859_5f1_1783',['ISO_8859_1',['../d8/d37/classECIEncodings.html#ab9bb6ab1a4f99eb789cdcc2d7c5ee791',1,'ECIEncodings']]],
+  ['iso_5f8859_5f10_1784',['ISO_8859_10',['../d8/d37/classECIEncodings.html#a5de07b3f6b60ee97582a4aa7aaec2e6e',1,'ECIEncodings']]],
+  ['iso_5f8859_5f11_1785',['ISO_8859_11',['../d8/d37/classECIEncodings.html#af29f4b97d16fb3f9a9d9f0744898aeba',1,'ECIEncodings']]],
+  ['iso_5f8859_5f13_1786',['ISO_8859_13',['../d8/d37/classECIEncodings.html#affb8e783467581d99162bc35880e1fa8',1,'ECIEncodings']]],
+  ['iso_5f8859_5f14_1787',['ISO_8859_14',['../d8/d37/classECIEncodings.html#a7ae3cfbb0824cbfe0aea3724b631ed85',1,'ECIEncodings']]],
+  ['iso_5f8859_5f15_1788',['ISO_8859_15',['../d8/d37/classECIEncodings.html#a84369a814c0969e2f5929e5029dad0ec',1,'ECIEncodings']]],
+  ['iso_5f8859_5f16_1789',['ISO_8859_16',['../d8/d37/classECIEncodings.html#ab210524838c69b76d50406fbe0550088',1,'ECIEncodings']]],
+  ['iso_5f8859_5f2_1790',['ISO_8859_2',['../d8/d37/classECIEncodings.html#a46d7c193b09c32f13c846c0c79691b78',1,'ECIEncodings']]],
+  ['iso_5f8859_5f3_1791',['ISO_8859_3',['../d8/d37/classECIEncodings.html#a1dd0458d39d3c03aaeaa3a2483876d4d',1,'ECIEncodings']]],
+  ['iso_5f8859_5f4_1792',['ISO_8859_4',['../d8/d37/classECIEncodings.html#a46dc6798a506bd41276c00e61dabd8f7',1,'ECIEncodings']]],
+  ['iso_5f8859_5f5_1793',['ISO_8859_5',['../d8/d37/classECIEncodings.html#aaf352a7605d3634819bfa53525470d6d',1,'ECIEncodings']]],
+  ['iso_5f8859_5f6_1794',['ISO_8859_6',['../d8/d37/classECIEncodings.html#a967e7729c030a7380e0554de524c53d6',1,'ECIEncodings']]],
+  ['iso_5f8859_5f7_1795',['ISO_8859_7',['../d8/d37/classECIEncodings.html#ab1756b124d67fdf5dc1c1320a4ca0795',1,'ECIEncodings']]],
+  ['iso_5f8859_5f8_1796',['ISO_8859_8',['../d8/d37/classECIEncodings.html#a599d0cfa39a53345af24a250ec51f4c1',1,'ECIEncodings']]],
+  ['iso_5f8859_5f9_1797',['ISO_8859_9',['../d8/d37/classECIEncodings.html#a38bcdff40ca84b70c96488f771839e88',1,'ECIEncodings']]],
+  ['issn_1798',['ISSN',['../d5/d0f/classEncodeTypes.html#ad6bc4f91c306f163463b88a392e3086f',1,'EncodeTypes\ISSN()'],['../d4/d26/classDecodeType.html#a75f1d88134953e61522f9e5dc651d74e',1,'DecodeType\ISSN()']]],
+  ['italian_5fpost_5f25_1799',['ITALIAN_POST_25',['../d5/d0f/classEncodeTypes.html#a9e1872560fbcf16abfea6b8674e1cd3e',1,'EncodeTypes\ITALIAN_POST_25()'],['../d4/d26/classDecodeType.html#a6b14af392b5238c563453f2bc629c6b4',1,'DecodeType\ITALIAN_POST_25()']]],
+  ['italic_1800',['ITALIC',['../d4/d42/classFontStyle.html#ac7bf6acd902e61846b145d545aa57a51',1,'FontStyle']]],
+  ['itf_5f14_1801',['ITF_14',['../d5/d0f/classEncodeTypes.html#ac176d1dd8c1912f45f16f8f5b8637ece',1,'EncodeTypes\ITF_14()'],['../d4/d26/classDecodeType.html#a4ff40a45aee877647e7dd70fedd92704',1,'DecodeType\ITF_14()']]],
+  ['itf_5f6_1802',['ITF_6',['../d5/d0f/classEncodeTypes.html#a96dccb45c146a3d2a691f736fe6a6ef3',1,'EncodeTypes\ITF_6()'],['../d4/d26/classDecodeType.html#ae86f5de6166ed1ed873453aea47cfde1',1,'DecodeType\ITF_6()']]]
 ];

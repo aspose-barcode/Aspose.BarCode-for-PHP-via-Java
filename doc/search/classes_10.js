@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['unit_986',['Unit',['../df/dd9/classUnit.html',1,'']]]
+  ['textalignment_1111',['TextAlignment',['../dc/d31/classTextAlignment.html',1,'']]],
+  ['twodcomponenttype_1112',['TwoDComponentType',['../de/d98/classTwoDComponentType.html',1,'']]]
 ];

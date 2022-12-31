@@ -3333,35 +3333,126 @@ class DotCodeParameters extends BaseJavaClass
     }
 
     /**
-     * Mask of Dotcode barcode.
-     * Default value: -1.
+     * <p>
+     * Identifies DotCode encode mode.
+     * Default value: Auto.
+     * </p>
      */
-    public function getDotCodeMask(): int
+    public function getDotCodeEncodeMode() : int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getDotCodeMask(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getDotCodeEncodeMode(), "integer");
+    }
+    /**
+     * <p>
+     * Identifies DotCode encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function setDotCodeEncodeMode(int $value) : void
+    {
+        $this->getJavaClass()->setDotCodeEncodeMode($value);
     }
 
     /**
-     * Mask of Dotcode barcode.
-     * Default value: -1.
+     * <p>
+     * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
+     * Default value is false.
+     * </p>
      */
-    public function setDotCodeMask(int $value): void
+    public function isReaderInitialization() : bool
+    { return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean"); }
+    /**
+     * <p>
+     * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
+     * Default value is false.
+     * </p>
+     */
+    public function setReaderInitialization(bool $value) : void
+    { $this->getJavaClass()->setReaderInitialization($value); }
+
+    /**
+     * <p>
+     * Identifies the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.
+     * </p>
+     */
+    public function getDotCodeStructuredAppendModeBarcodeId() : int
+    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodeId(), "integer"); }
+    /**
+     * <p>
+     * Identifies the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.
+     * </p>
+     */
+    public function setDotCodeStructuredAppendModeBarcodeId(int $value)
+    { $this->getJavaClass()->setDotCodeStructuredAppendModeBarcodeId($value); }
+
+    /**
+     * <p>
+     * Identifies DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.
+     * </p>
+     */
+    public function getDotCodeStructuredAppendModeBarcodesCount() : int
+    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodesCount(), "integer"); }
+    /**
+     * <p>
+     * Identifies DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.
+     * </p>
+     */
+    public function setDotCodeStructuredAppendModeBarcodesCount(int $value) : void
+    { $this->getJavaClass()->setDotCodeStructuredAppendModeBarcodesCount($value); }
+
+    /**
+     * <p>
+     * Identifies ECI encoding. Used when DotCodeEncodeMode is Auto.
+     * Default value: ISO-8859-1
+     * </p>
+     */
+    public function getECIEncoding() : int
+    { return java_cast($this->getJavaClass()->getECIEncoding(), "integer"); }
+    /**
+     * <p>
+     * Identifies ECI encoding. Used when DotCodeEncodeMode is Auto.
+     * Default value: ISO-8859-1
+     * </p>
+     */
+    public function setECIEncoding(int $value) : void
+    { $this->getJavaClass()->setECIEncoding($value); }
+
+    /**
+     * <p>
+     * Identifies rows count. Sum of the number of rows plus the number of columns of a DotCode symbol must be odd. Number of rows must be at least 5.
+     * Default value: -1
+     * </p>
+     */
+    public function getRows() : int
+    { return java_cast($this->getJavaClass()->getRows(), "integer"); }
+    /**
+     * <p>
+     * Identifies rows count. Sum of the number of rows plus the number of columns of a DotCode symbol must be odd. Number of rows must be at least 5.
+     * Default value: -1
+     * </p>
+     */
+    public function setRows(int $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setDotCodeMask($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getJavaClass()->setRows($value);
+    }
+
+    /**
+     * <p>
+     * Identifies columns count. Sum of the number of rows plus the number of columns of a DotCode symbol must be odd. Number of columns must be at least 5.
+     * Default value: -1
+     * </p>
+     */
+    public function getColumns() : int
+    { return java_cast($this->getJavaClass()->getColumns(), "integer"); }
+    /**
+     * <p>
+     * Identifies columns count. Sum of the number of rows plus the number of columns of a DotCode symbol must be odd. Number of columns must be at least 5.
+     * Default value: -1
+     * </p>
+     */
+    public function setColumns(int $value) : void
+    {
+        $this->getJavaClass()->setColumns($value);
     }
 
     /**
@@ -5765,6 +5856,108 @@ class MaxiCodeExtCodetextBuilder extends ExtCodetextBuilder
 }
 
 /**
+ * <p>
+ * <p>Extended codetext generator for 2D DotCode barcodes for ExtendedCodetext Mode of DotCodeEncodeMode</p>
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ *
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new DotCodeExtCodetextBuilder();
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * $textBuilder->addFNC3SymbolSeparator();
+ * $textBuilder->addFNC3ReaderInitialization();
+ * $textBuilder->addPlainCodetext("Reader initialization info");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * {
+ *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
+ * 	   $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class DotCodeExtCodetextBuilder extends ExtCodetextBuilder
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwDotCodeExtCodetextBuilder";
+    public function __construct()
+    {
+        $javaClass = new java(DotCodeExtCodetextBuilder::JAVA_CLASS_NAME);
+        parent::__construct($javaClass);
+    }
+
+    static function construct($javaClass) : DotCodeExtCodetextBuilder
+    {
+        $obj = new DotCodeExtCodetextBuilder();
+        $obj->setJavaClass($javaClass);
+        return $obj;
+    }
+
+    /**
+     * <p>
+     * Adds FNC1 format identifier to the extended codetext items
+     * </p>
+     */
+    public function addFNC1FormatIdentifier() : void
+    {
+        $this->getJavaClass()->addFNC1FormatIdentifier();
+    }
+
+    /**
+     * <p>
+     * Adds FNC3 symbol separator to the extended codetext items
+     * </p>
+     */
+    public function addFNC3SymbolSeparator() : void
+    {
+        $this->getJavaClass()->addFNC3SymbolSeparator();
+    }
+
+    /**
+     * <p>
+     * Adds FNC3 reader initialization to the extended codetext items
+     * </p>
+     */
+    public function addFNC3ReaderInitialization() : void
+    {
+        $this->getJavaClass()->addFNC3ReaderInitialization();
+    }
+
+    /**
+     * <p>
+     * Adds structured append mode to the extended codetext items
+     * </p>
+     * @param barcodeId ID of barcode
+     * @param barcodesCount Barcodes count
+     */
+    public function addStructuredAppendMode(int $barcodeId, int $barcodesCount) : void
+    {
+        $this->getJavaClass()->addStructuredAppendMode($barcodeId, $barcodesCount);
+    }
+
+    /**
+     * <p>
+     * Generates Extended codetext from the extended codetext list.
+     * </p>
+     * @return Extended codetext as string
+     */
+    public function getExtendedCodetext() : string
+    {
+        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+    }
+
+    public function init() : void {}
+}
+
+/**
  * Class BarcodeClassifications EncodeTypes classification
  */
 final class BarcodeClassifications
@@ -6654,7 +6847,7 @@ class AutoSizeMode
      *
      *  This sample shows how to create and save a BarCode image in Scale mode.
      * @code
-     *      $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
+     *      $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, "");
      *      $generator->getParameters()->getBarcode()->setAutoSizeMode(AutoSizeMode::INTERPOLATION);
      *      $generator->getParameters()->getBarcode()->getBarCodeWidth()->setMillimeters(50);
      *      $generator->getParameters()->getBarcode()->getBarCodeHeight()->setInches(1.3);
@@ -7065,7 +7258,247 @@ class EncodeTypes
     /**
      * Specifies that the data should be encoded with <b>GS1 Composite Bar</b> barcode specification. The codetext must contains parentheses for AI. 1D codetext and 2D codetext must be separated with symbol '/'
      */
-    const GS_1_COMPOSITE_BAR = 71;
+    const GS_1_COMPOSITE_BAR = 67;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC LIC Code39Standart</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_CODE_39_LIC = 68;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC LIC Code128</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_CODE_128_LIC = 69;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC LIC Aztec</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_AZTEC_LIC = 70;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC LIC DataMatrix</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_DATA_MATRIX_LIC = 71;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC LIC QR</b>} barcode specification.
+     * </p>
+     */
+    const HIBCQRLIC = 72;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC PAS Code39Standart</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_CODE_39_PAS = 73;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC PAS Code128</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_CODE_128_PAS = 74;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC PAS Aztec</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_AZTEC_PAS = 75;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC PAS DataMatrix</b>} barcode specification.
+     * </p>
+     */
+    const HIBC_DATA_MATRIX_PAS = 76;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>HIBC PAS QR</b>} barcode specification.
+     * </p>
+     */
+    const HIBCQRPAS = 77;
+
+    /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>GS1 DotCode</b>} barcode specification. The codetext must contains parentheses for AI.
+     * </p>
+     */
+    const GS_1_DOT_CODE = 78;
+
+    public static function parse(string $encodeTypeName) : int
+    {
+        if($encodeTypeName == "CODABAR") return 0;
+
+        else if($encodeTypeName == "CODE_11") return 1;
+
+        else if($encodeTypeName == "CODE_39_STANDARD") return 2;
+
+        else if($encodeTypeName == "CODE_39_EXTENDED") return 3;
+
+        else if($encodeTypeName == "CODE_93_STANDARD") return 4;
+
+        else if($encodeTypeName == "CODE_93_EXTENDED") return 5;
+
+        else if($encodeTypeName == "CODE_128") return 6;
+
+        else if($encodeTypeName == "GS_1_CODE_128") return 7;
+
+        else if($encodeTypeName == "EAN_8") return 8;
+
+        else if($encodeTypeName == "EAN_13") return 9;
+
+        else if($encodeTypeName == "EAN_14") return 10;
+
+        else if($encodeTypeName == "SCC_14") return 11;
+
+        else if($encodeTypeName == "SSCC_18") return 12;
+
+        else if($encodeTypeName == "UPCA") return 13;
+
+        else if($encodeTypeName == "UPCE") return 14;
+
+        else if($encodeTypeName == "ISBN") return 15;
+
+        else if($encodeTypeName == "ISSN") return 16;
+
+        else if($encodeTypeName == "ISMN") return 17;
+
+        else if($encodeTypeName == "STANDARD_2_OF_5") return 18;
+
+        else if($encodeTypeName == "INTERLEAVED_2_OF_5") return 19;
+
+        else if($encodeTypeName == "MATRIX_2_OF_5") return 20;
+
+        else if($encodeTypeName == "ITALIAN_POST_25") return 21;
+
+        else if($encodeTypeName == "IATA_2_OF_5") return 22;
+
+        else if($encodeTypeName == "ITF_14") return 23;
+
+        else if($encodeTypeName == "ITF_6") return 24;
+
+        else if($encodeTypeName == "MSI") return 25;
+
+        else if($encodeTypeName == "VIN") return 26;
+
+        else if($encodeTypeName == "DEUTSCHE_POST_IDENTCODE") return 27;
+
+        else if($encodeTypeName == "DEUTSCHE_POST_LEITCODE") return 28;
+
+        else if($encodeTypeName == "OPC") return 29;
+
+        else if($encodeTypeName == "PZN") return 30;
+
+        else if($encodeTypeName == "CODE_16_K") return 31;
+
+        else if($encodeTypeName == "PHARMACODE") return 32;
+
+        else if($encodeTypeName == "DATA_MATRIX") return 33;
+
+        else if($encodeTypeName == "QR") return 34;
+
+        else if($encodeTypeName == "AZTEC") return 35;
+
+        else if($encodeTypeName == "PDF_417") return 36;
+
+        else if($encodeTypeName == "MACRO_PDF_417") return 37;
+
+        else if($encodeTypeName == "GS_1_DATA_MATRIX") return 48;
+
+        else if($encodeTypeName == "MICRO_PDF_417") return 55;
+
+        else if($encodeTypeName == "GS_1_QR") return 56;
+
+        else if($encodeTypeName == "MAXI_CODE") return 57;
+
+        else if($encodeTypeName == "DOT_CODE") return 60;
+
+        else if($encodeTypeName == "AUSTRALIA_POST") return 38;
+
+        else if($encodeTypeName == "POSTNET") return 39;
+
+        else if($encodeTypeName == "PLANET") return 40;
+
+        else if($encodeTypeName == "ONE_CODE") return 41;
+
+        else if($encodeTypeName == "RM_4_SCC") return 42;
+
+        else if($encodeTypeName == "MAILMARK") return 66;
+
+        else if($encodeTypeName == "DATABAR_OMNI_DIRECTIONAL") return 43;
+
+        else if($encodeTypeName == "DATABAR_TRUNCATED") return 44;
+
+        else if($encodeTypeName == "DATABAR_LIMITED") return 45;
+
+        else if($encodeTypeName == "DATABAR_EXPANDED") return 46;
+
+        else if($encodeTypeName == "DATABAR_EXPANDED_STACKED") return 52;
+
+        else if($encodeTypeName == "DATABAR_STACKED") return 53;
+
+        else if($encodeTypeName == "DATABAR_STACKED_OMNI_DIRECTIONAL") return 54;
+
+        else if($encodeTypeName == "SINGAPORE_POST") return 47;
+
+        else if($encodeTypeName == "AUSTRALIAN_POSTE_PARCEL") return 49;
+
+        else if($encodeTypeName == "SWISS_POST_PARCEL") return 50;
+
+        else if($encodeTypeName == "PATCH_CODE") return 51;
+
+        else if($encodeTypeName == "CODE_32") return 58;
+
+        else if($encodeTypeName == "DATA_LOGIC_2_OF_5") return 59;
+
+        else if($encodeTypeName == "DUTCH_KIX") return 61;
+
+        else if($encodeTypeName == "UPCA_GS_1_CODE_128_COUPON") return 62;
+
+        else if($encodeTypeName == "UPCA_GS_1_DATABAR_COUPON") return 63;
+
+        else if($encodeTypeName == "CODABLOCK_F") return 64;
+
+        else if($encodeTypeName == "GS_1_CODABLOCK_F") return 65;
+
+        else if($encodeTypeName == "GS_1_COMPOSITE_BAR") return 67;
+
+        else if($encodeTypeName == "HIBC_CODE_39_LIC") return 68;
+
+        else if($encodeTypeName == "HIBC_CODE_128_LIC") return 69;
+
+        else if($encodeTypeName == "HIBC_AZTEC_LIC") return 70;
+
+        else if($encodeTypeName == "HIBC_DATA_MATRIX_LIC") return 71;
+
+        else if($encodeTypeName == "HIBCQRLIC") return 72;
+
+        else if($encodeTypeName == "HIBC_CODE_39_PAS") return 73;
+
+        else if($encodeTypeName == "HIBC_CODE_128_PAS") return 74;
+
+        else if($encodeTypeName == "HIBC_AZTEC_PAS") return 75;
+
+        else if($encodeTypeName == "HIBC_DATA_MATRIX_PAS") return 76;
+
+        else if($encodeTypeName == "HIBCQRPAS") return 77;
+
+        else if($encodeTypeName == "GS_1_DOT_CODE") return 78;
+
+        else return -1;
+    }
 }
 
 /**
@@ -7470,21 +7903,21 @@ class MaxiCodeEncodeMode
  *
  * //Mode 4
  * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
- * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_4);
+ * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_4);
  * $maxiCodeCodetext->setMessage("Test message");
  * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
  * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
  *
  * //Mode 5
  * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
- * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_5);
+ * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_5);
  * $maxiCodeCodetext->setMessage("Test message");
  * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext())
  * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
  *
  * //Mode 6
  * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
- * $maxiCodeCodetext->setMode(MaxiCodeMode.MODE_6);
+ * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_6);
  * $maxiCodeCodetext->setMessage("Test message");
  * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
  * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
@@ -7519,5 +7952,86 @@ class MaxiCodeMode
      * Used to encode device.
      */
     const MODE_6 = 6;
+}
+
+/**
+ * <p>
+ * Encoding mode for DotCode barcodes.
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ * //Auto mode with macros
+ * $codetext = ""[)>\u001E05\u001DCodetextWithMacros05\u001E\u0004"";
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * {
+ *     $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * }
+ *
+ * //Auto mode
+ * $codetext = "犬Right狗";
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * {
+ *     $generator->getParameters()->getBarcode()->getDotCode()->setECIEncoding(ECIEncodings::UTF8);
+ *     $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * }
+ *
+ * //Bytes mode
+ * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
+ * //encode array to string
+ * $codetext = "";
+ * foreach (encodedArr as $bval)
+ *     $codetext .= bval;
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * {
+ *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::BYTES);
+ *     $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * }
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new DotCodeExtCodetextBuilder();
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addFNC3SymbolSeparator();
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * {
+ *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
+ * 	   $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class DotCodeEncodeMode
+{
+    /**
+     * <p>
+     * Encode codetext with value set in the ECIEncoding property.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * <p>
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     * </p>
+     */
+     const BYTES = 1;
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use DotCodeExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     */
+     const EXTENDED_CODETEXT = 2;
 }
 ?>

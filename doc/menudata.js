@@ -54,6 +54,7 @@ var menudata={children:[
 {text:"\u202Au",url:"functions_u.html#index_u"},
 {text:"\u202Av",url:"functions_v.html#index_v"},
 {text:"\u202Aw",url:"functions_w.html#index_w"},
+{text:"\u202Ax",url:"functions_x.html#index_x"},
 {text:"\u202Ay",url:"functions_y.html#index_y"}]},
 {text:"\u202AFunctions",url:"functions_func.html",children:[
 {text:"_",url:"functions_func.html#index__5F"},
@@ -78,6 +79,7 @@ var menudata={children:[
 {text:"\u202Ae",url:"functions_vars_e.html#index_e"},
 {text:"\u202Af",url:"functions_vars_f.html#index_f"},
 {text:"\u202Ag",url:"functions_vars_g.html#index_g"},
+{text:"\u202Ah",url:"functions_vars_h.html#index_h"},
 {text:"\u202Ai",url:"functions_vars_i.html#index_i"},
 {text:"\u202Aj",url:"functions_vars_j.html#index_j"},
 {text:"\u202Al",url:"functions_vars_l.html#index_l"},
@@ -92,4 +94,5 @@ var menudata={children:[
 {text:"\u202Au",url:"functions_vars_u.html#index_u"},
 {text:"\u202Av",url:"functions_vars_v.html#index_v"},
 {text:"\u202Aw",url:"functions_vars_w.html#index_w"},
+{text:"\u202Ax",url:"functions_vars_x.html#index_x"},
 {text:"\u202Ay",url:"functions_vars_y.html#index_y"}]}]}]}]}

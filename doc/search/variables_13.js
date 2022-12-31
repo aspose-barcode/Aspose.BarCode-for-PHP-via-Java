@@ -1,16 +1,13 @@
 var searchData=
 [
-  ['underline_1693',['UNDERLINE',['../d4/d42/classFontStyle.html#a194c5e7c073861dd354f2e38fa516f54',1,'FontStyle']]],
-  ['undetermined_1694',['UNDETERMINED',['../d7/dbd/classAddressType.html#ab1a77dd2e11edd36394e61c02e0dcc27',1,'AddressType']]],
-  ['upca_1695',['UPCA',['../d5/d0f/classEncodeTypes.html#a3763de920d74dd651d96816f808f80c1',1,'EncodeTypes\UPCA()'],['../d4/d26/classDecodeType.html#a40e6dec3f5fb65adc85090f92fdc2062',1,'DecodeType\UPCA()']]],
-  ['upca_5fgs_5f1_5fcode_5f128_5fcoupon_1696',['UPCA_GS_1_CODE_128_COUPON',['../d5/d0f/classEncodeTypes.html#a8039d7746d0335397e6d04e27c7f42fc',1,'EncodeTypes']]],
-  ['upca_5fgs_5f1_5fdatabar_5fcoupon_1697',['UPCA_GS_1_DATABAR_COUPON',['../d5/d0f/classEncodeTypes.html#a53debc3ca561916ce2729b1df5fa1d7e',1,'EncodeTypes']]],
-  ['upce_1698',['UPCE',['../d5/d0f/classEncodeTypes.html#ab700e2a11164a7a3d8ef4cd360261eb0',1,'EncodeTypes\UPCE()'],['../d4/d26/classDecodeType.html#ac93c23b4e35c122d33e9f0e785876801',1,'DecodeType\UPCE()']]],
-  ['us_5fascii_1699',['US_ASCII',['../d8/d37/classECIEncodings.html#aac33f3e6cedfbb6b7d524ff7d6235de5',1,'ECIEncodings']]],
-  ['us_5fletter_1700',['US_LETTER',['../d0/d26/classPatchFormat.html#a87762ed5c6b2afbdad5d0a986422d3bb',1,'PatchFormat']]],
-  ['us_5fletter_5flandscape_1701',['US_LETTER_LANDSCAPE',['../d0/d26/classPatchFormat.html#a57072918cd15c7098bc04a75c159e87f',1,'PatchFormat']]],
-  ['utf16be_1702',['UTF16BE',['../d8/d37/classECIEncodings.html#a1a3f5a261672624c437a7b1b996e950d',1,'ECIEncodings']]],
-  ['utf8_1703',['UTF8',['../d8/d37/classECIEncodings.html#a4239e71d256c82cbe9fc6e86f0e747d1',1,'ECIEncodings']]],
-  ['utf_5f16_5fbebom_1704',['UTF_16_BEBOM',['../d9/d97/classQREncodeMode.html#af5e9afd688d37f412ef3e3d11a719da3',1,'QREncodeMode']]],
-  ['utf_5f8_5fbom_1705',['UTF_8_BOM',['../d9/d97/classQREncodeMode.html#a7317ea7da32aac0584cc9cc64bc9cbe6',1,'QREncodeMode']]]
+  ['text_1901',['TEXT',['../d1/d09/classDataMatrixEncodeMode.html#ad1e6177bc289d72ef68e6cf9754abd5f',1,'DataMatrixEncodeMode\TEXT()'],['../d2/d92/classPdf417CompactionMode.html#a76f531d0de57bb5cbdd4bceadc823804',1,'Pdf417CompactionMode\TEXT()']]],
+  ['tiff_1902',['TIFF',['../d7/d7c/classBarCodeImageFormat.html#a85b532c0992949aaa4980212df495fbb',1,'BarCodeImageFormat']]],
+  ['tiff_5fin_5fcmyk_1903',['TIFF_IN_CMYK',['../d7/d7c/classBarCodeImageFormat.html#a201216809a67776d015abb84cbff5a67',1,'BarCodeImageFormat']]],
+  ['type_5f1d_1904',['TYPE_1D',['../d2/d59/classBarcodeClassifications.html#a93ade11b7158d7ab8c86e0242762d1c8',1,'BarcodeClassifications']]],
+  ['type_5f29_1905',['TYPE_29',['../d7/d21/classMailmark2DType.html#a45288e28c6159b3bef9d6b1c39ff4290',1,'Mailmark2DType']]],
+  ['type_5f2d_1906',['TYPE_2D',['../d2/d59/classBarcodeClassifications.html#a1154ce701da4004df8c43ad8034623fb',1,'BarcodeClassifications']]],
+  ['type_5f7_1907',['TYPE_7',['../d7/d21/classMailmark2DType.html#a9635440ffae5e4c982bd16d9cfeccc3f',1,'Mailmark2DType']]],
+  ['type_5f9_1908',['TYPE_9',['../d7/d21/classMailmark2DType.html#a9477dfcb99277a45e1ad1d25fd00d7bb',1,'Mailmark2DType']]],
+  ['types_5f1d_1909',['TYPES_1D',['../d4/d26/classDecodeType.html#a7fc8d212a834d02ef20114fdacf85db1',1,'DecodeType']]],
+  ['types_5f2d_1910',['TYPES_2D',['../d4/d26/classDecodeType.html#a371c93a13d683db2968b87c2458b22ce',1,'DecodeType']]]
 ];

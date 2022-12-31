@@ -4,6 +4,7 @@ var classBarCodeExtendedParameters =
     [ "\u202Aequals", "dc/dc5/classBarCodeExtendedParameters.html#ad84a2a2499f04e853a526e141493033b", null ],
     [ "\u202AgetCode128", "dc/dc5/classBarCodeExtendedParameters.html#ab4a1ea35e5597ff164d7c1eb869fb0ce", null ],
     [ "\u202AgetDataBar", "dc/dc5/classBarCodeExtendedParameters.html#a67685a5a87d5e757b70f2344e5526540", null ],
+    [ "\u202AgetDotCode", "dc/dc5/classBarCodeExtendedParameters.html#a8d002eab9fb1f63cdfefa40abcfc9c9b", null ],
     [ "\u202AgetJavaClass", "dc/dc5/classBarCodeExtendedParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "dc/dc5/classBarCodeExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetMaxiCode", "dc/dc5/classBarCodeExtendedParameters.html#a29470d9a9b15a2ef7a8ab1ea9866b22a", null ],

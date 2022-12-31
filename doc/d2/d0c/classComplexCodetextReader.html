@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">22.11</span>
+   &#160;<span id="projectnumber">22.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -102,6 +102,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:aef1023158290a10c1ce408f8bfed6384"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addd0b558960f8387e1bfd37fa010f95e"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html#addd0b558960f8387e1bfd37fa010f95e">tryDecodeMaxiCode</a> (int $maxiCodeMode, string $encodedCodetext)</td></tr>
 <tr class="separator:addd0b558960f8387e1bfd37fa010f95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afad1cd245c79f6228138f668b4e5d054"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html#afad1cd245c79f6228138f668b4e5d054">tryDecodeHIBCLIC</a> (string $encodedCodetext)</td></tr>
+<tr class="separator:afad1cd245c79f6228138f668b4e5d054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44ab8bb321874f2b5ca2a595d0df2f82"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html#a44ab8bb321874f2b5ca2a595d0df2f82">tryDecodeHIBCPAS</a> (string $encodedCodetext)</td></tr>
+<tr class="separator:a44ab8bb321874f2b5ca2a595d0df2f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR"><a class="el" href="../../d2/d0c/classComplexCodetextReader.html">ComplexCodetextReader</a> decodes codetext to specified complex barcode type.</p>
@@ -109,6 +113,74 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">$cr-&gt;read();</div>
 <div class="line">$result = <a class="code" href="../../d2/d0c/classComplexCodetextReader.html#a2b90f615d6de83d366f68db5e78930f6">ComplexCodetextReader::tryDecodeSwissQR</a>($cr-&gt;getCodeText(<span class="keyword">false</span>));</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="afad1cd245c79f6228138f668b4e5d054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afad1cd245c79f6228138f668b4e5d054">&#9670;&nbsp;</a></span>tryDecodeHIBCLIC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static ComplexCodetextReader::tryDecodeHIBCLIC </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>$encodedCodetext</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Decodes HIBC LIC codetext. </p>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;decoded HIBC LIC Complex Codetext or null. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">encodedCodetext</td><td>&#x202A;encoded codetext </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a44ab8bb321874f2b5ca2a595d0df2f82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44ab8bb321874f2b5ca2a595d0df2f82">&#9670;&nbsp;</a></span>tryDecodeHIBCPAS()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static ComplexCodetextReader::tryDecodeHIBCPAS </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>$encodedCodetext</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Decodes HIBC PAS codetext. </p>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;decoded HIBC PAS Complex Codetext or null. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">encodedCodetext</td><td>&#x202A;encoded codetext </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aef1023158290a10c1ce408f8bfed6384"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aef1023158290a10c1ce408f8bfed6384">&#9670;&nbsp;</a></span>tryDecodeMailmark()</h2>
 

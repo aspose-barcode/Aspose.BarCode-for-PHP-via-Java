@@ -1,15 +1,8 @@
 var searchData=
 [
-  ['patch_5fcode_1653',['PATCH_CODE',['../d5/d0f/classEncodeTypes.html#ace6b85be44294f479472359abf7e40d7',1,'EncodeTypes\PATCH_CODE()'],['../d4/d26/classDecodeType.html#a5442ae81a752f0b43cefbfc2e57249b4',1,'DecodeType\PATCH_CODE()']]],
-  ['patch_5fonly_1654',['PATCH_ONLY',['../d0/d26/classPatchFormat.html#a1579aa9dd562d010d691edee679a11de',1,'PatchFormat']]],
-  ['pdf_5f417_1655',['PDF_417',['../d5/d0f/classEncodeTypes.html#aa2271bb2105de26e5d19005ae5a70a6b',1,'EncodeTypes\PDF_417()'],['../d4/d26/classDecodeType.html#a564ac6deef7cbb8f659c15911fc2972b',1,'DecodeType\PDF_417()']]],
-  ['pharmacode_1656',['PHARMACODE',['../d5/d0f/classEncodeTypes.html#ae50684b2c3fd6c1d4fd813d417575cb9',1,'EncodeTypes\PHARMACODE()'],['../d4/d26/classDecodeType.html#a79072930a06f29a3fbb94fc291b3cf6f',1,'DecodeType\PHARMACODE()']]],
-  ['pixel_1657',['PIXEL',['../da/d63/classGraphicsUnit.html#ae1bd134ec35ad45f06d86be45d5a1e1b',1,'GraphicsUnit']]],
-  ['planet_1658',['PLANET',['../d5/d0f/classEncodeTypes.html#af74b140df415299e54791b0086556df5',1,'EncodeTypes\PLANET()'],['../d4/d26/classDecodeType.html#a5f86ea8448e78b2fc8cc44154e0f8e4c',1,'DecodeType\PLANET()']]],
-  ['png_1659',['PNG',['../d7/d7c/classBarCodeImageFormat.html#a07f661390cabae97572bc6db85b8640d',1,'BarCodeImageFormat']]],
-  ['point_1660',['POINT',['../da/d63/classGraphicsUnit.html#a1f0467cde034bcf36fb7384cd56b8fd0',1,'GraphicsUnit']]],
-  ['postal_1661',['POSTAL',['../d2/d59/classBarcodeClassifications.html#ad703e4554ba7a89e9f2d0a5f859472d3',1,'BarcodeClassifications']]],
-  ['postal_5ftypes_1662',['POSTAL_TYPES',['../d4/d26/classDecodeType.html#a013c77da722a04a414c323f8ffe384d1',1,'DecodeType']]],
-  ['postnet_1663',['POSTNET',['../d5/d0f/classEncodeTypes.html#af84625f7c7f94f1667632f2d53fac191',1,'EncodeTypes\POSTNET()'],['../d4/d26/classDecodeType.html#a3ecd7bf64076c6e53c48e221daaabe89',1,'DecodeType\POSTNET()']]],
-  ['pzn_1664',['PZN',['../d5/d0f/classEncodeTypes.html#ad28f411879493c87a205c453f27b9cd8',1,'EncodeTypes\PZN()'],['../d4/d26/classDecodeType.html#a1e7a9c726581e144ef22413a4436175f',1,'DecodeType\PZN()']]]
+  ['off_1854',['OFF',['../d1/d68/classChecksumValidation.html#af4a502322ca4e78ca492e5166c72df84',1,'ChecksumValidation']]],
+  ['on_1855',['ON',['../d1/d68/classChecksumValidation.html#a06a83657c4a45e3ee746800324d06c3a',1,'ChecksumValidation']]],
+  ['one_5fcode_1856',['ONE_CODE',['../d5/d0f/classEncodeTypes.html#a904b440bf8c57f9364961c429c65d076',1,'EncodeTypes\ONE_CODE()'],['../d4/d26/classDecodeType.html#a21cc3e752517e44ac5a5b7157f3ac7b8',1,'DecodeType\ONE_CODE()']]],
+  ['opc_1857',['OPC',['../d5/d0f/classEncodeTypes.html#abca00af5cb7d158a8168e4e493c2caac',1,'EncodeTypes\OPC()'],['../d4/d26/classDecodeType.html#a41c4291a35fba3ccfbd0a2659240801d',1,'DecodeType\OPC()']]],
+  ['other_1858',['OTHER',['../d5/d35/classCustomerInformationInterpretingType.html#a68217dd88ae48986265d86fa097e5ef5',1,'CustomerInformationInterpretingType']]]
 ];

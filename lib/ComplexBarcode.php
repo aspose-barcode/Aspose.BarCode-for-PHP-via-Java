@@ -681,6 +681,51 @@ final class ComplexCodetextReader
             return MaxiCodeStandardCodetext::construct($javaMaxiCodeCodetext);
         }
     }
+
+    /**
+     * <p>
+     * Decodes HIBC LIC codetext.
+     * </p>
+     * @return decoded HIBC LIC Complex Codetext or null.
+     * @param encodedCodetext encoded codetext
+     */
+    public static function tryDecodeHIBCLIC(string $encodedCodetext) : ?HIBCLICComplexCodetext
+    {
+        $javaHIBCLICSecondaryAndAdditionalDataCodetextClass = java(HIBCLICSecondaryAndAdditionalDataCodetext::JAVA_CLASS_NAME);
+        $javaHIBCLICPrimaryDataCodetextClass = java(HIBCLICPrimaryDataCodetext::JAVA_CLASS_NAME);
+        $javaHIBCLICCombinedCodetextClass = java(HIBCLICCombinedCodetext::JAVA_CLASS_NAME);
+        $javaPhpComplexCodetextReaderJavaClass = java(self::$javaClassName);
+        $hibclicComplexCodetext = $javaPhpComplexCodetextReaderJavaClass->tryDecodeHIBCLIC($encodedCodetext);
+        if(java_instanceof($hibclicComplexCodetext, $javaHIBCLICSecondaryAndAdditionalDataCodetextClass))
+        {
+            return HIBCLICSecondaryAndAdditionalDataCodetext::construct($hibclicComplexCodetext);
+        }
+        else if(java_instanceof($hibclicComplexCodetext, $javaHIBCLICPrimaryDataCodetextClass))
+        {
+            return HIBCLICPrimaryDataCodetext::construct($hibclicComplexCodetext);
+        }
+        else if(java_instanceof($hibclicComplexCodetext, $javaHIBCLICCombinedCodetextClass))
+        {
+            return HIBCLICCombinedCodetext::construct($hibclicComplexCodetext);
+        }
+        return null;
+    }
+
+    /**
+     * <p>
+     * Decodes HIBC PAS codetext.
+     * </p>
+     * @return decoded HIBC PAS Complex Codetext or null.
+     * @param encodedCodetext encoded codetext
+     */
+    public static function tryDecodeHIBCPAS(string $encodedCodetext) : ?HIBCPASCodetext
+    {
+        $javaPhpComplexCodetextReader = java(ComplexCodetextReader::$javaClassName);
+        $javaHIBCPAS = $javaPhpComplexCodetextReader->tryDecodeHIBCPAS($encodedCodetext);
+        if(java_is_null($javaHIBCPAS))
+            return null;
+        return HIBCPASCodetext::construct($javaHIBCPAS);
+    }
 }
 
 /**
@@ -2864,6 +2909,1114 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
 }
 
 /**
+ * <p>
+ * Class for encoding and decoding the text embedded in the HIBC LIC code which stores primary and secodary data.
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to encode and decode HIBC LIC using HIBCLICCombinedCodetext.
+ * <pre>
+ *
+ * $combinedCodetext = new HIBCLICCombinedCodetext();
+ * $combinedCodetext->setBarcodeType(EncodeTypes::HIBCQRLIC);
+ * $combinedCodetext->setPrimaryData(new PrimaryData());
+ * $combinedCodetext->getPrimaryData()->setProductOrCatalogNumber("12345");
+ * $combinedCodetext->getPrimaryData()->setLabelerIdentificationCode("A999");
+ * $combinedCodetext->getPrimaryData()->setUnitOfMeasureID(1);
+ * $combinedCodetext->setSecondaryAndAdditionalData(new SecondaryAndAdditionalData());
+ * $combinedCodetext->getSecondaryAndAdditionalData()->setExpiryDate(new Date());
+ * $combinedCodetext->getSecondaryAndAdditionalData()->setExpiryDateFormat(HIBCLICDateFormat.MMDDYY);
+ * $combinedCodetext->getSecondaryAndAdditionalData()->setQuantity(30);
+ * $combinedCodetext->getSecondaryAndAdditionalData()->setLotNumber("LOT123");
+ * $combinedCodetext->getSecondaryAndAdditionalData()->setSerialNumber("SERIAL123");
+ * $combinedCodetext->getSecondaryAndAdditionalData()->setDateOfManufacture(new Date());
+ * ComplexBarcodeGenerator generator = new ComplexBarcodeGenerator(combinedCodetext);
+ * {
+ *     $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+ *     $reader = new BarCodeReader($image, null, DecodeType::HIBCQRLIC);
+ *     {
+ *         $reader->readBarCodes();
+ *         $codetext = $reader->getFoundBarCodes()[0]->getCodeText();
+ *         $result = ComplexCodetextReader::tryDecodeHIBCLIC($codetext) ;
+ *         print("Product or catalog number: " . $result->getPrimaryData()->getProductOrCatalogNumber());
+ *         print("Labeler identification code: " . $result->getPrimaryData()->getLabelerIdentificationCode());
+ *         print("Unit of measure ID: " . $result->getPrimaryData()->getUnitOfMeasureID());
+ *         print("Expiry date: " . $result->getSecondaryAndAdditionalData()->getExpiryDate());
+ *         print("Quantity: " . $result->getSecondaryAndAdditionalData()->getQuantity());
+ *         print("Lot number: " . $result->getSecondaryAndAdditionalData()->getLotNumber());
+ *         print("Serial number: " . $result->getSecondaryAndAdditionalData()->getSerialNumber());
+ *         print("Date of manufacture: " . $result->getSecondaryAndAdditionalData()->getDateOfManufacture());
+ *     }
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
+{
+    public const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCLICCombinedCodetext";
+
+    function __construct()
+    {
+        $javaClass = new java(self::JAVA_CLASS_NAME);
+        parent::__construct($javaClass);
+    }
+
+    static function construct($javaClass) : HIBCLICCombinedCodetext
+    {
+        $obj = new HIBCLICCombinedCodetext();
+        $obj->setJavaClass($javaClass);
+        return $obj;
+    }
+
+    protected function init() : void
+    {
+        $this->auto_PrimaryData = PrimaryData::construct($this->getJavaClass()->getPrimaryData());
+        $this->auto_SecondaryAndAdditionalData = SecondaryAndAdditionalData::construct($this->getJavaClass()->getSecondaryAndAdditionalData());
+    }
+
+    /**
+     * <p>
+     * Identifies primary data.
+     * </p>
+     */
+    public function getPrimaryData() : PrimaryData
+    {
+        return $this->auto_PrimaryData;
+    }
+
+    /**
+     * <p>
+     * Identifies primary data.
+     * </p>
+     */
+    public function setPrimaryData(PrimaryData $value) : void
+    {
+        $this->getJavaClass()->setPrimaryData($value->getJavaClass());
+        $this->auto_PrimaryData = $value;
+    }
+
+    private $auto_PrimaryData;
+
+    /**
+     * <p>
+     * Identifies secondary and additional supplemental data.
+     * </p>
+     */
+    public function getSecondaryAndAdditionalData() : SecondaryAndAdditionalData
+    {
+        return $this->auto_SecondaryAndAdditionalData;
+    }
+
+    /**
+     * <p>
+     * Identifies secondary and additional supplemental data.
+     * </p>
+     */
+    public function setSecondaryAndAdditionalData(SecondaryAndAdditionalData $value) : void
+    {
+        $this->getJavaClass()->setSecondaryAndAdditionalData($value->getJavaClass());
+        $this->auto_SecondaryAndAdditionalData = $value;
+    }
+
+    private $auto_SecondaryAndAdditionalData;
+
+    /**
+     * <p>
+     * Constructs codetext
+     * </p>
+     *
+     * @return Constructed codetext
+     */
+    public function getConstructedCodetext() : string
+    {
+        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+    }
+
+    /**
+     * <p>
+     * Initializes instance from constructed codetext.
+     * </p>
+     *
+     * @param constructedCodetext Constructed codetext.
+     */
+    public function initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code HIBCLICCombinedCodetext} value.
+     * </p>
+     *
+     * @param obj An {@code HIBCLICCombinedCodetext} value to compare to this instance.
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     */
+    public function  equals(HIBCLICCombinedCodetext $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     *
+     * @return A 32-bit signed integer hash code.
+     */
+    public  function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+}
+
+/**
+ * <p>
+ * Base class for encoding and decoding the text embedded in the HIBC LIC code.
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to decode raw HIBC LIC codetext to HIBCLICComplexCodetext instance.
+ * <pre>
+ * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::HIBC_AZTEC_LIC);
+ * {
+ *     foreach($reader->readBarCodes() as $result)
+ *     {
+ *         $resultHIBCLICComplexCodetext = ComplexCodetextReader::tryDecodeHIBCLIC($result->getCodeText());
+ *         print("BarCode Type: " . $resultMaxiCodeCodetext->getBarcodeType());
+ *         print("BarCode CodeText: " . $resultMaxiCodeCodetext->getConstructedCodetext());
+ *     }
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+abstract class HIBCLICComplexCodetext extends IComplexCodetext
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+    /**
+     * <p>
+     * Constructs codetext
+     * </p>
+     * @return Constructed codetext
+     */
+    public abstract function getConstructedCodetext() : string;
+
+    /**
+     * <p>
+     * Initializes instance from constructed codetext.
+     * </p>
+     * @param constructedCodetext Constructed codetext.
+     */
+    public abstract function initFromString(string $constructedCodetext) : void;
+
+    /**
+     * <p>
+     * Gets or sets barcode type. HIBC LIC codetext can be encoded using HIBCCode39LIC, HIBCCode128LIC, HIBCAztecLIC, HIBCDataMatrixLIC and HIBCQRLIC encode types.
+     * Default value: HIBCCode39LIC.
+     * </p>
+     * @return Barcode type.
+     */
+    public function getBarcodeType() : int
+    {
+        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+    }
+    /**
+     * <p>
+     * Gets or sets barcode type. HIBC LIC codetext can be encoded using HIBCCode39LIC, HIBCCode128LIC, HIBCAztecLIC, HIBCDataMatrixLIC and HIBCQRLIC encode types.
+     * Default value: HIBCCode39LIC.
+     * </p>
+     * @return Barcode type.
+     */
+    public function setBarcodeType(int $value) : void
+    {
+        $this->getJavaClass()->setBarcodeType($value);
+    }
+}
+
+
+/**
+ * <p>
+ * Class for encoding and decoding the text embedded in the HIBC LIC code which stores primary data.
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to encode and decode HIBC LIC using HIBCLICPrimaryCodetext.
+ * <pre>
+ * $complexCodetext  = new HIBCLICPrimaryCodetext();
+ * $complexCodetext->setBarcodeType(EncodeTypes::HIBCQRLIC);
+ * $complexCodetext->setData(new PrimaryData());
+ * $complexCodetext->getData()->setProductOrCatalogNumber("12345");
+ * $complexCodetext->getData()->setLabelerIdentificationCode("A999");
+ * $complexCodetext->getData()->setUnitOfMeasureID(1);
+ * $generator = new ComplexBarcodeGenerator($complexCodetext);
+ * {
+ *     $image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+ *     $reader = new BarCodeReader($image, null, DecodeType::HIBCQRLIC);
+ *     {
+ *         $reader->readBarCodes();
+ *         $codetext = $reader->getFoundBarCodes()[0]->getCodeText();
+ *         $result = ComplexCodetextReader::tryDecodeHIBCLIC($codetext) ;
+ *         print("Product or catalog number: " . $result->getData()->getProductOrCatalogNumber());
+ *         print("Labeler identification code: " . $result->getData()->getLabelerIdentificationCode());
+ *         print("Unit of measure ID: " . $result->getData()->getUnitOfMeasureID());
+ *     }
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCLICPrimaryDataCodetext";
+
+    function __construct()
+    {
+        parent::__construct(new java(HIBCLICPrimaryDataCodetext::JAVA_CLASS_NAME));
+    }
+
+    static function construct($java_class) : HIBCLICPrimaryDataCodetext
+    {
+        $obj = new HIBCLICPrimaryDataCodetext();
+        $obj->setJavaClass($java_class);
+        return $obj;
+    }
+
+    protected function init() : void
+    {
+        $this->data = PrimaryData::construct($this->getJavaClass()->getData());
+    }
+
+    private $data;
+
+    /**
+     * <p>
+     * Identifies primary data.
+     * </p>
+     */
+    public function getData() : PrimaryData
+    {
+        return $this->data;
+    }
+
+    /**
+     * <p>
+     * Identifies primary data.
+     * </p>
+     */
+    public function setData(PrimaryData $value) : void
+    {
+        $this->getJavaClass()->setData($value->getJavaClass());
+        $this->data = $value;
+    }
+
+    /**
+     * <p>
+     * Constructs codetext
+     * </p>
+     *
+     * @return Constructed codetext
+     */
+    public function getConstructedCodetext() : string
+    {
+        return $this->getJavaClass()->getConstructedCodetext();
+    }
+
+    /**
+     * <p>
+     * Initializes instance from constructed codetext.
+     * </p>
+     *
+     * @param constructedCodetext Constructed codetext.
+     */
+    public function initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code HIBCLICPrimaryDataCodetext} value.
+     * </p>
+     *
+     * @param obj An {@code HIBCLICPrimaryDataCodetext} value to compare to this instance.
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     */
+    function equals(HIBCLICPrimaryDataCodetext $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     *
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return $this->getJavaClass()->hashCode();
+    }
+}
+
+
+/**
+ * <p>
+ * Class for encoding and decoding the text embedded in the HIBC LIC code which stores seconday data.
+ * </p>
+ */
+class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCLICSecondaryAndAdditionalDataCodetext";
+    private $data;
+
+    function __construct()
+    {
+        parent::__construct(new java(HIBCLICSecondaryAndAdditionalDataCodetext::JAVA_CLASS_NAME));
+    }
+
+    static function construct($java_class) : HIBCLICSecondaryAndAdditionalDataCodetext
+    {
+        $obj = new HIBCLICSecondaryAndAdditionalDataCodetext();
+        $obj->setJavaClass($java_class);
+        return $obj;
+    }
+
+    /**
+     * <p>
+     * Identifies secodary and additional supplemental data.
+     * </p>
+     */
+    public function getData() : SecondaryAndAdditionalData
+    {
+        return $this->data;
+    }
+
+    /**
+     * <p>
+     * Identifies secodary and additional supplemental data.
+     * </p>
+     */
+    public function setData(SecondaryAndAdditionalData $value) : void
+    {
+        $this->getJavaClass()->setData($value->getJavaClass());
+        $this->data = $value;
+    }
+
+    /**
+     * <p>
+     * Identifies link character.
+     * </p>
+     */
+    public function getLinkCharacter() : string
+    {
+        return java_cast($this->getJavaClass()->getLinkCharacter(), "string");
+    }
+
+    /**
+     * <p>
+     * Identifies link character.
+     * </p>
+     */
+    public function setLinkCharacter(string $value) : void
+    {
+        $this->getJavaClass()->setLinkCharacter($value);
+    }
+
+    /**
+     * <p>
+     * Constructs codetext
+     * </p>
+     *
+     * @return Constructed codetext
+     */
+    public function getConstructedCodetext() : string
+    {
+        return $this->getJavaClass()->getConstructedCodetext();
+    }
+
+    /**
+     * <p>
+     * Initializes instance from constructed codetext.
+     * </p>
+     *
+     * @param constructedCodetext Constructed codetext.
+     */
+    function initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code HIBCLICSecondaryAndAdditionalDataCodetext} value.
+     * </p>
+     *
+     * @param obj An {@code HIBCLICSecondaryAndAdditionalDataCodetext} value to compare to this instance.
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     */
+    public function equals(HIBCLICSecondaryAndAdditionalDataCodetext $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     *
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    protected function init() : void
+    {
+        $this->data = SecondaryAndAdditionalData::construct($this->getJavaClass()->getData());
+    }
+}
+
+/**
+ * <p>
+ *  Class for encoding and decoding the text embedded in the HIBC PAS code.
+ *  </p><p><hr><blockquote><pre>
+ *  This sample shows how to encode and decode HIBC PAS using HIBCPASCodetext.
+ *  <pre>
+ *
+ *  $complexCodetext = new HIBCPASComplexCodetext();
+ *  $complexCodetext->setDataLocation(HIBCPASDataLocation::PATIENT);
+ *  $complexCodetext->addRecord(HIBCPASDataType::LABELER_IDENTIFICATION_CODE, "A123");
+ *  $complexCodetext->addRecord(HIBCPASDataType::MANUFACTURER_SERIAL_NUMBER, "SERIAL123");
+ *  $complexCodetext->setBarcodeType(EncodeTypes::HIBC_DATA_MATRIX_PAS);
+ *  $generator = new ComplexBarcodeGenerator($complexCodetext);
+ *  {
+ *      BarCodeReader reader = new BarCodeReader($generator->generateBarCodeImage(BarCodeImageFormat::PNG), null, DecodeType::HIBC_DATA_MATRIX_PAS);
+ *      {
+ *          $reader->readBarCodes();
+ *          $codetext = $reader->getFoundBarCodes()[0]->getCodeText();
+ * 			$readCodetext = ComplexCodetextReader::tryDecodeHIBCPAS($codetext);
+ *  		print("Data location: " . $readCodetext->getDataLocation());
+ *          print("Data type: " . $readCodetext->getRecords()[0]->getDataType());
+ *          print("Data: " . $readCodetext->getRecords()[0]->getData());
+ *          print("Data type: " . $readCodetext->getRecords()[1]->getDataType());
+ *          print("Data: " . $readCodetext->getRecords()[1]->getData());
+ *      }
+ *  }
+ *  </pre>
+ *  </pre></blockquote></hr></p>
+ */
+class HIBCPASCodetext extends IComplexCodetext
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCPASCodetext";
+
+    function __construct()
+    {
+        parent::__construct(new java(self::JAVA_CLASS_NAME));
+    }
+
+    /**
+     * <p>
+     * HIBCPASRecord constructor
+     * </p>
+     */
+    static function construct($javaClass) : HIBCPASCodetext
+    {
+        $obj = new HIBCPASCodetext();
+        $obj->setJavaClass($javaClass);
+        return $obj;
+    }
+
+    protected function init() : void
+    {
+
+    }
+
+    /**
+     * <p>
+     * Gets or sets barcode type. HIBC PAS codetext can be encoded using HIBCCode39PAS, HIBCCode128PAS, HIBCAztec:PAS, HIBCDataMatrixPAS and HIBCQRPAS encode types.
+     * Default value: HIBCCode39PAS.
+     * </p>
+     * @return Barcode type.
+     */
+    public function setBarcodeType(int $value) : void
+    {
+        $this->getJavaClass()->setBarcodeType($value);
+    }
+
+    /**
+     * <p>
+     * Identifies data location.
+     * </p>
+     */
+    public function getDataLocation() : int
+    {
+        return java_cast($this->getJavaClass()->getDataLocation(), "integer");
+    }
+    /**
+     * <p>
+     * Identifies data location.
+     * </p>
+     */
+    public function setDataLocation(int $value) : void
+    {
+        $this->getJavaClass()->setDataLocation($value);
+    }
+
+    /**
+     * <p>
+     * Gets records list
+     * </p>
+     * @return List of records
+     */
+    function getRecords() : array
+    {
+        $_array = array();
+        $mwRecordsList = $this->getJavaClass()->getRecords();
+        $listSize = java_cast($mwRecordsList->size(), "integer");
+        for ($i = 0; $i < $listSize; $i++)
+        {
+            $mwhibcpasRecord = $mwRecordsList->get($i);
+            array_push($_array, HIBCPASRecord::construct($mwhibcpasRecord));
+        }
+        return $_array;
+    }
+
+    /**
+     * <p>
+     * Adds new record
+     * </p>
+     * @param dataType Type of data
+     * @param data Data string
+     */
+    public function addRecord(int $dataType, string $data) : void
+    {
+        $this->getJavaClass()->addRecord($dataType, $data);
+    }
+
+    /**
+     * <p>
+     * Adds new record
+     * </p>
+     * @param record Record to be added
+     */
+    public function addHIBCPASRecord(HIBCPASRecord $record) : void
+    {
+        $this->getJavaClass()->addRecord($record->getJavaClass());
+    }
+
+    /**
+     * <p>
+     * Clears records list
+     * </p>
+     */
+    public function clear() : void
+    {
+        $this->getJavaClass()->clear();
+    }
+
+    /**
+     * <p>
+     * Gets barcode type.
+     * </p>
+     * @return Barcode type.
+     */
+    public function getBarcodeType() : int
+    {
+        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+    }
+
+    /**
+     * <p>
+     * Constructs codetext
+     * </p>
+     * @return Constructed codetext
+     */
+    public function getConstructedCodetext() : string
+    {
+        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+    }
+
+    /**
+     * <p>
+     * Initializes instance from constructed codetext.
+     * </p>
+     * @param constructedCodetext Constructed codetext.
+     */
+    public function initFromString(string $constructedCodetext) : void
+    {
+        $this->getJavaClass()->initFromString($constructedCodetext);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code HIBCPASCodetext} value.
+     * </p>
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param obj An {@code HIBCPASCodetext} value to compare to this instance.
+     */
+    public function equals(HIBCPASCodetext $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+}
+
+/**
+ * <p>
+ * Class for storing HIBC PAS record.
+ * </p>
+ */
+class HIBCPASRecord extends BaseJavaClass
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCPASRecord";
+
+    /**
+     * <p>
+     * HIBCPASRecord constructor
+     * </p>
+     *
+     * @param dataType Type of data.
+     * @param data     Data string.
+     */
+    function __construct(int $dataType, string $data)
+    {
+        parent::__construct(new java(self::JAVA_CLASS_NAME, $dataType, $data));
+    }
+
+    /**
+     * <p>
+     * HIBCPASRecord constructor
+     * </p>
+     */
+    static function construct($javaClass) : HIBCPASRecord
+    {
+        $obj = new HIBCPASRecord(0,0);
+        $obj->setJavaClass($javaClass);
+        return $obj;
+    }
+
+    protected function init() : void
+    {}
+
+    /**
+     * <p>
+     * Identifies data type.
+     * </p>
+     */
+    public function getDataType() : int
+    {
+        return java_cast($this->getJavaClass()->getDataType(), "integer");
+    }
+
+    /**
+     * <p>
+     * Identifies data type.
+     * </p>
+     */
+    public function setDataType(int $value) : void
+    {
+        $this->getJavaClass()->setDataType($value);
+    }
+
+    /**
+     * <p>
+     * Identifies data.
+     * </p>
+     */
+    public function getData() : string
+    {
+        return java_cast($this->getJavaClass()->getData(), "string");
+    }
+
+    /**
+     * <p>
+     * Identifies data.
+     * </p>
+     */
+    public function setData(string $value) : void
+    {
+        $this->getJavaClass()->setData($value);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code HIBCPASDataType} value.
+     * </p>
+     *
+     * @param obj An {@code HIBCPASDataType} value to compare to this instance.
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     */
+    public function equals(HIBCPASRecord $obj) : bool
+    {
+        return $this->getJavaClass()->equals($obj->getJavaClass());
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     *
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+}
+
+
+/**
+ * <p>
+ * Class for storing HIBC LIC primary data.
+ * </p>
+ */
+class PrimaryData extends BaseJavaClass
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwPrimaryData";
+
+    function __construct()
+    {
+        $java_class = new java(self::JAVA_CLASS_NAME);
+        parent::__construct($java_class);
+    }
+
+    static function construct($java_class) : PrimaryData
+    {
+        $obj = new PrimaryData();
+        $obj->setJavaClass($java_class);
+        return $obj;
+    }
+
+    /**
+     * <p>
+     * Identifies date of labeler identification code.
+     * Labeler identification code must be 4 symbols alphanumeric string, with first character always being alphabetic.
+     * </p>
+     */
+    public function getLabelerIdentificationCode() : string
+    {
+        return java_cast($this->getJavaClass()->getLabelerIdentificationCode(), "string");
+    }
+
+    /**
+     * <p>
+     * Identifies date of labeler identification code.
+     * Labeler identification code must be 4 symbols alphanumeric string, with first character always being alphabetic.
+     * </p>
+     */
+    public function setLabelerIdentificationCode(string $value) : void
+    {
+        $this->getJavaClass()->setLabelerIdentificationCode($value);
+    }
+
+    /**
+     * <p>
+     * Identifies product or catalog number. Product or catalog number must be alphanumeric string up to 18 sybmols length.
+     * </p>
+     */
+    public function getProductOrCatalogNumber() : string
+    {
+        return java_cast($this->getJavaClass()->getProductOrCatalogNumber(), "string");
+    }
+
+    /**
+     * <p>
+     * Identifies product or catalog number. Product or catalog number must be alphanumeric string up to 18 sybmols length.
+     * </p>
+     */
+    public function setProductOrCatalogNumber(string $value) : void
+    {
+        $this->getJavaClass()->setProductOrCatalogNumber($value);
+    }
+
+    /**
+     * <p>
+     * Identifies unit of measure ID. Unit of measure ID must be integer value from 0 to 9.
+     * </p>
+     */
+    public function getUnitOfMeasureID() : int
+    {
+        return java_cast($this->getJavaClass()->getUnitOfMeasureID(), "integer");
+    }
+
+    /**
+     * <p>
+     * Identifies unit of measure ID. Unit of measure ID must be integer value from 0 to 9.
+     * </p>
+     */
+    public function setUnitOfMeasureID(int $value) : void
+    {
+        $this->getJavaClass()->setUnitOfMeasureID($value);
+    }
+
+    /**
+     * <p>
+     * Converts data to string format according HIBC LIC specification.
+     * </p>
+     *
+     * @return Formatted string.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
+    }
+
+    /**
+     * <p>
+     * Instantiates primary data from string format according HIBC LIC specification.
+     * </p>
+     *
+     * @param primaryDataCodetext Formatted string.
+     */
+    public function parseFromString(string $primaryDataCodetext) : void
+    {
+        $this->getJavaClass()->parseFromString($primaryDataCodetext);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code PrimaryData} value.
+     * </p>
+     *
+     * @param obj An {@code PrimaryData} value to compare to this instance.
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     */
+    public function equals(PrimaryData $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     *
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    protected function init() : void
+    {}
+}
+
+/**
+ * <p>
+ * Class for storing HIBC LIC secondary and additional data.
+ * </p>
+ */
+class SecondaryAndAdditionalData extends BaseJavaClass
+{
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwSecondaryAndAdditionalData";
+
+    function __construct()
+    {
+        $java_class = new java(self::JAVA_CLASS_NAME);
+        parent::__construct($java_class);
+    }
+
+    static function construct($java_class) : SecondaryAndAdditionalData
+    {
+        $obj = new SecondaryAndAdditionalData(null);
+        $obj->setJavaClass($java_class);
+        return $obj;
+    }
+
+    /**
+     * <p>
+     * Identifies expiry date format.
+     * </p>
+     */
+    public function getExpiryDateFormat() : int
+    {
+        return java_cast($this->getJavaClass()->getExpiryDateFormat(), "integer");
+    }
+
+    /**
+     * <p>
+     * Identifies expiry date format.
+     * </p>
+     */
+    public function setExpiryDateFormat(int $value) : void
+    {
+        $this->getJavaClass()->setExpiryDateFormat($value);
+    }
+
+    /**
+     * <p>
+     * Identifies expiry date. Will be used if ExpiryDateFormat is not set to None.
+     * </p>
+     */
+    public function getExpiryDate() : DateTime
+    {
+        return new DateTime('@' . java_cast($this->getJavaClass()->getExpiryDate(), "string"));
+    }
+
+    /**
+     * <p>
+     * Identifies expiry date. Will be used if ExpiryDateFormat is not set to None.
+     * </p>
+     */
+    public function setExpiryDate(DateTime $value) : void
+    {
+        $this->getJavaClass()->setExpiryDate($value->getTimestamp() . "");
+    }
+
+    /**
+     * <p>
+     * Identifies lot or batch number. Lot/batch number must be alphanumeric string with up to 18 sybmols length. .
+     * </p>
+     */
+    public function getLotNumber() : string
+    {
+        return java_cast($this->getJavaClass()->getLotNumber(), "string");
+    }
+
+    /**
+     * <p>
+     * Identifies lot or batch number. Lot/batch number must be alphanumeric string with up to 18 sybmols length. .
+     * </p>
+     */
+    public function setLotNumber(?string $value) : void
+    {
+        if($value == null)
+            $value = "null";
+        $this->getJavaClass()->setLotNumber($value);
+    }
+
+    /**
+     * <p>
+     * Identifies serial number. Serial number must be alphanumeric string up to 18 sybmols length.
+     * </p>
+     */
+    public function getSerialNumber() : string
+    {
+        return java_cast($this->getJavaClass()->getSerialNumber(), "string");
+    }
+
+    /**
+     * <p>
+     * Identifies serial number. Serial number must be alphanumeric string up to 18 sybmols length.
+     * </p>
+     */
+    public function setSerialNumber(?string $value) : void
+    {
+        if($value == null)
+            $value = "null";
+        $this->getJavaClass()->setSerialNumber($value);
+    }
+
+    /**
+     * <p>
+     * Identifies date of manufacture.
+     * Date of manufacture can be set to DateTime.MinValue in order not to use this field.
+     * Default value: DateTime.MinValue
+     * </p>
+     */
+    public function getDateOfManufacture() : DateTime
+    {
+        return new DateTime('@' . java_cast($this->getJavaClass()->getDateOfManufacture(), "string"));
+    }
+
+    /**
+     * <p>
+     * Identifies date of manufacture.
+     * Date of manufacture can be set to DateTime.MinValue in order not to use this field.
+     * Default value: DateTime.MinValue
+     * </p>
+     */
+    public function setDateOfManufacture(DateTime $value) : void
+    {
+        $this->getJavaClass()->setDateOfManufacture($value->getTimestamp() . "");
+    }
+
+    /**
+     * <p>
+     * Identifies quantity, must be integer value from 0 to 500.
+     * Quantity can be set to -1 in order not to use this field.
+     * Default value: -1
+     * </p>
+     */
+    public function getQuantity() : int
+    {
+        return java_cast($this->getJavaClass()->getQuantity(), "integer");
+    }
+
+    /**
+     * <p>
+     * Identifies quantity, must be integer value from 0 to 500.
+     * Quantity can be set to -1 in order not to use this field.
+     * Default value: -1
+     * </p>
+     */
+    public function setQuantity(int $value) : void
+    {
+        $this->getJavaClass()->setQuantity($value);
+    }
+
+    /**
+     * <p>
+     * Converts data to string format according HIBC LIC specification.
+     * </p>
+     *
+     * @return Formatted string.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
+    }
+
+    /**
+     * <p>
+     * Instantiates secondary and additional supplemental data from string format according HIBC LIC specification.
+     * </p>
+     *
+     * @param secondaryDataCodetext Formatted string.
+     */
+    public function parseFromString(string $secondaryDataCodetext) : void
+    {
+        $this->getJavaClass()->parseFromString($secondaryDataCodetext);
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code SecondaryAndAdditionalData} value.
+     * </p>
+     *
+     * @param obj An {@code SecondaryAndAdditionalData} value to compare to this instance.
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     */
+    public function equals(SecondaryAndAdditionalData $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     *
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    protected function init() : void
+    {}
+}
+/**
  * 2D Mailmark Type defines size of Data Matrix barcode
  */
 class Mailmark2DType
@@ -2887,6 +4040,303 @@ class Mailmark2DType
      * 16 x 48 modules
      */
     const TYPE_29 = 3;
+}
+
+/**
+ * <p>
+ * Specifies the different types of date formats for HIBC LIC.
+ * </p>
+ */
+class HIBCLICDateFormat
+{
+    /**
+     * <p>
+     * YYYYMMDD format. Will be encoded in additional supplemental data.
+     * </p>
+     */
+    const YYYYMMDD = 0;
+    /**
+     * <p>
+     * MMYY format.
+     * </p>
+     */
+    const MMYY = 1;
+    /**
+     * <p>
+     * MMDDYY format.
+     * </p>
+     */
+    const MMDDYY = 2;
+    /**
+     * <p>
+     * YYMMDD format.
+     * </p>
+     */
+    const YYMMDD = 3;
+    /**
+     * <p>
+     * YYMMDDHH format.
+     * </p>
+     */
+    const YYMMDDHH = 4;
+    /**
+     * <p>
+     * Julian date format.
+     * </p>
+     */
+    const YYJJJ = 5;
+    /**
+     * <p>
+     * Julian date format with hours.
+     * </p>
+     */
+    const YYJJJHH = 6;
+    /**
+     * <p>
+     * Do not encode expiry date.
+     * </p>
+     */
+    const NONE =7;
+}
+
+/**
+ * <p>
+ * HIBC PAS data location types.
+ * </p>
+ */
+class HIBCPASDataLocation
+{
+    /**
+     * <p>
+     * A - Patient
+     * </p>
+     */
+    const PATIENT = 0;
+    /**
+     * <p>
+     * B - Patient Care Record
+     * </p>
+     */
+    const PATIENT_CARE_RECORD = 1;
+    /**
+     * <p>
+     * C - Specimen Container
+     * </p>
+     */
+    const SPECIMEN_CONTAINER = 2;
+    /**
+     * <p>
+     * D - Direct Patient Image Item
+     * </p>
+     */
+    const DIRECT_PATIENT_IMAGE_ITEM = 3;
+    /**
+     * <p>
+     * E - Business Record
+     * </p>
+     */
+    const BUSINESS_RECORD = 4;
+    /**
+     * <p>
+     * F - Medical Administration Record
+     * </p>
+     */
+    const MEDICAL_ADMINISTRATION_RECORD = 5;
+    /**
+     * <p>
+     * G - Library Reference Material
+     * </p>
+     */
+    const LIBRARY_REFERENCE_MATERIAL = 6;
+    /**
+     * <p>
+     * H - Devices and Materials
+     * </p>
+     */
+    const DEVICES_AND_MATERIALS = 7;
+    /**
+     * <p>
+     * I - Identification Card
+     * </p>
+     */
+    const IDENTIFICATION_CARD = 8;
+    /**
+     * <p>
+     * J - Product Container
+     * </p>
+     */
+    const PRODUCT_CONTAINER = 9;
+    /**
+     * <p>
+     * K - Asset data type
+     * </p>
+     */
+    const ASSET = 10;
+    /**
+     * <p>
+     * L - Surgical Instrument
+     * </p>
+     */
+    const SURGICAL_INSTRUMENT = 11;
+    /**
+     * <p>
+     * Z - User Defined
+     * </p>
+     */
+    const USER_DEFINED = 25;
+}
+
+/**
+ * <p>
+ * HIBC PAS record's data types.
+ * </p>
+ */
+class HIBCPASDataType
+{
+    /**
+     * <p>
+     * A - Labeler Identification Code
+     * </p>
+     */
+    const LABELER_IDENTIFICATION_CODE = 0;
+    /**
+     * <p>
+     * B - Service Identification
+     * </p>
+     */
+    const SERVICE_IDENTIFICATION = 1;
+    /**
+     * <p>
+     * C - Patient Identification
+     * </p>
+     */
+    const PATIENT_IDENTIFICATION = 2;
+    /**
+     * <p>
+     * D - Specimen Identification
+     * </p>
+     */
+    const SPECIMEN_IDENTIFICATION = 3;
+    /**
+     * <p>
+     * E - Personnel Identification
+     * </p>
+     */
+    const PERSONNEL_IDENTIFICATION = 4;
+    /**
+     * <p>
+     * F - Administrable Product Identification
+     * </p>
+     */
+    const ADMINISTRABLE_PRODUCT_IDENTIFICATION = 5;
+    /**
+     * <p>
+     * G - Implantable Product Information
+     * </p>
+     */
+    const IMPLANTABLE_PRODUCT_INFORMATION = 6;
+    /**
+     * <p>
+     * H - Hospital Item Identification
+     * </p>
+     */
+    const HOSPITAL_ITEM_IDENTIFICATION = 7;
+    /**
+     * <p>
+     * I - Medical Procedure Identification
+     * </p>
+     */
+    const MEDICAL_PROCEDURE_IDENTIFICATION = 8;
+    /**
+     * <p>
+     * J - Reimbursement Category
+     * </p>
+     */
+    const REIMBURSEMENT_CATEGORY = 9;
+    /**
+     * <p>
+     * K - Blood Product Identification
+     * </p>
+     */
+    const BLOOD_PRODUCT_IDENTIFICATION = 10;
+    /**
+     * <p>
+     * L - Demographic Data
+     * </p>
+     */
+    const DEMOGRAPHIC_DATA = 11;
+    /**
+     * <p>
+     * M - DateTime in YYYDDDHHMMG format
+     * </p>
+     */
+    const DATE_TIME = 12;
+    /**
+     * <p>
+     * N - Asset Identification
+     * </p>
+     */
+    const ASSET_IDENTIFICATION = 13;
+    /**
+     * <p>
+     * O - Purchase Order Number
+     * </p>
+     */
+    const PURCHASE_ORDER_NUMBER = 14;
+    /**
+     * <p>
+     * P - Dietary Item Identification
+     * </p>
+     */
+    const DIETARY_ITEM_IDENTIFICATION = 15;
+    /**
+     * <p>
+     * Q - Manufacturer Serial Number
+     * </p>
+     */
+    const MANUFACTURER_SERIAL_NUMBER = 16;
+    /**
+     * <p>
+     * R - Library Materials Identification
+     * </p>
+     */
+    const LIBRARY_MATERIALS_IDENTIFICATION = 17;
+    /**
+     * <p>
+     * S - Business Control Number
+     * </p>
+     */
+    const BUSINESS_CONTROL_NUMBER = 18;
+    /**
+     * <p>
+     * T - Episode of Care Identification
+     * </p>
+     */
+    const EPISODE_OF_CARE_IDENTIFICATION = 19;
+    /**
+     * <p>
+     * U - Health Industry Number
+     * </p>
+     */
+    const HEALTH_INDUSTRY_NUMBER = 20;
+    /**
+     * <p>
+     * V - Patient Visit ID
+     * </p>
+     */
+    const PATIENT_VISIT_ID = 21;
+    /**
+     * <p>
+     * X - XML Document
+     * </p>
+     */
+    const XML_DOCUMENT = 22;
+    /**
+     * <p>
+     * Z - User Defined
+     * </p>
+     */
+    const USER_DEFINED = 25;
 }
 
 ?>
