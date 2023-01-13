@@ -1,0 +1,33 @@
+To check the supplied examples the following software should be available:
+-PHP 7.0 or higher (https://www.php.net/downloads.php)
+-Java SE 8 or higher(https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html)
+Optionally
+-Java Bridge (https://sourceforge.net/projects/php-java-bridge/files/Binary%20package/php-java-bridge_7.2.1/exploded/JavaBridge.jar/download)
+
+JavaBridge.jar and Java.inc are the part of Java Bridge.
+
+The script for launching server is residet in folder java_side.
+The files which relevant to PHP side are collected in folder php_side.
+
+Launch examples procedure:
+1. Put the license file Aspose.BarCode.PHP.Java.lic to folder lic.
+If you launch examples without license the functionality will be partially restricted according to licensing rules.
+The expected license file name is Aspose.BarCode.PHP.Java.lic.
+If the license file has another name you should update the file name in the file examples.ini.
+2. Run JavaBridge server. The easiest way is to launch the script 'run-bridge.bat'.
+It will be launched on port 8999. If you wish to change the port number just appoint another port number in 'run-bridge.bat'.
+3. You can open file 'how_to_generate_and_read_example.php' and launch it from IDE.
+   Another option is to launch command (from inside the folder php_side):
+   php -n -dallow_url_include=On how_to_generate_and_read_example.php
+4. You can open file 'how_to_generate_barcode_examples.php' and launch it from IDE.
+Another option is to launch command:
+php -n -dallow_url_include=On how_to_generate_barcode_examples.php
+5. You can open file 'how_to_read_barcode_examples.php' and launch it from IDE.
+   Another option is to launch command:
+   php -n -dallow_url_include=On how_to_read_barcode_examples.php
+
+If you launch JavaBridge on port 8080 you can use statement 'require_once("Java.inc")'.
+The file 'Java.inc' should be in the same folder with your php example.
+If you're changing port to another then you should use statement
+'require_once("http://localhost:8083/JavaBridge/java/Java.inc")'.
+The statement 'require_once("http://localhost:8080/JavaBridge/java/Java.inc")' is also acceptable.
