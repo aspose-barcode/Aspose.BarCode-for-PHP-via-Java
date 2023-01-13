@@ -1,4 +1,4 @@
- <?php
+<?php
 define('nl', chr(10));
 
 function println(string $string = '')
