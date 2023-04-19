@@ -1,13 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"da/dc9/classPdf417ExtendedParameters.html#a12db0e1f9ad1bbfdfb507878ca875942":[0,0,96,15],
-"da/dc9/classPdf417ExtendedParameters.html#a1457bb95e9ad35970caaaa6e51b80c77":[0,0,96,9],
-"da/dc9/classPdf417ExtendedParameters.html#a17a20f36d9453ddd05e7513c171ef5ba":[0,0,96,4],
-"da/dc9/classPdf417ExtendedParameters.html#a23e14b9d2ef1ba9522cd398a13176743":[0,0,96,0],
-"da/dc9/classPdf417ExtendedParameters.html#a264c7345eb64c83446fded2fde8c2780":[0,0,96,16],
-"da/dc9/classPdf417ExtendedParameters.html#a36be1b931cf9933370fc47d62f339f0e":[0,0,96,3],
-"da/dc9/classPdf417ExtendedParameters.html#a4bb5e18222abce1e977aefa344c11158":[0,0,96,5],
-"da/dc9/classPdf417ExtendedParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,96,18],
 "da/dc9/classPdf417ExtendedParameters.html#a73a7f2d89334271fd6266670ec2385a9":[0,0,96,14],
 "da/dc9/classPdf417ExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,96,2],
 "da/dc9/classPdf417ExtendedParameters.html#ab886d44fd75f2fe279e9999d46c415e4":[0,0,96,13],
@@ -249,5 +241,13 @@ var NAVTREEINDEX5 =
 "dc/df2/classDataMatrixParameters.html#ab902bfac8ac474f915c04eff2da7dd19":[0,0,45,16],
 "dc/df2/classDataMatrixParameters.html#ac03e442b57114a5882b9995e28db2b07":[0,0,45,18],
 "dc/df2/classDataMatrixParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,45,11],
-"dc/df2/classDataMatrixParameters.html#adcc987db0a056744a40dbea4c9295f7e":[0,0,45,15]
+"dc/df2/classDataMatrixParameters.html#adcc987db0a056744a40dbea4c9295f7e":[0,0,45,15],
+"dc/df2/classDataMatrixParameters.html#ae0cd920edf5451a085aa4c95ef865905":[0,0,45,13],
+"dc/df2/classDataMatrixParameters.html#afd2b3b0ae23af787ce8cf5eec2ddf2f5":[0,0,45,7],
+"dd/d22/classMaxiCodeCodetext.html":[0,0,77],
+"dd/d22/classMaxiCodeCodetext.html#a053ce758e53144de1516899221e0a5e7":[0,0,77,7],
+"dd/d22/classMaxiCodeCodetext.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,77,3],
+"dd/d22/classMaxiCodeCodetext.html#a05f60aee18094c868eec259686e21871":[0,0,77,6],
+"dd/d22/classMaxiCodeCodetext.html#a264c7345eb64c83446fded2fde8c2780":[0,0,77,9],
+"dd/d22/classMaxiCodeCodetext.html#a34b7a338fd06fc74e70f5f238a5b4796":[0,0,77,8]
 };

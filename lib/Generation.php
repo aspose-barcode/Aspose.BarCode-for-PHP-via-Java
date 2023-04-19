@@ -249,8 +249,6 @@ class BarcodeParameters extends BaseJavaClass
 {
     private $xDimension;
     private $barHeight;
-    private $barCodeWidth;
-    private $barCodeHeight;
     private $codeTextParameters;
     private $postal;
     private $australianPost;
@@ -278,8 +276,6 @@ class BarcodeParameters extends BaseJavaClass
         {
             $this->xDimension = new Unit($this->getJavaClass()->getXDimension());
             $this->barHeight = new Unit($this->getJavaClass()->getBarHeight());
-            $this->barCodeWidth = new Unit($this->getJavaClass()->getBarCodeWidth());
-            $this->barCodeHeight = new Unit($this->getJavaClass()->getBarCodeHeight());
             $this->codeTextParameters = new CodetextParameters($this->getJavaClass()->getCodeTextParameters());
             $this->postal = new PostalParameters($this->getJavaClass()->getPostal());
             $this->australianPost = new AustralianPostParameters($this->getJavaClass()->getAustralianPost());
@@ -1013,6 +1009,26 @@ class BaseGenerationParameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * <p>
+     * Gets a value indicating whether is used anti-aliasing mode to render image
+     * </p>
+     */
+    public function getUseAntiAlias() : bool
+    {
+        return java_cast($this->getJavaClass()->getUseAntiAlias(), "boolean");
+    }
+
+    /**
+     * <p>
+     * Sets a value indicating whether is used anti-aliasing mode to render image
+     * </p>
+     */
+    public function setUseAntiAlias(bool $value) : void
+    {
+        $this->getJavaClass()->setUseAntiAlias($value);
     }
 
     /**

@@ -12,6 +12,7 @@ var classBaseGenerationParameters =
     [ "\u202AgetJavaClassName", "de/d44/classBaseGenerationParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetResolution", "de/d44/classBaseGenerationParameters.html#a9e62c5eed64fa3c4705640314efa43b1", null ],
     [ "\u202AgetRotationAngle", "de/d44/classBaseGenerationParameters.html#a96857b3ac8975c3d8bde691c1cdf4495", null ],
+    [ "\u202AgetUseAntiAlias", "de/d44/classBaseGenerationParameters.html#a5bd7a2ec96e7fabebd1e57adf9551f97", null ],
     [ "\u202Ainit", "de/d44/classBaseGenerationParameters.html#a38e47dc35f70ec90a5f7519ffbabdf8a", null ],
     [ "\u202AisNull", "de/d44/classBaseGenerationParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "de/d44/classBaseGenerationParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
@@ -24,5 +25,6 @@ var classBaseGenerationParameters =
     [ "\u202AsetImageWidth", "de/d44/classBaseGenerationParameters.html#a55bab1727db610209c23fe8d2731c178", null ],
     [ "\u202AsetJavaClass", "de/d44/classBaseGenerationParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetResolution", "de/d44/classBaseGenerationParameters.html#adb2f3105e64754fa24a93ce6b517eec0", null ],
-    [ "\u202AsetRotationAngle", "de/d44/classBaseGenerationParameters.html#af44a70c3c9d59082baf5b717746bcde5", null ]
+    [ "\u202AsetRotationAngle", "de/d44/classBaseGenerationParameters.html#af44a70c3c9d59082baf5b717746bcde5", null ],
+    [ "\u202AsetUseAntiAlias", "de/d44/classBaseGenerationParameters.html#a61670a412be57e9caa5904dd67d24182", null ]
 ];
