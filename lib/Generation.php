@@ -262,6 +262,7 @@ class BarcodeParameters extends BaseJavaClass
     private $pdf417;
     private $maxiCode;
     private $aztec;
+    private $code128;
     private $codabar;
     private $coupon;
     private $supplement;
@@ -289,6 +290,7 @@ class BarcodeParameters extends BaseJavaClass
             $this->pdf417 = new Pdf417Parameters($this->getJavaClass()->getPdf417());
             $this->maxiCode = new MaxiCodeParameters($this->getJavaClass()->getMaxiCode());
             $this->aztec = new AztecParameters($this->getJavaClass()->getAztec());
+            $this->code128 = new Code128Parameters($this->getJavaClass()->getCode128());
             $this->codabar = new CodabarParameters($this->getJavaClass()->getCodabar());
             $this->coupon = new CouponParameters($this->getJavaClass()->getCoupon());
             $this->supplement = new SupplementParameters($this->getJavaClass()->getSupplement());
@@ -948,6 +950,16 @@ class BarcodeParameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * <p>
+     * Code128 parameters.
+     * </p>
+     */
+    public function getCode128() : Code128Parameters
+    {
+        return $this->code128;
     }
 
     /**
@@ -5974,6 +5986,72 @@ class DotCodeExtCodetextBuilder extends ExtCodetextBuilder
 }
 
 /**
+ * Code128 parameters.
+ */
+class Code128Parameters extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    function init(): void
+    {
+    }
+
+    /**
+     * <p>
+     * Gets or sets a Code128 encode mode.
+     * Default value: Code128EncodeMode.Auto
+     * </p>
+     */
+    public function getCode128EncodeMode() : int
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->getCode128EncodeMode(), "integer");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+    /**
+     * <p>
+     * Gets or sets a Code128 encode mode.
+     * Default value: Code128EncodeMode.Auto
+     * </p>
+     */
+    public function setCode128EncodeMode(int $value)
+    {
+        try
+        {
+            $this->getJavaClass()->setCode128EncodeMode($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a human-readable string representation of this PatchCodeParameters.
+     * @return string A string that represents this PatchCodeParameters.
+     */
+    public function toString(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->toString(), "string");
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+/**
  * Class BarcodeClassifications EncodeTypes classification
  */
 final class BarcodeClassifications
@@ -7750,6 +7828,30 @@ class BarCodeImageFormat
      const SVG = 7;
 }
 
+
+/**
+ * Type of 2D component
+ * This sample shows how to create and save a GS1 Composite Bar image.
+ * Note that 1D codetext and 2D codetext are separated by symbol '/'
+ * <code>
+ * $codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8";
+ * $generator = new BarcodeGenerator(EncodeTypes::GS1_COMPOSITE_BAR, $codetext))
+ *
+ *     $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setLinearComponentType(EncodeTypes::GS1_CODE_128);
+ *     $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setTwoDComponentType(TwoDComponentType::CC_A);
+ *
+ *     // Aspect ratio of 2D component
+ *     $generator->getParameters()->getBarcode()->getPdf417()->setAspectRatio(3);
+ *     ///
+ *     // X-Dimension of 1D and 2D components
+ *     $generator->getParameters()->getBarcode()->getXDimension()->setPixels(3);
+ *     ///
+ *     // Height of 1D component
+ *     $generator->getParameters()->getBarcode()->getBarHeight()->setPixels(100);
+ *     ///
+ *     $generator->save("test.png", BarcodeImageFormat::PNG);
+ *
+ */
 class TwoDComponentType
 {
     /**
@@ -8049,5 +8151,76 @@ class DotCodeEncodeMode
      * </p>
      */
      const EXTENDED_CODETEXT = 2;
+}
+
+/**
+ * <p>
+ * Encoding mode for Code128 barcodes.
+ * {@code Code 128} specification.
+ * </p><p><hr><blockquote><pre>
+ * Thos code demonstrates how to generate code 128 with different encodings
+ * <pre>
+ *
+ * //Generate code 128 with ISO 15417 encoding
+ * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
+ * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::AUTO);
+ * $generator->Save("d:\\code128Auto.png", BarCodeImageFormat::Png);
+ * //Generate code 128 only with Codeset A encoding
+ * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
+ * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::CODE_A);
+ * $generator->Save("d:\\code128CodeA.png", BarCodeImageFormat::Png);
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class Code128EncodeMode
+{
+    /**
+     * <p>
+     * Encode codetext in classic ISO 15417 mode. The mode should be used in all ordinary cases.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * <p>
+     * Encode codetext only in 128A codeset.
+     * </p>
+     */
+    const CODE_A = 1;
+
+    /**
+     * <p>
+     * Encode codetext only in 128B codeset.
+     * </p>
+     */
+    const CODE_B = 2;
+
+    /**
+     * <p>
+     * Encode codetext only in 128C codeset.
+     * </p>
+     */
+    const CODE_C = 4;
+
+    /**
+     * <p>
+     * Encode codetext only in 128A and 128B codesets.
+     * </p>
+     */
+    const CODE_AB = 3;
+
+    /**
+     * <p>
+     * Encode codetext only in 128A and 128C codesets.
+     * </p>
+     */
+    const CODE_AC = 5;
+
+    /**
+     * <p>
+     * Encode codetext only in 128B and 128C codesets.
+     * </p>
+     */
+    const CODE_BC = 6;
 }
 ?>

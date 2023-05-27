@@ -8,6 +8,7 @@ var classBarcodeParameters =
     [ "\u202AgetChecksumAlwaysShow", "dd/dfd/classBarcodeParameters.html#a16be7c7ad11eec521593c188ec6ff334", null ],
     [ "\u202AgetCodabar", "dd/dfd/classBarcodeParameters.html#a48ae21d0292e4b147d8a072c55989449", null ],
     [ "\u202AgetCodablock", "dd/dfd/classBarcodeParameters.html#aa333ae68ea54a61658ecb94fa34ffae2", null ],
+    [ "\u202AgetCode128", "dd/dfd/classBarcodeParameters.html#a65887a4929f7eea40014299aff91eb66", null ],
     [ "\u202AgetCode16K", "dd/dfd/classBarcodeParameters.html#a8ca37bdb3b870c41a5c125caffd57b44", null ],
     [ "\u202AgetCodeTextParameters", "dd/dfd/classBarcodeParameters.html#a3c4d5e04e09995ec5801a5f413881d17", null ],
     [ "\u202AgetCoupon", "dd/dfd/classBarcodeParameters.html#ab94d4824d46312628d4cbc8dc90fae5d", null ],
