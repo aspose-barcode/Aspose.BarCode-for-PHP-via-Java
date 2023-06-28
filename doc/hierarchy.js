@@ -45,6 +45,7 @@ var hierarchy =
       [ "\u202AFontUnit", "d1/d76/classFontUnit.html", null ],
       [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", null ],
       [ "\u202AHIBCPASRecord", "d3/de4/classHIBCPASRecord.html", null ],
+      [ "\u202AHanXinParameters", "d0/d10/classHanXinParameters.html", null ],
       [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", [
         [ "\u202AHIBCLICComplexCodetext", "da/d57/classHIBCLICComplexCodetext.html", [
           [ "\u202AHIBCLICCombinedCodetext", "df/d90/classHIBCLICCombinedCodetext.html", null ],
@@ -114,6 +115,9 @@ var hierarchy =
     [ "\u202AFontMode", "dd/d60/classFontMode.html", null ],
     [ "\u202AFontStyle", "d4/d42/classFontStyle.html", null ],
     [ "\u202AGraphicsUnit", "da/d63/classGraphicsUnit.html", null ],
+    [ "\u202AHanXinEncodeMode", "d6/d56/classHanXinEncodeMode.html", null ],
+    [ "\u202AHanXinErrorLevel", "d4/dd3/classHanXinErrorLevel.html", null ],
+    [ "\u202AHanXinVersion", "d5/d05/classHanXinVersion.html", null ],
     [ "\u202AHIBCLICDateFormat", "d9/d6d/classHIBCLICDateFormat.html", null ],
     [ "\u202AHIBCPASDataLocation", "d8/dbf/classHIBCPASDataLocation.html", null ],
     [ "\u202AHIBCPASDataType", "d9/d1b/classHIBCPASDataType.html", null ],

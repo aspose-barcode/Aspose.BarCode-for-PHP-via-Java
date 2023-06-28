@@ -4515,6 +4515,16 @@ class DecodeType
     const HIBCQRPAS = 76;
 
     /**
+     *  Specifies that the data should be decoded with <b>Han Xin Code</b> blank specification
+     */
+    const HAN_XIN = 78;
+
+    /**
+     * Specifies that the data should be decoded with <b>Han Xin Code</b> blank specification
+     */
+    const GS_1_HAN_XIN =  79;
+
+    /**
      * Specifies that data will be checked with all of  1D  barcode symbologies
      */
     const TYPES_1D = 97;

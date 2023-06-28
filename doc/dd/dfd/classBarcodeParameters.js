@@ -18,6 +18,7 @@ var classBarcodeParameters =
     [ "\u202AgetEnableEscape", "dd/dfd/classBarcodeParameters.html#a4345654845622fb24d506225db334bda", null ],
     [ "\u202AgetFilledBars", "dd/dfd/classBarcodeParameters.html#ac6ba102ffcf013831e288be35063ceb8", null ],
     [ "\u202AgetGS1CompositeBar", "dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72", null ],
+    [ "\u202AgetHanXin", "dd/dfd/classBarcodeParameters.html#a32fdce5499d8988e8d518e10fb183554", null ],
     [ "\u202AgetITF", "dd/dfd/classBarcodeParameters.html#a600ec6ed80c0d5fd5ddc4c306cd35190", null ],
     [ "\u202AgetJavaClass", "dd/dfd/classBarcodeParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "dd/dfd/classBarcodeParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],

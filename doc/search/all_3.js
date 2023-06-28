@@ -19,7 +19,7 @@ var searchData=
   ['basejavaclass_54',['BaseJavaClass',['../de/d5e/classBaseJavaClass.html',1,'']]],
   ['below_55',['BELOW',['../d8/df0/classCodeLocation.html#a398b45dae24fdcc80774a80c0ce9dadd',1,'CodeLocation']]],
   ['big5_56',['Big5',['../d8/d37/classECIEncodings.html#a0ae0dbcad988f67ada6f2f749e2e303e',1,'ECIEncodings']]],
-  ['binary_57',['BINARY',['../d2/d92/classPdf417CompactionMode.html#a89eef78cce2843bba15873d135bbdcea',1,'Pdf417CompactionMode']]],
+  ['binary_57',['BINARY',['../d2/d92/classPdf417CompactionMode.html#a89eef78cce2843bba15873d135bbdcea',1,'Pdf417CompactionMode\BINARY()'],['../d6/d56/classHanXinEncodeMode.html#a3cf856f679c2ae8447b54a8b6bc43180',1,'HanXinEncodeMode\BINARY()']]],
   ['blood_5fproduct_5fidentification_58',['BLOOD_PRODUCT_IDENTIFICATION',['../d9/d1b/classHIBCPASDataType.html#a8845d80e123719f00412077308f88ca3',1,'HIBCPASDataType']]],
   ['bmp_59',['BMP',['../d7/d7c/classBarCodeImageFormat.html#adb38924e64207186adf50410c7da7e29',1,'BarCodeImageFormat']]],
   ['bold_60',['BOLD',['../d4/d42/classFontStyle.html#a3afe29fddc2dbc4bcc57474a3c7bbed0',1,'FontStyle']]],

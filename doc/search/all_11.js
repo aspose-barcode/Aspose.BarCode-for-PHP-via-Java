@@ -1,15 +1,15 @@
 var searchData=
 [
-  ['qr_661',['QR',['../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5',1,'EncodeTypes\QR()'],['../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7',1,'DecodeType\QR()']]],
-  ['qrbillstandardversion_662',['QrBillStandardVersion',['../d1/dff/classQrBillStandardVersion.html',1,'']]],
-  ['qrencodemode_663',['QREncodeMode',['../d9/d97/classQREncodeMode.html',1,'']]],
-  ['qrencodetype_664',['QREncodeType',['../d7/d8a/classQREncodeType.html',1,'']]],
-  ['qrerrorlevel_665',['QRErrorLevel',['../d3/d7d/classQRErrorLevel.html',1,'']]],
-  ['qrextcodetextbuilder_666',['QrExtCodetextBuilder',['../dd/dc2/classQrExtCodetextBuilder.html',1,'']]],
-  ['qrextendedparameters_667',['QRExtendedParameters',['../d6/daf/classQRExtendedParameters.html',1,'']]],
-  ['qrparameters_668',['QrParameters',['../da/ded/classQrParameters.html',1,'']]],
-  ['qrstructuredappendparameters_669',['QrStructuredAppendParameters',['../dc/da4/classQrStructuredAppendParameters.html',1,'']]],
-  ['qrversion_670',['QRVersion',['../d8/d37/classQRVersion.html',1,'']]],
-  ['quadrangle_671',['Quadrangle',['../d8/d57/classQuadrangle.html',1,'']]],
-  ['qualitysettings_672',['QualitySettings',['../d1/d04/classQualitySettings.html',1,'']]]
+  ['qr_678',['QR',['../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5',1,'EncodeTypes\QR()'],['../d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7',1,'DecodeType\QR()']]],
+  ['qrbillstandardversion_679',['QrBillStandardVersion',['../d1/dff/classQrBillStandardVersion.html',1,'']]],
+  ['qrencodemode_680',['QREncodeMode',['../d9/d97/classQREncodeMode.html',1,'']]],
+  ['qrencodetype_681',['QREncodeType',['../d7/d8a/classQREncodeType.html',1,'']]],
+  ['qrerrorlevel_682',['QRErrorLevel',['../d3/d7d/classQRErrorLevel.html',1,'']]],
+  ['qrextcodetextbuilder_683',['QrExtCodetextBuilder',['../dd/dc2/classQrExtCodetextBuilder.html',1,'']]],
+  ['qrextendedparameters_684',['QRExtendedParameters',['../d6/daf/classQRExtendedParameters.html',1,'']]],
+  ['qrparameters_685',['QrParameters',['../da/ded/classQrParameters.html',1,'']]],
+  ['qrstructuredappendparameters_686',['QrStructuredAppendParameters',['../dc/da4/classQrStructuredAppendParameters.html',1,'']]],
+  ['qrversion_687',['QRVersion',['../d8/d37/classQRVersion.html',1,'']]],
+  ['quadrangle_688',['Quadrangle',['../d8/d57/classQuadrangle.html',1,'']]],
+  ['qualitysettings_689',['QualitySettings',['../d1/d04/classQualitySettings.html',1,'']]]
 ];

@@ -41,13 +41,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/dd3/classCode128DataPortion.html#a05ed9335956ecce2efde24e07a0fcf7e",
-"d4/d26/classDecodeType.html#a956789de6d06adb5d0d6bc5d7b0cc94f",
-"d6/d0c/classMaxiCodeStructuredCodetext.html#a264c7345eb64c83446fded2fde8c2780",
-"d8/d37/classQRVersion.html#a113171c41a305e843f1855af363d744d",
-"da/dc1/classBorderParameters.html#ad8c9e383a93f8c52c3a2d8171ad5db2d",
-"dc/df2/classDataMatrixParameters.html#a5ec1827ffd294f5d780236ad4338aee0",
-"de/d9a/classSwissQRBill.html#a4ab1c842d3bc19aa4dc301db024fb350"
+"d1/dcc/classAztecParameters.html#a05ed9335956ecce2efde24e07a0fcf7e",
+"d4/d26/classDecodeType.html#a564ac6deef7cbb8f659c15911fc2972b",
+"d5/d0f/classEncodeTypes.html#a7312c32db1be9ae5a915fd5fcaea823b",
+"d7/d1b/classMaxiCodeEncodeMode.html#a0c5dcd093ece78b8d700c197ee955a62",
+"d8/df0/classCodeLocation.html",
+"dc/d1d/classAustralianPostParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b",
+"dd/dfd/classBarcodeParameters.html#a77bcd9216928a2e31724b63d7156d082",
+"df/ddc/classHIBCPASCodetext.html#a264c7345eb64c83446fded2fde8c2780"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
