@@ -41,14 +41,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/dcc/classAztecParameters.html#a05ed9335956ecce2efde24e07a0fcf7e",
-"d4/d26/classDecodeType.html#a564ac6deef7cbb8f659c15911fc2972b",
-"d5/d0f/classEncodeTypes.html#a7312c32db1be9ae5a915fd5fcaea823b",
-"d7/d1b/classMaxiCodeEncodeMode.html#a0c5dcd093ece78b8d700c197ee955a62",
-"d8/df0/classCodeLocation.html",
-"dc/d1d/classAustralianPostParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b",
-"dd/dfd/classBarcodeParameters.html#a77bcd9216928a2e31724b63d7156d082",
-"df/ddc/classHIBCPASCodetext.html#a264c7345eb64c83446fded2fde8c2780"
+"d1/dcc/classAztecParameters.html#a11f1afb817798b872249f9032a76d0a9",
+"d4/d26/classDecodeType.html#a5f86ea8448e78b2fc8cc44154e0f8e4c",
+"d5/d0f/classEncodeTypes.html#a4d26d7ddeaa8cc89dd94bb217368fac5",
+"d6/de0/classCode128Parameters.html#aa629988ac0fff47c08713188ebadafb6",
+"d8/dae/classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94",
+"db/d41/classDataMatrixVersion.html#a7c8c3b134a4f5882e6de275dfa300c04",
+"dd/d22/classMaxiCodeCodetext.html#a34b7a338fd06fc74e70f5f238a5b4796",
+"de/d9a/classSwissQRBill.html#ac4c34ebf18268116a187afa075c64a4a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

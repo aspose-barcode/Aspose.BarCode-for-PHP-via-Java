@@ -34,10 +34,12 @@ var hierarchy =
       [ "\u202ACouponParameters", "da/d5d/classCouponParameters.html", null ],
       [ "\u202ADataBarExtendedParameters", "d8/d71/classDataBarExtendedParameters.html", null ],
       [ "\u202ADataBarParameters", "db/d4c/classDataBarParameters.html", null ],
+      [ "\u202ADataMatrixExtendedParameters", "d4/dfa/classDataMatrixExtendedParameters.html", null ],
       [ "\u202ADataMatrixParameters", "dc/df2/classDataMatrixParameters.html", null ],
       [ "\u202ADotCodeExtendedParameters", "d1/d0b/classDotCodeExtendedParameters.html", null ],
       [ "\u202ADotCodeParameters", "de/de2/classDotCodeParameters.html", null ],
       [ "\u202AExtCodetextBuilder", "d0/dce/classExtCodetextBuilder.html", [
+        [ "\u202ADataMatrixExtCodetextBuilder", "d8/d2a/classDataMatrixExtCodetextBuilder.html", null ],
         [ "\u202ADotCodeExtCodetextBuilder", "d1/d82/classDotCodeExtCodetextBuilder.html", null ],
         [ "\u202AMaxiCodeExtCodetextBuilder", "de/dc3/classMaxiCodeExtCodetextBuilder.html", null ],
         [ "\u202AQrExtCodetextBuilder", "dd/dc2/classQrExtCodetextBuilder.html", null ]
@@ -103,6 +105,7 @@ var hierarchy =
     [ "\u202ACustomerInformationInterpretingType", "d5/d35/classCustomerInformationInterpretingType.html", null ],
     [ "\u202ADataMatrixEccType", "df/d47/classDataMatrixEccType.html", null ],
     [ "\u202ADataMatrixEncodeMode", "d1/d09/classDataMatrixEncodeMode.html", null ],
+    [ "\u202ADataMatrixVersion", "db/d41/classDataMatrixVersion.html", null ],
     [ "\u202ADecodeType", "d4/d26/classDecodeType.html", null ],
     [ "\u202ADotCodeEncodeMode", "df/d22/classDotCodeEncodeMode.html", null ],
     [ "\u202AECIEncodings", "d8/d37/classECIEncodings.html", null ],

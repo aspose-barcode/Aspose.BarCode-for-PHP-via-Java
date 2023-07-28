@@ -1,7 +1,7 @@
 var classMaxiCodeExtendedParameters =
 [
     [ "\u202A__construct", "d6/d16/classMaxiCodeExtendedParameters.html#a9e88af7bd9894caa788d12445a8b392d", null ],
-    [ "\u202Aequals", "d6/d16/classMaxiCodeExtendedParameters.html#af5943781179c2eebc31dc4e89e62a648", null ],
+    [ "\u202Aequals", "d6/d16/classMaxiCodeExtendedParameters.html#ae004d80d3ee4edcda684ba46f6804042", null ],
     [ "\u202AgetHashCode", "d6/d16/classMaxiCodeExtendedParameters.html#aabacbc2070b32411b8a0f5ff81caad61", null ],
     [ "\u202AgetJavaClass", "d6/d16/classMaxiCodeExtendedParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "d6/d16/classMaxiCodeExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],

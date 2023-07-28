@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.6</span>
+   &#160;<span id="projectnumber">23.7</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -98,10 +98,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a0eee1303b22dc74bb6f378c3b337c9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14f52ea3e3e8aadb1c0886eb6b3fa579"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#a14f52ea3e3e8aadb1c0886eb6b3fa579">ASCII</a> = 1</td></tr>
 <tr class="separator:a14f52ea3e3e8aadb1c0886eb6b3fa579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13d539deffbc223050836b0cd5052730"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#a13d539deffbc223050836b0cd5052730">FULL</a> = 6</td></tr>
-<tr class="separator:a13d539deffbc223050836b0cd5052730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c1c3a8373baa1d841b1c444b064f71"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#ab2c1c3a8373baa1d841b1c444b064f71">CUSTOM</a> = 7</td></tr>
-<tr class="separator:ab2c1c3a8373baa1d841b1c444b064f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe507531a62a0e8e9c73de98d7d1570"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#afbe507531a62a0e8e9c73de98d7d1570">BYTES</a> = 6</td></tr>
+<tr class="separator:afbe507531a62a0e8e9c73de98d7d1570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85d92989ad80f2578fcb9769991835c7"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#a85d92989ad80f2578fcb9769991835c7">C40</a> = 8</td></tr>
 <tr class="separator:a85d92989ad80f2578fcb9769991835c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1e6177bc289d72ef68e6cf9754abd5f"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#ad1e6177bc289d72ef68e6cf9754abd5f">TEXT</a> = 9</td></tr>
@@ -161,6 +159,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="afbe507531a62a0e8e9c73de98d7d1570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbe507531a62a0e8e9c73de98d7d1570">&#9670;&nbsp;</a></span>BYTES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataMatrixEncodeMode::BYTES = 6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Encode 8 bit values </p>
+
+</div>
+</div>
 <a id="a85d92989ad80f2578fcb9769991835c7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85d92989ad80f2578fcb9769991835c7">&#9670;&nbsp;</a></span>C40</h2>
 
@@ -173,21 +186,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Uses C40 encoding. Encodes Upper-case alphanumeric, Lower case and special characters </p>
-
-</div>
-</div>
-<a id="ab2c1c3a8373baa1d841b1c444b064f71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2c1c3a8373baa1d841b1c444b064f71">&#9670;&nbsp;</a></span>CUSTOM</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const DataMatrixEncodeMode::CUSTOM = 7</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p class="DocNodeLTR">Encode with the encoding specified in BarCodeBuilder.CodeTextEncoding </p>
 
 </div>
 </div>
@@ -224,21 +222,6 @@ Public Attributes</h2></td></tr>
 <div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText(<span class="stringliteral">&quot;My Text&quot;</span>);</div>
 <div class="line">$generator-&gt;save(<span class="stringliteral">&quot;test.png&quot;</span>, BarcodeImageFormat::PNG);</div>
 </div><!-- fragment --> 
-</div>
-</div>
-<a id="a13d539deffbc223050836b0cd5052730"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13d539deffbc223050836b0cd5052730">&#9670;&nbsp;</a></span>FULL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const DataMatrixEncodeMode::FULL = 6</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p class="DocNodeLTR">Encode 8 bit values </p>
-
 </div>
 </div>
 <a id="ad1e6177bc289d72ef68e6cf9754abd5f"></a>

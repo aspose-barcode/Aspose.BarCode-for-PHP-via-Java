@@ -2082,6 +2082,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     private $_dataBarParameters;
     private $_maxiCodeParameters;
     private $_dotCodeExtendedParameters;
+    private $_dataMatrixExtendedParameters;
 
     protected function init(): void
     {
@@ -2094,6 +2095,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
             $this->_dataBarParameters = new DataBarExtendedParameters($this->getJavaClass()->getDataBar());
             $this->_maxiCodeParameters = new MaxiCodeExtendedParameters($this->getJavaClass()->getMaxiCode());
             $this->_dotCodeExtendedParameters = new DotCodeExtendedParameters($this->getJavaClass()->getDotCode());
+            $this->_dataMatrixExtendedParameters = new DataMatrixExtendedParameters($this->getJavaClass()->getDataMatrix());
         }
         catch (Exception $ex)
         {
@@ -2137,6 +2139,14 @@ class BarCodeExtendedParameters extends BaseJavaClass
     public function getDotCode() : DotCodeExtendedParameters
     {
         return $this->_dotCodeExtendedParameters;
+    }
+
+    /**
+     * <p>Gets a DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode</p>Value: A DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode
+     */
+    public function getDataMatrix() : DataMatrixExtendedParameters
+    {
+        return $this->_dataMatrixExtendedParameters;
     }
 
     /**
@@ -3967,9 +3977,9 @@ class MaxiCodeExtendedParameters extends BaseJavaClass
      * @param object $obj An System.Object value to compare to this instance.
      * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
      */
-    public function equals($obj) : bool
+    public function equals(MaxiCodeExtendedParameters $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj), "integer");
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "integer");
     }
 
     /**
@@ -4080,6 +4090,109 @@ class DotCodeExtendedParameters extends BaseJavaClass
     protected function init() : void
     {
         // TODO: Implement init() method.
+    }
+}
+
+/**
+ * <p>
+ * Stores special data of DataMatrix recognized barcode
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to get DataMatrix raw values
+ * <pre>
+ * $generator = new BarcodeGenerator(EncodeTypes.DATA_MATRIX, "12345"))
+ * $generator->save("c:\\test.png", BarcodeImageFormat::PNG);
+ * 
+ * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::DATA_MATRIX))
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    echo("BarCode type: " . $result->getCodeTypeName());
+ *    echo("BarCode codetext: " . $result->getCodeText());
+ *    echo("DataMatrix barcode ID: " . $result->getExtended()->getDataMatrix()->getStructuredAppendBarcodeId());
+ *    echo("DataMatrix barcodes count: " . $result->getExtended()->getDataMatrix()->getStructuredAppendBarcodesCount());
+ *    echo("DataMatrix file ID: " . $result->getExtended()->getDataMatrix()->getStructuredAppendFileId());
+ *    echo("DataMatrix is reader programming: " . $result->getExtended()->getDataMatrix()->isReaderProgramming());
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class DataMatrixExtendedParameters extends BaseJavaClass
+{
+    public function construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    protected function init() : void
+    {
+    }
+
+    /**
+     * <p>Gets the DataMatrix structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.</p>Value: The count of the DataMatrix structured append mode barcode.
+     */
+    public function getStructuredAppendBarcodesCount() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
+    }
+
+    /**
+     * <p>Gets the ID of the DataMatrix structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.</p>Value: The ID of the DataMatrix structured append mode barcode.
+     */
+    public function getStructuredAppendBarcodeId()  : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
+    }
+
+    /**
+     * <p>Gets the ID of the DataMatrix structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.</p>Value: The ID of the DataMatrix structured append mode barcode.
+     */
+    public function getStructuredAppendFileId() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "integer");
+    }
+
+    /**
+     * <p>
+     * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
+     * Default value is false.
+     * </p>
+     */
+    public function isReaderProgramming() : bool
+    {
+        return java_cast($this->getJavaClass()->isReaderProgramming(), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code DataMatrixExtendedParameters} value.
+     * </p>
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param obj An System.Object value to compare to this instance.
+     */
+    public function equals(DataMatrixExtendedParameters $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code DataMatrixExtendedParameters}.
+     * </p>
+     * @return A string that represents this {@code DataMatrixExtendedParameters}.
+     */
+    public /*override*/ function toString() : String
+    {
+        return java_cast($this->getJavaClass()->toString(), "String");
     }
 }
 
