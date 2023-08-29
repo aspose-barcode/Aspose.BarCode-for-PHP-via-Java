@@ -689,7 +689,7 @@ final class ComplexCodetextReader
      * @return decoded HIBC LIC Complex Codetext or null.
      * @param encodedCodetext encoded codetext
      */
-    public static function tryDecodeHIBCLIC(string $encodedCodetext) : ?HIBCLICComplexCodetext
+    public static function tryDecodeHIBCLIC(?string $encodedCodetext) : ?HIBCLICComplexCodetext
     {
         $javaHIBCLICSecondaryAndAdditionalDataCodetextClass = java(HIBCLICSecondaryAndAdditionalDataCodetext::JAVA_CLASS_NAME);
         $javaHIBCLICPrimaryDataCodetextClass = java(HIBCLICPrimaryDataCodetext::JAVA_CLASS_NAME);

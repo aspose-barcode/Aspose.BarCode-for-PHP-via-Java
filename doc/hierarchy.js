@@ -47,6 +47,7 @@ var hierarchy =
       [ "\u202AFontUnit", "d1/d76/classFontUnit.html", null ],
       [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", null ],
       [ "\u202AHIBCPASRecord", "d3/de4/classHIBCPASRecord.html", null ],
+      [ "\u202AHanXinExtCodetextBuilder", "d7/d06/classHanXinExtCodetextBuilder.html", null ],
       [ "\u202AHanXinParameters", "d0/d10/classHanXinParameters.html", null ],
       [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", [
         [ "\u202AHIBCLICComplexCodetext", "da/d57/classHIBCLICComplexCodetext.html", [

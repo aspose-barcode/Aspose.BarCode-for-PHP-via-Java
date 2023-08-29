@@ -6394,6 +6394,207 @@ class DataMatrixExtCodetextBuilder extends ExtCodetextBuilder
 }
 
 /**
+ * <p>
+ * <p>Extended codetext generator for Han Xin Code for Extended Mode of HanXinEncodeMode</p>
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ *
+ * //Extended codetext mode
+ * //create codetext
+ * $codeTextBuilder = new HanXinExtCodetextBuilder();
+ * $codeTextBuilder->addGB18030TwoByte("漄");
+ * $codeTextBuilder->addGB18030FourByte("㐁");
+ * $codeTextBuilder->addCommonChineseRegionOne("全");
+ * $codeTextBuilder->addCommonChineseRegionTwo("螅");
+ * $codeTextBuilder->addNumeric("123");
+ * $codeTextBuilder->addText("qwe");
+ * $codeTextBuilder->addUnicode("ıntəˈnæʃənəl");
+ * $codeTextBuilder->addECI("ΑΒΓΔΕ", 9);
+ * $codeTextBuilder->addAuto("abc");
+ * $codeTextBuilder->addBinary("abc");
+ * $codeTextBuilder->addURI("backslashes_should_be_doubled\000555:test");
+ * $codeTextBuilder->addGS1("(01)03453120000011(17)191125(10)ABCD1234(21)10");
+ * $expectedStr = "漄㐁全螅123qweıntəˈnæʃənəlΑΒΓΔΕabcabcbackslashes_should_be_doubled\000555:test(01)03453120000011(17)191125(10)ABCD1234(21)10";
+ * //generate codetext
+ * $str = $codeTextBuilder->getExtendedCodetext();
+ * //generate
+ * $bg = new BarcodeGenerator(EncodeTypes::HAN_XIN, $str);
+ * $bg->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::EXTENDED);
+ * $img = $bg->generateBarCodeImage(BarcodeImageFormat::PNG);
+ * $r = new BarCodeReader($img, null, DecodeType::HAN_XIN))
+ * $found = $r->readBarCodes();
+ * Assert::assertEquals(1, sizeof(found));
+ * Assert::assertEquals($expectedStr, $found[0]->getCodeText());
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class HanXinExtCodetextBuilder extends BaseJavaClass
+{
+    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwHanXinExtCodetextBuilder";
+
+    function __construct()
+    {
+        try
+        {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    function init(): void
+    {
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in ECI mode
+     * </p>
+     * @param text Codetext string
+     * @param encoding ECI encoding in integer format
+     */
+    public function addECI(String $text, int $encoding) : void
+    {
+        $this->getJavaClass()->addECI($text, $encoding);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Auto mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addAuto(String $text) : void
+    {
+        $this->getJavaClass()->addAuto($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Binary mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addBinary(String $text) : void
+    {
+        $this->getJavaClass()->addBinary($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in URI mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addURI(String $text) : void
+    {
+        $this->getJavaClass()->addURI($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Text mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addText(String $text) : void
+    {
+        $this->getJavaClass()->addText($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Numeric mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addNumeric(String $text) : void
+    {
+        $this->getJavaClass()->addNumeric($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Unicode mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addUnicode(String $text) : void
+    {
+        $this->getJavaClass()->addUnicode($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Common Chinese Region One mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addCommonChineseRegionOne(String $text) : void
+    {
+        $this->getJavaClass()->addCommonChineseRegionOne($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Common Chinese Region Two mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addCommonChineseRegionTwo(String $text) : void
+    {
+        $this->getJavaClass()->addCommonChineseRegionTwo($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in GB18030 Two Byte mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addGB18030TwoByte(String $text) : void
+    {
+        $this->getJavaClass()->addGB18030TwoByte($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in GB18030 Four Byte mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addGB18030FourByte(String $text) : void
+    {
+        $this->getJavaClass()->addGB18030FourByte($text);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in GS1 mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addGS1(String $text) : void
+    {
+        $this->getJavaClass()->addGS1($text);
+    }
+
+    /**
+     * <p>
+     * Returns codetext from Extended mode codetext builder
+     * </p>
+     * @return Codetext in Extended mode
+     */
+    public function getExtendedCodetext() : String
+{
+        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+    }
+}
+
+/**
  * Class BarcodeClassifications EncodeTypes classification
  */
 final class BarcodeClassifications
@@ -8261,33 +8462,18 @@ class Pdf417MacroTerminator
  *
  * //Bytes mode
  * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
- *
- * //encode array to string
+ * //encode array to String
  * $strBld = "";
  * foreach($encodedArr as $bval)
- *     strBld.= bval;
+ * {
+ * $strBld .= $bval;
+ * }
  * $codetext = $strBld;
- *
- * $generator1 = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext))
+ * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
  * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode.BYTES);
- * $generator->save("test.bmp");
+ * $generator->save(ApiTests::folder."test2.bmp", BarCodeImageFormat::BMP);
  *
- * //Extended codetext mode
- * //create codetext
- * $textBuilder = new MaxiCodeExtCodetextBuilder();
- * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
- * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
- * $textBuilder->addPlainCodetext("Plain text");
- *
- * // generate codetext
- * $codetext = $textBuilder->getExtendedCodetext();
- *
- * //generate
- * $generator = new BarcodeGenerator(EncodeTypes::MaxiCode, $codetext);
- * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode::EXTENDED_CODETEXT);
- * $generator->getParameters()->getBarcode()->getMaxiCode()->setTwoDDisplayText("My Text");
- * $generator->save("test.bmp");
+
  * @endcode
  */
 class MaxiCodeEncodeMode

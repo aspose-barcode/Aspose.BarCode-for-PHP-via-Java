@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.7</span>
+   &#160;<span id="projectnumber">23.8</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -111,33 +111,16 @@ Public Attributes</h2></td></tr>
 <div class="line"> </div>
 <div class="line"><span class="comment">//Bytes mode</span></div>
 <div class="line">$encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">//encode array to string</span></div>
+<div class="line"><span class="comment">//encode array to String</span></div>
 <div class="line">$strBld = <span class="stringliteral">&quot;&quot;</span>;</div>
 <div class="line"><span class="keywordflow">foreach</span>($encodedArr as $bval)</div>
-<div class="line">    strBld.= bval;</div>
+<div class="line">{</div>
+<div class="line">$strBld .= $bval;</div>
+<div class="line">}</div>
 <div class="line">$codetext = $strBld;</div>
-<div class="line"> </div>
-<div class="line">$generator1 = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a353fc282a845181933c8c15da5dfed69">EncodeTypes::MAXI_CODE</a>, $codetext))</div>
-<div class="line">$generator-&gt;<a class="code" href="../../d0/dfb/classBarcodeGenerator.html#a39fc3308107500b478e37e1a5cfadd33">getParameters</a>()-&gt;getBarcode()-&gt;getMaxiCode()-&gt;setMaxiCodeEncodeMode(<a class="code" href="../../d7/d1b/classMaxiCodeEncodeMode.html">MaxiCodeEncodeMode</a>.<a class="code" href="../../d7/d1b/classMaxiCodeEncodeMode.html#a4b313037aed56e10fbc06542a22d9509">BYTES</a>);</div>
-<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;test.bmp&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">//Extended codetext mode</span></div>
-<div class="line"><span class="comment">//create codetext</span></div>
-<div class="line">$textBuilder = <span class="keyword">new</span> <a class="code" href="../../de/dc3/classMaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a>();</div>
-<div class="line">$textBuilder-&gt;addECICodetext(<a class="code" href="../../d8/d37/classECIEncodings.html#a8906beae4ace9f1432fc8afd4813f00d">ECIEncodings::Win1251</a>, <span class="stringliteral">&quot;Will&quot;</span>);</div>
-<div class="line">$textBuilder-&gt;addECICodetext(<a class="code" href="../../d8/d37/classECIEncodings.html#a4239e71d256c82cbe9fc6e86f0e747d1">ECIEncodings::UTF8</a>, <span class="stringliteral">&quot;犬Right狗&quot;</span>);</div>
-<div class="line">$textBuilder-&gt;addECICodetext(<a class="code" href="../../d8/d37/classECIEncodings.html#a1a3f5a261672624c437a7b1b996e950d">ECIEncodings::UTF16BE</a>, <span class="stringliteral">&quot;犬Power狗&quot;</span>);</div>
-<div class="line">$textBuilder-&gt;addPlainCodetext(<span class="stringliteral">&quot;Plain text&quot;</span>);</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// generate codetext</span></div>
-<div class="line">$codetext = $textBuilder-&gt;getExtendedCodetext();</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">//generate</span></div>
-<div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(EncodeTypes::MaxiCode, $codetext);</div>
-<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getMaxiCode()-&gt;setMaxiCodeEncodeMode(<a class="code" href="../../d7/d1b/classMaxiCodeEncodeMode.html#a13fade2cc129a44157d1c6bacc4cfe7c">MaxiCodeEncodeMode::EXTENDED_CODETEXT</a>);</div>
-<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getMaxiCode()-&gt;setTwoDDisplayText(<span class="stringliteral">&quot;My Text&quot;</span>);</div>
-<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;test.bmp&quot;</span>);</div>
+<div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a353fc282a845181933c8c15da5dfed69">EncodeTypes::MAXI_CODE</a>, $codetext);</div>
+<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getMaxiCode()-&gt;setMaxiCodeEncodeMode(<a class="code" href="../../d7/d1b/classMaxiCodeEncodeMode.html">MaxiCodeEncodeMode</a>.<a class="code" href="../../d7/d1b/classMaxiCodeEncodeMode.html#a4b313037aed56e10fbc06542a22d9509">BYTES</a>);</div>
+<div class="line">$generator-&gt;save(ApiTests::folder.<span class="stringliteral">&quot;test2.bmp&quot;</span>, <a class="code" href="../../d7/d7c/classBarCodeImageFormat.html#adb38924e64207186adf50410c7da7e29">BarCodeImageFormat::BMP</a>);</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a0c5dcd093ece78b8d700c197ee955a62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c5dcd093ece78b8d700c197ee955a62">&#9670;&nbsp;</a></span>AUTO</h2>

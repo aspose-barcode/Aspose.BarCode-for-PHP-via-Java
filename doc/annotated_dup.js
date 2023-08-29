@@ -67,6 +67,7 @@ var annotated_dup =
     [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", "dc/d33/classGS1CompositeBarParameters" ],
     [ "\u202AHanXinEncodeMode", "d6/d56/classHanXinEncodeMode.html", "d6/d56/classHanXinEncodeMode" ],
     [ "\u202AHanXinErrorLevel", "d4/dd3/classHanXinErrorLevel.html", "d4/dd3/classHanXinErrorLevel" ],
+    [ "\u202AHanXinExtCodetextBuilder", "d7/d06/classHanXinExtCodetextBuilder.html", "d7/d06/classHanXinExtCodetextBuilder" ],
     [ "\u202AHanXinParameters", "d0/d10/classHanXinParameters.html", "d0/d10/classHanXinParameters" ],
     [ "\u202AHanXinVersion", "d5/d05/classHanXinVersion.html", "d5/d05/classHanXinVersion" ],
     [ "\u202AHIBCLICCombinedCodetext", "df/d90/classHIBCLICCombinedCodetext.html", "df/d90/classHIBCLICCombinedCodetext" ],

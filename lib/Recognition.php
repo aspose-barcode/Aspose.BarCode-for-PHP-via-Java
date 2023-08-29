@@ -1082,19 +1082,11 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     }
 
     /**
-     * Tests whether all parameters has only default values
-     * Value: Returns { <b>true</b>} if all parameters has only default values; otherwise, { <b>false</b>}.
+     * <p>Used to instruct the reader to interpret the data contained within the symbol as programming for reader initialization.</p>Value: Reader initialization flag
      */
-    public function isEmpty(): bool
+    public function isReaderInitialization() : bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->isEmpty(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
     }
 
     /**
@@ -2910,6 +2902,28 @@ final class QualitySettings extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * <p>
+     * Allows engine using additional image restorations to recognize corrupted barcodes. At this time, it is used only in MicroPdf417 barcode type.
+     * </p>Value:
+     * Allows engine using additional image restorations to recognize corrupted barcodes.
+     */
+    public function getAllowAdditionalRestorations() : bool
+    {
+        return java_cast($this->getJavaClass()->getAllowAdditionalRestorations(), "boolean");
+    }
+
+    /**
+     * <p>
+     * Allows engine using additional image restorations to recognize corrupted barcodes. At this time, it is used only in MicroPdf417 barcode type.
+     * </p>Value:
+     * Allows engine using additional image restorations to recognize corrupted barcodes.
+     */
+    public function setAllowAdditionalRestorations(bool $value) : void
+    {
+        $this->getJavaClass()->setAllowAdditionalRestorations($value);
     }
 
     /**

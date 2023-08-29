@@ -2,6 +2,7 @@ var classQualitySettings =
 [
     [ "\u202A__construct", "d1/d04/classQualitySettings.html#a584b4f05e2288fdaa22dc3a8ae4c1d7f", null ],
     [ "\u202AapplyAll", "d1/d04/classQualitySettings.html#a94b22ec27526ba88bdf4c5c7f210fbf1", null ],
+    [ "\u202AgetAllowAdditionalRestorations", "d1/d04/classQualitySettings.html#ab034dfe489f31b51971a7160964ecdcd", null ],
     [ "\u202AgetAllowComplexBackground", "d1/d04/classQualitySettings.html#a926e8e4c8b2045b567f698418d5ed6ae", null ],
     [ "\u202AgetAllowDatamatrixIndustrialBarcodes", "d1/d04/classQualitySettings.html#ada9787a0faf03bae9fb5e7ce79e5aa82", null ],
     [ "\u202AgetAllowDecreasedImage", "d1/d04/classQualitySettings.html#ad4c15c06b72f8eb8cfc4884a15fd1cd8", null ],
@@ -28,6 +29,7 @@ var classQualitySettings =
     [ "\u202Ainit", "d1/d04/classQualitySettings.html#a0796c41639d2d13f4c982d182f8fffc9", null ],
     [ "\u202AisNull", "d1/d04/classQualitySettings.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d1/d04/classQualitySettings.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
+    [ "\u202AsetAllowAdditionalRestorations", "d1/d04/classQualitySettings.html#ad7d0c0b7b80e46533a5f08967d3e34bf", null ],
     [ "\u202AsetAllowComplexBackground", "d1/d04/classQualitySettings.html#a85c8ffbd4ad31e22973f1993009c0682", null ],
     [ "\u202AsetAllowDatamatrixIndustrialBarcodes", "d1/d04/classQualitySettings.html#a849e187b00ffe1e26cab1c4840353c46", null ],
     [ "\u202AsetAllowDecreasedImage", "d1/d04/classQualitySettings.html#a3c6fa6b60303d0e5e079f81da444ce0a", null ],

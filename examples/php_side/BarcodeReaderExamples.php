@@ -169,23 +169,6 @@ public function howToRecognitionCodeAllSupportedTypes2()
     }
 
 
-    public function howToDetectEncodingEnabled()
-    {
-        print("\nfunction '".__FUNCTION__."'\n");
-        $gen = new BarcodeGenerator(EncodeTypes::QR, null);
-        $gen->setCodeText("Слово");
-        $gen->getParameters()->getBarcode()->getQR()->setCodeTextEncoding("UTF-8");
-        $image = $gen->generateBarcodeImage(BarCodeImageFormat::PNG);
-
-        $reader = new BarCodeReader(($image), null, DecodeType::QR);
-        $reader->setDetectEncoding(true);
-        forEach($reader->readBarCodes() as $res)
-        {
-            print("CodeText : " . $res->getCodeText()."\n");
-            print("CodeType : " . $res->getCodeTypeName()."\n");
-        }
-    }
-
     public function howToCustomerInformationInterpretingType1()
     {
         print("\nfunction '".__FUNCTION__."'\n");
@@ -197,7 +180,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
         $generator->getParameters()->getImageHeight()->setPixels(150);
         $image = $generator->generateBarcodeImage(BarCodeImageFormat::PNG);
         $reader = new BarCodeReader(($image), null, DecodeType::AUSTRALIA_POST);
-        $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE);
+        $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE);
         forEach($reader->readBarCodes() as $res)
         {
             print("CodeText : " . $res->getCodeText()."\n");
@@ -216,7 +199,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
         $generator->getParameters()->getImageHeight()->setPixels(150);
         $image = $generator->generateBarcodeImage(BarCodeImageFormat::PNG);
         $reader = new BarCodeReader(($image), null, DecodeType::AUSTRALIA_POST);
-        $reader->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
+        $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
         forEach($reader->readBarCodes() as $res)
         {
             print("CodeText : " . $res->getCodeText()."\n");
@@ -236,6 +219,5 @@ $barcodeReaderTests->howToRecognitionCodeAllSupportedTypes();
 $barcodeReaderTests->howToRecognitionCodeAllSupportedTypes2();
 $barcodeReaderTests->howToRecognitionSetBarCodeImage();
 $barcodeReaderTests->howToMacroPdf417();
-$barcodeReaderTests->howToDetectEncodingEnabled();
 $barcodeReaderTests->howToCustomerInformationInterpretingType1();
 $barcodeReaderTests->howToCustomerInformationInterpretingType2();
