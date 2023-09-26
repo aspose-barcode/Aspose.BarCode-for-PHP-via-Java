@@ -15,6 +15,7 @@ var classPdf417ExtendedParameters =
     [ "\u202AgetMacroPdf417TimeStamp", "da/dc9/classPdf417ExtendedParameters.html#a077375ec6ed7ccd8fb2ee74865cc3940", null ],
     [ "\u202AhashCode", "da/dc9/classPdf417ExtendedParameters.html#ab886d44fd75f2fe279e9999d46c415e4", null ],
     [ "\u202Ainit", "da/dc9/classPdf417ExtendedParameters.html#a73a7f2d89334271fd6266670ec2385a9", null ],
+    [ "\u202AisLinked", "da/dc9/classPdf417ExtendedParameters.html#a4e804dcdb02a74d4d0e42254c94b2fbd", null ],
     [ "\u202AisNull", "da/dc9/classPdf417ExtendedParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AisReaderInitialization", "da/dc9/classPdf417ExtendedParameters.html#a2d09e75df7e69de0ee2d0dbd52e164b5", null ],
     [ "\u202AprintJavaClassName", "da/dc9/classPdf417ExtendedParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],

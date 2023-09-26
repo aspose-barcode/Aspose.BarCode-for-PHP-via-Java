@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.8</span>
+   &#160;<span id="projectnumber">23.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -190,7 +190,11 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 : <a class="el" href="de/d44/classBaseGenerationParameters.html#a214ed96ace5e4d2254e4d3ea6f04c01b">BaseGenerationParameters</a>
 </li>
 <li>getAztec()
-: <a class="el" href="dd/dfd/classBarcodeParameters.html#a3d4c4bd0dea8dd0944ebafd072c29108">BarcodeParameters</a>
+: <a class="el" href="dc/dc5/classBarCodeExtendedParameters.html#a7eddf9f131e00a25fdec839065c410c9">BarCodeExtendedParameters</a>
+, <a class="el" href="dd/dfd/classBarcodeParameters.html#a3d4c4bd0dea8dd0944ebafd072c29108">BarcodeParameters</a>
+</li>
+<li>getAztecEncodeMode()
+: <a class="el" href="d1/dcc/classAztecParameters.html#a4f586471fda88a104149176eafbf5b69">AztecParameters</a>
 </li>
 <li>getAztecErrorLevel()
 : <a class="el" href="d1/dcc/classAztecParameters.html#a69197e3ab1be48c17064cdf6c8ec20fa">AztecParameters</a>
@@ -446,7 +450,8 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 , <a class="el" href="de/de2/classDotCodeParameters.html#a06c2aa45bdad57c9df1fea943f3416a8">DotCodeParameters</a>
 </li>
 <li>getECIEncoding()
-: <a class="el" href="dc/df2/classDataMatrixParameters.html#a02b15e38fa1707a55b0e463ecf130de6">DataMatrixParameters</a>
+: <a class="el" href="d1/dcc/classAztecParameters.html#abd8731e8fb3633386aee811dc8870125">AztecParameters</a>
+, <a class="el" href="dc/df2/classDataMatrixParameters.html#a02b15e38fa1707a55b0e463ecf130de6">DataMatrixParameters</a>
 , <a class="el" href="de/de2/classDotCodeParameters.html#ad1818005a07432038071cc4d6f21c567">DotCodeParameters</a>
 , <a class="el" href="dd/d22/classMaxiCodeCodetext.html#adb7375fcc02c34690a842db34af0e613">MaxiCodeCodetext</a>
 , <a class="el" href="d6/dd0/classMaxiCodeParameters.html#a6264c3518377d9af88584507dfc27b1c">MaxiCodeParameters</a>
@@ -503,7 +508,8 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 : <a class="el" href="d8/dae/classBarCodeReader.html#aff425380baac223ec86c7e9a43aa990b">BarCodeReader</a>
 </li>
 <li>getGS1CompositeBar()
-: <a class="el" href="dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">BarcodeParameters</a>
+: <a class="el" href="dc/dc5/classBarCodeExtendedParameters.html#af3326ca73e85541ad0d9e642ad5cc38a">BarCodeExtendedParameters</a>
+, <a class="el" href="dd/dfd/classBarcodeParameters.html#afc9314cc8561b7967999670ddd9acd72">BarcodeParameters</a>
 </li>
 <li>getHanXin()
 : <a class="el" href="dd/dfd/classBarcodeParameters.html#a32fdce5499d8988e8d518e10fb183554">BarcodeParameters</a>
@@ -586,6 +592,9 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 </li>
 <li>getLabelerIdentificationCode()
 : <a class="el" href="d1/dc6/classPrimaryData.html#ab65adfddfccbb064c873e36940929a42">PrimaryData</a>
+</li>
+<li>getLayersCount()
+: <a class="el" href="d1/dcc/classAztecParameters.html#aaae3e94797cfbc1ecabe96ea109bab93">AztecParameters</a>
 </li>
 <li>getLeft()
 : <a class="el" href="d0/d63/classPadding.html#ab8d75c22f4087586e0b941ada62c3de8">Padding</a>
@@ -705,6 +714,12 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 </li>
 <li>getOneD()
 : <a class="el" href="dc/dc5/classBarCodeExtendedParameters.html#af8ef3725882fd7ad13d6f66c0a58fde4">BarCodeExtendedParameters</a>
+</li>
+<li>getOneDCodeText()
+: <a class="el" href="d6/ddf/classGS1CompositeBarExtendedParameters.html#a77b7e8bfd7b9cd69a05bc720a1825080">GS1CompositeBarExtendedParameters</a>
+</li>
+<li>getOneDType()
+: <a class="el" href="d6/ddf/classGS1CompositeBarExtendedParameters.html#acb67056d4190568f78aae28bc285d98b">GS1CompositeBarExtendedParameters</a>
 </li>
 <li>getPadding()
 : <a class="el" href="dd/dfd/classBarcodeParameters.html#a813ac187b05045f15197d24b1c2961f6">BarcodeParameters</a>
@@ -930,15 +945,21 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 : <a class="el" href="da/ded/classQrParameters.html#aaa65726b96c6b08a156ee88b2a0d4839">QrParameters</a>
 </li>
 <li>getStructuredAppendBarcodeId()
-: <a class="el" href="d4/dfa/classDataMatrixExtendedParameters.html#abd9a5d4e40f9f896108b2df605b7e7e5">DataMatrixExtendedParameters</a>
+: <a class="el" href="d4/d6c/classAztecExtendedParameters.html#a5b25d5a34c43373e580eb209631b12c6">AztecExtendedParameters</a>
+, <a class="el" href="d1/dcc/classAztecParameters.html#a2c142f8343aa0d2a9bdf6db95b0de208">AztecParameters</a>
+, <a class="el" href="d4/dfa/classDataMatrixExtendedParameters.html#abd9a5d4e40f9f896108b2df605b7e7e5">DataMatrixExtendedParameters</a>
 , <a class="el" href="dc/df2/classDataMatrixParameters.html#a4a218f514162d5316417a22f80fc2445">DataMatrixParameters</a>
 </li>
 <li>getStructuredAppendBarcodesCount()
-: <a class="el" href="d4/dfa/classDataMatrixExtendedParameters.html#a8735630d2b4815ba90450d116c7b7433">DataMatrixExtendedParameters</a>
+: <a class="el" href="d4/d6c/classAztecExtendedParameters.html#addbe65534f7c069483871f1d64531078">AztecExtendedParameters</a>
+, <a class="el" href="d1/dcc/classAztecParameters.html#aef9ceddb30c182f8da19df06383cebfc">AztecParameters</a>
+, <a class="el" href="d4/dfa/classDataMatrixExtendedParameters.html#a8735630d2b4815ba90450d116c7b7433">DataMatrixExtendedParameters</a>
 , <a class="el" href="dc/df2/classDataMatrixParameters.html#ad462bd66fd1693f83d05388c7fc41dab">DataMatrixParameters</a>
 </li>
 <li>getStructuredAppendFileId()
-: <a class="el" href="d4/dfa/classDataMatrixExtendedParameters.html#a938c4d04c22477d747e7cfe500337b22">DataMatrixExtendedParameters</a>
+: <a class="el" href="d4/d6c/classAztecExtendedParameters.html#adf363d4c4c8b0ce6ed039363585593a9">AztecExtendedParameters</a>
+, <a class="el" href="d1/dcc/classAztecParameters.html#a07f1d60d900539f090555558c0f55fcf">AztecParameters</a>
+, <a class="el" href="d4/dfa/classDataMatrixExtendedParameters.html#a938c4d04c22477d747e7cfe500337b22">DataMatrixExtendedParameters</a>
 , <a class="el" href="dc/df2/classDataMatrixParameters.html#ad1e970e0a3456ef7fe10c18c4d31b2b8">DataMatrixParameters</a>
 </li>
 <li>getStyle()
@@ -979,11 +1000,17 @@ $(document).ready(function(){initNavTree('functions_func_g.html',''); initResiza
 <li>getTown()
 : <a class="el" href="de/d6b/classAddress.html#af76596d91835729f8495b589b2eb8451">Address</a>
 </li>
+<li>getTwoDCodeText()
+: <a class="el" href="d6/ddf/classGS1CompositeBarExtendedParameters.html#a3bce6ae3a92eb197054301c4eecb5d66">GS1CompositeBarExtendedParameters</a>
+</li>
 <li>getTwoDComponentType()
 : <a class="el" href="dc/d33/classGS1CompositeBarParameters.html#a83c2755649f8c1b670122e5212254598">GS1CompositeBarParameters</a>
 </li>
 <li>getTwoDDisplayText()
 : <a class="el" href="d2/d94/classCodetextParameters.html#a4c64845161ad041d15111c9f778e9cf2">CodetextParameters</a>
+</li>
+<li>getTwoDType()
+: <a class="el" href="d6/ddf/classGS1CompositeBarExtendedParameters.html#a71fe25933f9df8703fd79fb66e7a5ee8">GS1CompositeBarExtendedParameters</a>
 </li>
 <li>getType()
 : <a class="el" href="de/d6b/classAddress.html#ad93811cd909ca5c15c4b8615b13c65e8">Address</a>

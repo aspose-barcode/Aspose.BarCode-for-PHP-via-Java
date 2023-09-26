@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.8</span>
+   &#160;<span id="projectnumber">23.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -124,13 +124,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a657e3148b4c9d6c9a872e254d4bc4c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p class="DocNodeLTR">Extended codetext generator for MaxiCode barcodes for ExtendedCodetext Mode of <a class="el" href="../../d7/d1b/classMaxiCodeEncodeMode.html">MaxiCodeEncodeMode</a> Use TwoDDisplayText property of <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a> to set visible text to removing managing characters.</p>
+<div class="textblock"><p class="DocNodeLTR">Extended codetext generator for MaxiCode barcodes for ExtendedCodetext Mode of MaxiCodeEncodeMode Use TwoDDisplayText property of <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a> to set visible text to removing managing characters.</p>
 <p class="DocNodeLTR">This sample shows how to use <a class="el" href="../../de/dc3/classMaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a> in Extended Mode.</p>
 <div class="fragment"><div class="line"><span class="comment">//create codetext</span></div>
 <div class="line">$textBuilder = <span class="keyword">new</span> <a class="code" href="../../de/dc3/classMaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a>();</div>
-<div class="line">$textBuilder-&gt;addECICodetext(<a class="code" href="../../d8/d37/classECIEncodings.html#a8906beae4ace9f1432fc8afd4813f00d">ECIEncodings::Win1251</a>, <span class="stringliteral">&quot;Will&quot;</span>);</div>
-<div class="line">$textBuilder-&gt;addECICodetext(<a class="code" href="../../d8/d37/classECIEncodings.html#a4239e71d256c82cbe9fc6e86f0e747d1">ECIEncodings::UTF8</a>, <span class="stringliteral">&quot;犬Right狗&quot;</span>);</div>
-<div class="line">$textBuilder-&gt;addECICodetext(<a class="code" href="../../d8/d37/classECIEncodings.html#a1a3f5a261672624c437a7b1b996e950d">ECIEncodings::UTF16BE</a>, <span class="stringliteral">&quot;犬Power狗&quot;</span>);</div>
+<div class="line">$textBuilder-&gt;addECICodetext(ECIEncodings::Win1251, <span class="stringliteral">&quot;Will&quot;</span>);</div>
+<div class="line">$textBuilder-&gt;addECICodetext(ECIEncodings::UTF8, <span class="stringliteral">&quot;犬Right狗&quot;</span>);</div>
+<div class="line">$textBuilder-&gt;addECICodetext(ECIEncodings::UTF16BE, <span class="stringliteral">&quot;犬Power狗&quot;</span>);</div>
 <div class="line">$textBuilder-&gt;addPlainCodetext(<span class="stringliteral">&quot;Plain text&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">//generate codetext</span></div>

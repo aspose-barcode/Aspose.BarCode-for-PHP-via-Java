@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.8</span>
+   &#160;<span id="projectnumber">23.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -115,8 +115,8 @@ Public Attributes</h2></td></tr>
  <pre>
  // Auto mode
  $codetext = "1234567890ABCDEFGabcdefg,Han Xin Code";
- $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a52fa942af0cd92ddfc8b44de8070a613">EncodeTypes.HAN_XIN</a>, codetext);
- generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
+ $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::HAN_XIN, codetext)</a>;
+ $generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
 
  // Bytes mode
  $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
@@ -127,22 +127,22 @@ Public Attributes</h2></td></tr>
      strBld.append((char) bval);
  $codetext = strBld.toString();
 
- $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a52fa942af0cd92ddfc8b44de8070a613">EncodeTypes.HAN_XIN</a>, codetext);
+ $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::HAN_XIN, codetext)</a>;
  $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getHanXin()-&gt;setHanXinEncodeMode(HanXinEncodeMode::BYTES);
- generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
+ $generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
 
  // ECI mode
  $codetext = "ΑΒΓΔΕ";
- $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a52fa942af0cd92ddfc8b44de8070a613">EncodeTypes.HAN_XIN</a>, codetext);
+ $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::HAN_XIN, codetext)</a>;
  $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getHanXin()-&gt;setHanXinEncodeMode(HanXinEncodeMode::ECI);
- $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getHanXin()-&gt;setHanXinECIEncoding(<a class="el" href="../../d8/d37/classECIEncodings.html#ab1756b124d67fdf5dc1c1320a4ca0795">ECIEncodings.ISO_8859_7</a>);
- generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
+ $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getHanXin()-&gt;setHanXinECIEncoding(ECIEncodings::ISO_8859_7);
+ $generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
 
  // URI mode
  $codetext = "https://www.test.com/%BC%DE%%%ab/search=test";
- $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a52fa942af0cd92ddfc8b44de8070a613">EncodeTypes.HAN_XIN</a>, codetext);
+ $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::HAN_XIN, codetext)</a>;
  $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getHanXin()-&gt;setHanXinEncodeMode(HanXinEncodeMode::URI);
- generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
+ $generator-&gt;save("test.bmp", BarcodeImageFormat::BMP);
 
  // Extended mode - TBD
  </pre> </pre></blockquote>

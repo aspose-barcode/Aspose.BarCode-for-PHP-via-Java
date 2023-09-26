@@ -42,13 +42,13 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d1/dcc/classAztecParameters.html",
-"d4/d26/classDecodeType.html#a5442ae81a752f0b43cefbfc2e57249b4",
-"d5/d0f/classEncodeTypes.html#a4aee1630839ea3550b643eb84e7e3626",
-"d6/de0/classCode128Parameters.html#a88dc1db5906ecc0ecd381db13eed913d",
-"d8/d71/classDataBarExtendedParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b",
-"db/d41/classDataMatrixVersion.html#a35d74b982eec2b45f65521d5dec4fe3c",
-"dc/df2/classDataMatrixParameters.html#a5ec1827ffd294f5d780236ad4338aee0",
-"de/d9a/classSwissQRBill.html#a0f843ba3797e4f1f8370862a68e6c458"
+"d4/d26/classDecodeType.html#a2d9a5f353df690d109bbcc164554742f",
+"d5/d05/classHanXinVersion.html#af117a3c067cacbd7123ccb6a5936f969",
+"d6/dbb/classMaxiCodeStandartSecondMessage.html#af7d68b95c990018bb91d95a500af158f",
+"d8/d8c/classLicense.html",
+"db/d41/classDataMatrixVersion.html#a4996afc59860833d8cfdf6ce43bfdf3e",
+"dc/df2/classDataMatrixParameters.html#a4a218f514162d5316417a22f80fc2445",
+"de/d9a/classSwissQRBill.html#a53dd5ae9fa78898b3378953af2aaabd3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

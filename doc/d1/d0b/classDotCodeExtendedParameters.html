@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.8</span>
+   &#160;<span id="projectnumber">23.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -137,7 +137,7 @@ This sample shows how to get DotCode raw values
 
 $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a402b334ccc3fc8c77f78a31a29a86fce">EncodeTypes::DOT_CODE</a>, "12345");
 {
-    $generator-&gt;save("c:\\test.png", <a class="el" href="../../d7/d7c/classBarCodeImageFormat.html#a07f661390cabae97572bc6db85b8640d">BarCodeImageFormat::PNG</a>);
+    $generator-&gt;save("c:\\test.png", BarCodeImageFormat::PNG);
 }
 $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("c:\\test.png", null, <a class="el" href="../../d4/d26/classDecodeType.html#a49fca12d9f612c844a125f43def7f6ab">DecodeType::DOT_CODE</a>);
 {

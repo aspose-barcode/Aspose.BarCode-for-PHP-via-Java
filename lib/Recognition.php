@@ -1090,6 +1090,14 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     }
 
     /**
+     * <p>Flag that indicates that the barcode must be linked to 1D barcode.</p>Value: Linkage flag
+     */
+    public function isLinked() : bool
+    {
+        return java_cast($this->getJavaClass()->isLinked(), "boolean");
+    }
+
+    /**
      * Returns a value indicating whether this instance is equal to a specified Pdf417ExtendedParameters value.
      *
      * @param Pdf417ExtendedParameters $obj An System.Object value to compare to this instance.
@@ -2065,6 +2073,11 @@ final class BarCodeRegionParameters extends BaseJavaClass
     }
 }
 
+/**
+ * <p>
+ * Stores extended parameters of recognized barcode
+ * </p>
+ */
 class BarCodeExtendedParameters extends BaseJavaClass
 {
     private $_oneDParameters;
@@ -2075,6 +2088,8 @@ class BarCodeExtendedParameters extends BaseJavaClass
     private $_maxiCodeParameters;
     private $_dotCodeExtendedParameters;
     private $_dataMatrixExtendedParameters;
+    private $_aztecExtendedParameters;
+    private $_gs1CompositeBarExtendedParameters;
 
     protected function init(): void
     {
@@ -2088,6 +2103,8 @@ class BarCodeExtendedParameters extends BaseJavaClass
             $this->_maxiCodeParameters = new MaxiCodeExtendedParameters($this->getJavaClass()->getMaxiCode());
             $this->_dotCodeExtendedParameters = new DotCodeExtendedParameters($this->getJavaClass()->getDotCode());
             $this->_dataMatrixExtendedParameters = new DataMatrixExtendedParameters($this->getJavaClass()->getDataMatrix());
+            $this->_aztecExtendedParameters = new AztecExtendedParameters($this->getJavaClass()->getAztec());
+            $this->_gs1CompositeBarExtendedParameters = new GS1CompositeBarExtendedParameters($this->getJavaClass()->getGS1CompositeBar());
         }
         catch (Exception $ex)
         {
@@ -2139,6 +2156,22 @@ class BarCodeExtendedParameters extends BaseJavaClass
     public function getDataMatrix() : DataMatrixExtendedParameters
     {
         return $this->_dataMatrixExtendedParameters;
+    }
+
+    /**
+     * <p>Gets a Aztec additional information{@code AztecExtendedParameters} of recognized barcode</p>Value: A Aztec additional information{@code AztecExtendedParameters} of recognized barcode
+     */
+    public function getAztec() : AztecExtendedParameters
+    {
+        return $this->_aztecExtendedParameters;
+    }
+    
+    /**
+     * <p>Gets a GS1CompositeBar additional information{@code GS1CompositeBarExtendedParameters} of recognized barcode</p>Value: A GS1CompositeBar additional information{@code GS1CompositeBarExtendedParameters} of recognized barcode
+     */
+    public function getGS1CompositeBar() : GS1CompositeBarExtendedParameters
+    {
+        return $this->_gs1CompositeBarExtendedParameters;
     }
 
     /**
@@ -3638,17 +3671,17 @@ class BarcodeSettings extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      * {
      *      echo ("BarCode CodeText: ".$result->getCodeText());
-     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
      * }
      * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::EAN_13);
      * //checksum enabled
      * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
      * foreach($reader->readBarCodes() as $result)
      * {
-     *      echo ("BarCode CodeText: " + $result->CodeText);
-     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
+     *      echo ("BarCode CodeText: " . $result->CodeText);
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
      * }
      * @endcode
      * @return int Enable checksum validation during recognition for 1D and Postal barcodes.
@@ -3682,17 +3715,17 @@ class BarcodeSettings extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      * {
      *      echo ("BarCode CodeText: ".$result->getCodeText());
-     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
      * }
      * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
      * //checksum enabled
      * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
      * foreach($reader->readBarCodes() as $result)
      * {
-     *      echo ("BarCode CodeText: " + $result->CodeText);
-     *      echo ("BarCode Value: " + $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " + $result->getExtended()->getOneD()->getCheckSum());
+     *      echo ("BarCode CodeText: " . $result->CodeText);
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
      * }
      * @endcode
      * @param int $value Enable checksum validation during recognition for 1D and Postal barcodes.
@@ -4131,7 +4164,7 @@ class DotCodeExtendedParameters extends BaseJavaClass
  */
 class DataMatrixExtendedParameters extends BaseJavaClass
 {
-    public function construct($javaClass)
+    public function __construct($javaClass)
     {
         parent::__construct($javaClass);
     }
@@ -4207,6 +4240,189 @@ class DataMatrixExtendedParameters extends BaseJavaClass
     public /*override*/ function toString() : String
     {
         return java_cast($this->getJavaClass()->toString(), "String");
+    }
+}
+
+/**
+ * <p>
+ * Stores special data of {@code <b>GS1 Composite Bar</b>} recognized barcode
+ * </p>
+ */
+class GS1CompositeBarExtendedParameters extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    protected function init() : void
+    {
+    }
+
+    /**
+     * <p>Gets the 1D (linear) barcode type of GS1 Composite</p>Value: 2D barcode type
+     */
+    public function getOneDType() : int
+    {
+        return java_cast($this->getJavaClass()->getOneDType(), "integer");
+    }
+
+    /**
+     * <p>Gets the 1D (linear) barcode value of GS1 Composite</p>Value: 1D barcode value
+     */
+    public function getOneDCodeText() : string
+    {
+        return java_cast($this->getJavaClass()->getOneDCodeText(), "string");
+    }
+
+    /**
+     * <p>Gets the 2D barcode type of GS1 Composite</p>Value: 2D barcode type
+     */
+    public function getTwoDType() : int
+    {
+        return java_cast($this->getJavaClass()->getTwoDType(), "integer");
+    }
+
+    /**
+     * <p>Gets the 2D barcode value of GS1 Composite</p>Value: 2D barcode value
+     */
+    public function getTwoDCodeText() : string
+    {
+        return java_cast($this->getJavaClass()->getTwoDCodeText(), "string");
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code GS1CompositeBarExtendedParameters} value.
+     * </p>
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param obj An System.Object value to compare to this instance.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code GS1CompositeBarExtendedParameters}.
+     * </p>
+     * @return A string that represents this {@code GS1CompositeBarExtendedParameters}.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
+    }
+}
+
+/**
+ * Stores special data of Aztec recognized barcode *
+ * This sample shows how to get Aztec raw values
+ *
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, "12345");
+ * $generator->save("test.png", BarcodeImageFormat::PNG);
+ *
+ * $reader = new BarCodeReader("test.png", null, DecodeType::AZTEC);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *     echo("BarCode type: " . $result->getCodeTypeName());
+ *     echo("BarCode codetext: " . $result->getCodeText());
+ *     echo("Aztec barcode ID: " . $result->getExtended()->getAztec()->getStructuredAppendBarcodeId());
+ *     echo("Aztec barcodes count: " . $result->getExtended()->getAztec()->getStructuredAppendBarcodesCount());
+ *     echo("Aztec file ID: " . $result->getExtended()->getAztec()->getStructuredAppendFileId());
+ *     echo("Aztec is reader initialization: " . $result->getExtended()->getAztec()->isReaderInitialization());
+ * }
+ * @endcode
+ */
+class AztecExtendedParameters extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    protected function init() : void
+    {
+    }
+    /**
+     * <p>Gets the Aztec structured append mode barcodes count. Default value is 0. Count must be a value from 1 to 26.</p>Value: The barcodes count of the Aztec structured append mode.
+     */
+    public function getStructuredAppendBarcodesCount() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
+    }
+
+    /**
+     * <p>Gets the ID of the Aztec structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is 0.</p>Value: The barcode ID of the Aztec structured append mode.
+     */
+    public function getStructuredAppendBarcodeId() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
+    }
+
+    /**
+     * <p>Gets the File ID of the Aztec structured append mode. Default value is empty string</p>Value: The File ID of the Aztec structured append mode.
+     */
+    public function getStructuredAppendFileId() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "integer");
+    }
+
+    /**
+     * <p>
+     * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
+     * Default value is false.
+     * </p>
+     */
+    public function isReaderInitialization() : bool
+    {
+        return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code AztecExtendedParameters} value.
+     * </p>
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param obj An System.Object value to compare to this instance.
+     */
+    public function equals($obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode() : int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code AztecExtendedParameters}.
+     * </p>
+     * @return A string that represents this {@code AztecExtendedParameters}.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
     }
 }
 
@@ -4399,6 +4615,13 @@ class DecodeType
      * Specifies that the data should be decoded with { <b>Aztec</b>} barcode specification
      */
     const AZTEC = 33;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>GS1 Aztec</b>} barcode specification
+     * </p>
+     */
+    const GS_1_AZTEC = 81;
 
     /**
      * Specifies that the data should be decoded with { <b>Pdf417</b>} barcode symbology
@@ -4650,6 +4873,13 @@ class DecodeType
      * Specifies that the data should be decoded with <b>Han Xin Code</b> blank specification
      */
     const GS_1_HAN_XIN =  79;
+
+    /**
+     * <p>
+     * Specifies that the data should be decoded with {@code <b>GS1 Composite Bar</b>} barcode specification
+     * </p>
+     */
+    const GS_1_COMPOSITE_BAR = 80;
 
     /**
      * Specifies that data will be checked with all of  1D  barcode symbologies

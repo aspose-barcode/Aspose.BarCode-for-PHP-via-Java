@@ -1,6 +1,6 @@
 var classDataMatrixExtendedParameters =
 [
-    [ "\u202Aconstruct", "d4/dfa/classDataMatrixExtendedParameters.html#ae8a1128f5f61de47ca1790731e6baf8d", null ],
+    [ "\u202A__construct", "d4/dfa/classDataMatrixExtendedParameters.html#a1e1f81a30ae6198818a9797a971a7b8c", null ],
     [ "\u202Aequals", "d4/dfa/classDataMatrixExtendedParameters.html#a8d9b08de487d8f462bca1c6a6d776270", null ],
     [ "\u202AgetJavaClass", "d4/dfa/classDataMatrixExtendedParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "d4/dfa/classDataMatrixExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],

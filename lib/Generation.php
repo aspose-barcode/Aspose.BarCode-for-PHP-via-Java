@@ -2367,7 +2367,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets the alignment of the code text.
+     * Gets the alignment of the code text.
      * Default value: TextAlignment::CENTER.
      */
     public function getAlignment(): int
@@ -2383,7 +2383,7 @@ class CodetextParameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets the alignment of the code text.
+     * Sets the alignment of the code text.
      * Default value: TextAlignment::CENTER.
      */
     public function setAlignment(int $value): void
@@ -2994,7 +2994,7 @@ class DataMatrixParameters extends BaseJavaClass
 
     /**
      * <p>
-     * Gets or sets a Datamatrix symbol size.
+     * Gets a Datamatrix symbol size.
      * Default value: DataMatrixVersion.Auto.
      * </p>
      */
@@ -3005,7 +3005,7 @@ class DataMatrixParameters extends BaseJavaClass
 
     /**
      * <p>
-     * Gets or sets a Datamatrix symbol size.
+     * Sets a Datamatrix symbol size.
      * Default value: DataMatrixVersion.Auto.
      * </p>
      */
@@ -3328,17 +3328,17 @@ class DataMatrixParameters extends BaseJavaClass
 
     /**
      * <p>
-     * Gets or sets ECI encoding. Used when DataMatrixEncodeMode is Auto.
+     * Gets ECI encoding. Used when DataMatrixEncodeMode is Auto.
      * Default value: ISO-8859-1
      * </p>
      */
-    public /*ECIEncodings*/function getECIEncoding() : int
+    public function getECIEncoding() : int
     {
         return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
     }
     /**
      * <p>
-     * Gets or sets ECI encoding. Used when DataMatrixEncodeMode is Auto.
+     * Sets ECI encoding. Used when DataMatrixEncodeMode is Auto.
      * Default value: ISO-8859-1
      * </p>
      */
@@ -3670,6 +3670,9 @@ class DotCodeParameters extends BaseJavaClass
     }
 }
 
+/**
+ * GS1 Composite bar parameters.
+ */
 class GS1CompositeBarParameters extends BaseJavaClass
 {
     protected function init(): void
@@ -3677,7 +3680,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
     }
 
     /**
-     * Linear component type
+     * Linear component type: GS1Code128, UPCE, EAN8, UPCA, EAN13, DatabarStacked, DatabarStackedOmniDirectional, DatabarLimited, DatabarOmniDirectional, DatabarExpanded, DatabarExpandedStacked
      */
     public function getLinearComponentType():int
     {
@@ -3685,7 +3688,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
     }
 
     /**
-     * Linear component type
+     * Linear component type: GS1Code128, UPCE, EAN8, UPCA, EAN13, DatabarStacked, DatabarStackedOmniDirectional, DatabarLimited, DatabarOmniDirectional, DatabarExpanded, DatabarExpandedStacked
      */
     public function setLinearComponentType(int $value): void
     {
@@ -3706,6 +3709,26 @@ class GS1CompositeBarParameters extends BaseJavaClass
     public function setTwoDComponentType(int $value) : void
     {
         $this->getJavaClass()->setTwoDComponentType($value);
+    }
+
+    /**
+     * <p>
+     * If this flag is set, it allows only GS1 encoding standard for GS1CompositeBar 2D Component
+     * </p>
+     */
+    public function isAllowOnlyGS1Encoding() : bool
+    {
+        return java_cast($this->getJavaClass()->isAllowOnlyGS1Encoding(), "bool");
+    }
+
+    /**
+     * <p>
+     * If this flag is set, it allows only GS1 encoding standard for GS1CompositeBar 2D Component
+     * </p>
+     */
+    public function setAllowOnlyGS1Encoding(bool $value) : void
+    {
+        $this->getJavaClass()->setAllowOnlyGS1Encoding($value);
     }
 
     /**
@@ -3739,7 +3762,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets an ITF border (bearer bar) thickness in Unit value.
+     * Gets an ITF border (bearer bar) thickness in Unit value.
      * Default value: 12pt.
      */
     public function getItfBorderThickness(): Unit
@@ -3755,7 +3778,7 @@ class ITFParameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets an ITF border (bearer bar) thickness in Unit value.
+     * Sets an ITF border (bearer bar) thickness in Unit value.
      * Default value: 12pt.
      */
     public function setItfBorderThickness(Unit $value): void
@@ -4186,7 +4209,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets Pdf417 symbology type of BarCode's error correction level
+     * Gets Pdf417 symbology type of BarCode's error correction level
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
      */
@@ -4203,7 +4226,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets Pdf417 symbology type of BarCode's error correction level
+     * Sets Pdf417 symbology type of BarCode's error correction level
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
      */
@@ -4554,7 +4577,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets macro Pdf417 file size.
+     * Gets macro Pdf417 file size.
      * @return int file size field contains the size in bytes of the entire source file.
      */
     public function getPdf417MacroFileSize(): int
@@ -4570,7 +4593,7 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     * Gets or sets macro Pdf417 file size.
+     * Sets macro Pdf417 file size.
      * @param int $value The file size field contains the size in bytes of the entire source file.
      */
     public function setPdf417MacroFileSize(int $value)
@@ -5081,150 +5104,260 @@ class MaxiCodeParameters extends BaseJavaClass
  */
 class AztecParameters extends BaseJavaClass
 {
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
 
     protected function init(): void
     {
     }
 
     /**
+     * <p>
+     * Gets a Aztec encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function getAztecEncodeMode() : int
+    {
+        return java_cast($this->getJavaClass()->getAztecEncodeMode(), "integer");
+    }
+
+    /**
+     * <p>
+     * Sets a Aztec encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function setAztecEncodeMode(int $value) : void
+    {
+        $this->getJavaClass()->setAztecEncodeMode($value);
+    }
+    
+    /**
+     * <p>
+     * Gets ECI encoding. Used when AztecEncodeMode is Auto.
+     * Default value: ISO-8859-1
+     * </p>
+     */
+    public function getECIEncoding() : int
+    {
+        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
+    }
+    /**
+     * <p>
+     * Gets ECI encoding. Used when AztecEncodeMode is Auto.
+     * Default value: ISO-8859-1
+     * </p>
+     */
+    public function setECIEncoding(int $value) : void
+    {
+        $this->getJavaClass()->setECIEncoding($value);
+    }
+
+    /**
+     * <p>
+     * Barcode ID for Structured Append mode of Aztec barcode. Barcode ID should be in range from 1 to barcodes count.
+     * Default value: 0
+     * </p>
+     */
+    public function getStructuredAppendBarcodeId() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
+    }
+    /**
+     * <p>
+     * Barcode ID for Structured Append mode of Aztec barcode. Barcode ID should be in range from 1 to barcodes count.
+     * Default value: 0
+     * </p>
+     */
+    public function setStructuredAppendBarcodeId(int $value) : void
+    {
+        $this->getJavaClass()->setStructuredAppendBarcodeId($value);
+    }
+
+    /**
+     * <p>
+     * Barcodes count for Structured Append mode of Aztec barcode. Barcodes count should be in range from 1 to 26.
+     * Default value: 0
+     * </p>
+     */
+    public function getStructuredAppendBarcodesCount() : int
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
+    }
+    /**
+     * <p>
+     * Barcodes count for Structured Append mode of Aztec barcode. Barcodes count should be in range from 1 to 26.
+     * Default value: 0
+     * </p>
+     */
+    public function setStructuredAppendBarcodesCount(int $value) : void
+    {
+        $this->getJavaClass()->setStructuredAppendBarcodesCount($value);
+    }
+
+    /**
+     * <p>
+     * File ID for Structured Append mode of Aztec barcode (optional field). File ID should not contain spaces.
+     * Default value: empty string
+     * </p>
+     */
+    public function getStructuredAppendFileId() : string
+    {
+        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "string");
+    }
+    /**
+     * <p>
+     * File ID for Structured Append mode of Aztec barcode (optional field). File ID should not contain spaces.
+     * Default value: empty string
+     * </p>
+     */
+    public function setStructuredAppendFileId(string $value) : void
+    {
+        $this->getJavaClass()->setStructuredAppendFileId($value);
+    }
+
+    /**
+     * <p>
      * Level of error correction of Aztec types of barcode.
-     * Value should between 10 to 95.
+     * Value should between 5 to 95.
+     * </p>
      */
-    public function getAztecErrorLevel(): int
+    public function getAztecErrorLevel() : int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAztecErrorLevel(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getAztecErrorLevel(), "integer");
     }
-
     /**
+     * <p>
      * Level of error correction of Aztec types of barcode.
-     * Value should between 10 to 95.
+     * Value should between 5 to 95.
+     * </p>
      */
-    public function setAztecErrorLevel(int $value): void
+    public function setAztecErrorLevel(int $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setAztecErrorLevel($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getJavaClass()->setAztecErrorLevel($value);
     }
 
     /**
-     * Gets or sets a Aztec Symbol mode.
-     * Default value: AztecSymbolMode::AUTO.
+     * <p>
+     * Gets a Aztec Symbol mode.
+     * Default value: AztecSymbolMode.Auto.
+     * </p>
      */
-    public function getAztecSymbolMode(): int
+    public function getAztecSymbolMode() : int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAztecSymbolMode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getAztecSymbolMode(), "integer");
+    }
+    /**
+     * <p>
+     * Sets a Aztec Symbol mode.
+     * Default value: AztecSymbolMode.Auto.
+     * </p>
+     */
+    public function setAztecSymbolMode(int $value) : void
+    {
+        $this->getJavaClass()->setAztecSymbolMode($value);
     }
 
     /**
-     * Gets or sets a Aztec Symbol mode.
-     * Default value: AztecSymbolMode::AUTO.
+     * <p>
+     * Gets layers count of Aztec symbol. Layers count should be in range from 1 to 3 for Compact mode and
+     * in range from 1 to 32 for Full Range mode.
+     * Default value: 0 (auto).
+     * </p>
      */
-    public function setAztecSymbolMode(int $value): void
+    public function getLayersCount() : int
     {
-        try
-        {
-            $this->getJavaClass()->setAztecSymbolMode($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getLayersCount(), "integer");
+    }
+    /**
+     * <p>
+     * Sets layers count of Aztec symbol. Layers count should be in range from 1 to 3 for Compact mode and
+     * in range from 1 to 32 for Full Range mode.
+     * Default value: 0 (auto).
+     * </p>
+     */
+    public function setLayersCount(int $value) : void
+    {
+        $this->getJavaClass()->setLayersCount($value);
     }
 
     /**
+     * <p>
+     * Used to instruct the reader to interpret the data contained within the symbol
+     * as programming for reader initialization.
+     * </p>
+     */
+    public function isReaderInitialization() : bool
+    {
+        return java_cast($this->getJavaClass()->isReaderInitialization(), "bool");
+    }
+
+    /**
+     * <p>
+     * Used to instruct the reader to interpret the data contained within the symbol
+     * as programming for reader initialization.
+     * </p>
+     */
+    public function setReaderInitialization(bool $value) : void
+    {
+    $this->getJavaClass()->setReaderInitialization($value);
+    }
+
+    /**
+     * <p>
      * Height/Width ratio of 2D BarCode module.
+     * </p>
      */
-    public function getAspectRatio(): int
+    public function getAspectRatio() : float
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getAspectRatio(), "float");
     }
-
     /**
+     * <p>
      * Height/Width ratio of 2D BarCode module.
+     * </p>
      */
-    public function setAspectRatio(int $value): void
+    public function setAspectRatio(float $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setAspectRatio($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getJavaClass()->setAspectRatio($value);
     }
 
     /**
+     * <p>
      * Gets the encoding of codetext.
+     * Default value: UTF-8
+     * </p>
      */
-    public function getCodeTextEncoding(): string
+    public function getCodeTextEncoding() : string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        console.log('This function is deprecated.');
+        return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
     }
 
     /**
+     * <p>
      * Sets the encoding of codetext.
+     * Default value: UTF-8
+     * </p>
      */
-    public function setCodeTextEncoding(string $value): void
+    public function setCodeTextEncoding(string $codeTextEncoding) : void
     {
-        try
-        {
-            $this->getJavaClass()->setCodeTextEncoding($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        console.log('This function is deprecated.');
+        $this->getJavaClass()->setCodeTextEncoding($codeTextEncoding);
     }
 
     /**
-     * Returns a human-readable string representation of this AztecParameters.
-     *
-     * @return string that represents this  AztecParameters.
+     * <p>
+     * Returns a human-readable string representation of this {@code AztecParameters}.
+     * </p>
+     * @return A string that represents this {@code AztecParameters}.
      */
-    public function toString(): string
+    public function toString() : string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->toString(), "string");
     }
 }
 
@@ -6140,7 +6273,7 @@ class Code128Parameters extends BaseJavaClass
 
     /**
      * <p>
-     * Gets or sets a Code128 encode mode.
+     * Gets a Code128 encode mode.
      * Default value: Code128EncodeMode.Auto
      * </p>
      */
@@ -6157,7 +6290,7 @@ class Code128Parameters extends BaseJavaClass
     }
     /**
      * <p>
-     * Gets or sets a Code128 encode mode.
+     * Sets a Code128 encode mode.
      * Default value: Code128EncodeMode.Auto
      * </p>
      */
@@ -7723,6 +7856,13 @@ class EncodeTypes
     const  AZTEC = 35;
 
     /**
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>GS1 Aztec</b>} barcode specification. The codetext must contains parentheses for AI.
+     * </p>
+     */
+    const GS_1_AZTEC = 81;
+
+    /**
      * Specifies that the data should be encoded with Pdf417 barcode specification
      */
     const  PDF_417 = 36;
@@ -8053,6 +8193,8 @@ class EncodeTypes
 
         else if($encodeTypeName == "AZTEC") return 35;
 
+        else if($encodeTypeName == "GS_1_AZTEC") return 81;
+        
         else if($encodeTypeName == "PDF_417") return 36;
 
         else if($encodeTypeName == "MACRO_PDF_417") return 37;
@@ -8144,6 +8286,57 @@ class EncodeTypes
         else if($encodeTypeName == "GS_1_HAN_XIN") return 80;
 
         else return -1;
+    }
+}
+
+/**
+ * <p>
+ * <p>Extended codetext generator for Aztec barcodes for ExtendedCodetext Mode of AztecEncodeMode</p>
+ * <p>Use TwoDDisplayText property of BarcodeGenerator to set visible text to removing managing characters.</p>
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to use AztecExtCodetextBuilder in Extended Mode.
+ * <pre>
+ * @code
+ * //create codetext
+ * $textBuilder = new AztecExtCodetextBuilder();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, $codetext);
+ * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setwoDDisplayText("My Text");
+ * $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ */
+class AztecExtCodetextBuilder extends ExtCodetextBuilder
+{
+    private const  JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwAztecExtCodetextBuilder";
+
+    public function __construct()
+    {
+        try {
+            $java_class = new java(self::JAVA_CLASS_NAME);
+            parent::__construct($java_class);
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+    
+    public function init() : void
+    {
+    }
+
+    /**
+     * <p>
+     * Generates Extended codetext from the extended codetext list.
+     * </p>
+     * @return Extended codetext as string
+     */
+    public function getExtendedCodetext() : string
+    {
+        return $this->getJavaClass()->getExtendedCodetext();
     }
 }
 
@@ -9321,8 +9514,8 @@ class HanXinErrorLevel
  *  <pre>
  *  // Auto mode
  *  $codetext = "1234567890ABCDEFGabcdefg,Han Xin Code";
- *  $generator = new BarcodeGenerator(EncodeTypes.HAN_XIN, codetext);
- *  generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
  *
  *  // Bytes mode
  *  $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
@@ -9333,22 +9526,22 @@ class HanXinErrorLevel
  *      strBld.append((char) bval);
  *  $codetext = strBld.toString();
  *
- *  $generator = new BarcodeGenerator(EncodeTypes.HAN_XIN, codetext);
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
  *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::BYTES);
- *  generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
  *
  *  // ECI mode
  *  $codetext = "ΑΒΓΔΕ";
- *  $generator = new BarcodeGenerator(EncodeTypes.HAN_XIN, codetext);
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
  *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::ECI);
- *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinECIEncoding(ECIEncodings.ISO_8859_7);
- *  generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinECIEncoding(ECIEncodings::ISO_8859_7);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
  *
  *  // URI mode
  *  $codetext = "https://www.test.com/%BC%DE%%%ab/search=test";
- *  $generator = new BarcodeGenerator(EncodeTypes.HAN_XIN, codetext);
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
  *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::URI);
- *  generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
  *
  *  // Extended mode - TBD
  *  </pre>
@@ -9831,5 +10024,77 @@ class DataMatrixVersion
      * </p>
      */
     const DMRE_26x64 = 70;
+}
+
+/**
+ * <p>
+ * Encoding mode for Aztec barcodes.
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ *
+ * @code
+ * //Auto mode
+ * $codetext = "犬Right狗";
+ * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, $codetext);
+ * $generator->getParameters()->getBarcode()->getAztec()->setECIEncoding(ECIEncodings::UTF_8);
+ * $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ * @code
+ * //Bytes mode
+ * $encodedArr = [0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9];
+ * //encode array to string
+ * $strBld = "";
+ * foreach($encodedArr as bval)
+ *     $strBld->append(chr(bval));
+ * $codetext = $strBld->toString();
+ * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, $codetext);
+ * $generator->getParameters()->getBarcode()->getAztec()->setAztecEncodeMode(AztecEncodeMode::BYTES);
+ * $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ * @code
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new AztecExtCodetextBuilder();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, codetext);
+ * $generator->getParameters()->getBarcode()->getAztec()->setAztecEncodeMode(AztecEncodeMode::EXTENDED_CODETEXT);
+ * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ * $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class AztecEncodeMode
+{
+    /**
+     * <p>
+     * Encode codetext with value set in the ECIEncoding property.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * <p>
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     * </p>
+     */
+    const BYTES = 1;
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use AztecExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     */
+    const EXTENDED_CODETEXT = 2;
 }
 ?>

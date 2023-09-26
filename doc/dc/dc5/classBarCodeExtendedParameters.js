@@ -2,10 +2,12 @@ var classBarCodeExtendedParameters =
 [
     [ "\u202A__construct", "dc/dc5/classBarCodeExtendedParameters.html#ac84018031d98c3b4663b167468f39640", null ],
     [ "\u202Aequals", "dc/dc5/classBarCodeExtendedParameters.html#ad84a2a2499f04e853a526e141493033b", null ],
+    [ "\u202AgetAztec", "dc/dc5/classBarCodeExtendedParameters.html#a7eddf9f131e00a25fdec839065c410c9", null ],
     [ "\u202AgetCode128", "dc/dc5/classBarCodeExtendedParameters.html#ab4a1ea35e5597ff164d7c1eb869fb0ce", null ],
     [ "\u202AgetDataBar", "dc/dc5/classBarCodeExtendedParameters.html#a67685a5a87d5e757b70f2344e5526540", null ],
     [ "\u202AgetDataMatrix", "dc/dc5/classBarCodeExtendedParameters.html#a094203948a7ed6658d15d4c68fb1de39", null ],
     [ "\u202AgetDotCode", "dc/dc5/classBarCodeExtendedParameters.html#a8d002eab9fb1f63cdfefa40abcfc9c9b", null ],
+    [ "\u202AgetGS1CompositeBar", "dc/dc5/classBarCodeExtendedParameters.html#af3326ca73e85541ad0d9e642ad5cc38a", null ],
     [ "\u202AgetJavaClass", "dc/dc5/classBarCodeExtendedParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "dc/dc5/classBarCodeExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetMaxiCode", "dc/dc5/classBarCodeExtendedParameters.html#a29470d9a9b15a2ef7a8ab1ea9866b22a", null ],

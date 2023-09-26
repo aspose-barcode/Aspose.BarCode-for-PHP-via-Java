@@ -29,6 +29,7 @@ var classEncodeTypes =
     [ "\u202AEAN_13", "d5/d0f/classEncodeTypes.html#a036247fd98d10ee2b9422c6f246b029b", null ],
     [ "\u202AEAN_14", "d5/d0f/classEncodeTypes.html#a648c6b1fc293a4140b06825b1bcee509", null ],
     [ "\u202AEAN_8", "d5/d0f/classEncodeTypes.html#a5c87e168095a00f14e6c8464bdcadf98", null ],
+    [ "\u202AGS_1_AZTEC", "d5/d0f/classEncodeTypes.html#a4dc88d02b3c29e674d5ae3f6df71222c", null ],
     [ "\u202AGS_1_CODABLOCK_F", "d5/d0f/classEncodeTypes.html#aa5a8dbad9d276a2e8575df1045349d6d", null ],
     [ "\u202AGS_1_CODE_128", "d5/d0f/classEncodeTypes.html#a1e8684410a29a9a17837984e655c69a7", null ],
     [ "\u202AGS_1_COMPOSITE_BAR", "d5/d0f/classEncodeTypes.html#ae696dc46ecf27750d4f0d9083d70f522", null ],

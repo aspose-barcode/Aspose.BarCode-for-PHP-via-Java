@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.8</span>
+   &#160;<span id="projectnumber">23.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -154,11 +154,11 @@ Protected Member Functions</h2></td></tr>
 //create codetext
 $textBuilder = new <a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html">DotCodeExtCodetextBuilder()</a>;
 $textBuilder-&gt;<a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html#a2864ff53a34566ca81c9a9bd600c8c5f">addFNC1FormatIdentifier()</a>;
-$textBuilder-&gt;addECICodetext(<a class="el" href="../../d8/d37/classECIEncodings.html#a8906beae4ace9f1432fc8afd4813f00d">ECIEncodings::Win1251</a>, "Will");
+$textBuilder-&gt;addECICodetext(ECIEncodings::Win1251, "Will");
 $textBuilder-&gt;<a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html#a2864ff53a34566ca81c9a9bd600c8c5f">addFNC1FormatIdentifier()</a>;
-$textBuilder-&gt;addECICodetext(<a class="el" href="../../d8/d37/classECIEncodings.html#a4239e71d256c82cbe9fc6e86f0e747d1">ECIEncodings::UTF8</a>, "犬Right狗");
+$textBuilder-&gt;addECICodetext(ECIEncodings::UTF8, "犬Right狗");
 $textBuilder-&gt;<a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html#a2864ff53a34566ca81c9a9bd600c8c5f">addFNC1FormatIdentifier()</a>;
-$textBuilder-&gt;addECICodetext(<a class="el" href="../../d8/d37/classECIEncodings.html#a1a3f5a261672624c437a7b1b996e950d">ECIEncodings::UTF16BE</a>, "犬Power狗");
+$textBuilder-&gt;addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
 $textBuilder-&gt;addPlainCodetext("Plain text");
 $textBuilder-&gt;<a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html#afcb63dd70c59f1f64dc8d1a81519bee2">addFNC3SymbolSeparator()</a>;
 $textBuilder-&gt;<a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html#a4894e86de3b9dac8b568c28947bbf54e">addFNC3ReaderInitialization()</a>;
@@ -169,7 +169,7 @@ $codetext = $textBuilder-&gt;<a class="el" href="../../d1/d82/classDotCodeExtCod
 $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a402b334ccc3fc8c77f78a31a29a86fce">EncodeTypes::DOT_CODE</a>, $codetext);
 {
     $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
-       $generator-&gt;save("test.bmp", <a class="el" href="../../d7/d7c/classBarCodeImageFormat.html#adb38924e64207186adf50410c7da7e29">BarCodeImageFormat::BMP</a>);
+       $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
 }
 </pre> </pre></blockquote>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

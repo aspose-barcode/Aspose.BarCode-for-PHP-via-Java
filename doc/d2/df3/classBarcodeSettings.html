@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.8</span>
+   &#160;<span id="projectnumber">23.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -236,17 +236,17 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
 <div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
 <div class="line">}</div>
 <div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;c:\\test.png&quot;</span>, <span class="keyword">null</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>);</div>
 <div class="line"><span class="comment">//checksum enabled</span></div>
 <div class="line">$reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(<a class="code" href="../../d1/d68/classChecksumValidation.html#a06a83657c4a45e3ee746800324d06c3a">ChecksumValidation::ON</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> + $result-&gt;CodeText);</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> . $result-&gt;CodeText);</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
 <div class="line">}</div>
 </div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>&#x202A;int Enable checksum validation during recognition for 1D and Postal barcodes. </dd></dl>
 
@@ -474,17 +474,17 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
 <div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
 <div class="line">}</div>
 <div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">@&quot;c:\test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#aebddc7f0fefc6850faab01884bd42e1d">DecodeType::EAN_13</a>);</div>
 <div class="line"><span class="comment">//checksum enabled</span></div>
 <div class="line">$reader-&gt;getBarcodeSettings()-&gt;setChecksumValidation(<a class="code" href="../../d1/d68/classChecksumValidation.html#a06a83657c4a45e3ee746800324d06c3a">ChecksumValidation::ON</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> + $result-&gt;CodeText);</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
-<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> + $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span> . $result-&gt;CodeText);</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Value: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getValue());</div>
+<div class="line">     echo (<span class="stringliteral">&quot;BarCode Checksum: &quot;</span> . $result-&gt;getExtended()-&gt;getOneD()-&gt;getCheckSum());</div>
 <div class="line">}</div>
 </div><!-- fragment --> <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
