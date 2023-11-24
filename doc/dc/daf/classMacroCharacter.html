@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">23.10</span>
+   &#160;<span id="projectnumber">23.11</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -101,7 +101,33 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a546f044e22391fb261943732cfc2b400"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/daf/classMacroCharacter.html#a546f044e22391fb261943732cfc2b400">MACRO_06</a> = 6</td></tr>
 <tr class="separator:a546f044e22391fb261943732cfc2b400"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p class="DocNodeLTR">Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes. 05 Macro craracter is translated to "[)&gt;\u001E05\u001D" as decoded data header and "\u001E\u0004" as decoded data trailer. 06 Macro craracter is translated to "[)&gt;\u001E06\u001D" as decoded data header and "\u001E\u0004" as decoded data trailer. </p><pre>
+These samples show how to encode Macro Characters in MicroPdf417 and DataMatrix
+<pre>
+
+<div class="fragment"><div class="line"><span class="preprocessor"># to generate autoidentified GS1 message like this &quot;(10)123ABC(10)123ABC&quot;</span> in ISO 15434 format you need:</div>
+<div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#ac5ad93206f5a6754638bca51aa509ec5">EncodeTypes::DATA_MATRIX</a>, <span class="stringliteral">&quot;10123ABC\u001D10123ABC&quot;</span>);</div>
+<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDataMatrix()-&gt;setMacroCharacters(<a class="code" href="../../dc/daf/classMacroCharacter.html#a4e2d0614c541f78ac0dfb670aa134104">MacroCharacter::MACRO_05</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($generator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG), <span class="keyword">null</span>, DecodeType::GS1DataMatrix);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo <span class="stringliteral">&quot;BarCode CodeText: &quot;</span> . $result-&gt;getCodeText();</div>
+</div><!-- fragment -->
+<div class="fragment"><div class="line"><span class="preprocessor"># Encodes MicroPdf417 with 05 Macro the string: &quot;[)&gt;\u001E05\u001Dabcde1234\u001E\u0004&quot;</span></div>
+<div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(EncodeTypes::MicroPdf417, <span class="stringliteral">&quot;abcde1234&quot;</span>);</div>
+<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getPdf417()-&gt;setMacroCharacters(<a class="code" href="../../dc/daf/classMacroCharacter.html#a4e2d0614c541f78ac0dfb670aa134104">MacroCharacter::MACRO_05</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($generator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG), <span class="keyword">null</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a70c74b22b31ecd780ff0aff2476ce9ba">DecodeType::MICRO_PDF_417</a>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">   echo $result-&gt;getCodeText();</div>
+</div><!-- fragment -->
+<div class="fragment"><div class="line"><span class="preprocessor"># Encodes MicroPdf417 with 06 Macro the string: &quot;[)&gt;\u001E06\u001Dabcde1234\u001E\u0004&quot;</span></div>
+<div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(EncodeTypes::MicroPdf417, <span class="stringliteral">&quot;abcde1234&quot;</span>);</div>
+<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getPdf417()-&gt;setMacroCharacters(<a class="code" href="../../dc/daf/classMacroCharacter.html#a546f044e22391fb261943732cfc2b400">MacroCharacter::MACRO_06</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>($generator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG), <span class="keyword">null</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a70c74b22b31ecd780ff0aff2476ce9ba">DecodeType::MICRO_PDF_417</a>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">   echo $result-&gt;getCodeText();</div>
+</div><!-- fragment -->
+</pre> </pre> </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a4e2d0614c541f78ac0dfb670aa134104"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e2d0614c541f78ac0dfb670aa134104">&#9670;&nbsp;</a></span>MACRO_05</h2>
 

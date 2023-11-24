@@ -1,5 +1,12 @@
 var NAVTREEINDEX7 =
 {
+"dc/df2/classDataMatrixParameters.html#a1a900deead3d03d57a266e46d38d423b":[0,0,49,18],
+"dc/df2/classDataMatrixParameters.html#a1db133668e674014508f832f7705e02f":[0,0,49,0],
+"dc/df2/classDataMatrixParameters.html#a2095fed90ea93488281d41bec0b88943":[0,0,49,31],
+"dc/df2/classDataMatrixParameters.html#a219ea4bdfb7f5aa42d7f774e231e0a5b":[0,0,49,1],
+"dc/df2/classDataMatrixParameters.html#a264c7345eb64c83446fded2fde8c2780":[0,0,49,15],
+"dc/df2/classDataMatrixParameters.html#a2b6528217ffe54fc239bc2bf9ac941b4":[0,0,49,10],
+"dc/df2/classDataMatrixParameters.html#a37cd1855b65f3e31f2284185441f5e86":[0,0,49,27],
 "dc/df2/classDataMatrixParameters.html#a4a218f514162d5316417a22f80fc2445":[0,0,49,11],
 "dc/df2/classDataMatrixParameters.html#a5cf47a1b562d9e4df5ddc98b7a38bd94":[0,0,49,23],
 "dc/df2/classDataMatrixParameters.html#a5ec1827ffd294f5d780236ad4338aee0":[0,0,49,3],
@@ -242,12 +249,5 @@ var NAVTREEINDEX7 =
 "de/d9a/classSwissQRBill.html":[0,0,123],
 "de/d9a/classSwissQRBill.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,123,10],
 "de/d9a/classSwissQRBill.html#a0d2f1445bbf4708e929b82ddbe5efd52":[0,0,123,20],
-"de/d9a/classSwissQRBill.html#a0f843ba3797e4f1f8370862a68e6c458":[0,0,123,21],
-"de/d9a/classSwissQRBill.html#a14dae6f4b2832583a20300a232b85ac9":[0,0,123,14],
-"de/d9a/classSwissQRBill.html#a264c7345eb64c83446fded2fde8c2780":[0,0,123,17],
-"de/d9a/classSwissQRBill.html#a314e01c2a6825d97ba4df0e04d91f16b":[0,0,123,16],
-"de/d9a/classSwissQRBill.html#a412519b902a8b19971a79a75df7f0970":[0,0,123,9],
-"de/d9a/classSwissQRBill.html#a422307745970b49f91328d98a62e9d11":[0,0,123,4],
-"de/d9a/classSwissQRBill.html#a4ab1c842d3bc19aa4dc301db024fb350":[0,0,123,7],
-"de/d9a/classSwissQRBill.html#a4c3490bf71079ce8f2bd884006f55a43":[0,0,123,3]
+"de/d9a/classSwissQRBill.html#a0f843ba3797e4f1f8370862a68e6c458":[0,0,123,21]
 };

@@ -37,6 +37,7 @@ var classDecodeType =
     [ "\u202AGS_1_DATA_MATRIX", "d4/d26/classDecodeType.html#af58f17d6f9268c4745f8cc68054cab84", null ],
     [ "\u202AGS_1_DOT_CODE", "d4/d26/classDecodeType.html#a69dbbcd175f9438443eefe3be0d7360e", null ],
     [ "\u202AGS_1_HAN_XIN", "d4/d26/classDecodeType.html#a01e236adc829fb508e39871af448ed12", null ],
+    [ "\u202AGS_1_MICRO_PDF_417", "d4/d26/classDecodeType.html#a129321eaa8a9bd21fae338bc74f2f2b0", null ],
     [ "\u202AGS_1_QR", "d4/d26/classDecodeType.html#a44435b79565231484a342c2853babcd5", null ],
     [ "\u202AHAN_XIN", "d4/d26/classDecodeType.html#a3b8770f5795a8f828aed3fa4de0976fc", null ],
     [ "\u202AHIBC_AZTEC_LIC", "d4/d26/classDecodeType.html#a8bb0991466c11dcedc851e0af5d7e025", null ],

@@ -3171,7 +3171,7 @@ class DataMatrixParameters extends BaseJavaClass
      * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
      * Can be used only with DataMatrixEccType.Ecc200 or DataMatrixEccType.EccAuto.
      * Cannot be used with EncodeTypes::GS_1_DATA_MATRIX
-     * Default value: MacroCharacter.NONE.
+     * Default value: MacroCharacter::NONE.
      */
     public function getMacroCharacters(): int
     {
@@ -3192,7 +3192,7 @@ class DataMatrixParameters extends BaseJavaClass
      * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
      * Can be used only with DataMatrixEccType.Ecc200 or DataMatrixEccType.EccAuto.
      * Cannot be used with EncodeTypes::GS_1_DATA_MATRIX
-     * Default value: MacroCharacter.NONE.
+     * Default value: MacroCharacter::NONE.
      */
     public function setMacroCharacters(int $value): void
     {
@@ -4168,7 +4168,28 @@ class QrParameters extends BaseJavaClass
 }
 
 /**
- * PDF417 parameters.
+ * <p>
+ * PDF417 parameters. Contains PDF417, MacroPDF417, MicroPDF417 and GS1MicroPdf417 parameters.
+ * MacroPDF417 requires two fields: Pdf417MacroFileID and Pdf417MacroSegmentID. All other fields are optional.
+ * MicroPDF417 in Structured Append mode (same as MacroPDF417 mode) requires two fields: Pdf417MacroFileID and Pdf417MacroSegmentID. All other fields are optional.
+ * <pre>
+ * These samples show how to encode UCC/EAN-128 non Linked modes in GS1MicroPdf417
+ * <pre>
+ *
+ * # Encodes GS1 UCC/EAN-128 non Linked mode 905 with AI 01 (GTIN)
+ * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(01)12345678901231");
+ * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+ * foreach ($reader->readBarCodes() as $result)
+ *    echo $result->getCodeText();
+ *
+ * # Encodes GS1 UCC/EAN-128 non Linked modes 903, 904 with any AI
+ * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(241)123456789012345(241)ABCD123456789012345");
+ * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+ * foreach ($reader->readBarCodes() as $result)
+ *    echo $result->getCodeText();
+ * </pre>
+ * </pre>
+ * </p>
  */
 class Pdf417Parameters extends BaseJavaClass
 {
@@ -4801,33 +4822,335 @@ class Pdf417Parameters extends BaseJavaClass
     }
 
     /**
-     *  Function codeword for Code 128 emulation. Applied for MicroPDF417 only.  Ignored for PDF417 and MacroPDF417 barcodes.
+     * <p>
+     * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
+     * Can be used only with MicroPdf417 and encodes 916 and 917 MicroPdf417 modes
+     * Default value: MacroCharacters.None.
+     * </p><p><hr><blockquote><pre>
+     * These samples show how to encode Macro Characters in MicroPdf417
+     * <pre>
+     * @code
+     * # Encodes MicroPdf417 with 05 Macro the string: "[)>\u001E05\u001Dabcde1234\u001E\u0004"
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "abcde1234");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setMacroCharacters(MacroCharacter::MACRO_05);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText();
+     * @endcode
+     *
+     * @code
+     * # Encodes MicroPdf417 with 06 Macro the string: "[)>\u001E06\u001Dabcde1234\u001E\u0004"
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "abcde1234");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setMacroCharacters(MacroCharacter::MACRO_06);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText());
+     * @endcode
+     * </pre>
+     * </pre></blockquote></hr></p>
      */
-    public function getCode128Emulation(): int
+    public function getMacroCharacters() : int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCode128Emulation(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getMacroCharacters(), "integer");
     }
 
     /**
-     *  Function codeword for Code 128 emulation. Applied for MicroPDF417 only.  Ignored for PDF417 and MacroPDF417 barcodes.
+     * <p>
+     * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
+     * Can be used only with MicroPdf417 and encodes 916 and 917 MicroPdf417 modes
+     * Default value: MacroCharacters.None.
+     * </p><p><hr><blockquote><pre>
+     * These samples show how to encode Macro Characters in MicroPdf417
+     * <pre>
+     * @code
+     * # Encodes MicroPdf417 with 05 Macro the string: "[)>\u001E05\u001Dabcde1234\u001E\u0004"
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "abcde1234");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setMacroCharacters(MacroCharacter::MACRO_05);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText();
+     *
+     * @endcode
+     * @code
+     *
+     * # Encodes MicroPdf417 with 06 Macro the string: "[)>\u001E06\u001Dabcde1234\u001E\u0004"
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "abcde1234");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setMacroCharacters(MacroCharacter::MACRO_06);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *    echo $result->getCodeText();
+     * @endcode
+     * </pre>
+     * </pre></blockquote></hr></p>
      */
-    public function setCode128Emulation(int $value): void
+    public function setMacroCharacters(int $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setCode128Emulation($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getJavaClass()->setMacroCharacters($value);
+    }
+
+    /**
+     * <p>
+     * Defines linked modes with GS1MicroPdf417, MicroPdf417 and Pdf417 barcodes
+     * With GS1MicroPdf417 symbology encodes 906, 907, 912, 913, 914, 915 “Linked” UCC/EAN-128 modes
+     * With MicroPdf417 and Pdf417 symbologies encodes 918 linkage flag to associated linear component other than an EAN.UCC
+     * </p><p><hr><blockquote><pre>
+     * These samples show how to encode "Linked" UCC/EAN-128 modes in GS1MicroPdf417 and Linkage Flag (918) in MicroPdf417 and Pdf417 barcodes
+     * <pre>
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 11 (Production date) and AI 10 (Lot number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(11)991231(10)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 13 (Packaging date) and AI 21 (Serial number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(13)991231(21)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 15 (Sell-by date) and AI 10 (Lot number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(15)991231(10)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 17 (Expiration date) and AI 21 (Serial number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(17)991231(21)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 914 with AI 10 (Lot number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(10)ABCD12345");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 915 with AI 21 (Serial number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(21)ABCD12345");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked modes 906, 907 with any AI
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(240)123456789012345");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes MicroPdf417 NON EAN.UCC Linked mode 918
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "ABCDE123456789012345678");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * @code
+     * # Encodes Pdf417 NON EAN.UCC Linked mode 918
+     * $generator = new BarcodeGenerator(EncodeTypes::PDF_417, "ABCDE123456789012345678");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     *
+     * @endcode
+     * </pre>
+     * </pre></blockquote></hr></p>
+     */
+    public function isLinked() : bool
+    {
+        return java_cast($this->getJavaClass()->isLinked(), "boolean");
+    }
+    /**
+     * <p>
+     * Defines linked modes with GS1MicroPdf417, MicroPdf417 and Pdf417 barcodes
+     * With GS1MicroPdf417 symbology encodes 906, 907, 912, 913, 914, 915 “Linked” UCC/EAN-128 modes
+     * With MicroPdf417 and Pdf417 symbologies encodes 918 linkage flag to associated linear component other than an EAN.UCC
+     * </p><p><hr><blockquote><pre>
+     * These samples show how to encode "Linked" UCC/EAN-128 modes in GS1MicroPdf417 and Linkage Flag (918) in MicroPdf417 and Pdf417 barcodes
+     * <pre>
+     *
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 11 (Production date) and AI 10 (Lot number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(11)991231(10)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * # Encodes GS1 Linked mode 912 with date field AI 13 (Packaging date) and AI 21 (Serial number)
+     * @endcode
+     * @code
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(13)991231(21)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 15 (Sell-by date) and AI 10 (Lot number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(15)991231(10)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 912 with date field AI 17 (Expiration date) and AI 21 (Serial number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(17)991231(21)ABCD");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 914 with AI 10 (Lot number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(10)ABCD12345");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked mode 915 with AI 21 (Serial number)
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(21)ABCD12345");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes GS1 Linked modes 906, 907 with any AI
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_MICRO_PDF_417, "(240)123456789012345");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS_1_MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes MicroPdf417 NON EAN.UCC Linked mode 918
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "ABCDE123456789012345678");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * @code
+     * # Encodes Pdf417 NON EAN.UCC Linked mode 918
+     * $generator = new BarcodeGenerator(EncodeTypes::PDF_417, "ABCDE123456789012345678");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setLinked(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *         echo $result->getCodeText() . " IsLinked:" . $result->getExtended()->getPdf417()->isLinked();
+     * @endcode
+     * </pre>
+     * </pre></blockquote></hr></p>
+     */
+    public function setLinked(bool $value) : void
+    {
+        $this->getJavaClass()->setLinked($value);
+    }
+
+    /**
+     * <p>
+     * Can be used only with MicroPdf417 and encodes Code 128 emulation modes
+     * Can encode FNC1 in second position modes 908 and 909, also can encode 910 and 911 which just indicate that recognized MicroPdf417 can be interpret as Code 128
+     * </p><p><hr><blockquote><pre>
+     * These samples show how to encode Code 128 emulation modes with FNC1 in second position and without. In this way MicroPdf417 can be decoded as Code 128 barcode
+     * <pre>
+     *
+     * @code
+     * # Encodes MicroPdf417 in Code 128 emulation mode with FNC1 in second position and Application Indicator "a", mode 908.
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "a\u001d1222322323");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setCode128Emulation(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText() . " IsCode128Emulation:" . $result->getExtended()->getPdf417()->isCode128Emulation();
+     * @endcode
+     * @code
+     * # Encodes MicroPdf417 in Code 128 emulation mode with FNC1 in second position and Application Indicator "99", mode 909.
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "99\u001d1222322323");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setCode128Emulation(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText() . " IsCode128Emulation:" . $result->getExtended()->getPdf417()->isCode128Emulation();
+     * @endcode
+     * @code
+     * # Encodes MicroPdf417 in Code 128 emulation mode, modes 910, 911
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "123456789012345678");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setCode128Emulation(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText() . " IsCode128Emulation:" + result.Extended.Pdf417.IsCode128Emulation().toString());
+     * @endcode
+     * </pre>
+     * </pre></blockquote></hr></p>
+     */
+    public function isCode128Emulation() : bool
+    {
+        return java_cast($this->getJavaClass()->isCode128Emulation(), "boolean");
+    }
+
+    /**
+     * <p>
+     * Can be used only with MicroPdf417 and encodes Code 128 emulation modes
+     * Can encode FNC1 in second position modes 908 and 909, also can encode 910 and 911 which just indicate that recognized MicroPdf417 can be interpret as Code 128
+     * </p><p><hr><blockquote><pre>
+     * These samples show how to encode Code 128 emulation modes with FNC1 in second position and without. In this way MicroPdf417 can be decoded as Code 128 barcode
+     * <pre>
+     *
+     * @code
+     * # Encodes MicroPdf417 in Code 128 emulation mode with FNC1 in second position and Application Indicator "a", mode 908.
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "a\u001d1222322323");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setCode128Emulation(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText() . " IsCode128Emulation:" + result.Extended.Pdf417.IisCode128Emulation().toString());
+     * @endcode
+     * @code
+     * # Encodes MicroPdf417 in Code 128 emulation mode with FNC1 in second position and Application Indicator "99", mode 909.
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "99\u001d1222322323");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setCode128Emulation(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo $result->getCodeText() . " IsCode128Emulation:" . $result->getExtended()->getPdf417()->isCode128Emulation();
+     * @endcode
+     * @code
+     * # Encodes MicroPdf417 in Code 128 emulation mode, modes 910, 911
+     * $generator = new BarcodeGenerator(EncodeTypes::MICRO_PDF_417, "123456789012345678");
+     * $generator->getParameters()->getBarcode()->getPdf417()->setCode128Emulation(true);
+     * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+     * foreach($reader->readBarCodes() as $result)
+     *    echo $result->getCodeText() . " IsCode128Emulation:" . $result->getExtended()->getPdf417()->isCode128Emulation()));
+     * @endcode
+     * </pre>
+     * </pre></blockquote></hr></p>
+     */
+    public function setCode128Emulation(bool $value) : void
+    {
+        $this->getJavaClass()->setCode128Emulation($value);
     }
 
     /**
@@ -6763,6 +7086,41 @@ final class BarcodeClassifications
     const COUPON = 5;
 }
 
+/**
+ * Macro Characters 05 and 06 values are used to obtain more compact encoding in special modes.
+ * 05 Macro craracter is translated to "[)>\u001E05\u001D" as decoded data header and "\u001E\u0004" as decoded data trailer.
+ * 06 Macro craracter is translated to "[)>\u001E06\u001D" as decoded data header and "\u001E\u0004" as decoded data trailer.
+ * <pre>
+ * These samples show how to encode Macro Characters in MicroPdf417 and DataMatrix
+ * <pre>
+ *
+ * @code
+ * # to generate autoidentified GS1 message like this "(10)123ABC(10)123ABC" in ISO 15434 format you need:
+ * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, "10123ABC\u001D10123ABC");
+ * $generator->getParameters()->getBarcode()->getDataMatrix()->setMacroCharacters(MacroCharacter::MACRO_05);
+ * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::GS1DataMatrix);
+ * foreach($reader->readBarCodes() as $result)
+ *     echo "BarCode CodeText: " . $result->getCodeText();
+ * @endcode
+ * @code
+ * # Encodes MicroPdf417 with 05 Macro the string: "[)>\u001E05\u001Dabcde1234\u001E\u0004"
+ * $generator = new BarcodeGenerator(EncodeTypes::MicroPdf417, "abcde1234");
+ * $generator->getParameters()->getBarcode()->getPdf417()->setMacroCharacters(MacroCharacter::MACRO_05);
+ * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+ * foreach($reader->readBarCodes() as $result)
+ *    echo $result->getCodeText();
+ * @endcode
+ * @code
+ * # Encodes MicroPdf417 with 06 Macro the string: "[)>\u001E06\u001Dabcde1234\u001E\u0004"
+ * $generator = new BarcodeGenerator(EncodeTypes::MicroPdf417, "abcde1234");
+ * $generator->getParameters()->getBarcode()->getPdf417()->setMacroCharacters(MacroCharacter::MACRO_06);
+ * $reader = new BarCodeReader($generator->generateBarCodeImage(BarcodeImageFormat::PNG), null, DecodeType::MICRO_PDF_417);
+ * foreach($reader->readBarCodes() as $result)
+ *    echo $result->getCodeText();
+ * @endcode
+ * </pre>
+ * </pre>
+ */
 final class MacroCharacter
 {
     /**
@@ -7883,6 +8241,11 @@ class EncodeTypes
     const  MICRO_PDF_417 = 55;
 
     /**
+     * Specifies that the data should be encoded with <b>GS1MicroPdf417</b> barcode specification
+     */
+    const GS_1_MICRO_PDF_417 = 82;
+
+    /**
      * 2D barcode symbology QR with GS1 string format
      */
     const  GS_1_QR = 56;
@@ -8194,7 +8557,7 @@ class EncodeTypes
         else if($encodeTypeName == "AZTEC") return 35;
 
         else if($encodeTypeName == "GS_1_AZTEC") return 81;
-        
+
         else if($encodeTypeName == "PDF_417") return 36;
 
         else if($encodeTypeName == "MACRO_PDF_417") return 37;
@@ -8323,7 +8686,7 @@ class AztecExtCodetextBuilder extends ExtCodetextBuilder
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-    
+
     public function init() : void
     {
     }
@@ -8501,32 +8864,6 @@ class EnableChecksum
 }
 
 /**
- * Function codewords for Code 128 emulation. Applied for MicroPDF417 only. Ignored for PDF417 and MacroPDF417 barcodes.
- */
-class Code128Emulation
-{
-    /**
-     * No Code 128 emulation
-     */
-    const NONE = 0;
-
-    /**
-     * UCC/EAN-128 emulation. Text compactionmode implied.
-     */
-    const CODE_903 = 903;
-
-    /**
-     * UCC/EAN-128 emulation. Numeric compactionmode implied.
-     */
-    const CODE_904 = 904;
-
-    /**
-     * UCC/EAN-128 emulation. Implied '01' AI and 14-digit codetext.
-     */
-    const CODE_905 = 905;
-}
-
-/**
  * Specifies the file format of the image.
  */
 class BarCodeImageFormat
@@ -8578,7 +8915,7 @@ class BarCodeImageFormat
  * Type of 2D component
  * This sample shows how to create and save a GS1 Composite Bar image.
  * Note that 1D codetext and 2D codetext are separated by symbol '/'
- * <code>
+ * @code
  * $codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8";
  * $generator = new BarcodeGenerator(EncodeTypes::GS1_COMPOSITE_BAR, $codetext))
  *
@@ -8595,7 +8932,7 @@ class BarCodeImageFormat
  *     $generator->getParameters()->getBarcode()->getBarHeight()->setPixels(100);
  *     ///
  *     $generator->save("test.png", BarcodeImageFormat::PNG);
- *
+ * @endcode
  */
 class TwoDComponentType
 {
@@ -8665,8 +9002,6 @@ class Pdf417MacroTerminator
  * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
  * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode.BYTES);
  * $generator->save(ApiTests::folder."test2.bmp", BarCodeImageFormat::BMP);
- *
-
  * @endcode
  */
 class MaxiCodeEncodeMode

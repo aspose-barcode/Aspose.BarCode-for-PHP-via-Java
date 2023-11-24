@@ -1098,6 +1098,15 @@ final class Pdf417ExtendedParameters extends BaseJavaClass
     }
 
     /**
+     * Flag that indicates that the MicroPdf417 barcode encoded with 908, 909, 910 or 911 Code 128 emulation codewords.
+     * @return Code 128 emulation flag
+     */
+    public function isCode128Emulation() : bool
+    {
+        return java_cast($this->getJavaClass()->isCode128Emulation(), "boolean");
+    }
+
+    /**
      * Returns a value indicating whether this instance is equal to a specified Pdf417ExtendedParameters value.
      *
      * @param Pdf417ExtendedParameters $obj An System.Object value to compare to this instance.
@@ -4637,6 +4646,11 @@ class DecodeType
      * Specifies that the data should be decoded with { <b>MicroPdf417</b>} barcode specification
      */
     const MICRO_PDF_417 = 36;
+
+    /**
+     * Specifies that the data should be decoded with <b>MicroPdf417</b> barcode specification
+     */
+    const GS_1_MICRO_PDF_417 = 82;
 
     /**
      * Specifies that the data should be decoded with { <b>CodablockF</b>} barcode specification
