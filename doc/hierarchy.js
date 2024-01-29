@@ -48,16 +48,13 @@ var hierarchy =
       [ "\u202AFontUnit", "d1/d76/classFontUnit.html", null ],
       [ "\u202AGS1CompositeBarExtendedParameters", "d6/ddf/classGS1CompositeBarExtendedParameters.html", null ],
       [ "\u202AGS1CompositeBarParameters", "dc/d33/classGS1CompositeBarParameters.html", null ],
-      [ "\u202AHIBCPASRecord", "d3/de4/classHIBCPASRecord.html", null ],
       [ "\u202AHanXinExtCodetextBuilder", "d7/d06/classHanXinExtCodetextBuilder.html", null ],
       [ "\u202AHanXinParameters", "d0/d10/classHanXinParameters.html", null ],
       [ "\u202AIComplexCodetext", "d7/d9b/classIComplexCodetext.html", [
         [ "\u202AHIBCLICComplexCodetext", "da/d57/classHIBCLICComplexCodetext.html", [
           [ "\u202AHIBCLICCombinedCodetext", "df/d90/classHIBCLICCombinedCodetext.html", null ],
-          [ "\u202AHIBCLICPrimaryDataCodetext", "dd/d96/classHIBCLICPrimaryDataCodetext.html", null ],
-          [ "\u202AHIBCLICSecondaryAndAdditionalDataCodetext", "db/d50/classHIBCLICSecondaryAndAdditionalDataCodetext.html", null ]
+          [ "\u202AHIBCLICPrimaryDataCodetext", "dd/d96/classHIBCLICPrimaryDataCodetext.html", null ]
         ] ],
-        [ "\u202AHIBCPASCodetext", "df/ddc/classHIBCPASCodetext.html", null ],
         [ "\u202AMailmark2DCodetext", "d4/d70/classMailmark2DCodetext.html", null ],
         [ "\u202AMailmarkCodetext", "d0/d1f/classMailmarkCodetext.html", null ],
         [ "\u202AMaxiCodeCodetext", "dd/d22/classMaxiCodeCodetext.html", [
@@ -84,14 +81,12 @@ var hierarchy =
       [ "\u202APdf417Parameters", "d5/d2c/classPdf417Parameters.html", null ],
       [ "\u202APoint", "dc/d4f/classPoint.html", null ],
       [ "\u202APostalParameters", "d6/dfb/classPostalParameters.html", null ],
-      [ "\u202APrimaryData", "d1/dc6/classPrimaryData.html", null ],
       [ "\u202AQRExtendedParameters", "d6/daf/classQRExtendedParameters.html", null ],
       [ "\u202AQrParameters", "da/ded/classQrParameters.html", null ],
       [ "\u202AQrStructuredAppendParameters", "dc/da4/classQrStructuredAppendParameters.html", null ],
       [ "\u202AQuadrangle", "d8/d57/classQuadrangle.html", null ],
       [ "\u202AQualitySettings", "d1/d04/classQualitySettings.html", null ],
       [ "\u202ARectangle", "de/d00/classRectangle.html", null ],
-      [ "\u202ASecondaryAndAdditionalData", "dd/d2f/classSecondaryAndAdditionalData.html", null ],
       [ "\u202ASupplementParameters", "d8/d05/classSupplementParameters.html", null ],
       [ "\u202ASwissQRBill", "de/d9a/classSwissQRBill.html", null ],
       [ "\u202AUnit", "df/dd9/classUnit.html", null ]
@@ -121,12 +116,8 @@ var hierarchy =
     [ "\u202AHanXinEncodeMode", "d6/d56/classHanXinEncodeMode.html", null ],
     [ "\u202AHanXinErrorLevel", "d4/dd3/classHanXinErrorLevel.html", null ],
     [ "\u202AHanXinVersion", "d5/d05/classHanXinVersion.html", null ],
-    [ "\u202AHIBCLICDateFormat", "d9/d6d/classHIBCLICDateFormat.html", null ],
-    [ "\u202AHIBCPASDataLocation", "d8/dbf/classHIBCPASDataLocation.html", null ],
-    [ "\u202AHIBCPASDataType", "d9/d1b/classHIBCPASDataType.html", null ],
     [ "\u202AITF14BorderType", "d3/de2/classITF14BorderType.html", null ],
     [ "\u202AMacroCharacter", "dc/daf/classMacroCharacter.html", null ],
-    [ "\u202AMailmark2DType", "d7/d21/classMailmark2DType.html", null ],
     [ "\u202APatchFormat", "d0/d26/classPatchFormat.html", null ],
     [ "\u202APdf417CompactionMode", "d2/d92/classPdf417CompactionMode.html", null ],
     [ "\u202APdf417ErrorLevel", "d7/d65/classPdf417ErrorLevel.html", null ],

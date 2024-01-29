@@ -3255,11 +3255,35 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
     }
 }
 
-
 /**
- * <p>
  * Class for encoding and decoding the text embedded in the HIBC LIC code which stores seconday data.
- * </p>
+ * @example
+ * This sample shows how to encode and decode HIBC LIC using HIBCLICSecondaryAndAdditionalDataCodetext.
+ *
+ * @code
+ * $complexCodetext = new HIBCLICSecondaryAndAdditionalDataCodetext();
+ * $complexCodetext->setBarcodeType(EncodeTypes::HIBCQRLIC);
+ * $complexCodetext->setLinkCharacter('L');
+ * $complexCodetext->setData(new SecondaryAndAdditionalData());
+ * $complexCodetext->getData()->setExpiryDate(new Date());
+ * $complexCodetext->getData()->setExpiryDateFormat(HIBCLICDateFormat.MMDDYY);
+ * $complexCodetext->getData()->setQuantity(30);
+ * $complexCodetext->getData()->setLotNumber("LOT123");
+ * $complexCodetext->getData()->setSerialNumber("SERIAL123");
+ * $complexCodetext->getData()->setDateOfManufacture(new Date());
+ * $generator = new ComplexBarcodeGenerator($complexCodetext);
+ * $image = $generator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ * $reader = new BarCodeReader($image, null, DecodeType::HIBCQRLIC);
+ * $reader->readBarCodes();
+ * $codetext = $reader->getFoundBarCodes()[0]->getCodeText();
+ * $result = ComplexCodetextReader::tryDecodeHIBCLIC($codetext);
+ * print("Expiry date: " . $result->getData()->getExpiryDate());
+ * print("Quantity: " . $result->getData()->getQuantity());
+ * print("Lot number: " . $result->getData()->getLotNumber());
+ * print("Serial number: " . $result->getData()->getSerialNumber());
+ * print("Date of manufacture: " . $result->getData()->getDateOfManufacture());
+ * </code>
+ * </example>
  */
 class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
 {

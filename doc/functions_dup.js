@@ -23,7 +23,5 @@ var functions_dup =
     [ "\u202At", "functions_t.html", null ],
     [ "\u202Au", "functions_u.html", null ],
     [ "\u202Av", "functions_v.html", null ],
-    [ "\u202Aw", "functions_w.html", null ],
-    [ "\u202Ax", "functions_x.html", null ],
-    [ "\u202Ay", "functions_y.html", null ]
+    [ "\u202Aw", "functions_w.html", null ]
 ];
