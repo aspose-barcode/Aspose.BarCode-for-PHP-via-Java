@@ -41,14 +41,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/dcc/classAztecParameters.html#aaae3e94797cfbc1ecabe96ea109bab93",
-"d4/d26/classDecodeType.html#a8828b6e35ad3a38dddbedfabaa0ec575",
-"d5/d0f/classEncodeTypes.html#a4cd6f6fe5240e0c2f52aa4b58457905a",
-"d6/ddf/classGS1CompositeBarExtendedParameters.html#a77b7e8bfd7b9cd69a05bc720a1825080",
-"d8/df0/classCodeLocation.html#aa76f940dd0b0888dcb6a56dfad2210a8",
-"db/d7b/classMaxiCodeStructuredSecondMessage.html#ac705b94ec870f30a9762eb463e09a000",
-"dd/dfd/classBarcodeParameters.html#a57b347bc798ea5eb8198cc322f26e6ff",
-"functions.html"
+"d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
+"d4/d26/classDecodeType.html#af940ad56c1a85347cc8271ff9c6052c1",
+"d5/d0f/classEncodeTypes.html#aa5c5cc7918500b9ca1d13927c3d5baee",
+"d7/d06/classHanXinExtCodetextBuilder.html#a05ed9335956ecce2efde24e07a0fcf7e",
+"d8/df0/classCodeLocation.html",
+"db/d4c/classDataBarParameters.html#a6161fbb9d353e0b3f6fdc0db0f2f087a",
+"dd/df6/classSwissQRCodetext.html#a88dc1db5906ecc0ecd381db13eed913d",
+"df/dbc/classBorderDashStyle.html#afe24d5209f47fb224f56771f2cc5a66c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

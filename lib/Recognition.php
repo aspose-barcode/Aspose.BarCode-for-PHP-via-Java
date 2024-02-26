@@ -34,9 +34,14 @@ class BarCodeReader extends BaseJavaClass
     {
         try
         {
-            if (!is_null($rectangles) && !is_array($rectangles))
+            if (!is_null($rectangles))
             {
-                $rectangles = array($rectangles);
+                if(!is_array($rectangles))
+                    $rectangles = array($rectangles);
+                for($i = 0; $i < sizeof($rectangles);$i ++)
+                {
+                    $rectangles[$i] = $rectangles[$i]->toString();
+                }
             }
             if (!is_null($decodeTypes) && !is_array($decodeTypes))
             {
@@ -1387,326 +1392,6 @@ final class Code128ExtendedParameters extends BaseJavaClass
 }
 
 /**
- * Barcode detector settings.
- */
-final class BarcodeSvmDetectorSettings extends BaseJavaClass
-{
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.recognition.MwBarcodeSvmDetectorSettings";
-    private const HighPerformance = 0;
-    private const NormalQuality = 1;
-    private const HighQuality = 2;
-    private const MaxQuality = 3;
-    private $scanWindowSizes;
-
-
-    public function __construct(int $aType)
-    {
-        $javaClass = new java(self::JAVA_CLASS_NAME, self::NormalQuality);
-        switch ($aType)
-        {
-            case self::HighPerformance:
-                $javaClass = new java(self::JAVA_CLASS_NAME, self::HighPerformance);
-                break;
-            case self::HighQuality:
-                $javaClass = new java(self::JAVA_CLASS_NAME, self::HighQuality);
-                break;
-            case self::MaxQuality:
-                $javaClass = new java(self::JAVA_CLASS_NAME, self::MaxQuality);
-                break;
-        }
-        parent::__construct($javaClass);
-    }
-
-    static function construct($javaClass): BarcodeSvmDetectorSettings
-    {
-        $barcodeSvmDetectorSettings = new BarcodeSvmDetectorSettings(self::NormalQuality);
-        $barcodeSvmDetectorSettings->setJavaClass($javaClass);
-        return $barcodeSvmDetectorSettings;
-    }
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->scanWindowSizes = self::convertScanWindowSizes($this->getJavaClass()->getScanWindowSizes());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    private static function convertScanWindowSizes($javaScanWindowSizes)
-    {
-        $scanWindowSizes = array();
-        for ($i = 0; $i < java_cast($javaScanWindowSizes->size(), "integer"); $i++)
-        {
-            $scanWindowSizes[$i] = java_cast($javaScanWindowSizes->get($i), "integer");
-        }
-        return $scanWindowSizes;
-    }
-
-    /**
-     * Scan window sizes in pixels.
-     *
-     * Allowed sizes are 10, 15, 20, 25, 30.
-     * Scanning with small window size takes more time and provides more accuracy but may fail in detecting very big barcodes.
-     * Combining of several window sizes can improve detection quality.
-     */
-    public function getScanWindowSizes(): array
-    {
-        return $this->scanWindowSizes;
-    }
-
-    /**
-     * Scan window sizes in pixels.
-     *
-     * Allowed sizes are 10, 15, 20, 25, 30.
-     * Scanning with small window size takes more time and provides more accuracy but may fail in detecting very big barcodes.
-     * Combining of several window sizes can improve detection quality.
-     */
-    public function setScanWindowSizes(array $value)
-    {
-        try
-        {
-            $this->scanWindowSizes = $value;
-            $this->getJavaClass()->setScanWindowSizes($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Similarity coefficient depends on how homogeneous barcodes are.
-     *
-     * Use high value for for clear barcodes.
-     * Use low values to detect barcodes that ara partly damaged or not lighten evenly.
-     * Similarity coefficient must be between [0.5, 0.9]
-     */
-    public function getSimilarityCoef(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getSimilarityCoef(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Similarity coefficient depends on how homogeneous barcodes are.
-     * @param int $value Use high value for for clear barcodes.
-     * Use low values to detect barcodes that ara partly damaged or not lighten evenly.
-     * Similarity coefficient must be between [0.5, 0.9]
-     * @throws BarcodeException
-     */
-    public function setSimilarityCoef(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setSimilarityCoef($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets threshold for detected regions that may contain barcodes.
-     * @return int Value 0.7 means that bottom 70% of possible regions are filtered out and not processed further.
-     * Region likelihood threshold must be between [0.05, 0.9]
-     * Use high values for clear images with few barcodes.
-     * Use low values for images with many barcodes or for noisy images.
-     * Low value may lead to a bigger recognition time.
-     * @throws BarcodeException
-     */
-    public function getRegionLikelihoodThresholdPercent(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getRegionLikelihoodThresholdPercent(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets threshold for detected regions that may contain barcodes.
-     * @param float $value Value 0.7 means that bottom 70% of possible regions are filtered out and not processed further.
-     * Region likelihood threshold must be between [0.05, 0.9]
-     * Use high values for clear images with few barcodes.
-     * Use low values for images with many barcodes or for noisy images.
-     * Low value may lead to a bigger recognition time.
-     * @throws BarcodeException
-     */
-    public function setRegionLikelihoodThresholdPercent(float $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setRegionLikelihoodThresholdPercent($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows detector to skip search for diagonal barcodes.
-     * @return bool Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
-     * Enabling of diagonal search leads to a bigger detection time.
-     * @throws BarcodeException
-     */
-    public function getSkipDiagonalSearch(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getSkipDiagonalSearch(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows detector to skip search for diagonal barcodes.
-     *
-     * @param bool $value Setting it to false will increase detection time but allow to find diagonal barcodes that can be missed otherwise.
-     * Enabling of diagonal search leads to a bigger detection time.
-     * @throws BarcodeException
-     */
-    public function setSkipDiagonalSearch(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setSkipDiagonalSearch($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Window size for median smoothing.
-     * @return int Typical values are 3 or 4. 0 means no median smoothing.
-     * Default value is 0.
-     * Median filter window size must be between [0, 10]
-     * @throws BarcodeException
-     */
-    public function getMedianFilterWindowSize(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMedianFilterWindowSize(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *
-     *
-     */
-    /**
-     * Window size for median smoothing.
-     * @param int $value Typical values are 3 or 4. 0 means no median smoothing.
-     * Default value is 0.
-     * Median filter window size must be between [0, 10]
-     * @throws BarcodeException
-     */
-    public function setMedianFilterWindowSize(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setMedianFilterWindowSize($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * High performance detection preset.
-     * @return BarcodeSvmDetectorSettings Default for QualitySettings::PresetType::HighPerformance
-     * @throws BarcodeException
-     */
-    public static function getHighPerformance(): BarcodeSvmDetectorSettings
-    {
-        try
-        {
-            return new BarcodeSvmDetectorSettings(self::HighPerformance);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Normal quality detection preset.
-     * @return BarcodeSvmDetectorSettings Default for QualitySettings::PresetType::NormalQuality
-     * @throws BarcodeException
-     */
-    public static function getNormalQuality(): BarcodeSvmDetectorSettings
-    {
-        try
-        {
-            return new BarcodeSvmDetectorSettings(self::NormalQuality);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * High quality detection preset.
-     * @return BarcodeSvmDetectorSettings Default for QualitySettings.PresetType.HighQualityDetection and QualitySettings::PresetType::HighQuality
-     * @throws BarcodeException
-     */
-    public static function getHighQuality(): BarcodeSvmDetectorSettings
-    {
-        try
-        {
-            return new BarcodeSvmDetectorSettings(self::HighQuality);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Max quality detection preset.
-     * @return BarcodeSvmDetectorSettings Default for QualitySettings.PresetType.MaxQualityDetection and QualitySettings::PresetType::MaxBarCodes
-     * @throws BarcodeException
-     */
-    public static function getMaxQuality(): BarcodeSvmDetectorSettings
-    {
-        try
-        {
-            return new BarcodeSvmDetectorSettings(self::MaxQuality);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
  * Stores recognized barcode data like SingleDecodeType type, {string} codetext,
  * BarCodeRegionParameters region and other parameters
  *
@@ -2314,7 +1999,6 @@ class BarCodeExtendedParameters extends BaseJavaClass
  */
 final class QualitySettings extends BaseJavaClass
 {
-    private $detectorSettings;
 
     function __construct($qualitySettings)
     {
@@ -2347,14 +2031,6 @@ final class QualitySettings extends BaseJavaClass
 
     protected function init(): void
     {
-        try
-        {
-            $this->detectorSettings = BarcodeSvmDetectorSettings::construct($this->getJavaClass()->getDetectorSettings());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -2475,786 +2151,146 @@ final class QualitySettings extends BaseJavaClass
     }
 
     /**
-     * MaxBarCodes recognition quality preset. This preset is developed to recognize all possible barcodes, even incorrect barcodes.
-     *
-     * @code
-     * $reader = new BarCodeReader("test.png");
-     * $reader->setQualitySettings(QualitySettings::getMaxBarCodes());
-     * @endcode
-     * @return QualitySettings MaxBarCodes recognition quality preset.
-     * @throws BarcodeException
+     * Recognition mode which sets size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
+     * @return: size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
      */
-    public static function getMaxBarCodes(): QualitySettings
+    public function getXDimension() : float
     {
-        try
-        {
-            $qualitySettings = new QualitySettings(null);
-            return new QualitySettings($qualitySettings->getJavaClass()->getMaxBarCodes());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getXDimension(), "float");
+    }
+    /**
+     * Recognition mode which sets size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
+     * @param $value: size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
+     */
+    public function setXDimension(float $value) : void
+    {
+        $this->getJavaClass()->setXDimension($value);
     }
 
     /**
-     * Allows engine to recognize inverse color image as additional scan. Mode can be used when barcode is white on black background.
-     * @return bool Allows engine to recognize inverse color image.
-     * @throws BarcodeException
+     * Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
+     * @return: Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
      */
-    public final function getAllowInvertImage(): bool
+    public function getMinimalXDimension() : float
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowInvertImage(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getMinimalXDimension(), "float");
     }
-
     /**
-     * Allows engine to recognize inverse color image as additional scan. Mode can be used when barcode is white on black background.
-     * @param bool $value Allows engine to recognize inverse color image.
-     * @throws BarcodeException
+     * Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
+     * @param $value: Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
      */
-    public final function setAllowInvertImage(bool $value): void
+    public function setMinimalXDimension(float $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setAllowInvertImage($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values.
-     * Mode can be used to recognize damaged barcodes with incorrect text.
-     * @return bool Allows engine to recognize incorrect barcodes.
-     * @throws BarcodeException
-     */
-    public final function getAllowIncorrectBarcodes(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowIncorrectBarcodes(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values.
-     * Mode can be used to recognize damaged barcodes with incorrect text.
-     * @param bool $value Allows engine to recognize incorrect barcodes.
-     * @throws BarcodeException
-     */
-    public final function setAllowIncorrectBarcodes(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowIncorrectBarcodes($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *  Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False.
-     * @return bool If True, allows engine to recognize tiny barcodes on large images.
-     */
-    public function getReadTinyBarcodes(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getReadTinyBarcodes(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize tiny barcodes on large images. Ignored if AllowIncorrectBarcodes is set to True. Default value: False.
-     * @param bool $value If True, allows engine to recognize tiny barcodes on large images.
-     * @throws BarcodeException
-     */
-    public function setReadTinyBarcodes(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setReadTinyBarcodes($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize 1D barcodes with checksum by checking more recognition variants. Default value: False.
-     * @return bool If True, allows engine to recognize 1D barcodes with checksum.
-     * @throws BarcodeException
-     */
-    public function getCheckMore1DVariants(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCheckMore1DVariants(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize 1D barcodes with checksum by checking more recognition variants. Default value: False.
-     * @param bool $value If True, allows engine to recognize 1D barcodes with checksum.
-     */
-    public function setCheckMore1DVariants(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setCheckMore1DVariants($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize color barcodes on color background as additional scan. Extremely slow mode.
-     * @return bool Allows engine to recognize color barcodes on color background.
-     * @throws BarcodeException
-     */
-    public final function getAllowComplexBackground(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowComplexBackground(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize color barcodes on color background as additional scan. Extremely slow mode.
-     * @param bool $value Allows engine to recognize color barcodes on color background.
-     * @throws BarcodeException
-     */
-    public final function setAllowComplexBackground(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowComplexBackground($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to enable median smoothing as additional scan. Mode helps to recognize noised barcodes.
-     * @return bool Allows engine to enable median smoothing.
-     * @throws BarcodeException
-     */
-    public final function getAllowMedianSmoothing(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowMedianSmoothing(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to enable median smoothing as additional scan. Mode helps to recognize noised barcodes.
-     * @param bool $value Allows engine to enable median smoothing.
-     * @throws BarcodeException
-     */
-    public final function setAllowMedianSmoothing(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowMedianSmoothing($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Window size for median smoothing. Typical values are 3 or 4. Default value is 3. AllowMedianSmoothing must be set.
-     * @return int  Window size for median smoothing.
-     * @throws BarcodeException
-     */
-    public final function getMedianSmoothingWindowSize(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMedianSmoothingWindowSize(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Window size for median smoothing. Typical values are 3 or 4. Default value is 3. AllowMedianSmoothing must be set.
-     * @param int $value Window size for median smoothing.
-     * @throws BarcodeException
-     */
-    public final function setMedianSmoothingWindowSize(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setMedianSmoothingWindowSize($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize regular image without any restorations as main scan. Mode to recognize image as is.
-     * @return bool Allows to recognize regular image without any restorations.
-     * @throws BarcodeException
-     */
-    public final function getAllowRegularImage(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowRegularImage(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize regular image without any restorations as main scan. Mode to recognize image as is.
-     * @param bool $value Allows to recognize regular image without any restorations.
-     * @throws BarcodeException
-     */
-    public final function setAllowRegularImage(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowRegularImage($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize decreased image as additional scan. Size for decreasing is selected by internal engine algorithms.
-     * Mode helps to recognize barcodes which are noised and blurred but captured with high resolution.
-     * @return bool Allows engine to recognize decreased image
-     * @throws BarcodeException
-     */
-    public final function getAllowDecreasedImage(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowDecreasedImage(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize decreased image as additional scan. Size for decreasing is selected by internal engine algorithms.
-     * Mode helps to recognize barcodes which are noised and blurred but captured with high resolution.
-     * @param bool $value Allows engine to recognize decreased image
-     * @throws BarcodeException
-     */
-    public final function setAllowDecreasedImage(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowDecreasedImage($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize image without small white spots as additional scan. Mode helps to recognize noised image as well as median smoothing filtering.
-     * @return bool Allows engine to recognize image without small white spots.
-     * @throws BarcodeException
-     */
-    public final function getAllowWhiteSpotsRemoving(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowWhiteSpotsRemoving(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine to recognize image without small white spots as additional scan. Mode helps to recognize noised image as well as median smoothing filtering.
-     * @param bool $value Allows engine to recognize image without small white spots.
-     * @throws BarcodeException
-     */
-    public function setAllowWhiteSpotsRemoving(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowWhiteSpotsRemoving($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to recognize regular image with different params as additional scan. Mode helps to recongize low height 1D barcodes.
-     * @return bool Allows engine for 1D barcodes to run additional scan.
-     * @throws BarcodeException
-     */
-    public final function getAllowOneDAdditionalScan(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowOneDAdditionalScan(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to recognize regular image with different params as additional scan. Mode helps to recongize low height 1D barcodes.
-     * @param bool $value Allows engine for 1D barcodes to run additional scan.
-     * @throws BarcodeException
-     */
-    public final function setAllowOneDAdditionalScan(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowOneDAdditionalScan($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to quickly recognize high quality barcodes which fill almost whole image.
-     * Mode helps to quickly recognize generated barcodes from Internet.
-     * @return bool Allows engine for 1D barcodes to quickly recognize high quality barcodes.
-     * @throws BarcodeException
-     */
-    public final function getAllowOneDFastBarcodesDetector(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowOneDFastBarcodesDetector(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to quickly recognize high quality barcodes which fill almost whole image.
-     * Mode helps to quickly recognize generated barcodes from Internet.
-     * @param bool $value Allows engine for 1D barcodes to quickly recognize high quality barcodes.
-     * @throws BarcodeException
-     */
-    public final function setAllowOneDFastBarcodesDetector(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowOneDFastBarcodesDetector($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getJavaClass()->setMinimalXDimension($value);
     }
 
     /**
      * <p>
-     * Switches to the old barcode detector.
-     * </p>Value:
-     * Switches to the old barcode detector.
+     * Mode which enables methods to recognize barcode elements with the selected quality. Barcode element with lower quality requires more hard methods which slows the recognition.
+     * @return: Mode which enables methods to recognize barcode elements with the selected quality.
      */
-    public function getUseOldBarcodeDetector() : bool
+    public function getBarcodeQuality() : int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getUseOldBarcodeDetector(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getBarcodeQuality(), "integer");
+    }
+    /**
+     * Mode which enables methods to recognize barcode elements with the selected quality. Barcode element with lower quality requires more hard methods which slows the recognition.
+     * @param $value: Mode which enables methods to recognize barcode elements with the selected quality.
+     */
+    public function setBarcodeQuality(int $value) : void
+    {
+        $this->getJavaClass()->setBarcodeQuality($value);
     }
 
     /**
      * <p>
-     * Switches to the old barcode detector.
-     * </p>Value:
-     * Switches to the old barcode detector.
+     * Deconvolution (image restorations) mode which defines level of image degradation. Originally deconvolution is a function which can restore image degraded
+     * (convoluted) by any natural function like blur, during obtaining image by camera. Because we cannot detect image function which corrupt the image,
+     * we have to check most well know functions like sharp or mathematical morphology.
+     * @return: Deconvolution mode which defines level of image degradation.
      */
-    //@XmlSerialization (type = XmlSerializationType.Element)
-    public function setUseOldBarcodeDetector(bool $value)
+    public function getDeconvolution() : int
     {
-        try
-        {
-            $this->getJavaClass()->setUseOldBarcodeDetector($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return java_cast($this->getJavaClass()->getDeconvolution(), "integer");
+    }
+    /**
+     * Deconvolution (image restorations) mode which defines level of image degradation. Originally deconvolution is a function which can restore image degraded
+     * (convoluted) by any natural function like blur, during obtaining image by camera. Because we cannot detect image function which corrupt the image,
+     * we have to check most well know functions like sharp or mathematical morphology.
+     * @param $value: Deconvolution mode which defines level of image degradation.
+     */
+    public function setDeconvolution(int $value) : void
+    {
+        $this->getJavaClass()->setDeconvolution($value);
+    }
+
+    /**
+     * Mode which enables or disables additional recognition of barcodes on images with inverted colors (luminance).
+     * @return: Additional recognition of barcodes on images with inverse colors
+     */
+    public function getInverseImage() : int
+    {
+        return java_cast($this->getJavaClass()->getInverseImage(),"integer");
+    }
+    /**
+     * Mode which enables or disables additional recognition of barcodes on images with inverted colors (luminance).
+     * @param $value: Additional recognition of barcodes on images with inverse colors
+     */
+    public function setInverseImage(int $value) : void
+    {
+        $this->getJavaClass()->setInverseImage($value);
     }
 
     /**
      * <p>
-     * Allows engine using additional image restorations to recognize corrupted barcodes. At this time, it is used only in MicroPdf417 barcode type.
-     * </p>Value:
-     * Allows engine using additional image restorations to recognize corrupted barcodes.
+     * Mode which enables or disables additional recognition of color barcodes on color images.
+     * @return: Additional recognition of color barcodes on color images.
      */
-    public function getAllowAdditionalRestorations() : bool
+    public function getComplexBackground() : int
     {
-        return java_cast($this->getJavaClass()->getAllowAdditionalRestorations(), "boolean");
+        return java_cast($this->getJavaClass()->getComplexBackground(), "integer");
+    }
+    /**
+     * Mode which enables or disables additional recognition of color barcodes on color images.
+     * @param $value: Additional recognition of color barcodes on color images.
+     */
+    public function setComplexBackground(int $value) : void
+    {
+        $this->getJavaClass()->setComplexBackground($value);
+    }
+
+    /**
+     * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values. Mode can be used to recognize damaged barcodes with incorrect text.
+     * @return: Allows engine to recognize incorrect barcodes.
+     */
+    public function getAllowIncorrectBarcodes() : bool
+    {
+        return java_cast($this->getJavaClass()->getAllowIncorrectBarcodes(), "boolean");
+    }
+    /**
+     * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values. Mode can be used to recognize damaged barcodes with incorrect text.
+     * @param $value: Allows engine to recognize incorrect barcodes.
+     */
+    public function setAllowIncorrectBarcodes(int $value) : void
+    {
+        $this->getJavaClass()->setAllowIncorrectBarcodes($value);
     }
 
     /**
      * <p>
-     * Allows engine using additional image restorations to recognize corrupted barcodes. At this time, it is used only in MicroPdf417 barcode type.
-     * </p>Value:
-     * Allows engine using additional image restorations to recognize corrupted barcodes.
+     * Function apply all values from Src setting to Dst
+     * </p>
+     * @param $Src: source settings
      */
-    public function setAllowAdditionalRestorations(bool $value) : void
+    public function applyAll(QualitySettings $Src) : void
     {
-        $this->getJavaClass()->setAllowAdditionalRestorations($value);
-    }
-
-    /**
-     * Allows engine for Postal barcodes to recognize slightly noised images. Mode helps to recognize sligtly damaged Postal barcodes.
-     * @return bool Allows engine for Postal barcodes to recognize slightly noised images.
-     * @throws BarcodeException
-     */
-    public final function getAllowMicroWhiteSpotsRemoving(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowMicroWhiteSpotsRemoving(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for Postal barcodes to recognize slightly noised images. Mode helps to recognize sligtly damaged Postal barcodes.
-     * @param bool $value Allows engine for Postal barcodes to recognize slightly noised images.
-     * @throws BarcodeException
-     */
-    public final function setAllowMicroWhiteSpotsRemoving(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowMicroWhiteSpotsRemoving($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to quickly recognize middle slice of an image and return result without using any time-consuming algorithms.
-     * @return bool Allows engine for 1D barcodes to quickly recognize high quality barcodes.
-     */
-    public final function getFastScanOnly(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getFastScanOnly(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to quickly recognize middle slice of an image and return result without using any time-consuming algorithms.
-     * @param bool value Allows engine for 1D barcodes to quickly recognize high quality barcodes.
-     */
-    public final function setFastScanOnly(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setFastScanOnly($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    //OneD uses, PDF417 and QR can use
-
-    /**
-     * Allows engine to recognize barcodes with salt and paper noise type. Mode can remove small noise with white and black dots.
-     * @return bool Allows engine to recognize barcodes with salt and paper noise type.
-     * @throws BarcodeException
-     */
-    public final function getAllowSaltAndPaperFiltering(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowSaltAndPaperFiltering(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-    //OneD uses, PDF417 and QR can use
-
-    /**
-     * Allows engine to recognize barcodes with salt and paper noise type. Mode can remove small noise with white and black dots.
-     * @param bool $value Allows engine to recognize barcodes with salt and paper noise type.
-     * @throws BarcodeException
-     */
-    public final function setAllowSaltAndPaperFiltering(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowSaltAndPaperFiltering($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    //OneD curently uses
-
-    /**
-     * Allows engine to use gap between scans to increase recognition speed. Mode can make recognition problems with low height barcodes.
-     * @return bool Allows engine to use gap between scans to increase recognition speed.
-     * @throws BarcodeException
-     */
-    public final function getAllowDetectScanGap(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowDetectScanGap(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-    //OneD curently uses
-
-    /**
-     * Allows engine to use gap between scans to increase recognition speed. Mode can make recognition problems with low height barcodes.
-     * @param bool $value Allows engine to use gap between scans to increase recognition speed.
-     * @throws BarcodeException
-     */
-    public final function setAllowDetectScanGap(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowDetectScanGap($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for Datamatrix to recognize dashed industrial Datamatrix barcodes.
-     * Slow mode which helps only for dashed barcodes which consist from spots.
-     * @return bool Allows engine for Datamatrix to recognize dashed industrial barcodes.
-     * @throws BarcodeException
-     */
-    public final function getAllowDatamatrixIndustrialBarcodes(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowDatamatrixIndustrialBarcodes(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for Datamatrix to recognize dashed industrial Datamatrix barcodes.
-     * Slow mode which helps only for dashed barcodes which consist from spots.
-     * @param bool $value Allows engine for Datamatrix to recognize dashed industrial barcodes.
-     * @throws BarcodeException
-     */
-    public final function setAllowDatamatrixIndustrialBarcodes(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowDatamatrixIndustrialBarcodes($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
-     * @return bool Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
-     * @throws BarcodeException
-     */
-    public final function getAllowQRMicroQrRestoration(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowQRMicroQrRestoration(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
-     * @param bool $value Allows engine for QR/MicroQR to recognize damaged MicroQR barcodes.
-     * @throws BarcodeException
-     */
-    public final function setAllowQRMicroQrRestoration(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowQRMicroQrRestoration($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
-     * @return bool Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
-     * @throws BarcodeException
-     */
-    public function getAllowOneDWipedBarsRestoration(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAllowOneDWipedBarsRestoration(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
-     * @param bool $value Allows engine for 1D barcodes to recognize barcodes with single wiped/glued bars in pattern.
-     * @throws BarcodeException
-     */
-    public function setAllowOneDWipedBarsRestoration(bool $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAllowOneDWipedBarsRestoration($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Barcode detector settings.
-     */
-    public function getDetectorSettings(): BarcodeSvmDetectorSettings
-    {
-        return $this->detectorSettings;
-    }
-
-    /**
-     * Barcode detector settings.
-     */
-    public function setDetectorSettings(BarcodeSvmDetectorSettings $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setDetectorSettings($value->getJavaClass());
-            $this->detectorSettings = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Function apply all values from Src setting to this
-     * @param QualitySettings Src source settings
-     */
-    public function applyAll(QualitySettings $Src): void
-    {
-        $this->setAllowInvertImage($Src->getAllowInvertImage());
+        $this->setXDimension($Src->getXDimension());
+        $this->setMinimalXDimension($Src->getMinimalXDimension());
+        $this->setBarcodeQuality($Src->getBarcodeQuality());
+        $this->setDeconvolution($Src->getDeconvolution());
+        $this->setInverseImage($Src->getInverseImage());
+        $this->setComplexBackground($Src->getComplexBackground());
         $this->setAllowIncorrectBarcodes($Src->getAllowIncorrectBarcodes());
-        $this->setAllowComplexBackground($Src->getAllowComplexBackground());
-        $this->setAllowMedianSmoothing($Src->getAllowMedianSmoothing());
-        $this->setMedianSmoothingWindowSize($Src->getMedianSmoothingWindowSize());
-        $this->setAllowRegularImage($Src->getAllowRegularImage());
-        $this->setAllowDecreasedImage($Src->getAllowDecreasedImage());
-        $this->setAllowWhiteSpotsRemoving($Src->getAllowWhiteSpotsRemoving());
-        $this->setAllowOneDAdditionalScan($Src->getAllowOneDAdditionalScan());
-        $this->setAllowOneDFastBarcodesDetector($Src->getAllowOneDFastBarcodesDetector());
-        $this->setAllowMicroWhiteSpotsRemoving($Src->getAllowMicroWhiteSpotsRemoving());
-        $this->setAllowSaltAndPaperFiltering($Src->getAllowSaltAndPaperFiltering());
-        $this->setAllowDetectScanGap($Src->getAllowDetectScanGap());
     }
 }
 
@@ -4762,6 +3798,11 @@ class DecodeType
     const MICRO_QR = 56;
 
     /**
+     * Specifies that the data should be decoded with <b>RectMicroQR (rMQR) Code</b> barcode specification
+     */
+    const RECT_MICRO_QR = 83;
+
+    /**
      * Specifies that the data should be decoded with { <b>CompactPdf417</b>} (Pdf417Truncated) barcode specification
      */
     const COMPACT_PDF_417 = 57;
@@ -5134,4 +4175,189 @@ class BarCodeConfidence
     const STRONG = 100;
 }
 
+/**
+ * <p>
+ *  <p>
+ *  Deconvolution (image restorations) mode which defines level of image degradation. Originally deconvolution is a function which can restore image degraded
+ *  (convoluted) by any natural function like blur, during obtaining image by camera. Because we cannot detect image function which corrupt the image,
+ *  we have to check most well know functions like sharp or mathematical morphology.
+ *  </p>
+ *  </p><p><hr><blockquote><pre>
+ *  This sample shows how to use Deconvolution mode
+ *  <pre>
+ * @code
+ *  $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39_EXTENDED, DecodeType::CODE_128));
+ *  $reader->getQualitySettings()->setDeconvolution(DeconvolutionMode::SLOW);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *  }
+ * @endcode
+ * 	</pre>
+ *  </pre></blockquote></hr></p>
+ */
+class DeconvolutionMode
+{
+    /**
+     * <p>Enables fast deconvolution methods for high quality images.</p>
+     */
+    const FAST = 0;
+    /**
+     * <p>Enables normal deconvolution methods for common images.</p>
+     */
+    const NORMAL = 1;
+    /**
+     * <p>Enables slow deconvolution methods for low quality images.</p>
+     */
+    const SLOW = 2;
+};
+/**
+ * <p>
+ * <p>
+ * Mode which enables or disables additional recognition of barcodes on images with inverted colors (luminance).
+ * </p>
+ * </p><p><hr><blockquote><pre>
+ *  This sample shows how to use InverseImage mode
+ *  <pre>
+ *
+ * @code
+ *  $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39_EXTENDED, DecodeType::CODE_128));
+ *  $reader->getQualitySettings()->setInverseImage(InverseImageMode::ENABLED);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *  }
+ * @endcode
+ * 	</pre>
+ *  </pre></blockquote></hr></p>
+ */
+class InverseImageMode
+{
+    /**
+     * <p>At this time the same as Disabled. Disables additional recognition of barcodes on inverse images.</p>
+     */
+    const AUTO = 0;
+    /**
+     * <p>Disables additional recognition of barcodes on inverse images.</p>
+     */
+    const DISABLED = 1;
+    /**
+     * <p>Enables additional recognition of barcodes on inverse images</p>
+     */
+    const ENABLED = 2;
+};
+
+/**
+ * <p>
+ *  <p>
+ *  Recognition mode which sets size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
+ *  </p>
+ *  </p><p><hr><blockquote><pre>
+ *  This sample shows how to use XDimension mode
+ *  <pre>
+ * @code
+ *  $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39_EXTENDED, DecodeType::CODE_128));
+ *  $reader->getQualitySettings()->setXDimension(XDimensionMode::SMALL);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *  }
+ * @endcode
+ * 	</pre>
+ *  </pre></blockquote></hr></p>
+ */
+class XDimensionMode
+{
+    /**
+     * <p>Value of XDimension is detected by AI (SVM). At this time the same as Normal</p>
+     */
+    const AUTO = 0;
+    /**
+     * <p>Detects barcodes with small XDimension in 1 pixel or more with quality from BarcodeQuality</p>
+     */
+    const SMALL = 1;
+    /**
+     * <p>Detects barcodes with classic XDimension in 2 pixels or more with quality from BarcodeQuality or high quality barcodes.</p>
+     */
+    const NORMAL = 2;
+    /**
+     * <p>Detects barcodes with large XDimension with quality from BarcodeQuality captured with high-resolution cameras.</p>
+     */
+    const LARGE = 3;
+    /**
+     * <p>Detects barcodes from size set in MinimalXDimension with quality from BarcodeQuality</p>
+     */
+    const USE_MINIMAL_X_DIMENSION = 4;
+}
+
+/**
+ * <p>
+ *  <p>
+ *  Mode which enables or disables additional recognition of color barcodes on color images.
+ *  </p>
+ *  </p><p><hr><blockquote><pre>
+ *  This sample shows how to use ComplexBackground mode
+ *  <pre>
+ * @code
+ *  $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39_EXTENDED, DecodeType::CODE_128));
+ *  $reader->getQualitySettings()->setComplexBackground(ComplexBackgroundMode::ENABLED);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *  }
+ * @endcode
+ * 	</pre>
+ *  </pre></blockquote></hr></p>
+ */
+class ComplexBackgroundMode
+{
+    /**
+     * <p>At this time the same as Disabled. Disables additional recognition of color barcodes on color images.</p>
+     */
+    const AUTO = 0;
+    /**
+     * <p>Disables additional recognition of color barcodes on color images.</p>
+     */
+    const DISABLED = 1;
+    /**
+     * <p>Enables additional recognition of color barcodes on color images.</p>
+     */
+    const ENABLED = 2;
+
+}
+
+/**
+ * <p>
+ *  <p>
+ *  Mode which enables methods to recognize barcode elements with the selected quality. Barcode element with lower quality requires more hard methods which slows the recognition.
+ *  </p>
+ *  </p><p><hr><blockquote><pre>
+ *  This sample shows how to use BarcodeQuality mode
+ *  <pre>
+ * @code
+ *  $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39_EXTENDED, DecodeType::CODE_128));
+ *  $reader->getQualitySettings()->setBarcodeQuality(BarcodeQualityMode::LOW);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *  }
+ * @endcode
+ * 	</pre>
+ *  </pre></blockquote></hr></p>
+ */
+class BarcodeQualityMode
+{
+    /**
+     * <p>Enables recognition methods for High quality barcodes.</p>
+     */
+    const HIGH = 0;
+    /**
+     * <p>Enables recognition methods for Common(Normal) quality barcodes.</p>
+     */
+    const NORMAL = 1;
+    /**
+     * <p>Enables recognition methods for Low quality barcodes.</p>
+     */
+    const LOW = 2;
+}
 ?>

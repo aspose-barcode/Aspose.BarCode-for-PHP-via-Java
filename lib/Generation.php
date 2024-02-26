@@ -4090,6 +4090,48 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
+     * <p>
+     * Version of MicroQR Code. From version M1 to version M4.
+     * Default value is MicroQRVersion.Auto.
+     * </p>
+     */
+    public function getMicroQRVersion() : int
+    {
+        return java_cast($this->getJavaClass()->getMicroQRVersion(), "integer");
+    }
+    /**
+     * <p>
+     * Version of MicroQR Code. From version M1 to version M4.
+     * Default value is MicroQRVersion.Auto.
+     * </p>
+     */
+    public function setMicroQRVersion(int $value) : void
+    {
+        $this->getJavaClass()->setMicroQRVersion($value);
+    }
+
+    /**
+     * <p>
+     * Version of RectMicroQR Code. From version R7x59 to version R17x139.
+     * Default value is RectMicroQRVersion.Auto.
+     * </p>
+     */
+    public function getRectMicroQrVersion() : int
+    {
+        return java_cast($this->getJavaClass()->getRectMicroQrVersion(), "integer");
+    }
+    /**
+     * <p>
+     * Version of RectMicroQR Code. From version R7x59 to version R17x139.
+     * Default value is RectMicroQRVersion.Auto.
+     * </p>
+     */
+    public function setRectMicroQrVersion(int $value) : void
+    {
+        $this->getJavaClass()->setRectMicroQrVersion($value);
+    }
+
+    /**
      * Height/Width ratio of 2D BarCode module.
      */
     public function getAspectRatio(): float
@@ -8482,6 +8524,16 @@ class EncodeTypes
      */
     const GS_1_HAN_XIN = 80;
 
+    /**
+     * Specifies that the data should be encoded with <b>MicroQR Code</b> barcode specification
+     */
+    const MICRO_QR = 83;
+
+    /**
+     * Specifies that the data should be encoded with <b>RectMicroQR (rMQR) Code</b> barcode specification
+     */
+    const RECT_MICRO_QR = 84;
+
     public static function parse(string $encodeTypeName) : int
     {
         if($encodeTypeName == "CODABAR") return 0;
@@ -8647,6 +8699,10 @@ class EncodeTypes
         else if($encodeTypeName == "HAN_XIN") return 79;
 
         else if($encodeTypeName == "GS_1_HAN_XIN") return 80;
+
+        else if($encodeTypeName == "MICRO_QR") return 83;
+
+        else if($encodeTypeName == "RECT_MICRO_QR") return 84;
 
         else return -1;
     }
@@ -10431,5 +10487,291 @@ class AztecEncodeMode
      * </p>
      */
     const EXTENDED_CODETEXT = 2;
+}
+
+/**
+ * <p>
+ * Version of MicroQR Code.
+ * From M1 to M4.
+ * </p>
+ */
+class MicroQRVersion
+{
+    /**
+     * <p>
+     * Specifies to automatically pick up the best version for MicroQR.
+     * This is default value.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * <p>
+     * Specifies version M1 for Micro QR with 11 x 11 modules.
+     * </p>
+     */
+    const M1 = 1;
+
+    /**
+     * <p>
+     * Specifies version M2 for Micro QR with 13 x 13 modules.
+     * </p>
+     */
+    const M2 = 2;
+
+    /**
+     * <p>
+     * Specifies version M3 for Micro QR with 15 x 15 modules.
+     * </p>
+     */
+    const M3 = 3;
+
+    /**
+     * <p>
+     * Specifies version M4 for Micro QR with 17 x 17 modules.
+     * </p>
+     */
+    const M4 = 4;
+}
+
+/**
+ * <p>
+ * Version of RectMicroQR Code.
+ * From version R7x43 to version R17x139.
+ * </p>
+ */
+class RectMicroQRVersion
+{
+    /**
+     * <p>
+     * Specifies to automatically pick up the best version for RectMicroQR.
+     * This is default value.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * <p>
+     * Specifies version with 7 x 43 modules.
+     * </p>
+     */
+    const R7x43 = 1;
+
+    /**
+     * <p>
+     * Specifies version with 7 x 59 modules.
+     * </p>
+     */
+    const R7x59 = 2;
+
+    /**
+     * <p>
+     * Specifies version with 7 x 77 modules.
+     * </p>
+     */
+    const R7x77 = 3;
+
+    /**
+     * <p>
+     * Specifies version with 7 x 99 modules.
+     * </p>
+     */
+    const R7x99 = 4;
+
+    /**
+     * <p>
+     * Specifies version with 7 x 139 modules.
+     * </p>
+     */
+    const R7x139 = 5;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 43 modules.
+     * </p>
+     */
+    const R9x43 = 6;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 59 modules.
+     * </p>
+     */
+    const R9x59 = 7;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 77 modules.
+     * </p>
+     */
+    const R9x77 = 8;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 99 modules.
+     * </p>
+     */
+    const R9x99 = 9;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 139 modules.
+     * </p>
+     */
+    const R9x139 = 10;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 27 modules.
+     * </p>
+     */
+    const R11x27 = 11;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 43 modules.
+     * </p>
+     */
+    const R11x43 = 12;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 59 modules.
+     * </p>
+     */
+    const R11x59 = 13;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 77 modules.
+     * </p>
+     */
+    const R11x77 = 14;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 99 modules.
+     * </p>
+     */
+    const R11x99 = 15;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 139 modules.
+     * </p>
+     */
+    const R11x139 = 16;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 27 modules.
+     * </p>
+     */
+    const R13x27 = 17;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 43 modules.
+     * </p>
+     */
+    const R13x43 = 18;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 59 modules.
+     * </p>
+     */
+    const R13x59 = 19;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 77 modules.
+     * </p>
+     */
+    const R13x77 = 20;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 99 modules.
+     * </p>
+     */
+    const R13x99 = 21;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 139 modules.
+     * </p>
+     */
+    const R13x139 = 22;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 43 modules.
+     * </p>
+     */
+    const R15x43 = 23;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 59 modules.
+     * </p>
+     */
+    const R15x59 = 24;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 77 modules.
+     * </p>
+     */
+    const R15x77 = 25;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 99 modules.
+     * </p>
+     */
+    const R15x99 = 26;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 139 modules.
+     * </p>
+     */
+    const R15x139 = 27;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 43 modules.
+     * </p>
+     */
+    const R17x43 = 28;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 59 modules.
+     * </p>
+     */
+    const R17x59 = 29;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 77 modules.
+     * </p>
+     */
+    const R17x77 = 30;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 99 modules.
+     * </p>
+     */
+    const R17x99 = 31;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 139 modules.
+     * </p>
+     */
+    const R17x139 = 32;
 }
 ?>

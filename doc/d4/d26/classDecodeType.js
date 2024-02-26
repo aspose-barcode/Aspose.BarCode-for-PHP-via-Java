@@ -78,6 +78,7 @@ var classDecodeType =
     [ "\u202APOSTNET", "d4/d26/classDecodeType.html#a3ecd7bf64076c6e53c48e221daaabe89", null ],
     [ "\u202APZN", "d4/d26/classDecodeType.html#a1e7a9c726581e144ef22413a4436175f", null ],
     [ "\u202AQR", "d4/d26/classDecodeType.html#a14cf8974dac3ae7113777743b039bfa7", null ],
+    [ "\u202ARECT_MICRO_QR", "d4/d26/classDecodeType.html#aa3f0fd78ed538465300d6d8106dc8a44", null ],
     [ "\u202ARM_4_SCC", "d4/d26/classDecodeType.html#aca777af1d5b62da7defd07d8a634014f", null ],
     [ "\u202ASCC_14", "d4/d26/classDecodeType.html#a99687e90b8ac39354e5ff4687516a5f5", null ],
     [ "\u202ASSCC_18", "d4/d26/classDecodeType.html#a9488829232388294f73d6c021b69dc69", null ],

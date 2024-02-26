@@ -6,6 +6,7 @@ var hierarchy =
     [ "\u202AAztecSymbolMode", "d1/d1b/classAztecSymbolMode.html", null ],
     [ "\u202ABarcodeClassifications", "d2/d59/classBarcodeClassifications.html", null ],
     [ "\u202ABarCodeConfidence", "d2/d46/classBarCodeConfidence.html", null ],
+    [ "\u202ABarcodeQualityMode", "db/d40/classBarcodeQualityMode.html", null ],
     [ "\u202ABaseJavaClass", "de/d5e/classBaseJavaClass.html", [
       [ "\u202AAddress", "de/d6b/classAddress.html", null ],
       [ "\u202AAlternativeScheme", "d9/dae/classAlternativeScheme.html", null ],
@@ -20,7 +21,6 @@ var hierarchy =
       [ "\u202ABarcodeGenerator", "d0/dfb/classBarcodeGenerator.html", null ],
       [ "\u202ABarcodeParameters", "dd/dfd/classBarcodeParameters.html", null ],
       [ "\u202ABarcodeSettings", "d2/df3/classBarcodeSettings.html", null ],
-      [ "\u202ABarcodeSvmDetectorSettings", "d3/ddf/classBarcodeSvmDetectorSettings.html", null ],
       [ "\u202ABaseGenerationParameters", "de/d44/classBaseGenerationParameters.html", null ],
       [ "\u202ABorderParameters", "da/dc1/classBorderParameters.html", null ],
       [ "\u202ACaptionParameters", "d2/de9/classCaptionParameters.html", null ],
@@ -98,12 +98,14 @@ var hierarchy =
     [ "\u202ACode128EncodeMode", "d8/df7/classCode128EncodeMode.html", null ],
     [ "\u202ACode128SubType", "d0/d19/classCode128SubType.html", null ],
     [ "\u202ACodeLocation", "d8/df0/classCodeLocation.html", null ],
+    [ "\u202AComplexBackgroundMode", "d0/d68/classComplexBackgroundMode.html", null ],
     [ "\u202AComplexCodetextReader", "d2/d0c/classComplexCodetextReader.html", null ],
     [ "\u202ACustomerInformationInterpretingType", "d5/d35/classCustomerInformationInterpretingType.html", null ],
     [ "\u202ADataMatrixEccType", "df/d47/classDataMatrixEccType.html", null ],
     [ "\u202ADataMatrixEncodeMode", "d1/d09/classDataMatrixEncodeMode.html", null ],
     [ "\u202ADataMatrixVersion", "db/d41/classDataMatrixVersion.html", null ],
     [ "\u202ADecodeType", "d4/d26/classDecodeType.html", null ],
+    [ "\u202ADeconvolutionMode", "da/d51/classDeconvolutionMode.html", null ],
     [ "\u202ADotCodeEncodeMode", "df/d22/classDotCodeEncodeMode.html", null ],
     [ "\u202AEncodeTypes", "d5/d0f/classEncodeTypes.html", null ],
     [ "\u202AException", null, [
@@ -116,8 +118,10 @@ var hierarchy =
     [ "\u202AHanXinEncodeMode", "d6/d56/classHanXinEncodeMode.html", null ],
     [ "\u202AHanXinErrorLevel", "d4/dd3/classHanXinErrorLevel.html", null ],
     [ "\u202AHanXinVersion", "d5/d05/classHanXinVersion.html", null ],
+    [ "\u202AInverseImageMode", "d2/d15/classInverseImageMode.html", null ],
     [ "\u202AITF14BorderType", "d3/de2/classITF14BorderType.html", null ],
     [ "\u202AMacroCharacter", "dc/daf/classMacroCharacter.html", null ],
+    [ "\u202AMicroQRVersion", "d3/d00/classMicroQRVersion.html", null ],
     [ "\u202APatchFormat", "d0/d26/classPatchFormat.html", null ],
     [ "\u202APdf417CompactionMode", "d2/d92/classPdf417CompactionMode.html", null ],
     [ "\u202APdf417ErrorLevel", "d7/d65/classPdf417ErrorLevel.html", null ],
@@ -126,5 +130,7 @@ var hierarchy =
     [ "\u202AQREncodeType", "d7/d8a/classQREncodeType.html", null ],
     [ "\u202AQRErrorLevel", "d3/d7d/classQRErrorLevel.html", null ],
     [ "\u202AQRVersion", "d8/d37/classQRVersion.html", null ],
-    [ "\u202ATextAlignment", "dc/d31/classTextAlignment.html", null ]
+    [ "\u202ARectMicroQRVersion", "d7/d88/classRectMicroQRVersion.html", null ],
+    [ "\u202ATextAlignment", "dc/d31/classTextAlignment.html", null ],
+    [ "\u202AXDimensionMode", "da/d50/classXDimensionMode.html", null ]
 ];
