@@ -4190,7 +4190,7 @@ class BarCodeConfidence
  *  $reader->getQualitySettings()->setDeconvolution(DeconvolutionMode::SLOW);
  *  foreach($reader->readBarCodes() as $result)
  *  {
- *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *     print("BarCode CodeText: " . $result->getCodeText());
  *  }
  * @endcode
  * 	</pre>
@@ -4225,7 +4225,7 @@ class DeconvolutionMode
  *  $reader->getQualitySettings()->setInverseImage(InverseImageMode::ENABLED);
  *  foreach($reader->readBarCodes() as $result)
  *  {
- *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *     print("BarCode CodeText: " . $result->getCodeText());
  *  }
  * @endcode
  * 	</pre>
@@ -4260,7 +4260,7 @@ class InverseImageMode
  *  $reader->getQualitySettings()->setXDimension(XDimensionMode::SMALL);
  *  foreach($reader->readBarCodes() as $result)
  *  {
- *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *     print("BarCode CodeText: " . $result->getCodeText());
  *  }
  * @endcode
  * 	</pre>
@@ -4303,7 +4303,7 @@ class XDimensionMode
  *  $reader->getQualitySettings()->setComplexBackground(ComplexBackgroundMode::ENABLED);
  *  foreach($reader->readBarCodes() as $result)
  *  {
- *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *     print("BarCode CodeText: " . $result->getCodeText());
  *  }
  * @endcode
  * 	</pre>
@@ -4339,7 +4339,7 @@ class ComplexBackgroundMode
  *  $reader->getQualitySettings()->setBarcodeQuality(BarcodeQualityMode::LOW);
  *  foreach($reader->readBarCodes() as $result)
  *  {
- *     console.log("BarCode CodeText: " . $result->getCodeText());
+ *     print("BarCode CodeText: " . $result->getCodeText());
  *  }
  * @endcode
  * 	</pre>

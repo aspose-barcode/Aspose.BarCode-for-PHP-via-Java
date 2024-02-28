@@ -5698,7 +5698,7 @@ class AztecParameters extends BaseJavaClass
      */
     public function getCodeTextEncoding() : string
     {
-        console.log('This function is deprecated.');
+        print('This function is deprecated.');
         return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
     }
 
@@ -5710,7 +5710,7 @@ class AztecParameters extends BaseJavaClass
      */
     public function setCodeTextEncoding(string $codeTextEncoding) : void
     {
-        console.log('This function is deprecated.');
+        print('This function is deprecated.');
         $this->getJavaClass()->setCodeTextEncoding($codeTextEncoding);
     }
 
