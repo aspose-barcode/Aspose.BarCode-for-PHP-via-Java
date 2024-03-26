@@ -67,6 +67,7 @@ var hierarchy =
         [ "\u202ASwissQRCodetext", "dd/df6/classSwissQRCodetext.html", null ]
       ] ],
       [ "\u202AITFParameters", "db/d00/classITFParameters.html", null ],
+      [ "\u202AImageParameters", "dc/d89/classImageParameters.html", null ],
       [ "\u202ALicense", "d8/d8c/classLicense.html", null ],
       [ "\u202AMaxiCodeExtendedParameters", "d6/d16/classMaxiCodeExtendedParameters.html", null ],
       [ "\u202AMaxiCodeParameters", "d6/dd0/classMaxiCodeParameters.html", null ],
@@ -88,6 +89,7 @@ var hierarchy =
       [ "\u202AQualitySettings", "d1/d04/classQualitySettings.html", null ],
       [ "\u202ARectangle", "de/d00/classRectangle.html", null ],
       [ "\u202ASupplementParameters", "d8/d05/classSupplementParameters.html", null ],
+      [ "\u202ASvgParameters", "d3/db7/classSvgParameters.html", null ],
       [ "\u202ASwissQRBill", "de/d9a/classSwissQRBill.html", null ],
       [ "\u202AUnit", "df/dd9/classUnit.html", null ]
     ] ],

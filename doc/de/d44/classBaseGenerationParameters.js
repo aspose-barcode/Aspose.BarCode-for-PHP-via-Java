@@ -6,6 +6,7 @@ var classBaseGenerationParameters =
     [ "\u202AgetBorder", "de/d44/classBaseGenerationParameters.html#a84ae94e4f4a57c829a0cfa4886aac8e8", null ],
     [ "\u202AgetCaptionAbove", "de/d44/classBaseGenerationParameters.html#a8e15f2c555f1e72488d93270d5a39488", null ],
     [ "\u202AgetCaptionBelow", "de/d44/classBaseGenerationParameters.html#ae369481be4c465a9fc8fe5c4d47ee32b", null ],
+    [ "\u202AgetImage", "de/d44/classBaseGenerationParameters.html#af79082a0d42c51d5b8d153a48f562efe", null ],
     [ "\u202AgetImageHeight", "de/d44/classBaseGenerationParameters.html#a3264517ad6f059f83e5aecd5f96ab6a3", null ],
     [ "\u202AgetImageWidth", "de/d44/classBaseGenerationParameters.html#a979bfcf470247f6436403bbefcc63c1a", null ],
     [ "\u202AgetJavaClass", "de/d44/classBaseGenerationParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],

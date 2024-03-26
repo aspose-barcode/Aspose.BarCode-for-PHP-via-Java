@@ -26,7 +26,7 @@ class BarCodeReader extends BaseJavaClass
     /**
      * BarCodeReader constructor. Initializes a new instance of the BarCodeReader
      * @param string $resource image encoded as base64 string or path to image resource (located in the file system or via http)
-     * @param int|array|null $rectangles array of object by type Rectangle
+     * @param Rectangle|array|null $rectangles array of object by type Rectangle
      * @param int|array|null $decodeTypes array of decode types
      * @throws BarcodeException
      */
@@ -40,6 +40,8 @@ class BarCodeReader extends BaseJavaClass
                     $rectangles = array($rectangles);
                 for($i = 0; $i < sizeof($rectangles);$i ++)
                 {
+                    if(!($rectangles[$i] instanceof Rectangle))
+                        throw new Exception();
                     $rectangles[$i] = $rectangles[$i]->toString();
                 }
             }
@@ -2267,11 +2269,12 @@ final class QualitySettings extends BaseJavaClass
     {
         return java_cast($this->getJavaClass()->getAllowIncorrectBarcodes(), "boolean");
     }
+
     /**
      * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values. Mode can be used to recognize damaged barcodes with incorrect text.
      * @param $value: Allows engine to recognize incorrect barcodes.
      */
-    public function setAllowIncorrectBarcodes(int $value) : void
+    public function setAllowIncorrectBarcodes(bool $value) : void
     {
         $this->getJavaClass()->setAllowIncorrectBarcodes($value);
     }

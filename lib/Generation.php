@@ -1012,6 +1012,7 @@ class BaseGenerationParameters extends BaseJavaClass
     private $captionBelow;
     private $barcodeParameters;
     private $borderParameters;
+    private $image;
 
     private $imageWidth;
     private $imageHeight;
@@ -1026,6 +1027,7 @@ class BaseGenerationParameters extends BaseJavaClass
             $this->borderParameters = new BorderParameters($this->getJavaClass()->getBorder());
             $this->imageWidth = new Unit($this->getJavaClass()->getImageWidth());
             $this->imageHeight = new Unit($this->getJavaClass()->getImageHeight());
+            $this->image = new ImageParameters($this->getJavaClass()->getImage());
         }
         catch (Exception $ex)
         {
@@ -1130,6 +1132,15 @@ class BaseGenerationParameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * Image parameters. See <see cref="ImageParameters"/>.
+     * @return
+     */
+    public function getImage() : ImageParameters
+    {
+        return $this->image;
     }
 
     /**
@@ -7087,8 +7098,94 @@ class HanXinExtCodetextBuilder extends BaseJavaClass
      * @return Codetext in Extended mode
      */
     public function getExtendedCodetext() : String
-{
+    {
         return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+    }
+}
+
+/**
+ * Image parameters.
+ */
+class ImageParameters extends BaseJavaClass
+{
+    private $svg;
+
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    function init() : void
+    {
+        $this->svg = new SvgParameters($this->getJavaClass()->getSvg());
+    }
+
+    /**
+     * SVG parameters
+     */
+    function getSvg() : SvgParameters
+    {
+        return $this->svg;
+    }
+
+    /**
+     * SVG parameters
+     */
+    function setSvg(SvgParameters $svg) : void
+    {
+        $this->svg = $svg;
+        $this->getJavaClass()->setSvg($svg->getJavaClass());
+    }
+}
+
+/**
+ * SVG parameters.
+ */
+class SvgParameters extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    function init() : void
+    {
+    }
+
+    /**
+     * Does SVG image contain explicit size in pixels (recommended)
+     * Default value: true.
+     */
+    function isExplicitSizeInPixels() : bool
+    {
+        return java_cast($this->getJavaClass()->isExplicitSizeInPixels(), "boolean");
+    }
+
+    /**
+     * Does SVG image contain explicit size in pixels (recommended)
+     * Default value: true.
+     */
+    function setExplicitSizeInPixels(bool $explicitSizeInPixels) : void
+    {
+        $this->getJavaClass()->setExplicitSizeInPixels($explicitSizeInPixels);
+    }
+
+    /**
+     * Does SVG image contain text as text element rather than paths (recommended)
+     * Default value: true.
+     */
+    function isTextDrawnInTextElement() : bool
+    {
+        return java_cast($this->getJavaClass()->isTextDrawnInTextElement(), "boolean");
+    }
+
+    /**
+     * Does SVG image contain text as text element rather than paths (recommended)
+     * Default value: true.
+     */
+    function setTextDrawnInTextElement(bool $textDrawnInTextElement) : void
+    {
+        $this->getJavaClass()->setTextDrawnInTextElement($textDrawnInTextElement);
     }
 }
 

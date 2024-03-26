@@ -14,7 +14,7 @@ var classQualitySettings =
     [ "\u202Ainit", "d1/d04/classQualitySettings.html#a0796c41639d2d13f4c982d182f8fffc9", null ],
     [ "\u202AisNull", "d1/d04/classQualitySettings.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d1/d04/classQualitySettings.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
-    [ "\u202AsetAllowIncorrectBarcodes", "d1/d04/classQualitySettings.html#a3d91fec95c646fb81a5fed51de521342", null ],
+    [ "\u202AsetAllowIncorrectBarcodes", "d1/d04/classQualitySettings.html#a12c856f33ae70d840b3bb25a428b0f6f", null ],
     [ "\u202AsetBarcodeQuality", "d1/d04/classQualitySettings.html#a47e4b06075bacf394ba72bce894c8fa0", null ],
     [ "\u202AsetComplexBackground", "d1/d04/classQualitySettings.html#a9b11dd3902a017c0f67b1ba712415d89", null ],
     [ "\u202AsetDeconvolution", "d1/d04/classQualitySettings.html#a93fcf18089b69180343b456481762972", null ],
