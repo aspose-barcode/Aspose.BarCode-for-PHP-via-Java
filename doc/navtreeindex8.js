@@ -1,5 +1,8 @@
 var NAVTREEINDEX8 =
 {
+"df/d7b/classComplexBarcodeGenerator.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,40,7],
+"df/d7b/classComplexBarcodeGenerator.html#ad403f9fcaa8b369af35818d526e07f88":[0,0,40,0],
+"df/d90/classHIBCLICCombinedCodetext.html":[0,0,71],
 "df/d90/classHIBCLICCombinedCodetext.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,71,4],
 "df/d90/classHIBCLICCombinedCodetext.html#a067ecf5544bf0cc47ebda3001f254916":[0,0,71,2],
 "df/d90/classHIBCLICCombinedCodetext.html#a1a9e30ba724d0f860c3902274b7b6598":[0,0,71,17],
@@ -82,8 +85,8 @@ var NAVTREEINDEX8 =
 "functions_t.html":[0,3,0,20],
 "functions_u.html":[0,3,0,21],
 "functions_v.html":[0,3,0,22],
-"functions_vars.html":[0,3,2,0],
 "functions_vars.html":[0,3,2],
+"functions_vars.html":[0,3,2,0],
 "functions_vars_a.html":[0,3,2,1],
 "functions_vars_b.html":[0,3,2,2],
 "functions_vars_c.html":[0,3,2,3],

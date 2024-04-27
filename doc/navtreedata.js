@@ -44,11 +44,11 @@ var NAVTREEINDEX =
 "d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
 "d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593",
 "d5/d0f/classEncodeTypes.html#a86411b550a670522586486c273d47b37",
-"d6/dfb/classPostalParameters.html",
-"d8/dae/classBarCodeReader.html#a45d21023b4389685c0582579161ad165",
-"db/d41/classDataMatrixVersion.html#aeeb97e674bcac0bb1a3fa1c9f319f493",
-"dd/dc2/classQrExtCodetextBuilder.html#a05ed9335956ecce2efde24e07a0fcf7e",
-"df/d90/classHIBCLICCombinedCodetext.html#a05ed9335956ecce2efde24e07a0fcf7e"
+"d6/de0/classCode128Parameters.html#ab89fbe1c25820614d92e72a7d8521586",
+"d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325",
+"db/d41/classDataMatrixVersion.html#aeb247e02366a3a793d184b10eb9c05ee",
+"dd/d96/classHIBCLICPrimaryDataCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1",
+"df/d7b/classComplexBarcodeGenerator.html#ac836ea8c7444cc5ccd8499b1ae405ef1"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

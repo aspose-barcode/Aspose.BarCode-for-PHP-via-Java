@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"d6/de0/classCode128Parameters.html#ab89fbe1c25820614d92e72a7d8521586":[0,0,34,4],
+"d6/de0/classCode128Parameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,34,6],
 "d6/dfb/classPostalParameters.html":[0,0,104],
 "d6/dfb/classPostalParameters.html#a00eff0b51690f1dd0ce5b625f2f41d38":[0,0,104,7],
 "d6/dfb/classPostalParameters.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,104,0],
@@ -41,10 +43,10 @@ var NAVTREEINDEX4 =
 "d7/d3d/classMaxiCodeCodetextMode2.html#a1c77267e5ade46727778b607f5a081f6":[0,0,84,0],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a264c7345eb64c83446fded2fde8c2780":[0,0,84,16],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a299ba0ba39294abc1aafa282fb430b96":[0,0,84,1],
-"d7/d3d/classMaxiCodeCodetextMode2.html#a35b48c50239d50fee178cf2420929393":[0,0,84,23],
+"d7/d3d/classMaxiCodeCodetextMode2.html#a35b48c50239d50fee178cf2420929393":[0,0,84,24],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a4a6903c377e03e941b3c4e04b87559b3":[0,0,84,9],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a517e181c214f7ba22dc5a0dd4c210c55":[0,0,84,21],
-"d7/d3d/classMaxiCodeCodetextMode2.html#a5eb9fd14a69365bb151aad4bada34f83":[0,0,84,24],
+"d7/d3d/classMaxiCodeCodetextMode2.html#a5eb9fd14a69365bb151aad4bada34f83":[0,0,84,25],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,84,20],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a6c74acb2ea03b8c0f5339a15db2f44b3":[0,0,84,15],
 "d7/d3d/classMaxiCodeCodetextMode2.html#a6c7d37dec9981e0d2755016b35101a56":[0,0,84,2],
@@ -55,7 +57,8 @@ var NAVTREEINDEX4 =
 "d7/d3d/classMaxiCodeCodetextMode2.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,84,17],
 "d7/d3d/classMaxiCodeCodetextMode2.html#acb354b041d6424bb9ed66670a684d792":[0,0,84,19],
 "d7/d3d/classMaxiCodeCodetextMode2.html#adb7375fcc02c34690a842db34af0e613":[0,0,84,5],
-"d7/d3d/classMaxiCodeCodetextMode2.html#ae32119b9463a4421a17f76b98ae00acc":[0,0,84,22],
+"d7/d3d/classMaxiCodeCodetextMode2.html#ae32119b9463a4421a17f76b98ae00acc":[0,0,84,23],
+"d7/d3d/classMaxiCodeCodetextMode2.html#ae3d7fe92e71182d3b841f0842497ab8e":[0,0,84,22],
 "d7/d3d/classMaxiCodeCodetextMode2.html#af100776ae759a4e2daddc7daf30484db":[0,0,84,10],
 "d7/d65/classPdf417ErrorLevel.html":[0,0,100],
 "d7/d65/classPdf417ErrorLevel.html#a0c128b632109f0c26f15c0f382d840a8":[0,0,100,5],
@@ -246,8 +249,5 @@ var NAVTREEINDEX4 =
 "d8/d8c/classLicense.html#af2a828c84bb900fdeb81452c0524192b":[0,0,79,0],
 "d8/dae/classBarCodeReader.html":[0,0,17],
 "d8/dae/classBarCodeReader.html#a0142d9361114f67098a1cf01fdf1d12f":[0,0,17,14],
-"d8/dae/classBarCodeReader.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,17,7],
-"d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325":[0,0,17,16],
-"d8/dae/classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94":[0,0,17,5],
-"d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780":[0,0,17,11]
+"d8/dae/classBarCodeReader.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,17,7]
 };

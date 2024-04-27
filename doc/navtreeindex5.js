@@ -1,5 +1,8 @@
 var NAVTREEINDEX5 =
 {
+"d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325":[0,0,17,16],
+"d8/dae/classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94":[0,0,17,5],
+"d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780":[0,0,17,11],
 "d8/dae/classBarCodeReader.html#a45d21023b4389685c0582579161ad165":[0,0,17,3],
 "d8/dae/classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a":[0,0,17,2],
 "d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082":[0,0,17,13],
@@ -246,8 +249,5 @@ var NAVTREEINDEX5 =
 "db/d41/classDataMatrixVersion.html#adfe0d0442bc08b47d379e3d70a471e61":[0,0,51,15],
 "db/d41/classDataMatrixVersion.html#ae6994919cb18c658b65b5fd335c73a69":[0,0,51,32],
 "db/d41/classDataMatrixVersion.html#ae6f10b6937fa08a09441f5656df02028":[0,0,51,53],
-"db/d41/classDataMatrixVersion.html#ae9830dcd26a54721ca8ae59bdf97c6ca":[0,0,51,27],
-"db/d41/classDataMatrixVersion.html#aeb247e02366a3a793d184b10eb9c05ee":[0,0,51,65],
-"db/d41/classDataMatrixVersion.html#aec4b3b5829dd934334cb18f2961da1c5":[0,0,51,45],
-"db/d41/classDataMatrixVersion.html#aedd1fded2b9b5d08747d9b02bcdac491":[0,0,51,49]
+"db/d41/classDataMatrixVersion.html#ae9830dcd26a54721ca8ae59bdf97c6ca":[0,0,51,27]
 };

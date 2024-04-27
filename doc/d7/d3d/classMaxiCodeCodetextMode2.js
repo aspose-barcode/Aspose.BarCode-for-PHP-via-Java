@@ -22,6 +22,7 @@ var classMaxiCodeCodetextMode2 =
     [ "\u202AsetECIEncoding", "d7/d3d/classMaxiCodeCodetextMode2.html#acb354b041d6424bb9ed66670a684d792", null ],
     [ "\u202AsetJavaClass", "d7/d3d/classMaxiCodeCodetextMode2.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetMaxiCodeEncodeMode", "d7/d3d/classMaxiCodeCodetextMode2.html#a517e181c214f7ba22dc5a0dd4c210c55", null ],
+    [ "\u202AsetPostalCode", "d7/d3d/classMaxiCodeCodetextMode2.html#ae3d7fe92e71182d3b841f0842497ab8e", null ],
     [ "\u202AsetSecondMessage", "d7/d3d/classMaxiCodeCodetextMode2.html#ae32119b9463a4421a17f76b98ae00acc", null ],
     [ "\u202AsetServiceCategory", "d7/d3d/classMaxiCodeCodetextMode2.html#a35b48c50239d50fee178cf2420929393", null ],
     [ "\u202AJAVA_CLASS_NAME", "d7/d3d/classMaxiCodeCodetextMode2.html#a5eb9fd14a69365bb151aad4bada34f83", null ]

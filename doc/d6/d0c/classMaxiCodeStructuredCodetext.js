@@ -22,6 +22,7 @@ var classMaxiCodeStructuredCodetext =
     [ "\u202AsetECIEncoding", "d6/d0c/classMaxiCodeStructuredCodetext.html#acb354b041d6424bb9ed66670a684d792", null ],
     [ "\u202AsetJavaClass", "d6/d0c/classMaxiCodeStructuredCodetext.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetMaxiCodeEncodeMode", "d6/d0c/classMaxiCodeStructuredCodetext.html#a517e181c214f7ba22dc5a0dd4c210c55", null ],
+    [ "\u202AsetPostalCode", "d6/d0c/classMaxiCodeStructuredCodetext.html#ae3d7fe92e71182d3b841f0842497ab8e", null ],
     [ "\u202AsetSecondMessage", "d6/d0c/classMaxiCodeStructuredCodetext.html#ae32119b9463a4421a17f76b98ae00acc", null ],
     [ "\u202AsetServiceCategory", "d6/d0c/classMaxiCodeStructuredCodetext.html#a35b48c50239d50fee178cf2420929393", null ]
 ];

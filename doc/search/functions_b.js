@@ -134,7 +134,7 @@ var searchData=
   ['setpdf417truncate_1646',['setPdf417Truncate',['../d5/d2c/classPdf417Parameters.html#aa4f7d49cade6f702ea638caa7aa4e59c',1,'Pdf417Parameters']]],
   ['setpixels_1647',['setPixels',['../df/dd9/classUnit.html#a232fde4d7b27c6c1cf2fa03c48394d07',1,'Unit']]],
   ['setpoint_1648',['setPoint',['../df/dd9/classUnit.html#a80ae42b8432e823f78971f714ff69a79',1,'Unit']]],
-  ['setpostalcode_1649',['setPostalCode',['../de/d6b/classAddress.html#a2257da51a0491a9179c967f6b550de31',1,'Address']]],
+  ['setpostalcode_1649',['setPostalCode',['../de/d6b/classAddress.html#a2257da51a0491a9179c967f6b550de31',1,'Address\setPostalCode()'],['../d6/d0c/classMaxiCodeStructuredCodetext.html#ae3d7fe92e71182d3b841f0842497ab8e',1,'MaxiCodeStructuredCodetext\setPostalCode()']]],
   ['setpostalshortbarheight_1650',['setPostalShortBarHeight',['../d6/dfb/classPostalParameters.html#a00eff0b51690f1dd0ce5b625f2f41d38',1,'PostalParameters']]],
   ['setprimarydata_1651',['setPrimaryData',['../df/d90/classHIBCLICCombinedCodetext.html#aa2e2d149a6d3d957861d7313baf40956',1,'HIBCLICCombinedCodetext']]],
   ['setqreciencoding_1652',['setQrECIEncoding',['../da/ded/classQrParameters.html#aea0ff4151b284078a00a68737c95cfd6',1,'QrParameters']]],

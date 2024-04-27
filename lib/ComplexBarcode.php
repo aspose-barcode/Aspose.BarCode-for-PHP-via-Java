@@ -2722,6 +2722,15 @@ abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
     }
 
     /**
+     * Identifies the postal code. Must be 9 digits in mode 2 or
+     * 6 alphanumeric symbols in mode 3.
+     */
+    public function setPostalCode(string $value)
+    {
+        $this->getJavaClass()->setPostalCode($value);
+    }
+
+    /**
      * Identifies 3 digit country code.
      */
     public function getCountryCode() : int
