@@ -25,53 +25,21 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * BarCodeReader constructor. Initializes a new instance of the BarCodeReader
-     * @param string $resource image encoded as base64 string or path to image resource (located in the file system or via http)
-     * @param Rectangle|array|null $rectangles array of object by type Rectangle
+     * @param string|GdImage $imageResource image encoded as GDImage, file resource, base64 string or path to image resource (located in the file system or via http)
+     * @param Rectangle|array|null $areas array of object by type Rectangle
      * @param int|array|null $decodeTypes array of decode types
      * @throws BarcodeException
      */
-    public function __construct(?string $image, $rectangles, $decodeTypes)
+    public function __construct($imageResource, $areas, $decodeTypes)
     {
         try
         {
-            if (!is_null($rectangles))
-            {
-                if(!is_array($rectangles))
-                    $rectangles = array($rectangles);
-                for($i = 0; $i < sizeof($rectangles);$i ++)
-                {
-                    if(!($rectangles[$i] instanceof Rectangle))
-                        throw new Exception();
-                    $rectangles[$i] = $rectangles[$i]->toString();
-                }
-            }
-            if (!is_null($decodeTypes) && !is_array($decodeTypes))
-            {
-                $decodeTypes = array($decodeTypes);
-            }
+            $stringFormattedAreas = convertAreasToStringFormattedAreas($areas);
+            $decodeTypesArray = convertDecodeTypeToFormattedDecodeType($decodeTypes);
 
-
-            if ($image == null && $rectangles == null && $decodeTypes == null)
-            {
-                $java_class = new java(self::JAVA_CLASS_NAME);
-                parent::__construct($java_class);
-                return;
-            }
-            if (isBase64Encoded($image))
-            {
-                $java_class = new java(self::JAVA_CLASS_NAME, $image, $rectangles, $decodeTypes);
-                parent::__construct($java_class);
-                return;
-            }
-            if (isPath($image))
-            {
-                $image_base64 = convertImagePathToBase64String($image);
-                $java_class = new java(self::JAVA_CLASS_NAME, $image_base64, $rectangles, $decodeTypes);
-                parent::__construct($java_class);
-                return;
-            }
-            throw new BarcodeException("Passed argument should be path to image file or Base64 encoded image");
-
+            $base64Image = convertImageResourceToBase64($imageResource);
+            $java_class = new java(self::JAVA_CLASS_NAME, $base64Image, $stringFormattedAreas, $decodeTypesArray);
+            parent::__construct($java_class);
         }
         catch (Exception $ex)
         {
@@ -80,7 +48,7 @@ class BarCodeReader extends BaseJavaClass
         }
     }
 
-    static function construct($javaClass): BarCodeReader
+    private static function construct($javaClass): BarCodeReader
     {
         $barcodeReader = new BarCodeReader(null, null, null);
         $barcodeReader->setJavaClass($javaClass);
@@ -89,7 +57,7 @@ class BarCodeReader extends BaseJavaClass
 
     /**
      * Determines whether any of the given decode types is included into
-     * @param $decodeTypes Types to verify.
+     * @param array $decodeTypes Types to verify.
      * @return bool Value is a true if any types are included into.
      */
     public function containsAny(...$decodeTypes): bool
@@ -109,7 +77,7 @@ class BarCodeReader extends BaseJavaClass
         try
         {
             $this->qualitySettings = new QualitySettings($this->getJavaClass()->getQualitySettings());
-            $this->barcodeSettings = BarcodeSettings::construct($this->getJavaClass()->getBarcodeSettings());
+            $this->barcodeSettings = new BarcodeSettings($this->getJavaClass()->getBarcodeSettings());
         }
         catch (Exception $ex)
         {
@@ -364,29 +332,13 @@ class BarCodeReader extends BaseJavaClass
      * @param Rectangle|null $areas areas list for recognition
      * @throws BarcodeException
      */
-    public final function setBarCodeImage(string $resource, ?Rectangle ...$areas): void
+    public final function setBarCodeImage($imageResource, ?Rectangle ...$areas): void
     {
         try
         {
-            $image = convertResourceToBase64String($resource);
-            $stringAreas = array();
-            $isAllRectanglesNotNull = false;
-            if (!is_null($areas) && sizeof($areas) > 0)
-            {
-                for ($i = 0; $i < sizeof($areas); $i++)
-                {
-                    if (!is_null($areas[$i]))
-                    {
-                        $isAllRectanglesNotNull |= true;
-                        $stringAreas[$i] = $areas[$i]->toString();
-                    }
-                }
-                if (!$isAllRectanglesNotNull)
-                {
-                    $stringAreas = null;
-                }
-            }
-            $this->getJavaClass()->setBarCodeImage($image, $stringAreas);
+            $base64Image = convertImageResourceToBase64($imageResource);
+            $stringFormattedAreas = convertAreasToStringFormattedAreas($areas);
+            $this->getJavaClass()->setBarCodeImage($base64Image, $stringFormattedAreas);
         }
         catch (Exception $ex)
         {
@@ -423,11 +375,14 @@ class BarCodeReader extends BaseJavaClass
         $this->getJavaClass()->setBarcodeReadType($types);
     }
 
-    public function getBarCodeDecodeType(): int
+    public function getBarCodeDecodeType(): array
     {
         try
         {
-            return java_cast($this->getJavaClass()->getBarCodeDecodeType(), "integer");
+            $barcodeTypesArray = array();
+            foreach($this->getJavaClass()->getBarCodeDecodeType() as $javaInteger)
+                array_push($barcodeTypesArray, java_cast($javaInteger, "integer"));
+            return $barcodeTypesArray;
         }
         catch (Exception $ex)
         {
@@ -1315,7 +1270,7 @@ final class Code128ExtendedParameters extends BaseJavaClass
         $code128DataPortions = array();
         for ($i = 0; $i < sizeof($code128DataPortionsValues); $i++)
         {
-            $code128DataPortions[$i] = Code128DataPortion::construct($code128DataPortionsValues[$i]);
+            array_push($code128DataPortions, new Code128DataPortion($code128DataPortionsValues[$i]));
         }
         return $code128DataPortions;
     }
@@ -1607,12 +1562,7 @@ final class BarCodeResult extends BaseJavaClass
         return new BarCodeResult($this);
     }
 
-    /**
-     * Creates a a copy of the BarCodeResult class.
-     *
-     * @param result An copy BarCodeResult instance.TODO
-     */
-    public function __construct($javaClass)
+    function __construct($javaClass)
     {
         try
         {
@@ -1808,7 +1758,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
         }
     }
 
-    public function __construct($javaClass)
+    function __construct($javaClass)
     {
         try
         {
@@ -2002,15 +1952,11 @@ class BarCodeExtendedParameters extends BaseJavaClass
 final class QualitySettings extends BaseJavaClass
 {
 
-    function __construct($qualitySettings)
+    function __construct($javaClass)
     {
         try
         {
-            parent::__construct(self::initQualitySettings($qualitySettings));
-            if ($qualitySettings instanceof QualitySettings)
-            {
-                $this->applyAll($qualitySettings);
-            }
+            parent::__construct($javaClass);
         }
         catch (Exception $ex)
         {
@@ -2018,18 +1964,11 @@ final class QualitySettings extends BaseJavaClass
         }
     }
 
-    private static function initQualitySettings($qualitySettings)
+    private static function initQualitySettings()
     {
         $javaClassName = "com.aspose.mw.barcode.recognition.MwQualitySettings";
-        if ($qualitySettings instanceof QualitySettings || is_null($qualitySettings))
-        {
             return new java($javaClassName);
         }
-        else
-        {
-            return $qualitySettings;
-        }
-    }
 
     protected function init(): void
     {
@@ -2049,8 +1988,8 @@ final class QualitySettings extends BaseJavaClass
     {
         try
         {
-            $qualitySettings = new QualitySettings(null);
-            return new QualitySettings($qualitySettings->getJavaClass()->getHighPerformance());
+            $javaQualitySettings = QualitySettings::initQualitySettings();
+            return new QualitySettings($javaQualitySettings->getHighPerformance());
         }
         catch (Exception $ex)
         {
@@ -2073,55 +2012,8 @@ final class QualitySettings extends BaseJavaClass
     {
         try
         {
-            $qualitySettings = new QualitySettings(null);
-            return new QualitySettings($qualitySettings->getJavaClass()->getNormalQuality());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * HighQualityDetection recognition quality preset. Same as NormalQuality but with high quality DetectorSettings
-     *
-     * @code
-     * $reader = new BarCodeReader("test.png");
-     * $reader->setQualitySettings(QualitySettings::getHighQualityDetection());
-     * @endcode
-     * @return QualitySettings HighQualityDetection recognition quality preset.
-     * @throws BarcodeException
-     */
-    public static function getHighQualityDetection(): QualitySettings
-    {
-        try
-        {
-            $qualitySettings = new QualitySettings(null);
-            return new QualitySettings($qualitySettings->getJavaClass()->getHighQualityDetection());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * MaxQualityDetection recognition quality preset. Same as NormalQuality but with highest quality DetectorSettings.
-     * Allows to detect diagonal and damaged barcodes.
-     *
-     * @code
-     * $reader = new BarCodeReader("test.png");
-     * $reader->setQualitySettings(QualitySettings::getMaxQualityDetection());
-     * @endcode
-     * @return QualitySettings MaxQualityDetection recognition quality preset.
-     * @throws BarcodeException
-     */
-    public static function getMaxQualityDetection(): QualitySettings
-    {
-        try
-        {
-            $qualitySettings = new QualitySettings(null);
-            return new QualitySettings($qualitySettings->getJavaClass()->getMaxQualityDetection());
+            $javaQualitySettings = QualitySettings::initQualitySettings();
+            return new QualitySettings($javaQualitySettings->getNormalQuality());
         }
         catch (Exception $ex)
         {
@@ -2143,8 +2035,39 @@ final class QualitySettings extends BaseJavaClass
     {
         try
         {
-            $qualitySettings = new QualitySettings(null);
-            return new QualitySettings($qualitySettings->getJavaClass()->getHighQuality());
+            $javaQualitySettings = QualitySettings::initQualitySettings();
+            return new QualitySettings($javaQualitySettings->getHighQuality());
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>
+     *  MaxQuality recognition quality preset. This preset is developed to recognize all possible barcodes, even incorrect barcodes.
+     *  </p><p><hr><blockquote><pre>
+     *  This sample shows how to use MaxQuality mode
+     *  <pre>
+     *
+     *  $reader = new BarCodeReader("test.png"null, null, DecodeType::CODE_39_EXTENDED, DecodeType::CODE_128);
+     *  {
+     *      $reader->setQualitySettings(QualitySettings::getMaxQuality());
+     *      foreach($reader->readBarCodes() as $result)
+     *          echo ($result->getCodeText());
+     *  }
+     * 	</pre>
+     *  </pre></blockquote></hr></p>Value:
+     *  MaxQuality recognition quality preset.
+     *
+     */
+    public static function getMaxQuality(): QualitySettings
+    {
+        try
+        {
+            $javaQualitySettings = QualitySettings::initQualitySettings();
+            return new QualitySettings($javaQualitySettings->getMaxQuality());
         }
         catch (Exception $ex)
         {
@@ -2278,23 +2201,6 @@ final class QualitySettings extends BaseJavaClass
     {
         $this->getJavaClass()->setAllowIncorrectBarcodes($value);
     }
-
-    /**
-     * <p>
-     * Function apply all values from Src setting to Dst
-     * </p>
-     * @param $Src: source settings
-     */
-    public function applyAll(QualitySettings $Src) : void
-    {
-        $this->setXDimension($Src->getXDimension());
-        $this->setMinimalXDimension($Src->getMinimalXDimension());
-        $this->setBarcodeQuality($Src->getBarcodeQuality());
-        $this->setDeconvolution($Src->getDeconvolution());
-        $this->setInverseImage($Src->getInverseImage());
-        $this->setComplexBackground($Src->getComplexBackground());
-        $this->setAllowIncorrectBarcodes($Src->getAllowIncorrectBarcodes());
-    }
 }
 
 /**
@@ -2302,19 +2208,11 @@ final class QualitySettings extends BaseJavaClass
  */
 class Code128DataPortion extends BaseJavaClass
 {
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwCode128DataPortion";
-
-    /**
-     * Creates a new instance of the {Code128DataPortion} class with start code symbol and decoded codetext.
-     *
-     * @param int $code128SubType A start encoding symbol
-     * @param string $data A partial codetext
-     */
-    public function __construct(int $code128SubType, string $data)
+    function __construct($javaClass)
     {
         try
         {
-            parent::__construct(new java(self::javaClassName, $code128SubType, $data));
+            parent::__construct($javaClass);
         }
         catch (Exception $ex)
         {
@@ -2322,18 +2220,8 @@ class Code128DataPortion extends BaseJavaClass
         }
     }
 
-    static function construct($javaClass): Code128DataPortion
-    {
-        try
+    protected function init(): void
         {
-            $code128DataPortion = new Code128DataPortion(0, "");
-            $code128DataPortion->setJavaClass($javaClass);
-            return $code128DataPortion;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -2346,23 +2234,6 @@ class Code128DataPortion extends BaseJavaClass
         try
         {
             return java_cast($this->getJavaClass()->getData(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the part of code text related to subtype.
-     *
-     * @return string The part of code text related to subtype
-     */
-    public final function setData(string $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setData($value);
         }
         catch (Exception $ex)
         {
@@ -2385,25 +2256,6 @@ class Code128DataPortion extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-    }
-
-    /**
-     * Gets the type of Code128 subset
-     */
-    public final function setCode128SubType(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setCode128SubType($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    protected function init(): void
-    {
     }
 
     /**
@@ -2516,27 +2368,14 @@ class DataBarExtendedParameters extends BaseJavaClass
  */
 class AustraliaPostSettings extends BaseJavaClass
 {
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwAustraliaPostSettings";
-
-    protected function init(): void
-    {
-    }
-
     /**
      * AustraliaPostSettings constructor
      */
-    public function __construct(?AustraliaPostSettings $settings)
+    public function __construct($javaClass)
     {
         try
         {
-            if ($settings != null)
-            {
-                parent::__construct($settings->getJavaClass());
-            }
-            else
-            {
-                parent::__construct(new java(self::javaClassName));
-            }
+            parent::__construct($javaClass);
         }
         catch (Exception $ex)
         {
@@ -2544,11 +2383,8 @@ class AustraliaPostSettings extends BaseJavaClass
         }
     }
 
-    static function construct($javaClass): AustraliaPostSettings
+    protected function init(): void
     {
-        $australiaPostSettings = new AustraliaPostSettings(null);
-        $australiaPostSettings->setJavaClass($javaClass);
-        return $australiaPostSettings;
     }
 
     /**
@@ -2654,47 +2490,23 @@ class AustraliaPostSettings extends BaseJavaClass
  */
 class BarcodeSettings extends BaseJavaClass
 {
-
     private $_australiaPost;
-
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwBarcodeSettings";
 
     /**
      * BarcodeSettings copy constructor
      * @param BarcodeSettings|null $settings The source of the data
      * @throws BarcodeException
      */
-    public function __construct(?BarcodeSettings $settings)
+    function __construct($javaClass)
     {
-        try
-        {
-            if ($settings != null)
-            {
-                parent::__construct($settings->getJavaClass());
-            }
-            else
-            {
-                parent::__construct(new java(self::javaClassName));
-            }
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    static function construct($javaClass): BarcodeSettings
-    {
-        $barcodeSettings = new BarcodeSettings(null);
-        $barcodeSettings->setJavaClass($javaClass);
-        return $barcodeSettings;
+        parent::__construct($javaClass);
     }
 
     protected function init(): void
     {
         try
         {
-            $this->_australiaPost = AustraliaPostSettings::construct($this->getJavaClass()->getAustraliaPost());
+            $this->_australiaPost = new AustraliaPostSettings($this->getJavaClass()->getAustraliaPost());
         }
         catch (Exception $ex)
         {
@@ -3004,7 +2816,7 @@ class RecognitionAbortedException extends Exception
 class MaxiCodeExtendedParameters extends BaseJavaClass
 {
 
-    public function __construct($javaClass)
+    function __construct($javaClass)
     {
         parent::__construct($javaClass);
     }
@@ -3212,7 +3024,7 @@ class DotCodeExtendedParameters extends BaseJavaClass
  */
 class DataMatrixExtendedParameters extends BaseJavaClass
 {
-    public function __construct($javaClass)
+    function __construct($javaClass)
     {
         parent::__construct($javaClass);
     }
@@ -4362,5 +4174,55 @@ class BarcodeQualityMode
      * <p>Enables recognition methods for Low quality barcodes.</p>
      */
     const LOW = 2;
+}
+
+
+/**
+ * Enable checksum validation during recognition for 1D barcodes.
+ * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
+ * Checksum never used: Codabar
+ * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
+ * Checksum always used: Rest symbologies
+ *
+ * This sample shows influence of ChecksumValidation on recognition quality and results
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
+ * $generator->save("test.png", BarcodeImageFormat::PNG);
+ * $reader = new BarCodeReader("test.png", null, DecodeType::EAN_13);
+ * //checksum disabled
+ * $reader->setChecksumValidation(ChecksumValidation::OFF);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    print("BarCode CodeText: ".$result->getCodeText());
+ *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
+ *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
+ * }
+ * $reader = new BarCodeReader("test.png", null, DecodeType::EAN_13);
+ * //checksum enabled
+ * $reader->setChecksumValidation(ChecksumValidation::ON);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    print("BarCode CodeText: ".$result->getCodeText());
+ *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
+ *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
+ * }
+ * @endcode
+ */
+class ChecksumValidation
+{
+    /**
+     *    If checksum is required by the specification - it will be validated.
+     */
+    const DEFAULT = 0;
+
+    /**
+     *    Always validate checksum if possible.
+     */
+    const ON = 1;
+
+    /**
+     *    Do not validate checksum.
+     */
+    const OFF = 2;
 }
 ?>

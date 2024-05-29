@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.4</span>
+   &#160;<span id="projectnumber">24.5</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -106,6 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1db7141dbca0f2a9d5f1e9c6c4553ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad973c5fbeb21b417379647f20cea519b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#ad973c5fbeb21b417379647f20cea519b">setBarcodeType</a> (int $value)</td></tr>
 <tr class="separator:ad973c5fbeb21b417379647f20cea519b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1baf54c19fb2bb174fd43fa9bc332c4b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#a1baf54c19fb2bb174fd43fa9bc332c4b">generateBarCodeGDImage</a> ()</td></tr>
+<tr class="separator:a1baf54c19fb2bb174fd43fa9bc332c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0e8c024e0956835801aa33c6530246a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#ad0e8c024e0956835801aa33c6530246a">generateBarCodeImage</a> (int $format)</td></tr>
 <tr class="separator:ad0e8c024e0956835801aa33c6530246a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d792b484380df71615b5948270bc7dd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#a7d792b484380df71615b5948270bc7dd">save</a> (string $filePath, int $format)</td></tr>
@@ -237,6 +239,33 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>&#x202A;bool Whether or not export completed successfully. Returns <b>True</b> in case of success; <b>False</b> Otherwise </dd></dl>
+
+</div>
+</div>
+<a id="a1baf54c19fb2bb174fd43fa9bc332c4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1baf54c19fb2bb174fd43fa9bc332c4b">&#9670;&nbsp;</a></span>generateBarCodeGDImage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">BarcodeGenerator::generateBarCodeGDImage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Generate the barcode image under current settings. This sample shows how to create and save a barcode image.</p>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;string GD representation of image.</dd></dl>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> BarCodeGenerator(<a class="code" href="../../d5/d0f/classEncodeTypes.html#a54e1794f088d79314ab5ddfaf3038ef6">EncodeTypes::CODE_128</a>);</div>
+<div class="line">$image = $generator-&gt;generateBarCodeGDImage();</div>
+</div><!-- fragment --><dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="../../d8/d71/classBarcodeException.html">BarcodeException</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

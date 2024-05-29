@@ -1,6 +1,6 @@
 var classBarcodeSettings =
 [
-    [ "\u202A__construct", "d2/df3/classBarcodeSettings.html#af3d7dd085c6dc70204f4b57957f4b3b7", null ],
+    [ "\u202A__construct", "d2/df3/classBarcodeSettings.html#ae247eecf8ce8ffc356c150953cae3e7f", null ],
     [ "\u202AgetAustraliaPost", "d2/df3/classBarcodeSettings.html#a12abf6b77de7ac6fef797b1a23352f5e", null ],
     [ "\u202AgetChecksumValidation", "d2/df3/classBarcodeSettings.html#a41ce20e34adcf69ab6feb0ce66850305", null ],
     [ "\u202AgetDetectEncoding", "d2/df3/classBarcodeSettings.html#a58c8c67a99c489f22bcae72442105d73", null ],

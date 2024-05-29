@@ -1,20 +1,18 @@
 var NAVTREEINDEX5 =
 {
-"d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325":[0,0,17,16],
-"d8/dae/classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94":[0,0,17,5],
 "d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780":[0,0,17,11],
 "d8/dae/classBarCodeReader.html#a45d21023b4389685c0582579161ad165":[0,0,17,3],
 "d8/dae/classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a":[0,0,17,2],
-"d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082":[0,0,17,13],
 "d8/dae/classBarCodeReader.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,17,15],
 "d8/dae/classBarCodeReader.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,17,8],
+"d8/dae/classBarCodeReader.html#aac5e41cc1c9865f019da4eccf61f6404":[0,0,17,0],
 "d8/dae/classBarCodeReader.html#ab5bac98ecba871ef3f643a98de1e9dc3":[0,0,17,4],
 "d8/dae/classBarCodeReader.html#abe83dbe36111281f94ac6adb9008c555":[0,0,17,1],
 "d8/dae/classBarCodeReader.html#ac43c19a411f7d48ca6b1b75caf9c45b0":[0,0,17,9],
 "d8/dae/classBarCodeReader.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,17,12],
 "d8/dae/classBarCodeReader.html#adbd0a70ac50ecd94ae5052320e555c24":[0,0,17,10],
+"d8/dae/classBarCodeReader.html#aed5da65720ace4d775b12c2daa68541f":[0,0,17,13],
 "d8/dae/classBarCodeReader.html#aff425380baac223ec86c7e9a43aa990b":[0,0,17,6],
-"d8/dae/classBarCodeReader.html#affe7a1bad3abad6b26b8a172fbd50e3c":[0,0,17,0],
 "d8/df0/classCodeLocation.html":[0,0,37],
 "d8/df0/classCodeLocation.html#a06d5f8205a3f34462e3422825e19631f":[0,0,37,0],
 "d8/df0/classCodeLocation.html#a398b45dae24fdcc80774a80c0ce9dadd":[0,0,37,1],
@@ -249,5 +247,7 @@ var NAVTREEINDEX5 =
 "db/d41/classDataMatrixVersion.html#adfe0d0442bc08b47d379e3d70a471e61":[0,0,51,15],
 "db/d41/classDataMatrixVersion.html#ae6994919cb18c658b65b5fd335c73a69":[0,0,51,32],
 "db/d41/classDataMatrixVersion.html#ae6f10b6937fa08a09441f5656df02028":[0,0,51,53],
-"db/d41/classDataMatrixVersion.html#ae9830dcd26a54721ca8ae59bdf97c6ca":[0,0,51,27]
+"db/d41/classDataMatrixVersion.html#ae9830dcd26a54721ca8ae59bdf97c6ca":[0,0,51,27],
+"db/d41/classDataMatrixVersion.html#aeb247e02366a3a793d184b10eb9c05ee":[0,0,51,65],
+"db/d41/classDataMatrixVersion.html#aec4b3b5829dd934334cb18f2961da1c5":[0,0,51,45]
 };

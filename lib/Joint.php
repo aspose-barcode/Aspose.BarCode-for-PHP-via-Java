@@ -20,37 +20,89 @@ function isPath($file)
     return false;
 }
 
-function convertImagePathToBase64String($imagePath)
+
+function convertDecodeTypeToFormattedDecodeType($decodeTypes)
 {
-    try
-    {
-        $imageData = file_get_contents($imagePath);
-        return base64_encode($imageData);
-    }
-    catch (Exception $ex)
-    {
-        throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+    if (is_null($decodeTypes)) {
+        return array(DecodeType::ALL_SUPPORTED_TYPES);
+    } else {
+        if (!is_array($decodeTypes))
+            $decodeTypes = array($decodeTypes);
+
+        foreach ($decodeTypes as $decodeType) {
+            if (!is_int($decodeType))
+                throw new Error("Unsuported decodeType format");
+        }
+        return $decodeTypes;
     }
 }
 
-function convertResourceToBase64String($resource)
+function areAllNull($array)
 {
-    try
-    {
-        if (isPath($resource))
-        {
-            $resourceData = file_get_contents($resource);
-            return base64_encode($resourceData);
-        }
-        else
-        {
-            return $resource;
+    foreach ($array as $element) {
+        if ($element !== null) {
+            return false;
         }
     }
-    catch (Exception $ex)
-    {
-        throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+    return true;
+}
+
+function convertAreasToStringFormattedAreas($areas): array
+{
+    $stringFormattedAreas = array();
+    if (!is_null($areas)) {
+        if (is_array($areas)) {
+            if (!areAllNull($areas)) {
+                foreach ($areas as $area) {
+                    if (is_null($area) || !($area instanceof Rectangle))
+                        throw new BarcodeException('All elements of $areas should be instances of Rectangle class');
+                    array_push($stringFormattedAreas, $area->toString());
+                }
+            }
+        } else {
+            if (!($areas instanceof Rectangle))
+                throw new BarcodeException('All elements of $areas should be instances of Rectangle class');
+            array_push($stringFormattedAreas, $areas->toString());
     }
+    }
+    return $stringFormattedAreas;
+}
+
+function convertImageResourceToBase64($imageResource) : ?string
+{
+    if(is_null($imageResource))
+    {
+        return null;
+    }
+    elseif (is_resource($imageResource))
+    {
+        if(get_resource_type($imageResource) === 'gd')
+        {
+            ob_start();
+            imagepng($imageResource);
+            $imageData = ob_get_contents();
+            ob_end_clean();
+            return base64_encode($imageData);
+        }
+        elseif (get_resource_type($imageResource) === 'file' && $imageResource)
+        {
+            $imageData = stream_get_contents($imageResource);
+            fclose($imageResource);
+            var_dump($imageData);
+            return base64_encode($imageData);
+        }
+        throw new BarcodeException("This resource type is not supported now");
+    }
+    elseif (is_string($imageResource) && base64_encode(base64_decode($imageResource, true)) === $imageResource)
+    {
+        return $imageResource;
+    }
+    elseif (is_file($imageResource))
+    {
+        $file_content = file_get_contents($imageResource);
+        return base64_encode($file_content);
+    }
+    throw new BarcodeException("Passed argument should be GD image or path to image file or Base64 encoded image");
 }
 
 function isBase64Encoded($str)
@@ -87,7 +139,7 @@ class License extends BaseJavaClass
         parent::__construct(new java($this->javaClassName));
     }
 
-    public function setLicense($filePath)
+    public function setLicense($filePath) // TODO path???
     {
         try
         {
@@ -516,7 +568,7 @@ class Rectangle extends BaseJavaClass
     {
         try
         {
-            return ($this->getWidth() <= 0) || ($this->getWidth() <= 0);
+            return ($this->getWidth() <= 0) || ($this->getHeight() <= 0);
         }
         catch (Exception $ex)
         {

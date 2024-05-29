@@ -1,6 +1,6 @@
 var classBarCodeReader =
 [
-    [ "\u202A__construct", "d8/dae/classBarCodeReader.html#affe7a1bad3abad6b26b8a172fbd50e3c", null ],
+    [ "\u202A__construct", "d8/dae/classBarCodeReader.html#aac5e41cc1c9865f019da4eccf61f6404", null ],
     [ "\u202Aabort", "d8/dae/classBarCodeReader.html#abe83dbe36111281f94ac6adb9008c555", null ],
     [ "\u202AcontainsAny", "d8/dae/classBarCodeReader.html#a4e0bc8b16ec8bc48750e20c5aff2236a", null ],
     [ "\u202AexportToXml", "d8/dae/classBarCodeReader.html#a45d21023b4389685c0582579161ad165", null ],
@@ -13,7 +13,7 @@ var classBarCodeReader =
     [ "\u202Ainit", "d8/dae/classBarCodeReader.html#adbd0a70ac50ecd94ae5052320e555c24", null ],
     [ "\u202AisNull", "d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d8/dae/classBarCodeReader.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
-    [ "\u202AsetBarCodeImage", "d8/dae/classBarCodeReader.html#a5120780f5597119fe96747d3400e2082", null ],
+    [ "\u202AsetBarCodeImage", "d8/dae/classBarCodeReader.html#aed5da65720ace4d775b12c2daa68541f", null ],
     [ "\u202AsetBarCodeReadType", "d8/dae/classBarCodeReader.html#a0142d9361114f67098a1cf01fdf1d12f", null ],
     [ "\u202AsetJavaClass", "d8/dae/classBarCodeReader.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetTimeout", "d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325", null ]

@@ -1,6 +1,6 @@
 var classAustraliaPostSettings =
 [
-    [ "\u202A__construct", "dc/d9a/classAustraliaPostSettings.html#ae5608c3c0f3d8187339b5e7017829f50", null ],
+    [ "\u202A__construct", "dc/d9a/classAustraliaPostSettings.html#a4507658ccf7e38abaa91550f9c42a652", null ],
     [ "\u202AgetCustomerInformationInterpretingType", "dc/d9a/classAustraliaPostSettings.html#aabc40a6c02b45be17bf790280b08a7e7", null ],
     [ "\u202AgetIgnoreEndingFillingPatternsForCTable", "dc/d9a/classAustraliaPostSettings.html#a70f629924774e6dedd9210fb85cf9039", null ],
     [ "\u202AgetJavaClass", "dc/d9a/classAustraliaPostSettings.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],

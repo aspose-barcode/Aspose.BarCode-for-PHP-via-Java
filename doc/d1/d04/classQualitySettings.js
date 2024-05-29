@@ -1,7 +1,6 @@
 var classQualitySettings =
 [
-    [ "\u202A__construct", "d1/d04/classQualitySettings.html#a584b4f05e2288fdaa22dc3a8ae4c1d7f", null ],
-    [ "\u202AapplyAll", "d1/d04/classQualitySettings.html#a94b22ec27526ba88bdf4c5c7f210fbf1", null ],
+    [ "\u202A__construct", "d1/d04/classQualitySettings.html#ab17f15372f94ecc1e9cb2bbc44cd9355", null ],
     [ "\u202AgetAllowIncorrectBarcodes", "d1/d04/classQualitySettings.html#a0c0c0fbe6ce1d0c73467631ba3ed4cb6", null ],
     [ "\u202AgetBarcodeQuality", "d1/d04/classQualitySettings.html#a3ef331f46d30b74a0ebc14db4551d5bb", null ],
     [ "\u202AgetComplexBackground", "d1/d04/classQualitySettings.html#a6b42171678ee0e328b1ad359b527975c", null ],

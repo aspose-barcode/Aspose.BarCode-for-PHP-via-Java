@@ -41,14 +41,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
-"d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593",
-"d5/d0f/classEncodeTypes.html#a86411b550a670522586486c273d47b37",
-"d6/de0/classCode128Parameters.html#ab89fbe1c25820614d92e72a7d8521586",
-"d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325",
-"db/d41/classDataMatrixVersion.html#aeb247e02366a3a793d184b10eb9c05ee",
-"dd/d96/classHIBCLICPrimaryDataCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1",
-"df/d7b/classComplexBarcodeGenerator.html#ac836ea8c7444cc5ccd8499b1ae405ef1"
+"d2/d15/classInverseImageMode.html",
+"d4/d26/classDecodeType.html#ae6f521d0b1b2154f943ab6a25592db9a",
+"d5/d0f/classEncodeTypes.html#a8787927f554ddc69fe8ae7efa020b32f",
+"d6/dfb/classPostalParameters.html",
+"d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780",
+"db/d41/classDataMatrixVersion.html#aedd1fded2b9b5d08747d9b02bcdac491",
+"dd/dc2/classQrExtCodetextBuilder.html",
+"df/d90/classHIBCLICCombinedCodetext.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

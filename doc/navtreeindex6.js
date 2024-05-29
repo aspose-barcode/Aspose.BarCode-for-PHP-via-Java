@@ -1,7 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"db/d41/classDataMatrixVersion.html#aeb247e02366a3a793d184b10eb9c05ee":[0,0,51,65],
-"db/d41/classDataMatrixVersion.html#aec4b3b5829dd934334cb18f2961da1c5":[0,0,51,45],
 "db/d41/classDataMatrixVersion.html#aedd1fded2b9b5d08747d9b02bcdac491":[0,0,51,49],
 "db/d41/classDataMatrixVersion.html#aeeb97e674bcac0bb1a3fa1c9f319f493":[0,0,51,12],
 "db/d41/classDataMatrixVersion.html#af3a2d64a67ceeb40f1e8f0050027847a":[0,0,51,64],
@@ -110,13 +108,13 @@ var NAVTREEINDEX6 =
 "dc/d9a/classAustraliaPostSettings.html#a1e778c1c47343bb55cf45f933d1673a0":[0,0,4,8],
 "dc/d9a/classAustraliaPostSettings.html#a264c7345eb64c83446fded2fde8c2780":[0,0,4,6],
 "dc/d9a/classAustraliaPostSettings.html#a2cac70e3fe375d6638e2dc9ad0930d41":[0,0,4,5],
+"dc/d9a/classAustraliaPostSettings.html#a4507658ccf7e38abaa91550f9c42a652":[0,0,4,0],
 "dc/d9a/classAustraliaPostSettings.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,4,10],
 "dc/d9a/classAustraliaPostSettings.html#a70f629924774e6dedd9210fb85cf9039":[0,0,4,2],
 "dc/d9a/classAustraliaPostSettings.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,4,4],
 "dc/d9a/classAustraliaPostSettings.html#aabc40a6c02b45be17bf790280b08a7e7":[0,0,4,1],
 "dc/d9a/classAustraliaPostSettings.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,4,7],
 "dc/d9a/classAustraliaPostSettings.html#adc0f9f6418b38df29c519b85f21574a6":[0,0,4,9],
-"dc/d9a/classAustraliaPostSettings.html#ae5608c3c0f3d8187339b5e7017829f50":[0,0,4,0],
 "dc/da4/classQrStructuredAppendParameters.html":[0,0,112],
 "dc/da4/classQrStructuredAppendParameters.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,112,1],
 "dc/da4/classQrStructuredAppendParameters.html#a06136680b531bba2043d0fe7a1ee460a":[0,0,112,3],
@@ -249,5 +247,7 @@ var NAVTREEINDEX6 =
 "dd/d96/classHIBCLICPrimaryDataCodetext.html#a6b4acba1c340ac14951150c426b537bd":[0,0,73,4],
 "dd/d96/classHIBCLICPrimaryDataCodetext.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,73,6],
 "dd/d96/classHIBCLICPrimaryDataCodetext.html#a8f03fe81273833e44b3407ce108ceb72":[0,0,73,3],
-"dd/d96/classHIBCLICPrimaryDataCodetext.html#a944af8a06249847d43eab2c0883a49c0":[0,0,73,9]
+"dd/d96/classHIBCLICPrimaryDataCodetext.html#a944af8a06249847d43eab2c0883a49c0":[0,0,73,9],
+"dd/d96/classHIBCLICPrimaryDataCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,73,11],
+"dd/d96/classHIBCLICPrimaryDataCodetext.html#acdcf71daa3b06dbc2ff7593790c20e42":[0,0,73,12]
 };

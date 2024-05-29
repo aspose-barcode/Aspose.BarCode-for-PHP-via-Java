@@ -1,7 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"dd/d96/classHIBCLICPrimaryDataCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,73,11],
-"dd/d96/classHIBCLICPrimaryDataCodetext.html#acdcf71daa3b06dbc2ff7593790c20e42":[0,0,73,12],
 "dd/dc2/classQrExtCodetextBuilder.html":[0,0,109],
 "dd/dc2/classQrExtCodetextBuilder.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,109,8],
 "dd/dc2/classQrExtCodetextBuilder.html#a264c7345eb64c83446fded2fde8c2780":[0,0,109,11],
@@ -249,5 +247,7 @@ var NAVTREEINDEX7 =
 "df/d7b/classComplexBarcodeGenerator.html#a38f31e6d10ce8a3faf728b96b9af6933":[0,0,40,8],
 "df/d7b/classComplexBarcodeGenerator.html#a474e19d97bed9adf0618f7503d67b3c3":[0,0,40,1],
 "df/d7b/classComplexBarcodeGenerator.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,40,9],
-"df/d7b/classComplexBarcodeGenerator.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,40,3]
+"df/d7b/classComplexBarcodeGenerator.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,40,3],
+"df/d7b/classComplexBarcodeGenerator.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,40,7],
+"df/d7b/classComplexBarcodeGenerator.html#ad403f9fcaa8b369af35818d526e07f88":[0,0,40,0]
 };

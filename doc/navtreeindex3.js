@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"d5/d0f/classEncodeTypes.html#a86411b550a670522586486c273d47b37":[0,0,58,47],
-"d5/d0f/classEncodeTypes.html#a86e13b59f6aa30d49dfc70b61ae65c23":[0,0,58,17],
 "d5/d0f/classEncodeTypes.html#a8787927f554ddc69fe8ae7efa020b32f":[0,0,58,39],
 "d5/d0f/classEncodeTypes.html#a903a8a6bc0f0009e4bdb2f7a9fb85e26":[0,0,58,51],
 "d5/d0f/classEncodeTypes.html#a904b440bf8c57f9364961c429c65d076":[0,0,58,65],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "d6/de0/classCode128Parameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b":[0,0,34,8],
 "d6/de0/classCode128Parameters.html#a88dc1db5906ecc0ecd381db13eed913d":[0,0,34,3],
 "d6/de0/classCode128Parameters.html#a931708e4a68a2fb725ca6988b28261e9":[0,0,34,1],
-"d6/de0/classCode128Parameters.html#aa629988ac0fff47c08713188ebadafb6":[0,0,34,0]
+"d6/de0/classCode128Parameters.html#aa629988ac0fff47c08713188ebadafb6":[0,0,34,0],
+"d6/de0/classCode128Parameters.html#ab89fbe1c25820614d92e72a7d8521586":[0,0,34,4],
+"d6/de0/classCode128Parameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,34,6]
 };

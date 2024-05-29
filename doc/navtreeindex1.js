@@ -1,7 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12":[0,0,105,0],
-"d2/d0c/classComplexCodetextReader.html":[0,0,41],
 "d2/d15/classInverseImageMode.html":[0,0,76],
 "d2/d15/classInverseImageMode.html#a10a104c3ee265b7bf34377399ca1f59e":[0,0,76,1],
 "d2/d15/classInverseImageMode.html#adbc24cd6abf69b8096898159f600cffa":[0,0,76,2],
@@ -108,7 +106,7 @@ var NAVTREEINDEX1 =
 "d2/df3/classBarcodeSettings.html#acaf41ddeddc92b310e8e8e372a82a13c":[0,0,20,10],
 "d2/df3/classBarcodeSettings.html#acf045b6d3da07a09c2081c54902b3caf":[0,0,20,7],
 "d2/df3/classBarcodeSettings.html#ad99fb43533420493e781e112dc1a4109":[0,0,20,11],
-"d2/df3/classBarcodeSettings.html#af3d7dd085c6dc70204f4b57957f4b3b7":[0,0,20,0],
+"d2/df3/classBarcodeSettings.html#ae247eecf8ce8ffc356c150953cae3e7f":[0,0,20,0],
 "d3/d00/classMicroQRVersion.html":[0,0,94],
 "d3/d00/classMicroQRVersion.html#a08e8885745b30ade7a8e860059ef9760":[0,0,94,0],
 "d3/d00/classMicroQRVersion.html#a6649ba46b5119dc8fbf3467784fc9204":[0,0,94,2],
@@ -249,5 +247,7 @@ var NAVTREEINDEX1 =
 "d4/d26/classDecodeType.html#ac839ddefec3e22158551d96159cec33e":[0,0,52,17],
 "d4/d26/classDecodeType.html#ac93c23b4e35c122d33e9f0e785876801":[0,0,52,88],
 "d4/d26/classDecodeType.html#aca777af1d5b62da7defd07d8a634014f":[0,0,52,79],
-"d4/d26/classDecodeType.html#ad1846f1f77e2cc09663f4b40a642ed95":[0,0,52,59]
+"d4/d26/classDecodeType.html#ad1846f1f77e2cc09663f4b40a642ed95":[0,0,52,59],
+"d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593":[0,0,52,1],
+"d4/d26/classDecodeType.html#adc2d47d30602944295d9b30b64e61029":[0,0,52,19]
 };

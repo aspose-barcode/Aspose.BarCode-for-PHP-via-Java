@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"d6/de0/classCode128Parameters.html#ab89fbe1c25820614d92e72a7d8521586":[0,0,34,4],
-"d6/de0/classCode128Parameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[0,0,34,6],
 "d6/dfb/classPostalParameters.html":[0,0,104],
 "d6/dfb/classPostalParameters.html#a00eff0b51690f1dd0ce5b625f2f41d38":[0,0,104,7],
 "d6/dfb/classPostalParameters.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,104,0],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "d8/d8c/classLicense.html#af2a828c84bb900fdeb81452c0524192b":[0,0,79,0],
 "d8/dae/classBarCodeReader.html":[0,0,17],
 "d8/dae/classBarCodeReader.html#a0142d9361114f67098a1cf01fdf1d12f":[0,0,17,14],
-"d8/dae/classBarCodeReader.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,17,7]
+"d8/dae/classBarCodeReader.html#a05ed9335956ecce2efde24e07a0fcf7e":[0,0,17,7],
+"d8/dae/classBarCodeReader.html#a078a44b766cc363223eebb1050529325":[0,0,17,16],
+"d8/dae/classBarCodeReader.html#a1efe85b437ac21ff27cae78a79453c94":[0,0,17,5]
 };

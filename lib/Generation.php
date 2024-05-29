@@ -117,6 +117,35 @@ class BarcodeGenerator extends BaseJavaClass
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
      *
+     * @return string GD representation of image.
+     *
+     * @code
+     *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
+     *  $image = $generator->generateBarCodeGDImage();
+     * @endcode
+     *
+     * @throws BarcodeException
+     */
+    public function generateBarCodeGDImage()
+    {
+        try
+        {
+            if (!extension_loaded('gd'))
+                throw new BarcodeException("GD extension is not available!", __FILE__, __LINE__);
+            $base64Image = java_cast($this->getJavaClass()->generateBarCodeImage(BarCodeImageFormat::PNG), "string");
+            return imagecreatefromstring(base64_decode($base64Image));
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+
+    /**
+     * Generate the barcode image under current settings.
+     * This sample shows how to create and save a barcode image.
+     *
      * @param int $format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, EMF)
      * @return string base64 representation of image.
      *
@@ -151,11 +180,11 @@ class BarcodeGenerator extends BaseJavaClass
      * @endcode
      * @throws BarcodeException
      */
-    public function save(string $filePath, int $format): void  //TODO BARCODEPHP-87
+    public function save(string $filePath, int $format): void
     {
         try
         {
-            $image = $this->generateBarCodeImage($format); //TODO BARCODEPHP-87
+            $image = $this->generateBarCodeImage($format);
             file_put_contents($filePath, base64_decode($image));
         }
         catch (Exception $ex)
@@ -1550,55 +1579,6 @@ class BorderParameters extends BaseJavaClass
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-}
-
-/**
- * Enable checksum validation during recognition for 1D barcodes.
- * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
- * Checksum never used: Codabar
- * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
- * Checksum always used: Rest symbologies
- *
- * This sample shows influence of ChecksumValidation on recognition quality and results
- * @code
- * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
- * $generator->save("test.png", BarcodeImageFormat::PNG);
- * $reader = new BarCodeReader("test.png", null, DecodeType::EAN_13);
- * //checksum disabled
- * $reader->setChecksumValidation(ChecksumValidation::OFF);
- * foreach($reader->readBarCodes() as $result)
- * {
- *    print("BarCode CodeText: ".$result->getCodeText());
- *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
- *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
- * }
- * $reader = new BarCodeReader("test.png", null, DecodeType::EAN_13);
- * //checksum enabled
- * $reader->setChecksumValidation(ChecksumValidation::ON);
- * foreach($reader->readBarCodes() as $result)
- * {
- *    print("BarCode CodeText: ".$result->getCodeText());
- *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
- *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
- * }
- * @endcode
- */
-class  ChecksumValidation
-{
-    /**
-     *    If checksum is required by the specification - it will be validated.
-     */
-    const DEFAULT = 0;
-
-    /**
-     *    Always validate checksum if possible.
-     */
-    const ON = 1;
-
-    /**
-     *    Do not validate checksum.
-     */
-    const OFF = 2;
 }
 
 /**
