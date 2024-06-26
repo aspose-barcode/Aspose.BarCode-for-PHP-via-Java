@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.5</span>
+   &#160;<span id="projectnumber">24.6</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -100,6 +100,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a00859c1ce8d19c346821ece5a24f93bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5951fb868f2cec84c8fb2a2f21155c2"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de5/classAztecEncodeMode.html#aa5951fb868f2cec84c8fb2a2f21155c2">EXTENDED_CODETEXT</a> = 2</td></tr>
 <tr class="separator:aa5951fb868f2cec84c8fb2a2f21155c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cebf833c69b6d3130a178579a381ab4"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de5/classAztecEncodeMode.html#a7cebf833c69b6d3130a178579a381ab4">EXTENDED</a> = 3</td></tr>
+<tr class="separator:a7cebf833c69b6d3130a178579a381ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a99eb8c0d589c7f4e67dd2a865ee67"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de5/classAztecEncodeMode.html#ae6a99eb8c0d589c7f4e67dd2a865ee67">BINARY</a> = 4</td></tr>
+<tr class="separator:ae6a99eb8c0d589c7f4e67dd2a865ee67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae159942ef941cc7bf36649319eebb2f6"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/de5/classAztecEncodeMode.html#ae159942ef941cc7bf36649319eebb2f6">ECI</a> = 5</td></tr>
+<tr class="separator:ae159942ef941cc7bf36649319eebb2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR">Encoding mode for Aztec barcodes. </p>
@@ -157,7 +163,22 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Encode codetext with value set in the ECIEncoding property. </p>
+<p class="DocNodeLTR">In Auto mode, the CodeText is encoded with maximum data compactness. Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier. If a character is found that is not supported by the selected ECI encoding, an exception is thrown. </p>
+
+</div>
+</div>
+<a id="ae6a99eb8c0d589c7f4e67dd2a865ee67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a99eb8c0d589c7f4e67dd2a865ee67">&#9670;&nbsp;</a></span>BINARY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const AztecEncodeMode::BINARY = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">In Binary mode, the CodeText is encoded with maximum data compactness. If a Unicode character is found, an exception is thrown. </p>
 
 </div>
 </div>
@@ -173,6 +194,41 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first. </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000009">Deprecated:</a></b></dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="ae159942ef941cc7bf36649319eebb2f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae159942ef941cc7bf36649319eebb2f6">&#9670;&nbsp;</a></span>ECI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const AztecEncodeMode::ECI = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier. If a character is found that is not supported by the selected ECI encoding, an exception is thrown. Please note that some old (pre 2006) scanners may not support this mode. </p>
+
+</div>
+</div>
+<a id="a7cebf833c69b6d3130a178579a381ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cebf833c69b6d3130a178579a381ab4">&#9670;&nbsp;</a></span>EXTENDED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const AztecEncodeMode::EXTENDED = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Extended mode which supports multi ECI modes.</p>
+<p class="DocNodeLTR">It is better to use AztecExtCodetextBuilder for extended codetext generation.</p>
+<p class="DocNodeLTR">Use Display2DText property to set visible text to removing managing characters.</p>
+<p class="DocNodeLTR">ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+<p class="DocNodeLTR">All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
 
 </div>
 </div>
@@ -192,6 +248,7 @@ Public Attributes</h2></td></tr>
 <p class="DocNodeLTR">Use Display2DText property to set visible text to removing managing characters.</p>
 <p class="DocNodeLTR">ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
 <p class="DocNodeLTR">All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000010">Deprecated:</a></b></dt><dd></dd></dl>
 
 </div>
 </div>

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.5</span>
+   &#160;<span id="projectnumber">24.6</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -110,9 +110,46 @@ Public Attributes</h2></td></tr>
 <tr class="separator:aac10542ca5fdd998af68dec51efbefa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ca678d703fb32b91265e94a6b4fccdc"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#a5ca678d703fb32b91265e94a6b4fccdc">EXTENDED_CODETEXT</a> = 12</td></tr>
 <tr class="separator:a5ca678d703fb32b91265e94a6b4fccdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca2f03ff7ce45b641cd789fc43199d22"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#aca2f03ff7ce45b641cd789fc43199d22">EXTENDED</a> = 13</td></tr>
+<tr class="separator:aca2f03ff7ce45b641cd789fc43199d22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13b0b5b49806666725569a68fb9a9eb4"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#a13b0b5b49806666725569a68fb9a9eb4">BASE_256</a> = 14</td></tr>
+<tr class="separator:a13b0b5b49806666725569a68fb9a9eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8fbe468b9c63a5ee780895fbdefc248"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#aa8fbe468b9c63a5ee780895fbdefc248">BINARY</a> = 15</td></tr>
+<tr class="separator:aa8fbe468b9c63a5ee780895fbdefc248"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa482c33efcb69802e6a49bbbb9c5132f"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#aa482c33efcb69802e6a49bbbb9c5132f">ECI</a> = 16</td></tr>
+<tr class="separator:aa482c33efcb69802e6a49bbbb9c5132f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p class="DocNodeLTR">DataMatrix encoder's encoding mode, default to AUTO </p>
+<div class="textblock"><p class="DocNodeLTR">DataMatrix encoder's encoding mode, default to Auto </p>
+<hr  />
+<blockquote class="doxtable DocNodeLTR">
+<pre>
+This sample shows how to do codetext in Extended Mode.
+<pre>
+//Auto mode
+$codetext = "犬Right狗";
+$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#ac5ad93206f5a6754638bca51aa509ec5">EncodeTypes::DATA_MATRIX</a>, $codetext);
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDataMatrix()-&gt;setECIEncoding(ECIEncodings::UTF8);
+$generator-&gt;save("test.bmp", BarcodeImageFormat::PNG);
+//Bytes mode
+$encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
+$generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#ac5ad93206f5a6754638bca51aa509ec5">EncodeTypes::DATA_MATRIX</a>, $encodedArr);
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDataMatrix()-&gt;setDataMatrixEncodeMode(DataMatrixEncodeMode::BINARY);
+$generator-&gt;save("test.bmp", BarcodeImageFormat::PNG);
+//Extended codetext mode
+//create codetext
+$codetextBuilder=new <a class="el" href="../../d8/d2a/classDataMatrixExtCodetextBuilder.html">DataMatrixExtCodetextBuilder()</a>;
+$codetextBuilder-&gt;addECICodetextWithEncodeMode(ECIEncodings::Win1251,<a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#afbe507531a62a0e8e9c73de98d7d1570">DataMatrixEncodeMode::BYTES</a>,"World");
+$codetextBuilder-&gt;addPlainCodetext("Will");
+$codetextBuilder-&gt;addECICodetext(ECIEncodings::UTF8,"犬Right狗");
+$codetextBuilder-&gt;addCodetextWithEncodeMode(<a class="el" href="../../d1/d09/classDataMatrixEncodeMode.html#a85d92989ad80f2578fcb9769991835c7">DataMatrixEncodeMode::C40</a>,"ABCDE");
+//generate codetext
+$codetext=$codetextBuilder-&gt;getExtended();
+//generate
+$generator=new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::DATA_MATRIX,codetext)</a>;
+$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDataMatrix()-&gt;setDataMatrixEncodeMode(DataMatrixEncodeMode::EXTENDED_CODETEXT);
+$generator-&gt;save("test.bmp", BarcodeImageFormat::PNG);
+</pre> </pre></blockquote>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="aac10542ca5fdd998af68dec51efbefa0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac10542ca5fdd998af68dec51efbefa0">&#9670;&nbsp;</a></span>ANSIX12</h2>
@@ -155,7 +192,37 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Automatically pick up the best encode mode for datamatrix encoding </p>
+<p class="DocNodeLTR">In Auto mode, the CodeText is encoded with maximum data compactness. Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier. If a character is found that is not supported by the selected ECI encoding, an exception is thrown. </p>
+
+</div>
+</div>
+<a id="a13b0b5b49806666725569a68fb9a9eb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13b0b5b49806666725569a68fb9a9eb4">&#9670;&nbsp;</a></span>BASE_256</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataMatrixEncodeMode::BASE_256 = 14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Encode 8 bit values </p>
+
+</div>
+</div>
+<a id="aa8fbe468b9c63a5ee780895fbdefc248"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8fbe468b9c63a5ee780895fbdefc248">&#9670;&nbsp;</a></span>BINARY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataMatrixEncodeMode::BINARY = 15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">In Binary mode, the CodeText is encoded with maximum data compactness. If a Unicode character is found, an exception is thrown. </p>
 
 </div>
 </div>
@@ -170,7 +237,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Encode 8 bit values </p>
+<p class="DocNodeLTR">Encode 8 bit values </p><dl class="deprecated DocNodeLTR"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000005">Deprecated:</a></b></dt><dd>&#x202A;This property is obsolete and will be removed in future releases. Instead, use Base256 option. </dd></dl>
 
 </div>
 </div>
@@ -189,6 +256,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aa482c33efcb69802e6a49bbbb9c5132f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa482c33efcb69802e6a49bbbb9c5132f">&#9670;&nbsp;</a></span>ECI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataMatrixEncodeMode::ECI = 16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier. If a character is found that is not supported by the selected ECI encoding, an exception is thrown. Please note that some old (pre 2006) scanners may not support this mode. </p>
+
+</div>
+</div>
 <a id="a51f8ff54356f8ca6efb0db7fcbdbbe08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51f8ff54356f8ca6efb0db7fcbdbbe08">&#9670;&nbsp;</a></span>EDIFACT</h2>
 
@@ -204,6 +286,23 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aca2f03ff7ce45b641cd789fc43199d22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca2f03ff7ce45b641cd789fc43199d22">&#9670;&nbsp;</a></span>EXTENDED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DataMatrixEncodeMode::EXTENDED = 13</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">ExtendedCodetext mode allows to manually switch encodation schemes and ECI encodings in codetext. It is better to use <a class="el" href="../../d8/d2a/classDataMatrixExtCodetextBuilder.html">DataMatrixExtCodetextBuilder</a> for extended codetext generation. Use Display2DText property to set visible text to removing managing characters. ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+<p class="DocNodeLTR">Encodation schemes are set in the next format : "\Encodation_scheme_name:text\Encodation_scheme_name:text". Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.</p>
+<p class="DocNodeLTR">All backslashes () must be doubled in text. </p>
+
+</div>
+</div>
 <a id="a5ca678d703fb32b91265e94a6b4fccdc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ca678d703fb32b91265e94a6b4fccdc">&#9670;&nbsp;</a></span>EXTENDED_CODETEXT</h2>
 
@@ -215,13 +314,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">ExtendedCodetext mode allows to manually switch encodation schemes in codetext. Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto. Extended codetext example: "\ansix12:ANSIX12TEXT\ascii:backslash must be \ doubled\edifact:EdifactEncodedText" All backslashes () must be doubled in text.</p>
-<p class="DocNodeLTR">This sample shows how to do codetext in Extended Mode. </p><div class="fragment"><div class="line">$generator = <span class="keyword">new</span> <a class="code" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="code" href="../../d5/d0f/classEncodeTypes.html#ac5ad93206f5a6754638bca51aa509ec5">EncodeTypes::DATA_MATRIX</a>);</div>
-<div class="line">$generator-&gt;setCodeText(<span class="stringliteral">&quot;\\ansix12:ANSIX12TEXT\\ascii:backslash must be \\\\ doubled\\edifact:EdifactEncodedText&quot;</span>);</div>
-<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDataMatrix()-&gt;setDataMatrixEncodeMode(<a class="code" href="../../d1/d09/classDataMatrixEncodeMode.html">DataMatrixEncodeMode</a>.<a class="code" href="../../d1/d09/classDataMatrixEncodeMode.html#a5ca678d703fb32b91265e94a6b4fccdc">EXTENDED_CODETEXT</a>);</div>
-<div class="line">$generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText(<span class="stringliteral">&quot;My Text&quot;</span>);</div>
-<div class="line">$generator-&gt;save(<span class="stringliteral">&quot;test.png&quot;</span>, BarcodeImageFormat::PNG);</div>
-</div><!-- fragment --> 
+<p class="DocNodeLTR">ExtendedCodetext mode allows to manually switch encodation schemes and ECI encodings in codetext.</p>
+<p class="DocNodeLTR">It is better to use <a class="el" href="../../d8/d2a/classDataMatrixExtCodetextBuilder.html">DataMatrixExtCodetextBuilder</a> for extended codetext generation.</p>
+<p class="DocNodeLTR">Use Display2DText property to set visible text to removing managing characters.</p>
+<p class="DocNodeLTR">ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+<p class="DocNodeLTR">All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+<p class="DocNodeLTR">Encodation schemes are set in the next format : "\Encodation_scheme_name:text\Encodation_scheme_name:text".</p>
+<p class="DocNodeLTR">Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.</p>
+<p class="DocNodeLTR">All backslashes () must be doubled in text.</p>
+<dl class="deprecated DocNodeLTR"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000006">Deprecated:</a></b></dt><dd>&#x202A;This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode </dd></dl>
+
 </div>
 </div>
 <a id="ad1e6177bc289d72ef68e6cf9754abd5f"></a>
@@ -235,7 +337,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Uses TEXT encoding. Encodes Lower-case alphanumeric, Upper case and special characters </p>
+<p class="DocNodeLTR">Uses Text encoding. Encodes Lower-case alphanumeric, Upper case and special characters </p>
 
 </div>
 </div>

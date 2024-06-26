@@ -14,6 +14,6 @@ var classBarcodeGenerator =
     [ "\u202AprintJavaClassName", "d0/dfb/classBarcodeGenerator.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202Asave", "d0/dfb/classBarcodeGenerator.html#a7d792b484380df71615b5948270bc7dd", null ],
     [ "\u202AsetBarcodeType", "d0/dfb/classBarcodeGenerator.html#ad973c5fbeb21b417379647f20cea519b", null ],
-    [ "\u202AsetCodeText", "d0/dfb/classBarcodeGenerator.html#a88ef1a474cc724c1759e8716cff9d70a", null ],
+    [ "\u202AsetCodeText", "d0/dfb/classBarcodeGenerator.html#a4feac898b644fd01c8e76502e26e3222", null ],
     [ "\u202AsetJavaClass", "d0/dfb/classBarcodeGenerator.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ]
 ];

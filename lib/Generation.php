@@ -209,13 +209,24 @@ class BarcodeGenerator extends BaseJavaClass
     }
 
     /**
-     * Text to be encoded.
+     * <p>
+     * Encodes codetext with byte order mark (BOM) using specified encoding.
+     * </p>
+     * @param string|array codeText CodeText string | Bytes of codetext
+     * @param int encoding Applied encoding
      */
-    public function setCodeText(string $value): void
+    public function setCodeText($value, ?string $encoding): void
     {
         try
         {
-            $this->getJavaClass()->setCodeText($value);
+            if(is_array($value))
+            {
+                $this->getJavaClass()->setCodeBytes(base64_encode(pack("C*", ...$value)));
+            }
+            else
+            {
+                $this->getJavaClass()->setCodeText($value, $encoding);
+            }
         }
         catch (Exception $ex)
         {
@@ -3288,36 +3299,6 @@ class DataMatrixParameters extends BaseJavaClass
     }
 
     /**
-     * Gets the encoding of codetext.
-     */
-    public function getCodeTextEncoding(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the encoding of codetext.
-     */
-    public function setCodeTextEncoding(string $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setCodeTextEncoding($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * <p>
      * Gets ECI encoding. Used when DataMatrixEncodeMode is Auto.
      * Default value: ISO-8859-1
@@ -4153,36 +4134,6 @@ class QrParameters extends BaseJavaClass
     }
 
     /**
-     * Gets the encoding of codetext.
-     */
-    public function getCodeTextEncoding(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the encoding of codetext.
-     */
-    public function setCodeTextEncoding(string $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCodeTextEncoding($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Returns a human-readable string representation of this QrParameters.
      *
      * @return string that represents this QrParameters.
@@ -4233,6 +4184,7 @@ class Pdf417Parameters extends BaseJavaClass
     /**
      * Pdf417 symbology type of BarCode's compaction mode.
      * Default value: Pdf417CompactionMode::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the Pdf417EncodeMode property.
      */
     public function getPdf417CompactionMode(): int
     {
@@ -4249,6 +4201,7 @@ class Pdf417Parameters extends BaseJavaClass
     /**
      * Pdf417 symbology type of BarCode's compaction mode.
      * Default value: Pdf417CompactionMode::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the Pdf417EncodeMode property.
      */
     public function setPdf417CompactionMode(int $value): void
     {
@@ -4260,6 +4213,24 @@ class Pdf417Parameters extends BaseJavaClass
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * Identifies Pdf417 encode mode.
+     * Default value: Auto.
+     */
+    public function getPdf417EncodeMode() : int
+    {
+        return java_cast($this->getJavaClass()->getPdf417EncodeMode(), "integer");
+    }
+
+    /**
+     * Identifies Pdf417 encode mode.
+     * Default value: Auto.
+     */
+    public function setPdf417EncodeMode(int $pdf417EncodeMode) : void
+    {
+        $this->getJavaClass()->setPdf417EncodeMode($pdf417EncodeMode);
     }
 
     /**
@@ -4687,36 +4658,6 @@ class Pdf417Parameters extends BaseJavaClass
         try
         {
             $this->getJavaClass()->setPdf417MacroChecksum($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the encoding of codetext.
-     */
-    public function getCodeTextEncoding(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the encoding of codetext.
-     */
-    public function setCodeTextEncoding(string $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCodeTextEncoding($value);
         }
         catch (Exception $ex)
         {
@@ -5679,30 +5620,6 @@ class AztecParameters extends BaseJavaClass
     public function setAspectRatio(float $value) : void
     {
         $this->getJavaClass()->setAspectRatio($value);
-    }
-
-    /**
-     * <p>
-     * Gets the encoding of codetext.
-     * Default value: UTF-8
-     * </p>
-     */
-    public function getCodeTextEncoding() : string
-    {
-        print('This function is deprecated.');
-        return java_cast($this->getJavaClass()->getCodeTextEncoding(), "string");
-    }
-
-    /**
-     * <p>
-     * Sets the encoding of codetext.
-     * Default value: UTF-8
-     * </p>
-     */
-    public function setCodeTextEncoding(string $codeTextEncoding) : void
-    {
-        print('This function is deprecated.');
-        $this->getJavaClass()->setCodeTextEncoding($codeTextEncoding);
     }
 
     /**
@@ -7358,60 +7275,135 @@ final class CodabarSymbol
 }
 
 /**
- *
- * DataMatrix encoder's encoding mode, default to AUTO
+ * <p>
+ * DataMatrix encoder's encoding mode, default to Auto
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to do codetext in Extended Mode.
+ * <pre>
+ * //Auto mode
+ * $codetext = "犬Right狗";
+ * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, $codetext);
+ * $generator->getParameters()->getBarcode()->getDataMatrix()->setECIEncoding(ECIEncodings::UTF8);
+ * $generator->save("test.bmp", BarcodeImageFormat::PNG);
+ * //Bytes mode
+ * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
+ * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, $encodedArr);
+ * $generator->getParameters()->getBarcode()->getDataMatrix()->setDataMatrixEncodeMode(DataMatrixEncodeMode::BINARY);
+ * $generator->save("test.bmp", BarcodeImageFormat::PNG);
+ * //Extended codetext mode
+ * //create codetext
+ * $codetextBuilder=new DataMatrixExtCodetextBuilder();
+ * $codetextBuilder->addECICodetextWithEncodeMode(ECIEncodings::Win1251,DataMatrixEncodeMode::BYTES,"World");
+ * $codetextBuilder->addPlainCodetext("Will");
+ * $codetextBuilder->addECICodetext(ECIEncodings::UTF8,"犬Right狗");
+ * $codetextBuilder->addCodetextWithEncodeMode(DataMatrixEncodeMode::C40,"ABCDE");
+ * //generate codetext
+ * $codetext=$codetextBuilder->getExtended();
+ * //generate
+ * $generator=new BarcodeGenerator(EncodeTypes::DATA_MATRIX,codetext);
+ * $generator->getParameters()->getBarcode()->getDataMatrix()->setDataMatrixEncodeMode(DataMatrixEncodeMode::EXTENDED_CODETEXT);
+ * $generator->save("test.bmp", BarcodeImageFormat::PNG);
+ * </pre>
+ * </pre></blockquote></hr></p>
  */
 class DataMatrixEncodeMode
 {
-
     /**
-     * Automatically pick up the best encode mode for datamatrix encoding
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
      */
     const AUTO = 0;
+
     /**
+     * <p>
      * Encodes one alphanumeric or two numeric characters per byte
+     * </p>
      */
-    const ASCII = 1;
+     const ASCII = 1;
+
     /**
      * Encode 8 bit values
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use Base256 option.
      */
     const BYTES = 6;
+
     /**
+     * <p>
      * Uses C40 encoding. Encodes Upper-case alphanumeric, Lower case and special characters
+     * </p>
      */
     const C40 = 8;
 
     /**
-     * Uses TEXT encoding. Encodes Lower-case alphanumeric, Upper case and special characters
+     * <p>
+     * Uses Text encoding. Encodes Lower-case alphanumeric, Upper case and special characters
+     * </p>
      */
     const TEXT = 9;
 
     /**
+     * <p>
      * Uses EDIFACT encoding. Uses six bits per character, encodes digits, upper-case letters, and many punctuation marks, but has no support for lower-case letters.
+     * </p>
      */
     const EDIFACT = 10;
 
     /**
+     * <p>
      * Uses ANSI X12 encoding.
+     * </p>
      */
     const ANSIX12 = 11;
 
     /**
-     * ExtendedCodetext mode allows to manually switch encodation schemes in codetext.
-     * Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.
-     * Extended codetext example: @"\ansix12:ANSIX12TEXT\ascii:backslash must be \\ doubled\edifact:EdifactEncodedText"
-     * All backslashes (\) must be doubled in text.
-     *
-     * This sample shows how to do codetext in Extended Mode.
-     * @code
-     * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX);
-     * $generator->setCodeText("\\ansix12:ANSIX12TEXT\\ascii:backslash must be \\\\ doubled\\edifact:EdifactEncodedText");
-     * $generator->getParameters()->getBarcode()->getDataMatrix()->setDataMatrixEncodeMode(DataMatrixEncodeMode.EXTENDED_CODETEXT);
-     * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     * $generator->save("test.png", BarcodeImageFormat::PNG);
-     * @endcode
+     * <p>
+     * <p>ExtendedCodetext mode allows to manually switch encodation schemes and ECI encodings in codetext.</p>
+     * <p>It is better to use DataMatrixExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * <p></p>
+     * <p>Encodation schemes are set in the next format : "\Encodation_scheme_name:text\Encodation_scheme_name:text".</p>
+     * <p>Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.</p>
+     * <p></p>
+     * <p>All backslashes (\) must be doubled in text.</p>
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode
      */
     const EXTENDED_CODETEXT = 12;
+
+    /**
+     * ExtendedCodetext mode allows to manually switch encodation schemes and ECI encodings in codetext.
+     * It is better to use DataMatrixExtCodetextBuilder for extended codetext generation.
+     * Use Display2DText property to set visible text to removing managing characters.
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
+     *
+     * Encodation schemes are set in the next format : "\Encodation_scheme_name:text\Encodation_scheme_name:text".
+     * Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.
+     *
+     * All backslashes (\) must be doubled in text.
+     */
+    const EXTENDED = 13;
+
+    /**
+     * Encode 8 bit values
+     */
+    const BASE_256 = 14;
+
+    /**
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     */
+    const BINARY = 15;
+
+    /**
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     */
+    const ECI = 16;
 }
 
 /**
@@ -7470,7 +7462,64 @@ class ITF14BorderType
 }
 
 /**
- * Encoding mode for QR barcodes. It is recomended to Use AUTO with CodeTextEncoding = Encoding.UTF8 for latin symbols or digits and UTF_8_BOM for unicode symbols.
+ * <p>
+ * Encoding mode for QR barcodes.
+ * </p>
+ * <p><hr><blockquote><pre>
+ * Example how to use ECI encoding
+ * <pre>
+ *     $generator = new BarcodeGenerator(EncodeTypes::QR, "12345TEXT");
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF8);
+ *     $generator->save("test.png", BarcodeImageFormat::PNG);
+ * </pre>
+ * </pre></blockquote></hr></p>
+ *      <p><hr><blockquote><pre>
+ *  Example how to use FNC1 first position in Extended Mode
+ *  <pre>
+ *      $textBuilder = new QrExtCodetextBuilder();
+ *      $textBuilder->addPlainCodetext("000%89%%0");
+ *      $textBuilder->addFNC1GroupSeparator();
+ *      $textBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
+ *      //generate barcode
+ *      $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *      $generator->setCodeText(textBuilder->getExtended());
+ *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+ *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ *      $generator->save("d:/test.png", BarcodeImageFormat::PNG);
+ * </pre>
+ *      *
+ * This sample shows how to use FNC1 second position in Extended Mode.
+ * <pre>
+ *
+ *    //create codetext
+ *    $textBuilder = new QrExtCodetextBuilder();
+ *    $textBuilder->addFNC1SecondPosition("12");
+ *    $textBuilder->addPlainCodetext("TRUE3456");
+ *    //generate barcode
+ *    $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *    $generator->setCodeText(textBuilder->getExtended());
+ *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ *    $generator->save("d:/test.png", BarcodeImageFormat::PNG);
+ *    </pre>
+ *
+ *    This sample shows how to use multi ECI mode in Extended Mode.
+ *    <pre>
+ *
+ *   //create codetext
+ *   $textBuilder = new QrExtCodetextBuilder();
+ *   $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ *   $textBuilder->addECICodetext(ECIEncodings::UTF8, "Right");
+ *   $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
+ *   $textBuilder->addPlainCodetext("t\e\\st");
+ *   //generate barcode
+ *   $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *   $generator->setCodeText(textBuilder->getExtended());
+ *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+ *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ *   $generator->save("d:/test.png", BarcodeImageFormat::PNG);
+ *  </pre>
+ *  </pre></blockquote></hr></p>
  */
 class QREncodeMode
 {
@@ -7569,7 +7618,7 @@ class QREncodeMode
 /**
  * Specify the type of the ECC to encode.
  */
-class  DataMatrixEccType
+class DataMatrixEccType
 {
     /**
      * Specifies that encoded Ecc type is defined by default Reed-Solomon error correction or ECC 200.
@@ -7845,7 +7894,7 @@ class QRVersion
  *  $generator->save("test.png", "PNG");
  * @endcode
  */
-class  AztecSymbolMode
+class AztecSymbolMode
 {
     /**
      * Specifies to automatically pick up the best symbol (COMPACT or FULL-range) for Aztec.
@@ -8839,15 +8888,12 @@ class AztecExtCodetextBuilder extends ExtCodetextBuilder
 /**
  * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
  * about the used references for encoding the data in the symbol.
- * Current implementation consists all well known charset encodings.
- * Currently, it is used only for QR 2D barcode.
  *
  * Example how to use ECI encoding
  * @code
  *     $generator = new BarcodeGenerator(EncodeTypes::QR);
  *     $generator->setCodeText("12345TEXT");
  *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
- *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeType(QREncodeType::FORCE_QR);
  *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF_8);
  *     $generator->save("test.png", "PNG");
  * @endcode
@@ -8957,13 +9003,41 @@ class ECIEncodings
      */
     const Big5 = 28;
     /**
-     * GB (PRC) Chinese Character Set encoding. ECI Id:"\000029"
+     * <p>GB2312 Chinese Character Set encoding. ECI Id:"\000029"</p>
      */
-    const GB18030 = 29;
+    const GB2312 = 29;
     /**
      * Korean Character Set encoding. ECI Id:"\000030"
      */
     const EUC_KR = 30;
+    /**
+     * <p>GBK (extension of GB2312 for Simplified Chinese)  encoding. ECI Id:"\000031"</p>
+     */
+    const GBK = 31;
+    /**
+     * <p>GGB18030 Chinese Character Set encoding. ECI Id:"\000032"</p>
+     */
+    const GB18030 = 32;
+    /**
+     * <p> ISO/IEC 10646 UTF-16LE encoding. ECI Id:"\000033"</p>
+     */
+    const UTF16LE = 33;
+    /**
+     * <p> ISO/IEC 10646 UTF-32BE encoding. ECI Id:"\000034"</p>
+     */
+    const UTF32BE = 34;
+    /**
+     * <p> ISO/IEC 10646 UTF-32LE encoding. ECI Id:"\000035"</p>
+     */
+    const UTF32LE = 35;
+    /**
+     * <p> ISO/IEC 646: ISO 7-bit coded character set - Invariant Characters set encoding. ECI Id:"\000170"</p>
+     */
+    const INVARIANT = 170;
+    /**
+     * <p> 8-bit binary data. ECI Id:"\000899"</p>
+     */
+    const BINARY = 899;
 
     /**
      * No Extended Channel Interpretation/p>
@@ -9139,17 +9213,33 @@ class Pdf417MacroTerminator
  */
 class MaxiCodeEncodeMode
 {
-    
     /**
-     * Encode codetext with value set in the ECIEncoding property.
+     * <p>
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * </p>
      */
     const AUTO = 0;
     
     /**
      * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     * @deprecated
      */
     const BYTES = 1;
-    
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     * @deprecated
+     */
+    const EXTENDED_CODETEXT = 2;
+
     /**
      * Extended mode which supports multi ECI modes.
      * It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.
@@ -9157,7 +9247,24 @@ class MaxiCodeEncodeMode
      * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
      * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
      */
-    const EXTENDED_CODETEXT = 2;
+    const EXTENDED = 3;
+
+    /**
+     * <p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
+     */
+     const BINARY = 4;
+
+    /**
+     * <p>
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * </p>
+     */
+    const ECI = 5;
 }
 
 /**
@@ -9276,29 +9383,21 @@ class MaxiCodeMode
  * //Auto mode with macros
  * $codetext = ""[)>\u001E05\u001DCodetextWithMacros05\u001E\u0004"";
  * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * {
- *     $generator->save("test.bmp", BarCodeImageFormat::BMP);
- * }
+ * $generator->save("test.bmp", BarCodeImageFormat::BMP);
  *
  * //Auto mode
  * $codetext = "犬Right狗";
  * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * {
- *     $generator->getParameters()->getBarcode()->getDotCode()->setECIEncoding(ECIEncodings::UTF8);
- *     $generator->save("test.bmp", BarCodeImageFormat::BMP);
- * }
+ * $generator->getParameters()->getBarcode()->getDotCode()->setECIEncoding(ECIEncodings::UTF8);
+ * $generator->save("test.bmp", BarCodeImageFormat::BMP);
  *
  * //Bytes mode
- * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
- * //encode array to string
- * $codetext = "";
- * foreach (encodedArr as $bval)
- *     $codetext .= bval;
- * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * {
- *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::BYTES);
- *     $generator->save("test.bmp", BarCodeImageFormat::BMP);
- * }
+ * $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, null);
+ * $generator->setCodetext($encodedArr, null);
+ * $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::BINARY);
+ * $generator->save("test.bmp", BarcodeImageFormat:PNG);
+ *
  * //Extended codetext mode
  * //create codetext
  * $textBuilder = new DotCodeExtCodetextBuilder();
@@ -9311,13 +9410,11 @@ class MaxiCodeMode
  * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
  * $textBuilder->addPlainCodetext("Plain text");
  * //generate codetext
- * $codetext = $textBuilder->getExtendedCodetext();
+ * $codetext = $textBuilder->getExtended();
  * //generate
  * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * {
- *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
- * 	   $generator->save("test.bmp", BarCodeImageFormat::BMP);
- * }
+ * $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
+ * $generator->save("test.bmp", BarCodeImageFormat::BMP);
  * </pre>
  * </pre></blockquote></hr></p>
  */
@@ -9325,7 +9422,9 @@ class DotCodeEncodeMode
 {
     /**
      * <p>
-     * Encode codetext with value set in the ECIEncoding property.
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
      * </p>
      */
     const AUTO = 0;
@@ -9334,6 +9433,7 @@ class DotCodeEncodeMode
      * <p>
      * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
      * </p>
+     * @deprecated
      */
      const BYTES = 1;
 
@@ -9345,9 +9445,85 @@ class DotCodeEncodeMode
      * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
      * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
      * </p>
+     * @deprecated
      */
      const EXTENDED_CODETEXT = 2;
+
+    /**
+     * <p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
+     */
+    const BINARY = 3;
+
+    /**
+     * <p>
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * </p>
+     */
+    const ECI = 4;
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use DotCodeExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     */
+    const EXTENDED = 5;
 }
+
+
+/**
+ * <p>
+ * Pdf417 barcode encode mode
+ * </p>
+ */
+class Pdf417EncodeMode
+{
+    /**
+     * <p>
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * <p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
+     */
+    const BINARY = 1;
+
+    /**
+     * <p>
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * </p>
+     */
+    const ECI = 2;
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use Pdf417ExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     */
+    const EXTENDED = 3;
+}
+
 
 /**
  * <p>
@@ -9360,11 +9536,11 @@ class DotCodeEncodeMode
  * //Generate code 128 with ISO 15417 encoding
  * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
  * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::AUTO);
- * $generator->Save("d:\\code128Auto.png", BarCodeImageFormat::Png);
+ * $generator->Save("d:/code128Auto.png", BarCodeImageFormat::Png);
  * //Generate code 128 only with Codeset A encoding
  * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
  * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::CODE_A);
- * $generator->Save("d:\\code128CodeA.png", BarCodeImageFormat::Png);
+ * $generator->Save("d:/code128CodeA.png", BarCodeImageFormat::Png);
  * </pre>
  * </pre></blockquote></hr></p>
  */
@@ -10542,7 +10718,9 @@ class AztecEncodeMode
 {
     /**
      * <p>
-     * Encode codetext with value set in the ECIEncoding property.
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
      * </p>
      */
     const AUTO = 0;
@@ -10551,6 +10729,7 @@ class AztecEncodeMode
      * <p>
      * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
      * </p>
+     * @deprecated
      */
     const BYTES = 1;
 
@@ -10562,8 +10741,36 @@ class AztecEncodeMode
      * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
      * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
      * </p>
+     * @deprecated
      */
     const EXTENDED_CODETEXT = 2;
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use AztecExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     */
+    const EXTENDED = 3;
+
+    /**
+     * <p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
+     */
+     const BINARY = 4;
+
+    /**
+     * <p>
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * </p>
+     */
+     const ECI = 5;
 }
 
 /**

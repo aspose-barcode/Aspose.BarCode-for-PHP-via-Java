@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.5</span>
+   &#160;<span id="projectnumber">24.6</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -100,6 +100,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a56a1eb2018508fd449ed4cd74f9fa097"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a112dd4d41c82e8cac3adc118c7ae0f9d"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d22/classDotCodeEncodeMode.html#a112dd4d41c82e8cac3adc118c7ae0f9d">EXTENDED_CODETEXT</a> = 2</td></tr>
 <tr class="separator:a112dd4d41c82e8cac3adc118c7ae0f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31f9abc751a01c5b516e9b0a94fbfbf3"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d22/classDotCodeEncodeMode.html#a31f9abc751a01c5b516e9b0a94fbfbf3">BINARY</a> = 3</td></tr>
+<tr class="separator:a31f9abc751a01c5b516e9b0a94fbfbf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4f099e41045f42bdfb10fad7451294c"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d22/classDotCodeEncodeMode.html#af4f099e41045f42bdfb10fad7451294c">ECI</a> = 4</td></tr>
+<tr class="separator:af4f099e41045f42bdfb10fad7451294c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a333bc2fdae3d6abf9aadf2bb0c38d1a0"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d22/classDotCodeEncodeMode.html#a333bc2fdae3d6abf9aadf2bb0c38d1a0">EXTENDED</a> = 5</td></tr>
+<tr class="separator:a333bc2fdae3d6abf9aadf2bb0c38d1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR">Extended codetext generator for Aztec barcodes for ExtendedCodetext Mode of <a class="el" href="../../db/de5/classAztecEncodeMode.html">AztecEncodeMode</a></p>
@@ -155,15 +161,12 @@ Public Attributes</h2></td></tr>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment">   Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details</span></div>
 <div class="line"><span class="comment">   about the used references for encoding the data in the symbol.</span></div>
-<div class="line"><span class="comment">   Current implementation consists all well known charset encodings.</span></div>
-<div class="line"><span class="comment">   Currently, it is used only for QR 2D barcode.</span></div>
 <div class="line"><span class="comment">  </span></div>
 <div class="line"><span class="comment">   Example how to use ECI encoding</span></div>
 <div class="line"><span class="comment">   @code</span></div>
 <div class="line"><span class="comment">       $generator = new BarcodeGenerator(EncodeTypes::QR);</span></div>
 <div class="line"><span class="comment">       $generator-&gt;setCodeText(&quot;12345TEXT&quot;);</span></div>
 <div class="line"><span class="comment">       $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::ECI_ENCODING);</span></div>
-<div class="line"><span class="comment">       $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeType(QREncodeType::FORCE_QR);</span></div>
 <div class="line"><span class="comment">       $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrECIEncoding(ECIEncodings::UTF_8);</span></div>
 <div class="line"><span class="comment">       $generator-&gt;save(&quot;test.png&quot;, &quot;PNG&quot;);</span></div>
 </div><!-- fragment -->
@@ -273,13 +276,41 @@ class ECIEncodings
      */
     const Big5 = 28;
     /**
-       GB (PRC) Chinese Character Set encoding. ECI Id:"\000029"
+       </pre></pre><pre><pre>GB2312 Chinese Character Set encoding. ECI Id:"\000029"</pre></pre><pre><pre>
      */
-    const GB18030 = 29;
+    const GB2312 = 29;
     /**
        Korean Character Set encoding. ECI Id:"\000030"
      */
     const EUC_KR = 30;
+    /**
+       </pre></pre><pre><pre>GBK (extension of GB2312 for Simplified Chinese)  encoding. ECI Id:"\000031"</pre></pre><pre><pre>
+     */
+    const GBK = 31;
+    /**
+       </pre></pre><pre><pre>GGB18030 Chinese Character Set encoding. ECI Id:"\000032"</pre></pre><pre><pre>
+     */
+    const GB18030 = 32;
+    /**
+       </pre></pre><pre><pre> ISO/IEC 10646 UTF-16LE encoding. ECI Id:"\000033"</pre></pre><pre><pre>
+     */
+    const UTF16LE = 33;
+    /**
+       </pre></pre><pre><pre> ISO/IEC 10646 UTF-32BE encoding. ECI Id:"\000034"</pre></pre><pre><pre>
+     */
+    const UTF32BE = 34;
+    /**
+       </pre></pre><pre><pre> ISO/IEC 10646 UTF-32LE encoding. ECI Id:"\000035"</pre></pre><pre><pre>
+     */
+    const UTF32LE = 35;
+    /**
+       </pre></pre><pre><pre> ISO/IEC 646: ISO 7-bit coded character set - Invariant Characters set encoding. ECI Id:"\000170"</pre></pre><pre><pre>
+     */
+    const INVARIANT = 170;
+    /**
+       </pre></pre><pre><pre> 8-bit binary data. ECI Id:"\000899"</pre></pre><pre><pre>
+     */
+    const BINARY = 899;
 
     /**
        No Extended Channel Interpretation/p&gt;
@@ -453,31 +484,52 @@ class Pdf417MacroTerminator
  */
 class MaxiCodeEncodeMode
 {
-
     /**
-       Encode codetext with value set in the ECIEncoding property.
+       </pre></pre><pre><pre>
+       In Auto mode, the CodeText is encoded with maximum data compactness.
+       Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+       If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+       </pre></pre><pre><pre>
      */
     const AUTO = 0;
 
     /**
        Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
-     */
-    const BYTES = 1;
-
-    /**
+ <dl class="deprecated DocNodeLTR"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>&#x202A;*/
+    const BYTES = 1;</dd></dl>
+</pre></pre><pre><pre>    /**
+       </pre></pre><pre><pre>
+       </pre></pre><pre><pre>Extended mode which supports multi ECI modes.</pre></pre><pre><pre>
+       </pre></pre><pre><pre>It is better to use <a class="el" href="../../de/dc3/classMaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a> for extended codetext generation.</pre></pre><pre><pre>
+       </pre></pre><pre><pre>Use Display2DText property to set visible text to removing managing characters.</pre></pre><pre><pre>
+       </pre></pre><pre><pre>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</pre></pre><pre><pre>
+       </pre></pre><pre><pre>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</pre></pre><pre><pre>
+       </pre></pre><pre><pre>
+ <dl class="deprecated DocNodeLTR"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>&#x202A;*/
+    const EXTENDED_CODETEXT = 2;</dd></dl>
+</pre></pre><pre><pre>    /**
        Extended mode which supports multi ECI modes.
        It is better to use <a class="el" href="../../de/dc3/classMaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a> for extended codetext generation.
        Use Display2DText property to set visible text to removing managing characters.
        ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
        All unicode characters after ECI identifier are automatically encoded into correct character codeset.
      */
-    const EXTENDED_CODETEXT = 2;
-}
-
-/**
-   Encoding mode for MaxiCode barcodes.
-
-   This sample shows how to genereate MaxiCode barcodes using <a class="el" href="../../df/d7b/classComplexBarcodeGenerator.html">ComplexBarcodeGenerator</a>
+    const EXTENDED = 3;</pre></pre><pre><pre>    /**
+       </pre></pre><pre><pre>
+       In Binary mode, the CodeText is encoded with maximum data compactness.
+       If a Unicode character is found, an exception is thrown.
+        </pre></pre><pre><pre>
+     */
+     const BINARY = 4;</pre></pre><pre><pre>    /**
+       </pre></pre><pre><pre>
+       In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+       If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+       Please note that some old (pre 2006) scanners may not support this mode.
+       </pre></pre><pre><pre>
+     */
+    const ECI = 5;
+}</pre></pre><pre><pre>/**
+   Encoding mode for MaxiCode barcodes.</pre></pre><pre><pre>   This sample shows how to genereate MaxiCode barcodes using <a class="el" href="../../df/d7b/classComplexBarcodeGenerator.html">ComplexBarcodeGenerator</a>
 <div class="fragment"><div class="line"><span class="comment">//Mode 2 with standart second message</span></div>
 <div class="line">$maxiCodeCodetext = <span class="keyword">new</span> <a class="code" href="../../d7/d3d/classMaxiCodeCodetextMode2.html">MaxiCodeCodetextMode2</a>();</div>
 <div class="line">$maxiCodeCodetext-&gt;setPostalCode(<span class="stringliteral">&quot;524032140&quot;</span>);</div>
@@ -556,32 +608,22 @@ class MaxiCodeMode
        Mode 2 encodes postal information in first message and data in second message.
        Has 9 digits postal code (used only in USA).
      */
-    const MODE_2 = 2;
-
-    /**
+    const MODE_2 = 2;</pre></pre><pre><pre>    /**
        Mode 3 encodes postal information in first message and data in second message.
        Has 6 alphanumeric postal code, used in the world.
      */
-    const MODE_3 = 3;
-
-    /**
+    const MODE_3 = 3;</pre></pre><pre><pre>    /**
         Mode 4 encodes data in first and second message, with short ECC correction.
      */
-    const MODE_4 = 4;
-
-    /**
+    const MODE_4 = 4;</pre></pre><pre><pre>    /**
        Mode 5 encodes data in first and second message, with long ECC correction.
      */
-    const MODE_5 = 5;
-
-    /**
+    const MODE_5 = 5;</pre></pre><pre><pre>    /**
        Mode 6 encodes data in first and second message, with short ECC correction.
        Used to encode device.
      */
     const MODE_6 = 6;
-}
-
-/**
+}</pre></pre><pre><pre>/**
    </pre></pre><pre><pre>
    Encoding mode for DotCode barcodes.
    </pre></pre><pre><pre></pre></pre><pre><pre><hr  />
@@ -591,29 +633,21 @@ class MaxiCodeMode
    //Auto mode with macros
    $codetext = ""[)&gt;\u001E05\u001DCodetextWithMacros05\u001E\u0004"";
    $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a402b334ccc3fc8c77f78a31a29a86fce">EncodeTypes::DOT_CODE</a>, $codetext);
-   {
-       $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
-   }
+   $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
 
    //Auto mode
    $codetext = "犬Right狗";
    $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a402b334ccc3fc8c77f78a31a29a86fce">EncodeTypes::DOT_CODE</a>, $codetext);
-   {
-       $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setECIEncoding(ECIEncodings::UTF8);
-       $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
-   }
+   $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setECIEncoding(ECIEncodings::UTF8);
+   $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
 
    //Bytes mode
-   $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
-   //encode array to string
-   $codetext = "";
-   foreach (encodedArr as $bval)
-       $codetext .= bval;
-   $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a402b334ccc3fc8c77f78a31a29a86fce">EncodeTypes::DOT_CODE</a>, $codetext);
-   {
-       $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setDotCodeEncodeMode(DotCodeEncodeMode::BYTES);
-       $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
-   }
+   $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
+   $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::DOT_CODE, null)</a>;
+   $generator-&gt;setCodetext($encodedArr, null);
+   $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setDotCodeEncodeMode(DotCodeEncodeMode::BINARY);
+   $generator-&gt;save("test.bmp", BarcodeImageFormat:PNG);
+
    //Extended codetext mode
    //create codetext
    $textBuilder = new <a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html">DotCodeExtCodetextBuilder()</a>;
@@ -626,13 +660,11 @@ class MaxiCodeMode
    $textBuilder-&gt;addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
    $textBuilder-&gt;addPlainCodetext("Plain text");
    //generate codetext
-   $codetext = $textBuilder-&gt;getExtendedCodetext();
+   $codetext = $textBuilder-&gt;getExtended();
    //generate
    $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a402b334ccc3fc8c77f78a31a29a86fce">EncodeTypes::DOT_CODE</a>, $codetext);
-   {
-       $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
-       $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
-   }
+   $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getDotCode()-&gt;setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
+   $generator-&gt;save("test.bmp", BarCodeImageFormat::BMP);
    </pre> </pre></blockquote>
 </pre></pre><pre><pre>
 </pre></pre></blockquote>
@@ -648,7 +680,22 @@ class MaxiCodeMode
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Encode codetext with value set in the ECIEncoding property. </p>
+<p class="DocNodeLTR">In Auto mode, the CodeText is encoded with maximum data compactness. Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier. If a character is found that is not supported by the selected ECI encoding, an exception is thrown. </p>
+
+</div>
+</div>
+<a id="a31f9abc751a01c5b516e9b0a94fbfbf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31f9abc751a01c5b516e9b0a94fbfbf3">&#9670;&nbsp;</a></span>BINARY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DotCodeEncodeMode::BINARY = 3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">In Binary mode, the CodeText is encoded with maximum data compactness. If a Unicode character is found, an exception is thrown. </p>
 
 </div>
 </div>
@@ -664,6 +711,41 @@ class MaxiCodeMode
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first. </p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000007">Deprecated:</a></b></dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="af4f099e41045f42bdfb10fad7451294c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4f099e41045f42bdfb10fad7451294c">&#9670;&nbsp;</a></span>ECI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DotCodeEncodeMode::ECI = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier. If a character is found that is not supported by the selected ECI encoding, an exception is thrown. Please note that some old (pre 2006) scanners may not support this mode. </p>
+
+</div>
+</div>
+<a id="a333bc2fdae3d6abf9aadf2bb0c38d1a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a333bc2fdae3d6abf9aadf2bb0c38d1a0">&#9670;&nbsp;</a></span>EXTENDED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const DotCodeEncodeMode::EXTENDED = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Extended mode which supports multi ECI modes.</p>
+<p class="DocNodeLTR">It is better to use <a class="el" href="../../d1/d82/classDotCodeExtCodetextBuilder.html">DotCodeExtCodetextBuilder</a> for extended codetext generation.</p>
+<p class="DocNodeLTR">Use Display2DText property to set visible text to removing managing characters.</p>
+<p class="DocNodeLTR">ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+<p class="DocNodeLTR">All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
 
 </div>
 </div>
@@ -683,6 +765,7 @@ class MaxiCodeMode
 <p class="DocNodeLTR">Use Display2DText property to set visible text to removing managing characters.</p>
 <p class="DocNodeLTR">ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
 <p class="DocNodeLTR">All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000008">Deprecated:</a></b></dt><dd></dd></dl>
 
 </div>
 </div>

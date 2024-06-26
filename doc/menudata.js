@@ -24,6 +24,7 @@
 */
 var menudata={children:[
 {text:"\u202AMain Page",url:"index.html"},
+{text:"\u202ARelated Pages",url:"pages.html"},
 {text:"\u202AClasses",url:"annotated.html",children:[
 {text:"\u202AClass List",url:"annotated.html"},
 {text:"\u202AClass Index",url:"classes.html"},

@@ -3,6 +3,7 @@ var classBarCodeExtendedParameters =
     [ "\u202A__construct", "dc/dc5/classBarCodeExtendedParameters.html#ac84018031d98c3b4663b167468f39640", null ],
     [ "\u202Aequals", "dc/dc5/classBarCodeExtendedParameters.html#ad84a2a2499f04e853a526e141493033b", null ],
     [ "\u202AgetAztec", "dc/dc5/classBarCodeExtendedParameters.html#a7eddf9f131e00a25fdec839065c410c9", null ],
+    [ "\u202AgetCodabar", "dc/dc5/classBarCodeExtendedParameters.html#a6c73ed48225f58e150bb0b591445dea8", null ],
     [ "\u202AgetCode128", "dc/dc5/classBarCodeExtendedParameters.html#ab4a1ea35e5597ff164d7c1eb869fb0ce", null ],
     [ "\u202AgetDataBar", "dc/dc5/classBarCodeExtendedParameters.html#a67685a5a87d5e757b70f2344e5526540", null ],
     [ "\u202AgetDataMatrix", "dc/dc5/classBarCodeExtendedParameters.html#a094203948a7ed6658d15d4c68fb1de39", null ],

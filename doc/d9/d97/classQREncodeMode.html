@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.5</span>
+   &#160;<span id="projectnumber">24.6</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -108,8 +108,63 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a222dab784b0cddc87a88f2d18c7a88ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p class="DocNodeLTR">Encoding mode for QR barcodes. It is recomended to Use AUTO with CodeTextEncoding = Encoding.UTF8 for latin symbols or digits and UTF_8_BOM for unicode symbols. </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+<div class="textblock"><p class="DocNodeLTR">Encoding mode for QR barcodes. </p>
+<hr  />
+<blockquote class="doxtable DocNodeLTR">
+<pre>
+Example how to use ECI encoding
+<pre>
+    $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator</a>(<a class="el" href="../../d5/d0f/classEncodeTypes.html#a643a4986c4ec7c97b9af16cb4a2e4ba5">EncodeTypes::QR</a>, "12345TEXT");
+    $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+    $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrECIEncoding(ECIEncodings::UTF8);
+    $generator-&gt;save("test.png", BarcodeImageFormat::PNG);
+</pre> </pre></blockquote>
+<hr  />
+<blockquote class="doxtable DocNodeLTR">
+<pre>
+ Example how to use FNC1 first position in Extended Mode
+ <pre>
+     $textBuilder = new <a class="el" href="../../dd/dc2/classQrExtCodetextBuilder.html">QrExtCodetextBuilder()</a>;
+     $textBuilder-&gt;addPlainCodetext("000%89%%0");
+     $textBuilder-&gt;addFNC1GroupSeparator();
+     $textBuilder-&gt;addPlainCodetext("12345&amp;lt;FNC1&amp;gt;");
+     //generate barcode
+     $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::QR)</a>;
+     $generator-&gt;setCodeText(textBuilder-&gt;getExtended());
+     $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+     $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText("My Text");
+     $generator-&gt;save("d:/test.png", BarcodeImageFormat::PNG);
+</pre><ul class="DocNodeLTR">
+<li><p class="startli DocNodeLTR">This sample shows how to use FNC1 second position in Extended Mode. </p><pre>
+
+   //create codetext
+   $textBuilder = new <a class="el" href="../../dd/dc2/classQrExtCodetextBuilder.html">QrExtCodetextBuilder()</a>;
+   $textBuilder-&gt;addFNC1SecondPosition("12");
+   $textBuilder-&gt;addPlainCodetext("TRUE3456");
+   //generate barcode
+   $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::QR)</a>;
+   $generator-&gt;setCodeText(textBuilder-&gt;getExtended());
+   $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText("My Text");
+   $generator-&gt;save("d:/test.png", BarcodeImageFormat::PNG);
+   </pre><p class="startli DocNodeLTR">This sample shows how to use multi ECI mode in Extended Mode. </p><pre>
+
+  //create codetext
+  $textBuilder = new <a class="el" href="../../dd/dc2/classQrExtCodetextBuilder.html">QrExtCodetextBuilder()</a>;
+  $textBuilder-&gt;addECICodetext(ECIEncodings::Win1251, "Will");
+  $textBuilder-&gt;addECICodetext(ECIEncodings::UTF8, "Right");
+  $textBuilder-&gt;addECICodetext(ECIEncodings::UTF16BE, "Power");
+  $textBuilder-&gt;addPlainCodetext("t\e\\st");
+  //generate barcode
+  $generator = new <a class="el" href="../../d0/dfb/classBarcodeGenerator.html">BarcodeGenerator(EncodeTypes::QR)</a>;
+  $generator-&gt;setCodeText(textBuilder-&gt;getExtended());
+  $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getQR()-&gt;setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+  $generator-&gt;getParameters()-&gt;getBarcode()-&gt;getCodeTextParameters()-&gt;setTwoDDisplayText("My Text");
+  $generator-&gt;save("d:/test.png", BarcodeImageFormat::PNG);
+ </pre> </li>
+</ul>
+</pre></blockquote>
+<pre>
+</pre></div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a9fdeb3f2e94446ea0cfdb608685ca6d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9fdeb3f2e94446ea0cfdb608685ca6d0">&#9670;&nbsp;</a></span>AUTO</h2>
 

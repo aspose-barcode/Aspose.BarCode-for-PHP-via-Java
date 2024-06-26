@@ -1,2 +1,2 @@
 set port=8999
-"%JAVA_HOME%\bin\java" -jar ../../lib/aspose-barcode-php-24.5.jar %port%
+"%JAVA_HOME%\bin\java" -jar ../../lib/aspose-barcode-php-24.6.jar %port%

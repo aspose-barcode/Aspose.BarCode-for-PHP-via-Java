@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.5</span>
+   &#160;<span id="projectnumber">24.6</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -114,8 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7d792b484380df71615b5948270bc7dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0aa8b6743e9d1e70353898f1243d3ef9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#a0aa8b6743e9d1e70353898f1243d3ef9">getCodeText</a> ()</td></tr>
 <tr class="separator:a0aa8b6743e9d1e70353898f1243d3ef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88ef1a474cc724c1759e8716cff9d70a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#a88ef1a474cc724c1759e8716cff9d70a">setCodeText</a> (string $value)</td></tr>
-<tr class="separator:a88ef1a474cc724c1759e8716cff9d70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4feac898b644fd01c8e76502e26e3222"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#a4feac898b644fd01c8e76502e26e3222">setCodeText</a> ($value, ?string $encoding)</td></tr>
+<tr class="separator:a4feac898b644fd01c8e76502e26e3222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a723ce8a961a3ec6ffa8c485396b1736b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dfb/classBarcodeGenerator.html#a723ce8a961a3ec6ffa8c485396b1736b">exportToXml</a> ($filePath)</td></tr>
 <tr class="separator:a723ce8a961a3ec6ffa8c485396b1736b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05ed9335956ecce2efde24e07a0fcf7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d5e/classBaseJavaClass.html#a05ed9335956ecce2efde24e07a0fcf7e">getJavaClass</a> ()</td></tr>
@@ -580,8 +580,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a88ef1a474cc724c1759e8716cff9d70a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88ef1a474cc724c1759e8716cff9d70a">&#9670;&nbsp;</a></span>setCodeText()</h2>
+<a id="a4feac898b644fd01c8e76502e26e3222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4feac898b644fd01c8e76502e26e3222">&#9670;&nbsp;</a></span>setCodeText()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -589,13 +589,30 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">BarcodeGenerator::setCodeText </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
-          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">?string&#160;</td>
+          <td class="paramname"><em>$encoding</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Text to be encoded. </p>
+<p class="DocNodeLTR">Encodes codetext with byte order mark (BOM) using specified encoding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string|array</td><td>&#x202A;codeText CodeText string | Bytes of codetext </td></tr>
+    <tr><td class="paramname">int</td><td>&#x202A;encoding Applied encoding </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

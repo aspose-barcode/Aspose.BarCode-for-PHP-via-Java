@@ -1,7 +1,6 @@
 var classQrParameters =
 [
     [ "\u202AgetAspectRatio", "da/ded/classQrParameters.html#a78a78b81709885c687f4ff6ac2fa3e15", null ],
-    [ "\u202AgetCodeTextEncoding", "da/ded/classQrParameters.html#a6a765dbe92dcebfc6ac5e087dc6852df", null ],
     [ "\u202AgetJavaClass", "da/ded/classQrParameters.html#a05ed9335956ecce2efde24e07a0fcf7e", null ],
     [ "\u202AgetJavaClassName", "da/ded/classQrParameters.html#a88dc1db5906ecc0ecd381db13eed913d", null ],
     [ "\u202AgetMicroQRVersion", "da/ded/classQrParameters.html#a312d608668a5125bf74dd4c38fc4df75", null ],
@@ -16,7 +15,6 @@ var classQrParameters =
     [ "\u202AisNull", "da/ded/classQrParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "da/ded/classQrParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetAspectRatio", "da/ded/classQrParameters.html#ad2b3c443f0e273d7d366773c4e0c75c6", null ],
-    [ "\u202AsetCodeTextEncoding", "da/ded/classQrParameters.html#a346229b651f6c1ee2be98fd486a496d8", null ],
     [ "\u202AsetJavaClass", "da/ded/classQrParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetMicroQRVersion", "da/ded/classQrParameters.html#aa86ffe64424f5c40a89f498dc4ff08d8", null ],
     [ "\u202AsetQrECIEncoding", "da/ded/classQrParameters.html#aea0ff4151b284078a00a68737c95cfd6", null ],

@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "\u202AAspose.Barcode for PHP via Java", "index.html", [
+    [ "\u202ADeprecated List", "da/d58/deprecated.html", null ],
     [ "\u202AClasses", "annotated.html", [
       [ "\u202AClass List", "annotated.html", "annotated_dup" ],
       [ "\u202AClass Index", "classes.html", null ],
@@ -41,14 +42,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d2/d15/classInverseImageMode.html",
-"d4/d26/classDecodeType.html#ae6f521d0b1b2154f943ab6a25592db9a",
-"d5/d0f/classEncodeTypes.html#a8787927f554ddc69fe8ae7efa020b32f",
-"d6/dfb/classPostalParameters.html",
-"d8/dae/classBarCodeReader.html#a264c7345eb64c83446fded2fde8c2780",
-"db/d41/classDataMatrixVersion.html#aedd1fded2b9b5d08747d9b02bcdac491",
-"dd/dc2/classQrExtCodetextBuilder.html",
-"df/d90/classHIBCLICCombinedCodetext.html"
+"d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
+"d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593",
+"d5/d0f/classEncodeTypes.html#a648c6b1fc293a4140b06825b1bcee509",
+"d6/de0/classCode128Parameters.html#a415caa7d2d0f66c483871779132ad11f",
+"d8/d8c/classLicense.html#ae8da241ff8cdc3ffe2c63af441437328",
+"db/d41/classDataMatrixVersion.html#adfe0d0442bc08b47d379e3d70a471e61",
+"dd/d96/classHIBCLICPrimaryDataCodetext.html#a6136e52a405422d2ce638f77a93c79cf",
+"df/d7b/classComplexBarcodeGenerator.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

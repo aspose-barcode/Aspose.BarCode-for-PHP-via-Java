@@ -1736,6 +1736,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
     private $_dataMatrixExtendedParameters;
     private $_aztecExtendedParameters;
     private $_gs1CompositeBarExtendedParameters;
+    private $_codabarExtendedParameters;
 
     protected function init(): void
     {
@@ -1751,6 +1752,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
             $this->_dataMatrixExtendedParameters = new DataMatrixExtendedParameters($this->getJavaClass()->getDataMatrix());
             $this->_aztecExtendedParameters = new AztecExtendedParameters($this->getJavaClass()->getAztec());
             $this->_gs1CompositeBarExtendedParameters = new GS1CompositeBarExtendedParameters($this->getJavaClass()->getGS1CompositeBar());
+            $this->_codabarExtendedParameters = new CodabarExtendedParameters($this->getJavaClass()->getCodabar());
         }
         catch (Exception $ex)
         {
@@ -1818,6 +1820,15 @@ class BarCodeExtendedParameters extends BaseJavaClass
     public function getGS1CompositeBar() : GS1CompositeBarExtendedParameters
     {
         return $this->_gs1CompositeBarExtendedParameters;
+    }
+
+    /**
+     * Gets a Codabar additional information{@code CodabarExtendedParameters} of recognized barcode
+     * @return A Codabar additional information{@code CodabarExtendedParameters} of recognized barcode
+     */
+    public  function getCodabar() : CodabarExtendedParameters
+    {
+        return $this->_codabarExtendedParameters;
     }
 
     /**
@@ -3279,6 +3290,102 @@ class AztecExtendedParameters extends BaseJavaClass
      * Returns a human-readable string representation of this {@code AztecExtendedParameters}.
      * </p>
      * @return A string that represents this {@code AztecExtendedParameters}.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->getJavaClass()->toString(), "string");
+    }
+}
+
+/**
+ * <p>
+ * Stores a Codabar additional information of recognized barcode
+ * </p>
+ */
+class CodabarExtendedParameters extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    protected function init() : void
+    {
+    }
+
+    /**
+     * <p>
+     * Gets or sets a Codabar start symbol.
+     * Default value: CodabarSymbol.A
+     * </p>
+     */
+    public function getCodabarStartSymbol() :int
+    {
+        return java_cast($this->getJavaClass()->getCodabarStartSymbol(), "integer");
+    }
+
+    /**
+     * <p>
+     * Gets or sets a Codabar start symbol.
+     * Default value: CodabarSymbol.A
+     * </p>
+     */
+    public function setCodabarStartSymbol(int $value) : void
+    {
+        $this->getJavaClass()->setCodabarStartSymbol($value);
+    }
+
+    /**
+     * <p>
+     * Gets or sets a Codabar stop symbol.
+     * Default value: CodabarSymbol.A
+     * </p>
+     */
+    public function getCodabarStopSymbol() : int
+    {
+        return java_cast($this->getJavaClass()->getCodabarStopSymbol(), "integer");
+    }
+
+    /**
+     * <p>
+     * Gets or sets a Codabar stop symbol.
+     * Default value: CodabarSymbol.A
+     * </p>
+     */
+    public function setCodabarStopSymbol(int $value) : void
+    {
+        $this->getJavaClass()->setCodabarStopSymbol($value);
+    }
+
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code CodabarExtendedParameters} value.
+     * </p>
+     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param obj An System.Object value to compare to this instance.
+     */
+    public function equals(Object $obj) : bool
+    {
+        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+    }
+
+    /**
+     * <p>
+     * Returns the hash code for this instance.
+     * </p>
+     * @return A 32-bit signed integer hash code.
+     */
+    public function hashCode(): int
+    {
+        return java_cast($this->getJavaClass()->hashCode(), "integer");
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code CodabarExtendedParameters}.
+     * </p>
+     * @return A string that represents this {@code CodabarExtendedParameters}.
      */
     public function toString() : string
     {
