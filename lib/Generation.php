@@ -7084,7 +7084,158 @@ class SvgParameters extends BaseJavaClass
     {
         $this->getJavaClass()->setTextDrawnInTextElement($textDrawnInTextElement);
     }
+
+
+    /**
+     * <p>
+     * Possible modes for filling color in svg file, RGB is default and supported by SVG 1.1.
+     * RGBA, HSL, HSLA is allowed in SVG 2.0 standard.
+     * Even in RGB opacity will be set through "fill-opacity" parameter
+     * </p>
+     */
+    function setSvgColorMode(int $svgColorMode) : void
+    {
+        $this->getJavaClass()->setSvgColorMode($svgColorMode);
+    }
+
+
+    /**
+     * Possible modes for filling color in svg file, RGB is default and supported by SVG 1.1.
+     * RGBA, HSL, HSLA is allowed in SVG 2.0 standard.
+     * Even in RGB opacity will be set through "fill-opacity" parameter
+     */
+    function getSvgColorMode() : int
+    {
+        return java_cast($this->getJavaClass()->getSvgColorMode(), "integer");
+    }
 }
+
+/**
+ * <p>
+ * Class for representing HSLA color (Hue, Saturation, Lightness, Alpha)
+ * </p>
+ */
+class HslaColor 
+{
+    /**
+     * <p>
+     * Hue [0, 360]
+     * </p>
+     */
+    public $H;
+
+    /**
+     * <p>
+     * Saturation [0, 100]
+     * </p>
+     */
+    public $S;
+
+    /**
+     * <p>
+     * Lightness [0, 100]
+     * </p>
+     */
+    public $L;
+
+    /**
+     * <p>
+     * Alpha (opacity) [0.0f, 1.0f]
+     * </p>
+     */
+    public $A = 0.0;
+
+
+    /**
+     * <p>
+     * Constructor for HslaColor
+     * </p>
+     *
+     * @param $h Hue [0, 360]
+     * @param $s Saturation [0, 100]
+     * @param $l Lightness [0, 100]
+     * @param $a Alpha (opacity) [0.0f, 1.0f]
+     */
+    public function __construct(int $h, int $s, int $l, float $a) {
+        $this->checkHue($h);
+        $this->checkSatLight($s);
+        $this->checkSatLight($l);
+        $this->checkAlpha($a);
+
+        $this->H = $h;
+        $this->S = $s;
+        $this->L = $l;
+        $this->A = $a;
+    }
+
+    private static function checkHue(int $value) 
+    {
+        if ($value < 0 || $value > 360) {
+            throw new Exception("Wrong color value");
+        }
+    }
+
+    private static function checkSatLight(int $value)
+    {
+        if ($value < 0 || $value > 100) {
+            throw new Exception("Wrong color value");
+        }
+    }
+
+    private static function checkAlpha(float $value) 
+    {
+        if ($value < 0.0 || $value > 1.0) 
+        {
+            throw new Exception("Wrong color value");
+        }
+    }
+
+    /**
+     * <p>
+     * Uses https://en.wikipedia.org/wiki/HSL_and_HSV#HSL_to_RGB
+     * </p>
+     *
+     * @param hslaColor HSLA color to convert
+     * @return string with RGBA values
+     */
+    public static function convertHslaToRgba(HslaColor $hslaColor) : string
+    {
+        $r = 0; $g = 0; $b = 0;
+
+        $hueF = $hslaColor->H / 360.0;
+        $satF = $hslaColor->S / 100.0;
+        $lightF = $hslaColor->L / 100.0;
+
+        if ($satF == 0) {
+            $r = $g = $b = $lightF;
+        } else {
+            $q = $lightF < 0.5 ? $lightF * (1 + $satF) : $lightF + $satF - $lightF * $satF;
+            $p = 2 * $lightF - $q;
+
+            $r = HslaColor::hueToRgb($p, $q, $hueF + 1.0 / 3.0);
+            $g = HslaColor::hueToRgb($p, $q, $hueF);
+            $b = HslaColor::hueToRgb($p, $q, $hueF - 1.0 / 3.0);
+        }
+
+        $rI = intval($r * 255 + 0.5);
+        $gI = intval($g * 255 + 0.5);
+        $bI = intval($b * 255 + 0.5);
+        $aI = intval($hslaColor->A * 255 + 0.5);
+
+        return sprintf("#%02X%02X%02X%02X", $aI, $rI, $gI, $bI);
+    }
+
+    private static function hueToRgb(float $p, float $q, float $t) : float
+    {
+        if ($t < 0.0) $t += 1.0;
+        if ($t > 1.0) $t -= 1.0;
+        if ($t < 1.0 / 6.0) return $p + ($q - $p) * 6.0 * $t;
+        if ($t < 1.0 / 2.0) return $q;
+        if ($t < 2.0 / 3.0) return $p + ($q - $p) * (2.0 / 3.0 - $t) * 6.0;
+        return $p;
+    }
+}
+
 
 /**
  * Class BarcodeClassifications EncodeTypes classification
@@ -7524,95 +7675,86 @@ class ITF14BorderType
 class QREncodeMode
 {
     /**
-     * Encode codetext as is non-unicode charset. If there is any unicode character, the codetext will be encoded with value which is set in CodeTextEncoding.
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are encoded in kanji mode if possible, or they are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
      */
+
     const AUTO = 0;
     /**
-     * Encode codetext as plain bytes. If it detects any unicode character, the character will be encoded as two bytes, lower byte first.
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method to convert the message to byte array with specified encoding.
      */
     const BYTES = 1;
-    //https://en.wikipedia.org/wiki/Byte_order_mark
+
     /**
      * Encode codetext with UTF8 encoding with first ByteOfMark character.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with UTF8 encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
      */
     const UTF_8_BOM = 2;
+
+
     /**
-     * Encode codetext with UTF8 encoding with first ByteOfMark character. It can be problems with some barcode scaners.
+     * Encode codetext with UTF8 encoding with first ByteOfMark character. It can be problems with some barcode scanners.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with BigEndianUnicode encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
      */
     const UTF_16_BEBOM = 3;
+
     /**
-     * Encode codetext with value set in the ECI_ENCODING property. It can be problems with some old (pre 2006) barcode scaners.
-     *
-     * Example how to use ECI encoding
-     * @code
-     *     $generator = new BarcodeGenerator(EncodeTypes::QR);
-     *     $generator->setCodeText("12345TEXT");
-     *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
-     *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeType(QREncodeType::FORCE_QR);
-     *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF8);
-     *     $generator->save("test.png", BarcodeImageFormat::PNG);
-     * @endcode
+     * Encode codetext with value set in the ECIEncoding property. It can be problems with some old (pre 2006) barcode scanners.
+     * This mode is not supported by MicroQR barcodes.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use ECI option.
      */
     const ECI_ENCODING = 4;
+
     /**
-     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.
-     * It is better to use QrExtCodetextBuilder for extended codetext generation.
-     * Use Display2DText property to set visible text to removing managing characters.
-     * Encoding Principles:
-     * All symbols "\" must be doubled "\\" in the codetext.
-     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"
-     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.
-     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D'
-     *  If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;"
-     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
-     * TO disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"
-     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
-     *
-     * Example how to use FNC1 first position in Extended Mode
-     * @code
-     *      $textBuilder = new QrExtCodetextBuilder();
-     *      $textBuilder->addPlainCodetext("000%89%%0");
-     *      $textBuilder->addFNC1GroupSeparator();
-     *      $textBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
-     *      //generate barcode
-     *      $generator = new BarcodeGenerator(EncodeTypes::QR);
-     *      $generator->setCodeText($textBuilder->getExtendedCodetext());
-     *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
-     *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     *      $generator->save("d:/test.png", BarcodeImageFormat::PNG);
-     * @endcode
-     *
-     * This sample shows how to use FNC1 second position in Extended Mode.
-     * @code
-     *    //create codetext
-     *    $textBuilder = new QrExtCodetextBuilder();
-     *    $textBuilder->addFNC1SecondPosition("12");
-     *    $textBuilder->addPlainCodetext("TRUE3456");
-     *    //generate barcode
-     *    $generator = new BarcodeGenerator(EncodeTypes::QR);
-     *    $generator->setCodeText($textBuilder->getExtendedCodetext());
-     *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     *    $generator->save("d:/test.png", BarcodeImageFormat::PNG);
-     * @endcode
-     *
-     *    This sample shows how to use multi ECI mode in Extended Mode.
-     * @code
-     *   //create codetext
-     *   $textBuilder = new QrExtCodetextBuilder();
-     *   $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
-     *   $textBuilder->addECICodetext(ECIEncodings::UTF8, "Right");
-     *   $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
-     *   $textBuilder->addPlainCodetext("t\e\\st");
-     *   //generate barcode
-     *   $generator = new BarcodeGenerator(EncodeTypes::QR);
-     *   $generator->setCodeText($textBuilder->getExtendedCodetext());
-     *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
-     *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
-     *   $generator->save("d:/test.png", BarcodeImageFormat::PNG);
-     * @endcode
+     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
+     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
+     * Use Display2DText property to set visible text to removing managing characters.</para>
+     * Encoding Principles:</para>
+     * All symbols "\" must be doubled "\\" in the codetext.</para>
+     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
+     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
+     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
+     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
+     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
+     * This mode is not supported by MicroQR barcodes.</para>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode.
      */
     const EXTENDED_CODETEXT = 5;
 
+    /**
+     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
+     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
+     * Use Display2DText property to set visible text to removing managing characters.</para>
+     * Encoding Principles:</para>
+     * All symbols "\" must be doubled "\\" in the codetext.</para>
+     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
+     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
+     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
+     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
+     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
+     * This mode is not supported by MicroQR barcodes.</para>
+     */
+    const EXTENDED = 6;
+
+    /**
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     */
+    const BINARY = 7;
+
+    /**
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * This mode is not supported by MicroQR barcodes.
+     */
+    const ECI = 8;
 }
 
 /**
@@ -8211,24 +8353,25 @@ class EncodeTypes
     const  CODE_11 = 1;
 
     /**
-     * Specifies that the data should be encoded with Standard CODE 39 barcode specification
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>Code 39</b>} basic charset barcode specification: ISO/IEC 16388
+     * </p>
      */
-    const  CODE_39_STANDARD = 2;
+    const CODE_39 = 2;
 
     /**
-     * Specifies that the data should be encoded with Extended CODE 39 barcode specification
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>Code 39</b>} full ASCII charset barcode specification: ISO/IEC 16388
+     * </p>
      */
-    const  CODE_39_EXTENDED = 3;
+    const CODE_39_FULL_ASCII = 3;
 
     /**
-     * Specifies that the data should be encoded with Standard CODE 93 barcode specification
+     * <p>
+     * Specifies that the data should be encoded with {@code <b>CODE 93</b>} barcode specification
+     * </p>
      */
-    const  CODE_93_STANDARD = 4;
-
-    /**
-     * Specifies that the data should be encoded with Extended CODE 93 barcode specification
-     */
-    const  CODE_93_EXTENDED = 5;
+    const CODE_93 = 5;
 
     /**
      * Specifies that the data should be encoded with CODE 128 barcode specification
@@ -8666,13 +8809,11 @@ class EncodeTypes
 
         else if($encodeTypeName == "CODE_11") return 1;
 
-        else if($encodeTypeName == "CODE_39_STANDARD") return 2;
+        else if($encodeTypeName == "CODE_39") return 2;
 
-        else if($encodeTypeName == "CODE_39_EXTENDED") return 3;
+        else if($encodeTypeName == "CODE_39_FULL_ASCII") return 3;
 
-        else if($encodeTypeName == "CODE_93_STANDARD") return 4;
-
-        else if($encodeTypeName == "CODE_93_EXTENDED") return 5;
+        else if($encodeTypeName == "CODE_93") return 5;
 
         else if($encodeTypeName == "CODE_128") return 6;
 
@@ -11057,5 +11198,40 @@ class RectMicroQRVersion
      * </p>
      */
     const R17x139 = 32;
+}
+
+/**
+ * <p>
+ * Possible modes for filling color in svg file, RGB is default and supported by SVG 1.1.
+ * RGBA, HSL, HSLA is allowed in SVG 2.0 standard.
+ * Even in RGB opacity will be set through "fill-opacity" parameter
+ * </p>
+ */
+class SvgColorMode
+{
+    /**
+     * <p>
+     * RGB mode, example: fill="#ff5511" fill-opacity="0.73". Default mode.
+     * </p>
+     */
+    const RGB = 0;
+    /**
+     * <p>
+     * RGBA mode, example: fill="rgba(255, 85, 17, 0.73)"
+     * </p>
+     */
+    const RGBA =1;
+    /**
+     * <p>
+     * HSL mode, example: fill="hsl(17, 100%, 53%)" fill-opacity="0.73"
+     * </p>
+     */
+    const HSL = 2;
+    /**
+     * <p>
+     * HSLA mode, example: fill="hsla(30, 50%, 70%, 0.8)"
+     * </p>
+     */
+    const HSLA = 3;
 }
 ?>

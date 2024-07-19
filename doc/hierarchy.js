@@ -121,6 +121,7 @@ var hierarchy =
     [ "\u202AHanXinEncodeMode", "d6/d56/classHanXinEncodeMode.html", null ],
     [ "\u202AHanXinErrorLevel", "d4/dd3/classHanXinErrorLevel.html", null ],
     [ "\u202AHanXinVersion", "d5/d05/classHanXinVersion.html", null ],
+    [ "\u202AHslaColor", "de/d40/classHslaColor.html", null ],
     [ "\u202AInverseImageMode", "d2/d15/classInverseImageMode.html", null ],
     [ "\u202AITF14BorderType", "d3/de2/classITF14BorderType.html", null ],
     [ "\u202AMacroCharacter", "dc/daf/classMacroCharacter.html", null ],
@@ -135,6 +136,7 @@ var hierarchy =
     [ "\u202AQRErrorLevel", "d3/d7d/classQRErrorLevel.html", null ],
     [ "\u202AQRVersion", "d8/d37/classQRVersion.html", null ],
     [ "\u202ARectMicroQRVersion", "d7/d88/classRectMicroQRVersion.html", null ],
+    [ "\u202ASvgColorMode", "d2/dc1/classSvgColorMode.html", null ],
     [ "\u202ATextAlignment", "dc/d31/classTextAlignment.html", null ],
     [ "\u202AXDimensionMode", "da/d50/classXDimensionMode.html", null ]
 ];

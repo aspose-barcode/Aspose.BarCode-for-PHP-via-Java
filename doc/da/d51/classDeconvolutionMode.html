@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.6</span>
+   &#160;<span id="projectnumber">24.7</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -108,7 +108,7 @@ Public Attributes</h2></td></tr>
 <pre>
  This sample shows how to use Deconvolution mode
  <pre>
-<div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#a2d9a5f353df690d109bbcc164554742f">DecodeType::CODE_39_EXTENDED</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
+<div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#ac77f91ab4aa0a1cd6d9a306afddf5b31">DecodeType::CODE_39_FULL_ASCII</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
 <div class="line">$reader-&gt;getQualitySettings()-&gt;setDeconvolution(<a class="code" href="../../da/d51/classDeconvolutionMode.html#adc06079755b8a3bcabb6969f94f55cab">DeconvolutionMode::SLOW</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>

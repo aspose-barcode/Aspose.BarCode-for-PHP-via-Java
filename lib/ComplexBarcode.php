@@ -14,25 +14,17 @@ final class Address extends BaseJavaClass
 {
     private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwAddress";
 
-    public function __construct($arg)
+    public function __construct()
     {
-        parent::__construct(self::initAddress($arg));
+        parent::__construct(new java(self::$javaClassName));
     }
 
-    private static function initAddress($arg)
+    static function construct($javaClass) : Address
     {
-        try
-        {
-            if (is_null($arg))
-            {
-                return new java(self::$javaClassName);
-            }
-            return $arg;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $address = new Address();
+        $address->setJavaClass($javaClass);
+
+        return $address;
     }
 
     /**
@@ -751,8 +743,8 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->creditor = new Address($this->getJavaClass()->getCreditor());
-            $this->debtor = new Address($this->getJavaClass()->getDebtor());
+            $this->creditor = Address::construct($this->getJavaClass()->getCreditor());
+            $this->debtor = Address::construct($this->getJavaClass()->getDebtor());
         }
         catch (Exception $ex)
         {

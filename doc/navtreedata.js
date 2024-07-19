@@ -43,13 +43,13 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
-"d4/d26/classDecodeType.html#ad681e4e0383a5ba307e24f710722d593",
-"d5/d0f/classEncodeTypes.html#a648c6b1fc293a4140b06825b1bcee509",
-"d6/de0/classCode128Parameters.html#a415caa7d2d0f66c483871779132ad11f",
-"d8/d8c/classLicense.html#ae8da241ff8cdc3ffe2c63af441437328",
-"db/d41/classDataMatrixVersion.html#adfe0d0442bc08b47d379e3d70a471e61",
-"dd/d96/classHIBCLICPrimaryDataCodetext.html#a6136e52a405422d2ce638f77a93c79cf",
-"df/d7b/classComplexBarcodeGenerator.html"
+"d4/d26/classDecodeType.html#ac74883936de6fa531cbb441766f8f071",
+"d5/d0f/classEncodeTypes.html#a5c87e168095a00f14e6c8464bdcadf98",
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#ae33673207e7a1b7ad24ee3940c2d90dc",
+"d8/d8c/classLicense.html#a657e3148b4c9d6c9a872e254d4bc4c8b",
+"db/d41/classDataMatrixVersion.html#abdb5610f847cdf2dea0bf4348eab37e8",
+"dd/d96/classHIBCLICPrimaryDataCodetext.html#a05ed9335956ecce2efde24e07a0fcf7e",
+"df/d22/classDotCodeEncodeMode.html#a112dd4d41c82e8cac3adc118c7ae0f9d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

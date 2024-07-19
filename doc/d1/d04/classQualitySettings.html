@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.6</span>
+   &#160;<span id="projectnumber">24.7</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -157,26 +157,26 @@ Protected Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR"><a class="el" href="../../d1/d04/classQualitySettings.html">QualitySettings</a> allows to configure recognition quality and speed manually. You can quickly set up <a class="el" href="../../d1/d04/classQualitySettings.html">QualitySettings</a> by embedded presets: HighPerformance, NormalQuality, HighQuality, MaxBarCodes or you can manually configure separate options. Default value of <a class="el" href="../../d1/d04/classQualitySettings.html">QualitySettings</a> is NormalQuality.</p>
-<p class="DocNodeLTR">This sample shows how to use <a class="el" href="../../d1/d04/classQualitySettings.html">QualitySettings</a> with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<p class="DocNodeLTR">This sample shows how to use <a class="el" href="../../d1/d04/classQualitySettings.html">QualitySettings</a> with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="comment">//set high performance mode</span></div>
 <div class="line">$reader-&gt;setQualitySettings(<a class="code" href="../../d1/d04/classQualitySettings.html#a354b80ff84528bd9a70a47510094dd7e">QualitySettings::getHighPerformance</a>());</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="comment">//normal quality mode is set by default</span></div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">  print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="comment">//set high quality mode with low speed recognition</span></div>
 <div class="line">$reader-&gt;setQualitySettings(<a class="code" href="../../d1/d04/classQualitySettings.html#a7f1fc7fd994679659cf81cc11737e4f2">QualitySettings::getHighQuality</a>());</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">  print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="comment">//set max barcodes mode, which tries to find all possible barcodes, even incorrect. The slowest recognition mode</span></div>
 <div class="line">$reader-&gt;setQualitySettings(QualitySettings::getMaxBarCodes());</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">  print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="comment">//set high performance mode</span></div>
 <div class="line">$reader-&gt;setQualitySettings(<a class="code" href="../../d1/d04/classQualitySettings.html#a354b80ff84528bd9a70a47510094dd7e">QualitySettings::getHighPerformance</a>());</div>
 <div class="line"><span class="comment">//set separate options</span></div>
@@ -184,7 +184,7 @@ Protected Member Functions</h2></td></tr>
 <div class="line">$reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">      print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="comment">//default mode is NormalQuality</span></div>
 <div class="line"><span class="comment">//set separate options</span></div>
 <div class="line">$reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(<span class="keyword">true</span>);</div>
@@ -452,7 +452,7 @@ Protected Member Functions</h2></td></tr>
  This sample shows how to use MaxQuality mode
  <pre>
 
- $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("test.png"null, null, <a class="el" href="../../d4/d26/classDecodeType.html#a2d9a5f353df690d109bbcc164554742f">DecodeType::CODE_39_EXTENDED</a>, <a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);
+ $reader = new <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>("test.png"null, null, <a class="el" href="../../d4/d26/classDecodeType.html#ac77f91ab4aa0a1cd6d9a306afddf5b31">DecodeType::CODE_39_FULL_ASCII</a>, <a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);
  {
      $reader-&gt;setQualitySettings(QualitySettings::getMaxQuality());
      foreach($reader-&gt;readBarCodes() as $result)

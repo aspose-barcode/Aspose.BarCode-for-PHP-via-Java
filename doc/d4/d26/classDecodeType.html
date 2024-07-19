@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.6</span>
+   &#160;<span id="projectnumber">24.7</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -112,14 +112,12 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a67c7b5823319090978fcacc3e37a980d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af96bf76d2b3ff85e9457bb8c4c10846f"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#af96bf76d2b3ff85e9457bb8c4c10846f">CODE_11</a> = 1</td></tr>
 <tr class="separator:af96bf76d2b3ff85e9457bb8c4c10846f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32343c58da3e34ae9bb120875719a018"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">CODE_39_STANDARD</a> = 2</td></tr>
-<tr class="separator:a32343c58da3e34ae9bb120875719a018"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d9a5f353df690d109bbcc164554742f"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#a2d9a5f353df690d109bbcc164554742f">CODE_39_EXTENDED</a> = 3</td></tr>
-<tr class="separator:a2d9a5f353df690d109bbcc164554742f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1048aac97819c52706d2134155b6abd6"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#a1048aac97819c52706d2134155b6abd6">CODE_93_STANDARD</a> = 4</td></tr>
-<tr class="separator:a1048aac97819c52706d2134155b6abd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af48b3caeceeda55c3c235e851a858a06"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#af48b3caeceeda55c3c235e851a858a06">CODE_93_EXTENDED</a> = 5</td></tr>
-<tr class="separator:af48b3caeceeda55c3c235e851a858a06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35e96079470d557aaf2ba0039570ee78"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">CODE_39</a> = 2</td></tr>
+<tr class="separator:a35e96079470d557aaf2ba0039570ee78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac77f91ab4aa0a1cd6d9a306afddf5b31"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#ac77f91ab4aa0a1cd6d9a306afddf5b31">CODE_39_FULL_ASCII</a> = 3</td></tr>
+<tr class="separator:ac77f91ab4aa0a1cd6d9a306afddf5b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae131b8fe7eca250a31bb6baa008ac977"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#ae131b8fe7eca250a31bb6baa008ac977">CODE_93</a> = 5</td></tr>
+<tr class="separator:ae131b8fe7eca250a31bb6baa008ac977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5e5146966c75f09530a3e8fe3e1b1ff"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">CODE_128</a> = 6</td></tr>
 <tr class="separator:aa5e5146966c75f09530a3e8fe3e1b1ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf889a3a4cb5a91302fbf3fae17a910f"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d26/classDecodeType.html#abf889a3a4cb5a91302fbf3fae17a910f">GS_1_CODE_128</a> = 7</td></tr>
@@ -289,7 +287,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR">Specify the type of barcode to read.</p>
-<p class="DocNodeLTR">This sample shows how to detect Code39 and Code128 barcodes. </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a32343c58da3e34ae9bb120875719a018">DecodeType::CODE_39_STANDARD</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<p class="DocNodeLTR">This sample shows how to detect Code39 and Code128 barcodes. </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.$result-&gt;getCodeTypeName());</div>
@@ -596,63 +594,51 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a2d9a5f353df690d109bbcc164554742f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d9a5f353df690d109bbcc164554742f">&#9670;&nbsp;</a></span>CODE_39_EXTENDED</h2>
+<a id="a35e96079470d557aaf2ba0039570ee78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35e96079470d557aaf2ba0039570ee78">&#9670;&nbsp;</a></span>CODE_39</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const DecodeType::CODE_39_EXTENDED = 3</td>
+          <td class="memname">const DecodeType::CODE_39 = 2</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Specifies that the data should be decoded with { <b>Extended CODE 39</b>} barcode specification </p>
+<p class="DocNodeLTR">Specifies that the data should be decoded with</p><div class="fragment"><div class="line">&lt;b&gt;Code 39&lt;/b&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> basic charset barcode specification: ISO/IEC 16388 </p>
 
 </div>
 </div>
-<a id="a32343c58da3e34ae9bb120875719a018"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32343c58da3e34ae9bb120875719a018">&#9670;&nbsp;</a></span>CODE_39_STANDARD</h2>
+<a id="ac77f91ab4aa0a1cd6d9a306afddf5b31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac77f91ab4aa0a1cd6d9a306afddf5b31">&#9670;&nbsp;</a></span>CODE_39_FULL_ASCII</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const DecodeType::CODE_39_STANDARD = 2</td>
+          <td class="memname">const DecodeType::CODE_39_FULL_ASCII = 3</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Specifies that the data should be decoded with { <b>Standard CODE 39</b>} barcode specification </p>
+<p class="DocNodeLTR">Specifies that the data should be decoded with</p><div class="fragment"><div class="line">&lt;b&gt;Code 39&lt;/b&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> full ASCII charset barcode specification: ISO/IEC 16388 </p>
 
 </div>
 </div>
-<a id="af48b3caeceeda55c3c235e851a858a06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af48b3caeceeda55c3c235e851a858a06">&#9670;&nbsp;</a></span>CODE_93_EXTENDED</h2>
+<a id="ae131b8fe7eca250a31bb6baa008ac977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae131b8fe7eca250a31bb6baa008ac977">&#9670;&nbsp;</a></span>CODE_93</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const DecodeType::CODE_93_EXTENDED = 5</td>
+          <td class="memname">const DecodeType::CODE_93 = 5</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Specifies that the data should be decoded with { <b>Extended CODE 93</b>} barcode specification </p>
-
-</div>
-</div>
-<a id="a1048aac97819c52706d2134155b6abd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1048aac97819c52706d2134155b6abd6">&#9670;&nbsp;</a></span>CODE_93_STANDARD</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const DecodeType::CODE_93_STANDARD = 4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p class="DocNodeLTR">Specifies that the data should be decoded with { <b>Standard CODE 93</b>} barcode specification </p>
+<p class="DocNodeLTR">Specifies that the data should be decoded with</p><div class="fragment"><div class="line">&lt;b&gt;CODE 93&lt;/b&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> barcode specification </p>
 
 </div>
 </div>
