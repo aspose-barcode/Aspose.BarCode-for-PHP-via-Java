@@ -7157,10 +7157,11 @@ class HslaColor
      * @param $a Alpha (opacity) [0.0f, 1.0f]
      */
     public function __construct(int $h, int $s, int $l, float $a) {
-        $this->checkHue($h);
-        $this->checkSatLight($s);
-        $this->checkSatLight($l);
-        $this->checkAlpha($a);
+//        $this->checkHue($h);
+        self::checkHue($h);
+        self::checkSatLight($s);
+        self::checkSatLight($l);
+        self::checkAlpha($a);
 
         $this->H = $h;
         $this->S = $s;
@@ -7222,7 +7223,7 @@ class HslaColor
         $bI = intval($b * 255 + 0.5);
         $aI = intval($hslaColor->A * 255 + 0.5);
 
-        return sprintf("#%02X%02X%02X%02X", $aI, $rI, $gI, $bI);
+        return sprintf("#%02X%02X%02X%02X", $rI, $gI, $bI, $aI);
     }
 
     private static function hueToRgb(float $p, float $q, float $t) : float
