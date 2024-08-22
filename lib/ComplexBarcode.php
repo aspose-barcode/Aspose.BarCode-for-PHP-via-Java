@@ -712,8 +712,8 @@ final class ComplexCodetextReader
      */
     public static function tryDecodeHIBCPAS(string $encodedCodetext) : ?HIBCPASCodetext
     {
-        $javaPhpComplexCodetextReader = java(ComplexCodetextReader::$javaClassName);
-        $javaHIBCPAS = $javaPhpComplexCodetextReader->tryDecodeHIBCPAS($encodedCodetext);
+        $javaComplexCodetextReader = java(ComplexCodetextReader::$javaClassName);
+        $javaHIBCPAS = $javaComplexCodetextReader->tryDecodeHIBCPAS($encodedCodetext);
         if(java_is_null($javaHIBCPAS))
             return null;
         return HIBCPASCodetext::construct($javaHIBCPAS);

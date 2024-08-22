@@ -10,7 +10,7 @@ class BarcodeGeneratorExamples
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $encode_type = EncodeTypes::CODE_128;
         $generator = new BarcodeGenerator($encode_type, null);
-        $generator->setCodeText("123ABC");
+        $generator->setCodeText("123ABC", null);
         $path = $this->subfolder . "howToGenerateBarcodeImage.png";
         $generator->save($path, BarCodeImageFormat::PNG);
         print("barcode image saved to ".$path."\n");
@@ -57,7 +57,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $codeText = '01234567';
-        $encodeType = EncodeTypes::CODE_39_STANDARD;
+        $encodeType = EncodeTypes::CODE_39;
         $generator = new BarcodeGenerator($encodeType, $codeText);
         $path = $this->subfolder . "howToGenerateOneD.png";
         $generator->save($path, BarCodeImageFormat::PNG);
@@ -79,7 +79,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#FF0000";
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $generator->getParameters()->setBackColor($color_expected);
         $color_actual = $generator->getParameters()->getBackColor();
         $generator->save($this->subfolder . "howToSetBackColor.png", BarCodeImageFormat::PNG);
@@ -94,7 +94,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#FFFFFF";
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $color_actual = $generator->getParameters()->getBackColor();
         $path = $this->subfolder . "howToGetDefaultBackColor.png";
         $generator->save($path, BarCodeImageFormat::PNG);
@@ -107,7 +107,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#000000";
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $color_actual = $generator->getParameters()->getBarcode()->getBarColor();
         $path = $this->subfolder . "howToGetDefaultForeColor.png";
         $generator->save($path, BarCodeImageFormat::PNG);
@@ -120,7 +120,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $color_expected = "#FA00AA";
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $generator->getParameters()->getBarcode()->setBarColor($color_expected);
         $color_actual = $generator->getParameters()->getBarcode()->getBarColor();
         $path = $this->subfolder . "howToSetForeColor.png";
@@ -137,7 +137,7 @@ class BarcodeGeneratorExamples
         $encode_type = EncodeTypes::CODE_128;
         $generator = new BarcodeGenerator($encode_type, null);
         $expected = "555777";
-        $generator->setCodeText($expected);
+        $generator->setCodeText($expected, null);
         $actual = $generator->getCodeText();
         $path = $this->subfolder . "howToSetCodeText.png";
         $generator->save($path, BarCodeImageFormat::PNG);
@@ -168,7 +168,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $dash_style_expected = BorderDashStyle::SOLID;
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $dash_style_actual = $generator->getParameters()->getBorder()->getDashStyle();
         $path = $this->subfolder . "howToGetDefaultDashStyle.png";
         $generator->save($path, BarCodeImageFormat::PNG);
@@ -181,7 +181,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $border_color_expected = "#000000";
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $border_color_actual = $generator->getParameters()->getBorder()->getColor();
         $path = $this->subfolder . "howToDefaultBorderColor.png";
         $generator->save($path, BarCodeImageFormat::PNG);
@@ -194,7 +194,7 @@ class BarcodeGeneratorExamples
     {
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $border_color_expected = "#AA00BB";
-        $generator = new BarcodeGenerator(EncodeTypes::CODE_39_STANDARD, '01234567');
+        $generator = new BarcodeGenerator(EncodeTypes::CODE_39, '01234567');
         $generator->getParameters()->getBorder()->setColor($border_color_expected);
         $border_color_actual = $generator->getParameters()->getBorder()->getColor();
         $path = $this->subfolder . "howToSetBorderColor.png";

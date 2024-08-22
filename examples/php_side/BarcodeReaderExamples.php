@@ -28,8 +28,6 @@ class BarCodeReaderExamples
         print(file_exists($full_path)."\n");
         $reader = new BarCodeReader($full_path, null, null);
         $reader->setQualitySettings(QualitySettings::getHighPerformance());
-        $reader->getQualitySettings()->setAllowMedianSmoothing(true);
-        $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
 
         forEach($reader->readBarCodes() as $res)
         {
@@ -152,7 +150,7 @@ public function howToRecognitionCodeAllSupportedTypes2()
     {
         print("\nfunction '".__FUNCTION__."'\n");
         $gen = new BarcodeGenerator(EncodeTypes::MACRO_PDF_417, null);
-        $gen->setCodeText("codeSomecode");
+        $gen->setCodeText("codeSomecode", null);
         $gen->getParameters()->getBarcode()->getPdf417()->setPdf417MacroFileID(15900);
         $gen->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentID(2);
         $gen->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentsCount(3);
@@ -169,43 +167,6 @@ public function howToRecognitionCodeAllSupportedTypes2()
     }
 
 
-    public function howToCustomerInformationInterpretingType1()
-    {
-        print("\nfunction '".__FUNCTION__."'\n");
-        $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, null);
-        $generator->setCodeText("59123456781234567");
-        $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::N_TABLE);
-        $generator->getParameters()->setAutoSizeMode(AutoSizeMode::NEAREST);
-        $generator->getParameters()->getImageWidth()->setPixels(300);
-        $generator->getParameters()->getImageHeight()->setPixels(150);
-        $image = $generator->generateBarcodeImage(BarCodeImageFormat::PNG);
-        $reader = new BarCodeReader(($image), null, DecodeType::AUSTRALIA_POST);
-        $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::N_TABLE);
-        forEach($reader->readBarCodes() as $res)
-        {
-            print("CodeText : " . $res->getCodeText()."\n");
-            print("CodeType : " . $res->getCodeTypeName()."\n");
-        }
-    }
-
-  public function howToCustomerInformationInterpretingType2()
-    {
-        print("\nfunction '".__FUNCTION__."'\n");
-        $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, null);
-        $generator->setCodeText("6212345678ABCdef123#");
-        $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
-        $generator->getParameters()->setAutoSizeMode(AutoSizeMode::NEAREST);
-        $generator->getParameters()->getImageWidth()->setPixels(300);
-        $generator->getParameters()->getImageHeight()->setPixels(150);
-        $image = $generator->generateBarcodeImage(BarCodeImageFormat::PNG);
-        $reader = new BarCodeReader(($image), null, DecodeType::AUSTRALIA_POST);
-        $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
-        forEach($reader->readBarCodes() as $res)
-        {
-            print("CodeText : " . $res->getCodeText()."\n");
-            print("CodeType : " . $res->getCodeTypeName()."\n");
-        }
-    }
 }
 
 set_license();
@@ -219,5 +180,3 @@ $barcodeReaderTests->howToRecognitionCodeAllSupportedTypes();
 $barcodeReaderTests->howToRecognitionCodeAllSupportedTypes2();
 $barcodeReaderTests->howToRecognitionSetBarCodeImage();
 $barcodeReaderTests->howToMacroPdf417();
-$barcodeReaderTests->howToCustomerInformationInterpretingType1();
-$barcodeReaderTests->howToCustomerInformationInterpretingType2();
