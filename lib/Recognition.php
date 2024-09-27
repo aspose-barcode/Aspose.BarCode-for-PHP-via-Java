@@ -799,6 +799,31 @@ final class QRExtendedParameters extends BaseJavaClass
         }
     }
 
+    /**
+     * Version of recognized QR Code. From Version1 to Version40.
+     * @return Version of recognized QR Code
+     */
+    public function getQRVersion() : int   { return java_cast($this->getJavaClass()->getQRVersion(), "integer"); }
+
+    /**
+     * Version of recognized MicroQR Code. From M1 to M4.
+     * @return Version of recognized MicroQR Code. From M1 to M4.
+     */
+    public function getMicroQRVersion() : int  { return java_cast($this->getJavaClass()->getMicroQRVersion(), "integer"); }
+
+    /**
+     * Version of recognized RectMicroQR Code. From R7x43 to R17x139.
+     * @return Version of recognized RectMicroQR Code
+     */
+    public function getRectMicroQRVersion() : int  { return java_cast($this->getJavaClass()->getRectMicroQRVersion(), "integer"); }
+
+    /**
+     * Reed-Solomon error correction level of recognized barcode. From low to high: LevelL, LevelM, LevelQ, LevelH.
+     * @return Reed-Solomon error correction level of recognized barcode.
+     */
+    public function getQRErrorLevel() : int  { return java_cast($this->getJavaClass()->getQRErrorLevel(), "integer"); }
+
+
     public function isEmpty(): bool
     {
         try
