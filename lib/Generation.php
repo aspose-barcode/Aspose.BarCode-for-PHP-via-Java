@@ -50,7 +50,7 @@ class BarcodeGenerator extends BaseJavaClass
 
     static function construct($javaClass): BarcodeGenerator
     {
-        $barcodeGenerator = new BarcodeGenerator( null, null);
+        $barcodeGenerator = new BarcodeGenerator( 0, null);
         $barcodeGenerator->setJavaClass($javaClass);
         return $barcodeGenerator;
     }
@@ -271,8 +271,6 @@ class BarcodeGenerator extends BaseJavaClass
             if(isPath($resource))
                 $resource = fopen($resource, "r");
             $xmlData = (stream_get_contents($resource));
-            $offset = 6;
-            $xmlData = substr($xmlData, $offset, strlen($xmlData) - $offset);
             return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml($xmlData));
         }
         catch (Exception $ex)
@@ -507,6 +505,8 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
+            if(substr($value, 0, 1) == '#')
+                $value = substr($value, 1, strlen($value) - 1);
             $this->getJavaClass()->setBarColor(hexdec($value));
         }
         catch (Exception $ex)
@@ -1386,22 +1386,6 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * Gets the BarcodeParameters that contains all barcode properties.
-     */
-    function setBarcode(BarcodeParameters $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setBarcode($value->getJavaClass());
-            $this->barcodeParameters = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Gets the BorderParameters that contains all configuration properties for barcode border.
      */
     public function getBorder(): BorderParameters
@@ -1583,6 +1567,8 @@ class BorderParameters extends BaseJavaClass
     {
         try
         {
+            if(substr($hexValue, 0, 1) == '#')
+                $hexValue = substr($hexValue, 1, strlen($hexValue) - 1);
             $this->getJavaClass()->setColor(hexdec($hexValue));
         }
         catch (Exception $ex)
@@ -1719,11 +1705,13 @@ class CaptionParameters extends BaseJavaClass
      * Caption text color.
      * Default value BLACK.
      */
-    public function setTextColor(string $rgbValue): void
+    public function setTextColor(string $value): void
     {
         try
         {
-            $this->getJavaClass()->setTextColor(hexdec($rgbValue));
+            if(substr($value, 0, 1) == '#')
+                $value = substr($value, 1, strlen($value) - 1);
+            $this->getJavaClass()->setTextColor(hexdec($value));
         }
         catch (Exception $ex)
         {
@@ -2426,11 +2414,13 @@ class CodetextParameters extends BaseJavaClass
      * Specify the displaying CodeText's Color.
      * Default value BLACK.
      */
-    public function setColor(string $value): void
+    public function setColor(string $hexValue): void
     {
         try
         {
-            $this->getJavaClass()->setColor(hexdec($value));
+            if(substr($hexValue, 0, 1) == '#')
+                $hexValue = substr($hexValue, 1, strlen($hexValue) - 1);
+            $this->getJavaClass()->setColor(hexdec($hexValue));
         }
         catch (Exception $ex)
         {

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.9</span>
+   &#160;<span id="projectnumber">24.10</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -287,7 +287,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR">Specify the type of barcode to read.</p>
-<p class="DocNodeLTR">This sample shows how to detect Code39 and Code128 barcodes. </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<p class="DocNodeLTR">This sample shows how to detect Code39 and Code128 barcodes. </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">{</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode Type: &quot;</span>.$result-&gt;getCodeTypeName());</div>

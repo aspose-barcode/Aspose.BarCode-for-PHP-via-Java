@@ -2,7 +2,7 @@ var classMailmark2DCodetext =
 [
     [ "\u202A__construct", "d4/d70/classMailmark2DCodetext.html#a89e3fafaad6f4040a2b16965e097022a", null ],
     [ "\u202AgetBarcodeType", "d4/d70/classMailmark2DCodetext.html#a27da3e79fdc508d441a1d8c16c597488", null ],
-    [ "\u202Agetclass", "d4/d70/classMailmark2DCodetext.html#a37a5b96245f22bdb76d12e207eed9ac2", null ],
+    [ "\u202AgetClass_", "d4/d70/classMailmark2DCodetext.html#afbf239a924bf1ebf8e8577ef906d63e5", null ],
     [ "\u202AgetConstructedCodetext", "d4/d70/classMailmark2DCodetext.html#aa3e61771ea6fdccd29432a64c398c00a", null ],
     [ "\u202AgetCustomerContent", "d4/d70/classMailmark2DCodetext.html#a09623eb87160a34a2b0df0f91d5b1b68", null ],
     [ "\u202AgetCustomerContentEncodeMode", "d4/d70/classMailmark2DCodetext.html#a641e188666a4ec24a2f9bc80aa2a5236", null ],
@@ -22,7 +22,7 @@ var classMailmark2DCodetext =
     [ "\u202AinitFromString", "d4/d70/classMailmark2DCodetext.html#a34b7a338fd06fc74e70f5f238a5b4796", null ],
     [ "\u202AisNull", "d4/d70/classMailmark2DCodetext.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d4/d70/classMailmark2DCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
-    [ "\u202Asetclass", "d4/d70/classMailmark2DCodetext.html#acdd4a692a3f92574736b5f0c90f6454f", null ],
+    [ "\u202AsetClass_", "d4/d70/classMailmark2DCodetext.html#abf7e176cef932d2986d5ca71e261a634", null ],
     [ "\u202AsetCustomerContent", "d4/d70/classMailmark2DCodetext.html#a0fae4702a8a846163516b7eb4b676a25", null ],
     [ "\u202AsetCustomerContentEncodeMode", "d4/d70/classMailmark2DCodetext.html#adce89b0be90cc0d74bf355f434686e51", null ],
     [ "\u202AsetDataMatrixType", "d4/d70/classMailmark2DCodetext.html#a7a41f445d7aab5ee47fb2a36d4ae9262", null ],

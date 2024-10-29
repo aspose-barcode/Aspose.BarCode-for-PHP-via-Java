@@ -1718,11 +1718,11 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @return string class of the item
      */
-    public function getclass(): string
+    public function getClass_(): string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getclass(), "string");
+            return java_cast($this->getJavaClass()->getClass_(), "string");
         }
         catch (Exception $ex)
         {
@@ -1743,7 +1743,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
      *
      * @param string $value class of the item
      */
-    public function setclass(string $value): void
+    public function setClass_(string $value): void
     {
         try
         {

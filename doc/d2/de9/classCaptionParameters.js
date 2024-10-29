@@ -17,6 +17,6 @@ var classCaptionParameters =
     [ "\u202AsetNoWrap", "d2/de9/classCaptionParameters.html#aa7622dde08600e308c48b1d7a6cc2017", null ],
     [ "\u202AsetPadding", "d2/de9/classCaptionParameters.html#a6a3f46a4d4b63c6530fe0f92d8d20c59", null ],
     [ "\u202AsetText", "d2/de9/classCaptionParameters.html#a3d629d7ba3a4cb362e3ad2c4d05fc7d4", null ],
-    [ "\u202AsetTextColor", "d2/de9/classCaptionParameters.html#a4dfafe038748ebb04b4c8291e05d4e1c", null ],
+    [ "\u202AsetTextColor", "d2/de9/classCaptionParameters.html#a8ba389f43ffa56b7a03705797ffa87cb", null ],
     [ "\u202AsetVisible", "d2/de9/classCaptionParameters.html#ae44fee0cbf944ee6a1458d048c79c1c8", null ]
 ];

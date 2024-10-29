@@ -14,7 +14,7 @@ var classCodetextParameters =
     [ "\u202AisNull", "d2/d94/classCodetextParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d2/d94/classCodetextParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetAlignment", "d2/d94/classCodetextParameters.html#a106fe5b51ba1aa14cd81fdf7c51417ab", null ],
-    [ "\u202AsetColor", "d2/d94/classCodetextParameters.html#a5cf985722437fb4c8077661234a8105b", null ],
+    [ "\u202AsetColor", "d2/d94/classCodetextParameters.html#a1538f58999e4d510fc71dd58ec17814d", null ],
     [ "\u202AsetFont", "d2/d94/classCodetextParameters.html#a2a8ea5ff4f8cc918aa50d4f44b44b141", null ],
     [ "\u202AsetFontMode", "d2/d94/classCodetextParameters.html#afc177762e3230e5b5b7bdaa2e72a7923", null ],
     [ "\u202AsetJavaClass", "d2/d94/classCodetextParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],

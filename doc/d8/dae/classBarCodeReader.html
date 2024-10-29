@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">24.9</span>
+   &#160;<span id="projectnumber">24.10</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -298,7 +298,7 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Gets recognized <a class="el" href="../../d2/d68/classBarCodeResult.html">BarCodeResult</a> array</p>
-<p class="DocNodeLTR">This sample shows how to read barcodes with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<p class="DocNodeLTR">This sample shows how to read barcodes with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
 <div class="line">$reader-&gt;readBarCodes();</div>
 <div class="line"><span class="keywordflow">for</span>($i = 0; $reader-&gt;getFoundCount() &gt; $i; ++$i)</div>
 <div class="line">{</div>
@@ -323,7 +323,7 @@ Protected Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Gets recognized barcodes count</p>
-<p class="DocNodeLTR">This sample shows how to read barcodes with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<p class="DocNodeLTR">This sample shows how to read barcodes with <a class="el" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a> </p><div class="fragment"><div class="line">$reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
 <div class="line">$reader-&gt;readBarCodes();</div>
 <div class="line"><span class="keywordflow">for</span>($i = 0; $reader-&gt;getFoundCount() &gt; $i; ++$i)</div>
 <div class="line">   print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$reader-&gt;getFoundBarCodes()[i]-&gt;getCodeText());</div>
@@ -555,10 +555,10 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Reads <a class="el" href="../../d2/d68/classBarCodeResult.html">BarCodeResult</a> from the image.</p>
 <div class="fragment"><div class="line">   This sample shows how to read barcodes with <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a></div>
-<div class="line">   $reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">   $reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
 <div class="line">   <span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">      print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
-<div class="line">   $reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>);</div>
+<div class="line">   $reader = <span class="keyword">new</span> <a class="code" href="../../d8/dae/classBarCodeReader.html">BarCodeReader</a>(<span class="stringliteral">&quot;test.png&quot;</span>, <span class="keyword">null</span>, array(<a class="code" href="../../d4/d26/classDecodeType.html#a35e96079470d557aaf2ba0039570ee78">DecodeType::CODE_39</a>, <a class="code" href="../../d4/d26/classDecodeType.html#aa5e5146966c75f09530a3e8fe3e1b1ff">DecodeType::CODE_128</a>));</div>
 <div class="line">   $reader-&gt;readBarCodes();</div>
 <div class="line">   <span class="keywordflow">for</span>($i = 0; $reader-&gt;getFoundCount() &gt; $i; ++$i)</div>
 <div class="line">      print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$reader-&gt;getFoundBarCodes()[i]-&gt;getCodeText());</div>
@@ -602,11 +602,11 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><span class="comment"> * $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance());</span></div>
 <div class="line"><span class="comment"> * foreach($reader-&gt;readBarCodes() as $result)</span></div>
 <div class="line"><span class="comment"> *   print(&quot;BarCode CodeText: &quot;.$result-&gt;getCodeText());</span></div>
-<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, DecodeType::CODE_39, DecodeType::CODE_128);</span></div>
+<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, null, array(DecodeType::CODE_39, DecodeType::CODE_128));</span></div>
 <div class="line"><span class="comment"> * //normal quality mode is set by default</span></div>
 <div class="line"><span class="comment"> * foreach($reader-&gt;readBarCodes() as $result)</span></div>
 <div class="line"><span class="comment"> *   print(&quot;BarCode CodeText: &quot;.$result-&gt;getCodeText());</span></div>
-<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, DecodeType::CODE_39, DecodeType::CODE_128);</span></div>
+<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, null, array(DecodeType::CODE_39, DecodeType::CODE_128));</span></div>
 <div class="line"><span class="comment"> * //set high performance mode</span></div>
 <div class="line"><span class="comment"> * $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance());</span></div>
 <div class="line"><span class="comment"> * //set separate options</span></div>
@@ -643,11 +643,11 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><span class="comment"> * $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance());</span></div>
 <div class="line"><span class="comment"> * foreach($reader-&gt;readBarCodes() as $result)</span></div>
 <div class="line"><span class="comment"> *   print(&quot;BarCode CodeText: &quot;.$result-&gt;getCodeText());</span></div>
-<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, DecodeType::CODE_39, DecodeType::CODE_128);</span></div>
+<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, null, array(DecodeType::CODE_39, DecodeType::CODE_128));</span></div>
 <div class="line"><span class="comment"> * //normal quality mode is set by default</span></div>
 <div class="line"><span class="comment"> * foreach($reader-&gt;readBarCodes() as $result)</span></div>
 <div class="line"><span class="comment"> *   print(&quot;BarCode CodeText: &quot;.$result-&gt;getCodeText());</span></div>
-<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, DecodeType::CODE_39, DecodeType::CODE_128);</span></div>
+<div class="line"><span class="comment"> * $reader = new BarCodeReader(&quot;test.png&quot;, null, array(DecodeType::CODE_39, DecodeType::CODE_128));</span></div>
 <div class="line"><span class="comment"> * //set high performance mode</span></div>
 <div class="line"><span class="comment"> * $reader-&gt;setQualitySettings(QualitySettings::getHighPerformance());</span></div>
 <div class="line"><span class="comment"> * //set separate options</span></div>
@@ -689,7 +689,7 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><span class="comment"> * @code</span></div>
 <div class="line"><span class="comment"> * $bmp = &quot;test.png&quot;;</span></div>
 <div class="line"><span class="comment"> * $reader = new BarCodeReader();</span></div>
-<div class="line"><span class="comment"> * $reader-&gt;setBarCodeReadType(DecodeType::CODE_39, DecodeType::CODE_128);</span></div>
+<div class="line"><span class="comment"> * $reader-&gt;setBarCodeReadType(array(DecodeType::CODE_39, DecodeType::CODE_128));</span></div>
 <div class="line"><span class="comment"> * $width, $height;</span></div>
 <div class="line"><span class="comment"> * list($width, $height) = getimagesize(&#39;path_to_image&#39;)</span></div>
 <div class="line"><span class="comment"> * $reader-&gt;setBarCodeImage($bmp, new Rectangle[] { new Rectangle(0, 0, $width, $height) });</span></div>

@@ -148,7 +148,7 @@ class BarCodeReader extends BaseJavaClass
      *
      * This sample shows how to read barcodes with BarCodeReader
      * @code
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      * {
@@ -167,7 +167,7 @@ class BarCodeReader extends BaseJavaClass
      *
      * This sample shows how to read barcodes with BarCodeReader
      * @code
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
@@ -184,10 +184,10 @@ class BarCodeReader extends BaseJavaClass
      *
      * @code
      * This sample shows how to read barcodes with BarCodeReader
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * foreach($reader->readBarCodes() as $result)
      *    print("BarCode CodeText: ".$result->getCodeText());
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * $reader->readBarCodes();
      * for($i = 0; $reader->getFoundCount() > $i; ++$i)
      *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
@@ -231,11 +231,11 @@ class BarCodeReader extends BaseJavaClass
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * //normal quality mode is set by default
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * //set separate options
@@ -272,11 +272,11 @@ class BarCodeReader extends BaseJavaClass
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * //normal quality mode is set by default
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
-     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
      * //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * //set separate options
@@ -318,7 +318,7 @@ class BarCodeReader extends BaseJavaClass
      * @code
      * $bmp = "test.png";
      * $reader = new BarCodeReader();
-     * $reader->setBarCodeReadType(DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader->setBarCodeReadType(array(DecodeType::CODE_39, DecodeType::CODE_128));
      * $width, $height;
      * list($width, $height) = getimagesize('path_to_image')
      * $reader->setBarCodeImage($bmp, new Rectangle[] { new Rectangle(0, 0, $width, $height) });
@@ -1608,7 +1608,7 @@ final class BarCodeResult extends BaseJavaClass
  * @code
  * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
  * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png", null, array( DecodeType::CODE_39, DecodeType::CODE_128));
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode CodeText: ".$result->getCodeText());
@@ -1949,26 +1949,26 @@ class BarCodeExtendedParameters extends BaseJavaClass
  *
  * This sample shows how to use QualitySettings with BarCodeReader
  * @code
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //set high performance mode
  * $reader->setQualitySettings(QualitySettings::getHighPerformance());
  * foreach($reader->readBarCodes() as $result)
  *    print("BarCode CodeText: ".$result->getCodeText());
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png",  null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //normal quality mode is set by default
  * foreach($reader->readBarCodes() as $result)
  *   print("BarCode CodeText: ".$result->getCodeText());
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png",  null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //set high quality mode with low speed recognition
  * $reader->setQualitySettings(QualitySettings::getHighQuality());
  * foreach($reader->readBarCodes() as $result)
  *   print("BarCode CodeText: ".$result->getCodeText());
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png",  null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //set max barcodes mode, which tries to find all possible barcodes, even incorrect. The slowest recognition mode
  * $reader->setQualitySettings(QualitySettings::getMaxBarCodes());
  * foreach($reader->readBarCodes() as $result)
  *   print("BarCode CodeText: ".$result->getCodeText());
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png",  null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //set high performance mode
  * $reader->setQualitySettings(QualitySettings::getHighPerformance());
  * //set separate options
@@ -1976,7 +1976,7 @@ class BarCodeExtendedParameters extends BaseJavaClass
  * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
  * foreach($reader->readBarCodes() as $result)
  *       print("BarCode CodeText: ".$result->getCodeText());
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png",  null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //default mode is NormalQuality
  * //set separate options
  * $reader->getQualitySettings()->setAllowMedianSmoothing(true);
@@ -2087,7 +2087,7 @@ final class QualitySettings extends BaseJavaClass
      *  This sample shows how to use MaxQuality mode
      *  <pre>
      *
-     *  $reader = new BarCodeReader("test.png"null, null, DecodeType::CODE_39_FULL_ASCII, DecodeType::CODE_128);
+     *  $reader = new BarCodeReader("test.png"null, null, array(DecodeType::CODE_39_FULL_ASCII, DecodeType::CODE_128));
      *  {
      *      $reader->setQualitySettings(QualitySettings::getMaxQuality());
      *      foreach($reader->readBarCodes() as $result)
@@ -3423,7 +3423,7 @@ class CodabarExtendedParameters extends BaseJavaClass
  *
  * This sample shows how to detect Code39 and Code128 barcodes.
  * @code
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode Type: ".$result->getCodeTypeName());
@@ -4077,7 +4077,7 @@ class  CustomerInformationInterpretingType
  * @code
  * $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12345");
  * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode Type: ".$result->getCodeTypeName());
@@ -4091,7 +4091,7 @@ class  CustomerInformationInterpretingType
  * @code
  * $generator = new BarcodeGenerator(EncodeTypes::QR, "12345");
  * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::QR);
+ * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::QR));
  * foreach($reader->readBarCodes() as $result)
  * {
  *     print("BarCode Type: ".$result->getCodeTypeName());
@@ -4158,7 +4158,7 @@ class DeconvolutionMode
      * <p>Enables slow deconvolution methods for low quality images.</p>
      */
     const SLOW = 2;
-};
+}
 /**
  * <p>
  * <p>

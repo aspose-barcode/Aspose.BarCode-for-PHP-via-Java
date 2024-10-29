@@ -49,7 +49,7 @@ var NAVTREEINDEX =
 "d8/d8c/classLicense.html#a05ed9335956ecce2efde24e07a0fcf7e",
 "db/d41/classDataMatrixVersion.html#aad5e7b3a842cd9efe890cc116f5f7dac",
 "dd/d60/classFontMode.html",
-"de/de2/classDotCodeParameters.html#adc83b169de35f474caa2aa69e5822068"
+"de/de2/classDotCodeParameters.html#ae7e92cae7ac2797c2dab99441242d821"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
