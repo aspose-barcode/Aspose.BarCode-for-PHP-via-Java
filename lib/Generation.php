@@ -1248,23 +1248,6 @@ class BaseGenerationParameters extends BaseJavaClass
     }
 
     /**
-     * Caption Above the BarCode image.
-     * @see CaptionParameters.
-     */
-    public function setCaptionAbove(CaptionParameters $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCaptionAbove($value->getJavaClass());
-            $this->captionAbove->updateCaption($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Caption Below the BarCode image.
      * @see CaptionParameters.
      */
@@ -1273,23 +1256,6 @@ class BaseGenerationParameters extends BaseJavaClass
         try
         {
             return $this->captionBelow;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption Below the BarCode image.
-     * @see CaptionParameters.
-     */
-    function setCaptionBelow(CaptionParameters $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCaptionBelow($value->getJavaClass());
-            $this->captionBelow->updateCaption($value);
         }
         catch (Exception $ex)
         {

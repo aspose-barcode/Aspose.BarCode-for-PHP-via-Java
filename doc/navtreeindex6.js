@@ -1,8 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"db/d41/classDataMatrixVersion.html#aad5e7b3a842cd9efe890cc116f5f7dac":[1,0,52,34],
-"db/d41/classDataMatrixVersion.html#aaf223c19f06b141fd4ff6817498b927f":[1,0,52,18],
-"db/d41/classDataMatrixVersion.html#ab299b9d712e800bf1b4cedf330bf0ea1":[1,0,52,36],
 "db/d41/classDataMatrixVersion.html#ab3c0cc7a0c096ea6c0a96b902d2ef42c":[1,0,52,38],
 "db/d41/classDataMatrixVersion.html#abdb5610f847cdf2dea0bf4348eab37e8":[1,0,52,62],
 "db/d41/classDataMatrixVersion.html#abded4e4abfe7d20eac4902a768daf15a":[1,0,52,5],
@@ -249,5 +246,8 @@ var NAVTREEINDEX6 =
 "dd/d22/classMaxiCodeCodetext.html#a88dc1db5906ecc0ecd381db13eed913d":[1,0,85,4],
 "dd/d22/classMaxiCodeCodetext.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[1,0,85,10],
 "dd/d22/classMaxiCodeCodetext.html#acb354b041d6424bb9ed66670a684d792":[1,0,85,11],
-"dd/d22/classMaxiCodeCodetext.html#adb7375fcc02c34690a842db34af0e613":[1,0,85,2]
+"dd/d22/classMaxiCodeCodetext.html#adb7375fcc02c34690a842db34af0e613":[1,0,85,2],
+"dd/d60/classFontMode.html":[1,0,61],
+"dd/d60/classFontMode.html#a1b5ea530de4ee0a4ac69337616f4dbf3":[1,0,61,1],
+"dd/d60/classFontMode.html#a22921b4d8c55bb21e722b9039a23372c":[1,0,61,0]
 };

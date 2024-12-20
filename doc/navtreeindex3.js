@@ -136,8 +136,7 @@ var NAVTREEINDEX3 =
 "d6/d0c/classMaxiCodeStructuredCodetext.html#ae32119b9463a4421a17f76b98ae00acc":[1,0,94,23],
 "d6/d0c/classMaxiCodeStructuredCodetext.html#ae3d7fe92e71182d3b841f0842497ab8e":[1,0,94,22],
 "d6/d16/classMaxiCodeExtendedParameters.html":[1,0,89],
-"d6/d16/classMaxiCodeExtendedParameters.html#a057e7171a4fb926b21017254d575d55e":[1,0,89,15],
-"d6/d16/classMaxiCodeExtendedParameters.html#a05bffa317c126257c28f37a43a07adc3":[1,0,89,12],
+"d6/d16/classMaxiCodeExtendedParameters.html#a057e7171a4fb926b21017254d575d55e":[1,0,89,12],
 "d6/d16/classMaxiCodeExtendedParameters.html#a05ed9335956ecce2efde24e07a0fcf7e":[1,0,89,3],
 "d6/d16/classMaxiCodeExtendedParameters.html#a0d989206493f98fee4db8210becd27e8":[1,0,89,7],
 "d6/d16/classMaxiCodeExtendedParameters.html#a264c7345eb64c83446fded2fde8c2780":[1,0,89,9],
@@ -146,9 +145,7 @@ var NAVTREEINDEX3 =
 "d6/d16/classMaxiCodeExtendedParameters.html#a9aeb5bd0dd8154339b64cb1bbba53f98":[1,0,89,6],
 "d6/d16/classMaxiCodeExtendedParameters.html#a9e88af7bd9894caa788d12445a8b392d":[1,0,89,0],
 "d6/d16/classMaxiCodeExtendedParameters.html#aabacbc2070b32411b8a0f5ff81caad61":[1,0,89,2],
-"d6/d16/classMaxiCodeExtendedParameters.html#aaf2de3785aec89e20e5924ae659fe62d":[1,0,89,14],
 "d6/d16/classMaxiCodeExtendedParameters.html#ab5eed9441411317b1d00eb72cd68e0ab":[1,0,89,5],
-"d6/d16/classMaxiCodeExtendedParameters.html#abcc96e47e2a61795f24c751f89cc353a":[1,0,89,13],
 "d6/d16/classMaxiCodeExtendedParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[1,0,89,10],
 "d6/d16/classMaxiCodeExtendedParameters.html#ae004d80d3ee4edcda684ba46f6804042":[1,0,89,1],
 "d6/d16/classMaxiCodeExtendedParameters.html#aed1e14597b6e94b81e9cece646193313":[1,0,89,8],
@@ -249,5 +246,8 @@ var NAVTREEINDEX3 =
 "d6/ddf/classGS1CompositeBarExtendedParameters.html#a71fe25933f9df8703fd79fb66e7a5ee8":[1,0,65,7],
 "d6/ddf/classGS1CompositeBarExtendedParameters.html#a77b7e8bfd7b9cd69a05bc720a1825080":[1,0,65,4],
 "d6/ddf/classGS1CompositeBarExtendedParameters.html#a88dc1db5906ecc0ecd381db13eed913d":[1,0,65,3],
-"d6/ddf/classGS1CompositeBarExtendedParameters.html#a90d5796fc6c9d34ddff3e3227e24c660":[1,0,65,1]
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#a90d5796fc6c9d34ddff3e3227e24c660":[1,0,65,1],
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#aab4c0a6b7eeed7ad363a0769f4ef146f":[1,0,65,9],
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#abe56c78dec8605a2d2f7b8f0305d29e3":[1,0,65,0],
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[1,0,65,11]
 };

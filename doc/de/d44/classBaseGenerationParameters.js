@@ -19,8 +19,6 @@ var classBaseGenerationParameters =
     [ "\u202AprintJavaClassName", "de/d44/classBaseGenerationParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetAutoSizeMode", "de/d44/classBaseGenerationParameters.html#a908844ddf3f2166cbaa97c12b8835ce7", null ],
     [ "\u202AsetBackColor", "de/d44/classBaseGenerationParameters.html#a1e7e84f5fa100afc53ec31dd641e0283", null ],
-    [ "\u202AsetCaptionAbove", "de/d44/classBaseGenerationParameters.html#ae919eac8970f7ca7f13fbc4d75b435d4", null ],
-    [ "\u202AsetCaptionBelow", "de/d44/classBaseGenerationParameters.html#acef921d85db6998a38fc1209e2a11837", null ],
     [ "\u202AsetImageHeight", "de/d44/classBaseGenerationParameters.html#a8b04c7d78ebd48237434fce261150629", null ],
     [ "\u202AsetImageWidth", "de/d44/classBaseGenerationParameters.html#a55bab1727db610209c23fe8d2731c178", null ],
     [ "\u202AsetJavaClass", "de/d44/classBaseGenerationParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],

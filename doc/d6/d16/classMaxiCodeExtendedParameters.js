@@ -12,8 +12,5 @@ var classMaxiCodeExtendedParameters =
     [ "\u202AisNull", "d6/d16/classMaxiCodeExtendedParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d6/d16/classMaxiCodeExtendedParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetJavaClass", "d6/d16/classMaxiCodeExtendedParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
-    [ "\u202AsetMaxiCodeMode", "d6/d16/classMaxiCodeExtendedParameters.html#a05bffa317c126257c28f37a43a07adc3", null ],
-    [ "\u202AsetMaxiCodeStructuredAppendModeBarcodeId", "d6/d16/classMaxiCodeExtendedParameters.html#abcc96e47e2a61795f24c751f89cc353a", null ],
-    [ "\u202AsetMaxiCodeStructuredAppendModeBarcodesCount", "d6/d16/classMaxiCodeExtendedParameters.html#aaf2de3785aec89e20e5924ae659fe62d", null ],
     [ "\u202AtoString", "d6/d16/classMaxiCodeExtendedParameters.html#a057e7171a4fb926b21017254d575d55e", null ]
 ];

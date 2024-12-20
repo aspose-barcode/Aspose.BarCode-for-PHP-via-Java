@@ -2871,15 +2871,6 @@ class MaxiCodeExtendedParameters extends BaseJavaClass
     }
 
     /**
-     * Sets a MaxiCode encode mode.
-     *  Default value: Mode4
-     */
-    public function setMaxiCodeMode(int $maxiCodeMode) : void
-    {
-        $this->getJavaClass()->setMaxiCodeMode($maxiCodeMode);
-    }
-
-    /**
      * Gets a MaxiCode barcode id in structured append mode.
      * Default value: 0
      */
@@ -2889,30 +2880,12 @@ class MaxiCodeExtendedParameters extends BaseJavaClass
     }
 
     /**
-     * Sets a MaxiCode barcode id in structured append mode.
-     * Default value: 0
-     */
-    public function setMaxiCodeStructuredAppendModeBarcodeId(int $value) : void
-    {
-        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodeId($value);
-    }
-
-    /**
      * Gets a MaxiCode barcodes count in structured append mode.
      * Default value: -1
      */
     public function getMaxiCodeStructuredAppendModeBarcodesCount() : int
     {
         return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodesCount(), "integer");
-    }
-
-    /**
-     * Sets a MaxiCode barcodes count in structured append mode.
-     * Default value: -1
-     */
-    public function setMaxiCodeStructuredAppendModeBarcodesCount(int $value) : void
-    {
-        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodesCount($value);
     }
 
     /**

@@ -45,11 +45,11 @@ var NAVTREEINDEX =
 "d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
 "d4/d26/classDecodeType.html#ac74883936de6fa531cbb441766f8f071",
 "d5/d0f/classEncodeTypes.html#a5c87e168095a00f14e6c8464bdcadf98",
-"d6/ddf/classGS1CompositeBarExtendedParameters.html#aab4c0a6b7eeed7ad363a0769f4ef146f",
-"d8/d8c/classLicense.html#a05ed9335956ecce2efde24e07a0fcf7e",
-"db/d41/classDataMatrixVersion.html#aad5e7b3a842cd9efe890cc116f5f7dac",
-"dd/d60/classFontMode.html",
-"de/de2/classDotCodeParameters.html#ae7e92cae7ac2797c2dab99441242d821"
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#acb67056d4190568f78aae28bc285d98b",
+"d8/d8c/classLicense.html#a5e43f358739cc42b602d2aefd6857f70",
+"db/d41/classDataMatrixVersion.html#ab3c0cc7a0c096ea6c0a96b902d2ef42c",
+"dd/d96/classHIBCLICPrimaryDataCodetext.html",
+"df/d22/classDotCodeEncodeMode.html#a31f9abc751a01c5b516e9b0a94fbfbf3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
