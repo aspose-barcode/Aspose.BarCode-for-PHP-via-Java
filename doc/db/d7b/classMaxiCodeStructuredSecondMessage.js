@@ -14,5 +14,6 @@ var classMaxiCodeStructuredSecondMessage =
     [ "\u202AisNull", "db/d7b/classMaxiCodeStructuredSecondMessage.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "db/d7b/classMaxiCodeStructuredSecondMessage.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetJavaClass", "db/d7b/classMaxiCodeStructuredSecondMessage.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
-    [ "\u202AsetYear", "db/d7b/classMaxiCodeStructuredSecondMessage.html#ac705b94ec870f30a9762eb463e09a000", null ]
+    [ "\u202AsetYear", "db/d7b/classMaxiCodeStructuredSecondMessage.html#ac705b94ec870f30a9762eb463e09a000", null ],
+    [ "\u202AJAVA_CLASS_NAME", "db/d7b/classMaxiCodeStructuredSecondMessage.html#ad3a441ea4707f3465fc5ffa55a588fc5", null ]
 ];

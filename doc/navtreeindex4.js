@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#abe56c78dec8605a2d2f7b8f0305d29e3":[1,0,65,0],
+"d6/ddf/classGS1CompositeBarExtendedParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[1,0,65,11],
 "d6/ddf/classGS1CompositeBarExtendedParameters.html#acb67056d4190568f78aae28bc285d98b":[1,0,65,5],
 "d6/ddf/classGS1CompositeBarExtendedParameters.html#ae33673207e7a1b7ad24ee3940c2d90dc":[1,0,65,8],
 "d6/de0/classCode128Parameters.html":[1,0,35],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "d8/d71/classDataBarExtendedParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1":[1,0,45,7],
 "d8/d71/classDataBarExtendedParameters.html#aeb839179ff3a46613bb17f128936599f":[1,0,45,0],
 "d8/d8c/classLicense.html":[1,0,81],
-"d8/d8c/classLicense.html#a05ed9335956ecce2efde24e07a0fcf7e":[1,0,81,1],
-"d8/d8c/classLicense.html#a264c7345eb64c83446fded2fde8c2780":[1,0,81,5],
-"d8/d8c/classLicense.html#a51df0cdea6d344a0ea420711e44a52e6":[1,0,81,3]
+"d8/d8c/classLicense.html#a05ed9335956ecce2efde24e07a0fcf7e":[1,0,81,1]
 };

@@ -634,7 +634,7 @@ abstract class BaseJavaClass
     {
         try
         {
-            return $this->javaClassName;
+            return java_cast($this->getJavaClass()->getClass()->getName(), "string");
         }
         catch (Exception $ex)
         {

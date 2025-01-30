@@ -46,11 +46,11 @@ final class Address extends BaseJavaClass
      * company name of a legal person.
      * @return string The name.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getName(), "string");
+            return java_is_null($this->getJavaClass()->getName()) ? null : java_cast($this->getJavaClass()->getName(), "string");
         }
         catch (Exception $ex)
         {
@@ -63,7 +63,7 @@ final class Address extends BaseJavaClass
      * company name of a legal person.
      * @param string $value  The name.
      */
-    public function setName(string $value): void
+    public function setName(?string $value): void
     {
         try
         {
@@ -88,11 +88,11 @@ final class Address extends BaseJavaClass
      *
      * @return string The address line 1.
      */
-    public function getAddressLine1(): string
+    public function getAddressLine1(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAddressLine1(), "string");
+            return java_is_null($this->getJavaClass()->getAddressLine1()) ? null : java_cast($this->getJavaClass()->getAddressLine1(), "string");
         }
         catch (Exception $ex)
         {
@@ -112,7 +112,7 @@ final class Address extends BaseJavaClass
      *
      * @param string $value The address line 1.
      */
-    public function setAddressLine1(string $value): void
+    public function setAddressLine1(?string $value): void
     {
         try
         {
@@ -132,11 +132,11 @@ final class Address extends BaseJavaClass
      * This field is only used for combined elements addresses. For this type, it's mandatory.
      * @return string The address line 2.
      */
-    public function getAddressLine2(): string
+    public function getAddressLine2(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAddressLine2(), "string");
+            return java_is_null($this->getJavaClass()->getAddressLine2()) ? null : java_cast($this->getJavaClass()->getAddressLine2(), "string");
         }
         catch (Exception $ex)
         {
@@ -152,7 +152,7 @@ final class Address extends BaseJavaClass
      * This field is only used for combined elements addresses. For this type, it's mandatory.
      * @param string $value The address line 2.
      */
-    public function setAddressLine2(string $value): void
+    public function setAddressLine2(?string $value): void
     {
         try
         {
@@ -172,11 +172,11 @@ final class Address extends BaseJavaClass
      * This field is only used for structured addresses and is optional.
      * @return string The street.
      */
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getStreet(), "string");
+            return java_is_null($this->getJavaClass()->getStreet()) ? null : java_cast($this->getJavaClass()->getStreet(), "string");
         }
         catch (Exception $ex)
         {
@@ -197,7 +197,7 @@ final class Address extends BaseJavaClass
      *
      * @param string $value The street.
      */
-    public function setStreet(string $value): void
+    public function setStreet(?string $value): void
     {
         try
         {
@@ -219,11 +219,11 @@ final class Address extends BaseJavaClass
      *
      * @return string The house number.
      */
-    public function getHouseNo(): string
+    public function getHouseNo(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getHouseNo(), "string");
+            return java_is_null($this->getJavaClass()->getHouseNo()) ? null : java_cast($this->getJavaClass()->getHouseNo(), "string");
         }
         catch (Exception $ex)
         {
@@ -241,7 +241,7 @@ final class Address extends BaseJavaClass
      *
      * @param string $value The house number.
      */
-    public function setHouseNo(string $value): void
+    public function setHouseNo(?string $value): void
     {
         try
         {
@@ -263,11 +263,11 @@ final class Address extends BaseJavaClass
      *
      * @param string The postal code.
      */
-    public function getPostalCode(): string
+    public function getPostalCode(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPostalCode(), "string");
+            return java_is_null($this->getJavaClass()->getPostalCode()) ? null : java_cast($this->getJavaClass()->getPostalCode(), "string");
         }
         catch (Exception $ex)
         {
@@ -285,7 +285,7 @@ final class Address extends BaseJavaClass
      *
      * @param string $value The postal code.
      */
-    public function setPostalCode(string $value): void
+    public function setPostalCode(?string $value): void
     {
         try
         {
@@ -307,11 +307,11 @@ final class Address extends BaseJavaClass
      *
      * @return string The town or city.
      */
-    public function getTown(): string
+    public function getTown(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getTown(), "string");
+            return java_is_null($this->getJavaClass()->getTown()) ? null : java_cast($this->getJavaClass()->getTown(), "string");
         }
         catch (Exception $ex)
         {
@@ -329,7 +329,7 @@ final class Address extends BaseJavaClass
      *
      * @param string $value The town or city.
      */
-    public function setTown(string $value): void
+    public function setTown(?string $value): void
     {
         try
         {
@@ -348,11 +348,11 @@ final class Address extends BaseJavaClass
      *
      * @return  string The ISO country code.
      */
-    public function getCountryCode(): string
+    public function getCountryCode(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getCountryCode(), "string");
+            return java_is_null($this->getJavaClass()->getCountryCode()) ? null : java_cast($this->getJavaClass()->getCountryCode(), "string");
         }
         catch (Exception $ex)
         {
@@ -367,7 +367,7 @@ final class Address extends BaseJavaClass
      *
      * @param string $value The ISO country code.
      */
-    public function setCountryCode(string $value): void
+    public function setCountryCode(?string $value): void
     {
         try
         {
@@ -388,7 +388,7 @@ final class Address extends BaseJavaClass
         {
             $this->setName(null);
             $this->setAddressLine1(null);
-            $this->setaddressLine2(null);
+            $this->setAddressLine2(null);
             $this->setStreet(null);
             $this->setHouseNo(null);
             $this->setPostalCode(null);
@@ -597,12 +597,13 @@ final class ComplexCodetextReader
      * @param string encodedCodetext encoded codetext
      * @return SwissQRCodetext decoded SwissQRCodetext or null.
      */
-    public static function tryDecodeSwissQR(string $encodedCodetext): SwissQRCodetext
+    public static function tryDecodeSwissQR(string $encodedCodetext): ?SwissQRCodetext
     {
         try
         {
-            $javaPhpComplexCodetextReader = java(self::$javaClassName);
-            return SwissQRCodetext::construct($javaPhpComplexCodetextReader->tryDecodeSwissQR($encodedCodetext));
+            $javaComplexCodetextReaderClass = java(self::$javaClassName);
+            $javaSwissQR = $javaComplexCodetextReaderClass->tryDecodeSwissQR($encodedCodetext);
+            return java_is_null($javaSwissQR) ? null : SwissQRCodetext::construct($javaSwissQR);
         }
         catch (Exception $ex)
         {
@@ -615,17 +616,11 @@ final class ComplexCodetextReader
      * @param string $encodedCodetext encoded codetext
      * @return Mailmark2DCodetext decoded Royal Mail Mailmark 2D or null.
      */
-    public static function tryDecodeMailmark2D(string $encodedCodetext): Mailmark2DCodetext
+    public static function tryDecodeMailmark2D(string $encodedCodetext): ?Mailmark2DCodetext
     {
-        try
-        {
-            $javaPhpComplexCodetextReader = java(self::$javaClassName);
-            return Mailmark2DCodetext::construct($javaPhpComplexCodetextReader->tryDecodeMailmark2D($encodedCodetext));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $javaComplexCodetextReaderClass = java(self::$javaClassName);
+        $javaMailmark2D = $javaComplexCodetextReaderClass->tryDecodeMailmark2D($encodedCodetext);
+        return java_is_null($javaMailmark2D) ? null : Mailmark2DCodetext::construct($javaMailmark2D);
     }
 
     /**
@@ -635,16 +630,9 @@ final class ComplexCodetextReader
      */
     public static function tryDecodeMailmark(string $encodedCodetext) :?MailmarkCodetext
     {
-        $res = new MailmarkCodetext(null);
-        try
-        {
-            $res->initFromString($encodedCodetext);
-        }
-        catch (Exception $e)
-        {
-            return null;
-        }
-        return $res;
+        $javaComplexCodetextClass = java(self::$javaClassName);
+        $javaMailmark = $javaComplexCodetextClass->tryDecodeMailmark($encodedCodetext);
+        return java_is_null($javaMailmark) ? null : MailmarkCodetext::construct($javaMailmark);
     }
 
     /**
@@ -653,13 +641,17 @@ final class ComplexCodetextReader
      * @param string encodedCodetext encoded codetext
      * @return MaxiCodeCodetext Decoded MaxiCode codetext.
      */
-    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext) : MaxiCodeCodetext
+    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext) : ?MaxiCodeCodetext
     {
         $javaComplexCodetextReaderClass = java(self::$javaClassName);
         $javaMaxiCodeCodetextMode2Class = java(MaxiCodeCodetextMode2::JAVA_CLASS_NAME);
         $javaMaxiCodeCodetextMode3Class = java(MaxiCodeCodetextMode3::JAVA_CLASS_NAME);
         $javaMaxiCodeCodetext =  $javaComplexCodetextReaderClass->tryDecodeMaxiCode($maxiCodeMode, $encodedCodetext);
 
+        if(java_is_null($javaMaxiCodeCodetext))
+        {
+            return null;
+        }
         if(java_instanceof($javaMaxiCodeCodetext, $javaMaxiCodeCodetextMode2Class))
         {
             return MaxiCodeCodetextMode2::construct($javaMaxiCodeCodetext);
@@ -897,11 +889,12 @@ final class SwissQRBill extends BaseJavaClass
      *
      * Value: The creditor account number.
      */
-    public function getAccount(): string
+    public function getAccount(): ?string
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAccount(), "string");
+            $javaAccount = $this->getJavaClass()->getAccount();
+            return java_is_null($javaAccount) ? null : java_cast($this->getJavaClass()->getAccount(), "string");
         }
         catch (Exception $ex)
         {
@@ -1282,7 +1275,8 @@ final class SwissQRCodetext extends IComplexCodetext
         }
         catch (Exception $ex)
         {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+            $messageStartPosition = strpos(java_cast($ex->toString(), "string"), "Cause: com.aspose.mw.barcode.MwBarcodeException:");
+            throw new BarcodeException(substr(java_cast($ex->toString(), "string"), $messageStartPosition), __FILE__, __LINE__);
         }
     }
 
@@ -1434,6 +1428,31 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
 final class MailmarkCodetext extends IComplexCodetext
 {
     private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwMailmarkCodetext";
+
+    /**
+     * Initializes a new instance of the {@code MailmarkCodetext} class.
+     */
+    public function __construct()
+    {
+        $javaClass = new java(self::$javaClassName);
+        parent::__construct($javaClass);
+    }
+
+    protected function init():void {}
+
+    static function construct($javaClass) : MailmarkCodetext
+    {
+        try
+        {
+            $obj = new MailmarkCodetext();
+            $obj->setJavaClass($javaClass);
+            return $obj;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
     /**
      * "0" – Null or Test
      * "1" – Letter
@@ -1518,25 +1537,6 @@ final class MailmarkCodetext extends IComplexCodetext
      * A domestic sorting code consists of an outward postcode, an inward postcode, and a Delivery Point Suffix.
      */
     public function setDestinationPostCodePlusDPS(string $value){ $this->getJavaClass()->setDestinationPostCodePlusDPS($value); }
-
-    /**
-     * Initializes a new instance of the {@code MailmarkCodetext} class.
-     */
-    public function __construct(?MailmarkCodetext $mailmarkCodetext)
-    {
-        $javaClass = null;
-        if (is_null($mailmarkCodetext))
-        {
-            $javaClass = new java(self::$javaClassName);
-        }
-        else
-        {
-            $javaClass = new java(self::$javaClassName, $mailmarkCodetext->getJavaClass());
-        }
-        parent::__construct($javaClass);
-    }
-
-    protected function init():void {}
 
     /**
      * Construct codetext from Mailmark data.
@@ -2516,9 +2516,10 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
     /**
      * Gets message.
      */
-    public function getMessage() : string
+    public function getMessage() : ?string
     {
-        return java_cast($this->getJavaClass()->getMessage(), "string");
+        $javaMessage = $this->getJavaClass()->getMessage();
+        return java_is_null($javaMessage) ? null : java_cast($javaMessage, "string");
     }
 
     /**
@@ -2594,7 +2595,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
  */
 class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
 {
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandartSecondMessage";
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandartSecondMessage";
 
     function __construct()
     {
@@ -2607,6 +2608,14 @@ class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    static function construct($javaClass)
+    {
+        $_class = new MaxiCodeStandartSecondMessage();
+        $_class->setJavaClass($javaClass);
+
+        return $_class;
     }
 
     /**
@@ -2691,16 +2700,20 @@ abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
     protected function init() : void
     {
         $javaMaxiCodeSecondMessage = $this->getJavaClass()->getSecondMessage();
-        $javaMaxiCodeStandartSecondMessage=new java_class("com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandartSecondMessage");
-        $javaMaxiCodeStructuredSecondMessage=new java_class("com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredSecondMessage");
+        $javaMaxiCodeStandartSecondMessage=new java_class(MaxiCodeStandartSecondMessage::JAVA_CLASS_NAME);
+        $javaMaxiCodeStructuredSecondMessage=new java_class(MaxiCodeStructuredSecondMessage::JAVA_CLASS_NAME);
 
-        if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStandartSecondMessage))
+        if(java_is_null($javaMaxiCodeSecondMessage))
         {
-            $this->maxiCodeSecondMessage = new MaxiCodeStandartSecondMessage($this->getJavaClass()->getSecondMessage());
+            $this->maxiCodeSecondMessage = null;
+        }
+        else if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStandartSecondMessage))
+        {
+            $this->maxiCodeSecondMessage = MaxiCodeStandartSecondMessage::construct($javaMaxiCodeSecondMessage);
         }
         else if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStructuredSecondMessage))
         {
-            $this->maxiCodeSecondMessage = new MaxiCodeStructuredSecondMessage($this->getJavaClass()->getSecondMessage());
+            $this->maxiCodeSecondMessage = MaxiCodeStructuredSecondMessage::construct($javaMaxiCodeSecondMessage);
         }
     }
 
@@ -2814,7 +2827,7 @@ abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
  */
 class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
 {
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredSecondMessage";
+    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredSecondMessage";
 
     function __construct()
     {
@@ -2827,6 +2840,14 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    static function construct($javaClass)
+    {
+        $_class = new MaxiCodeStructuredSecondMessage();
+        $_class->setJavaClass($javaClass);
+
+        return $_class;
     }
 
     /**
@@ -2891,7 +2912,7 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function equals($obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        return java_is_true($this->getJavaClass()->equals($obj->getJavaClass()));
     }
 
     /**
@@ -3366,6 +3387,7 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
     function initFromString(string $constructedCodetext) : void
     {
         $this->getJavaClass()->initFromString($constructedCodetext);
+        $this->init();
     }
 
     /**

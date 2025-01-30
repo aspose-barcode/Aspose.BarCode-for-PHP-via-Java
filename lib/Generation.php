@@ -410,7 +410,7 @@ class BarcodeParameters extends BaseJavaClass
      * Get bars reduction value that is used to compensate ink spread while printing.
      * @return Unit value of BarWidthReduction
      */
-    public function getBarWidthReduction(): Unit
+    public function getBarWidthReduction(): ?Unit
     {
         try
         {
@@ -425,11 +425,11 @@ class BarcodeParameters extends BaseJavaClass
     /**
      * Sets bars reduction value that is used to compensate ink spread while printing.
      */
-    public function setBarWidthReduction(Unit $value): void
+    public function setBarWidthReduction(?Unit $value): void
     {
         try
         {
-            $this->getJavaClass()->setBarWidthReduction($value->getJavaClass());
+            $this->getJavaClass()->setBarWidthReduction(is_null($value) ? null : $value->getJavaClass());
             $this->barWidthReduction = $value;
         }
         catch (Exception $ex)
@@ -1776,6 +1776,22 @@ class CaptionParameters extends BaseJavaClass
         try
         {
             $this->getJavaClass()->setNoWrap($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+    /**
+     * Returns a human-readable string representation of this CaptionParameters.
+     *
+     * @return string A string that represents this Padding.
+     */
+    public function toString(): string
+    {
+        try
+        {
+            return java_cast($this->getJavaClass()->toString(), "string");
         }
         catch (Exception $ex)
         {
@@ -3528,7 +3544,14 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function setRows(int $value) : void
     {
-        $this->getJavaClass()->setRows($value);
+        try
+        {
+            $this->getJavaClass()->setRows($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->toString(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -3547,7 +3570,14 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function setColumns(int $value) : void
     {
-        $this->getJavaClass()->setColumns($value);
+        try
+        {
+            $this->getJavaClass()->setColumns($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->toString(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -7522,24 +7552,24 @@ class BorderDashStyle
     /**
      * Specifies a solid line.
      */
-    const  SOLID = "0"; //DashStyle.Solid
+    const  SOLID = 0; //DashStyle.Solid
     /**
      * Specifies a line consisting of dashes.
      */
-    const   DASH = "1"; // DashStyle.Dash
+    const   DASH = 1; // DashStyle.Dash
     /**
      * Specifies a line consisting of dots.
      */
-    const  DOT = "2"; //(DashStyle.Dot
+    const  DOT = 2; //(DashStyle.Dot
 
     /**
      * Specifies a line consisting of a repeating pattern of dash-dot.
      */
-    const  DASH_DOT = "3"; //DashStyle.DashDot
+    const  DASH_DOT = 3; //DashStyle.DashDot
     /**
      * Specifies a line consisting of a repeating pattern of dash-dot-dot.
      */
-    const  DASH_DOT_DOT = "4"; //DashStyle.DashDotDot
+    const  DASH_DOT_DOT = 4; //DashStyle.DashDotDot
 }
 
 /**
@@ -8220,13 +8250,13 @@ class AutoSizeMode
     /**
      * Automatic resizing is disabled. Default value.
      */
-    const NONE = '0';  //or CUSTOM, or DEFAULT
+    const NONE = 0;  //or CUSTOM, or DEFAULT
 
     /**
      * Barcode resizes to nearest lowest possible size
      * which are specified by BarCodeWidth and BarCodeHeight properties.
      */
-    const NEAREST = '1';
+    const NEAREST = 1;
 
     /**
      *  Resizes barcode to specified size with little scaling
@@ -8244,7 +8274,7 @@ class AutoSizeMode
      *      $generator->save("test.png", "PNG);
      * @endcode
      */
-    const INTERPOLATION = '2';
+    const INTERPOLATION = 2;
 }
 
 /**
@@ -9213,6 +9243,11 @@ class BarCodeImageFormat
      * Specifies the Scalable Vector Graphics (SVG) image format.
      */
      const SVG = 7;
+
+    /**
+     * Specifies the Portable Document Format (PDF) image format.
+     */
+    const PDF = 8;
 }
 
 

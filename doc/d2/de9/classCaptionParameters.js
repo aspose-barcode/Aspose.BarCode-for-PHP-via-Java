@@ -18,5 +18,6 @@ var classCaptionParameters =
     [ "\u202AsetPadding", "d2/de9/classCaptionParameters.html#a6a3f46a4d4b63c6530fe0f92d8d20c59", null ],
     [ "\u202AsetText", "d2/de9/classCaptionParameters.html#a3d629d7ba3a4cb362e3ad2c4d05fc7d4", null ],
     [ "\u202AsetTextColor", "d2/de9/classCaptionParameters.html#a8ba389f43ffa56b7a03705797ffa87cb", null ],
-    [ "\u202AsetVisible", "d2/de9/classCaptionParameters.html#ae44fee0cbf944ee6a1458d048c79c1c8", null ]
+    [ "\u202AsetVisible", "d2/de9/classCaptionParameters.html#ae44fee0cbf944ee6a1458d048c79c1c8", null ],
+    [ "\u202AtoString", "d2/de9/classCaptionParameters.html#af17174fc4af0e0c46572aff1be515ba4", null ]
 ];

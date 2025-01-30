@@ -400,11 +400,12 @@ class BarCodeReader extends BaseJavaClass
     {
         try
         {
-            $xmlData = java_cast($this->getJavaClass()->exportToXml(), "string");
+            $xmlData = str_replace("п»ї", "", preg_replace('/^\xEF\xBB\xBF/', '',java_cast($this->getJavaClass()->exportToXml(), "string")));
             $isSaved = $xmlData != null;
             if ($isSaved)
             {
-                file_put_contents($xmlFile, $xmlData);
+                if(!file_put_contents($xmlFile, $xmlData))
+                    throw new Exception("No such file or directory");
             }
             return $isSaved;
         }
@@ -428,9 +429,9 @@ class BarCodeReader extends BaseJavaClass
             {
                 $resource = fopen($resource, "r");
             }
-            $xmlData = (stream_get_contents($resource));
-            $offset = 6;
-            $xmlData = substr($xmlData, $offset, strlen($xmlData) - $offset);
+            $xmlData = str_replace("п»ї", "", preg_replace('/^\xEF\xBB\xBF/', '',(stream_get_contents($resource))));
+            if(!$xmlData)
+                throw new Exception("No such file or directory");
             return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml($xmlData));
         }
         catch (Exception $ex)
@@ -2843,6 +2844,15 @@ class RecognitionAbortedException extends Exception
 
     protected function init(): void
     {
+    }
+
+    /**
+     * Returns a human-readable string representation of this <see cref="MaxiCodeExtendedParameters"/>.
+     * @return string A string that represents this <see cref="MaxiCodeExtendedParameters"/>.
+     */
+    public function toString() : string
+    {
+        return java_cast($this->javaClass->toString(), "string");
     }
 }
 

@@ -10,5 +10,6 @@ var classMaxiCodeStandartSecondMessage =
     [ "\u202AisNull", "d6/dbb/classMaxiCodeStandartSecondMessage.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "d6/dbb/classMaxiCodeStandartSecondMessage.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
     [ "\u202AsetJavaClass", "d6/dbb/classMaxiCodeStandartSecondMessage.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
-    [ "\u202AsetMessage", "d6/dbb/classMaxiCodeStandartSecondMessage.html#a2a5343a476904166418a6433e3c09d39", null ]
+    [ "\u202AsetMessage", "d6/dbb/classMaxiCodeStandartSecondMessage.html#a2a5343a476904166418a6433e3c09d39", null ],
+    [ "\u202AJAVA_CLASS_NAME", "d6/dbb/classMaxiCodeStandartSecondMessage.html#af2604bb319d26621c4ed9d5cedccb524", null ]
 ];
