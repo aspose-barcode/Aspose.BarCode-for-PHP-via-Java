@@ -10,7 +10,7 @@ class BarcodeGeneratorExamples
         print("\nfunction '" . __FUNCTION__ . "'\n");
         $encode_type = EncodeTypes::CODE_128;
         $generator = new BarcodeGenerator($encode_type, null);
-        $generator->setCodeText("123ABC", null);
+        $generator->setCodeText("123ABC", null, true);
         $path = $this->subfolder . "howToGenerateBarcodeImage.png";
         $generator->save($path, BarCodeImageFormat::PNG);
         print("barcode image saved to ".$path."\n");

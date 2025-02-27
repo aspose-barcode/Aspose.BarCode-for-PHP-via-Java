@@ -429,7 +429,7 @@ class BarCodeReader extends BaseJavaClass
             {
                 $resource = fopen($resource, "r");
             }
-            $xmlData = str_replace("п»ї", "", preg_replace('/^\xEF\xBB\xBF/', '',(stream_get_contents($resource))));
+            $xmlData = str_replace("ï»¿", "", str_replace("п»ї", "", preg_replace('/^\xEF\xBB\xBF/', '',(stream_get_contents($resource)))));
             if(!$xmlData)
                 throw new Exception("No such file or directory");
             return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml($xmlData));

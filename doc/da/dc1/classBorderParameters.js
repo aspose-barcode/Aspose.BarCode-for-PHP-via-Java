@@ -9,7 +9,7 @@ var classBorderParameters =
     [ "\u202Ainit", "da/dc1/classBorderParameters.html#acbef54722dd79a4a6048397426bbd75e", null ],
     [ "\u202AisNull", "da/dc1/classBorderParameters.html#a264c7345eb64c83446fded2fde8c2780", null ],
     [ "\u202AprintJavaClassName", "da/dc1/classBorderParameters.html#ac836ea8c7444cc5ccd8499b1ae405ef1", null ],
-    [ "\u202AsetColor", "da/dc1/classBorderParameters.html#af72e97723d8f0eaad7cc13ed52968af0", null ],
+    [ "\u202AsetColor", "da/dc1/classBorderParameters.html#a72250b2bfedbe98423ae734bfef64815", null ],
     [ "\u202AsetDashStyle", "da/dc1/classBorderParameters.html#a52465661b2dae7a4149e266f15927834", null ],
     [ "\u202AsetJavaClass", "da/dc1/classBorderParameters.html#a657e3148b4c9d6c9a872e254d4bc4c8b", null ],
     [ "\u202AsetVisible", "da/dc1/classBorderParameters.html#a798db45819c8196e4b2febb39d0a74e2", null ],

@@ -35,7 +35,7 @@ class BarcodeGenerator extends BaseJavaClass
      * @endcode
      * @throws BarcodeException
      */
-    public function __construct(?int $encodeType, ?string $codeText)
+    public function __construct(?int $encodeType, ?string $codeText = null)
     {
         try
         {
@@ -214,18 +214,23 @@ class BarcodeGenerator extends BaseJavaClass
      * </p>
      * @param string|array codeText CodeText string | Bytes of codetext
      * @param int encoding Applied encoding
+     * @param bool flag indicates insertion of the Encoding byte order mark (BOM). In case, the Encoding requires byte order mark (BOM) insertion: like UTF8,
+     *   UTF16, UTF32, e.t.c. and flag is set to true, the BOM is added, in case of setting flag to false, the BOM insertion is ignored.
      */
-    public function setCodeText($value, ?string $encoding): void
+    public function setCodeText($value, ?string $encoding = null, ?bool $bom = true): void
     {
         try
         {
-            if(is_array($value))
+            if (is_array($value))
             {
                 $this->getJavaClass()->setCodeBytes(base64_encode(pack("C*", ...$value)));
             }
             else
             {
-                $this->getJavaClass()->setCodeText($value, $encoding);
+                // Explicitly set true instead of null
+                $bom = $bom ?? true;
+                $adaptedBoMStr = $bom ? 'true' : 'false';
+                $this->getJavaClass()->setCodeText($value, $encoding, $adaptedBoMStr);
             }
         }
         catch (Exception $ex)
@@ -233,6 +238,7 @@ class BarcodeGenerator extends BaseJavaClass
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
 
     /**
      * Exports BarCode properties to the xml-stream specified
@@ -1529,13 +1535,13 @@ class BorderParameters extends BaseJavaClass
      * Border color.
      * Default value: #000000
      */
-    public function setColor(string $hexValue): void
+    public function setColor(string $value): void
     {
         try
         {
-            if(substr($hexValue, 0, 1) == '#')
-                $hexValue = substr($hexValue, 1, strlen($hexValue) - 1);
-            $this->getJavaClass()->setColor(hexdec($hexValue));
+            if(substr($value, 0, 1) == '#')
+                $value = substr($value, 1, strlen($value) - 1);
+            $this->getJavaClass()->setColor(hexdec($value));
         }
         catch (Exception $ex)
         {
@@ -1782,6 +1788,7 @@ class CaptionParameters extends BaseJavaClass
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
     /**
      * Returns a human-readable string representation of this CaptionParameters.
      *
@@ -2396,13 +2403,13 @@ class CodetextParameters extends BaseJavaClass
      * Specify the displaying CodeText's Color.
      * Default value BLACK.
      */
-    public function setColor(string $hexValue): void
+    public function setColor(string $value): void
     {
         try
         {
-            if(substr($hexValue, 0, 1) == '#')
-                $hexValue = substr($hexValue, 1, strlen($hexValue) - 1);
-            $this->getJavaClass()->setColor(hexdec($hexValue));
+            if(substr($value, 0, 1) == '#')
+                $value = substr($value, 1, strlen($value) - 1);
+            $this->getJavaClass()->setColor(hexdec($value));
         }
         catch (Exception $ex)
         {
@@ -3280,6 +3287,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
     }
+
     /**
      * <p>
      * Sets ECI encoding. Used when DataMatrixEncodeMode is Auto.
@@ -3627,6 +3635,7 @@ class DotCodeParameters extends BaseJavaClass
         }
     }
 }
+
 
 /**
  * GS1 Composite bar parameters.
@@ -8242,7 +8251,7 @@ class  TextAlignment
  *  $generator->setAutoSizeMode(AutoSizeMode.NEAREST);
  *  $generator->getBarCodeWidth()->setMillimeters(50);
  *  $generator->getBarCodeHeight()->setInches(1.3f);
- *  $generator->save("test.png");
+ *  $generator->save("test.png", BarcodeImageFormat::PNG);
  * @endcode
  */
 class AutoSizeMode
@@ -8271,7 +8280,7 @@ class AutoSizeMode
      *      $generator->getParameters()->getBarcode()->setAutoSizeMode(AutoSizeMode::INTERPOLATION);
      *      $generator->getParameters()->getBarcode()->getBarCodeWidth()->setMillimeters(50);
      *      $generator->getParameters()->getBarcode()->getBarCodeHeight()->setInches(1.3);
-     *      $generator->save("test.png", "PNG);
+     *      $generator->save("test.png", BarcodeImageFormat::PNG);
      * @endcode
      */
     const INTERPOLATION = 2;
