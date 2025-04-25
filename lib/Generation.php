@@ -217,7 +217,7 @@ class BarcodeGenerator extends BaseJavaClass
      * @param bool flag indicates insertion of the Encoding byte order mark (BOM). In case, the Encoding requires byte order mark (BOM) insertion: like UTF8,
      *   UTF16, UTF32, e.t.c. and flag is set to true, the BOM is added, in case of setting flag to false, the BOM insertion is ignored.
      */
-    public function setCodeText($value, ?string $encoding = null, ?bool $bom = true): void
+    public function setCodeText($value, ?string $encoding = null, ?bool $bom = false): void
     {
         try
         {
@@ -227,9 +227,8 @@ class BarcodeGenerator extends BaseJavaClass
             }
             else
             {
-                // Explicitly set true instead of null
-                $bom = $bom ?? true;
-                $adaptedBoMStr = $bom ? 'true' : 'false';
+                if (!is_null($bom))
+                    $adaptedBoMStr = $bom ? 'true' : 'false';
                 $this->getJavaClass()->setCodeText($value, $encoding, $adaptedBoMStr);
             }
         }
