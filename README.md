@@ -1,24 +1,27 @@
 # Barcode Generation & Recognition via PHP
 
-Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and recognition component, written in PHP and Java. It allows developers to quickly and easily add barcode creation and scanning functionality to their PHP applications.  
+Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and recognition component, written in PHP and Java. It allows developers to quickly and easily add barcode creation and scanning functionality to their PHP applications.
+
+> ⚠️ **Notice:** This is the **last release** of Aspose.BarCode for PHP via Java that uses the [PHP-Java Bridge](http://php-java-bridge.sourceforge.net/).  
+> Future versions will use **Apache Thrift** for communication between PHP and Java components.
 
 ## General Barcode Features
 
-- Supports most established barcode standards and barcode specifications. 
-- Ability to read & export barcodes in multiple image formats including BMP, GIF, JPEG & PNG.  
-- Provides full control over barcode images including background color, bar color, image quality, rotation angle, x-dimension, resolution and more.  
+- Supports most established barcode standards and barcode specifications.
+- Ability to read & export barcodes in multiple image formats including BMP, GIF, JPEG & PNG.
+- Provides full control over barcode images including background color, bar color, image quality, rotation angle, x-dimension, resolution and more.
 - Complete control over barcode captions including caption font, back color, fore color, alignment, and location.
 - Support for checksum.
 - Support for X-dimension & Y-dimension for 2D BarCodes.
 - Support for Wide to Narrow Ratio for supported symbologies.
-- Support for DataMatrix barcode with X12, EDIFACT & Base 256 encoding. 
+- Support for DataMatrix barcode with X12, EDIFACT & Base 256 encoding.
 
 ## Barcode Recognition Features
 
 - Can read most common 1D, 2D barcodes anywhere at any angle from an image.
-- Specify an area in the image to scan the barcode 
+- Specify an area in the image to scan the barcode
 - Get region information for the barcodes recognized in the image
-	
+
 ## Barcode Imaging Features
 
 - Manipulate the barcode's image borders, border color, style, margins, width, etc.
@@ -37,13 +40,16 @@ Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and 
 
 ## Read Barcodes From
 
-**Images:** JPEG, TIFF, PNG, BMP
+**Images:** BMP, GIF, JPEG, PNG, TIFF, TIFF_IN_CMYK, EMF, SVG, PDF
 
-## Save Barcode Labels As
+## Export Barcode Labels As Images
 
-**Images:** JPEG, TIFF, PNG, BMP
+**Images:** BMP, GIF, JPEG, PNG, TIFF, TIFF_IN_CMYK, EMF, SVG, PDF
 
 ## Get Started with Aspose.BarCode for PHP via Java
+
+> ⚠️ **Note:** This guide applies to the final version that uses the [PHP-Java Bridge](http://php-java-bridge.sourceforge.net/).  
+> Future releases will be based on Apache Thrift.
 
 ### Install PHP application into J2SE
 
@@ -66,22 +72,21 @@ Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and 
    `require_once("http://localhost:8888/JavaBridge/java/Java.inc");`
    You can find example in `examples/php_side/test_assist.php` file.
 9. Now you can use the PHP API supplied by Aspose.Barcode PHP classes.
- 
- 
- ### Install PHP application by using Tomcat 
- 
+
+### Install PHP application by using Tomcat
+
 1. Download and install original Apache Tomcat software and copy JavaBridge.war to its autodeploy folder.
-For example you can install Tomcat like  `C:/apache-tomcat-9.0.37` 
-and copy JavaBridge.war to `webapps` folder of Tomcat`C:/apache-tomcat-9.0.37/webapps`.
+   For example you can install Tomcat like  `C:/apache-tomcat-9.0.37`
+   and copy JavaBridge.war to `webapps` folder of Tomcat`C:/apache-tomcat-9.0.37/webapps`.
 3. Run `C:/apache-tomcat-9.0.37/bin/startup.bat`, JavaBridge.war will be deployed to `C:/apache-tomcat-9.0.37/webapps/JavaBridge`.
 3. Copy aspose-barcode-php-xx.x.jar to `lib` folder, such as `C:/apache-tomcat-9.0.37/webapps/JavaBridge/WEB-INF/lib`.
-Restart Tomcat.
+   Restart Tomcat.
 5. Test `http://localhost:8080/JavaBridge/java/Java.inc` to ensure that PHP works fine.
 6. Deploy php files from the folder 'lib' to your web application on webserver
-For example to `C:/xampp/htdocs/Barcode`
+   For example to `C:/xampp/htdocs/Barcode`
 7. Add 'require' statement to your php code
-`require_once("http://localhost:8080/JavaBridge/java/Java.inc");`
-You can find example in examples/php_side/test_assist.php file.
+   `require_once("http://localhost:8080/JavaBridge/java/Java.inc");`
+   You can find example in examples/php_side/test_assist.php file.
 8. Now you can use the PHP API supplied by Aspose.Barcode PHP classes.
 
 You can find the installation instructions for php/Java bridge on http://php-java-bridge.sourceforge.net/pjb/installation.php.
