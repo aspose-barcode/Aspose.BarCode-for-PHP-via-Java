@@ -42,14 +42,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d1/dff/classQrBillStandardVersion.html#acce2c636fb4c313efbbfd8edd1f27d12",
-"d4/d26/classDecodeType.html#ac124cae26af4d141f19024cdc3a0a735",
-"d5/d0f/classEncodeTypes.html#a59cf39aea772d8a8f86e759deccea35f",
-"d6/ddf/classGS1CompositeBarExtendedParameters.html#abe56c78dec8605a2d2f7b8f0305d29e3",
-"d8/d8c/classLicense.html#a264c7345eb64c83446fded2fde8c2780",
-"db/d41/classDataMatrixVersion.html#aaf223c19f06b141fd4ff6817498b927f",
-"dd/d22/classMaxiCodeCodetext.html#adb7375fcc02c34690a842db34af0e613",
-"de/de2/classDotCodeParameters.html#af062b38c56d64927edb03ade06223756"
+"d1/dcc/classAztecParameters.html#acf25b4a5fb0935ac061c535f09456e30",
+"d4/d26/classDecodeType.html#a85efd6fe6a9d27ac027c7a96426eb83e",
+"d5/d0f/classEncodeTypes.html#a355f031398b9958990a0719c0656d1ec",
+"d6/dd0/classMaxiCodeParameters.html#a7b43a93fe76c0a9a2a9d71c356d85f9a",
+"d8/d57/classQuadrangle.html#af112aec9adbb4b334b2e74dd51a7ea70",
+"db/d41/classDataMatrixVersion.html#a5b790fa490366c07cd32ef6c0ab5a98b",
+"dc/df2/classDataMatrixParameters.html#a88dc1db5906ecc0ecd381db13eed913d",
+"de/dc3/classMaxiCodeExtCodetextBuilder.html#ac07e0e2b4f8cc019b6bbda53f16fe3df"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

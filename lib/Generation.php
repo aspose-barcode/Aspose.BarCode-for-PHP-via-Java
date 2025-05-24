@@ -7000,6 +7000,7 @@ class HanXinExtCodetextBuilder extends BaseJavaClass
 class ImageParameters extends BaseJavaClass
 {
     private $svg;
+    private $pdf;
 
     function __construct($javaClass)
     {
@@ -7009,6 +7010,7 @@ class ImageParameters extends BaseJavaClass
     function init() : void
     {
         $this->svg = new SvgParameters($this->getJavaClass()->getSvg());
+        $this->pdf = new PdfParameters($this->getJavaClass()->getPdf());
     }
 
     /**
@@ -7022,10 +7024,30 @@ class ImageParameters extends BaseJavaClass
     /**
      * SVG parameters
      */
-    function setSvg(SvgParameters $svg) : void
+    function setSvg(SvgParameters $value) : void
     {
-        $this->svg = $svg;
-        $this->getJavaClass()->setSvg($svg->getJavaClass());
+        $this->svg = $value;
+        $this->getJavaClass()->setSvg($value->getJavaClass());
+    }
+
+    /**
+     * <p>
+     * PDF parameters
+     * </p>
+     */
+    function getPdf() : PdfParameters
+    {
+        return $this->pdf;
+    }
+    /**
+     * <p>
+     * PDF parameters
+     * </p>
+     */
+    function setPdf(PdfParameters $value)
+    {
+        $this->pdf = $value;
+        $this->getJavaClass()->setPdf($value->getJavaClass());
     }
 }
 
@@ -7231,6 +7253,199 @@ class HslaColor
     }
 }
 
+/**
+ * <p>
+ * PDF parameters.
+ * </p>
+ */
+class PdfParameters extends BaseJavaClass
+{
+    function __construct($javaClass)
+    {
+        parent::__construct($javaClass);
+    }
+
+    function init() : void
+    {
+    }
+
+    /**
+     * Nullable. CMYK color value of bar code.
+     * Null means CMYK color is not used, instead normal RGB color is used.
+     */
+    public function getCMYKBarColor(): ?CMYKColor
+    {
+        $raw = $this->getJavaClass()->getCMYKBarColor();
+        return $raw === null
+            ? null
+            : CMYKColor::parseCMYK($raw);
+    }
+
+    public function setCMYKBarColor(?CMYKColor $value): void
+    {
+        $this->getJavaClass()->setCMYKBarColor(
+            $value !== null ? $value->formatCMYK() : null
+        );
+    }
+
+    /**
+     * Nullable. CMYK back color value.
+     */
+    public function getCMYKBackColor(): ?CMYKColor
+    {
+        $raw = $this->getJavaClass()->getCMYKBackColor();
+        return $raw === null
+            ? null
+            : CMYKColor::parseCMYK($raw);
+    }
+
+    public function setCMYKBackColor(?CMYKColor $value): void
+    {
+        $this->getJavaClass()->setCMYKBackColor(
+            $value !== null ? $value->formatCMYK() : null
+        );
+    }
+
+    /**
+     * Nullable. CMYK color value of codetext.
+     */
+    public function getCMYKCodetextColor(): ?CMYKColor
+    {
+        $raw = $this->getJavaClass()->getCMYKCodetextColor();
+        return $raw === null
+            ? null
+            : CMYKColor::parseCMYK($raw);
+    }
+
+    public function setCMYKCodetextColor(?CMYKColor $value): void
+    {
+        $this->getJavaClass()->setCMYKCodetextColor(
+            $value !== null ? $value->formatCMYK() : null
+        );
+    }
+
+    /**
+     * Nullable. CMYK color value of caption above.
+     */
+    public function getCMYKCaptionAboveColor(): ?CMYKColor
+    {
+        $raw = $this->getJavaClass()->getCMYKCaptionAboveColor();
+        return $raw === null
+            ? null
+            : CMYKColor::parseCMYK($raw);
+    }
+
+    public function setCMYKCaptionAboveColor(?CMYKColor $value): void
+    {
+        $this->getJavaClass()->setCMYKCaptionAboveColor(
+            $value !== null ? $value->formatCMYK() : null
+        );
+    }
+
+    /**
+     * Nullable. CMYK color value of caption below.
+     */
+    public function getCMYKCaptionBelowColor(): ?CMYKColor
+    {
+        $raw = $this->getJavaClass()->getCMYKCaptionBelowColor();
+        return $raw === null
+            ? null
+            : CMYKColor::parseCMYK($raw);
+    }
+
+    public function setCMYKCaptionBelowColor(?CMYKColor $value): void
+    {
+        $this->getJavaClass()->setCMYKCaptionBelowColor(
+            $value !== null ? $value->formatCMYK() : null
+        );
+    }
+}
+
+/**
+ * <p>
+ * Class for CMYK color. Null means CMYK is not used, default RGB color is in use.
+ * </p>
+ */
+class CMYKColor
+{
+    public $C;
+    public $M;
+    public $Y;
+    public $K;
+
+    /**
+     * <p>
+     * Initializes a new instance of the {@code CMYKColor} class from CMYK values.
+     * CMYK values are 0-100.
+     * </p>
+     * @param $c Cyan value [0, 100]
+     * @param $m Magenta value [0, 100]
+     * @param $y Yellow value [0, 100]
+     * @param $k Black value [0, 100]
+     */
+    function __construct(int $c, int $m, int $y, int $k)
+    {
+        if ($c < 0) $c = 0;
+        if ($m < 0) $m = 0;
+        if ($y < 0) $y = 0;
+        if ($k < 0) $k = 0;
+
+        if ($c > 100) $c = 100;
+        if ($m > 100) $m = 100;
+        if ($y > 100) $y = 100;
+        if ($k > 100) $k = 100;
+
+        $this->C = $c / 100.0;
+        $this->M = $m / 100.0;
+        $this->Y = $y / 100.0;
+        $this->K = $k / 100.0;
+    }
+
+    /**
+     * Parse a CMYK string of the form "C_M_Y_K" into a CMYK object.
+     *
+     * @param string $str
+     * @return CMYK
+     * @throws InvalidArgumentException
+     */
+    public static function parseCMYK(string $cmyk_str): CMYKColor
+    {
+        $parts = explode('_', $cmyk_str);
+        if (count($parts) !== 4) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid CMYK string: expected 4 parts but got %d', count($parts))
+            );
+        }
+
+        $values = array_map(function(string $s) {
+            if (!is_numeric($s)) {
+                throw new InvalidArgumentException(
+                    sprintf('Invalid number in CMYK string: "%s"', $s)
+                );
+            }
+            return (float)$s;
+        }, $parts);
+
+        return new CMYKColor($values[0], $values[1], $values[2], $values[3]);
+    }
+
+    /**
+     * Format this CMYK object into a string "C_M_Y_K",
+     * multiplying each component by 100.
+     *
+     * @return string
+     */
+    public function formatCMYK(): string
+    {
+        return sprintf(
+            '%s_%s_%s_%s',
+            $this->C * 100,
+            $this->M * 100,
+            $this->Y * 100,
+            $this->K * 100
+        );
+    }
+}
 
 /**
  * Class BarcodeClassifications EncodeTypes classification
