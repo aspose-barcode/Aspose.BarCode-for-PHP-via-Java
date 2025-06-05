@@ -1,0 +1,7 @@
+parameters:
+    level: 5
+    paths:
+        - lib/
+    bootstrapFiles:
+        - lib/loader.php
+    errorFormat: raw

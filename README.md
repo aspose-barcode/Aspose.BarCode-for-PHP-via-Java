@@ -2,9 +2,6 @@
 
 Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and recognition component, written in PHP and Java. It allows developers to quickly and easily add barcode creation and scanning functionality to their PHP applications.
 
-> ⚠️ **Notice:** This is the **last release** of Aspose.BarCode for PHP via Java that uses the [PHP-Java Bridge](http://php-java-bridge.sourceforge.net/).  
-> Future versions will use **Apache Thrift** for communication between PHP and Java components.
-
 ## General Barcode Features
 
 - Supports most established barcode standards and barcode specifications.
@@ -24,7 +21,7 @@ Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and 
 
 ## Barcode Imaging Features
 
-- Manipulate the barcode's image borders, border color, style, margins, width, etc.
+- Manipulate the barcodes image borders, border color, style, margins, width, etc.
 - Rotate barcode images to any degree.
 - Set anti-aliasing for barcode images.
 - Manage barcode image margins.
@@ -48,47 +45,115 @@ Aspose.BarCode for PHP via Java is a robust and reliable barcode generation and 
 
 ## Get Started with Aspose.BarCode for PHP via Java
 
-> ⚠️ **Note:** This guide applies to the final version that uses the [PHP-Java Bridge](http://php-java-bridge.sourceforge.net/).  
-> Future releases will be based on Apache Thrift.
+Aspose.BarCode for PHP via Java is distributed uses a background Java server (via Apache Thrift) to bridge PHP and Java functionality.
+#### Requirements
+-Java 1.8 or higher
+-PHP 7.4 or higher
+-Composer
 
-### Install PHP application into J2SE
+#### Installation Steps
+1. Install the package via Composer:
+   ```bash
+   composer require aspose/barcode
+   ```
 
-1. Install Java 1.8 or above
-2. Install PHP 7.0 or above into the operating system PATH.
-3. Put `aspose-barcode-php-xx.x.jar` to certain location, for example folder 'jar'
-4. Prepare JavaBridge. You need to place JavaBridge.jar to a specific path and add it to the classpath.
-   Or you can just point the path to JavaBridge.jar via command
-   `-jar path/to/JavaBridge.jar`
-5. Launch the JavaBridge by command
-   `"%JAVA_HOME%\bin\java" -Djava.ext.dirs=../jar -jar JavaBridge.jar SERVLET_LOCAL:8888`
-   where `-Djava.ext.dirs=../jar` points to the location of `aspose-barcode-php-xx.x.jar`
-   and `-jar  JavaBridge.jar` points to the location of `JavaBridge.jar`
-   You can appoint a port by your choice. We use `8888` just for example to differ from standard servers port numbers.
-6. Test the connection to JavaBridge
-   `http://localhost:8888/JavaBridge/java/Java.inc`
-7. Deploy php files from folder `lib` to your web application on webserver
-   For example to `C:/xampp/htdocs/Barcode`
-8. Add `require` statement to your php code
-   `require_once("http://localhost:8888/JavaBridge/java/Java.inc");`
-   You can find example in `examples/php_side/test_assist.php` file.
-9. Now you can use the PHP API supplied by Aspose.Barcode PHP classes.
+2. In the root of the package, locate and run the `start_server.cmd` file to start the background Thrift server:
+   ```batch
+   start_server.cmd
+   ```
 
-### Install PHP application by using Tomcat
+   You can also embed a similar script into your own project:
 
-1. Download and install original Apache Tomcat software and copy JavaBridge.war to its autodeploy folder.
-   For example you can install Tomcat like  `C:/apache-tomcat-9.0.37`
-   and copy JavaBridge.war to `webapps` folder of Tomcat`C:/apache-tomcat-9.0.37/webapps`.
-3. Run `C:/apache-tomcat-9.0.37/bin/startup.bat`, JavaBridge.war will be deployed to `C:/apache-tomcat-9.0.37/webapps/JavaBridge`.
-3. Copy aspose-barcode-php-xx.x.jar to `lib` folder, such as `C:/apache-tomcat-9.0.37/webapps/JavaBridge/WEB-INF/lib`.
-   Restart Tomcat.
-5. Test `http://localhost:8080/JavaBridge/java/Java.inc` to ensure that PHP works fine.
-6. Deploy php files from the folder 'lib' to your web application on webserver
-   For example to `C:/xampp/htdocs/Barcode`
-7. Add 'require' statement to your php code
-   `require_once("http://localhost:8080/JavaBridge/java/Java.inc");`
-   You can find example in examples/php_side/test_assist.php file.
-8. Now you can use the PHP API supplied by Aspose.Barcode PHP classes.
+   **Windows:**
+   ```batch
+   @echo off
+   :: Get the directory where this script is located
+   set SCRIPT_DIR=%~dp0
 
-You can find the installation instructions for php/Java bridge on http://php-java-bridge.sourceforge.net/pjb/installation.php.
+   :: Define the path to the JAR file relative to this script
+   set JAR_PATH=%SCRIPT_DIR%vendor\aspose\barcode-php\lib\aspose-barcode-php-thrift-25.5.jar
+
+   :: Define the log file path (optional)
+   set LOG_FILE=%SCRIPT_DIR%server.log
+
+   echo Starting Thrift server...
+   start /B java -jar "%JAR_PATH%"
+   echo Thrift server started! Logs are in %LOG_FILE%.
+   exit
+   ```
+
+   **Linux and macOS:**
+   ```bash
+   #!/bin/bash
+
+   # Get the directory where this script is located
+   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+   # Define the path to the JAR file relative to this script
+   JAR_PATH="$SCRIPT_DIR/vendor/aspose/barcode-php/lib/aspose-barcode-php-thrift-25.5.jar"
+
+   # Define the log file path (optional)
+   LOG_FILE="$SCRIPT_DIR/server.log"
+
+   echo "Starting Thrift server..."
+   nohup java -jar "$JAR_PATH" > "$LOG_FILE" 2>&1 &
+   echo "Thrift server started! Logs are in $LOG_FILE."
+   ```
+
+   This script launches a Java process using the JAR file:  
+   `vendor/aspose/barcode-php/lib/aspose-barcode-php-thrift-25.5.jar`  
+   Make sure the server is running by checking the console output or verifying that **port 9090** is open (e.g., using `netstat`).
+
+3. Once the Thrift server is running, your PHP application can interact with the Java-based barcode engine  
+   using the public API classes defined in the `Aspose\Barcode` namespace.  
+   These classes act as **PHP client wrappers**, communicating with the backend over Apache Thrift.  
+   You can use them to generate and recognize barcodes by simply calling methods as if they were native PHP objects,
+   while the actual processing is performed on the Java side.
+
+#### Sample code snippet for barcode recognition:
+The example below shows how to initialize the barcode reader, apply a license, set checksum validation, and read barcodes 
+from a sample image:  
+
+```php
+public function barcodeReaderExample()
+{
+  
+    $license = new License();
+    $license->setLicense(TestsAssist::PHP_LICENSE_PATH);
+    $image_path = TestsAssist::TESTDATA_ROOT . "Recognition/1D/Code39/code39.gif";
+    $reader = new BarCodeReader($image_path, null, null);
+    $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
+    $foundBarCodes = $reader->readBarCodes();
+    $foundCount = $reader->getFoundCount();
+    print("Count of found barcodes: ". $foundCount.PHP_EOL);
+    print("CodeText " . $foundBarCodes[0]->getCodeText().PHP_EOL);
+    print("CodeType " . $foundBarCodes[0]->getCodeType().PHP_EOL);
+    print("CodeType " . $foundBarCodes[0]->getCodeTypeName().PHP_EOL);
+}
+```
+
+#### Sample code snippet for barcode reading and generation:
+The example below shows how to initialize the barcode generator, apply a license, generate barcode and read barcode:
+
+```php
+public function readAndGenerateExample()
+{
+    $license = new License();
+    $license->setLicense(TestsAssist::PHP_LICENSE_PATH);
+    $codeText = "12345678";
+    $encodeType = EncodeTypes::CODE_11;
+    $generator = new BarcodeGenerator($encodeType, $codeText);
+    $base64Image = $generator->generateBarCodeImage(BarCodeImageFormat::PNG);
+    $reader = new BarCodeReader($base64Image, null, null);
+    $resultsArray = $reader->readBarCodes();
+    $barCodeResult = $resultsArray[0];
+    $codeText = $barCodeResult->getCodeText();
+    $codeType = $barCodeResult->getCodeTypeName();
+    print("codeText " . $codeText);
+    print("codeType " . $codeType);
+}
+```
+
+For detailed instructions, please refer to the [official documentation](https://docs.aspose.com/barcode/phpjava/).
 
 [Product](https://products.aspose.com/barcode) | [Documentation](https://products.aspose.com/barcode/php-java) | [Blog](https://blog.aspose.com/category/barcode/) | [API Reference](https://apireference.aspose.com/barcode/java) | [Search](https://search.aspose.com/) | [Free Support](https://forum.aspose.com/c/barcode) | [Temporary License](https://purchase.aspose.com/temporary-license)

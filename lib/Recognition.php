@@ -1,13 +1,46 @@
 <?php
+namespace Aspose\Barcode;
 
-require_once('Joint.php');
+use Aspose\Barcode\Internal\BarcodeException;
+use Aspose\Barcode\Internal\CommonUtility;
+use Aspose\Barcode\Internal\Communicator;
+use Aspose\Barcode\Internal\License;
+use Aspose\Barcode\Internal\Point;
+use Aspose\Barcode\Internal\Rectangle;
+use Aspose\Barcode\Internal\ThriftConnection;
+use DateTime;
+use Exception;
+
+use Aspose\Barcode\Bridge\QuadrangleDTO;
+use Aspose\Barcode\Bridge\CodabarExtendedParametersDTO;
+use Aspose\Barcode\Bridge\DataMatrixExtendedParametersDTO;
+use Aspose\Barcode\Bridge\Code128DataPortionDTO;
+use Aspose\Barcode\Bridge\AustraliaPostSettingsDTO;
+use Aspose\Barcode\Bridge\GS1CompositeBarExtendedParametersDTO;
+use Aspose\Barcode\Bridge\AztecExtendedParametersDTO;
+use Aspose\Barcode\Bridge\DotCodeExtendedParametersDTO;
+use Aspose\Barcode\Bridge\MaxiCodeExtendedParametersDTO;
+use Aspose\Barcode\Bridge\DataBarExtendedParametersDTO;
+use Aspose\Barcode\Bridge\Pdf417ExtendedParametersDTO;
+use Aspose\Barcode\Bridge\QRExtendedParametersDTO;
+use Aspose\Barcode\Bridge\Code128ExtendedParametersDTO;
+use Aspose\Barcode\Bridge\OneDExtendedParametersDTO;
+use Aspose\Barcode\Bridge\BarCodeExtendedParametersDTO;
+use Aspose\Barcode\Bridge\BarCodeRegionParametersDTO;
+use Aspose\Barcode\Bridge\BarCodeResultDTO;
+use Aspose\Barcode\Bridge\QualitySettingsDTO;
+use Aspose\Barcode\Bridge\BarcodeSettingsDTO;
+use Aspose\Barcode\Bridge\BarcodeReaderDTO;
+use InvalidArgumentException;
+use TypeError;
+
 
 /**
  * BarCodeReader encapsulates an image which may contain one or several barcodes, it then can perform ReadBarCodes operation to detect barcodes.
  *
  * This sample shows how to detect Code39 and Code128 barcodes.
  * @code
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * $reader = new BarCodeReader("test.png", DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
  * foreach($reader->readBarCodes() as $result)
  * {
  *    print("BarCode Type: ".$result->getCodeTypeName());
@@ -15,45 +48,99 @@ require_once('Joint.php');
  * }
  * @endcode
  */
-class BarCodeReader extends BaseJavaClass
+class BarCodeReader implements Communicator
 {
-    private $qualitySettings;
-    private $recognizedResults;
-    private $barcodeSettings;
+    private $barCodeReaderDto;
 
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.recognition.MwBarCodeReader";
+    private function getBarCodeReaderDto(): BarcodeReaderDTO
+    {
+        return $this->barCodeReaderDto;
+    }
+
+    private function setBarCodeReaderDto(BarcodeReaderDTO $barCodeReaderDto): void
+    {
+        $this->barCodeReaderDto = $barCodeReaderDto;
+//        $this->initFieldsFromDto();
+    }
+
+    private QualitySettings $qualitySettings;
+    private BarcodeSettings $barcodeSettings;
+    private $imageResource;
+    private $areas;
+    private $decodeTypes;
+
+    function __construct($imageResource, $areas, $decodeTypes)
+    {
+        $this->imageResource = $imageResource;
+        $this->areas = $areas;
+        $this->decodeTypes = $decodeTypes;
+        $this->setBarCodeReaderDto($this->obtainDto()); //TODO redundant ?
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args): BarcodeReaderDTO
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $barcodeReaderDTO = $client->BarcodeReader_ctor();
+        $thriftConnection->closeConnection();
+        return $barcodeReaderDTO;
+    }
+
+    public function initFieldsFromDto()
+    {
+        $this->qualitySettings = new QualitySettings($this->barCodeReaderDto->qualitySettings);
+        $this->barcodeSettings = new BarcodeSettings($this->barCodeReaderDto->barcodeSettings);
+
+        if ($this->imageResource !== null) {
+            $this->initializeImageRelatedFields();
+            $this->processDecodeTypes();
+        } else {
+            $this->validateNullState();
+        }
+    }
 
     /**
-     * BarCodeReader constructor. Initializes a new instance of the BarCodeReader
-     * @param string|GdImage $imageResource image encoded as GDImage, file resource, base64 string or path to image resource (located in the file system or via http)
-     * @param Rectangle|array|null $areas array of object by type Rectangle
-     * @param int|array|null $decodeTypes array of decode types
+     * Process Image Related Parameters
+     */
+    private function initializeImageRelatedFields(): void
+    {
+        $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBase64($this->imageResource);
+        $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($this->areas);
+    }
+
+    /**
+     * Detect Decode Types
+     */
+    private function processDecodeTypes(): void
+    {
+        $decodeTypes = $this->decodeTypes;
+        if (is_null($decodeTypes)) {
+            $decodeTypes = [DecodeType::ALL_SUPPORTED_TYPES];
+        } elseif (is_int($decodeTypes)) {
+            $decodeTypes = [$decodeTypes];
+            $this->decodeTypes = $decodeTypes;
+        } elseif (!is_array($decodeTypes)) {
+            throw new InvalidArgumentException("Invalid type for decodeTypes. Expected int, array, or null, got " . gettype($decodeTypes));
+        }
+
+        if (CommonUtility::isClassContainsConstantValueFromArray(DecodeType::class, $decodeTypes)) {
+            $this->barCodeReaderDto->barCodeDecodeTypes = $decodeTypes;
+        }
+    }
+
+    /**
+     * Ensures that when an image is missing, other parameters are also absent.
+     *
      * @throws BarcodeException
      */
-    public function __construct($imageResource, $areas, $decodeTypes)
+    private function validateNullState(): void
     {
-        try
-        {
-            $stringFormattedAreas = convertAreasToStringFormattedAreas($areas);
-            $decodeTypesArray = convertDecodeTypeToFormattedDecodeType($decodeTypes);
-
-            $base64Image = convertImageResourceToBase64($imageResource);
-            $java_class = new java(self::JAVA_CLASS_NAME, $base64Image, $stringFormattedAreas, $decodeTypesArray);
-            parent::__construct($java_class);
-        }
-        catch (Exception $ex)
-        {
-            println($ex->getMessage());
-            throw new BarcodeException("Incorrect arguments are passed to BarCodeReader constructor", __FILE__, __LINE__);
+        if ($this->areas !== null || $this->decodeTypes !== null) {
+            throw new BarcodeException('Illegal arguments. If $imageResource = null then $areas and $decodeTypes should be null');
         }
     }
 
-    private static function construct($javaClass): BarCodeReader
-    {
-        $barcodeReader = new BarCodeReader(null, null, null);
-        $barcodeReader->setJavaClass($javaClass);
-        return $barcodeReader;
-    }
 
     /**
      * Determines whether any of the given decode types is included into
@@ -62,121 +149,22 @@ class BarCodeReader extends BaseJavaClass
      */
     public function containsAny(...$decodeTypes): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->containsAny($decodeTypes), "boolean");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            foreach ($decodeTypes as $decodeType) {
+                if (DecodeType::containsAny($decodeType, $this->getBarCodeReaderDto()->barCodeDecodeTypes))
+                    return true;
+            }
+            return false;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
 
     protected function init(): void
     {
-        try
-        {
-            $this->qualitySettings = new QualitySettings($this->getJavaClass()->getQualitySettings());
-            $this->barcodeSettings = new BarcodeSettings($this->getJavaClass()->getBarcodeSettings());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the timeout of recognition process in milliseconds.
-     *
-     * @code
-     * $reader = new BarCodeReader("test.png");
-     * $reader->setTimeout(5000);
-     * foreach($reader->readBarCodes() as $result)
-     *    print("BarCode CodeText: ".$result->getCodeText());
-     * @endcode
-     * @return timeout.
-     */
-    public function getTimeout(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getTimeout(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the timeout of recognition process in milliseconds.
-     *
-     * @code
-     * $reader = new BarCodeReader("test.png");
-     * $reader->setTimeout(5000);
-     * foreach($reader->readBarCodes() as $result)
-     *    print("BarCode CodeText: ".$result->getCodeText());
-     * @endcode
-     * @param value The timeout.
-     */
-    public function setTimeout(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setTimeout($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    public function abort(): void
-    {
-        try
-        {
-            $this->getJavaClass()->abort();
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets recognized BarCodeResult array
-     *
-     * This sample shows how to read barcodes with BarCodeReader
-     * @code
-     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
-     * $reader->readBarCodes();
-     * for($i = 0; $reader->getFoundCount() > $i; ++$i)
-     * {
-     *    print("BarCode CodeText: ". $reader->getFoundBarCodes()[$i]->getCodeText());
-     * }
-     * @endcode
-     * Value: The recognized BarCodeResult array
-     */
-    public function getFoundBarCodes(): array
-    {
-        return $this->recognizedResults;
-    }
-
-    /**
-     * Gets recognized barcodes count
-     *
-     * This sample shows how to read barcodes with BarCodeReader
-     * @code
-     * $reader = new BarCodeReader("test.png", null, array(DecodeType::CODE_39, DecodeType::CODE_128));
-     * $reader->readBarCodes();
-     * for($i = 0; $reader->getFoundCount() > $i; ++$i)
-     *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
-     * @endcode
-     * Value: The recognized barcodes count
-     */
-    public function getFoundCount(): int
-    {
-        return java_cast($this->getJavaClass()->getFoundCount(), "integer");
+        $this->qualitySettings = new QualitySettings($this->barCodeReaderDto->qualitySettings);
+        $this->barcodeSettings = new BarcodeSettings($this->barCodeReaderDto->qualitySettings);
     }
 
     /**
@@ -194,28 +182,100 @@ class BarCodeReader extends BaseJavaClass
      *
      * @return array of recognized {@code BarCodeResult}s on the image. If nothing is recognized, zero array is returned.
      * @throws BarcodeException
-     * @throws RecognitionAbortedException
      */
-    public function readBarCodes(): array
+    public function readBarCodes(bool $passLicense = false): array
     {
-        try
-        {
-            $this->recognizedResults = array();
-            $javaReadBarcodes = java_values($this->getJavaClass()->readBarCodes());
-            for ($i = 0; $i < sizeof($javaReadBarcodes); $i++)
-            {
-                $this->recognizedResults[$i] = new BarCodeResult($javaReadBarcodes[$i]);
-            }
-            return $this->recognizedResults;
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            // Deciding if the license should be used
+            $licenseContent = $passLicense ? License::getLicenseContent() : null;
+            // Passing the license or null
+            $barcodeReaderDTO = $client->BarcodeReader_readBarCodes($this->barCodeReaderDto, $licenseContent);
+            $this->setBarCodeReaderDto($barcodeReaderDTO);
+            $thriftConnection->closeConnection();
+        } catch (Exception $exc) {
+            CommonUtility::println($exc->getMessage());
+            CommonUtility::println("Stack trace: " . $exc->getTraceAsString());
+            //TODO BARCODEPHP-919 Make fixes and improvements in exception handling on the Java and PHP sides
+            throw CommonUtility::convertBarcodeExceptionDto($exc);
         }
-        catch (Exception $e)
-        {
-            if (strpos($e->getMessage(), "RecognitionAbortedException"))
-            {
-                throw new RecognitionAbortedException($e->getMessage(), null);
-            }
-            throw $e;
+        return $this->getFoundBarCodes();
+    }
+
+    /**
+     * Gets recognized BarCodeResult array
+     *
+     * This sample shows how to read barcodes with BarCodeReader
+     * @code
+     * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader->readBarCodes();
+     * for($i = 0; $reader->getFoundCount() > $i; ++$i)
+     * {
+     *    print("BarCode CodeText: ". $reader->getFoundBarCodes()[$i]->getCodeText());
+     * }
+     * @endcode
+     * Value: The recognized BarCodeResult array
+     */
+    function getFoundBarCodes(): array
+    {
+        // TODO Implement not recognized behavior
+        $recognizedResults = array();
+        $dtoRef = $this->barCodeReaderDto;
+        foreach ($dtoRef->foundBarCodes as $foundBarcode) {
+            $recognizedResults[] = new BarCodeResult($foundBarcode);
         }
+
+        return $recognizedResults;
+    }
+
+    /**
+     * Gets the timeout of recognition process in milliseconds.
+     *
+     * @code
+     * $reader = new BarCodeReader("test.png");
+     * $reader->setTimeout(5000);
+     * foreach($reader->readBarCodes() as $result)
+     *    print("BarCode CodeText: ".$result->getCodeText());
+     * @endcode
+     * @return int timeout.
+     */
+    public function getTimeout(): int
+    {
+        return $this->barCodeReaderDto->timeout;
+    }
+
+    /**
+     * Sets the timeout of recognition process in milliseconds.
+     *
+     * @code
+     * $reader = new BarCodeReader("test.png");
+     * $reader->setTimeout(5000);
+     * foreach($reader->readBarCodes() as $result)
+     *    print("BarCode CodeText: ".$result->getCodeText());
+     * @endcode
+     * @param int $value The timeout.
+     */
+    public function setTimeout(int $value): void
+    {
+        $this->barCodeReaderDto->timeout = $value;
+    }
+
+    /**
+     * Gets recognized barcodes count
+     *
+     * This sample shows how to read barcodes with BarCodeReader
+     * @code
+     * $reader = new BarCodeReader("test.png", null, DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader->readBarCodes();
+     * for($i = 0; $reader->getFoundCount() > $i; ++$i)
+     *    print("BarCode CodeText: ".$reader->getFoundBarCodes()[i]->getCodeText());
+     * @endcode
+     * Value: The recognized barcodes count
+     */
+    public function getFoundCount(): int
+    {
+        return sizeof($this->getFoundBarCodes());
     }
 
     /**
@@ -245,18 +305,10 @@ class BarCodeReader extends BaseJavaClass
      *   print("BarCode CodeText: ".$result->getCodeText());
      *
      * @return QualitySettings to configure recognition quality and speed.
-     * @throws BarcodeException
      */
     public final function getQualitySettings(): QualitySettings
     {
-        try
-        {
-            return $this->qualitySettings;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $this->qualitySettings;
     }
 
     /**
@@ -285,20 +337,12 @@ class BarCodeReader extends BaseJavaClass
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
      *
-     * @param QualitySettings $value QualitySettings to configure recognition quality and speed.
-     * @throws BarcodeException
+     * @param QualitySettings $qualitySettings
      */
-    public function setQualitySettings(QualitySettings $value): void
+    public function setQualitySettings(QualitySettings $qualitySettings): void
     {
-        try
-        {
-            $this->getJavaClass()->setQualitySettings($value->getJavaClass());
-            //$this->qualitySettings = new QualitySettings($this->getJavaClass()->getQualitySettings());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->barCodeReaderDto->qualitySettings = $qualitySettings->getQualitySettingsDTO();
+        $this->qualitySettings = new QualitySettings($this->barCodeReaderDto->qualitySettings);
     }
 
     /**
@@ -328,20 +372,18 @@ class BarCodeReader extends BaseJavaClass
      *    print("BarCode CodeText: ".$result->getCodeText());
      * }
      * @endcode
-     * @param string $resource image encoded as base64 string or path to image resource located in the file system or via http
-     * @param Rectangle|null $areas areas list for recognition
+     * @param $imageResource
+     * @param Rectangle|null ...$areas areas list for recognition
      * @throws BarcodeException
      */
     public final function setBarCodeImage($imageResource, ?Rectangle ...$areas): void
     {
-        try
-        {
-            $base64Image = convertImageResourceToBase64($imageResource);
-            $stringFormattedAreas = convertAreasToStringFormattedAreas($areas);
-            $this->getJavaClass()->setBarCodeImage($base64Image, $stringFormattedAreas);
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBase64($imageResource);
+            $this->barCodeReaderDto->areas = CommonUtility::convertImageResourceToBase64($areas);
+            if(is_null($this->barCodeReaderDto->barCodeDecodeTypes) || sizeof($this->barCodeReaderDto->barCodeDecodeTypes) == 0)
+                $this->barCodeReaderDto->barCodeDecodeTypes = array(DecodeType::ALL_SUPPORTED_TYPES);
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -354,7 +396,7 @@ class BarCodeReader extends BaseJavaClass
      *
      * @code
      * $reader = new BarCodeReader();
-     * $reader->setBarCodeReadType(DecodeType::CODE_39, DecodeType::CODE_128);
+     * $reader->setBarCodeReadType(DecodeType::CODE_39_STANDARD, DecodeType::CODE_128);
      * $reader->setBarCodeImage("test.png");
      * foreach($reader->readBarCodes() as $result)
      * {
@@ -367,27 +409,16 @@ class BarCodeReader extends BaseJavaClass
      */
     public function setBarCodeReadType(int ...$types): void
     {
-        foreach($types as $type)
-            if(!is_int($type))
-            {
-                throw new TypeError("Argument 1 passed to BarCodeReader::setBarCodeReadType() must be of the type int, string given");
+        foreach ($types as $type)
+            if (!is_int($type)) {
+                throw new TypeError("Argument 1 passed to BarCodeReader::setBarCodeReadType() must be of the type int");
             }
-        $this->getJavaClass()->setBarcodeReadType($types);
+        $this->barCodeReaderDto->barCodeDecodeTypes = $types;
     }
 
-    public function getBarCodeDecodeType(): array
+    public function getBarCodeDecodeType() : array
     {
-        try
-        {
-            $barcodeTypesArray = array();
-            foreach($this->getJavaClass()->getBarCodeDecodeType() as $javaInteger)
-                array_push($barcodeTypesArray, java_cast($javaInteger, "integer"));
-            return $barcodeTypesArray;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex);
-        }
+        return $this->decodeTypes;
     }
 
     /**
@@ -400,14 +431,17 @@ class BarCodeReader extends BaseJavaClass
     {
         try
         {
-            $xmlData = str_replace("п»ї", "", preg_replace('/^\xEF\xBB\xBF/', '',java_cast($this->getJavaClass()->exportToXml(), "string")));
-            $isSaved = $xmlData != null;
-            if ($isSaved)
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            //TODO BARCODEPHP-677 Implement the passing of license file content from PHP to Java
+            $xmlData = $client->BarcodeReader_exportToXml($this->barCodeReaderDto);
+            $thriftConnection->closeConnection();
+            $isContentExported = $xmlData != null;
+            if ($isContentExported)
             {
-                if(!file_put_contents($xmlFile, $xmlData))
-                    throw new Exception("No such file or directory");
+                file_put_contents($xmlFile, $xmlData);
             }
-            return $isSaved;
+            return $isContentExported;
         }
         catch (Exception $ex)
         {
@@ -421,1524 +455,366 @@ class BarCodeReader extends BaseJavaClass
      * @return BarCodeReader
      * @throws BarcodeException
      */
-    public static function importFromXml($resource): BarCodeReader
+    public static function importFromXml(string $resource): BarCodeReader
     {
         try
         {
-            if (isPath($resource))
+            if (CommonUtility::isPath($resource))
             {
                 $resource = fopen($resource, "r");
             }
-            $xmlData = str_replace("ï»¿", "", str_replace("п»ї", "", preg_replace('/^\xEF\xBB\xBF/', '',(stream_get_contents($resource)))));
-            if(!$xmlData)
-                throw new Exception("No such file or directory");
-            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml($xmlData));
+            $xmlData = (stream_get_contents($resource));
+            $offset = 6;
+            $xmlData = substr($xmlData, $offset, strlen($xmlData) - $offset);
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+
+            $barCodeReaderDto = $client->BarcodeReader_importFromXml($xmlData);
+            $thriftConnection->closeConnection();
+
+            return BarCodeReader::construct($barCodeReaderDto);
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    private static function construct(BarcodeReaderDTO $barCodeReaderDto): BarCodeReader
+    {
+        $barcodeReader = new BarCodeReader(null, null, null);
+        $barcodeReader->setBarCodeReaderDto($barCodeReaderDto);
+        return $barcodeReader;
+    }
+}
+
+
+/**
+ * The main BarCode decoding parameters. Contains parameters which make influence on recognized data.
+ */
+class BarcodeSettings implements Communicator
+{
+
+    private BarcodeSettingsDTO $barcodeSettingsDto;
+
+    private function getBarcodeSettingsDto(): BarcodeSettingsDTO
+    {
+        return $this->barcodeSettingsDto;
+    }
+
+    private function setBarcodeSettingsDto(BarcodeSettingsDTO $barcodeSettingsDto): void
+    {
+        $this->barcodeSettingsDto = $barcodeSettingsDto;
+        $this->initFieldsFromDto();
+    }
+
+    private AustraliaPostSettings $_australiaPost;
+
+    /**
+     * BarcodeSettings copy constructor
+     * @param BarcodeSettingsDTO $barcodeSettingsDto
+     */
+    function __construct(BarcodeSettingsDTO $barcodeSettingsDto)
+    {
+        $this->barcodeSettingsDto = $barcodeSettingsDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        $this->_australiaPost = new AustraliaPostSettings($this->getBarcodeSettingsDto()->australiaPost);
+    }
+
+    /**
+     * Enable checksum validation during recognition for 1D and Postal barcodes.
+     * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
+     * Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5
+     * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
+     * Checksum always used: Rest symbologies
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", null, DecodeType::EAN_13);
+     * //checksum disabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: ".$result->getCodeText());
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
+     * }
+     * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::EAN_13);
+     * //checksum enabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: " . $result->CodeText);
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
+     * }
+     * @endcode
+     * @return int Enable checksum validation during recognition for 1D and Postal barcodes.
+     */
+    public function getChecksumValidation(): int
+    {
+        return $this->getBarcodeSettingsDto()->checksumValidation;
+    }
+
+    /**
+     * Enable checksum validation during recognition for 1D and Postal barcodes.
+     * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
+     * Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5
+     * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
+     * Checksum always used: Rest symbologies
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::EAN_13);
+     * //checksum disabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: ".$result->getCodeText());
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
+     * }
+     * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
+     * //checksum enabled
+     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *      echo ("BarCode CodeText: " . $result->CodeText);
+     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
+     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
+     * }
+     * @endcode
+     * @param int $value Enable checksum validation during recognition for 1D and Postal barcodes.
+     */
+    public function setChecksumValidation(int $value): void
+    {
+        $this->getBarcodeSettingsDto()->checksumValidation = ($value);
+    }
+
+    /**
+     * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC disabled
+     * $reader->getBarcodeSettings()->setStripFNC(false);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC enabled
+     * $reader->getBarcodeSettings()->setStripFNC(true);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     * @endcode
+     *
+     * @return bool Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     */
+    public function getStripFNC(): bool
+    {
+        return $this->getBarcodeSettingsDto()->stripFNC;
+    }
+
+    /**
+     * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
+     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC disabled
+     * $reader->getBarcodeSettings()->setStripFNC(false);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     *
+     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
+     *
+     * //StripFNC enabled
+     * $reader->getBarcodeSettings()->setStripFNC(true);
+     * foreach($reader->readBarCodes() as $result)
+     * {
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * }
+     * @endcode
+     *
+     * @param bool $value Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
+     */
+    public function setStripFNC(bool $value): void
+    {
+        $this->getBarcodeSettingsDto()->stripFNC = $value;
+    }
+
+    /**
+     * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово"))
+     * $im = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
+     *
+     * //detects encoding for Unicode codesets is enabled
+     * $reader = new BarCodeReader($im, DecodeType::QR);
+     * $reader->getBarcodeSettings()->setDetectEncoding(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     *
+     * //detect encoding is disabled
+     * $reader = new BarCodeReader($im, DecodeType::QR);
+     * $reader->getBarcodeSettings()->setDetectEncoding(false);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * @endcode
+     *
+     * @return bool The flag which force engine to detect codetext encoding for Unicode codesets
+     */
+    public function getDetectEncoding(): bool
+    {
+        return $this->getBarcodeSettingsDto()->detectEncoding;
+    }
+
+    public function setDetectEncoding(bool $value): void
+    {
+        $this->getBarcodeSettingsDto()->detectEncoding = $value;
+    }
+
+    /**
+     * Gets AustraliaPost decoding parameters
+     * @return AustraliaPostSettings The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology
+     */
+    public function getAustraliaPost(): AustraliaPostSettings
+    {
+        return $this->_australiaPost;
     }
 }
 
 /**
- *
- * Stores a set of four Points that represent a Quadrangle region.
- *
+ * AustraliaPost decoding parameters. Contains parameters which make influence on recognized data of AustraliaPost symbology.
  */
-class Quadrangle extends BaseJavaClass
-{
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwQuadrangle";
-    private $leftTop;
-    private $rightTop;
-    private $rightBottom;
-    private $leftBottom;
-
-    /**
-     * Represents a Quadrangle structure with its properties left uninitialized.Value: Quadrangle
-     */
-    public static function EMPTY(): Quadrangle
-    {
-        return new Quadrangle(new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0));
-    }
-
-    static function construct(...$args): Quadrangle
-    {
-        $quadrangle = self::EMPTY();
-        $quadrangle->setJavaClass($args[0]);
-        return $quadrangle;
-    }
-
-    /**
-     * Initializes a new instance of the Quadrangle structure with the describing points.
-     *
-     * @param Point $leftTop A Point that represents the left-top corner of the Quadrangle.
-     * @param Point $rightTop A Point that represents the right-top corner of the Quadrangle.
-     * @param Point $rightBottom A Point that represents the right-bottom corner of the Quadrangle.
-     * @param Point $leftBottom A Point that represents the left-bottom corner of the Quadrangle.
-     */
-    public function __construct(Point $leftTop, Point $rightTop, Point $rightBottom, Point $leftBottom)
-    {
-        parent::__construct(new java(self::javaClassName, $leftTop->getJavaClass(), $rightTop->getJavaClass(), $rightBottom->getJavaClass(), $leftBottom->getJavaClass()));
-    }
-
-    protected function init(): void
-    {
-        $this->leftTop = Point::construct($this->getJavaClass()->getLeftTop());
-        $this->rightTop = Point::construct($this->getJavaClass()->getRightTop());
-        $this->rightBottom = Point::construct($this->getJavaClass()->getRightBottom());
-        $this->leftBottom = Point::construct($this->getJavaClass()->getLeftBottom());
-    }
-
-    /**
-     * Gets left-top corner Point of Quadrangle regionValue: A left-top corner Point of Quadrangle region
-     */
-    public function getLeftTop(): Point
-    {
-        return $this->leftTop;
-    }
-
-    /**
-     * Gets left-top corner Point of Quadrangle regionValue: A left-top corner Point of Quadrangle region
-     */
-    public function setLeftTop(Point $value): void
-    {
-        try
-        {
-            $this->leftTop = $value;
-            $this->getJavaClass()->setLeftTop($value->getJavaClass());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets right-top corner Point of Quadrangle regionValue: A right-top corner Point of Quadrangle region
-     */
-    public function getRightTop(): Point
-    {
-        return $this->rightTop;
-    }
-
-    /**
-     * Gets right-top corner Point of Quadrangle regionValue: A right-top corner Point of Quadrangle region
-     */
-    public function setRightTop(Point $value): void
-    {
-        try
-        {
-            $this->rightTop = $value;
-            $this->getJavaClass()->setRightTop($value->getJavaClass());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets right-bottom corner Point of Quadrangle regionValue: A right-bottom corner Point of Quadrangle region
-     */
-    public function getRightBottom(): Point
-    {
-        return $this->rightBottom;
-    }
-
-    /**
-     * Gets right-bottom corner Point of Quadrangle regionValue: A right-bottom corner Point of Quadrangle region
-     */
-    public function setRightBottom(Point $value): void
-    {
-        try
-        {
-            $this->rightBottom = $value;
-            $this->getJavaClass()->setRightBottom($value->getJavaClass());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets left-bottom corner Point of Quadrangle regionValue: A left-bottom corner Point of Quadrangle region
-     */
-    public function getLeftBottom(): Point
-    {
-        return $this->leftBottom;
-    }
-
-    /**
-     * Gets left-bottom corner Point of Quadrangle regionValue: A left-bottom corner Point of Quadrangle region
-     */
-    public function setLeftBottom(Point $value): void
-    {
-        try
-        {
-            $this->leftBottom = $value;
-            $this->getJavaClass()->setLeftBottom($value->getJavaClass());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Tests whether all Points of this Quadrangle have values of zero.Value: Returns true if all Points of this Quadrangle have values of zero; otherwise, false.
-     */
-    public function isEmpty(): bool
-    {
-        return java_cast($this->getJavaClass()->isEmpty(), "boolean");
-    }
-
-    /**
-     * Determines if the specified Point is contained within this Quadrangle structure.
-     *
-     * @param Point pt The Point to test.
-     * @return bool Returns true if Point is contained within this Quadrangle structure; otherwise, false.
-     */
-    public function contains(Point $pt): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->contains($pt->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Determines if the specified point is contained within this Quadrangle structure.
-     *
-     * @param int $x The x point cordinate.
-     * @param int $y The y point cordinate.
-     * @return bool Returns true if point is contained within this Quadrangle structure; otherwise, false.
-     */
-    public function containsPoint(int $x, int $y): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->contains($x, $y), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Determines if the specified Quadrangle is contained or intersect this Quadrangle structure.
-     *
-     * @param Quadrangle quad The Quadrangle to test.
-     * @return bool Returns true if Quadrangle is contained or intersect this Quadrangle structure; otherwise, false.
-     */
-    public function containsQuadrangle(Quadrangle $quad): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->contains($quad->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Determines if the specified Rectangle is contained or intersect this Quadrangle structure.
-     *
-     * @param Rectangle rect The Rectangle to test.
-     * @return bool Returns true if Rectangle is contained or intersect this Quadrangle structure; otherwise, false.
-     */
-    public function containsRectangle(Rectangle $rect): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->contains($rect), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified Quadrangle value.
-     *
-     * @param Quadrangle $other An Quadrangle value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(Quadrangle $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     *
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashCode(): int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this Quadrangle.
-     *
-     * @return string A string that represents this Quadrangle.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Creates Rectangle bounding this Quadrangle
-     *
-     * @return Rectangle returns Rectangle bounding this Quadrangle
-     */
-    public function getBoundingRectangle(): Rectangle
-    {
-        try
-        {
-            return Rectangle::construct($this->getJavaClass()->getBoundingRectangle());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- *
- * Stores a QR Structured Append information of recognized barcode
- *
- * This sample shows how to get QR Structured Append data
- * @code
- * $reader = new BarCodeReader("test.png", DecodeType::QR);
- * foreach($reader->readBarCodes() as $result)
- * {
- *    print("BarCode Type: ".$result->getCodeTypeName());
- *    print("BarCode CodeText: ".$result->getCodeText());
- *    print("QR Structured Append Quantity: ".$result->getExtended()->getQR()->getQRStructuredAppendModeBarCodesQuantity());
- *    print("QR Structured Append Index: ".$result->getExtended()->getQR()->getQRStructuredAppendModeBarCodeIndex());
- *    print("QR Structured Append ParityData: ".$result->getExtended()->getQR()->getQRStructuredAppendModeParityData());
- * }
- * @endcode
- */
-final class QRExtendedParameters extends BaseJavaClass
+class AustraliaPostSettings implements Communicator
 {
 
-    protected function init(): void
+    private AustraliaPostSettingsDTO $australiaPostSettingsDto;
+
+    private function getAustraliaPostSettingsDto(): AustraliaPostSettingsDTO
     {
-        // TODO: Implement init() method.
+        return $this->australiaPostSettingsDto;
+    }
+
+    private function setAustraliaPostSettingsDto(AustraliaPostSettingsDTO $australiaPostSettingsDto): void
+    {
+        $this->australiaPostSettingsDto = $australiaPostSettingsDto;
     }
 
     /**
-     * Gets the QR structured append mode barcodes quantity. Default value is -1.Value: The quantity of the QR structured append mode barcode.
+     * AustraliaPostSettings constructor
      */
-    public function getQRStructuredAppendModeBarCodesQuantity(): int
+    function __construct(AustraliaPostSettingsDTO $australiaPostSettingsDto)
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getQRStructuredAppendModeBarCodesQuantity(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->australiaPostSettingsDto = $australiaPostSettingsDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function initFieldsFromDto(): void
+    {
+    }
+
+    public function obtainDto(...$args)
+    {
     }
 
     /**
-     * Gets the index of the QR structured append mode barcode. Index starts from 0. Default value is -1.Value: The quantity of the QR structured append mode barcode.
+     * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
+     * @return int The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
      */
-    public function getQRStructuredAppendModeBarCodeIndex(): int
+    public function getCustomerInformationInterpretingType(): int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getQRStructuredAppendModeBarCodeIndex(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $this->getAustraliaPostSettingsDto()->customerInformationInterpretingType;
     }
 
     /**
-     * Gets the QR structured append mode parity data. Default value is -1.Value: The index of the QR structured append mode barcode.
+     * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
+     * @param int $value The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
      */
-    public function getQRStructuredAppendModeParityData(): int
+    public function setCustomerInformationInterpretingType(int $value): void
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getQRStructuredAppendModeParityData(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getAustraliaPostSettingsDto()->customerInformationInterpretingType = $value;
     }
 
     /**
-     * Version of recognized QR Code. From Version1 to Version40.
-     * @return Version of recognized QR Code
-     */
-    public function getQRVersion() : int   { return java_cast($this->getJavaClass()->getQRVersion(), "integer"); }
-
-    /**
-     * Version of recognized MicroQR Code. From M1 to M4.
-     * @return Version of recognized MicroQR Code. From M1 to M4.
-     */
-    public function getMicroQRVersion() : int  { return java_cast($this->getJavaClass()->getMicroQRVersion(), "integer"); }
-
-    /**
-     * Version of recognized RectMicroQR Code. From R7x43 to R17x139.
-     * @return Version of recognized RectMicroQR Code
-     */
-    public function getRectMicroQRVersion() : int  { return java_cast($this->getJavaClass()->getRectMicroQRVersion(), "integer"); }
-
-    /**
-     * Reed-Solomon error correction level of recognized barcode. From low to high: LevelL, LevelM, LevelQ, LevelH.
-     * @return Reed-Solomon error correction level of recognized barcode.
-     */
-    public function getQRErrorLevel() : int  { return java_cast($this->getJavaClass()->getQRErrorLevel(), "integer"); }
-
-
-    public function isEmpty(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->isEmpty(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified QRExtendedParameters value.
+     * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
+     * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
      *
-     * @param QRExtendedParameters $obj An object value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(QRExtendedParameters $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
+     * @code
      *
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashCode(): int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this QRExtendedParameters.
+     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
+     * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
+     * $image = generator->generateBarCodeImage(BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader($image, null, DecodeType::AUSTRALIA_POST);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setIgnoreEndingFillingPatternsForCTable(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo("BarCode Type: ".$result->getCodeType());
+     *     echo("BarCode CodeText: ".$result->getCodeText());
+     * }
+     * @endcode
      *
-     * @return string A string that represents this QRExtendedParameters.
+     * @return bool The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
      */
-    public function toString(): string
+    public function getIgnoreEndingFillingPatternsForCTable(): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- *
- * Stores a MacroPdf417 metadata information of recognized barcode
- *
- * This sample shows how to get Macro Pdf417 metadata
- * @code
- * $generator = new BarcodeGenerator(EncodeTypes::MacroPdf417, "12345");
- * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroFileID(10);
- * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentsCount(2);
- * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentID(1);
- * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::MACRO_PDF_417);
- * foreach($reader->readBarCodes() as $result)
- * {
- *     print("BarCode Type: ".$result->getCodeTypeName());
- *     print("BarCode CodeText: ".$result->getCodeText());
- *     print("Macro Pdf417 FileID: ".$result->getExtended()->getPdf417()->getMacroPdf417FileID());
- *     print("Macro Pdf417 Segments: ".$result->getExtended()->getPdf417()->getMacroPdf417SegmentsCount());
- *     print("Macro Pdf417 SegmentID: ".$result->getExtended()->getPdf417()->getMacroPdf417SegmentID());
- * }
- * @endcode
- */
-final class Pdf417ExtendedParameters extends BaseJavaClass
-{
-    protected function init(): void
-    {
-        // TODO: Implement init() method.
+        return $this->getAustraliaPostSettingsDto()->ignoreEndingFillingPatternsForCTable;
     }
 
     /**
-     * Gets the file ID of the barcode, only available with MacroPdf417.Value: The file ID for MacroPdf417
-     */
-    public function getMacroPdf417FileID(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417FileID(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the segment ID of the barcode,only available with MacroPdf417.Value: The segment ID of the barcode.
-     */
-    public function getMacroPdf417SegmentID(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417SegmentID(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets macro pdf417 barcode segments count. Default value is -1.Value: Segments count.
-     */
-    public function getMacroPdf417SegmentsCount(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417SegmentsCount(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Macro PDF417 file name (optional).
-     * @return string File name.
-     */
-    public function getMacroPdf417FileName(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417FileName(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Macro PDF417 file size (optional).
-     * @return int File size.
-     */
-    public function getMacroPdf417FileSize(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417FileSize(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Macro PDF417 sender name (optional).
-     * @return string Sender name
-     */
-    public function getMacroPdf417Sender(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417Sender(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Macro PDF417 addressee name (optional).
-     * @return string Addressee name.
-     */
-    public function getMacroPdf417Addressee(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417Addressee(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Macro PDF417 time stamp (optional).
-     * @return DateTime Time stamp.
-     */
-    public function getMacroPdf417TimeStamp(): DateTime
-    {
-        try
-        {
-            return new DateTime('@' . java_cast($this->getJavaClass()->getMacroPdf417TimeStamp(), "string"));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Macro PDF417 checksum (optional).
-     * @return int Checksum.
-     */
-    public function getMacroPdf417Checksum(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417Checksum(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Indicates whether the segment is the last segment of a Macro PDF417 file.
-     * @return Terminator.
-     */
-    public function getMacroPdf417Terminator() : bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMacroPdf417Terminator(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * <p>Used to instruct the reader to interpret the data contained within the symbol as programming for reader initialization.</p>Value: Reader initialization flag
-     */
-    public function isReaderInitialization() : bool
-    {
-        return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
-    }
-
-    /**
-     * <p>Flag that indicates that the barcode must be linked to 1D barcode.</p>Value: Linkage flag
-     */
-    public function isLinked() : bool
-    {
-        return java_cast($this->getJavaClass()->isLinked(), "boolean");
-    }
-
-    /**
-     * Flag that indicates that the MicroPdf417 barcode encoded with 908, 909, 910 or 911 Code 128 emulation codewords.
-     * @return Code 128 emulation flag
-     */
-    public function isCode128Emulation() : bool
-    {
-        return java_cast($this->getJavaClass()->isCode128Emulation(), "boolean");
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified Pdf417ExtendedParameters value.
+     * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
+     * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
      *
-     * @param Pdf417ExtendedParameters $obj An System.Object value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(Pdf417ExtendedParameters $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashCode(): int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this Pdf417ExtendedParameters.
-     * @return int A string that represents this Pdf417ExtendedParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- *
- * Stores special data of 1D recognized barcode like separate codetext and checksum
- *
- * This sample shows how to get 1D barcode value and checksum
- * @code
- * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
- * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
- * foreach($reader->readBarCodes() as $result)
- * {
- *    print("BarCode Type: ".$result->getCodeTypeName());
- *    print("BarCode CodeText: ".$result->getCodeText());
- *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
- *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
- * }
- * @endcode
- */
-final class OneDExtendedParameters extends BaseJavaClass
-{
-    protected function init(): void
-    {
-        // TODO: Implement init() method.
-    }
-
-    /**
-     * Gets the codetext of 1D barcodes without checksum. Value: The codetext of 1D barcodes without checksum.
-     */
-    public function getValue(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getValue(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the checksum for 1D barcodes. Value: The checksum for 1D barcode.
-     */
-    public function getCheckSum(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCheckSum(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Tests whether all parameters has only default values
-     * @return bool Returns { <b>true</b>} if all parameters has only default values; otherwise, { <b>false</b>}.
-     * @throws BarcodeException
-     */
-    public function isEmpty(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->isEmpty(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified OneDExtendedParameters value.
+     * @code
      *
-     * @param OneDExtendedParameters obj An System.Object value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(OneDExtendedParameters $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
+     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
+     * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
+     * $image = generator->generateBarCodeImage(BarcodeImageFormat::PNG);
+     * $reader = new BarCodeReader($image, null, DecodeType::AUSTRALIA_POST);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
+     * $reader->getBarcodeSettings()->getAustraliaPost()->setIgnoreEndingFillingPatternsForCTable(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo("BarCode Type: ".$result->getCodeType());
+     *     echo("BarCode CodeText: ".$result->getCodeText());
+     * }
+     * @endcode
      *
-     * @return int A 32-bit signed integer hash code.
+     * @param bool $value The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
      */
-    public function hashCode(): int
+    public function setIgnoreEndingFillingPatternsForCTable(bool $value): void
     {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this OneDExtendedParameters.
-     *
-     * @return string A string that represents this OneDExtendedParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- *
- * Stores special data of Code128 recognized barcode
- * Represents the recognized barcode's region and barcode angle
- *
- * This sample shows how to get code128 raw values
- * @code
- * $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12345");
- * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_128);
- * foreach($reader->readBarCodes() as $result)
- * {
- *    print("BarCode Type: ".$result->getCodeTypeName());
- *    print("BarCode CodeText: ".$result->getCodeText());
- *    print("Code128 Data Portions: ".$result->getExtended()->getCode128());
- * }
- * @endcode
- */
-final class Code128ExtendedParameters extends BaseJavaClass
-{
-    private $code128DataPortions;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->code128DataPortions = self::convertCode128DataPortions($this->getJavaClass()->getCode128DataPortions());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    private static function convertCode128DataPortions($javaCode128DataPortions)
-    {
-        $code128DataPortionsValues = java_values($javaCode128DataPortions);
-        $code128DataPortions = array();
-        for ($i = 0; $i < sizeof($code128DataPortionsValues); $i++)
-        {
-            array_push($code128DataPortions, new Code128DataPortion($code128DataPortionsValues[$i]));
-        }
-        return $code128DataPortions;
-    }
-
-    /**
-     *  Gets Code128DataPortion array of recognized Code128 barcode Value: Array of the Code128DataPortion.
-     */
-    public function getCode128DataPortions(): array
-    {
-        try
-        {
-            return $this->code128DataPortions;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    public function isEmpty(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->isEmpty(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified Code128ExtendedParameters value.
-     *
-     * @param Code128ExtendedParameters obj An System.Object value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(Code128ExtendedParameters $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     *
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashCode(): int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this Code128ExtendedParameters.
-     *
-     * @return string A string that represents this Code128ExtendedParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Stores recognized barcode data like SingleDecodeType type, {string} codetext,
- * BarCodeRegionParameters region and other parameters
- *
- * This sample shows how to obtain BarCodeResult.
- * @code
- * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
- * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
- * foreach($reader->readBarCodes() as $result)
- * {
- *     print("BarCode Type: ".$result->getCodeTypeName());
- *     print("BarCode CodeText: ".$result->getCodeText());
- *     print("BarCode Confidence: ".$result->getConfidence());
- *     print("BarCode ReadingQuality: ".$result->getReadingQuality());
- *     print("BarCode Angle: ".$result->getRegion()->getAngle());
- * }
- * @endcode
- */
-final class BarCodeResult extends BaseJavaClass
-{
-    private $region;
-    private $extended;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->region = new BarCodeRegionParameters($this->getJavaClass()->getRegion());
-            $this->extended = new BarCodeExtendedParameters($this->getJavaClass()->getExtended());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return float Gets the reading quality. Works for 1D and postal barcodes. Value: The reading quality percent
-     * @throws BarcodeException
-     */
-    public function getReadingQuality(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getReadingQuality(), "double");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return int Gets recognition confidence level of the recognized barcode Value: BarCodeConfidence.Strong does not have fakes or misrecognitions, BarCodeConfidence.Moderate
-     * could sometimes have fakes or incorrect codetext because this confidence level for barcodews with weak cheksum or even without it,
-     * BarCodeConfidence.None always has incorrect codetext and could be fake recognitions
-     * @throws BarcodeException
-     */
-    public function getConfidence(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getConfidence(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return string Gets the code text Value: The code text of the barcode
-     * @throws BarcodeException
-     */
-    public function getCodeText(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeText(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return array Gets the encoded code bytes Value: The code bytes of the barcode
-     * @throws BarcodeException
-     */
-    public function getCodeBytes(): array
-    {
-        try
-        {
-            return explode(",", $this->getJavaClass()->getCodeBytes());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return int Gets the barcode type Value: The type information of the recognized barcode
-     * @throws BarcodeException
-     */
-    public function getCodeType(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeType(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return string Gets the name of the barcode type Value: The type name of the recognized barcode
-     * @throws BarcodeException
-     */
-    public function getCodeTypeName(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeTypeName(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return BarCodeRegionParameters Gets the barcode region Value: The region of the recognized barcode
-     * @throws BarcodeException
-     */
-    public function getRegion(): BarCodeRegionParameters
-    {
-        try
-        {
-            return $this->region;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * @return BarCodeExtendedParameters Gets extended parameters of recognized barcode Value: The extended parameters of recognized barcode
-     */
-    public function getExtended(): BarCodeExtendedParameters
-    {
-        return $this->extended;
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified BarCodeResult value.
-     * @param BarCodeResult $other An BarCodeResult value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     * @throws BarcodeException
-     */
-    public function equals(BarCodeResult $other): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($other->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     *
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashCode(): int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this BarCodeResult.
-     *
-     * @return string A string that represents this BarCodeResult.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Creates a copy of BarCodeResult class.
-     *
-     * @return BarCodeResult Returns copy of BarCodeResult class.
-     */
-    public function deepClone(): BarCodeResult
-    {
-        return new BarCodeResult($this);
-    }
-
-    function __construct($javaClass)
-    {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-}
-
-/**
- * Represents the recognized barcode's region and barcode angle
- *
- * This sample shows how to get barcode Angle and bounding quadrangle values
- * @code
- * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
- * $generator->save("test.png");
- * $reader = new BarCodeReader("test.png", null, array( DecodeType::CODE_39, DecodeType::CODE_128));
- * foreach($reader->readBarCodes() as $result)
- * {
- *    print("BarCode CodeText: ".$result->getCodeText());
- *    print("BarCode Angle: ".$result->getRegion()->getAngle());
- *    print("BarCode Quadrangle: ".$result->getRegion()->getQuadrangle());
- * }
- * @endcode
- */
-final class BarCodeRegionParameters extends BaseJavaClass
-{
-    private $quad;
-    private $rect;
-    private $points;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->quad = Quadrangle::construct($this->getJavaClass()->getQuadrangle());
-            $this->rect = Rectangle::construct($this->getJavaClass()->getRectangle());
-            $this->points = self::convertJavaPoints($this->getJavaClass()->getPoints());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    private static function convertJavaPoints($javaPoints)
-    {
-        $points = array();
-        for ($i = 0; $i < sizeof(java_values($javaPoints)); $i++)
-        {
-            $points[$i] = new Point(java_cast($javaPoints[$i]->getX(), "integer"), java_cast($javaPoints[$i]->getY(), "integer"));
-        }
-
-        return $points;
-    }
-
-    /**
-     * @return Quadrangle Gets Quadrangle bounding barcode region Value: Returns Quadrangle bounding barcode region
-     */
-    public function getQuadrangle(): Quadrangle
-    {
-        return $this->quad;
-    }
-
-    /**
-     * @return float Gets the angle of the barcode (0-360). Value: The angle for barcode (0-360).
-     * @throws BarcodeException
-     */
-    public function getAngle(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAngle(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *
-     */
-    /**
-     * @return array Gets Points array bounding barcode region Value: Returns Points array bounding barcode region
-     */
-    public function getPoints(): array
-    {
-        return $this->points;
-    }
-
-    /**
-     * @return Rectangle Gets Rectangle bounding barcode region Value: Returns Rectangle bounding barcode region
-     */
-    public function getRectangle(): Rectangle
-    {
-        return $this->rect;
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified BarCodeRegionParameters value.
-     *
-     * @param BarCodeRegionParameters $obj An System.Object value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(BarCodeRegionParameters $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     *
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashCode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->hashCode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this BarCodeRegionParameters.
-     *
-     * @return string A string that represents this BarCodeRegionParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * <p>
- * Stores extended parameters of recognized barcode
- * </p>
- */
-class BarCodeExtendedParameters extends BaseJavaClass
-{
-    private $_oneDParameters;
-    private $_code128Parameters;
-    private $_qrParameters;
-    private $_pdf417Parameters;
-    private $_dataBarParameters;
-    private $_maxiCodeParameters;
-    private $_dotCodeExtendedParameters;
-    private $_dataMatrixExtendedParameters;
-    private $_aztecExtendedParameters;
-    private $_gs1CompositeBarExtendedParameters;
-    private $_codabarExtendedParameters;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->_oneDParameters = new OneDExtendedParameters($this->getJavaClass()->getOneD());
-            $this->_code128Parameters = new Code128ExtendedParameters($this->getJavaClass()->getCode128());
-            $this->_qrParameters = new QRExtendedParameters($this->getJavaClass()->getQR());
-            $this->_pdf417Parameters = new Pdf417ExtendedParameters($this->getJavaClass()->getPdf417());
-            $this->_dataBarParameters = new DataBarExtendedParameters($this->getJavaClass()->getDataBar());
-            $this->_maxiCodeParameters = new MaxiCodeExtendedParameters($this->getJavaClass()->getMaxiCode());
-            $this->_dotCodeExtendedParameters = new DotCodeExtendedParameters($this->getJavaClass()->getDotCode());
-            $this->_dataMatrixExtendedParameters = new DataMatrixExtendedParameters($this->getJavaClass()->getDataMatrix());
-            $this->_aztecExtendedParameters = new AztecExtendedParameters($this->getJavaClass()->getAztec());
-            $this->_gs1CompositeBarExtendedParameters = new GS1CompositeBarExtendedParameters($this->getJavaClass()->getGS1CompositeBar());
-            $this->_codabarExtendedParameters = new CodabarExtendedParameters($this->getJavaClass()->getCodabar());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    function __construct($javaClass)
-    {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /** Gets a DataBar additional information DataBarExtendedParameters of recognized barcode
-     * @return DataBarExtendedParameters A DataBar additional information DataBarExtendedParameters of recognized barcode
-     */
-    public function getDataBar(): DataBarExtendedParameters
-    {
-        return $this->_dataBarParameters;
-    }
-
-    /**
-     * Gets a MaxiCode additional information<see cref="MaxiCodeExtendedParameters"/> of recognized barcode
-     *
-     * @return MaxiCodeExtendedParameters A MaxiCode additional information<see cref="MaxiCodeExtendedParameters"/> of recognized barcode
-     */
-    public function getMaxiCode() : MaxiCodeExtendedParameters
-    {
-        return $this->_maxiCodeParameters;
-    }
-
-    /**
-     * <p>Gets a DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode</p>Value: A DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode
-     */
-    public function getDotCode() : DotCodeExtendedParameters
-    {
-        return $this->_dotCodeExtendedParameters;
-    }
-
-    /**
-     * <p>Gets a DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode</p>Value: A DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode
-     */
-    public function getDataMatrix() : DataMatrixExtendedParameters
-    {
-        return $this->_dataMatrixExtendedParameters;
-    }
-
-    /**
-     * <p>Gets a Aztec additional information{@code AztecExtendedParameters} of recognized barcode</p>Value: A Aztec additional information{@code AztecExtendedParameters} of recognized barcode
-     */
-    public function getAztec() : AztecExtendedParameters
-    {
-        return $this->_aztecExtendedParameters;
-    }
-    
-    /**
-     * <p>Gets a GS1CompositeBar additional information{@code GS1CompositeBarExtendedParameters} of recognized barcode</p>Value: A GS1CompositeBar additional information{@code GS1CompositeBarExtendedParameters} of recognized barcode
-     */
-    public function getGS1CompositeBar() : GS1CompositeBarExtendedParameters
-    {
-        return $this->_gs1CompositeBarExtendedParameters;
-    }
-
-    /**
-     * Gets a Codabar additional information{@code CodabarExtendedParameters} of recognized barcode
-     * @return A Codabar additional information{@code CodabarExtendedParameters} of recognized barcode
-     */
-    public  function getCodabar() : CodabarExtendedParameters
-    {
-        return $this->_codabarExtendedParameters;
-    }
-
-    /**
-     * @return OneDExtendedParameters Gets a special data OneDExtendedParameters of 1D recognized barcode Value: A special data OneDExtendedParameters of 1D recognized barcode
-     */
-    public function getOneD(): OneDExtendedParameters
-    {
-        return $this->_oneDParameters;
-    }
-
-    /**
-     * @return Code128ExtendedParameters Gets a special data Code128ExtendedParameters of Code128 recognized barcode Value: A special data Code128ExtendedParameters of Code128 recognized barcode
-     */
-    public function getCode128(): Code128ExtendedParameters
-    {
-        return $this->_code128Parameters;
-    }
-
-    /**
-     * @return QRExtendedParameters Gets a QR Structured Append information QRExtendedParameters of recognized barcode Value: A QR Structured Append information QRExtendedParameters of recognized barcode
-     */
-    public function getQR(): QRExtendedParameters
-    {
-        return $this->_qrParameters;
-    }
-
-    /**
-     * @return Pdf417ExtendedParameters Gets a MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode Value: A MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode
-     */
-    public function getPdf417(): Pdf417ExtendedParameters
-    {
-        return $this->_pdf417Parameters;
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified BarCodeExtendedParameters value.
-     *
-     * @param BarCodeExtendedParameters $obj An System.Object value to compare to this instance.
-     * @return bool true if obj has the same value as this instance; otherwise, false.
-     */
-    public function equals(BarCodeExtendedParameters $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     *
-     * @return bool A 32-bit signed integer hash code.
-     */
-    public function hashCode(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->hashCode(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this BarCodeExtendedParameters.
-     *
-     * @return string A string that represents this BarCodeExtendedParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getAustraliaPostSettingsDto()->ignoreEndingFillingPatternsForCTable = $value;
     }
 }
 
@@ -1986,28 +862,39 @@ class BarCodeExtendedParameters extends BaseJavaClass
  *   print("BarCode CodeText: ".$result->getCodeText());
  * @endcode
  */
-final class QualitySettings extends BaseJavaClass
+final class QualitySettings implements Communicator
 {
+    private QualitySettingsDTO $qualitySettingsDTO;
 
-    function __construct($javaClass)
+    /**
+     * @return QualitySettingsDTO instance
+     */
+    function getQualitySettingsDTO() : QualitySettingsDTO
     {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $this->qualitySettingsDTO;
     }
 
-    private static function initQualitySettings()
+    /**
+     * @param $qualitySettingsDTO QualitySettingsDTO instance
+     */
+    private function setQualitySettingsDTO(QualitySettingsDTO $qualitySettingsDTO): void
     {
-        $javaClassName = "com.aspose.mw.barcode.recognition.MwQualitySettings";
-            return new java($javaClassName);
-        }
+        $this->qualitySettingsDTO = $qualitySettingsDTO;
+        $this->initFieldsFromDto();
+    }
 
-    protected function init(): void
+    function __construct(QualitySettingsDTO $qualitySettingsDTO)
+    {
+        $this->qualitySettingsDTO = $qualitySettingsDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto()
     {
     }
 
@@ -2023,13 +910,13 @@ final class QualitySettings extends BaseJavaClass
      */
     public static function getHighPerformance(): QualitySettings
     {
-        try
-        {
-            $javaQualitySettings = QualitySettings::initQualitySettings();
-            return new QualitySettings($javaQualitySettings->getHighPerformance());
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $qualitySettingsDTO = $client->QualitySettings_getHighPerformance();
+            $thriftConnection->closeConnection();
+            return new QualitySettings($qualitySettingsDTO);
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -2047,13 +934,13 @@ final class QualitySettings extends BaseJavaClass
      */
     public static function getNormalQuality(): QualitySettings
     {
-        try
-        {
-            $javaQualitySettings = QualitySettings::initQualitySettings();
-            return new QualitySettings($javaQualitySettings->getNormalQuality());
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $qualitySettingsDTO = $client->QualitySettings_getNormalQuality();
+            $thriftConnection->closeConnection();
+            return new QualitySettings($qualitySettingsDTO);
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -2070,13 +957,13 @@ final class QualitySettings extends BaseJavaClass
      */
     public static function getHighQuality(): QualitySettings
     {
-        try
-        {
-            $javaQualitySettings = QualitySettings::initQualitySettings();
-            return new QualitySettings($javaQualitySettings->getHighQuality());
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $qualitySettingsDTO = $client->QualitySettings_getHighQuality();
+            $thriftConnection->closeConnection();
+            return new QualitySettings($qualitySettingsDTO);
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -2101,67 +988,70 @@ final class QualitySettings extends BaseJavaClass
      */
     public static function getMaxQuality(): QualitySettings
     {
-        try
-        {
-            $javaQualitySettings = QualitySettings::initQualitySettings();
-            return new QualitySettings($javaQualitySettings->getMaxQuality());
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $qualitySettingsDTO = $client->QualitySettings_getMaxQuality();
+            $thriftConnection->closeConnection();
+            return new QualitySettings($qualitySettingsDTO);
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Recognition mode which sets size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
-     * @return: size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
+     * @return int : size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
      */
-    public function getXDimension() : float
+    public function getXDimension(): int
     {
-        return java_cast($this->getJavaClass()->getXDimension(), "float");
+        return $this->qualitySettingsDTO->xDimension;
     }
+
     /**
      * Recognition mode which sets size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
-     * @param $value: size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
+     * @param int : size (from 1 to infinity) of barcode minimal element: matrix cell or bar.
      */
-    public function setXDimension(float $value) : void
+    public function setXDimension(int $value): void
     {
-        $this->getJavaClass()->setXDimension($value);
+        $this->qualitySettingsDTO->xDimension = $value;
     }
 
     /**
      * Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
-     * @return: Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
+     * @return float : Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
      */
-    public function getMinimalXDimension() : float
+    public function getMinimalXDimension(): float
     {
-        return java_cast($this->getJavaClass()->getMinimalXDimension(), "float");
+        return $this->qualitySettingsDTO->minimalXDimension;
     }
+
     /**
      * Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
-     * @param $value: Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
+     * @param $value : Minimal size of XDimension in pixels which is used with UseMinimalXDimension.
      */
-    public function setMinimalXDimension(float $value) : void
+    public function setMinimalXDimension(float $value): void
     {
-        $this->getJavaClass()->setMinimalXDimension($value);
+        $this->qualitySettingsDTO->minimalXDimension = $value;
     }
 
     /**
      * <p>
      * Mode which enables methods to recognize barcode elements with the selected quality. Barcode element with lower quality requires more hard methods which slows the recognition.
-     * @return: Mode which enables methods to recognize barcode elements with the selected quality.
+     * @return int : Mode which enables methods to recognize barcode elements with the selected quality.
      */
-    public function getBarcodeQuality() : int
+    public function getBarcodeQuality(): int
     {
-        return java_cast($this->getJavaClass()->getBarcodeQuality(), "integer");
+        return $this->qualitySettingsDTO->barcodeQuality;
     }
+
     /**
      * Mode which enables methods to recognize barcode elements with the selected quality. Barcode element with lower quality requires more hard methods which slows the recognition.
-     * @param $value: Mode which enables methods to recognize barcode elements with the selected quality.
+     * @param $value : Mode which enables methods to recognize barcode elements with the selected quality.
      */
-    public function setBarcodeQuality(int $value) : void
+    public function setBarcodeQuality(int $value): void
     {
-        $this->getJavaClass()->setBarcodeQuality($value);
+        $this->qualitySettingsDTO->barcodeQuality = $value;
     }
 
     /**
@@ -2169,148 +1059,1471 @@ final class QualitySettings extends BaseJavaClass
      * Deconvolution (image restorations) mode which defines level of image degradation. Originally deconvolution is a function which can restore image degraded
      * (convoluted) by any natural function like blur, during obtaining image by camera. Because we cannot detect image function which corrupt the image,
      * we have to check most well know functions like sharp or mathematical morphology.
-     * @return: Deconvolution mode which defines level of image degradation.
+     * @return int : Deconvolution mode which defines level of image degradation.
      */
-    public function getDeconvolution() : int
+    public function getDeconvolution(): int
     {
-        return java_cast($this->getJavaClass()->getDeconvolution(), "integer");
+        return $this->qualitySettingsDTO->deconvolution;
     }
+
     /**
      * Deconvolution (image restorations) mode which defines level of image degradation. Originally deconvolution is a function which can restore image degraded
      * (convoluted) by any natural function like blur, during obtaining image by camera. Because we cannot detect image function which corrupt the image,
      * we have to check most well know functions like sharp or mathematical morphology.
-     * @param $value: Deconvolution mode which defines level of image degradation.
+     * @param $value : Deconvolution mode which defines level of image degradation.
      */
-    public function setDeconvolution(int $value) : void
+    public function setDeconvolution(int $value): void
     {
-        $this->getJavaClass()->setDeconvolution($value);
+        $this->qualitySettingsDTO->deconvolution = $value;
     }
 
     /**
      * Mode which enables or disables additional recognition of barcodes on images with inverted colors (luminance).
-     * @return: Additional recognition of barcodes on images with inverse colors
+     * @return int : Additional recognition of barcodes on images with inverse colors
      */
-    public function getInverseImage() : int
+    public function getInverseImage(): int
     {
-        return java_cast($this->getJavaClass()->getInverseImage(),"integer");
+        return $this->qualitySettingsDTO->inverseImage;
     }
+
     /**
      * Mode which enables or disables additional recognition of barcodes on images with inverted colors (luminance).
-     * @param $value: Additional recognition of barcodes on images with inverse colors
+     * @param $value : Additional recognition of barcodes on images with inverse colors
      */
-    public function setInverseImage(int $value) : void
+    public function setInverseImage(int $value): void
     {
-        $this->getJavaClass()->setInverseImage($value);
+        $this->qualitySettingsDTO->inverseImage = $value;
     }
 
     /**
      * <p>
      * Mode which enables or disables additional recognition of color barcodes on color images.
-     * @return: Additional recognition of color barcodes on color images.
+     * @return int : Additional recognition of color barcodes on color images.
      */
-    public function getComplexBackground() : int
+    public function getComplexBackground(): int
     {
-        return java_cast($this->getJavaClass()->getComplexBackground(), "integer");
+        return $this->qualitySettingsDTO->complexBackground;
     }
+
     /**
      * Mode which enables or disables additional recognition of color barcodes on color images.
-     * @param $value: Additional recognition of color barcodes on color images.
+     * @param $value : Additional recognition of color barcodes on color images.
      */
-    public function setComplexBackground(int $value) : void
+    public function setComplexBackground(int $value): void
     {
-        $this->getJavaClass()->setComplexBackground($value);
+        $this->qualitySettingsDTO->complexBackground = $value;
     }
 
     /**
      * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values. Mode can be used to recognize damaged barcodes with incorrect text.
-     * @return: Allows engine to recognize incorrect barcodes.
+     * @return bool : Allows engine to recognize incorrect barcodes.
      */
-    public function getAllowIncorrectBarcodes() : bool
+    public function getAllowIncorrectBarcodes(): bool
     {
-        return java_cast($this->getJavaClass()->getAllowIncorrectBarcodes(), "boolean");
+        return $this->qualitySettingsDTO->allowIncorrectBarcodes;
     }
 
     /**
      * Allows engine to recognize barcodes which has incorrect checksumm or incorrect values. Mode can be used to recognize damaged barcodes with incorrect text.
-     * @param $value: Allows engine to recognize incorrect barcodes.
+     * @param $value : Allows engine to recognize incorrect barcodes.
      */
-    public function setAllowIncorrectBarcodes(bool $value) : void
+    public function setAllowIncorrectBarcodes(bool $value): void
     {
-        $this->getJavaClass()->setAllowIncorrectBarcodes($value);
+        $this->qualitySettingsDTO->allowIncorrectBarcodes = $value;
+    }
+}
+
+
+/**
+ * Stores recognized barcode data like SingleDecodeType type, {string} codetext,
+ * BarCodeRegionParameters region and other parameters
+ *
+ * This sample shows how to obtain BarCodeResult.
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
+ * $generator->save("test.png");
+ * $reader = new BarCodeReader("test.png", DecodeType::CODE_39, DecodeType::CODE_128);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *     print("BarCode Type: ".$result->getCodeTypeName());
+ *     print("BarCode CodeText: ".$result->getCodeText());
+ *     print("BarCode Confidence: ".$result->getConfidence());
+ *     print("BarCode ReadingQuality: ".$result->getReadingQuality());
+ *     print("BarCode Angle: ".$result->getRegion()->getAngle());
+ * }
+ * @endcode
+ */
+class BarCodeResult implements Communicator
+{
+    private BarCodeRegionParameters $region;
+    private BarCodeExtendedParameters $extended;
+    private BarCodeResultDTO $barCodeResultDTO;
+
+    /**
+     * @return BarCodeResultDTO instance
+     */
+    private function getBarCodeResultDTO() : BarCodeResultDTO
+    {
+        return $this->barCodeResultDTO;
+    }
+
+    /**
+     * @param $barCodeResultDTO
+     */
+    private function setBarCodeResultDTO($barCodeResultDTO): void
+    {
+        $this->barCodeResultDTO = $barCodeResultDTO;
+    }
+
+    function __construct(BarCodeResultDTO $barCodeResultDTO)
+    {
+        $this->barCodeResultDTO = $barCodeResultDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        $this->region = new BarCodeRegionParameters($this->getBarCodeResultDTO()->region);
+        $this->extended = new BarCodeExtendedParameters($this->getBarCodeResultDTO()->extended);
+    }
+
+    /**
+     * @return float Gets the reading quality. Works for 1D and postal barcodes. Value: The reading quality percent
+     * @throws BarcodeException
+     */
+    public function getReadingQuality(): float
+    {
+        try {
+            return $this->getBarCodeResultDTO()->readingQuality;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    function getCodeText()
+    {
+        return $this->getBarCodeResultDTO()->codeText;
+    }
+
+    function getCodeType()
+    {
+        return $this->getBarCodeResultDTO()->codeType;
+    }
+
+    function getCodeBytes()
+    {
+        return explode(",", $this->getBarCodeResultDTO()->codeBytes);
+    }
+
+    function getCodeTypeName()
+    {
+        return $this->getBarCodeResultDTO()->codeTypeName;
+    }
+
+    function getConfidence()
+    {
+        return $this->getBarCodeResultDTO()->confidence;
+    }
+
+    function getExtended(): BarCodeExtendedParameters
+    {
+        return $this->extended;
+    }
+
+    function getRegion(): BarCodeRegionParameters
+    {
+        return $this->region;
     }
 }
 
 /**
- * Contains the data of subtype for Code128 type barcode
+ * Represents the recognized barcode's region and barcode angle
+ *
+ * This sample shows how to get barcode Angle and bounding quadrangle values
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::Code128, "12345");
+ * $generator->save("test.png");
+ * $reader = new BarCodeReader("test.png", null, array( DecodeType::CODE_39, DecodeType::CODE_128));
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    print("BarCode CodeText: ".$result->getCodeText());
+ *    print("BarCode Angle: ".$result->getRegion()->getAngle());
+ *    print("BarCode Quadrangle: ".$result->getRegion()->getQuadrangle());
+ * }
+ * @endcode
  */
-class Code128DataPortion extends BaseJavaClass
+final class BarCodeRegionParameters implements Communicator
 {
-    function __construct($javaClass)
-    {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    protected function init(): void
-        {
-    }
+    private $quad;
+    private $rect;
+    private array $points;
+    private BarCodeRegionParametersDTO $barCodeRegionParametersDTO;
 
     /**
-     * Gets the part of code text related to subtype.
-     *
-     * @return string The part of code text related to subtype
+     * @return BarCodeRegionParametersDTO instance
      */
-    public final function getData(): string
+    private function getBarCodeRegionParametersDTO() : BarCodeRegionParametersDTO
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getData(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $this->barCodeRegionParametersDTO;
     }
 
     /**
-     * Gets the type of Code128 subset
-     *
-     * @return int The type of Code128 subset
+     * @param $barCodeRegionParametersDTO
      */
-    public final function getCode128SubType(): int
+    private function setBarCodeRegionParametersDTO($barCodeRegionParametersDTO): void
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCode128SubType(), "integer");
+        $this->barCodeRegionParametersDTO = $barCodeRegionParametersDTO;
+    }
+
+    function __construct(BarCodeRegionParametersDTO $barCodeRegionParametersDTO)
+    {
+        $this->barCodeRegionParametersDTO = $barCodeRegionParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try {
+            $this->quad = Quadrangle::construct($this->getBarCodeRegionParametersDTO()->quad);
+            $this->rect = Rectangle::construct($this->getBarCodeRegionParametersDTO()->rectangle);
+            $this->points = self::convertJavaPoints($this->getBarCodeRegionParametersDTO()->points);
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-        catch (Exception $ex)
-        {
+    }
+
+    private static function convertJavaPoints($javaPoints): array
+    {
+        $points = array();
+        for ($i = 0; $i < sizeof($javaPoints); $i++) {
+            $points[$i] = Point::construct($javaPoints[$i]);
+        }
+
+        return $points;
+    }
+
+    /**
+     * @return Quadrangle Gets Quadrangle bounding barcode region Value: Returns Quadrangle bounding barcode region
+     */
+    public function getQuadrangle(): Quadrangle
+    {
+        return $this->quad;
+    }
+
+    /**
+     * @return float Gets the angle of the barcode (0-360). Value: The angle for barcode (0-360).
+     * @throws BarcodeException
+     */
+    public function getAngle(): float
+    {
+        try {
+            return $this->getBarCodeRegionParametersDTO()->angle;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
-     * Returns a human-readable string representation of this {Code128DataPortion}.
-     * @return string A string that represents this {Code128DataPortion}.
+     *
+     */
+    /**
+     * @return array Gets Points array bounding barcode region Value: Returns Points array bounding barcode region
+     */
+    public function getPoints(): array
+    {
+        return $this->points;
+    }
+
+    /**
+     * @return Rectangle Gets Rectangle bounding barcode region Value: Returns Rectangle bounding barcode region
+     */
+    public function getRectangle(): Rectangle
+    {
+        return $this->rect;
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified BarCodeRegionParameters value.
+     *
+     * @param BarCodeRegionParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(BarCodeRegionParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->BarCodeRegionParameters_equals($this->getBarCodeRegionParametersDTO(), $obj->getBarCodeRegionParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this BarCodeRegionParameters.
+     *
+     * @return string A string that represents this BarCodeRegionParameters.
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            return $this->getBarCodeRegionParametersDTO()->toString;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
+
+
+/**
+ *
+ * Stores a set of four Points that represent a Quadrangle region.
+ *
+ */
+class Quadrangle implements Communicator
+{
+    private Point $leftTop;
+    private Point $rightTop;
+    private Point $rightBottom;
+    private Point $leftBottom;
+    private QuadrangleDTO $quadrangleDTO;
+
+    /**
+     * @return QuadrangleDTO instance
+     */
+    private function getQuadrangleDTO() : QuadrangleDTO
+    {
+        return $this->quadrangleDTO;
+    }
+
+    /**
+     * @param QuadrangleDTO $quadrangleDTO
+     */
+    private function setQuadrangleDTO(QuadrangleDTO $quadrangleDTO): void
+    {
+        $this->quadrangleDTO = $quadrangleDTO;
+    }
+
+    /**
+     * Represents a Quadrangle structure with its properties left uninitialized.Value: Quadrangle
+     */
+    public static function EMPTY(): Quadrangle
+    {
+        return new Quadrangle(new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(0, 0));
+    }
+
+    static function construct(QuadrangleDTO $quadrangleDTO): Quadrangle
+    {
+        $quadrangle = Quadrangle::EMPTY();
+        $quadrangle->setQuadrangleDTO($quadrangleDTO);
+        $quadrangle->initFieldsFromDto();
+        return $quadrangle;
+    }
+
+    /**
+     * Initializes a new instance of the Quadrangle structure with the describing points.
+     *
+     * @param Point $leftTop A Point that represents the left-top corner of the Quadrangle.
+     * @param Point $rightTop A Point that represents the right-top corner of the Quadrangle.
+     * @param Point $rightBottom A Point that represents the right-bottom corner of the Quadrangle.
+     * @param Point $leftBottom A Point that represents the left-bottom corner of the Quadrangle.
+     */
+    public function __construct(Point $leftTop, Point $rightTop, Point $rightBottom, Point $leftBottom)
+    {
+        $this->quadrangleDTO = new QuadrangleDTO();
+        $this->getQuadrangleDTO()->leftTop = $leftTop->getPointDTO();
+        $this->getQuadrangleDTO()->rightTop = $rightTop->getPointDTO();
+        $this->getQuadrangleDTO()->rightBottom = $rightBottom->getPointDTO();
+        $this->getQuadrangleDTO()->leftBottom = $leftBottom->getPointDTO();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        $this->leftTop = Point::construct($this->getQuadrangleDTO()->leftTop);
+        $this->rightTop = Point::construct($this->getQuadrangleDTO()->rightTop);
+        $this->rightBottom = Point::construct($this->getQuadrangleDTO()->rightBottom);
+        $this->leftBottom = Point::construct($this->getQuadrangleDTO()->leftBottom);
+    }
+
+    /**
+     * Gets left-top corner Point of Quadrangle regionValue: A left-top corner Point of Quadrangle region
+     */
+    public function getLeftTop(): Point
+    {
+        return $this->leftTop;
+    }
+
+    /**
+     * Gets left-top corner Point of Quadrangle regionValue: A left-top corner Point of Quadrangle region
+     */
+    public function setLeftTop(Point $value): void
+    {
+        try {
+            $this->leftTop = $value;
+            $this->getQuadrangleDTO()->leftTop = $value->getPointDTO();
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets right-top corner Point of Quadrangle regionValue: A right-top corner Point of Quadrangle region
+     */
+    public function getRightTop(): Point
+    {
+        return $this->rightTop;
+    }
+
+    /**
+     * Gets right-top corner Point of Quadrangle regionValue: A right-top corner Point of Quadrangle region
+     */
+    public function setRightTop(Point $value): void
+    {
+        try {
+            $this->rightTop = $value;
+            $this->getQuadrangleDTO()->rightTop = $value->getPointDTO();
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets right-bottom corner Point of Quadrangle regionValue: A right-bottom corner Point of Quadrangle region
+     */
+    public function getRightBottom(): Point
+    {
+        return $this->rightBottom;
+    }
+
+    /**
+     * Gets right-bottom corner Point of Quadrangle regionValue: A right-bottom corner Point of Quadrangle region
+     */
+    public function setRightBottom(Point $value): void
+    {
+        try {
+            $this->rightBottom = $value;
+            $this->getQuadrangleDTO()->rightBottom = $value->getPointDTO();
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets left-bottom corner Point of Quadrangle regionValue: A left-bottom corner Point of Quadrangle region
+     */
+    public function getLeftBottom(): Point
+    {
+        return $this->leftBottom;
+    }
+
+    /**
+     * Gets left-bottom corner Point of Quadrangle regionValue: A left-bottom corner Point of Quadrangle region
+     */
+    public function setLeftBottom(Point $value): void
+    {
+        try {
+            $this->leftBottom = $value;
+            $this->getQuadrangleDTO()->leftBottom = $value->getPointDTO();
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Tests whether all Points of this Quadrangle have values of zero.Value: Returns true if all Points of this Quadrangle have values of zero; otherwise, false.
+     */
+    public function isEmpty(): bool
+    {
+        return $this->equals(Quadrangle::EMPTY());
+    }
+
+    /**
+     * Determines if the specified Point is contained within this Quadrangle structure.
+     *
+     * @param Point $pt
+     * @return bool Returns true if Point is contained within this Quadrangle structure; otherwise, false.
+     * @throws BarcodeException
+     */
+    public function containsPoint(Point $pt): bool
+    {
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $containsPointResponse = $client->Quadrangle_containsPoint($this->getQuadrangleDTO(), $pt->getPointDTO());
+            $thriftConnection->closeConnection();
+            return $containsPointResponse;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Determines if the specified point is contained within this Quadrangle structure.
+     *
+     * @param int $x The x point cordinate.
+     * @param int $y The y point cordinate.
+     * @return bool Returns true if point is contained within this Quadrangle structure; otherwise, false.
+     */
+    public function containsCoordinates(int $x, int $y): bool
+    {
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $containsPointResponse = $client->Quadrangle_containsCoordinates($this->getQuadrangleDTO(), $x, $y);
+            $thriftConnection->closeConnection();
+            return $containsPointResponse;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Determines if the specified Quadrangle is contained or intersect this Quadrangle structure.
+     *
+     * @param Quadrangle The Quadrangle to test.
+     * @return bool Returns true if Quadrangle is contained or intersect this Quadrangle structure; otherwise, false.
+     */
+    public function containsQuadrangle(Quadrangle $quad): bool
+    {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $containsPointResponse = $client->Quadrangle_containsQuadrangle($this->getQuadrangleDTO(), $quad->getQuadrangleDTO());
+            $thriftConnection->closeConnection();
+            return $containsPointResponse;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Determines if the specified Rectangle is contained or intersect this Quadrangle structure.
+     *
+     * @param Rectangle $rect
+     * @return bool Returns true if Rectangle is contained or intersect this Quadrangle structure; otherwise, false.
+     * @throws BarcodeException
+     */
+    public function containsRectangle(Rectangle $rect): bool
+    {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $containsPointResponse = $client->Quadrangle_containsRectangle($this->getQuadrangleDTO(), $rect->getRectangleDto());
+            $thriftConnection->closeConnection();
+            return $containsPointResponse;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified Quadrangle value.
+     *
+     * @param Quadrangle $obj
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(Quadrangle $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->Quadrangle_equals($this->getQuadrangleDTO(), $obj->getQuadrangleDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this Quadrangle.
+     *
+     * @return string A string that represents this Quadrangle.
+     */
+    public function toString(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Quadrangle_toString($this->getQuadrangleDTO());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+
+    /**
+     * Creates Rectangle bounding this Quadrangle
+     *
+     * @return Rectangle returns Rectangle bounding this Quadrangle
+     */
+    public function getBoundingRectangle(): Rectangle
+    {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $boundingRectangleDTO = $client->Quadrangle_getBoundingRectangle($this->getQuadrangleDTO());
+            $thriftConnection->closeConnection();
+            return Rectangle::construct($boundingRectangleDTO);
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+/**
+ * <p>
+ * Stores extended parameters of recognized barcode
+ * </p>
+ */
+class BarCodeExtendedParameters implements Communicator
+{
+    private $_oneDParameters;
+    private $_code128Parameters;
+    private $_qrParameters;
+    private $_pdf417Parameters;
+    private $_dataBarParameters;
+    private $_maxiCodeParameters;
+    private $_dotCodeExtendedParameters;
+    private $_dataMatrixExtendedParameters;
+    private $_aztecExtendedParameters;
+    private $_gs1CompositeBarExtendedParameters;
+    private BarCodeExtendedParametersDTO $barCodeExtendedParametersDTO;
+    private $_codabarExtendedParameters;
+
+    /**
+     * @return BarCodeExtendedParametersDTO instance
+     */
+    private function getBarCodeExtendedParametersDTO() : BarCodeExtendedParametersDTO
+    {
+        return $this->barCodeExtendedParametersDTO;
+    }
+
+    /**
+     * @param BarCodeExtendedParametersDTO $barCodeExtendedParametersDTO
+     */
+    private function setBarCodeExtendedParametersDTO(BarCodeExtendedParametersDTO $barCodeExtendedParametersDTO): void
+    {
+        $this->barCodeExtendedParametersDTO = $barCodeExtendedParametersDTO;
+    }
+
+    function __construct(BarCodeExtendedParametersDTO $barCodeExtendedParametersDTO)
+    {
+        $this->barCodeExtendedParametersDTO = $barCodeExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try {
+            $this->_oneDParameters = new OneDExtendedParameters($this->getBarCodeExtendedParametersDTO()->oneDParameters);
+            $this->_code128Parameters = new Code128ExtendedParameters($this->getBarCodeExtendedParametersDTO()->code128Parameters);
+            $this->_qrParameters = new QRExtendedParameters($this->getBarCodeExtendedParametersDTO()->qrParameters);
+            $this->_pdf417Parameters = new Pdf417ExtendedParameters($this->getBarCodeExtendedParametersDTO()->pdf417Parameters);
+            $this->_dataBarParameters = new DataBarExtendedParameters($this->getBarCodeExtendedParametersDTO()->dataBarParameters);
+            $this->_maxiCodeParameters = new MaxiCodeExtendedParameters($this->getBarCodeExtendedParametersDTO()->maxiCodeParameters);
+            $this->_dotCodeExtendedParameters = new DotCodeExtendedParameters($this->getBarCodeExtendedParametersDTO()->dotCodeExtendedParameters);
+            $this->_dataMatrixExtendedParameters = new DataMatrixExtendedParameters($this->getBarCodeExtendedParametersDTO()->dataMatrixExtendedParameters);
+            $this->_aztecExtendedParameters = new AztecExtendedParameters($this->getBarCodeExtendedParametersDTO()->aztecExtendedParameters);
+            $this->_gs1CompositeBarExtendedParameters = new GS1CompositeBarExtendedParameters($this->getBarCodeExtendedParametersDTO()->gs1CompositeBarExtendedParameters);
+            $this->_codabarExtendedParameters = new CodabarExtendedParameters($this->getBarCodeExtendedParametersDTO()->codabarExtendedParameters);
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /** Gets a DataBar additional information DataBarExtendedParameters of recognized barcode
+     * @return DataBarExtendedParameters A DataBar additional information DataBarExtendedParameters of recognized barcode
+     */
+    public function getDataBar(): DataBarExtendedParameters
+    {
+        return $this->_dataBarParameters;
+    }
+
+    /**
+     * Gets a MaxiCode additional information<see cref="MaxiCodeExtendedParameters"/> of recognized barcode
+     *
+     * @return MaxiCodeExtendedParameters A MaxiCode additional information<see cref="MaxiCodeExtendedParameters"/> of recognized barcode
+     */
+    public function getMaxiCode(): MaxiCodeExtendedParameters
+    {
+        return $this->_maxiCodeParameters;
+    }
+
+    /**
+     * <p>Gets a DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode</p>Value: A DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode
+     */
+    public function getDotCode(): DotCodeExtendedParameters
+    {
+        return $this->_dotCodeExtendedParameters;
+    }
+
+    /**
+     * <p>Gets a DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode</p>Value: A DotCode additional information{@code DotCodeExtendedParameters} of recognized barcode
+     */
+    public function getDataMatrix(): DataMatrixExtendedParameters
+    {
+        return $this->_dataMatrixExtendedParameters;
+    }
+
+    /**
+     * <p>Gets a Aztec additional information{@code AztecExtendedParameters} of recognized barcode</p>Value: A Aztec additional information{@code AztecExtendedParameters} of recognized barcode
+     */
+    public function getAztec(): AztecExtendedParameters
+    {
+        return $this->_aztecExtendedParameters;
+    }
+
+    /**
+     * <p>Gets a GS1CompositeBar additional information{@code GS1CompositeBarExtendedParameters} of recognized barcode</p>Value: A GS1CompositeBar additional information{@code GS1CompositeBarExtendedParameters} of recognized barcode
+     */
+    public function getGS1CompositeBar(): GS1CompositeBarExtendedParameters
+    {
+        return $this->_gs1CompositeBarExtendedParameters;
+    }
+
+    /**
+     * Gets a Codabar additional information{@code CodabarExtendedParameters} of recognized barcode
+     * @return CodabarExtendedParameters additional information
+     */
+    public  function getCodabar() : CodabarExtendedParameters
+    {
+        return $this->_codabarExtendedParameters;
+    }
+
+    /**
+     * @return OneDExtendedParameters Gets a special data OneDExtendedParameters of 1D recognized barcode Value: A special data OneDExtendedParameters of 1D recognized barcode
+     */
+    public function getOneD(): OneDExtendedParameters
+    {
+        return $this->_oneDParameters;
+    }
+
+    /**
+     * @return Code128ExtendedParameters Gets a special data Code128ExtendedParameters of Code128 recognized barcode Value: A special data Code128ExtendedParameters of Code128 recognized barcode
+     */
+    public function getCode128(): Code128ExtendedParameters
+    {
+        return $this->_code128Parameters;
+    }
+
+    /**
+     * @return QRExtendedParameters Gets a QR Structured Append information QRExtendedParameters of recognized barcode Value: A QR Structured Append information QRExtendedParameters of recognized barcode
+     */
+    public function getQR(): QRExtendedParameters
+    {
+        return $this->_qrParameters;
+    }
+
+    /**
+     * @return Pdf417ExtendedParameters Gets a MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode Value: A MacroPdf417 metadata information Pdf417ExtendedParameters of recognized barcode
+     */
+    public function getPdf417(): Pdf417ExtendedParameters
+    {
+        return $this->_pdf417Parameters;
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified BarCodeExtendedParameters value.
+     *
+     * @param BarCodeExtendedParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(BarCodeExtendedParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->BarCodeExtendedParameters_equals($this->getBarCodeExtendedParametersDTO(), $obj->getBarCodeExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this BarCodeExtendedParameters.
+     *
+     * @return string A string that represents this BarCodeExtendedParameters.
+     */
+    public function toString(): string
+    {
+        try {
+            return $this->getBarCodeExtendedParametersDTO()->toString; // TODO need to implement
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+
+/**
+ *
+ * Stores special data of 1D recognized barcode like separate codetext and checksum
+ *
+ * This sample shows how to get 1D barcode value and checksum
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
+ * $generator->save("test.png");
+ * $reader = new BarCodeReader("test.png", DecodeType::EAN_13);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    print("BarCode Type: ".$result->getCodeTypeName());
+ *    print("BarCode CodeText: ".$result->getCodeText());
+ *    print("BarCode Value: ".$result->getExtended()->getOneD()->getValue());
+ *    print("BarCode Checksum: ".$result->getExtended()->getOneD()->getCheckSum());
+ * }
+ * @endcode
+ */
+final class OneDExtendedParameters implements Communicator
+{
+    private OneDExtendedParametersDTO $oneDExtendedParametersDTO;
+
+    /**
+     * @return OneDExtendedParametersDTO instance
+     */
+    private function getOneDExtendedParametersDTO() : OneDExtendedParametersDTO
+    {
+        return $this->oneDExtendedParametersDTO;
+    }
+
+    /**
+     * @param $oneDExtendedParametersDTO
+     */
+    private function setOneDExtendedParametersDTO($oneDExtendedParametersDTO): void
+    {
+        $this->oneDExtendedParametersDTO = $oneDExtendedParametersDTO;
+    }
+
+    function __construct(OneDExtendedParametersDTO $oneDExtendedParametersDTO)
+    {
+        $this->oneDExtendedParametersDTO = $oneDExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+    }
+
+    /**
+     * Gets the codetext of 1D barcodes without checksum. Value: The codetext of 1D barcodes without checksum.
+     */
+    public function getValue(): string
+    {
+        try {
+            return $this->getOneDExtendedParametersDTO()->value;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the checksum for 1D barcodes. Value: The checksum for 1D barcode.
+     */
+    public function getCheckSum(): string
+    {
+        try {
+            return $this->getOneDExtendedParametersDTO()->checkSum;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Tests whether all parameters has only default values
+     * @return bool Returns { <b>true</b>} if all parameters has only default values; otherwise, { <b>false</b>}.
+     * @throws BarcodeException
+     */
+    public function isEmpty(): bool
+    {
+        try {
+            return $this->getOneDExtendedParametersDTO()->empty;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified OneDExtendedParameters value.
+     *
+     * @param OneDExtendedParameters obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(OneDExtendedParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->OneDExtendedParameters_equals($this->getOneDExtendedParametersDTO(), $obj->getOneDExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this OneDExtendedParameters.
+     *
+     * @return string A string that represents this OneDExtendedParameters.
+     */
+    public function toString(): string
+    {
+        try {
+            return $this->getOneDExtendedParametersDTO()->toString;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+/**
+ *
+ * Stores special data of Code128 recognized barcode
+ * Represents the recognized barcode's region and barcode angle
+ *
+ * This sample shows how to get code128 raw values
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::CODE_128, "12345");
+ * $generator->save("test.png");
+ * $reader = new BarCodeReader("test.png", DecodeType::CODE_128);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    print("BarCode Type: ".$result->getCodeTypeName());
+ *    print("BarCode CodeText: ".$result->getCodeText());
+ *    print("Code128 Data Portions: ".$result->getExtended()->getCode128());
+ * }
+ * @endcode
+ */
+final class Code128ExtendedParameters implements Communicator
+{
+    private array $code128DataPortions;
+    private Code128ExtendedParametersDTO $code128ExtendedParametersDTO;
+
+    /**
+     * @return Code128ExtendedParametersDTO instance
+     */
+    private function getCode128ExtendedParametersDTO() : Code128ExtendedParametersDTO
+    {
+        return $this->code128ExtendedParametersDTO;
+    }
+
+    /**
+     * @param Code128ExtendedParametersDTO $code128ExtendedParametersDTO
+     */
+    private function setCode128ExtendedParametersDTO(Code128ExtendedParametersDTO $code128ExtendedParametersDTO): void
+    {
+        $this->code128ExtendedParametersDTO = $code128ExtendedParametersDTO;
+    }
+
+    function __construct(Code128ExtendedParametersDTO $code128ExtendedParametersDTO)
+    {
+        $this->code128ExtendedParametersDTO = $code128ExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try {
+            $this->code128DataPortions = self::convertCode128DataPortions($this->getCode128ExtendedParametersDTO()->code128DataPortions);
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    private static function convertCode128DataPortions($javaCode128DataPortions): array
+    {
+        $code128DataPortions = array();
+        for ($i = 0; $i < sizeof($javaCode128DataPortions); $i++) {
+            $code128DataPortions[] = new Code128DataPortion($javaCode128DataPortions[$i]);
+        }
+        return $code128DataPortions;
+    }
+
+    /**
+     *  Gets Code128DataPortion array of recognized Code128 barcode Value: Array of the Code128DataPortion.
+     */
+    public function getCode128DataPortions(): array
+    {
+            return $this->code128DataPortions;
+    }
+
+    public function isEmpty(): bool
+    {
+        try {
+            return $this->getCode128ExtendedParametersDTO()->empty;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified Code128ExtendedParameters value.
+     *
+     * @param Code128ExtendedParameters obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(Code128ExtendedParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->Code128ExtendedParameters_equals($this->getCode128ExtendedParametersDTO(), $obj->getCode128ExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this Code128ExtendedParameters.
+     *
+     * @return string A string that represents this Code128ExtendedParameters.
+     */
+    public function toString(): string
+    {
+        try {
+            return $this->getCode128ExtendedParametersDTO()->toString;// TODO need to implement
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+
+/**
+ *
+ * Stores a QR Structured Append information of recognized barcode
+ *
+ * This sample shows how to get QR Structured Append data
+ * @code
+ * $reader = new BarCodeReader("test.png", DecodeType::QR);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *    print("BarCode Type: ".$result->getCodeTypeName());
+ *    print("BarCode CodeText: ".$result->getCodeText());
+ *    print("QR Structured Append Quantity: ".$result->getExtended()->getQR()->getQRStructuredAppendModeBarCodesQuantity());
+ *    print("QR Structured Append Index: ".$result->getExtended()->getQR()->getQRStructuredAppendModeBarCodeIndex());
+ *    print("QR Structured Append ParityData: ".$result->getExtended()->getQR()->getQRStructuredAppendModeParityData());
+ * }
+ * @endcode
+ */
+final class QRExtendedParameters implements Communicator
+{
+    private QRExtendedParametersDTO $qrExtendedParametersDTO;
+
+    /**
+     * @return QRExtendedParametersDTO instance
+     */
+    private function getQRExtendedParametersDTO() : QRExtendedParametersDTO
+    {
+        return $this->qrExtendedParametersDTO;
+    }
+
+    /**
+     * @param $qrExtendedParametersDTO
+     */
+    private function setQRExtendedParametersDTO($qrExtendedParametersDTO): void
+    {
+        $this->qrExtendedParametersDTO = $qrExtendedParametersDTO;
+    }
+
+    function __construct(QRExtendedParametersDTO $qrExtendedParametersDTO)
+    {
+        $this->qrExtendedParametersDTO = $qrExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    /**
+     * Gets the QR structured append mode barcodes quantity. Default value is -1.Value: The quantity of the QR structured append mode barcode.
+     */
+    public function getQRStructuredAppendModeBarCodesQuantity(): int
+    {
+        try {
+            return $this->getQRExtendedParametersDTO()->qRStructuredAppendModeBarCodesQuantity;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the index of the QR structured append mode barcode. Index starts from 0. Default value is -1.Value: The quantity of the QR structured append mode barcode.
+     */
+    public function getQRStructuredAppendModeBarCodeIndex(): int
+    {
+        try {
+            return $this->getQRExtendedParametersDTO()->qRStructuredAppendModeBarCodeIndex;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Version of recognized QR Code. From Version1 to Version40.
+     * return recognized QR Code
+     */
+    public function getQRVersion() : int
+    {
+        return $this->getQRExtendedParametersDTO()->qrVersion;
+    }
+
+    /**
+     * Version of recognized MicroQR Code. From M1 to M4.
+     * return recognized MicroQR Code. From M1 to M4.
+     */
+    public function getMicroQRVersion() : int
+    {
+        return $this->getQRExtendedParametersDTO()->microQRVersion;
+    }
+
+    /**
+     * Version of recognized RectMicroQR Code. From R7x43 to R17x139.
+     * @return int of recognized RectMicroQR Code
+     */
+    public function getRectMicroQRVersion() : int
+    {
+        return $this->getQRExtendedParametersDTO()->rectMicroQRVersion;
+    }
+
+    /**
+     * Reed-Solomon error correction level of recognized barcode. From low to high: LevelL, LevelM, LevelQ, LevelH.
+     * @return int error correction level of recognized barcode.
+     */
+    public function getQRErrorLevel() : int
+    {
+        return $this->getQRExtendedParametersDTO()->qrErrorLevel;
+    }
+
+
+    /**
+     * Gets the QR structured append mode parity data. Default value is -1.Value: The index of the QR structured append mode barcode.
+     */
+    public function getQRStructuredAppendModeParityData(): int
+    {
+        try {
+            return $this->getQRExtendedParametersDTO()->qRStructuredAppendModeParityData;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    public function isEmpty(): bool
+    {
+        try {
+            return $this->getQRExtendedParametersDTO()->empty;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified QRExtendedParameters value.
+     *
+     * @param QRExtendedParameters $obj An object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(QRExtendedParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->QRExtendedParameters_equals($this->getQRExtendedParametersDTO(), $obj->getQRExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this QRExtendedParameters.
+     *
+     * @return string A string that represents this QRExtendedParameters.
+     */
+    public function toString(): string
+    {
+        try {
+            return $this->getQRExtendedParametersDTO()->toString;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+/**
+ *
+ * Stores a MacroPdf417 metadata information of recognized barcode
+ *
+ * This sample shows how to get Macro Pdf417 metadata
+ * @code
+ * $generator = new BarcodeGenerator(EncodeTypes::MacroPdf417, "12345");
+ * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroFileID(10);
+ * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentsCount(2);
+ * $generator->getParameters()->getBarcode()->getPdf417()->setPdf417MacroSegmentID(1);
+ * $generator->save("test.png");
+ * $reader = new BarCodeReader("test.png", DecodeType::MACRO_PDF_417);
+ * foreach($reader->readBarCodes() as $result)
+ * {
+ *     print("BarCode Type: ".$result->getCodeTypeName());
+ *     print("BarCode CodeText: ".$result->getCodeText());
+ *     print("Macro Pdf417 FileID: ".$result->getExtended()->getPdf417()->getMacroPdf417FileID());
+ *     print("Macro Pdf417 Segments: ".$result->getExtended()->getPdf417()->getMacroPdf417SegmentsCount());
+ *     print("Macro Pdf417 SegmentID: ".$result->getExtended()->getPdf417()->getMacroPdf417SegmentID());
+ * }
+ * @endcode
+ */
+final class Pdf417ExtendedParameters implements Communicator
+{
+    private Pdf417ExtendedParametersDTO $pdf417ExtendedParametersDTO;
+
+    /**
+     * @return Pdf417ExtendedParametersDTO instance
+     */
+    private function getPdf417ExtendedParametersDTO() : Pdf417ExtendedParametersDTO
+    {
+        return $this->pdf417ExtendedParametersDTO;
+    }
+
+    /**
+     * @param $pdf417ExtendedParametersDTO
+     */
+    private function setQRExtendedParametersDTO($pdf417ExtendedParametersDTO): void
+    {
+        $this->pdf417ExtendedParametersDTO = $pdf417ExtendedParametersDTO;
+    }
+
+    function __construct(Pdf417ExtendedParametersDTO $pdf417ExtendedParametersDTO)
+    {
+        $this->pdf417ExtendedParametersDTO = $pdf417ExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    /**
+     * Gets the file ID of the barcode, only available with MacroPdf417.Value: The file ID for MacroPdf417
+     */
+    public function getMacroPdf417FileID(): string
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417FileID;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the segment ID of the barcode,only available with MacroPdf417.Value: The segment ID of the barcode.
+     */
+    public function getMacroPdf417SegmentID(): int
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417SegmentID;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets macro pdf417 barcode segments count. Default value is -1.Value: Segments count.
+     */
+    public function getMacroPdf417SegmentsCount(): int
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417SegmentsCount;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Macro PDF417 file name (optional).
+     * @return string File name.
+     */
+    public function getMacroPdf417FileName(): string
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417FileName;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Macro PDF417 file size (optional).
+     * @return int File size.
+     */
+    public function getMacroPdf417FileSize(): int
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417FileSize;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Macro PDF417 sender name (optional).
+     * @return string Sender name
+     */
+    public function getMacroPdf417Sender(): string
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417Sender;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Macro PDF417 addressee name (optional).
+     * @return string Addressee name.
+     */
+    public function getMacroPdf417Addressee(): string
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417Addressee;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Macro PDF417 time stamp (optional).
+     * @return DateTime Time stamp.
+     */
+    public function getMacroPdf417TimeStamp(): DateTime
+    {
+        try {
+            return new DateTime('@' . $this->getPdf417ExtendedParametersDTO()->macroPdf417TimeStamp);
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Macro PDF417 checksum (optional).
+     * @return int Checksum.
+     */
+    public function getMacroPdf417Checksum(): int
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417Checksum;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Indicates whether the segment is the last segment of a Macro PDF417 file.
+     */
+    public function getMacroPdf417Terminator(): bool
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->macroPdf417Terminator;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>Used to instruct the reader to interpret the data contained within the symbol as programming for reader initialization.</p>Value: Reader initialization flag
+     */
+    public function isReaderInitialization(): bool
+    {
+        return $this->getPdf417ExtendedParametersDTO()->isReaderInitialization;
+    }
+
+    /**
+     * <p>Flag that indicates that the barcode must be linked to 1D barcode.</p>Value: Linkage flag
+     */
+    public function isLinked(): bool
+    {
+        return $this->getPdf417ExtendedParametersDTO()->isLinked;
+    }
+
+    /**
+     * Flag that indicates that the MicroPdf417 barcode encoded with 908, 909, 910 or 911 Code 128 emulation codewords.
+     * @return bool 128 emulation flag
+     */
+    public function isCode128Emulation(): bool
+    {
+        return $this->getPdf417ExtendedParametersDTO()->isCode128Emulation;
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified Pdf417ExtendedParameters value.
+     *
+     * @param Pdf417ExtendedParameters $obj An System.Object value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     */
+    public function equals(Pdf417ExtendedParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->Pdf417ExtendedParameters_equals($this->getPdf417ExtendedParametersDTO(), $obj->getPdf417ExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * Returns a human-readable string representation of this Pdf417ExtendedParameters.
+     * @return string A string that represents this Pdf417ExtendedParameters.
+     * @throws BarcodeException
+     */
+    public function toString(): string
+    {
+        try {
+            return $this->getPdf417ExtendedParametersDTO()->toString;// TODO implement
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
 
 /**
  * Stores a DataBar additional information of recognized barcode
@@ -2326,10 +2539,39 @@ class Code128DataPortion extends BaseJavaClass
  * }
  * @endcode
  */
-class DataBarExtendedParameters extends BaseJavaClass
+class DataBarExtendedParameters implements Communicator
 {
+    private DataBarExtendedParametersDTO $dataBarExtendedParametersDTO;
 
-    protected function init(): void
+    /**
+     * @return DataBarExtendedParametersDTO instance
+     */
+    private function getDataBarExtendedParametersDTO() : DataBarExtendedParametersDTO
+    {
+        return $this->dataBarExtendedParametersDTO;
+    }
+
+    /**
+     * @param $dataBarExtendedParametersDTO
+     */
+    private function setQRExtendedParametersDTO($dataBarExtendedParametersDTO): void
+    {
+        $this->dataBarExtendedParametersDTO = $dataBarExtendedParametersDTO;
+    }
+
+    function __construct(DataBarExtendedParametersDTO $dataBarExtendedParametersDTO)
+    {
+        $this->dataBarExtendedParametersDTO = $dataBarExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
     {
         // TODO: Implement init() method.
     }
@@ -2340,12 +2582,9 @@ class DataBarExtendedParameters extends BaseJavaClass
      */
     public function is2DCompositeComponent(): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->is2DCompositeComponent(), "boolean");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            return $this->getDataBarExtendedParametersDTO()->is2DCompositeComponent;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -2357,30 +2596,12 @@ class DataBarExtendedParameters extends BaseJavaClass
      */
     public function equals(DataBarExtendedParameters $obj): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->DataBarExtendedParameters_equals($this->getDataBarExtendedParametersDTO(), $obj->getDataBarExtendedParametersDTO());
+        $thriftConnection->closeConnection();
 
-    /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function hashcode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->hashcode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $isEquals;
     }
 
     /**
@@ -2389,486 +2610,53 @@ class DataBarExtendedParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            return $this->getDataBarExtendedParametersDTO()->toString;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
 
-/**
- * AustraliaPost decoding parameters. Contains parameters which make influence on recognized data of AustraliaPost symbology.
- */
-class AustraliaPostSettings extends BaseJavaClass
-{
-    /**
-     * AustraliaPostSettings constructor
-     */
-    public function __construct($javaClass)
-    {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    protected function init(): void
-    {
-    }
-
-    /**
-     * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
-     * @return int The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
-     */
-    public function getCustomerInformationInterpretingType(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCustomerInformationInterpretingType(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets or sets the Interpreting Type for the Customer Information of AustralianPost BarCode.DEFAULT is CustomerInformationInterpretingType.OTHER.
-     * @param int $value The interpreting type (CTable, NTable or Other) of customer information for AustralianPost BarCode
-     */
-    public function setCustomerInformationInterpretingType(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCustomerInformationInterpretingType($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
-     * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
-     * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
-     * $image = generator->generateBarCodeImage(BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader($image, null, DecodeType::AUSTRALIA_POST);
-     * $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
-     * $reader->getBarcodeSettings()->getAustraliaPost()->setIgnoreEndingFillingPatternsForCTable(true);
-     * foreach($reader->readBarCodes() as $result)
-     *     echo("BarCode Type: ".$result->getCodeType());
-     *     echo("BarCode CodeText: ".$result->getCodeText());
-     * }
-     * @endcode
-     *
-     * @return bool The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
-     */
-    public function getIgnoreEndingFillingPatternsForCTable(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getIgnoreEndingFillingPatternsForCTable(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * The flag which force AustraliaPost decoder to ignore last filling patterns in Customer Information Field during decoding as CTable method.
-     * CTable encoding method does not have any gaps in encoding table and sequnce "333" of filling paterns is decoded as letter "z".
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::AUSTRALIA_POST, "5912345678AB");
-     * $generator->getParameters()->getBarcode()->getAustralianPost()->setAustralianPostEncodingTable(CustomerInformationInterpretingType::C_TABLE);
-     * $image = generator->generateBarCodeImage(BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader($image, null, DecodeType::AUSTRALIA_POST);
-     * $reader->getBarcodeSettings()->getAustraliaPost()->setCustomerInformationInterpretingType(CustomerInformationInterpretingType::C_TABLE);
-     * $reader->getBarcodeSettings()->getAustraliaPost()->setIgnoreEndingFillingPatternsForCTable(true);
-     * foreach($reader->readBarCodes() as $result)
-     *     echo("BarCode Type: ".$result->getCodeType());
-     *     echo("BarCode CodeText: ".$result->getCodeText());
-     * }
-     * @endcode
-     *
-     * @param bool $value The flag which force AustraliaPost decoder to ignore last filling patterns during CTable method decoding
-     * @throws BarcodeException
-     */
-    public function setIgnoreEndingFillingPatternsForCTable(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setIgnoreEndingFillingPatternsForCTable($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * The main BarCode decoding parameters. Contains parameters which make influence on recognized data.
- */
-class BarcodeSettings extends BaseJavaClass
-{
-    private $_australiaPost;
-
-    /**
-     * BarcodeSettings copy constructor
-     * @param BarcodeSettings|null $settings The source of the data
-     * @throws BarcodeException
-     */
-    function __construct($javaClass)
-    {
-        parent::__construct($javaClass);
-    }
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->_australiaPost = new AustraliaPostSettings($this->getJavaClass()->getAustraliaPost());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Enable checksum validation during recognition for 1D and Postal barcodes.
-     * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
-     * Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5
-     * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
-     * Checksum always used: Rest symbologies
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
-     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader("c:/test.png", null, DecodeType::EAN_13);
-     * //checksum disabled
-     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *      echo ("BarCode CodeText: ".$result->getCodeText());
-     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
-     * }
-     * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::EAN_13);
-     * //checksum enabled
-     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *      echo ("BarCode CodeText: " . $result->CodeText);
-     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
-     * }
-     * @endcode
-     * @return int Enable checksum validation during recognition for 1D and Postal barcodes.
-     */
-    public function getChecksumValidation(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getChecksumValidation(), "int");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Enable checksum validation during recognition for 1D and Postal barcodes.
-     * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
-     * Checksum never used: Codabar, PatchCode, Pharmacode, DataLogic2of5
-     * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, ItalianPost25, Matrix2of5, MSI, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
-     * Checksum always used: Rest symbologies
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "1234567890128");
-     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader("c:/test.png", DecodeType::EAN_13);
-     * //checksum disabled
-     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::OFF);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *      echo ("BarCode CodeText: ".$result->getCodeText());
-     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
-     * }
-     * $reader = new BarCodeReader(@"c:\test.png", DecodeType::EAN_13);
-     * //checksum enabled
-     * $reader->getBarcodeSettings()->setChecksumValidation(ChecksumValidation::ON);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *      echo ("BarCode CodeText: " . $result->CodeText);
-     *      echo ("BarCode Value: " . $result->getExtended()->getOneD()->getValue());
-     *      echo ("BarCode Checksum: " . $result->getExtended()->getOneD()->getCheckSum());
-     * }
-     * @endcode
-     * @param int $value Enable checksum validation during recognition for 1D and Postal barcodes.
-     */
-    public function setChecksumValidation(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setChecksumValidation($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
-     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
-     *
-     * //StripFNC disabled
-     * $reader->getBarcodeSettings()->setStripFNC(false);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *     echo ("BarCode CodeText: ".$result->getCodeText());
-     * }
-     *
-     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
-     *
-     * //StripFNC enabled
-     * $reader->getBarcodeSettings()->setStripFNC(true);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *     echo ("BarCode CodeText: ".$result->getCodeText());
-     * }
-     * @endcode
-     *
-     * @return bool Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
-     */
-    public function getStripFNC(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getStripFNC(), "bool");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::GS_1_CODE_128, "(02)04006664241007(37)1(400)7019590754");
-     * $generator->save("c:/test.png", BarcodeImageFormat::PNG);
-     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
-     *
-     * //StripFNC disabled
-     * $reader->getBarcodeSettings()->setStripFNC(false);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *     echo ("BarCode CodeText: ".$result->getCodeText());
-     * }
-     *
-     * $reader = new BarCodeReader("c:/test.png", DecodeType::CODE_128);
-     *
-     * //StripFNC enabled
-     * $reader->getBarcodeSettings()->setStripFNC(true);
-     * foreach($reader->readBarCodes() as $result)
-     * {
-     *     echo ("BarCode CodeText: ".$result->getCodeText());
-     * }
-     * @endcode
-     *
-     * @param bool $value Strip FNC1, FNC2, FNC3 characters from codetext. Default value is false.
-     */
-    public function setStripFNC(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setStripFNC($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
-     *
-     * @code
-     *
-     * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово"))
-     * $im = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
-     *
-     * //detects encoding for Unicode codesets is enabled
-     * $reader = new BarCodeReader($im, DecodeType::QR);
-     * $reader->getBarcodeSettings()->setDetectEncoding(true);
-     * foreach($reader->readBarCodes() as $result)
-     *     echo ("BarCode CodeText: ".$result->getCodeText());
-     *
-     * //detect encoding is disabled
-     * $reader = new BarCodeReader($im, DecodeType::QR);
-     * $reader->getBarcodeSettings()->setDetectEncoding(false);
-     * foreach($reader->readBarCodes() as $result)
-     *     echo ("BarCode CodeText: ".$result->getCodeText());
-     * @endcode
-     *
-     * @return bool The flag which force engine to detect codetext encoding for Unicode codesets
-     */
-    public function getDetectEncoding(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getDetectEncoding(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    public function setDetectEncoding(bool $value): void
-    {
-        $this->getJavaClass()->setDetectEncoding($value);
-    }
-
-    /**
-     * Gets AustraliaPost decoding parameters
-     * @return AustraliaPostSettings The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology
-     */
-    public function getAustraliaPost(): AustraliaPostSettings
-    {
-        return $this->_australiaPost;
-    }
-}
-
-class RecognitionAbortedException extends Exception
-{
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwRecognitionAbortedException";
-    private $javaClass;
-
-    /**
-     * Gets the execution time of current recognition session
-     * @return int The execution time of current recognition session
-     */
-    public function getExecutionTime(): int
-    {
-        try
-        {
-            return java_cast($this->javaClass->getExecutionTime(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the execution time of current recognition session
-     * @param int $value The execution time of current recognition session
-     */
-    public function setExecutionTime(int $value): void
-    {
-        try
-        {
-            $this->javaClass->setExecutionTime($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Initializes a new instance of the <see cref="RecognitionAbortedException" /> class with specified recognition abort message.
-     * @param $message null|string The error message of the exception.
-     * @param $executionTime null|int The execution time of current recognition session.
-     */
-    public function __construct(?string $message, ?int $executionTime)
-    {
-        try
-        {
-            parent::__construct($message);
-            if ($message != null && $executionTime != null)
-            {
-                $this->javaClass = new java(self::javaClassName, $message, $executionTime);
-            }
-            elseif ($executionTime != null)
-            {
-                $this->javaClass = new java(self::javaClassName, $executionTime);
-            }
-            else
-            {
-                $this->javaClass = new java(self::javaClassName);
-            }
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    static function construct($javaClass): RecognitionAbortedException
-    {
-        $exception = new RecognitionAbortedException(null, null);
-        $exception->javaClass = $javaClass;
-        return $exception;
-    }
-
-    protected function init(): void
-    {
-    }
-
-    /**
-     * Returns a human-readable string representation of this <see cref="MaxiCodeExtendedParameters"/>.
-     * @return string A string that represents this <see cref="MaxiCodeExtendedParameters"/>.
-     */
-    public function toString() : string
-    {
-        return java_cast($this->javaClass->toString(), "string");
-    }
-}
 
 /**
  * Stores a MaxiCode additional information of recognized barcode
  */
-class MaxiCodeExtendedParameters extends BaseJavaClass
+class MaxiCodeExtendedParameters implements Communicator
 {
+    private MaxiCodeExtendedParametersDTO $maxiCodeExtendedParametersDTO;
 
-    function __construct($javaClass)
+    /**
+     * @return MaxiCodeExtendedParametersDTO instance
+     */
+    private function getMaxiCodeExtendedParametersDTO() : MaxiCodeExtendedParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->maxiCodeExtendedParametersDTO;
     }
 
-    protected function init() : void
+    /**
+     * @param $maxiCodeExtendedParametersDTO
+     */
+    private function setMaxiCodeExtendedParametersDTO($maxiCodeExtendedParametersDTO): void
     {
+        $this->maxiCodeExtendedParametersDTO = $maxiCodeExtendedParametersDTO;
+    }
+
+    function __construct(MaxiCodeExtendedParametersDTO $maxiCodeExtendedParametersDTO)
+    {
+        $this->maxiCodeExtendedParametersDTO = $maxiCodeExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
     }
 
     /**
@@ -2877,53 +2665,76 @@ class MaxiCodeExtendedParameters extends BaseJavaClass
      */
     public function getMaxiCodeMode(): int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeMode(), "integer");
+        return $this->getMaxiCodeExtendedParametersDTO()->maxiCodeMode;
+    }
+
+    /**
+     * Sets a MaxiCode encode mode.
+     *  Default value: Mode4
+     */
+    public function setMaxiCodeMode(int $maxiCodeMode): void
+    {
+        $this->getMaxiCodeExtendedParametersDTO()->maxiCodeMode = $maxiCodeMode;
     }
 
     /**
      * Gets a MaxiCode barcode id in structured append mode.
      * Default value: 0
      */
-    public function getMaxiCodeStructuredAppendModeBarcodeId() : int
+    public function getMaxiCodeStructuredAppendModeBarcodeId(): int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodeId(), "integer");
+        return $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodeId;
+    }
+
+    /**
+     * Sets a MaxiCode barcode id in structured append mode.
+     * Default value: 0
+     */
+    public function setMaxiCodeStructuredAppendModeBarcodeId(int $value): void
+    {
+        $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodeId = $value;
     }
 
     /**
      * Gets a MaxiCode barcodes count in structured append mode.
      * Default value: -1
      */
-    public function getMaxiCodeStructuredAppendModeBarcodesCount() : int
+    public function getMaxiCodeStructuredAppendModeBarcodesCount(): int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodesCount(), "integer");
+        return $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodesCount;
     }
 
     /**
-     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeExtendedParameters"/> value.
-     * @param object $obj An System.Object value to compare to this instance.
+     * Sets a MaxiCode barcodes count in structured append mode.
+     * Default value: -1
+     */
+    public function setMaxiCodeStructuredAppendModeBarcodesCount(int $value): void
+    {
+        $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodesCount = $value;
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified MaxiCodeExtendedParameters value.
+     * @param MaxiCodeExtendedParameters $obj An System.Object value to compare to this instance.
      * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
      */
-    public function equals(MaxiCodeExtendedParameters $obj) : bool
+    public function equals(MaxiCodeExtendedParameters $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "integer");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->MaxiCodeExtendedParameters_equals($this->getMaxiCodeExtendedParametersDTO(), $obj->getMaxiCodeExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
     }
 
     /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code.
+     * Returns a human-readable string representation of this MaxiCodeExtendedParameters.
+     * @return string A string that represents this MaxiCodeExtendedParameters.
      */
-    public function getHashCode() : int
+    public function toString(): string
     {
-        return java_cast($this->getJavaClass()->getHashCode(), "integer");
-    }
-
-    /**
-     * Returns a human-readable string representation of this <see cref="MaxiCodeExtendedParameters"/>.
-     * @return string A string that represents this <see cref="MaxiCodeExtendedParameters"/>.
-     */
-    public function toString() : string
-    {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        return $this->getMaxiCodeExtendedParametersDTO()->toString;
     }
 }
 
@@ -2951,24 +2762,58 @@ class MaxiCodeExtendedParameters extends BaseJavaClass
  * </pre>
  * </pre></blockquote></hr></p>
  */
-class DotCodeExtendedParameters extends BaseJavaClass
+class DotCodeExtendedParameters implements Communicator
 {
-    public function construct($javaClass)
+    private DotCodeExtendedParametersDTO $dotCodeExtendedParametersDTO;
+
+    /**
+     * @return DotCodeExtendedParametersDTO instance
+     */
+    private function getDotCodeExtendedParametersDTO() : DotCodeExtendedParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->dotCodeExtendedParametersDTO;
+    }
+
+    /**
+     * @param $dotCodeExtendedParametersDTO
+     */
+    private function setDotCodeExtendedParametersDTO($dotCodeExtendedParametersDTO): void
+    {
+        $this->dotCodeExtendedParametersDTO = $dotCodeExtendedParametersDTO;
+    }
+
+    function __construct(DotCodeExtendedParametersDTO $dotCodeExtendedParametersDTO)
+    {
+        $this->dotCodeExtendedParametersDTO = $dotCodeExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
     }
 
     /**
      * <p>Gets the DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.</p>Value: The count of the DotCode structured append mode barcode.
      */
-    public function getDotCodeStructuredAppendModeBarcodesCount() : int
-    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodesCount(), "integer"); }
+    public function getDotCodeStructuredAppendModeBarcodesCount(): int
+    {
+        return $this->getDotCodeExtendedParametersDTO()->dotCodeStructuredAppendModeBarcodesCount;
+    }
 
     /**
      * <p>Gets the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.</p>Value: The ID of the DotCode structured append mode barcode.
      */
-    public function getDotCodeStructuredAppendModeBarcodeId() : int
-    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodeId(), "integer"); }
+    public function getDotCodeStructuredAppendModeBarcodeId(): int
+    {
+        return $this->getDotCodeExtendedParametersDTO()->dotCodeStructuredAppendModeBarcodeId;
+    }
 
     /**
      * <p>
@@ -2976,46 +2821,37 @@ class DotCodeExtendedParameters extends BaseJavaClass
      * Default value is false.
      * </p>
      */
-    public function getDotCodeIsReaderInitialization() : bool
-    { return java_cast($this->getJavaClass()->getDotCodeIsReaderInitialization(), "boolean"); }
+    public function getDotCodeIsReaderInitialization(): bool
+    {
+        return $this->getDotCodeExtendedParametersDTO()->dotCodeIsReaderInitialization;
+    }
 
     /**
      * <p>
      * Returns a value indicating whether this instance is equal to a specified {@code DotCodeExtendedParameters} value.
      * </p>
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
-     * @param obj An System.Object value to compare to this instance.
+     * @param DotCodeExtendedParameters $obj
+     * @return bool ```php
      */
-    public function equals(DotCodeExtendedParameters $obj) : bool
+    public function equals(DotCodeExtendedParameters $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->DotCodeExtendedParameters_equals($this->getDotCodeExtendedParametersDTO(), $obj->getDotCodeExtendedParametersDTO());
+        $thriftConnection->closeConnection();
 
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        return $isEquals;
     }
 
     /**
      * <p>
      * Returns a human-readable string representation of this {@code DotCodeExtendedParameters}.
      * </p>
-     * @return A string that represents this {@code DotCodeExtendedParameters}.
+     * @return string that represents this {@code DotCodeExtendedParameters}.
      */
-    public function toString() : string
+    public function toString(): string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
-    }
-
-    protected function init() : void
-    {
-        // TODO: Implement init() method.
+        return $this->getDotCodeExtendedParametersDTO()->toString;
     }
 }
 
@@ -3027,7 +2863,7 @@ class DotCodeExtendedParameters extends BaseJavaClass
  * <pre>
  * $generator = new BarcodeGenerator(EncodeTypes.DATA_MATRIX, "12345"))
  * $generator->save("c:\\test.png", BarcodeImageFormat::PNG);
- * 
+ *
  * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::DATA_MATRIX))
  * foreach($reader->readBarCodes() as $result)
  * {
@@ -3041,39 +2877,65 @@ class DotCodeExtendedParameters extends BaseJavaClass
  * </pre>
  * </pre></blockquote></hr></p>
  */
-class DataMatrixExtendedParameters extends BaseJavaClass
+class DataMatrixExtendedParameters implements Communicator
 {
-    function __construct($javaClass)
+    private DataMatrixExtendedParametersDTO $dataMatrixExtendedParametersDTO;
+
+    /**
+     * @return DataMatrixExtendedParametersDTO instance
+     */
+    private function getDataMatrixExtendedParametersDTO() : DataMatrixExtendedParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->dataMatrixExtendedParametersDTO;
     }
 
-    protected function init() : void
+    /**
+     * @param $dataMatrixExtendedParametersDTO
+     */
+    private function setDataMatrixExtendedParametersDTO($dataMatrixExtendedParametersDTO): void
     {
+        $this->dataMatrixExtendedParametersDTO = $dataMatrixExtendedParametersDTO;
+    }
+
+    function __construct(DataMatrixExtendedParametersDTO $dataMatrixExtendedParametersDTO)
+    {
+        $this->dataMatrixExtendedParametersDTO = $dataMatrixExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
     }
 
     /**
      * <p>Gets the DataMatrix structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.</p>Value: The count of the DataMatrix structured append mode barcode.
      */
-    public function getStructuredAppendBarcodesCount() : int
+    public function getStructuredAppendBarcodesCount(): int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
+        return $this->getDataMatrixExtendedParametersDTO()->structuredAppendBarcodesCount;
     }
 
     /**
      * <p>Gets the ID of the DataMatrix structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.</p>Value: The ID of the DataMatrix structured append mode barcode.
      */
-    public function getStructuredAppendBarcodeId()  : int
+    public function getStructuredAppendBarcodeId(): int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
+        return $this->getDataMatrixExtendedParametersDTO()->structuredAppendBarcodeId;
     }
 
     /**
      * <p>Gets the ID of the DataMatrix structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.</p>Value: The ID of the DataMatrix structured append mode barcode.
      */
-    public function getStructuredAppendFileId() : int
+    public function getStructuredAppendFileId(): int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "integer");
+        return $this->getDataMatrixExtendedParametersDTO()->structuredAppendFileId;
     }
 
     /**
@@ -3082,128 +2944,40 @@ class DataMatrixExtendedParameters extends BaseJavaClass
      * Default value is false.
      * </p>
      */
-    public function isReaderProgramming() : bool
+    public function isReaderProgramming(): bool
     {
-        return java_cast($this->getJavaClass()->isReaderProgramming(), "boolean");
+        return $this->getDataMatrixExtendedParametersDTO()->readerProgramming;
     }
 
     /**
      * <p>
      * Returns a value indicating whether this instance is equal to a specified {@code DataMatrixExtendedParameters} value.
      * </p>
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
-     * @param obj An System.Object value to compare to this instance.
+     * @param DataMatrixExtendedParameters $obj
+     * @return bool ```php
      */
-    public function equals(DataMatrixExtendedParameters $obj) : bool
+    public function equals(DataMatrixExtendedParameters $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->DataMatrixExtendedParameters_equals($this->getDataMatrixExtendedParametersDTO(), $obj->getDataMatrixExtendedParametersDTO());
+        $thriftConnection->closeConnection();
 
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        return $isEquals;
     }
 
     /**
      * <p>
      * Returns a human-readable string representation of this {@code DataMatrixExtendedParameters}.
      * </p>
-     * @return A string that represents this {@code DataMatrixExtendedParameters}.
+     * @return string that represents this {@code DataMatrixExtendedParameters}.
      */
-    public /*override*/ function toString() : String
+    public function toString(): string
     {
-        return java_cast($this->getJavaClass()->toString(), "String");
+        return $this->getDataMatrixExtendedParametersDTO()->toString;
     }
 }
 
-/**
- * <p>
- * Stores special data of {@code <b>GS1 Composite Bar</b>} recognized barcode
- * </p>
- */
-class GS1CompositeBarExtendedParameters extends BaseJavaClass
-{
-    function __construct($javaClass)
-    {
-        parent::__construct($javaClass);
-    }
-
-    protected function init() : void
-    {
-    }
-
-    /**
-     * <p>Gets the 1D (linear) barcode type of GS1 Composite</p>Value: 2D barcode type
-     */
-    public function getOneDType() : int
-    {
-        return java_cast($this->getJavaClass()->getOneDType(), "integer");
-    }
-
-    /**
-     * <p>Gets the 1D (linear) barcode value of GS1 Composite</p>Value: 1D barcode value
-     */
-    public function getOneDCodeText() : string
-    {
-        return java_cast($this->getJavaClass()->getOneDCodeText(), "string");
-    }
-
-    /**
-     * <p>Gets the 2D barcode type of GS1 Composite</p>Value: 2D barcode type
-     */
-    public function getTwoDType() : int
-    {
-        return java_cast($this->getJavaClass()->getTwoDType(), "integer");
-    }
-
-    /**
-     * <p>Gets the 2D barcode value of GS1 Composite</p>Value: 2D barcode value
-     */
-    public function getTwoDCodeText() : string
-    {
-        return java_cast($this->getJavaClass()->getTwoDCodeText(), "string");
-    }
-
-    /**
-     * <p>
-     * Returns a value indicating whether this instance is equal to a specified {@code GS1CompositeBarExtendedParameters} value.
-     * </p>
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
-     * @param obj An System.Object value to compare to this instance.
-     */
-    public function equals($obj) : bool
-    {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    /**
-     * <p>
-     * Returns a human-readable string representation of this {@code GS1CompositeBarExtendedParameters}.
-     * </p>
-     * @return A string that represents this {@code GS1CompositeBarExtendedParameters}.
-     */
-    public function toString() : string
-    {
-        return java_cast($this->getJavaClass()->toString(), "string");
-    }
-}
 
 /**
  * Stores special data of Aztec recognized barcode *
@@ -3225,38 +2999,65 @@ class GS1CompositeBarExtendedParameters extends BaseJavaClass
  * }
  * @endcode
  */
-class AztecExtendedParameters extends BaseJavaClass
+class AztecExtendedParameters implements Communicator
 {
-    function __construct($javaClass)
+    private AztecExtendedParametersDTO $aztecExtendedParametersDTO;
+
+    /**
+     * @return AztecExtendedParametersDTO instance
+     */
+    private function getAztecExtendedParametersDTO() : AztecExtendedParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->aztecExtendedParametersDTO;
     }
 
-    protected function init() : void
+    /**
+     * @param $aztecExtendedParametersDTO
+     */
+    private function setAztecExtendedParametersDTO($aztecExtendedParametersDTO): void
     {
+        $this->aztecExtendedParametersDTO = $aztecExtendedParametersDTO;
     }
+
+    function __construct(AztecExtendedParametersDTO $aztecExtendedParametersDTO)
+    {
+        $this->aztecExtendedParametersDTO = $aztecExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
+    }
+
     /**
      * <p>Gets the Aztec structured append mode barcodes count. Default value is 0. Count must be a value from 1 to 26.</p>Value: The barcodes count of the Aztec structured append mode.
      */
-    public function getStructuredAppendBarcodesCount() : int
+    public function getStructuredAppendBarcodesCount(): int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
+        return $this->getAztecExtendedParametersDTO()->structuredAppendBarcodesCount;
     }
 
     /**
      * <p>Gets the ID of the Aztec structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is 0.</p>Value: The barcode ID of the Aztec structured append mode.
      */
-    public function getStructuredAppendBarcodeId() : int
+    public function getStructuredAppendBarcodeId(): int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
+        return $this->getAztecExtendedParametersDTO()->structuredAppendBarcodeId;
     }
 
     /**
      * <p>Gets the File ID of the Aztec structured append mode. Default value is empty string</p>Value: The File ID of the Aztec structured append mode.
      */
-    public function getStructuredAppendFileId() : int
+    public function getStructuredAppendFileId(): string
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "integer");
+        return $this->getAztecExtendedParametersDTO()->structuredAppendFileId;
     }
 
     /**
@@ -3265,43 +3066,37 @@ class AztecExtendedParameters extends BaseJavaClass
      * Default value is false.
      * </p>
      */
-    public function isReaderInitialization() : bool
+    public function isReaderInitialization(): bool
     {
-        return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
+        return $this->getAztecExtendedParametersDTO()->readerInitialization;
     }
 
     /**
      * <p>
      * Returns a value indicating whether this instance is equal to a specified {@code AztecExtendedParameters} value.
      * </p>
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
-     * @param obj An System.Object value to compare to this instance.
+     * @param AztecExtendedParameters $obj
+     * @return bool ```php
      */
-    public function equals($obj) : bool
+    public function equals(AztecExtendedParameters $obj): bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->AztecExtendedParameters_equals($this->getAztecExtendedParametersDTO(), $obj->getAztecExtendedParametersDTO());
+        $thriftConnection->closeConnection();
 
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        return $isEquals;
     }
 
     /**
      * <p>
      * Returns a human-readable string representation of this {@code AztecExtendedParameters}.
      * </p>
-     * @return A string that represents this {@code AztecExtendedParameters}.
+     * @return string that represents this {@code AztecExtendedParameters}.
      */
-    public function toString() : string
+    public function toString(): string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        return $this->getAztecExtendedParametersDTO()->toString;
     }
 }
 
@@ -3310,15 +3105,41 @@ class AztecExtendedParameters extends BaseJavaClass
  * Stores a Codabar additional information of recognized barcode
  * </p>
  */
-class CodabarExtendedParameters extends BaseJavaClass
+class CodabarExtendedParameters implements Communicator
 {
-    function __construct($javaClass)
+    private CodabarExtendedParametersDTO $codabarExtendedParametersDTO;
+
+    /**
+     * @return CodabarExtendedParametersDTO instance
+     */
+    private function getCodabarExtendedParametersDTO() : CodabarExtendedParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->codabarExtendedParametersDTO;
     }
 
-    protected function init() : void
+    /**
+     * @param $codabarExtendedParametersDTO
+     */
+    private function setCodabarExtendedParametersDTO($codabarExtendedParametersDTO): void
     {
+        $this->codabarExtendedParametersDTO = $codabarExtendedParametersDTO;
+    }
+
+    function __construct(CodabarExtendedParametersDTO $codabarExtendedParametersDTO)
+    {
+        $this->codabarExtendedParametersDTO = $codabarExtendedParametersDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
     }
 
     /**
@@ -3329,7 +3150,7 @@ class CodabarExtendedParameters extends BaseJavaClass
      */
     public function getCodabarStartSymbol() :int
     {
-        return java_cast($this->getJavaClass()->getCodabarStartSymbol(), "integer");
+        return $this->getCodabarExtendedParametersDTO()->codabarStartSymbol;
     }
 
     /**
@@ -3340,7 +3161,7 @@ class CodabarExtendedParameters extends BaseJavaClass
      */
     public function setCodabarStartSymbol(int $value) : void
     {
-        $this->getJavaClass()->setCodabarStartSymbol($value);
+        $this->getCodabarExtendedParametersDTO()->codabarStartSymbol = $value;
     }
 
     /**
@@ -3351,7 +3172,7 @@ class CodabarExtendedParameters extends BaseJavaClass
      */
     public function getCodabarStopSymbol() : int
     {
-        return java_cast($this->getJavaClass()->getCodabarStopSymbol(), "integer");
+        return $this->getCodabarExtendedParametersDTO()->codabarStopSymbol;
     }
 
     /**
@@ -3362,42 +3183,257 @@ class CodabarExtendedParameters extends BaseJavaClass
      */
     public function setCodabarStopSymbol(int $value) : void
     {
-        $this->getJavaClass()->setCodabarStopSymbol($value);
-    }
-
-
-    /**
-     * <p>
-     * Returns a value indicating whether this instance is equal to a specified {@code CodabarExtendedParameters} value.
-     * </p>
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
-     * @param obj An System.Object value to compare to this instance.
-     */
-    public function equals(Object $obj) : bool
-    {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        $this->getCodabarExtendedParametersDTO()->codabarStopSymbol = $value;
     }
 
     /**
      * <p>
-     * Returns the hash code for this instance.
+     * Returns a value indicating whether this instance is equal to a specified {@code AztecExtendedParameters} value.
      * </p>
-     * @return A 32-bit signed integer hash code.
+     * @param CodabarExtendedParameters $obj
+     * @return bool ```php
      */
-    public function hashCode(): int
+    public function equals(CodabarExtendedParameters $obj): bool
     {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->CodabarExtendedParameters_equals($this->getCodabarExtendedParametersDTO(), $obj->getCodabarExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
     }
 
     /**
      * <p>
-     * Returns a human-readable string representation of this {@code CodabarExtendedParameters}.
+     * Returns a human-readable string representation of this {@code AztecExtendedParameters}.
      * </p>
-     * @return A string that represents this {@code CodabarExtendedParameters}.
+     * @return string that represents this {@code AztecExtendedParameters}.
      */
-    public function toString() : string
+    public function toString(): string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        return $this->getCodabarExtendedParametersDTO()->toString;
+    }
+}
+
+
+/**
+ * <p>
+ * Stores special data of {@code <b>GS1 Composite Bar</b>} recognized barcode
+ * </p>
+ */
+class GS1CompositeBarExtendedParameters implements Communicator
+{
+    private GS1CompositeBarExtendedParametersDTO $gs1CompositeBarExtendedParameters;
+
+    /**
+     * @return GS1CompositeBarExtendedParametersDTO instance
+     */
+    private function getGS1CompositeBarExtendedParametersDTO() : GS1CompositeBarExtendedParametersDTO
+    {
+        return $this->gs1CompositeBarExtendedParameters;
+    }
+
+    /**
+     * @param $gs1CompositeBarExtendedParameters
+     */
+    private function setGS1CompositeBarExtendedParametersDTO($gs1CompositeBarExtendedParameters): void
+    {
+        $this->gs1CompositeBarExtendedParameters = $gs1CompositeBarExtendedParameters;
+    }
+
+    function __construct(GS1CompositeBarExtendedParametersDTO $gs1CompositeBarExtendedParameters)
+    {
+        $this->gs1CompositeBarExtendedParameters = $gs1CompositeBarExtendedParameters;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    /**
+     * <p>Gets the 1D (linear) barcode type of GS1 Composite</p>Value: 2D barcode type
+     */
+    public function getOneDType(): int
+    {
+        return $this->getGS1CompositeBarExtendedParametersDTO()->oneDType;
+    }
+
+    /**
+     * <p>Gets the 1D (linear) barcode value of GS1 Composite</p>Value: 1D barcode value
+     */
+    public function getOneDCodeText(): string
+    {
+        return $this->getGS1CompositeBarExtendedParametersDTO()->oneDCodeText;
+    }
+
+    /**
+     * <p>Gets the 2D barcode type of GS1 Composite</p>Value: 2D barcode type
+     */
+    public function getTwoDType(): int
+    {
+        return $this->getGS1CompositeBarExtendedParametersDTO()->twoDType;
+    }
+
+    /**
+     * <p>Gets the 2D barcode value of GS1 Composite</p>Value: 2D barcode value
+     */
+    public function getTwoDCodeText(): string
+    {
+        return $this->getGS1CompositeBarExtendedParametersDTO()->twoDCodeText;
+    }
+
+    /**
+     * <p>
+     * Returns a value indicating whether this instance is equal to a specified {@code GS1CompositeBarExtendedParameters} value.
+     * </p>
+     * @param GS1CompositeBarExtendedParameters $obj
+     * @return bool ```php
+     */
+    public function equals(GS1CompositeBarExtendedParameters $obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->GS1CompositeBarExtendedParameters_equals($this->getGS1CompositeBarExtendedParametersDTO(), $obj->getGS1CompositeBarExtendedParametersDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code GS1CompositeBarExtendedParameters}.
+     * </p>
+     * @return string that represents this {@code GS1CompositeBarExtendedParameters}.
+     */
+    public function toString(): string
+    {
+        return $this->getGS1CompositeBarExtendedParametersDTO()->toString;
+    }
+}
+
+
+/**
+ * Contains the data of subtype for Code128 type barcode
+ */
+class Code128DataPortion implements Communicator
+{
+    private Code128DataPortionDTO $code128DataPortionDTO;
+
+    /**
+     * @return Code128DataPortionDTO instance
+     */
+    private function getCode128DataPortionDTO() : Code128DataPortionDTO
+    {
+        return $this->code128DataPortionDTO;
+    }
+
+    /**
+     * @param $code128DataPortionDTO
+     */
+    private function setCode128DataPortionDTO($code128DataPortionDTO): void
+    {
+        $this->code128DataPortionDTO = $code128DataPortionDTO;
+    }
+
+    function __construct(Code128DataPortionDTO $code128DataPortionDTO)
+    {
+        $this->code128DataPortionDTO = $code128DataPortionDTO;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+        // TODO: Implement obtainDto() method.
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        // TODO: Implement init() method.
+    }
+
+    /**
+     * Gets the part of code text related to subtype.
+     *
+     * @return string The part of code text related to subtype
+     */
+    public final function getData(): string
+    {
+        try {
+            return $this->getCode128DataPortionDTO()->data;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the type of Code128 subset
+     *
+     * @return int The type of Code128 subset
+     */
+    public final function getCode128SubType(): int
+    {
+        try {
+            return $this->getCode128DataPortionDTO()->code128SubType;
+        } catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a human-readable string representation of this {Code128DataPortion}.
+     * @return string A string that represents this {Code128DataPortion}.
+     */
+    public function toString(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Code128DataPortion_toString($this->getCode128DataPortionDTO());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+}
+
+class RecognitionAbortedException extends Exception
+{
+    private ?int $executionTime;
+
+    /**
+     * Gets the execution time of current recognition session
+     * @return int The execution time of current recognition session
+     */
+    public function getExecutionTime(): int
+    {
+        return $this->executionTime;
+    }
+
+    /**
+     * Sets the execution time of current recognition session
+     * @param int $value The execution time of current recognition session
+     */
+    public function setExecutionTime(int $value): void
+    {
+        $this->executionTime = $value;
+    }
+
+    /**
+     * Initializes a new instance of the <see cref="RecognitionAbortedException" /> class with specified recognition abort message.
+     * @param $message null|string The error message of the exception.
+     * @param $executionTime null|int The execution time of current recognition session.
+     */
+    public function __construct(?string $message, ?int $executionTime)
+    {
+        parent::__construct($message);
+        $this->executionTime = $executionTime;
     }
 }
 
@@ -3892,8 +3928,6 @@ class DecodeType
      */
     const ALL_SUPPORTED_TYPES = 99;
 
-    private const javaClassName = "com.aspose.mw.barcode.recognition.MwDecodeTypeUtils";
-
     /**
      * Determines if the specified BaseDecodeType contains any 1D barcode symbology
      * @param int $symbology barcode symbology
@@ -3901,13 +3935,13 @@ class DecodeType
      */
     public static function is1D(int $symbology): bool
     {
-        try
-        {
-            $javaClass = new java(DecodeType::javaClassName);
-            return java_cast($javaClass->is1D($symbology), "boolean");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $isEquals = $client->DecodeType_is1D($symbology);
+            $thriftConnection->closeConnection();
+            return $isEquals;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -3919,13 +3953,13 @@ class DecodeType
      */
     public static function isPostal(int $symbology): bool
     {
-        try
-        {
-            $javaClass = new java(DecodeType::javaClassName);
-            return java_cast($javaClass->isPostal($symbology), "boolean");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $isEquals = $client->DecodeType_isPostal($symbology);
+            $thriftConnection->closeConnection();
+            return $isEquals;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -3937,37 +3971,37 @@ class DecodeType
      */
     public static function is2D(int $symbology): bool
     {
-        try
-        {
-            $javaClass = new java(DecodeType::javaClassName);
-            return java_cast($javaClass->is2D($symbology), "boolean");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $isEquals = $client->DecodeType_is2D($symbology);
+            $thriftConnection->closeConnection();
+            return $isEquals;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
     /**
      * Determines if the BaseDecodeType array contains specified barcode symbology
-     * @param int $decodeType specified barcode symbology
+     * @param int $expectedDecodeType
      * @param array $decodeTypes the BaseDecodeType array
      * @return bool
      * @throws BarcodeException
      */
-    public static function containsAny(int $decodeType, array $decodeTypes): bool
+    public static function containsAny(int $expectedDecodeType, array $decodeTypes): bool
     {
-        try
-        {
-            $javaClass = new java(DecodeType::javaClassName);
-            return java_cast($javaClass->containsAny($decodeType, $decodeTypes), "boolean");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            if (in_array($expectedDecodeType, $decodeTypes, true)) {
+                return true;
+            }
+            return false;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 }
+
 
 /**
  * Contains types of Code128 subset
@@ -4142,6 +4176,7 @@ class DeconvolutionMode
      */
     const SLOW = 2;
 }
+
 /**
  * <p>
  * <p>
@@ -4176,7 +4211,7 @@ class InverseImageMode
      * <p>Enables additional recognition of barcodes on inverse images</p>
      */
     const ENABLED = 2;
-};
+}
 
 /**
  * <p>
@@ -4341,4 +4376,3 @@ class ChecksumValidation
      */
     const OFF = 2;
 }
-?>

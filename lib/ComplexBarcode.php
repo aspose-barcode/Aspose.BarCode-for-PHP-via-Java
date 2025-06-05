@@ -1,5 +1,14 @@
 <?php
-require_once('Joint.php');
+namespace Aspose\Barcode;
+
+use Aspose\Barcode\Bridge\HIBCPASRecordDTO;
+use Aspose\Barcode\Internal\BarcodeException;
+use Aspose\Barcode\Internal\Communicator;
+use Aspose\Barcode\Internal\License;
+use Aspose\Barcode\Internal\ThriftConnection;
+use Aspose\Barcode\Bridge\IComplexCodetextDTO;
+use DateTime;
+use Exception;
 
 /**
  * Address of creditor or debtor.
@@ -10,21 +19,59 @@ require_once('Joint.php');
  * If fields of both types are set, the address type becomes conflicting.
  * Name and country code must always be set unless all fields are empty.
  */
-final class Address extends BaseJavaClass
+final class Address implements Communicator
 {
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwAddress";
+    private $addressDto;
+
+    /**
+     * @return mixed
+     */
+    public function getAddressDto() : \Aspose\Barcode\Bridge\AddressDTO
+    {
+        return $this->addressDto;
+    }
+
+    /**
+     * @param mixed $addressDto
+     */
+    public function setAddressDto(\Aspose\Barcode\Bridge\AddressDTO $addressDto): void
+    {
+        $this->addressDto = $addressDto;
+    }
 
     public function __construct()
     {
-        parent::__construct(new java(self::$javaClassName));
+        $this->addressDto = new \Aspose\Barcode\Bridge\AddressDTO();
+        $this->initFieldsFromDto();
     }
 
-    static function construct($javaClass) : Address
+    /**
+     * Constructs an Address object from AddressDTO.
+     *
+     * @param \Aspose\Barcode\Bridge\AddressDTO $addressDto
+     * @return Address
+     * @throws BarcodeException
+     */
+    static function construct(\Aspose\Barcode\Bridge\AddressDTO $addressDto)
     {
-        $address = new Address();
-        $address->setJavaClass($javaClass);
+        try
+        {
+            $address = new Address();
+            $address->setAddressDto($addressDto);
+            return $address;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
-        return $address;
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -38,7 +85,7 @@ final class Address extends BaseJavaClass
      */
     public function getType(): int
     {
-        return java_cast($this->getJavaClass()->getType(), "integer");
+        return $this->getAddressDto()->type;
     }
 
     /**
@@ -50,7 +97,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            return java_is_null($this->getJavaClass()->getName()) ? null : java_cast($this->getJavaClass()->getName(), "string");
+            return $this->getAddressDto()->name;
         }
         catch (Exception $ex)
         {
@@ -67,7 +114,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setName($value);
+            $this->getAddressDto()->name  = $value;
         }
         catch (Exception $ex)
         {
@@ -92,7 +139,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            return java_is_null($this->getJavaClass()->getAddressLine1()) ? null : java_cast($this->getJavaClass()->getAddressLine1(), "string");
+            return $this->getAddressDto()->addressLine1;
         }
         catch (Exception $ex)
         {
@@ -116,7 +163,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAddressLine1($value);
+            $this->getAddressDto()->addressLine1  = $value;
         }
         catch (Exception $ex)
         {
@@ -136,7 +183,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            return java_is_null($this->getJavaClass()->getAddressLine2()) ? null : java_cast($this->getJavaClass()->getAddressLine2(), "string");
+            return $this->getAddressDto()->addressLine2;
         }
         catch (Exception $ex)
         {
@@ -156,7 +203,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAddressLine2($value);
+            $this->getAddressDto()->addressLine2  = $value;
         }
         catch (Exception $ex)
         {
@@ -174,14 +221,7 @@ final class Address extends BaseJavaClass
      */
     public function getStreet(): ?string
     {
-        try
-        {
-            return java_is_null($this->getJavaClass()->getStreet()) ? null : java_cast($this->getJavaClass()->getStreet(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+            return $this->getAddressDto()->street;
     }
 
     /**
@@ -201,7 +241,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setStreet($value);
+            $this->getAddressDto()->street  = $value;
         }
         catch (Exception $ex)
         {
@@ -221,14 +261,7 @@ final class Address extends BaseJavaClass
      */
     public function getHouseNo(): ?string
     {
-        try
-        {
-            return java_is_null($this->getJavaClass()->getHouseNo()) ? null : java_cast($this->getJavaClass()->getHouseNo(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $this->getAddressDto()->houseNo;
     }
 
     /**
@@ -245,7 +278,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setHouseNo($value);
+            $this->getAddressDto()->houseNo  = $value;
         }
         catch (Exception $ex)
         {
@@ -267,7 +300,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            return java_is_null($this->getJavaClass()->getPostalCode()) ? null : java_cast($this->getJavaClass()->getPostalCode(), "string");
+            return $this->getAddressDto()->postalCode;
         }
         catch (Exception $ex)
         {
@@ -289,7 +322,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPostalCode($value);
+            $this->getAddressDto()->postalCode  = $value;
         }
         catch (Exception $ex)
         {
@@ -311,7 +344,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            return java_is_null($this->getJavaClass()->getTown()) ? null : java_cast($this->getJavaClass()->getTown(), "string");
+            return $this->getAddressDto()->town;
         }
         catch (Exception $ex)
         {
@@ -333,7 +366,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setTown($value);
+            $this->getAddressDto()->town  = $value;
         }
         catch (Exception $ex)
         {
@@ -352,7 +385,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            return java_is_null($this->getJavaClass()->getCountryCode()) ? null : java_cast($this->getJavaClass()->getCountryCode(), "string");
+            return $this->getAddressDto()->countryCode;
         }
         catch (Exception $ex)
         {
@@ -371,7 +404,7 @@ final class Address extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setCountryCode($value);
+            $this->getAddressDto()->countryCode  = $value;
         }
         catch (Exception $ex)
         {
@@ -408,77 +441,44 @@ final class Address extends BaseJavaClass
      */
     public function equals(Address $obj): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->Address_equals($this->getAddressDto(), $obj->getAddressDto());
+        $thriftConnection->closeConnection();
+        return $isEquals;
     }
-
-    /**
-     * Gets the hash code for this instance.
-     * @return int A hash code for the current object.
-     */
-    public function hashCode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->hashCode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    protected function init(): void
-    {
-        // TODO: Implement init() method.
-    }
-}
-
-/**
- * Address type
- */
-class  AddressType
-{
-
-    /**
-     * Undetermined
-     */
-    const UNDETERMINED = 0;
-
-    /**
-     * Structured address
-     */
-    const STRUCTURED = 1;
-
-    /**
-     * Combined address elements
-     */
-    const COMBINED_ELEMENTS = 2;
-
-    /**
-     * Conflicting
-     */
-    const CONFLICTING = 3;
 }
 
 /**
  * Alternative payment scheme instructions
  */
-final class AlternativeScheme extends BaseJavaClass
+final class AlternativeScheme implements Communicator
 {
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwAlternativeScheme";
+    private $alternativeSchemeDto;
+
+    /**
+     * @return mixed
+     */
+    public function getAlternativeSchemeDto() : \Aspose\Barcode\Bridge\AlternativeSchemeDTO
+    {
+        return $this->alternativeSchemeDto;
+    }
+
+    /**
+     * @param mixed $alternativeSchemeDto
+     */
+    public function setAlternativeSchemeDto(\Aspose\Barcode\Bridge\AlternativeSchemeDTO $alternativeSchemeDto): void
+    {
+        $this->alternativeSchemeDto = $alternativeSchemeDto;
+    }
 
     public function __construct($instruction)
     {
         try
         {
-            parent::__construct(new java(self::$javaClassName, $instruction));
+            $this->alternativeSchemeDto = new \Aspose\Barcode\Bridge\AlternativeSchemeDTO();
+            $this->alternativeSchemeDto->instruction = $instruction;
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -491,13 +491,22 @@ final class AlternativeScheme extends BaseJavaClass
         try
         {
             $phpClass = new AlternativeScheme("");
-            $phpClass->setJavaClass($javaClass);
+            $phpClass->setAlternativeSchemeDto($javaClass);
             return $phpClass;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    public function obtainDto(...$args)
+    {
+
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -512,7 +521,7 @@ final class AlternativeScheme extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getInstruction(), "string");
+            return $this->getAlternativeSchemeDto()->instruction;
         }
         catch (Exception $ex)
         {
@@ -530,7 +539,7 @@ final class AlternativeScheme extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setInstruction($value);
+            $this->getAlternativeSchemeDto()->instruction  = $value;
         }
         catch (Exception $ex)
         {
@@ -545,35 +554,11 @@ final class AlternativeScheme extends BaseJavaClass
      */
     public function equals(AlternativeScheme $obj): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the hash code for this instance.
-     * @return int hash code for the current object.
-     */
-    public function hashCode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->hashCode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    protected function init(): void
-    {
-        // TODO: Implement init() method.
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->AlternativeScheme_equals($this->getAlternativeSchemeDto(), $obj->getAlternativeSchemeDto());
+        $thriftConnection->closeConnection();
+        return $isEquals;
     }
 }
 
@@ -589,21 +574,21 @@ final class AlternativeScheme extends BaseJavaClass
  */
 final class ComplexCodetextReader
 {
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwComplexCodetextReader";
-
     /**
      * Decodes SwissQR codetext.
      *
      * @param string encodedCodetext encoded codetext
      * @return SwissQRCodetext decoded SwissQRCodetext or null.
      */
-    public static function tryDecodeSwissQR(string $encodedCodetext): ?SwissQRCodetext
+    public static function tryDecodeSwissQR(string $encodedCodetext): SwissQRCodetext
     {
         try
         {
-            $javaComplexCodetextReaderClass = java(self::$javaClassName);
-            $javaSwissQR = $javaComplexCodetextReaderClass->tryDecodeSwissQR($encodedCodetext);
-            return java_is_null($javaSwissQR) ? null : SwissQRCodetext::construct($javaSwissQR);
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $swissQRCodetextDTO = $client->ComplexCodetextReader_tryDecodeSwissQR($encodedCodetext);
+            $thriftConnection->closeConnection();
+            return SwissQRCodetext::construct($swissQRCodetextDTO);
         }
         catch (Exception $ex)
         {
@@ -616,11 +601,21 @@ final class ComplexCodetextReader
      * @param string $encodedCodetext encoded codetext
      * @return Mailmark2DCodetext decoded Royal Mail Mailmark 2D or null.
      */
-    public static function tryDecodeMailmark2D(string $encodedCodetext): ?Mailmark2DCodetext
+    public static function tryDecodeMailmark2D(string $encodedCodetext): Mailmark2DCodetext
     {
-        $javaComplexCodetextReaderClass = java(self::$javaClassName);
-        $javaMailmark2D = $javaComplexCodetextReaderClass->tryDecodeMailmark2D($encodedCodetext);
-        return java_is_null($javaMailmark2D) ? null : Mailmark2DCodetext::construct($javaMailmark2D);
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $mailmark2DCodetextDTO = $client->ComplexCodetextReader_tryDecodeMailmark2D($encodedCodetext);
+            $thriftConnection->closeConnection();
+            $mailmark2DCodetext = Mailmark2DCodetext::construct($mailmark2DCodetextDTO);
+            return $mailmark2DCodetext;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -630,9 +625,16 @@ final class ComplexCodetextReader
      */
     public static function tryDecodeMailmark(string $encodedCodetext) :?MailmarkCodetext
     {
-        $javaComplexCodetextClass = java(self::$javaClassName);
-        $javaMailmark = $javaComplexCodetextClass->tryDecodeMailmark($encodedCodetext);
-        return java_is_null($javaMailmark) ? null : MailmarkCodetext::construct($javaMailmark);
+        $res = new MailmarkCodetext();
+        try
+        {
+            $res->initFromString($encodedCodetext);
+        }
+        catch (Exception $e)
+        {
+            return null;
+        }
+        return $res;
     }
 
     /**
@@ -641,28 +643,24 @@ final class ComplexCodetextReader
      * @param string encodedCodetext encoded codetext
      * @return MaxiCodeCodetext Decoded MaxiCode codetext.
      */
-    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext) : ?MaxiCodeCodetext
+    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext) : MaxiCodeCodetext
     {
-        $javaComplexCodetextReaderClass = java(self::$javaClassName);
-        $javaMaxiCodeCodetextMode2Class = java(MaxiCodeCodetextMode2::JAVA_CLASS_NAME);
-        $javaMaxiCodeCodetextMode3Class = java(MaxiCodeCodetextMode3::JAVA_CLASS_NAME);
-        $javaMaxiCodeCodetext =  $javaComplexCodetextReaderClass->tryDecodeMaxiCode($maxiCodeMode, $encodedCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $maxiCodeCodetextDTO = $client->ComplexCodetextReader_tryDecodeMaxiCode($maxiCodeMode, $encodedCodetext);
+        $thriftConnection->closeConnection();
 
-        if(java_is_null($javaMaxiCodeCodetext))
+        if($maxiCodeCodetextDTO->complexCodetextType == ComplexCodetextType::MaxiCodeCodetextMode2)
         {
-            return null;
+            return MaxiCodeCodetextMode2::construct($maxiCodeCodetextDTO);
         }
-        if(java_instanceof($javaMaxiCodeCodetext, $javaMaxiCodeCodetextMode2Class))
+        elseif($maxiCodeCodetextDTO->complexCodetextType == ComplexCodetextType::MaxiCodeCodetextMode3)
         {
-            return MaxiCodeCodetextMode2::construct($javaMaxiCodeCodetext);
-        }
-        elseif(java_instanceof($javaMaxiCodeCodetext, $javaMaxiCodeCodetextMode3Class))
-        {
-            return MaxiCodeCodetextMode3::construct($javaMaxiCodeCodetext);
+            return MaxiCodeCodetextMode3::construct($maxiCodeCodetextDTO);
         }
         else
         {
-            return MaxiCodeStandardCodetext::construct($javaMaxiCodeCodetext);
+            return MaxiCodeStandardCodetext::construct($maxiCodeCodetextDTO);
         }
     }
 
@@ -670,25 +668,34 @@ final class ComplexCodetextReader
      * <p>
      * Decodes HIBC LIC codetext.
      * </p>
-     * @return decoded HIBC LIC Complex Codetext or null.
-     * @param encodedCodetext encoded codetext
+     * @param string|null $encodedCodetext Encoded codetext
+     * @return HIBCLICComplexCodetext|null Decoded HIBC LIC Complex Codetext or null
      */
     public static function tryDecodeHIBCLIC(?string $encodedCodetext) : ?HIBCLICComplexCodetext
     {
-        $javaHIBCLICSecondaryAndAdditionalDataCodetextClass = java(HIBCLICSecondaryAndAdditionalDataCodetext::JAVA_CLASS_NAME);
-        $javaHIBCLICPrimaryDataCodetextClass = java(HIBCLICPrimaryDataCodetext::JAVA_CLASS_NAME);
-        $javaHIBCLICCombinedCodetextClass = java(HIBCLICCombinedCodetext::JAVA_CLASS_NAME);
-        $javaPhpComplexCodetextReaderJavaClass = java(self::$javaClassName);
-        $hibclicComplexCodetext = $javaPhpComplexCodetextReaderJavaClass->tryDecodeHIBCLIC($encodedCodetext);
-        if(java_instanceof($hibclicComplexCodetext, $javaHIBCLICSecondaryAndAdditionalDataCodetextClass))
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+
+        $hibclicComplexCodetext = null;
+        try
+        {
+            $hibclicComplexCodetext = $client->ComplexCodetextReader_tryDecodeHIBCLIC($encodedCodetext);
+        }
+        catch (\Aspose\Barcode\Bridge\NullValueException $e)
+        {
+            return null;
+        }
+
+        $thriftConnection->closeConnection();
+        if($hibclicComplexCodetext->complexCodetextType == ComplexCodetextType::HIBCLICSecondaryAndAdditionalDataCodetext)
         {
             return HIBCLICSecondaryAndAdditionalDataCodetext::construct($hibclicComplexCodetext);
         }
-        else if(java_instanceof($hibclicComplexCodetext, $javaHIBCLICPrimaryDataCodetextClass))
+        else if($hibclicComplexCodetext->complexCodetextType == ComplexCodetextType::HIBCLICPrimaryDataCodetext)
         {
             return HIBCLICPrimaryDataCodetext::construct($hibclicComplexCodetext);
         }
-        else if(java_instanceof($hibclicComplexCodetext, $javaHIBCLICCombinedCodetextClass))
+        else if($hibclicComplexCodetext->complexCodetextType == ComplexCodetextType::HIBCLICCombinedCodetext)
         {
             return HIBCLICCombinedCodetext::construct($hibclicComplexCodetext);
         }
@@ -699,44 +706,59 @@ final class ComplexCodetextReader
      * <p>
      * Decodes HIBC PAS codetext.
      * </p>
-     * @return decoded HIBC PAS Complex Codetext or null.
-     * @param encodedCodetext encoded codetext
-     */
+     * @param string encodedCodetext encoded codetext
+     * @return ?HIBCPASCodetext decoded HIBC PAS Complex Codetext or null.
+ */
     public static function tryDecodeHIBCPAS(string $encodedCodetext) : ?HIBCPASCodetext
     {
-        $javaComplexCodetextReader = java(ComplexCodetextReader::$javaClassName);
-        $javaHIBCPAS = $javaComplexCodetextReader->tryDecodeHIBCPAS($encodedCodetext);
-        if(java_is_null($javaHIBCPAS))
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $hibclicComplexCodetextDTO = $client->ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext);
+        $thriftConnection->closeConnection();
+        if($hibclicComplexCodetextDTO->isNull)
             return null;
-        return HIBCPASCodetext::construct($javaHIBCPAS);
+        return HIBCPASCodetext::construct($hibclicComplexCodetextDTO);
     }
-}
-
-/**
- * SwissQR bill standard version
- */
-class QrBillStandardVersion
-{
-    /**
-     * Version 2.0
-     */
-    const V2_0 = 0;
 }
 
 /**
  * SwissQR bill data
  */
-final class SwissQRBill extends BaseJavaClass
+final class SwissQRBill implements Communicator
 {
+    private $swissQRBillDto;
+
+    /**
+     * @return mixed
+     */
+    public function getSwissQRBillDto() : \Aspose\Barcode\Bridge\SwissQRBillDTO
+    {
+        return $this->swissQRBillDto;
+    }
+
+    /**
+     * @param mixed $swissQRBillDto
+     */
+    public function setSwissQRBillDto(\Aspose\Barcode\Bridge\SwissQRBillDTO $swissQRBillDto): void
+    {
+        $this->swissQRBillDto = $swissQRBillDto;
+    }
+
+
     private $creditor;
     private $debtor;
 
-    protected function init(): void
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto()
     {
         try
         {
-            $this->creditor = Address::construct($this->getJavaClass()->getCreditor());
-            $this->debtor = Address::construct($this->getJavaClass()->getDebtor());
+            $this->creditor = Address::construct($this->getSwissQRBillDto()->creditor);
+            $this->debtor = Address::construct($this->getSwissQRBillDto()->debtor);
         }
         catch (Exception $ex)
         {
@@ -744,11 +766,12 @@ final class SwissQRBill extends BaseJavaClass
         }
     }
 
-    public function __construct($javaClass)
+    public function __construct(\Aspose\Barcode\Bridge\SwissQRBillDTO $swissQRBillDto)
     {
         try
         {
-            parent::__construct($javaClass);
+            $this->swissQRBillDto = $swissQRBillDto;
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -761,7 +784,7 @@ final class SwissQRBill extends BaseJavaClass
         try
         {
             $alternativeSchemes = array();
-            for ($i = 0; $i < java_cast($javaAlternativeSchemes->size(), "integer"); $i++)
+            for ($i = 0; $i < $javaAlternativeSchemes->size(); $i++)
             {
                 $alternativeSchemes[$i] = AlternativeScheme::construct($javaAlternativeSchemes->get($i));
             }
@@ -781,7 +804,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getVersion(), "integer");
+            return $this->getSwissQRBillDto()->version;
         }
         catch (Exception $ex)
         {
@@ -797,7 +820,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setVersion($value);
+            $this->getSwissQRBillDto()->version  = $value;
         }
         catch (Exception $ex)
         {
@@ -816,7 +839,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAmount(), "double");
+            return $this->getSwissQRBillDto()->amount;
         }
         catch (Exception $ex)
         {
@@ -835,7 +858,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAmount($value);
+            $this->getSwissQRBillDto()->amount  = $value;
         }
         catch (Exception $ex)
         {
@@ -854,7 +877,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getCurrency(), "string");
+            return $this->getSwissQRBillDto()->currency;
         }
         catch (Exception $ex)
         {
@@ -873,7 +896,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setCurrency($value);
+            $this->getSwissQRBillDto()->currency  = $value;
         }
         catch (Exception $ex)
         {
@@ -893,8 +916,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $javaAccount = $this->getJavaClass()->getAccount();
-            return java_is_null($javaAccount) ? null : java_cast($this->getJavaClass()->getAccount(), "string");
+            return $this->getSwissQRBillDto()->account;
         }
         catch (Exception $ex)
         {
@@ -914,7 +936,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAccount($value);
+            $this->getSwissQRBillDto()->account  = $value;
         }
         catch (Exception $ex)
         {
@@ -941,7 +963,7 @@ final class SwissQRBill extends BaseJavaClass
         try
         {
             $this->creditor = $value;
-            $this->getJavaClass()->setCreditor($value->getJavaClass());
+            $this->getSwissQRBillDto()->creditor = $value->getAddressDto();
         }
         catch (Exception $ex)
         {
@@ -965,7 +987,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getReference(), "string");
+            return $this->getSwissQRBillDto()->reference;
         }
         catch (Exception $ex)
         {
@@ -989,7 +1011,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setReference($value);
+            $this->getSwissQRBillDto()->reference  = $value;
         }
         catch (Exception $ex)
         {
@@ -1010,7 +1032,10 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->createAndSetCreditorReference($rawReference);
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $this->setSwissQRBillDto($client->SwissQRBill_createAndSetCreditorReference($this->getSwissQRBillDto(), $rawReference));
+            $thriftConnection->closeConnection();
         }
         catch (Exception $ex)
         {
@@ -1044,7 +1069,7 @@ final class SwissQRBill extends BaseJavaClass
         try
         {
             $this->debtor = $value;
-            $this->getJavaClass()->setDebtor($value->getJavaClass());
+            $this->getSwissQRBillDto()->debtor = $value->getAddressDto();
         }
         catch (Exception $ex)
         {
@@ -1060,7 +1085,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getUnstructuredMessage(), "string");
+            return $this->getSwissQRBillDto()->UnstructuredMessage;
         }
         catch (Exception $ex)
         {
@@ -1076,7 +1101,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setUnstructuredMessage($value);
+            $this->getSwissQRBillDto()->UnstructuredMessage  = $value;
         }
         catch (Exception $ex)
         {
@@ -1092,7 +1117,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getBillInformation(), "string");
+            return $this->getSwissQRBillDto()->billInformation;
         }
         catch (Exception $ex)
         {
@@ -1108,7 +1133,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setBillInformation($value);
+            $this->getSwissQRBillDto()->billInformation  = $value;
         }
         catch (Exception $ex)
         {
@@ -1127,7 +1152,7 @@ final class SwissQRBill extends BaseJavaClass
     {
         try
         {
-            return self::convertAlternativeSchemes($this->getJavaClass()->getAlternativeSchemes());
+            return self::convertAlternativeSchemes($this->getSwissQRBillDto()->alternativeSchemes);
         }
         catch (Exception $ex)
         {
@@ -1140,24 +1165,28 @@ final class SwissQRBill extends BaseJavaClass
      *
      * A maximum of two schemes with parameters are allowed.
      *
-     * @param array $value The alternative payment schemes.
+     * @param AlternativeScheme[] $alternativeSchemes
      */
-    public function setAlternativeSchemes(array $value): void
+    public function setAlternativeSchemes(array $alternativeSchemes): void
     {
         try
         {
-            $javaArray = array();
-            for ($i = 0; $i < sizeof($value); $i++)
-            {
-                array_push($javaArray, $value[$i]->getJavaClass());
+            $dto = $this->getSwissQRBillDto();
+
+            if (!is_array($dto->alternativeSchemes)) {
+                $dto->alternativeSchemes = [];
             }
-            $this->getJavaClass()->setAlternativeSchemes($javaArray);
+
+            foreach ($alternativeSchemes as $value) {
+                $dto->alternativeSchemes[] = $value->getAlternativeSchemeDto();
+            }
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
 
     /**
      * Determines whether the specified object is equal to the current object.
@@ -1166,154 +1195,56 @@ final class SwissQRBill extends BaseJavaClass
      */
     public function equals(SwissQRBill $obj): bool
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->SwissQRBill_equals($this->getSwissQRBillDto(), $obj->getSwissQRBillDto());
+        $thriftConnection->closeConnection();
 
-    /**
-     * Gets the hash code for this instance.
-     * @return int A hash code for the current object.
-     */
-    public function hashCode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->hashCode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return $isEquals;
     }
 }
 
 /**
- * Class for encoding and decoding the text embedded in the SwissQR code.
+ * <p>
+ * Interface for complex codetext used with ComplexBarcodeGenerator.
+ * </p>
  */
-final class SwissQRCodetext extends IComplexCodetext
+abstract class IComplexCodetext implements Communicator
 {
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwSwissQRCodetext";
-    private $bill;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->bill = new SwissQRBill($this->getJavaClass()->getBill());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
+    private $complexCodetext;
 
     /**
-     * SwissQR bill data
+     * @return mixed
      */
-    public function getBill(): SwissQRBill
+    public function getIComplexCodetextDTO() : IComplexCodetextDTO
     {
-        return $this->bill;
+        return $this->complexCodetext;
     }
 
     /**
-     * Creates an instance of SwissQRCodetext.
-     *
-     * @param SwissQRBill $bill SwissQR bill data
-     * @throws BarcodeException
+     * @param mixed $HIBCLICCombinedCodetextDto
      */
-    public function __construct(?SwissQRBill $bill)
+    public function setIComplexCodetextDTO(IComplexCodetextDTO $complexCodetext): void
     {
-        try
-        {
-            $javaBill = null;
-            if (is_null($bill))
-            {
-                $javaBill = new java(self::$javaClassName);
-            }
-            else
-            {
-                $javaBill = new java(self::$javaClassName, $bill->getJavaClass());
-            }
-            parent::__construct($javaBill);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->complexCodetext = $complexCodetext;
     }
-
-    static function construct($javaClass)
-    {
-        try
-        {
-            $phpClass = new SwissQRCodetext(null);
-            $phpClass->setJavaClass($javaClass);
-            return $phpClass;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
     /**
-     * Construct codetext from SwissQR bill data
-     *
+     * Construct codetext for complex barcode
      * @return string Constructed codetext
      */
-    public function getConstructedCodetext(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
-        }
-        catch (Exception $ex)
-        {
-            $messageStartPosition = strpos(java_cast($ex->toString(), "string"), "Cause: com.aspose.mw.barcode.MwBarcodeException:");
-            throw new BarcodeException(substr(java_cast($ex->toString(), "string"), $messageStartPosition), __FILE__, __LINE__);
-        }
-    }
+    abstract function getConstructedCodetext(): string;
 
     /**
-     * Initializes Bill with constructed codetext.
-     *
+     * Initializes instance with constructed codetext.
      * @param string $constructedCodetext Constructed codetext.
      */
-    public function initFromString($constructedCodetext): void
-    {
-        try
-        {
-            $this->getJavaClass()->initFromString($constructedCodetext);
-            $this->init();
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
+    public abstract function initFromString(string $constructedCodetext): void;
 
     /**
      * Gets barcode type.
-     *
      * @return int Barcode type.
      */
-    public function getBarcodeType(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
+    abstract function getBarcodeType():int;
 }
 
 /**
@@ -1328,16 +1259,57 @@ final class SwissQRCodetext extends IComplexCodetext
  *    $res = $cg->generateBarCodeImage(BarcodeImageFormat::PNG);
  * @endcode
  */
-final class ComplexBarcodeGenerator extends BaseJavaClass
+final class ComplexBarcodeGenerator implements Communicator
 {
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwComplexBarcodeGenerator";
-    private $parameters;
+    private $complexBarcodeGeneratorDto;
 
-    protected function init(): void
+    /**
+     * @return mixed
+     */
+    public function getComplexBarcodeGeneratorDto() : \Aspose\Barcode\Bridge\ComplexBarcodeGeneratorDTO
+    {
+        return $this->complexBarcodeGeneratorDto;
+    }
+
+    /**
+     * @param mixed $complexBarcodeGeneratorDto
+     */
+    public function setComplexBarcodeGeneratorDto(\Aspose\Barcode\Bridge\ComplexBarcodeGeneratorDTO $complexBarcodeGeneratorDto): void
+    {
+        $this->complexBarcodeGeneratorDto = $complexBarcodeGeneratorDto;
+    }
+
+    private $parameters;
+//    private $complexCodeText;
+
+
+    /**
+     * Creates an instance of ComplexBarcodeGenerator.
+     *
+     * @param IComplexCodetext $complexCodetext complexCodetext Complex codetext
+     */
+    public function __construct(IComplexCodetext $complexCodetext)
+    {
+        $this->setComplexBarcodeGeneratorDto($this->obtainDto($complexCodetext->getIComplexCodetextDTO()));
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args) : \Aspose\Barcode\Bridge\ComplexBarcodeGeneratorDTO
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->ComplexBarcodeGenerator_ctor($args[0]);
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
+    }
+
+    public function initFieldsFromDto()
     {
         try
         {
-            $this->parameters = new BaseGenerationParameters($this->getJavaClass()->getParameters());
+//            $this->complexCodeText = $this->getComplexBarcodeGeneratorDto()->complexCodetextDTO;
+            $this->parameters = new BaseGenerationParameters($this->getComplexBarcodeGeneratorDto()->parameters);
         }
         catch (Exception $ex)
         {
@@ -1354,23 +1326,6 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
     }
 
     /**
-     * Creates an instance of ComplexBarcodeGenerator.
-     *
-     * @param IComplexCodetext $complexCodetext complexCodetext Complex codetext
-     */
-    public function __construct(IComplexCodetext $complexCodetext)
-    {
-        try
-        {
-            parent::__construct(new java(self::$javaClassName, $complexCodetext->getJavaClass()));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Generates complex barcode image under current settings.
      * @param int format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF)
      * @code
@@ -1382,12 +1337,19 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
      * @endcode
      * @return string base64 representation of image.
      */
-    public function generateBarcodeImage(int $format): string
+    public function generateBarcodeImage(int $format, bool $passLicense = false): string
     {
         try
         {
-            $base64Image = java_cast($this->getJavaClass()->generateBarcodeImage($format), "string");
-            return ($base64Image);
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+
+            // Deciding if the license should be used
+            $licenseContent = $passLicense ? License::getLicenseContent() : null;
+            // Passing the license or null
+            $base64Image = $client->ComplexBarcodeGenerator_generateBarcodeImage($this->getComplexBarcodeGeneratorDto(), $format, $licenseContent);
+            $thriftConnection->closeConnection();
+            return $base64Image;
         }
         catch (Exception $ex)
         {
@@ -1421,74 +1383,78 @@ final class ComplexBarcodeGenerator extends BaseJavaClass
     }
 }
 
+class ComplexCodetextType
+{
+    const HIBCLICCombinedCodetext = 0;
+    const HIBCLICPrimaryDataCodetext = 1;
+    const HIBCLICSecondaryAndAdditionalDataCodetext = 2;
+    const HIBCPASCodetext = 3;
+    const Mailmark2DCodetext = 4;
+    const MailmarkCodetext = 5;
+    const MaxiCodeStandardCodetext = 6;
+    const MaxiCodeCodetextMode2 = 7;
+    const MaxiCodeCodetextMode3 = 8;
+    const SwissQRCodetext = 9;
+}
+
 
 /**
  * Class for encoding and decoding the text embedded in the 4-state Royal Mailmark code.
  */
 final class MailmarkCodetext extends IComplexCodetext
 {
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwMailmarkCodetext";
-
     /**
      * Initializes a new instance of the {@code MailmarkCodetext} class.
      */
     public function __construct()
     {
-        $javaClass = new java(self::$javaClassName);
-        parent::__construct($javaClass);
+        $this->setIComplexCodetextDTO($this->obtainDto());
+        $this->getIComplexCodetextDTO()->complexCodetextType = ComplexCodetextType::MailmarkCodetext;
+        $this->initFieldsFromDto();
     }
 
-    protected function init():void {}
-
-    static function construct($javaClass) : MailmarkCodetext
+    public function initFieldsFromDto()
     {
-        try
-        {
-            $obj = new MailmarkCodetext();
-            $obj->setJavaClass($javaClass);
-            return $obj;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
+
+    public function obtainDto(...$args) : IComplexCodetextDTO
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->MailmarkCodetext_ctor();
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
+    }
+
     /**
      * "0" – Null or Test
      * "1" – Letter
      * "2" – Large Letter
      */
-    public function getFormat():int { return java_cast($this->getJavaClass()->getFormat(), "int"); }
+    public function getFormat():int { return $this->getIComplexCodetextDTO()->format; }
     /**
      * "0" – Null or Test
      * "1" – LetterN
      * "2" – Large Letter
      */
-    public function setFormat(int $value){ $this->getJavaClass()->setFormat($value); }
+    public function setFormat(int $value){ $this->getIComplexCodetextDTO()->format = $value; }
 
     /**
-     * Currently "1" – For Mailmark barcode (0 and 2 to 9 and A to Z spare for future use)
+     * Currently 1 – For Mailmark barcode (0 and 2 to 9 and A to Z spare for future use)
      */
-    public function getVersionID():int{ return java_cast($this->getJavaClass()->getVersionID(), "int"); }
+    public function getVersionID():int
+    {
+        return $this->getIComplexCodetextDTO()->versionID;
+    }
 
     /**
-     * Currently "1" – For Mailmark barcode (0 and 2 to 9 and A to Z spare for future use)
+     * Currently 1 – For Mailmark barcode (0 and 2 to 9 and A to Z spare for future use)
      */
-    public function setVersionID(int $value){ $this->getJavaClass()->setVersionID($value); }
-
-    /**
-     * "0" - Null or Test
-     * "1" - 1C (Retail)
-     * "2" - 2C (Retail)
-     * "3" - 3C (Retail)
-     * "4" - Premium (RetailPublishing Mail) (for potential future use)
-     * "5" - Deferred (Retail)
-     * "6" - Air (Retail) (for potential future use)
-     * "7" - Surface (Retail) (for potential future use)
-     * "8" - Premium (Network Access)
-     * "9" - Standard (Network Access)
-     */
-    public function  getClass_():string{ return java_cast($this->getJavaClass()->getClass_(), "string"); }
+    public function setVersionID(int $value)
+    {
+        $this->getIComplexCodetextDTO()->versionID = $value;
+    }
 
     /**
      * "0" - Null or Test
@@ -1502,25 +1468,48 @@ final class MailmarkCodetext extends IComplexCodetext
      * "8" - Premium (Network Access)
      * "9" - Standard (Network Access)
      */
-    public function setClass(string $value){ $this->getJavaClass()->setClass($value); }
+    public function  getClass_():string
+    {
+        return $this->getIComplexCodetextDTO()->class_;
+    }
+
+    /**
+     * "0" - Null or Test
+     * "1" - 1C (Retail)
+     * "2" - 2C (Retail)
+     * "3" - 3C (Retail)
+     * "4" - Premium (RetailPublishing Mail) (for potential future use)
+     * "5" - Deferred (Retail)
+     * "6" - Air (Retail) (for potential future use)
+     * "7" - Surface (Retail) (for potential future use)
+     * "8" - Premium (Network Access)
+     * "9" - Standard (Network Access)
+     */
+    public function setClass_(string $value){ $this->getIComplexCodetextDTO()->class_ = $value; }
 
     /**
      * Maximum values are 99 for Barcode C and 999999 for Barcode L.
      */
-    public function getSupplychainID():int{ return java_cast($this->getJavaClass()->getSupplychainID(), "int"); }
+    public function getSupplyChainID():int
+    {
+        return $this->getIComplexCodetextDTO()->supplyChainID;
+    }
     /**
      * Maximum values are 99 for Barcode C and 999999 for Barcode L.
      */
-    public function setSupplychainID(int $value){ $this->getJavaClass()->setSupplychainID($value); }
+    public function setSupplyChainID(int $value)
+    {
+        $this->getIComplexCodetextDTO()->supplyChainID = $value;
+    }
 
     /**
      * Maximum value is 99999999.
      */
-    public function getItemID():int{ return java_cast($this->getJavaClass()->getItemID(), "int"); }
+    public function getItemID():int{ return $this->getIComplexCodetextDTO()->itemID; }
     /**
      * Maximum value is 99999999.
      */
-    public function setItemID(int $value){ $this->getJavaClass()->setItemID($value); }
+    public function setItemID(int $value){ $this->getIComplexCodetextDTO()->itemID = $value; }
 
     /**
      * The PC and DP must comply with a PAF format.
@@ -1528,7 +1517,8 @@ final class MailmarkCodetext extends IComplexCodetext
      * of characters denoting a domestic sorting code.
      * A domestic sorting code consists of an outward postcode, an inward postcode, and a Delivery Point Suffix.
      */
-    public function getDestinationPostCodePlusDPS():string{ return java_cast($this->getJavaClass()->getDestinationPostCodePlusDPS(), "string"); }
+    public function getDestinationPostCodePlusDPS():string
+    { return $this->getIComplexCodetextDTO()->destinationPostCodePlusDPS; }
 
     /**
      * The PC and DP must comply with a PAF format.
@@ -1536,7 +1526,8 @@ final class MailmarkCodetext extends IComplexCodetext
      * of characters denoting a domestic sorting code.
      * A domestic sorting code consists of an outward postcode, an inward postcode, and a Delivery Point Suffix.
      */
-    public function setDestinationPostCodePlusDPS(string $value){ $this->getJavaClass()->setDestinationPostCodePlusDPS($value); }
+    public function setDestinationPostCodePlusDPS(string $value)
+    { $this->getIComplexCodetextDTO()->destinationPostCodePlusDPS = $value; }
 
     /**
      * Construct codetext from Mailmark data.
@@ -1545,7 +1536,11 @@ final class MailmarkCodetext extends IComplexCodetext
      */
     public function getConstructedCodetext():string
     {
-        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->MailmarkCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
     }
 
     /**
@@ -1555,7 +1550,11 @@ final class MailmarkCodetext extends IComplexCodetext
      */
     public function initFromString($constructedCodetext):void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $this->setIComplexCodetextDTO($client->MailmarkCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext));
+        $thriftConnection->closeConnection();
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -1565,7 +1564,7 @@ final class MailmarkCodetext extends IComplexCodetext
      */
     public function getBarcodeType():int
     {
-        $barcode_type = java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        $barcode_type = $this->getIComplexCodetextDTO()->barcodeType;
         return $barcode_type;
     }
 }
@@ -1575,21 +1574,50 @@ final class MailmarkCodetext extends IComplexCodetext
  */
 final class Mailmark2DCodetext extends IComplexCodetext
 {
-
-    private static $javaClassName = "com.aspose.mw.barcode.complexbarcode.MwMailmark2DCodetext";
-
-    static function construct($javaClass)
+    /**
+     * Create default instance of Mailmark2DCodetext class.
+     */
+    public function __construct()
     {
         try
         {
-            $phpClass = new Mailmark2DCodetext();
-            $phpClass->setJavaClass($javaClass);
-            return $phpClass;
+            $this->setIComplexCodetextDTO($this->obtainDto());
+            $this->getIComplexCodetextDTO()->complexCodetextType = ComplexCodetextType::Mailmark2DCodetext;
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    static function construct($complexCodetextDTO)
+    {
+        try
+        {
+            $class = new Mailmark2DCodetext();
+            $class->setIComplexCodetextDTO($complexCodetextDTO);
+            $class->initFieldsFromDto();
+            return $class;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->Mailmark2DCodetext_ctor();
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -1598,7 +1626,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getUPUCountryID(): string
     {
-        return java_cast($this->getJavaClass()->getUPUCountryID(), "string");
+        return $this->getIComplexCodetextDTO()->UPUCountryID;
     }
 
     /**
@@ -1609,7 +1637,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setUPUCountryID($value);
+            $this->getIComplexCodetextDTO()->UPUCountryID = $value;
         }
         catch (Exception $ex)
         {
@@ -1621,10 +1649,10 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Identifies the Royal Mail Mailmark barcode payload for each product type.
      * Valid Values:
      *
-     * “0” - Domestic Sorted &amp; Unsorted
-     * “A” - Online Postage
-     * “B” - Franking
-     * “C” - Consolidation
+     * "0" - Domestic Sorted &amp; Unsorted
+     * "A" - Online Postage
+     * "B" - Franking
+     * "C" - Consolidation
      *
      * @return string Information type ID
      */
@@ -1632,7 +1660,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getInformationTypeID(), "string");
+            return $this->getIComplexCodetextDTO()->informationTypeID;
         }
         catch (Exception $ex)
         {
@@ -1644,10 +1672,10 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Identifies the Royal Mail Mailmark barcode payload for each product type.
      * Valid Values:
      *
-     * “0” - Domestic Sorted &amp; Unsorted
-     * “A” - Online Postage
-     * “B” - Franking
-     * “C” - Consolidation
+     * "0" - Domestic Sorted &amp; Unsorted
+     * "A" - Online Postage
+     * "B" - Franking
+     * "C" - Consolidation
      *
      * @param string $value Information type ID
      */
@@ -1655,7 +1683,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setInformationTypeID($value);
+            $this->getIComplexCodetextDTO()->informationTypeID = $value;
         }
         catch (Exception $ex)
         {
@@ -1667,29 +1695,22 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Identifies the  barcode version as relevant to each Information Type ID.
      * Valid Values:
      *
-     * Currently “1”.
-     * “0” &amp; “2” to “9” and “A” to “Z” spare reserved for potential future use.
+     * Currently "1".
+     * "0" &amp; "2" to "9" and "A" to "Z" spare reserved for potential future use.
      *
      * @return string Version ID
      */
     public function getVersionID(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getVersionID(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return (string) $this->getIComplexCodetextDTO()->versionID;
     }
 
     /**
      * Identifies the  barcode version as relevant to each Information Type ID.
      * Valid Values:
      *
-     * Currently “1”.
-     * “0” &amp; “2” to “9” and “A” to “Z” spare reserved for potential future use.
+     * Currently "1".
+     * "0" &amp; "2" to "9" and "A" to "Z" spare reserved for potential future use.
      *
      * @param string $value Version ID
      */
@@ -1697,7 +1718,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setVersionID($value);
+            $this->getIComplexCodetextDTO()->versionID = (int) $value;
         }
         catch (Exception $ex)
         {
@@ -1709,12 +1730,12 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Identifies the class of the item.
      *
      * Valid Values:
-     * “1” - 1C (Retail)
-     * “2” - 2C (Retail)
-     * “3” - Economy (Retail)
-     * “5” - Deffered (Retail)
-     * “8” - Premium (Network Access)
-     * “9” - Standard (Network Access)
+     * "1" - 1C (Retail)
+     * "2" - 2C (Retail)
+     * "3" - Economy (Retail)
+     * "5" - Deffered (Retail)
+     * "8" - Premium (Network Access)
+     * "9" - Standard (Network Access)
      *
      * @return string class of the item
      */
@@ -1722,7 +1743,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getClass_(), "string");
+            return $this->getIComplexCodetextDTO()->class_;
         }
         catch (Exception $ex)
         {
@@ -1734,12 +1755,12 @@ final class Mailmark2DCodetext extends IComplexCodetext
      * Identifies the class of the item.
      *
      * Valid Values:
-     * “1” - 1C (Retail)
-     * “2” - 2C (Retail)
-     * “3” - Economy (Retail)
-     * “5” - Deffered (Retail)
-     * “8” - Premium (Network Access)
-     * “9” - Standard (Network Access)
+     * "1" - 1C (Retail)
+     * "2" - 2C (Retail)
+     * "3" - Economy (Retail)
+     * "5" - Deffered (Retail)
+     * "8" - Premium (Network Access)
+     * "9" - Standard (Network Access)
      *
      * @param string $value class of the item
      */
@@ -1747,7 +1768,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setclass($value);
+            $this->getIComplexCodetextDTO()->class_ = $value;
         }
         catch (Exception $ex)
         {
@@ -1765,7 +1786,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getSupplyChainID(), "integer");
+            return $this->getIComplexCodetextDTO()->supplyChainID;
         }
         catch (Exception $ex)
         {
@@ -1783,7 +1804,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setSupplyChainID($value);
+            $this->getIComplexCodetextDTO()->supplyChainID = $value;
         }
         catch (Exception $ex)
         {
@@ -1803,7 +1824,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getItemID(), "integer");
+            return $this->getIComplexCodetextDTO()->itemID;
         }
         catch (Exception $ex)
         {
@@ -1823,7 +1844,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setItemID($value);
+            $this->getIComplexCodetextDTO()->itemID = $value;
         }
         catch (Exception $ex)
         {
@@ -1844,7 +1865,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getDestinationPostCodeAndDPS(), "string");
+            return $this->getIComplexCodetextDTO()->destinationPostCodeAndDPS;
         }
         catch (Exception $ex)
         {
@@ -1865,7 +1886,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setDestinationPostCodeAndDPS($value);
+            $this->getIComplexCodetextDTO()->destinationPostCodeAndDPS = $value;
         }
         catch (Exception $ex)
         {
@@ -1882,7 +1903,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getRTSFlag(), "string");
+            return $this->getIComplexCodetextDTO()->RTSFlag;
         }
         catch (Exception $ex)
         {
@@ -1899,7 +1920,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setRTSFlag($value);
+            $this->getIComplexCodetextDTO()->RTSFlag = $value;
         }
         catch (Exception $ex)
         {
@@ -1917,7 +1938,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getReturnToSenderPostCode(), "string");
+            return $this->getIComplexCodetextDTO()->returnToSenderPostCode;
         }
         catch (Exception $ex)
         {
@@ -1935,7 +1956,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setReturnToSenderPostCode($value);
+            $this->getIComplexCodetextDTO()->returnToSenderPostCode = $value;
         }
         catch (Exception $ex)
         {
@@ -1957,7 +1978,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getCustomerContent(), "string");
+            return $this->getIComplexCodetextDTO()->customerContent;
         }
         catch (Exception $ex)
         {
@@ -1979,7 +2000,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setCustomerContent($value);
+            $this->getIComplexCodetextDTO()->customerContent = $value;
         }
         catch (Exception $ex)
         {
@@ -1997,7 +2018,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getCustomerContentEncodeMode(), "integer");
+            return $this->getIComplexCodetextDTO()->customerContentEncodeMode;
         }
         catch (Exception $ex)
         {
@@ -2015,7 +2036,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setCustomerContentEncodeMode($value);
+            $this->getIComplexCodetextDTO()->customerContentEncodeMode = $value;
         }
         catch (Exception $ex)
         {
@@ -2032,7 +2053,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getDataMatrixType(), "integer");
+            return $this->getIComplexCodetextDTO()->dataMatrixType;
         }
         catch (Exception $ex)
         {
@@ -2049,31 +2070,12 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->setDataMatrixType($value);
+            $this->getIComplexCodetextDTO()->dataMatrixType = $value;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-    }
-
-    /**
-     * Create default instance of Mailmark2DCodetext class.
-     */
-    public function __construct()
-    {
-        try
-        {
-            parent::__construct(new java(self::$javaClassName));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    public function init(): void
-    {
     }
 
     /**
@@ -2084,7 +2086,11 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $constructedCodetext = $client->Mailmark2DCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+            $thriftConnection->closeConnection();
+            return $constructedCodetext;
         }
         catch (Exception $ex)
         {
@@ -2100,7 +2106,11 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getJavaClass()->initFromString($constructedCodetext);
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $this->setIComplexCodetextDTO($client->Mailmark2DCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext));
+            $thriftConnection->closeConnection();
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -2114,23 +2124,72 @@ final class Mailmark2DCodetext extends IComplexCodetext
      */
     public function getBarcodeType(): int
     {
-        $barcode_type = java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        $barcode_type = $this->getIComplexCodetextDTO()->barcodeType;
         return $barcode_type;
     }
 }
 
 /**
- * <p>
- * Interface for complex codetext used with ComplexBarcodeGenerator.
- * </p>
+ * Class for encoding and decoding the text embedded in the SwissQR code.
  */
-abstract class IComplexCodetext extends BaseJavaClass
+final class SwissQRCodetext extends IComplexCodetext
 {
-    function __construct($javaClass)
+    private $bill;
+
+    /**
+     * Creates an instance of SwissQRCodetext.
+     *
+     * @param SwissQRBill $bill SwissQR bill data
+     * @throws BarcodeException
+     */
+    public function __construct(?SwissQRBill $bill)
     {
         try
         {
-            parent::__construct($javaClass);
+            $this->setIComplexCodetextDTO($this->obtainDto($bill));
+            $this->initFieldsFromDto();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    static function construct($dtoRef)
+    {
+        try
+        {
+            $class = new SwissQRCodetext(null);
+            $class->setIComplexCodetextDTO($dtoRef);
+            $class->initFieldsFromDto();
+            return $class;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = null;
+        if (is_null($args[0]))
+            $dtoRef = $client->SwissQRCodetext_ctor();
+        else
+            $dtoRef = $client->SwissQRCodetext_ctorSwissQRBill($args[0]->getSwissQRBillDto());
+        $dtoRef->complexCodetextType = ComplexCodetextType::SwissQRCodetext;
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
+    }
+
+    public function initFieldsFromDto()
+    {
+        try
+        {
+            $this->bill = new SwissQRBill($this->getIComplexCodetextDTO()->bill);
         }
         catch (Exception $ex)
         {
@@ -2139,22 +2198,71 @@ abstract class IComplexCodetext extends BaseJavaClass
     }
 
     /**
-     * Construct codetext for complex barcode
-     * @return string Constructed codetext
+     * SwissQR bill data
      */
-    abstract function getConstructedCodetext(): string;
+    public function getBill(): SwissQRBill
+    {
+        return $this->bill;
+    }
 
     /**
-     * Initializes instance with constructed codetext.
+     * Construct codetext from SwissQR bill data
+     *
+     * @return string Constructed codetext
+     */
+    public function getConstructedCodetext(): string
+    {
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $constructedCodetext =$client->SwissQRCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+            $thriftConnection->closeConnection();
+            return $constructedCodetext;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Initializes Bill with constructed codetext.
+     *
      * @param string $constructedCodetext Constructed codetext.
      */
-    public abstract function initFromString(string $constructedCodetext): void;
+    public function initFromString($constructedCodetext): void
+    {
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $this->setIComplexCodetextDTO($client->SwissQRCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext));
+            $this->initFieldsFromDto();
+            $thriftConnection->closeConnection();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
     /**
      * Gets barcode type.
+     *
      * @return int Barcode type.
      */
-    abstract function getBarcodeType():int;
+    public function getBarcodeType(): int
+    {
+        try
+        {
+            return $this->getIComplexCodetextDTO()->barcodeType;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 }
 
 /**
@@ -2176,17 +2284,11 @@ abstract class IComplexCodetext extends BaseJavaClass
 abstract class MaxiCodeCodetext extends IComplexCodetext
 {
     /**
-     * Gets MaxiCode mode.
-     * @return MaxiCode mode
-     */
-    public abstract function getMode() : int;
-
-    /**
      * Gets a MaxiCode encode mode.
      */
     public function getMaxiCodeEncodeMode() : int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeEncodeMode(), "integer");
+        return $this->getIComplexCodetextDTO()->maxiCodeEncodeMode;
     }
 
     /**
@@ -2194,17 +2296,15 @@ abstract class MaxiCodeCodetext extends IComplexCodetext
      */
     public function setMaxiCodeEncodeMode(int $value) : void
     {
-        $this->getJavaClass()->setMaxiCodeEncodeMode($value);
+        $this->getIComplexCodetextDTO()->maxiCodeEncodeMode = $value;
     }
-
-
 
     /**
      * Gets ECI encoding. Used when MaxiCodeEncodeMode is AUTO.
      */
     public function getECIEncoding() : int
     {
-        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
+        return $this->getIComplexCodetextDTO()->ECIEncoding;
     }
 
     /**
@@ -2212,17 +2312,155 @@ abstract class MaxiCodeCodetext extends IComplexCodetext
      */
     public function setECIEncoding(int $value) : void
     {
-        $this->getJavaClass()->setECIEncoding($value);
+        $this->getIComplexCodetextDTO()->ECIEncoding = $value;
     }
 
     /**
      * Gets barcode type.
-     * @return Barcode type
+     * @return int Barcode type
      */
     public function getBarcodeType() : int
     {
-        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        return $this->getIComplexCodetextDTO()->barcodeType;
     }
+}
+
+class MaxiCodeSecondMessageType
+{
+    const MAXI_CODE_STANDART_SECOND_MESSAGE = 0;
+    const MAXI_CODE_STRUCTURED_SECOND_MESSAGE = 1;
+}
+/**
+ * Base class for encoding and decoding the text embedded in the MaxiCode code for modes 2 and 3.
+ *
+ *  This sample shows how to decode raw MaxiCode codetext to MaxiCodeStructuredCodetext instance.
+ *  @code
+ *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
+ *  foreach($reader->readBarCodes() as $result)
+ *  {
+ *      $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
+ *      if ($resultMaxiCodeCodetext instanceof MaxiCodeStructuredCodetext)
+ *      {
+ *          $maxiCodeStructuredCodetext = $resultMaxiCodeCodetext;
+ *          print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
+ *          print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
+ *          print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
+ *      }
+ *  }
+ *  @endcode
+ */
+abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
+{
+    private $secondMessage;
+
+    public function initFieldsFromDto() : void
+    {
+        $maxiCodeSecondMessageDTO = $this->getIComplexCodetextDTO()->secondMessage;
+        if(!is_null($maxiCodeSecondMessageDTO))
+        {
+            switch ($maxiCodeSecondMessageDTO->maxiCodeSecondMessageType)
+            {
+                case MaxiCodeSecondMessageType::MAXI_CODE_STANDART_SECOND_MESSAGE:
+                    $this->secondMessage = MaxiCodeStandartSecondMessage::_construct($maxiCodeSecondMessageDTO);
+                    break;
+                case MaxiCodeSecondMessageType::MAXI_CODE_STRUCTURED_SECOND_MESSAGE:
+                    $this->secondMessage = MaxiCodeStructuredSecondMessage::_construct($maxiCodeSecondMessageDTO);
+                    break;
+                default:
+                    throw new Exception();
+            }
+        }
+        else
+        {
+            $this->secondMessage = null;
+        }
+    }
+
+    /**
+     * Identifies the postal code. Must be 9 digits in mode 2 or
+     * 6 alphanumeric symbols in mode 3.
+     */
+    public function getPostalCode() : string
+    {
+        return $this->getIComplexCodetextDTO()->postalCode;
+    }
+
+    /**
+     * Identifies the postal code. Must be 9 digits in mode 2 or
+     * 6 alphanumeric symbols in mode 3.
+     */
+    public function setPostalCode(string $value) : void
+    {
+        $this->getIComplexCodetextDTO()->postalCode = $value;
+    }
+
+    /**
+     * Identifies 3 digit country code.
+     */
+    public function getCountryCode() : int
+    {
+        return $this->getIComplexCodetextDTO()->countryCode;
+    }
+
+    /**
+     * Identifies 3 digit country code.
+     */
+    public function setCountryCode(int $value) : void
+    {
+        $this->getIComplexCodetextDTO()->countryCode = $value;
+    }
+
+    /**
+     * Identifies 3 digit service category.
+     */
+    public function getServiceCategory() : int
+    {
+        return $this->getIComplexCodetextDTO()->serviceCategory;
+    }
+
+    /**
+     * Identifies 3 digit service category.
+     */
+    public function setServiceCategory(int $value) : void
+    {
+        $this->getIComplexCodetextDTO()->serviceCategory = $value;
+    }
+
+    /**
+     * Identifies second message of the barcode.
+     */
+    public function getSecondMessage() : MaxiCodeSecondMessage
+    {
+        return $this->secondMessage;
+    }
+
+    /**
+     * Identifies second message of the barcode.
+     */
+    public function setSecondMessage(MaxiCodeSecondMessage $value)
+    {
+        $this->secondMessage = $value;
+        $this->getIComplexCodetextDTO()->secondMessage = ($value->getMaxiCodeSecondMessageDto());
+    }
+
+    /**
+     * Constructs codetext
+     * @return string Constructed codetext
+     */
+    public abstract function getConstructedCodetext() : string;
+
+    /**
+     * Initializes instance from constructed codetext.
+     * @param string $constructedCodetext Constructed codetext.
+     */
+    public abstract function initFromString(string $constructedCodetext) : void;
+
+    /**
+     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStructuredCodetext"/> value.
+     * @param object $obj An <see cref="MaxiCodeStructuredCodetext"/> value to compare to this instance.
+     * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
+     */
+    public abstract function equals($obj) : bool;
 }
 
 /**
@@ -2302,14 +2540,13 @@ abstract class MaxiCodeCodetext extends IComplexCodetext
  */
 class MaxiCodeCodetextMode2 extends MaxiCodeStructuredCodetext
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeCodetextMode2";
 
-    function __construct()
+    public function __construct()
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            $this->setIComplexCodetextDTO($this->obtainDto());
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -2317,12 +2554,26 @@ class MaxiCodeCodetextMode2 extends MaxiCodeStructuredCodetext
         }
     }
 
-    static function construct($javaClass)
+    static function construct($maxiCodeCodetextMode2Dto)
     {
-        $_class = new MaxiCodeCodetextMode2();
-        $_class->setJavaClass($javaClass);
+        $class_ = new MaxiCodeCodetextMode2();
+        $class_->setIComplexCodetextDTO($maxiCodeCodetextMode2Dto);
+        $class_->initFieldsFromDto();
+        return $class_;
+    }
 
-        return $_class;
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoObj = $client->MaxiCodeCodetextMode2_ctor();
+        $thriftConnection->closeConnection();
+        return $dtoObj;
+    }
+
+    public function initFieldsFromDto() : void
+    {
+        parent::initFieldsFromDto();
     }
 
     /**
@@ -2331,12 +2582,33 @@ class MaxiCodeCodetextMode2 extends MaxiCodeStructuredCodetext
      */
     public function getMode() : int
     {
-        return java_cast($this->getJavaClass()->getMode(), "integer");
+        return $this->getIComplexCodetextDTO()->mode;
     }
 
-    protected function init() : void
+    public function initFromString(string $constructedCodetext) : void
     {
-        parent::init();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $this->setIComplexCodetextDTO($client->MaxiCodeCodetextMode2_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext));
+        $thriftConnection->closeConnection();
+    }
+
+    public function getConstructedCodetext(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->MaxiCodeCodetextMode2_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
+    }
+
+    public function equals($obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->MaxiCodeCodetextMode2_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -2413,14 +2685,12 @@ class MaxiCodeCodetextMode2 extends MaxiCodeStructuredCodetext
  */
 class MaxiCodeCodetextMode3 extends MaxiCodeStructuredCodetext
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeCodetextMode3";
-
-    function __construct()
+    public function __construct()
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            $this->setIComplexCodetextDTO($this->obtainDto());
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -2428,12 +2698,26 @@ class MaxiCodeCodetextMode3 extends MaxiCodeStructuredCodetext
         }
     }
 
-    static function construct($javaClass)
+    static function construct($maxiCodeCodetextMode2Dto)
     {
-        $_class = new MaxiCodeCodetextMode3();
-        $_class->setJavaClass($javaClass);
+        $class_ = new MaxiCodeCodetextMode3();
+        $class_->setIComplexCodetextDTO($maxiCodeCodetextMode2Dto);
+        $class_->initFieldsFromDto();
+        return $class_;
+    }
 
-        return $_class;
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoObj = $client->MaxiCodeCodetextMode3_ctor();
+        $thriftConnection->closeConnection();
+        return $dtoObj;
+    }
+
+    public function initFieldsFromDto() : void
+    {
+        parent::initFieldsFromDto();
     }
 
     /**
@@ -2442,20 +2726,68 @@ class MaxiCodeCodetextMode3 extends MaxiCodeStructuredCodetext
      */
     public function getMode() : int
     {
-        return java_cast($this->getJavaClass()->getMode(), "integer");
+        return $this->getIComplexCodetextDTO()->mode;
     }
 
-    protected function init() : void
+    public function getConstructedCodetext(): string
     {
-        parent::init();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->MaxiCodeCodetextMode3_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
+    }
+
+    public function initFromString(string $constructedCodetext) : void
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $this->setIComplexCodetextDTO($client->MaxiCodeCodetextMode3_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext));
+        $thriftConnection->closeConnection();
+    }
+
+    public function equals($obj): bool
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->MaxiCodeCodetextMode3_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
 /**
  * Base class for encoding and decoding second message for MaxiCode barcode.
  */
-abstract class MaxiCodeSecondMessage extends BaseJavaClass
+abstract class MaxiCodeSecondMessage implements Communicator
 {
+    protected $maxiCodeSecondMessageDto;
+
+    /**
+     * @return mixed
+     */
+    public function getMaxiCodeSecondMessageDto() : \Aspose\Barcode\Bridge\MaxiCodeSecondMessageDTO
+    {
+        return $this->maxiCodeSecondMessageDto;
+    }
+
+    /**
+     * @param mixed $maxiCodeSecondMessageDto
+     */
+    public function setMaxiCodeSecondMessageDto(\Aspose\Barcode\Bridge\MaxiCodeSecondMessageDTO $maxiCodeSecondMessageDto): void
+    {
+        $this->maxiCodeSecondMessageDto = $maxiCodeSecondMessageDto;
+    }
+
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto()
+    {
+    }
+
     /**
      * Gets constructed second message
      * @return string Constructed second message
@@ -2490,14 +2822,13 @@ abstract class MaxiCodeSecondMessage extends BaseJavaClass
  */
 class MaxiCodeStandardCodetext extends MaxiCodeCodetext
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandardCodetext";
 
     function __construct()
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            $this->setIComplexCodetextDTO($this->obtainDto());
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -2505,12 +2836,26 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
         }
     }
 
-    static function construct($javaClass)
+    static function construct($maxiCodeStandardCodetextDto)
     {
-        $_class = new MaxiCodeStandardCodetext();
-        $_class->setJavaClass($javaClass);
+        $class_ = new MaxiCodeStandardCodetext();
+        $class_->setIComplexCodetextDTO($maxiCodeStandardCodetextDto);
+        $class_->initFieldsFromDto();
 
-        return $_class;
+        return $class_;
+    }
+
+    public function obtainDto(...$args) : IComplexCodetextDTO
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $maxiCodeStandardCodetextDTO = $client->MaxiCodeStandardCodetext_ctor();
+        $thriftConnection->closeConnection();
+        return $maxiCodeStandardCodetextDTO;
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -2518,8 +2863,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function getMessage() : ?string
     {
-        $javaMessage = $this->getJavaClass()->getMessage();
-        return java_is_null($javaMessage) ? null : java_cast($javaMessage, "string");
+        return $this->getIComplexCodetextDTO()->message;
     }
 
     /**
@@ -2527,7 +2871,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function setMessage(string $value) : void
     {
-        $this->getJavaClass()->setMessage($value);
+        $this->getIComplexCodetextDTO()->message = $value;
     }
 
     /**
@@ -2535,7 +2879,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function setMode(int $mode) : void
     {
-        $this->getJavaClass()->setMode($mode);
+        $this->getIComplexCodetextDTO()->mode = $mode;
     }
 
     /**
@@ -2544,7 +2888,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function getMode() : int
     {
-        return java_cast($this->getJavaClass()->getMode(),"integer");
+        return $this->getIComplexCodetextDTO()->mode;
     }
 
     /**
@@ -2553,7 +2897,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function getConstructedCodetext() : string
     {
-        return java_cast($this->getJavaClass()->getConstructedCodetext(),"string");
+        return $this->getMessage();
     }
 
     /**
@@ -2562,31 +2906,24 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function initFromString(string $constructedCodetext) : void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $this->setIComplexCodetextDTO($client->MaxiCodeStandardCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext));
+        $thriftConnection->closeConnection();
     }
 
     /**
-     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStandardCodetext"/> value.
-     * @param object obj An <see cref="MaxiCodeStandardCodetext"/> value to compare to this instance.
+     * Returns a value indicating whether this instance is equal to a specified MaxiCodeStandardCodetext value.
+     * @param object obj An MaxiCodeStandardCodetext value to compare to this instance.
      * @return bool if obj has the same value as this instance; otherwise, <b>false</b>.
      */
     public function equals($obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code
-     */
-    public function getHashCode() : int
-    {
-        return java_cast($this->getJavaClass()->getHashCode(), "integer");
-    }
-
-    protected function init() : void
-    {
-
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->MaxiCodeStandardCodetext_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -2595,14 +2932,12 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
  */
 class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStandartSecondMessage";
-
     function __construct()
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            $this->setMaxiCodeSecondMessageDto($this->obtainDto());
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -2610,12 +2945,32 @@ class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
         }
     }
 
-    static function construct($javaClass)
+    static function _construct($dtoObj)
     {
-        $_class = new MaxiCodeStandartSecondMessage();
-        $_class->setJavaClass($javaClass);
+        try
+        {
+            $obj = new MaxiCodeStandartSecondMessage();
+            $obj->setMaxiCodeSecondMessageDto($dtoObj);
+            $obj->initFieldsFromDto();
+            return $obj;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
 
-        return $_class;
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $maxiCodeStandartSecondMessageDTO = $client->MaxiCodeStandartSecondMessage_ctor();
+        $thriftConnection->closeConnection();
+        return $maxiCodeStandartSecondMessageDTO;
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -2623,7 +2978,7 @@ class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
      */
     public function setMessage(string $value)
     {
-        $this->getJavaClass()->setMessage($value);
+        $this->getMaxiCodeSecondMessageDto()->message = $value;
     }
 
     /**
@@ -2632,193 +2987,25 @@ class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
      */
     public function getMessage() : string
     {
-        return java_cast($this->getJavaClass()->getMessage(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $message = $client->MaxiCodeStandartSecondMessage_getMessage($this->getMaxiCodeSecondMessageDto());
+        $thriftConnection->closeConnection();
+        return $message;
     }
 
     /**
-     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStandartSecondMessage"/> value.
-     * @param object obj An <see cref="MaxiCodeStandartSecondMessage"/> value to compare to this instance
+     * Returns a value indicating whether this instance is equal to a specified MaxiCodeStandartSecondMessage value.
+     * @param object obj An MaxiCodeStandartSecondMessage value to compare to this instance
      * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
      */
     public function equals($obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function getHashCode() : int
-    {
-        return java_cast($this->getJavaClass()->getHashCode(), "function");
-    }
-
-    protected function init() : void
-    {
-    }
-}
-
-
-/**
- * Base class for encoding and decoding the text embedded in the MaxiCode code for modes 2 and 3.
- *
- *  This sample shows how to decode raw MaxiCode codetext to MaxiCodeStructuredCodetext instance.
- *  @code
- *  $reader = new BarCodeReader("c:\\test.png", DecodeType::MAXI_CODE);
- *  foreach($reader->readBarCodes() as $result)
- *  {
- *      $resultMaxiCodeCodetext = ComplexCodetextReader::tryDecodeMaxiCode($result->getExtended()->getMaxiCode()->getMaxiCodeMode(), $result->getCodeText());
- *      if ($resultMaxiCodeCodetext instanceof MaxiCodeStructuredCodetext)
- *      {
- *          $maxiCodeStructuredCodetext = $resultMaxiCodeCodetext;
- *          print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
- *          print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
- *          print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
- *      }
- *  }
- *  @endcode
- */
-abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
-{
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredCodetext";
-
-    private $maxiCodeSecondMessage;
-
-    function __construct($javaClass)
-    {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    protected function init() : void
-    {
-        $javaMaxiCodeSecondMessage = $this->getJavaClass()->getSecondMessage();
-        $javaMaxiCodeStandartSecondMessage=new java_class(MaxiCodeStandartSecondMessage::JAVA_CLASS_NAME);
-        $javaMaxiCodeStructuredSecondMessage=new java_class(MaxiCodeStructuredSecondMessage::JAVA_CLASS_NAME);
-
-        if(java_is_null($javaMaxiCodeSecondMessage))
-        {
-            $this->maxiCodeSecondMessage = null;
-        }
-        else if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStandartSecondMessage))
-        {
-            $this->maxiCodeSecondMessage = MaxiCodeStandartSecondMessage::construct($javaMaxiCodeSecondMessage);
-        }
-        else if(java_instanceof($javaMaxiCodeSecondMessage, $javaMaxiCodeStructuredSecondMessage))
-        {
-            $this->maxiCodeSecondMessage = MaxiCodeStructuredSecondMessage::construct($javaMaxiCodeSecondMessage);
-        }
-    }
-
-    /**
-     * Identifies the postal code. Must be 9 digits in mode 2 or
-     * 6 alphanumeric symbols in mode 3.
-     */
-    public function getPostalCode() : string
-    {
-        return java_cast($this->getJavaClass()->getPostalCode(), "string");
-    }
-
-    /**
-     * Identifies the postal code. Must be 9 digits in mode 2 or
-     * 6 alphanumeric symbols in mode 3.
-     */
-    public function setPostalCode(string $value)
-    {
-        $this->getJavaClass()->setPostalCode($value);
-    }
-
-    /**
-     * Identifies 3 digit country code.
-     */
-    public function getCountryCode() : int
-    {
-        return java_cast($this->getJavaClass()->getCountryCode(), "integer");
-    }
-
-    /**
-     * Identifies 3 digit country code.
-     */
-    public function setCountryCode(int $value) : void
-    {
-        $this->getJavaClass()->setCountryCode($value);
-    }
-
-    /**
-     * Identifies 3 digit service category.
-     */
-    public function getServiceCategory() : int
-    {
-        return java_cast($this->getJavaClass()->getServiceCategory(), "integer");
-    }
-
-    /**
-     * Identifies 3 digit service category.
-     */
-    public function setServiceCategory(int $value) : void
-    {
-        $this->getJavaClass()->setServiceCategory($value);
-    }
-
-    /**
-     * Identifies second message of the barcode.
-     */
-    public function getSecondMessage() : MaxiCodeSecondMessage
-    {
-        return $this->maxiCodeSecondMessage;
-    }
-
-    /**
-     * Identifies second message of the barcode.
-     */
-    public function setSecondMessage(MaxiCodeSecondMessage $value)
-    {
-        $this->maxiCodeSecondMessage = $value;
-        $this->getJavaClass()->setSecondMessage($value->getJavaClass());
-    }
-
-    /**
-     * Constructs codetext
-     * @return string Constructed codetext
-     */
-    public function getConstructedCodetext() : string
-    {
-        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
-    }
-
-    /**
-     * Initializes instance from constructed codetext.
-     * @param string $constructedCodetext Constructed codetext.
-     */
-    public function initFromString(string $constructedCodetext) : void
-    {
-        $this->getJavaClass()->initFromString($constructedCodetext);
-    }
-
-    /**
-     * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStructuredCodetext"/> value.
-     * @param object $obj An <see cref="MaxiCodeStructuredCodetext"/> value to compare to this instance.
-     * @return bool <b>true</b> if obj has the same value as this instance; otherwise, <b>false</b>.
-     */
-    public function equals($obj) : bool
-    {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function getHashCode() : int
-    {
-        return $this->getJavaClass()->getHashCode();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->MaxiCodeStandardCodetext_equals($this->getMaxiCodeSecondMessageDto(), $obj->getMaxiCodeSecondMessageDto());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -2827,14 +3014,12 @@ abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
  */
 class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwMaxiCodeStructuredSecondMessage";
-
     function __construct()
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            $this->setMaxiCodeSecondMessageDto($this->obtainDto());
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -2842,12 +3027,32 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
         }
     }
 
-    static function construct($javaClass)
+    public function obtainDto(...$args)
     {
-        $_class = new MaxiCodeStructuredSecondMessage();
-        $_class->setJavaClass($javaClass);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $maxiCodeStructuredSecondMessage = $client->MaxiCodeStructuredSecondMessage_ctor();
+        $thriftConnection->closeConnection();
+        return $maxiCodeStructuredSecondMessage;
+    }
 
-        return $_class;
+    public function initFieldsFromDto()
+    {
+    }
+
+    static function _construct($dtoObj)
+    {
+        try
+        {
+            $obj = new MaxiCodeStructuredSecondMessage();
+            $obj->setMaxiCodeSecondMessageDto($dtoObj);
+            $obj->initFieldsFromDto();
+            return $obj;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
@@ -2855,7 +3060,7 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function getYear() : int
     {
-        return java_cast($this->getJavaClass()->getYear(), "integer");
+        return $this->getMaxiCodeSecondMessageDto()->year;
     }
 
     /**
@@ -2863,7 +3068,7 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function setYear(int $value) : void
     {
-        $this->getJavaClass()->setYear($value);
+        $this->getMaxiCodeSecondMessageDto()->year = $value;
     }
 
     /**
@@ -2872,11 +3077,7 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function getIdentifiers() : array
     {
-        $identifiers_string = java_cast($this->getJavaClass()->getIdentifiers(), "string");
-        $delimeter = "\\/\\";
-        $identifiers = explode($delimeter, $identifiers_string);
-
-        return $identifiers;
+        return $this->getMaxiCodeSecondMessageDto()->identifiers;
     }
 
     /**
@@ -2885,7 +3086,7 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function add(string $identifier) : void
     {
-        $this->getJavaClass()->add($identifier);
+        array_push($this->getMaxiCodeSecondMessageDto()->identifiers, $identifier);
     }
 
     /**
@@ -2893,7 +3094,7 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function clear() : void
     {
-        $this->getJavaClass()->clear();
+        $this->getMaxiCodeSecondMessageDto()->identifiers = array();
     }
 
     /**
@@ -2902,9 +3103,13 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function getMessage() : string
     {
-        return java_cast($this->getJavaClass()->getMessage(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $message = $client->MaxiCodeStructuredSecondMessage_getMessage($this->getMaxiCodeSecondMessageDto());
+        $thriftConnection->closeConnection();
+        return $message;
     }
-    
+
     /**
      * Returns a value indicating whether this instance is equal to a specified <see cref="MaxiCodeStructuredSecondMessage"/> value.
      * @param object $obj An <see cref="MaxiCodeStructuredSecondMessage"/> value to compare to this instance.
@@ -2912,23 +3117,80 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
      */
     public function equals($obj) : bool
     {
-        return java_is_true($this->getJavaClass()->equals($obj->getJavaClass()));
-    }
-
-    /**
-     * Returns the hash code for this instance.
-     * @return int A 32-bit signed integer hash code.
-     */
-    public function getHashCode() : int
-    {
-        return java_cast($this->getJavaClass()->getHashCode(), "integer");
-    }
-
-    protected function init() : void
-    {
-
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $message = $client->MaxiCodeStructuredSecondMessage_equals($this->getMaxiCodeSecondMessageDto(), $obj->getMaxiCodeSecondMessageDto());
+        $thriftConnection->closeConnection();
+        return $message;
     }
 }
+
+/**
+ * <p>
+ * Base class for encoding and decoding the text embedded in the HIBC LIC code.
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to decode raw HIBC LIC codetext to HIBCLICComplexCodetext instance.
+ * <pre>
+ * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::HIBC_AZTEC_LIC);
+ * {
+ *     foreach($reader->readBarCodes() as $result)
+ *     {
+ *         $resultHIBCLICComplexCodetext = ComplexCodetextReader::tryDecodeHIBCLIC($result->getCodeText());
+ *         print("BarCode Type: " . $resultMaxiCodeCodetext->getBarcodeType());
+ *         print("BarCode CodeText: " . $resultMaxiCodeCodetext->getConstructedCodetext());
+ *     }
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+abstract class HIBCLICComplexCodetext extends IComplexCodetext
+{
+
+    function __construct($HIBCLICComplexCodetextDto)
+    {
+        $this->setIComplexCodetextDTO($HIBCLICComplexCodetextDto);
+        $this->initFieldsFromDto();
+    }
+    /**
+     * <p>
+     * Constructs codetext
+     * </p>
+     * @return string Constructed codetext
+     */
+    public abstract function getConstructedCodetext() : string;
+
+    /**
+     * <p>
+     * Initializes instance from constructed codetext.
+     * </p>
+     * @param string constructedCodetext Constructed codetext.
+     */
+    public abstract function initFromString(string $constructedCodetext) : void;
+
+    /**
+     * <p>
+     * Gets or sets barcode type. HIBC LIC codetext can be encoded using HIBCCode39LIC, HIBCCode128LIC, HIBCAztecLIC, HIBCDataMatrixLIC and HIBCQRLIC encode types.
+     * Default value: HIBCCode39LIC.
+     * </p>
+     * @return int Barcode type.
+     */
+    public function getBarcodeType() : int
+    {
+        return $this->getIComplexCodetextDTO()->barcodeType;
+    }
+    /**
+     * <p>
+     * Gets or sets barcode type. HIBC LIC codetext can be encoded using HIBCCode39LIC, HIBCCode128LIC, HIBCAztecLIC, HIBCDataMatrixLIC and HIBCQRLIC encode types.
+     * Default value: HIBCCode39LIC.
+     * </p>
+     * @return int Barcode type.
+     */
+    public function setBarcodeType(int $value) : void
+    {
+        $this->getIComplexCodetextDTO()->barcodeType = $value;
+    }
+}
+
 
 /**
  * <p>
@@ -2973,25 +3235,34 @@ class MaxiCodeStructuredSecondMessage extends MaxiCodeSecondMessage
  */
 class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
 {
-    public const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCLICCombinedCodetext";
-
     function __construct()
     {
-        $javaClass = new java(self::JAVA_CLASS_NAME);
-        parent::__construct($javaClass);
+        $this->setIComplexCodetextDTO($this->obtainDto());
+        $this->getIComplexCodetextDTO()->complexCodetextType = ComplexCodetextType::HIBCLICCombinedCodetext;
+        $this->initFieldsFromDto();
     }
 
     static function construct($javaClass) : HIBCLICCombinedCodetext
     {
         $obj = new HIBCLICCombinedCodetext();
-        $obj->setJavaClass($javaClass);
+        $obj->setIComplexCodetextDTO($javaClass);
+        $obj->initFieldsFromDto();
         return $obj;
     }
 
-    protected function init() : void
+    public function obtainDto(...$args)
     {
-        $this->auto_PrimaryData = PrimaryData::construct($this->getJavaClass()->getPrimaryData());
-        $this->auto_SecondaryAndAdditionalData = SecondaryAndAdditionalData::construct($this->getJavaClass()->getSecondaryAndAdditionalData());
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $complexCodetextDTO = $client->HIBCLICCombinedCodetext_ctor();
+        $thriftConnection->closeConnection();
+        return $complexCodetextDTO;
+    }
+
+    public function initFieldsFromDto()
+    {
+        $this->auto_PrimaryData = PrimaryData::construct($this->getIComplexCodetextDTO()->primaryData);
+        $this->auto_SecondaryAndAdditionalData = SecondaryAndAdditionalData::construct($this->getIComplexCodetextDTO()->secondaryAndAdditionalData);
     }
 
     /**
@@ -3011,7 +3282,7 @@ class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
      */
     public function setPrimaryData(PrimaryData $value) : void
     {
-        $this->getJavaClass()->setPrimaryData($value->getJavaClass());
+        $this->getIComplexCodetextDTO()->primaryData = ($value->getPrimaryDataDto());
         $this->auto_PrimaryData = $value;
     }
 
@@ -3034,7 +3305,7 @@ class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
      */
     public function setSecondaryAndAdditionalData(SecondaryAndAdditionalData $value) : void
     {
-        $this->getJavaClass()->setSecondaryAndAdditionalData($value->getJavaClass());
+        $this->getIComplexCodetextDTO()->secondaryAndAdditionalData = ($value->getSecondaryAndAdditionalDataDto());
         $this->auto_SecondaryAndAdditionalData = $value;
     }
 
@@ -3045,11 +3316,15 @@ class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
      * Constructs codetext
      * </p>
      *
-     * @return Constructed codetext
+     * @return string Constructed codetext
      */
     public function getConstructedCodetext() : string
     {
-        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->HIBCLICCombinedCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
     }
 
     /**
@@ -3057,11 +3332,17 @@ class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
      * Initializes instance from constructed codetext.
      * </p>
      *
-     * @param constructedCodetext Constructed codetext.
+     * @param string constructedCodetext Constructed codetext.
+     * @return void
      */
     public function initFromString(string $constructedCodetext) : void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $HIBCLICCombinedCodetextDTO = $client->HIBCLICCombinedCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext);
+        $this->setIComplexCodetextDTO($HIBCLICCombinedCodetextDTO);
+        $thriftConnection->closeConnection();
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -3074,83 +3355,11 @@ class HIBCLICCombinedCodetext extends HIBCLICComplexCodetext
      */
     public function  equals(HIBCLICCombinedCodetext $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     *
-     * @return A 32-bit signed integer hash code.
-     */
-    public  function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-}
-
-/**
- * <p>
- * Base class for encoding and decoding the text embedded in the HIBC LIC code.
- * </p><p><hr><blockquote><pre>
- * This sample shows how to decode raw HIBC LIC codetext to HIBCLICComplexCodetext instance.
- * <pre>
- * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::HIBC_AZTEC_LIC);
- * {
- *     foreach($reader->readBarCodes() as $result)
- *     {
- *         $resultHIBCLICComplexCodetext = ComplexCodetextReader::tryDecodeHIBCLIC($result->getCodeText());
- *         print("BarCode Type: " . $resultMaxiCodeCodetext->getBarcodeType());
- *         print("BarCode CodeText: " . $resultMaxiCodeCodetext->getConstructedCodetext());
- *     }
- * }
- * </pre>
- * </pre></blockquote></hr></p>
- */
-abstract class HIBCLICComplexCodetext extends IComplexCodetext
-{
-    function __construct($javaClass)
-    {
-        parent::__construct($javaClass);
-    }
-    /**
-     * <p>
-     * Constructs codetext
-     * </p>
-     * @return Constructed codetext
-     */
-    public abstract function getConstructedCodetext() : string;
-
-    /**
-     * <p>
-     * Initializes instance from constructed codetext.
-     * </p>
-     * @param constructedCodetext Constructed codetext.
-     */
-    public abstract function initFromString(string $constructedCodetext) : void;
-
-    /**
-     * <p>
-     * Gets or sets barcode type. HIBC LIC codetext can be encoded using HIBCCode39LIC, HIBCCode128LIC, HIBCAztecLIC, HIBCDataMatrixLIC and HIBCQRLIC encode types.
-     * Default value: HIBCCode39LIC.
-     * </p>
-     * @return Barcode type.
-     */
-    public function getBarcodeType() : int
-    {
-        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
-    }
-    /**
-     * <p>
-     * Gets or sets barcode type. HIBC LIC codetext can be encoded using HIBCCode39LIC, HIBCCode128LIC, HIBCAztecLIC, HIBCDataMatrixLIC and HIBCQRLIC encode types.
-     * Default value: HIBCCode39LIC.
-     * </p>
-     * @return Barcode type.
-     */
-    public function setBarcodeType(int $value) : void
-    {
-        $this->getJavaClass()->setBarcodeType($value);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->HIBCLICCombinedCodetext_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -3185,26 +3394,36 @@ abstract class HIBCLICComplexCodetext extends IComplexCodetext
  */
 class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCLICPrimaryDataCodetext";
 
     function __construct()
     {
-        parent::__construct(new java(HIBCLICPrimaryDataCodetext::JAVA_CLASS_NAME));
+        $this->setIComplexCodetextDTO($this->obtainDto());
+        $this->getIComplexCodetextDTO()->complexCodetextType = ComplexCodetextType::HIBCLICPrimaryDataCodetext;
+        $this->initFieldsFromDto();
     }
 
-    static function construct($java_class) : HIBCLICPrimaryDataCodetext
+    static function construct($HIBCLICPrimaryDataCodetextDto) : HIBCLICPrimaryDataCodetext
     {
         $obj = new HIBCLICPrimaryDataCodetext();
-        $obj->setJavaClass($java_class);
+        $obj->setIComplexCodetextDTO($HIBCLICPrimaryDataCodetextDto);
         return $obj;
     }
 
-    protected function init() : void
+    public function obtainDto(...$args)
     {
-        $this->data = PrimaryData::construct($this->getJavaClass()->getData());
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $complexCodetextDTO = $client->HIBCLICPrimaryDataCodetext_ctor();
+        $thriftConnection->closeConnection();
+        return $complexCodetextDTO;
     }
 
-    private $data;
+    public function initFieldsFromDto()
+    {
+        $this->primaryData = PrimaryData::construct($this->getIComplexCodetextDTO()->primaryData);
+    }
+
+    private $primaryData;
 
     /**
      * <p>
@@ -3213,7 +3432,7 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
      */
     public function getData() : PrimaryData
     {
-        return $this->data;
+        return $this->primaryData;
     }
 
     /**
@@ -3223,8 +3442,8 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
      */
     public function setData(PrimaryData $value) : void
     {
-        $this->getJavaClass()->setData($value->getJavaClass());
-        $this->data = $value;
+        $this->getIComplexCodetextDTO()->primaryData = $value->getPrimaryDataDto();
+        $this->primaryData = $value;
     }
 
     /**
@@ -3232,11 +3451,15 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
      * Constructs codetext
      * </p>
      *
-     * @return Constructed codetext
+     * @return string Constructed codetext
      */
     public function getConstructedCodetext() : string
     {
-        return $this->getJavaClass()->getConstructedCodetext();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->HIBCLICPrimaryDataCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
     }
 
     /**
@@ -3244,11 +3467,16 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
      * Initializes instance from constructed codetext.
      * </p>
      *
-     * @param constructedCodetext Constructed codetext.
+     * @param string constructedCodetext Constructed codetext.
      */
     public function initFromString(string $constructedCodetext) : void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $HIBCLICPrimaryDataCodetextDTO = $client->HIBCLICPrimaryDataCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext);
+        $this->setIComplexCodetextDTO($HIBCLICPrimaryDataCodetextDTO);
+        $thriftConnection->closeConnection();
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -3256,24 +3484,16 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
      * Returns a value indicating whether this instance is equal to a specified {@code HIBCLICPrimaryDataCodetext} value.
      * </p>
      *
-     * @param obj An {@code HIBCLICPrimaryDataCodetext} value to compare to this instance.
+     * @param bool obj An {@code HIBCLICPrimaryDataCodetext} value to compare to this instance.
      * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
      */
     function equals(HIBCLICPrimaryDataCodetext $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     *
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return $this->getJavaClass()->hashCode();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->HIBCLICPrimaryDataCodetext_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -3309,19 +3529,35 @@ class HIBCLICPrimaryDataCodetext extends HIBCLICComplexCodetext
  */
 class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCLICSecondaryAndAdditionalDataCodetext";
     private $data;
 
     function __construct()
     {
-        parent::__construct(new java(HIBCLICSecondaryAndAdditionalDataCodetext::JAVA_CLASS_NAME));
+        $this->setIComplexCodetextDTO($this->obtainDto());
+        $this->getIComplexCodetextDTO()->complexCodetextType = ComplexCodetextType::HIBCLICSecondaryAndAdditionalDataCodetext;
+        $this->initFieldsFromDto();
     }
 
     static function construct($java_class) : HIBCLICSecondaryAndAdditionalDataCodetext
     {
         $obj = new HIBCLICSecondaryAndAdditionalDataCodetext();
-        $obj->setJavaClass($java_class);
+        $obj->setIComplexCodetextDTO($java_class);
+        $obj->initFieldsFromDto();
         return $obj;
+    }
+
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $HIBCLICSecondaryAndAdditionalDataCodetextDTO = $client->HIBCLICSecondaryAndAdditionalDataCodetext_ctor();
+        $thriftConnection->closeConnection();
+        return $HIBCLICSecondaryAndAdditionalDataCodetextDTO;
+    }
+
+    public function initFieldsFromDto()
+    {
+        $this->data = SecondaryAndAdditionalData::construct($this->getIComplexCodetextDTO()->secondaryAndAdditionalData);
     }
 
     /**
@@ -3341,7 +3577,7 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
      */
     public function setData(SecondaryAndAdditionalData $value) : void
     {
-        $this->getJavaClass()->setData($value->getJavaClass());
+        $this->getIComplexCodetextDTO()->secondaryAndAdditionalData = ($value->getSecondaryAndAdditionalDataDto());
         $this->data = $value;
     }
 
@@ -3352,7 +3588,7 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
      */
     public function getLinkCharacter() : string
     {
-        return java_cast($this->getJavaClass()->getLinkCharacter(), "string");
+        return $this->getIComplexCodetextDTO()->linkCharacter;
     }
 
     /**
@@ -3362,7 +3598,7 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
      */
     public function setLinkCharacter(string $value) : void
     {
-        $this->getJavaClass()->setLinkCharacter($value);
+        $this->getIComplexCodetextDTO()->linkCharacter = $value;
     }
 
     /**
@@ -3370,11 +3606,15 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
      * Constructs codetext
      * </p>
      *
-     * @return Constructed codetext
+     * @return string Constructed codetext
      */
     public function getConstructedCodetext() : string
     {
-        return $this->getJavaClass()->getConstructedCodetext();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->HIBCLICSecondaryAndAdditionalDataCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
     }
 
     /**
@@ -3382,12 +3622,16 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
      * Initializes instance from constructed codetext.
      * </p>
      *
-     * @param constructedCodetext Constructed codetext.
+     * @param string constructedCodetext Constructed codetext.
      */
     function initFromString(string $constructedCodetext) : void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
-        $this->init();
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $HIBCLICSecondaryAndAdditionalDataCodetext = $client->HIBCLICSecondaryAndAdditionalDataCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext);
+        $this->setIComplexCodetextDTO($HIBCLICSecondaryAndAdditionalDataCodetext);
+        $thriftConnection->closeConnection();
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -3396,28 +3640,15 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
      * </p>
      *
      * @param obj An {@code HIBCLICSecondaryAndAdditionalDataCodetext} value to compare to this instance.
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @return bool true if obj has the same value as this instance; otherwise, false
      */
     public function equals(HIBCLICSecondaryAndAdditionalDataCodetext $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
-
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     *
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    protected function init() : void
-    {
-        $this->data = SecondaryAndAdditionalData::construct($this->getJavaClass()->getData());
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->HIBCLICSecondaryAndAdditionalDataCodetext_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -3452,11 +3683,11 @@ class HIBCLICSecondaryAndAdditionalDataCodetext extends HIBCLICComplexCodetext
  */
 class HIBCPASCodetext extends IComplexCodetext
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCPASCodetext";
-
+    private $_recordsList;
     function __construct()
     {
-        parent::__construct(new java(self::JAVA_CLASS_NAME));
+        $this->setIComplexCodetextDTO($this->obtainDto());
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -3464,16 +3695,29 @@ class HIBCPASCodetext extends IComplexCodetext
      * HIBCPASRecord constructor
      * </p>
      */
-    static function construct($javaClass) : HIBCPASCodetext
+    static function construct($HIBCPASCodetextDto) : HIBCPASCodetext
     {
         $obj = new HIBCPASCodetext();
-        $obj->setJavaClass($javaClass);
+        $obj->setIComplexCodetextDTO($HIBCPASCodetextDto);
+        $obj->initFieldsFromDto();
         return $obj;
     }
 
-    protected function init() : void
+    public function obtainDto(...$args)
     {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->HIBCPASCodetext_ctor();
+        $thriftConnection->closeConnection();
+        return $dtoRef;
+    }
 
+    public function initFieldsFromDto()
+    {
+        $this->_recordsList = array();
+        foreach($this->getIComplexCodetextDTO()->records as $recordDTO)
+            array_push($this->_recordsList, HIBCPASRecord::construct($recordDTO));
+        $this->getIComplexCodetextDTO()->complexCodetextType = ComplexCodetextType::HIBCPASCodetext;
     }
 
     /**
@@ -3481,11 +3725,12 @@ class HIBCPASCodetext extends IComplexCodetext
      * Gets or sets barcode type. HIBC PAS codetext can be encoded using HIBCCode39PAS, HIBCCode128PAS, HIBCAztec:PAS, HIBCDataMatrixPAS and HIBCQRPAS encode types.
      * Default value: HIBCCode39PAS.
      * </p>
-     * @return Barcode type.
+     * @param int $value Barcode type.
+     * @return void
      */
     public function setBarcodeType(int $value) : void
     {
-        $this->getJavaClass()->setBarcodeType($value);
+        $this->getIComplexCodetextDTO()->barcodeType = $value;
     }
 
     /**
@@ -3495,7 +3740,7 @@ class HIBCPASCodetext extends IComplexCodetext
      */
     public function getDataLocation() : int
     {
-        return java_cast($this->getJavaClass()->getDataLocation(), "integer");
+        return $this->getIComplexCodetextDTO()->dataLocation;
     }
     /**
      * <p>
@@ -3504,7 +3749,7 @@ class HIBCPASCodetext extends IComplexCodetext
      */
     public function setDataLocation(int $value) : void
     {
-        $this->getJavaClass()->setDataLocation($value);
+        $this->getIComplexCodetextDTO()->dataLocation = $value;
     }
 
     /**
@@ -3515,38 +3760,35 @@ class HIBCPASCodetext extends IComplexCodetext
      */
     function getRecords() : array
     {
-        $_array = array();
-        $mwRecordsList = $this->getJavaClass()->getRecords();
-        $listSize = java_cast($mwRecordsList->size(), "integer");
-        for ($i = 0; $i < $listSize; $i++)
-        {
-            $mwhibcpasRecord = $mwRecordsList->get($i);
-            array_push($_array, HIBCPASRecord::construct($mwhibcpasRecord));
-        }
-        return $_array;
+        return $this->_recordsList;
     }
 
     /**
      * <p>
      * Adds new record
      * </p>
-     * @param dataType Type of data
-     * @param data Data string
+     * @param int dataType Type of data
+     * @param string data Data string
      */
     public function addRecord(int $dataType, string $data) : void
     {
-        $this->getJavaClass()->addRecord($dataType, $data);
+        $hibcPASRecord = new HIBCPASRecord($dataType, $data);
+
+        array_push($this->_recordsList, $hibcPASRecord);
+        array_push($this->getIComplexCodetextDTO()->records, $hibcPASRecord->getHIBCPASRecordDto());
     }
 
     /**
      * <p>
      * Adds new record
      * </p>
-     * @param record Record to be added
+     * @param HIBCPASRecord record Record to be added
+     * @return void
      */
     public function addHIBCPASRecord(HIBCPASRecord $record) : void
     {
-        $this->getJavaClass()->addRecord($record->getJavaClass());
+        array_push($this->_recordsList, $record);
+        array_push($this->getIComplexCodetextDTO()->records, $record->getHIBCPASRecordDto());
     }
 
     /**
@@ -3556,63 +3798,67 @@ class HIBCPASCodetext extends IComplexCodetext
      */
     public function clear() : void
     {
-        $this->getJavaClass()->clear();
+        $this->_recordsList = array();
     }
 
     /**
      * <p>
      * Gets barcode type.
      * </p>
-     * @return Barcode type.
+     * @return int Barcode type.
      */
     public function getBarcodeType() : int
     {
-        return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
+        return $this->getIComplexCodetextDTO()->barcodeType;
     }
 
     /**
      * <p>
      * Constructs codetext
      * </p>
-     * @return Constructed codetext
+     * @return string Constructed codetext
      */
     public function getConstructedCodetext() : string
     {
-        return java_cast($this->getJavaClass()->getConstructedCodetext(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $constructedCodetext = $client->HIBCPASCodetext_getConstructedCodetext($this->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
+        return $constructedCodetext;
     }
 
     /**
      * <p>
      * Initializes instance from constructed codetext.
      * </p>
-     * @param constructedCodetext Constructed codetext.
+     * @param string constructedCodetext Constructed codetext.
+     * @return void
      */
     public function initFromString(string $constructedCodetext) : void
     {
-        $this->getJavaClass()->initFromString($constructedCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $hibcPASCodetextDTO = $client->HIBCPASCodetext_initFromString($this->getIComplexCodetextDTO(), $constructedCodetext);
+        $this->setIComplexCodetextDTO($hibcPASCodetextDTO);
+        $thriftConnection->closeConnection();
+        $this->initFieldsFromDto();
     }
 
     /**
      * <p>
      * Returns a value indicating whether this instance is equal to a specified {@code HIBCPASCodetext} value.
      * </p>
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
-     * @param obj An {@code HIBCPASCodetext} value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
+     * @param HIBCPASCodetext obj An {@code HIBCPASCodetext} value to compare to this instance.
      */
     public function equals(HIBCPASCodetext $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->HIBCPASCodetext_equals($this->getIComplexCodetextDTO(), $obj->getIComplexCodetextDTO());
+        $thriftConnection->closeConnection();
 
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        return $isEquals;
     }
 }
 
@@ -3621,21 +3867,40 @@ class HIBCPASCodetext extends IComplexCodetext
  * Class for storing HIBC PAS record.
  * </p>
  */
-class HIBCPASRecord extends BaseJavaClass
+class HIBCPASRecord implements Communicator
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwHIBCPASRecord";
+    private $HIBCPASRecordDto;
+
+    /**
+     * @return mixed
+     */
+    public function getHIBCPASRecordDto()
+    {
+        return $this->HIBCPASRecordDto;
+    }
+
+    /**
+     * @param mixed $HIBCPASRecordDto
+     */
+    public function setHIBCPASRecordDto($HIBCPASRecordDto): void
+    {
+        $this->HIBCPASRecordDto = $HIBCPASRecordDto;
+    }
 
     /**
      * <p>
      * HIBCPASRecord constructor
      * </p>
      *
-     * @param dataType Type of data.
-     * @param data     Data string.
+     * @param int dataType Type of data.
+     * @param string data
      */
     function __construct(int $dataType, string $data)
     {
-        parent::__construct(new java(self::JAVA_CLASS_NAME, $dataType, $data));
+        $this->HIBCPASRecordDto = new HIBCPASRecordDTO();
+        $this->HIBCPASRecordDto->dataType = $dataType;
+        $this->HIBCPASRecordDto->data = $data;
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -3645,13 +3910,19 @@ class HIBCPASRecord extends BaseJavaClass
      */
     static function construct($javaClass) : HIBCPASRecord
     {
-        $obj = new HIBCPASRecord(0,0);
-        $obj->setJavaClass($javaClass);
+        $obj = new HIBCPASRecord(0,"");
+        $obj->setHIBCPASRecordDto($javaClass);
         return $obj;
     }
 
-    protected function init() : void
-    {}
+    public function obtainDto(...$args)
+    {
+
+    }
+
+    public function initFieldsFromDto()
+    {
+    }
 
     /**
      * <p>
@@ -3660,7 +3931,7 @@ class HIBCPASRecord extends BaseJavaClass
      */
     public function getDataType() : int
     {
-        return java_cast($this->getJavaClass()->getDataType(), "integer");
+        return $this->getHIBCPASRecordDto()->dataType;
     }
 
     /**
@@ -3670,7 +3941,7 @@ class HIBCPASRecord extends BaseJavaClass
      */
     public function setDataType(int $value) : void
     {
-        $this->getJavaClass()->setDataType($value);
+        $this->getHIBCPASRecordDto()->setDataType = $value;
     }
 
     /**
@@ -3680,7 +3951,7 @@ class HIBCPASRecord extends BaseJavaClass
      */
     public function getData() : string
     {
-        return java_cast($this->getJavaClass()->getData(), "string");
+        return $this->getHIBCPASRecordDto()->data;
     }
 
     /**
@@ -3690,7 +3961,7 @@ class HIBCPASRecord extends BaseJavaClass
      */
     public function setData(string $value) : void
     {
-        $this->getJavaClass()->setData($value);
+        $this->getHIBCPASRecordDto()->setData = $value;
     }
 
     /**
@@ -3698,24 +3969,16 @@ class HIBCPASRecord extends BaseJavaClass
      * Returns a value indicating whether this instance is equal to a specified {@code HIBCPASDataType} value.
      * </p>
      *
-     * @param obj An {@code HIBCPASDataType} value to compare to this instance.
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param HIBCPASRecord obj An {@code HIBCPASDataType} value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public function equals(HIBCPASRecord $obj) : bool
     {
-        return $this->getJavaClass()->equals($obj->getJavaClass());
-    }
-
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     *
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->HIBCPASRecord_equals($this->getHIBCPASRecordDto(), $obj->getHIBCPASRecordDto());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
 }
 
@@ -3725,21 +3988,52 @@ class HIBCPASRecord extends BaseJavaClass
  * Class for storing HIBC LIC primary data.
  * </p>
  */
-class PrimaryData extends BaseJavaClass
+class PrimaryData implements Communicator
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwPrimaryData";
+    private $primaryDataDto;
+
+    /**
+     * @return mixed
+     */
+    public function getPrimaryDataDto()
+    {
+        return $this->primaryDataDto;
+    }
+
+    /**
+     * @param mixed $PrimaryDataDto
+     */
+    public function setPrimaryDataDto($primaryDataDto): void
+    {
+        $this->primaryDataDto = $primaryDataDto;
+    }
 
     function __construct()
     {
-        $java_class = new java(self::JAVA_CLASS_NAME);
-        parent::__construct($java_class);
+        $this->primaryDataDto = $this->obtainDto();
+        $this->initFieldsFromDto();
     }
 
     static function construct($java_class) : PrimaryData
     {
         $obj = new PrimaryData();
-        $obj->setJavaClass($java_class);
+        $obj->setPrimaryDataDto($java_class);
+        $obj->initFieldsFromDto();
         return $obj;
+    }
+
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->PrimaryData_ctor();
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -3750,7 +4044,7 @@ class PrimaryData extends BaseJavaClass
      */
     public function getLabelerIdentificationCode() : string
     {
-        return java_cast($this->getJavaClass()->getLabelerIdentificationCode(), "string");
+        return $this->getPrimaryDataDto()->labelerIdentificationCode;
     }
 
     /**
@@ -3761,7 +4055,7 @@ class PrimaryData extends BaseJavaClass
      */
     public function setLabelerIdentificationCode(string $value) : void
     {
-        $this->getJavaClass()->setLabelerIdentificationCode($value);
+        $this->getPrimaryDataDto()->labelerIdentificationCode = $value;
     }
 
     /**
@@ -3771,7 +4065,7 @@ class PrimaryData extends BaseJavaClass
      */
     public function getProductOrCatalogNumber() : string
     {
-        return java_cast($this->getJavaClass()->getProductOrCatalogNumber(), "string");
+        return $this->getPrimaryDataDto()->productOrCatalogNumber;
     }
 
     /**
@@ -3781,7 +4075,7 @@ class PrimaryData extends BaseJavaClass
      */
     public function setProductOrCatalogNumber(string $value) : void
     {
-        $this->getJavaClass()->setProductOrCatalogNumber($value);
+        $this->getPrimaryDataDto()->productOrCatalogNumber = $value;
     }
 
     /**
@@ -3791,7 +4085,7 @@ class PrimaryData extends BaseJavaClass
      */
     public function getUnitOfMeasureID() : int
     {
-        return java_cast($this->getJavaClass()->getUnitOfMeasureID(), "integer");
+        return $this->getPrimaryDataDto()->unitOfMeasureID;
     }
 
     /**
@@ -3801,7 +4095,7 @@ class PrimaryData extends BaseJavaClass
      */
     public function setUnitOfMeasureID(int $value) : void
     {
-        $this->getJavaClass()->setUnitOfMeasureID($value);
+        $this->getPrimaryDataDto()->unitOfMeasureID = $value;
     }
 
     /**
@@ -3809,11 +4103,16 @@ class PrimaryData extends BaseJavaClass
      * Converts data to string format according HIBC LIC specification.
      * </p>
      *
-     * @return Formatted string.
+     * @return string Formatted string.
      */
     public function toString() : string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->PrimaryData_toString($this->getPrimaryDataDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 
     /**
@@ -3825,7 +4124,12 @@ class PrimaryData extends BaseJavaClass
      */
     public function parseFromString(string $primaryDataCodetext) : void
     {
-        $this->getJavaClass()->parseFromString($primaryDataCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $this->setPrimaryDataDto($client->PrimaryData_parseFromString($this->getPrimaryDataDto(), $primaryDataCodetext));
+        $thriftConnection->closeConnection();
+        $this->initFieldsFromDto();
+
     }
 
     /**
@@ -3838,23 +4142,13 @@ class PrimaryData extends BaseJavaClass
      */
     public function equals(PrimaryData $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-    }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->PrimaryData_equals($this->getPrimaryDataDto(), $obj->getPrimaryDataDto());
+        $thriftConnection->closeConnection();
 
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     *
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
+        return $isEqual;
     }
-
-    protected function init() : void
-    {}
 }
 
 /**
@@ -3862,21 +4156,52 @@ class PrimaryData extends BaseJavaClass
  * Class for storing HIBC LIC secondary and additional data.
  * </p>
  */
-class SecondaryAndAdditionalData extends BaseJavaClass
+class SecondaryAndAdditionalData implements Communicator
 {
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.complexbarcode.MwSecondaryAndAdditionalData";
+    private $secondaryAndAdditionalDataDto;
+
+    /**
+     * @return mixed
+     */
+    public function getSecondaryAndAdditionalDataDto()
+    {
+        return $this->secondaryAndAdditionalDataDto;
+    }
+
+    /**
+     * @param mixed $secondaryAndAdditionalDataDto
+     */
+    public function setSecondaryAndAdditionalDataDto($secondaryAndAdditionalDataDto): void
+    {
+        $this->secondaryAndAdditionalDataDto = $secondaryAndAdditionalDataDto;
+    }
 
     function __construct()
     {
-        $java_class = new java(self::JAVA_CLASS_NAME);
-        parent::__construct($java_class);
+        $this->secondaryAndAdditionalDataDto = $this->obtainDto();
+        $this->initFieldsFromDto();
     }
 
     static function construct($java_class) : SecondaryAndAdditionalData
     {
-        $obj = new SecondaryAndAdditionalData(null);
-        $obj->setJavaClass($java_class);
+        $obj = new SecondaryAndAdditionalData();
+        $obj->setSecondaryAndAdditionalDataDto($java_class);
+        $obj->initFieldsFromDto();
         return $obj;
+    }
+
+    public function obtainDto(...$args)
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->SecondaryAndAdditionalData_ctor();
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
+    }
+
+    public function initFieldsFromDto()
+    {
     }
 
     /**
@@ -3886,7 +4211,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function getExpiryDateFormat() : int
     {
-        return java_cast($this->getJavaClass()->getExpiryDateFormat(), "integer");
+        return $this->getSecondaryAndAdditionalDataDto()->expiryDateFormat;
     }
 
     /**
@@ -3896,7 +4221,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function setExpiryDateFormat(int $value) : void
     {
-        $this->getJavaClass()->setExpiryDateFormat($value);
+        $this->getSecondaryAndAdditionalDataDto()->expiryDateFormat = $value;
     }
 
     /**
@@ -3906,7 +4231,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function getExpiryDate() : DateTime
     {
-        return new DateTime('@' . java_cast($this->getJavaClass()->getExpiryDate(), "string"));
+        return new DateTime('@' . $this->getSecondaryAndAdditionalDataDto()->expiryDate);
     }
 
     /**
@@ -3916,7 +4241,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function setExpiryDate(DateTime $value) : void
     {
-        $this->getJavaClass()->setExpiryDate($value->getTimestamp() . "");
+        $this->getSecondaryAndAdditionalDataDto()->expiryDate = $value->getTimestamp() . "";
     }
 
     /**
@@ -3926,7 +4251,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function getLotNumber() : string
     {
-        return java_cast($this->getJavaClass()->getLotNumber(), "string");
+        return $this->getSecondaryAndAdditionalDataDto()->lotNumber;
     }
 
     /**
@@ -3938,7 +4263,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
     {
         if($value == null)
             $value = "null";
-        $this->getJavaClass()->setLotNumber($value);
+        $this->getSecondaryAndAdditionalDataDto()->lotNumber = $value;
     }
 
     /**
@@ -3948,7 +4273,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function getSerialNumber() : string
     {
-        return java_cast($this->getJavaClass()->getSerialNumber(), "string");
+        return $this->getSecondaryAndAdditionalDataDto()->serialNumber;
     }
 
     /**
@@ -3960,7 +4285,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
     {
         if($value == null)
             $value = "null";
-        $this->getJavaClass()->setSerialNumber($value);
+        $this->getSecondaryAndAdditionalDataDto()->serialNumber = $value;
     }
 
     /**
@@ -3972,7 +4297,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function getDateOfManufacture() : DateTime
     {
-        return new DateTime('@' . java_cast($this->getJavaClass()->getDateOfManufacture(), "string"));
+        return new DateTime('@' . $this->getSecondaryAndAdditionalDataDto()->dateOfManufacture);
     }
 
     /**
@@ -3984,7 +4309,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function setDateOfManufacture(DateTime $value) : void
     {
-        $this->getJavaClass()->setDateOfManufacture($value->getTimestamp() . "");
+        $this->getSecondaryAndAdditionalDataDto()->dateOfManufacture = ($value->getTimestamp() . "");
     }
 
     /**
@@ -3996,7 +4321,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function getQuantity() : int
     {
-        return java_cast($this->getJavaClass()->getQuantity(), "integer");
+        return $this->getSecondaryAndAdditionalDataDto()->quantity;
     }
 
     /**
@@ -4008,7 +4333,7 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      */
     public function setQuantity(int $value) : void
     {
-        $this->getJavaClass()->setQuantity($value);
+        $this->getSecondaryAndAdditionalDataDto()->quantity = $value;
     }
 
     /**
@@ -4016,11 +4341,15 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      * Converts data to string format according HIBC LIC specification.
      * </p>
      *
-     * @return Formatted string.
+     * @return string Formatted string.
      */
     public function toString() : string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->SecondaryAndAdditionalData_toString($this->getSecondaryAndAdditionalDataDto());
+        $thriftConnection->closeConnection();
+        return $str;
     }
 
     /**
@@ -4028,11 +4357,16 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      * Instantiates secondary and additional supplemental data from string format according HIBC LIC specification.
      * </p>
      *
-     * @param secondaryDataCodetext Formatted string.
+     * @param string secondaryDataCodetext Formatted string.
      */
     public function parseFromString(string $secondaryDataCodetext) : void
     {
-        $this->getJavaClass()->parseFromString($secondaryDataCodetext);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $secondaryAndAdditionalDataDTO = $client->SecondaryAndAdditionalData_parseFromString($this->getSecondaryAndAdditionalDataDto(), $secondaryDataCodetext);
+        $thriftConnection->closeConnection();
+        $this->setSecondaryAndAdditionalDataDto($secondaryAndAdditionalDataDTO);
+        $this->initFieldsFromDto();
     }
 
     /**
@@ -4040,29 +4374,19 @@ class SecondaryAndAdditionalData extends BaseJavaClass
      * Returns a value indicating whether this instance is equal to a specified {@code SecondaryAndAdditionalData} value.
      * </p>
      *
-     * @param obj An {@code SecondaryAndAdditionalData} value to compare to this instance.
-     * @return {@code <b>true</b>} if obj has the same value as this instance; otherwise, {@code <b>false</b>}.
+     * @param SecondaryAndAdditionalData obj An {@code SecondaryAndAdditionalData} value to compare to this instance.
+     * @return bool true if obj has the same value as this instance; otherwise, false.
      */
     public function equals(SecondaryAndAdditionalData $obj) : bool
     {
-        return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEqual = $client->SecondaryAndAdditionalData_equals($this->getSecondaryAndAdditionalDataDto(), $obj->getSecondaryAndAdditionalDataDto());
+        $thriftConnection->closeConnection();
+        return $isEqual;
     }
-
-    /**
-     * <p>
-     * Returns the hash code for this instance.
-     * </p>
-     *
-     * @return A 32-bit signed integer hash code.
-     */
-    public function hashCode() : int
-    {
-        return java_cast($this->getJavaClass()->hashCode(), "integer");
-    }
-
-    protected function init() : void
-    {}
 }
+
 /**
  * 2D Mailmark Type defines size of Data Matrix barcode
  */
@@ -4384,6 +4708,44 @@ class HIBCPASDataType
      * </p>
      */
     const USER_DEFINED = 25;
+}
+
+/**
+ * Address type
+ */
+class  AddressType
+{
+
+    /**
+     * Undetermined
+     */
+    const UNDETERMINED = 0;
+
+    /**
+     * Structured address
+     */
+    const STRUCTURED = 1;
+
+    /**
+     * Combined address elements
+     */
+    const COMBINED_ELEMENTS = 2;
+
+    /**
+     * Conflicting
+     */
+    const CONFLICTING = 3;
+}
+
+/**
+ * SwissQR bill standard version
+ */
+class QrBillStandardVersion
+{
+    /**
+     * Version 2.0
+     */
+    const V2_0 = 0;
 }
 
 ?>

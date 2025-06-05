@@ -1,5 +1,48 @@
 <?php
-require_once('Joint.php');
+namespace Aspose\Barcode;
+
+use Aspose\Barcode\Bridge\ExtCodeItemDTO;
+use Aspose\Barcode\Internal\BarcodeException;
+use Aspose\Barcode\Internal\CommonUtility;
+use Aspose\Barcode\Internal\Communicator;
+use Aspose\Barcode\Internal\License;
+use Aspose\Barcode\Internal\ThriftConnection;
+
+
+use Aspose\Barcode\Bridge\BorderParametersDTO;
+use Aspose\Barcode\Bridge\HanXinParametersDTO;
+use Aspose\Barcode\Bridge\CouponParametersDTO;
+use Aspose\Barcode\Bridge\CodabarParametersDTO;
+use Aspose\Barcode\Bridge\Code128ParametersDTO;
+use Aspose\Barcode\Bridge\AztecParametersDTO;
+use Aspose\Barcode\Bridge\MaxiCodeParametersDTO;
+use Aspose\Barcode\Bridge\SupplementParametersDTO;
+use Aspose\Barcode\Bridge\QrStructuredAppendParametersDTO;
+use Aspose\Barcode\Bridge\QrParametersDTO;
+use Aspose\Barcode\Bridge\Pdf417ParametersDTO;
+use Aspose\Barcode\Bridge\ITFParametersDTO;
+use Aspose\Barcode\Bridge\DotCodeParametersDTO;
+use Aspose\Barcode\Bridge\Code16KParametersDTO;
+use Aspose\Barcode\Bridge\DataMatrixParametersDTO;
+use Aspose\Barcode\Bridge\CodablockParametersDTO;
+use Aspose\Barcode\Bridge\GS1CompositeBarParametersDTO;
+use Aspose\Barcode\Bridge\DataBarParametersDTO;
+use Aspose\Barcode\Bridge\AustralianPostParametersDTO;
+use Aspose\Barcode\Bridge\PostalParametersDTO;
+use Aspose\Barcode\Bridge\CodetextParametersDTO;
+use Aspose\Barcode\Bridge\PatchCodeParametersDTO;
+use Aspose\Barcode\Bridge\BarcodeParametersDTO;
+use Aspose\Barcode\Bridge\PaddingDTO;
+use Aspose\Barcode\Bridge\FontUnitDTO;
+use Aspose\Barcode\Bridge\CaptionParametersDTO;
+use Aspose\Barcode\Bridge\UnitDTO;
+use Aspose\Barcode\Bridge\SvgParametersDTO;
+use Aspose\Barcode\Bridge\ImageParametersDTO;
+use Aspose\Barcode\Bridge\BaseGenerationParametersDTO;
+use Aspose\Barcode\Bridge\BarcodeGeneratorDTO;
+use DateTime;
+use Exception;
+use InvalidArgumentException;
 
 /**
  *  BarcodeGenerator for backend barcode images generation.
@@ -20,11 +63,21 @@ require_once('Joint.php');
  *          $generator->setCodeText("123ABC");
  * @endcode
  */
-class BarcodeGenerator extends BaseJavaClass
+class BarcodeGenerator implements Communicator
 {
-    private $parameters;
+    private $barcodeGeneratorDto;
 
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwBarcodeGenerator";
+    private function getBarcodeGeneratorDto(): BarcodeGeneratorDTO
+    {
+        return $this->barcodeGeneratorDto;
+    }
+
+    private function setBarcodeGeneratorDto(BarcodeGeneratorDTO $barcodeGeneratorDto): void
+    {
+        $this->barcodeGeneratorDto = $barcodeGeneratorDto;
+    }
+
+    private $parameters;
 
     /**
      * BarcodeGenerator constructor.
@@ -37,34 +90,29 @@ class BarcodeGenerator extends BaseJavaClass
      */
     public function __construct(?int $encodeType, ?string $codeText = null)
     {
-        try
-        {
-            $java_class = new java(self::JAVA_CLASS_NAME, $encodeType, $codeText);
-            parent::__construct($java_class);
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $this->barcodeGeneratorDto = $this->obtainDto($encodeType);
+            $this->getBarcodeGeneratorDto()->barcodeType = $encodeType;
+            $this->getBarcodeGeneratorDto()->base64CodeText = $codeText;
+            $this->initFieldsFromDto();
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
 
-    static function construct($javaClass): BarcodeGenerator
+    public function obtainDto(...$args) : BarcodeGeneratorDTO
     {
-        $barcodeGenerator = new BarcodeGenerator( 0, null);
-        $barcodeGenerator->setJavaClass($javaClass);
-        return $barcodeGenerator;
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $dtoRef = $client->BarcodeGenerator_ctor($args[0]);
+        $thriftConnection->closeConnection();
+
+        return $dtoRef;
     }
 
-    protected function init(): void
+    public function initFieldsFromDto(): void
     {
-        try
-        {
-            $this->parameters = new BaseGenerationParameters($this->getJavaClass()->getParameters());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->parameters = new BaseGenerationParameters($this->getBarcodeGeneratorDto()->parameters);
     }
 
     /**
@@ -73,14 +121,7 @@ class BarcodeGenerator extends BaseJavaClass
      */
     public function getParameters(): BaseGenerationParameters
     {
-        try
-        {
             return $this->parameters;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -88,12 +129,9 @@ class BarcodeGenerator extends BaseJavaClass
      */
     public function getBarcodeType(): int
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getBarcodeType(), "integer");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            return $this->getBarcodeGeneratorDto()->barcodeType;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -103,12 +141,9 @@ class BarcodeGenerator extends BaseJavaClass
      */
     public function setBarcodeType(int $value): void
     {
-        try
-        {
-            $this->getJavaClass()->setBarcodeType($value);
-        }
-        catch (Exception $ex)
-        {
+        try {
+            $this->getBarcodeGeneratorDto()->barcodeType = $value;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -117,7 +152,7 @@ class BarcodeGenerator extends BaseJavaClass
      * Generate the barcode image under current settings.
      * This sample shows how to create and save a barcode image.
      *
-     * @return string GD representation of image.
+     * @return resource|false GD image resource or false on failure.
      *
      * @code
      *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
@@ -132,7 +167,7 @@ class BarcodeGenerator extends BaseJavaClass
         {
             if (!extension_loaded('gd'))
                 throw new BarcodeException("GD extension is not available!", __FILE__, __LINE__);
-            $base64Image = java_cast($this->getJavaClass()->generateBarCodeImage(BarCodeImageFormat::PNG), "string");
+            $base64Image = $this->generateBarCodeImage(BarCodeImageFormat::PNG);
             return imagecreatefromstring(base64_decode($base64Image));
         }
         catch (Exception $ex)
@@ -140,7 +175,6 @@ class BarcodeGenerator extends BaseJavaClass
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-
 
     /**
      * Generate the barcode image under current settings.
@@ -156,16 +190,19 @@ class BarcodeGenerator extends BaseJavaClass
      *
      * @throws BarcodeException
      */
-    public function generateBarCodeImage(int $format): string
+    public function generateBarCodeImage(int $format, bool $passLicense = false): string
     {
-        try
-        {
-            $base64Image = java_cast($this->getJavaClass()->generateBarCodeImage($format), "string");
-            return ($base64Image);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            // Deciding if the license should be used
+            $licenseContent = $passLicense ? License::getLicenseContent() : null;
+            // Passing the license or null
+            $base64Image = $client->BarcodeGenerator_generateBarCodeImage($this->getBarcodeGeneratorDto(), $format, $licenseContent);
+            $thriftConnection->closeConnection();
+            return $base64Image;
+        } catch (Exception $exc) {
+            throw new BarcodeException($exc->getMessage(), __FILE__, __LINE__);
         }
     }
 
@@ -198,12 +235,9 @@ class BarcodeGenerator extends BaseJavaClass
      */
     public function getCodeText(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodeText(), "string");
-        }
-        catch (Exception $ex)
-        {
+        try {
+            return $this->getBarcodeGeneratorDto()->base64CodeText;
+        } catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
@@ -213,23 +247,24 @@ class BarcodeGenerator extends BaseJavaClass
      * Encodes codetext with byte order mark (BOM) using specified encoding.
      * </p>
      * @param string|array codeText CodeText string | Bytes of codetext
-     * @param int encoding Applied encoding
-     * @param bool flag indicates insertion of the Encoding byte order mark (BOM). In case, the Encoding requires byte order mark (BOM) insertion: like UTF8,
-     *   UTF16, UTF32, e.t.c. and flag is set to true, the BOM is added, in case of setting flag to false, the BOM insertion is ignored.
+     * @param int encoding
      */
-    public function setCodeText($value, ?string $encoding = null, ?bool $bom = false): void
+    public function setCodeText($codeText, ?string $encoding = null, ?bool $insertBOM = false): void
     {
         try
         {
-            if (is_array($value))
+            if(is_array($codeText))
             {
-                $this->getJavaClass()->setCodeBytes(base64_encode(pack("C*", ...$value)));
+                $this->getBarcodeGeneratorDto()->base64CodeText = (base64_encode(pack("C*", ...$codeText)));
+                $this->getBarcodeGeneratorDto()->codeTextType = Base64CodeTextType::BYTE;
             }
             else
             {
-                if (!is_null($bom))
-                    $adaptedBoMStr = $bom ? 'true' : 'false';
-                $this->getJavaClass()->setCodeText($value, $encoding, $adaptedBoMStr);
+                $this->getBarcodeGeneratorDto()->base64CodeText = $codeText;
+                $this->getBarcodeGeneratorDto()->codeTextType = Base64CodeTextType::STRING;
+                if(!is_null($encoding) && strlen($encoding) > 0)
+                    $this->getBarcodeGeneratorDto()->encoding = $encoding;
+                $this->getBarcodeGeneratorDto()->insertBOM = $insertBOM;
             }
         }
         catch (Exception $ex)
@@ -238,23 +273,127 @@ class BarcodeGenerator extends BaseJavaClass
         }
     }
 
-
     /**
-     * Exports BarCode properties to the xml-stream specified
-     * @param $filePath path to xml file
-     * @return bool Whether or not export completed successfully. Returns <b>True</b> in case of success; <b>False</b> Otherwise </para>
+     * Exports BarCode properties to the xml-file specified
+     * @param string $xmlFile The path to xml file
+     * @return bool Whether or not export completed successfully.
+     * Returns True in case of success; False Otherwise
      */
-    public function exportToXml($filePath): bool
+    public function exportToXml(string $xmlFile): bool
     {
         try
         {
-            $xmlData = java_cast($this->getJavaClass()->exportToXml(), "string");
-            $isSaved = $xmlData != null;
-            if ($isSaved)
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            //TODO BARCODEPHP-677 Implement the passing of license file content from PHP to Java
+            $xmlData = $client->BarcodeGenerator_exportToXml($this->barcodeGeneratorDto);
+            $thriftConnection->closeConnection();
+            $isContentExported = $xmlData != null;
+            if ($isContentExported)
             {
-                file_put_contents($filePath, $xmlData);
+                file_put_contents($xmlFile, $xmlData);
             }
-            return $isSaved;
+            return $isContentExported;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Import BarCode properties from xml file
+     * @param string $resource The name of the xml file or path to http resource
+     * @return BarCodeReader
+     * @throws BarcodeException
+     */
+    public static function importFromXml($resource):BarcodeGenerator
+    {
+        try
+        {
+            if (CommonUtility::isPath($resource))
+            {
+                $resource = fopen($resource, "r");
+            }
+            $xmlData = (stream_get_contents($resource));
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+
+            $barCodeGeneratorDto = $client->BarcodeGenerator_importFromXml($xmlData);
+            $thriftConnection->closeConnection();
+
+            return BarcodeGenerator::construct($barCodeGeneratorDto);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    private static function construct(BarcodeGeneratorDTO $barCodeGeneratorDto): BarcodeGenerator
+    {
+        $barCodeGenerator = new BarcodeGenerator(0, null);
+        $barCodeGenerator->setBarcodeGeneratorDto($barCodeGeneratorDto);
+        $barCodeGenerator->initFieldsFromDto();
+        return $barCodeGenerator;
+    }
+}
+
+class Base64CodeTextType
+{
+    const STRING =0;
+    const BYTE = 1;
+}
+
+
+/**
+ * Barcode image generation parameters.
+ */
+class BaseGenerationParameters implements Communicator
+{
+    private $baseGenerationParametersDto;
+
+    private function getBaseGenerationParametersDto(): BaseGenerationParametersDTO
+    {
+        return $this->baseGenerationParametersDto;
+    }
+
+    private function setBaseGenerationParametersDto(BaseGenerationParametersDTO $baseGenerationParametersDto): void
+    {
+        $this->baseGenerationParametersDto = $baseGenerationParametersDto;
+    }
+
+    private $captionAbove;
+    private $captionBelow;
+    private $barcodeParameters;
+    private $borderParameters;
+    private $image;
+
+    private $imageWidth;
+    private $imageHeight;
+
+    function __construct(BaseGenerationParametersDTO $baseGenerationParametersDto)
+    {
+        $this->baseGenerationParametersDto = $baseGenerationParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try
+        {
+            $this->captionAbove = new CaptionParameters($this->getBaseGenerationParametersDto()->captionAbove);
+            $this->captionBelow = new CaptionParameters($this->getBaseGenerationParametersDto()->captionBelow);
+            $this->barcodeParameters = new BarcodeParameters($this->getBaseGenerationParametersDto()->barcode);
+            $this->borderParameters = new BorderParameters($this->getBaseGenerationParametersDto()->border);
+            $this->imageWidth = new Unit($this->getBaseGenerationParametersDto()->imageWidth);
+            $this->imageHeight = new Unit($this->getBaseGenerationParametersDto()->imageHeight);
+            $this->image = new ImageParameters($this->getBaseGenerationParametersDto()->image);
         }
         catch (Exception $ex)
         {
@@ -264,19 +403,361 @@ class BarcodeGenerator extends BaseJavaClass
 
     /**
      * <p>
-     * Imports BarCode properties from the xml-file specified and creates BarcodeGenerator instance.
+     * Gets a value indicating whether is used anti-aliasing mode to render image
      * </p>
-     * @param $resource path to xml file or http resource
-     * @return BarcodeGenerator instance
      */
-    public static function importFromXml($resource):BarcodeGenerator
+    public function getUseAntiAlias() : bool
+    {
+        return $this->getBaseGenerationParametersDto()->useAntiAlias;
+    }
+
+    /**
+     * <p>
+     * Sets a value indicating whether is used anti-aliasing mode to render image
+     * </p>
+     */
+    public function setUseAntiAlias(bool $value) : void
+    {
+        $this->getBaseGenerationParametersDto()->useAntiAlias = $value;
+    }
+
+    /**
+     * Background color of the barcode image.
+     * Default value: #FFFFFF
+     * @return string value of background color.
+     */
+    public function getBackColor(): string
     {
         try
         {
-            if(isPath($resource))
-                $resource = fopen($resource, "r");
-            $xmlData = (stream_get_contents($resource));
-            return self::construct(java(self::JAVA_CLASS_NAME)->importFromXml($xmlData));
+            $hexColor = strtoupper(dechex($this->getBaseGenerationParametersDto()->backColor));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0" . $hexColor;
+            }
+            $hexColor = "#" . $hexColor;
+            return $hexColor;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Background color of the barcode image.
+     * Default value: #FFFFFF
+     * @param string $hexValue  value of background color.
+     * @throws BarcodeException
+     */
+    public function setBackColor(string $hexValue): void
+    {
+        try
+        {
+            if($hexValue[0] == '#')
+                $hexValue = substr($hexValue, 1, strlen($hexValue) - 1);
+            $this->getBaseGenerationParametersDto()->backColor = hexdec($hexValue);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the resolution of the BarCode image.
+     * One value for both dimensions.
+     * Default value: 96 dpi.
+     * @return float The Resolution parameter value is less than or equal to 0.
+     * @throws BarcodeException
+     */
+    public function getResolution(): float
+    {
+        try
+        {
+            return $this->getBaseGenerationParametersDto()->resolution;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Sets the resolution of the BarCode image.
+     * One value for both dimensions.
+     * Default value: 96 dpi.
+     * @param float $value The Resolution parameter value is less than or equal to 0.
+     * @throws BarcodeException
+     */
+    public function setResolution(float $value): void
+    {
+        try
+        {
+            $this->updateResolution($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    private function updateResolution(float $newResolution)
+    {
+        $this->getBaseGenerationParametersDto()->resolution =$newResolution;
+
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $resolutionUpdatedParametersDto = $client->BaseGenerationParameters_updateResolution($this->getBaseGenerationParametersDto(), $newResolution);
+        $thriftConnection->closeConnection();
+
+
+        $this->getBaseGenerationParametersDto()->captionAbove = $resolutionUpdatedParametersDto->captionAbove;
+        $this->getBaseGenerationParametersDto()->captionBelow = $resolutionUpdatedParametersDto->captionBelow;
+        $this->getBaseGenerationParametersDto()->barcode = $resolutionUpdatedParametersDto->barcode;
+        $this->getBaseGenerationParametersDto()->border = $resolutionUpdatedParametersDto->border;
+        $this->getBaseGenerationParametersDto()->imageWidth = $resolutionUpdatedParametersDto->imageWidth;
+        $this->getBaseGenerationParametersDto()->imageHeight = $resolutionUpdatedParametersDto->imageHeight;
+        $this->getBaseGenerationParametersDto()->image = $resolutionUpdatedParametersDto->image;
+
+        $this->initFieldsFromDto();
+    }
+
+    /**
+     * Image parameters. See <see cref="ImageParameters"/>.
+     * @return
+     */
+    public function getImage() : ImageParameters
+    {
+        return $this->image;
+    }
+
+    /**
+     *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
+     *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
+     *  Default value: 0.
+     *
+     *  This sample shows how to create and save a BarCode image.
+     * @code
+     *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
+     *     $generator->getParameters()->setRotationAngle(7);
+     *     $generator->save("test.png", BarcodeImageFormat::PNG);
+     * @endcode
+     */
+    public function getRotationAngle(): float
+    {
+        try
+        {
+            return $this->getBaseGenerationParametersDto()->rotationAngle;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
+     *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
+     *  Default value: 0.
+     *
+     *  This sample shows how to create and save a BarCode image.
+     * @code
+     *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
+     *     $generator->getParameters()->setRotationAngle(7);
+     *     $generator->save("test.png", BarcodeImageFormat::PNG);
+     * @endcode
+     */
+    public function setRotationAngle(float $value): void
+    {
+        try
+        {
+            $this->getBaseGenerationParametersDto()->rotationAngle = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption Above the BarCode image.
+     * @see CaptionParameters.
+     */
+    public function getCaptionAbove(): CaptionParameters
+    {
+        try
+        {
+            return $this->captionAbove;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption Above the BarCode image.
+     * @see CaptionParameters.
+     */
+    public function setCaptionAbove(CaptionParameters $value): void
+    {
+        try
+        {
+            $this->getBaseGenerationParametersDto()->captionAbove = $value->getCaptionParametersDto();
+            $this->captionAbove->updateCaption($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption Below the BarCode image.
+     * @see CaptionParameters.
+     */
+    public function getCaptionBelow(): CaptionParameters
+    {
+        try
+        {
+            return $this->captionBelow;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption Below the BarCode image.
+     * @see CaptionParameters.
+     */
+    function setCaptionBelow(CaptionParameters $value): void
+    {
+        try
+        {
+            $this->getBaseGenerationParametersDto()->captionBelow = $value->getCaptionParametersDto();
+            $this->captionBelow->updateCaption($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Specifies the different types of automatic sizing modes.
+     * Default value: AutoSizeMode::NONE.
+     */
+    public function getAutoSizeMode(): int
+    {
+        try
+        {
+            return $this->getBaseGenerationParametersDto()->autoSizeMode;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Specifies the different types of automatic sizing modes.
+     * Default value: AutoSizeMode::NONE.
+     */
+    public function setAutoSizeMode(int $value)
+    {
+        try
+        {
+            $this->getBaseGenerationParametersDto()->autoSizeMode = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * BarCode image height when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
+     */
+    public function getImageHeight(): Unit
+    {
+        return $this->imageHeight;
+    }
+
+    /**
+     * BarCode image height when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
+     */
+    public function setImageHeight(Unit $value): void
+    {
+        try
+        {
+            $this->getBaseGenerationParametersDto()->imageHeight = $value->getUnitDto();
+            $this->imageHeight = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
+     */
+    public function getImageWidth(): Unit
+    {
+        return $this->imageWidth;
+    }
+
+    /**
+     * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
+     */
+    public function setImageWidth(Unit $value)
+    {
+        $this->getBaseGenerationParametersDto()->imageWidth = $value->getUnitDto();
+        $this->imageWidth = $value;
+    }
+
+    /**
+     * Gets the BarcodeParameters that contains all barcode properties.
+     */
+    public function getBarcode(): BarcodeParameters
+    {
+        try
+        {
+            return $this->barcodeParameters;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the BarcodeParameters that contains all barcode properties.
+     */
+    function setBarcode(BarcodeParameters $value): void
+    {
+        try
+        {
+            $this->getBaseGenerationParametersDto()->barcode = $value->getBarcodeParametersDto();
+            $this->barcodeParameters = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the BorderParameters that contains all configuration properties for barcode border.
+     */
+    public function getBorder(): BorderParameters
+    {
+        try
+        {
+            return $this->borderParameters;
         }
         catch (Exception $ex)
         {
@@ -285,11 +766,24 @@ class BarcodeGenerator extends BaseJavaClass
     }
 }
 
+
 /**
  * Barcode generation parameters.
  */
-class BarcodeParameters extends BaseJavaClass
+class BarcodeParameters implements Communicator
 {
+    private $barcodeParametersDto;
+
+    function getBarcodeParametersDto(): BarcodeParametersDTO
+    {
+        return $this->barcodeParametersDto;
+    }
+
+    private function setBarcodeParametersDto(BarcodeParametersDTO $barcodeParametersDto): void
+    {
+        $this->barcodeParametersDto = $barcodeParametersDto;
+    }
+
     private $xDimension;
     private $barHeight;
     private $codeTextParameters;
@@ -315,34 +809,45 @@ class BarcodeParameters extends BaseJavaClass
     private $patchCode;
     private $barWidthReduction;
 
-    protected function init(): void
+    function __construct(BarcodeParametersDTO $barcodeParametersDto)
+    {
+        $this->barcodeParametersDto = $barcodeParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->xDimension = new Unit($this->getJavaClass()->getXDimension());
-            $this->barHeight = new Unit($this->getJavaClass()->getBarHeight());
-            $this->codeTextParameters = new CodetextParameters($this->getJavaClass()->getCodeTextParameters());
-            $this->postal = new PostalParameters($this->getJavaClass()->getPostal());
-            $this->australianPost = new AustralianPostParameters($this->getJavaClass()->getAustralianPost());
-            $this->codablock = new CodablockParameters($this->getJavaClass()->getCodablock());
-            $this->dataBar = new DataBarParameters($this->getJavaClass()->getDataBar());
-            $this->gs1CompositeBar = new GS1CompositeBarParameters($this->getJavaClass()->getGS1CompositeBar());
-            $this->dataMatrix = new DataMatrixParameters($this->getJavaClass()->getDataMatrix());
-            $this->code16K = new Code16KParameters($this->getJavaClass()->getCode16K());
-            $this->itf = new ITFParameters($this->getJavaClass()->getITF());
-            $this->qr = new QrParameters($this->getJavaClass()->getQR());
-            $this->pdf417 = new Pdf417Parameters($this->getJavaClass()->getPdf417());
-            $this->maxiCode = new MaxiCodeParameters($this->getJavaClass()->getMaxiCode());
-            $this->aztec = new AztecParameters($this->getJavaClass()->getAztec());
-            $this->code128 = new Code128Parameters($this->getJavaClass()->getCode128());
-            $this->codabar = new CodabarParameters($this->getJavaClass()->getCodabar());
-            $this->coupon = new CouponParameters($this->getJavaClass()->getCoupon());
-            $this->hanXin = new HanXinParameters($this->getJavaClass()->getHanXin());
-            $this->supplement = new SupplementParameters($this->getJavaClass()->getSupplement());
-            $this->dotCode = new DotCodeParameters($this->getJavaClass()->getDotCode());
-            $this->padding = new Padding($this->getJavaClass()->getPadding());
-            $this->patchCode = new PatchCodeParameters($this->getJavaClass()->getPatchCode());
-            $this->barWidthReduction = new Unit($this->getJavaClass()->getBarWidthReduction());
+            $this->xDimension = new Unit($this->getBarcodeParametersDto()->xDimension);
+            $this->barHeight = new Unit($this->getBarcodeParametersDto()->barHeight);
+            $this->codeTextParameters = new CodetextParameters($this->getBarcodeParametersDto()->codeTextParameters);
+            $this->postal = new PostalParameters($this->getBarcodeParametersDto()->postal);
+            $this->australianPost = new AustralianPostParameters($this->getBarcodeParametersDto()->australianPost);
+            $this->codablock = new CodablockParameters($this->getBarcodeParametersDto()->codablock);
+            $this->dataBar = new DataBarParameters($this->getBarcodeParametersDto()->dataBar);
+            $this->gs1CompositeBar = new GS1CompositeBarParameters($this->getBarcodeParametersDto()->gs1CompositeBar);
+            $this->dataMatrix = new DataMatrixParameters($this->getBarcodeParametersDto()->dataMatrix);
+            $this->code16K = new Code16KParameters($this->getBarcodeParametersDto()->code16K);
+            $this->itf = new ITFParameters($this->getBarcodeParametersDto()->itf);
+            $this->qr = new QrParameters($this->getBarcodeParametersDto()->qr);
+            $this->pdf417 = new Pdf417Parameters($this->getBarcodeParametersDto()->pdf417);
+            $this->maxiCode = new MaxiCodeParameters($this->getBarcodeParametersDto()->maxiCode);
+            $this->aztec = new AztecParameters($this->getBarcodeParametersDto()->aztec);
+            $this->code128 = new Code128Parameters($this->getBarcodeParametersDto()->code128);
+            $this->codabar = new CodabarParameters($this->getBarcodeParametersDto()->codabar);
+            $this->coupon = new CouponParameters($this->getBarcodeParametersDto()->coupon);
+            $this->hanXin = new HanXinParameters($this->getBarcodeParametersDto()->hanXin);
+            $this->supplement = new SupplementParameters($this->getBarcodeParametersDto()->supplement);
+            $this->dotCode = new DotCodeParameters($this->getBarcodeParametersDto()->dotCode);
+            $this->padding = new Padding($this->getBarcodeParametersDto()->padding);
+            $this->patchCode = new PatchCodeParameters($this->getBarcodeParametersDto()->patchCode);
+            $this->barWidthReduction = new Unit($this->getBarcodeParametersDto()->barWidthReduction);
         }
         catch (Exception $ex)
         {
@@ -366,7 +871,7 @@ class BarcodeParameters extends BaseJavaClass
         try
         {
             $this->patchCode = $value;
-            $this->getJavaClass()->setPatchCode($value->getJavaClass());
+            $this->getBarcodeParametersDto()->patchCode =$value->getPatchCodeParametersDto();
         }
         catch (Exception $ex)
         {
@@ -402,7 +907,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setXDimension($value->getJavaClass());
+            $this->getBarcodeParametersDto()->xDimension = $value->getUnitDto();
             $this->xDimension = $value;
         }
         catch (Exception $ex)
@@ -415,7 +920,7 @@ class BarcodeParameters extends BaseJavaClass
      * Get bars reduction value that is used to compensate ink spread while printing.
      * @return Unit value of BarWidthReduction
      */
-    public function getBarWidthReduction(): ?Unit
+    public function getBarWidthReduction(): Unit
     {
         try
         {
@@ -430,11 +935,11 @@ class BarcodeParameters extends BaseJavaClass
     /**
      * Sets bars reduction value that is used to compensate ink spread while printing.
      */
-    public function setBarWidthReduction(?Unit $value): void
+    public function setBarWidthReduction(Unit $value): void
     {
         try
         {
-            $this->getJavaClass()->setBarWidthReduction(is_null($value) ? null : $value->getJavaClass());
+            $this->getBarcodeParametersDto()->barWidthReduction = $value->getUnitDto();
             $this->barWidthReduction = $value;
         }
         catch (Exception $ex)
@@ -446,19 +951,10 @@ class BarcodeParameters extends BaseJavaClass
     /**
      * Height of 1D barcodes' bars in Unit value.
      * Ignored if AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
-     *
-     * @throws BarcodeException
      */
     public function getBarHeight(): Unit
     {
-        try
-        {
             return $this->barHeight;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -471,7 +967,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setBarHeight($value->getJavaClass());
+            $this->getBarcodeParametersDto()->barHeight = $value->getUnitDto();
             $this->barHeight = $value;
         }
         catch (Exception $ex)
@@ -488,7 +984,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBarColor(), "integer")));
+            $hexColor = strtoupper(dechex($this->getBarcodeParametersDto()->barColor));
             while (strlen($hexColor) < 6)
             {
                 $hexColor = "0" . $hexColor;
@@ -512,7 +1008,7 @@ class BarcodeParameters extends BaseJavaClass
         {
             if(substr($value, 0, 1) == '#')
                 $value = substr($value, 1, strlen($value) - 1);
-            $this->getJavaClass()->setBarColor(hexdec($value));
+            $this->getBarcodeParametersDto()->barColor = (hexdec($value));
         }
         catch (Exception $ex)
         {
@@ -544,7 +1040,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPadding($value->getJavaClass());
+            $this->getBarcodeParametersDto()->padding = $value->getPaddingDto();
             $this->padding = $value;
         }
         catch (Exception $ex)
@@ -556,11 +1052,11 @@ class BarcodeParameters extends BaseJavaClass
     /**
      *  Always display checksum digit in the human readable text for Code128 and GS1Code128 barcodes.
      */
-    public function getChecksumAlwaysShow(): int
+    public function getChecksumAlwaysShow(): bool
     {
         try
         {
-            return java_cast($this->getJavaClass()->getChecksumAlwaysShow(), "boolean");
+            return $this->getBarcodeParametersDto()->checksumAlwaysShow;
         }
         catch (Exception $ex)
         {
@@ -571,11 +1067,11 @@ class BarcodeParameters extends BaseJavaClass
     /**
      *  Always display checksum digit in the human readable text for Code128 and GS1Code128 barcodes.
      */
-    public function setChecksumAlwaysShow(int $value): void
+    public function setChecksumAlwaysShow(bool $checksumAlwaysShow): void
     {
         try
         {
-            $this->getJavaClass()->setChecksumAlwaysShow($value);
+            $this->getBarcodeParametersDto()->checksumAlwaysShow = $checksumAlwaysShow;
         }
         catch (Exception $ex)
         {
@@ -594,7 +1090,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->isChecksumEnabled(), "integer");
+            return $this->getBarcodeParametersDto()->isChecksumEnabled;
         }
         catch (Exception $ex)
         {
@@ -612,7 +1108,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setChecksumEnabled($value);
+            $this->getBarcodeParametersDto()->isChecksumEnabled = $value;
         }
         catch (Exception $ex)
         {
@@ -629,7 +1125,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getEnableEscape(), "boolean");
+            return $this->getBarcodeParametersDto()->enableEscape;
         }
         catch (Exception $ex)
         {
@@ -646,7 +1142,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setEnableEscape($value);
+            $this->getBarcodeParametersDto()->enableEscape = $value;
         }
         catch (Exception $ex)
         {
@@ -666,7 +1162,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getWideNarrowRatio(), "float");
+            return $this->getBarcodeParametersDto()->wideNarrowRatio;
         }
         catch (Exception $ex)
         {
@@ -686,7 +1182,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setWideNarrowRatio($value);
+            $this->getBarcodeParametersDto()->wideNarrowRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -719,7 +1215,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getFilledBars(), "boolean");
+            return $this->getBarcodeParametersDto()->filledBars;
         }
         catch (Exception $ex)
         {
@@ -737,7 +1233,7 @@ class BarcodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setFilledBars($value);
+            $this->getBarcodeParametersDto()->filledBars = $value;
         }
         catch (Exception $ex)
         {
@@ -846,7 +1342,7 @@ class BarcodeParameters extends BaseJavaClass
     public function setGS1CompositeBar(GS1CompositeBarParameters $value) : void
     {
         $this->gs1CompositeBar = $value;
-        $this->getJavaClass()->setGS1CompositeBar($value->getJavaClass());
+        $this->getBarcodeParametersDto()->gs1CompositeBar = $value->getGS1CompositeBarParametersDto();
     }
 
     /**
@@ -1048,1166 +1544,45 @@ class BarcodeParameters extends BaseJavaClass
     }
 }
 
-/**
- * Barcode image generation parameters.
- */
-class BaseGenerationParameters extends BaseJavaClass
-{
-    private $captionAbove;
-    private $captionBelow;
-    private $barcodeParameters;
-    private $borderParameters;
-    private $image;
 
-    private $imageWidth;
-    private $imageHeight;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->captionAbove = new CaptionParameters($this->getJavaClass()->getCaptionAbove());
-            $this->captionBelow = new CaptionParameters($this->getJavaClass()->getCaptionBelow());
-            $this->barcodeParameters = new BarcodeParameters($this->getJavaClass()->getBarcode());
-            $this->borderParameters = new BorderParameters($this->getJavaClass()->getBorder());
-            $this->imageWidth = new Unit($this->getJavaClass()->getImageWidth());
-            $this->imageHeight = new Unit($this->getJavaClass()->getImageHeight());
-            $this->image = new ImageParameters($this->getJavaClass()->getImage());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * <p>
-     * Gets a value indicating whether is used anti-aliasing mode to render image
-     * </p>
-     */
-    public function getUseAntiAlias() : bool
-    {
-        return java_cast($this->getJavaClass()->getUseAntiAlias(), "boolean");
-    }
-
-    /**
-     * <p>
-     * Sets a value indicating whether is used anti-aliasing mode to render image
-     * </p>
-     */
-    public function setUseAntiAlias(bool $value) : void
-    {
-        $this->getJavaClass()->setUseAntiAlias($value);
-    }
-
-    /**
-     * Background color of the barcode image.
-     * Default value: #FFFFFF
-     * @return string value of background color.
-     */
-    public function getBackColor(): string
-    {
-        try
-        {
-            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getBackColor(), "integer")));
-            while (strlen($hexColor) < 6)
-            {
-                $hexColor = "0" . $hexColor;
-            }
-            $hexColor = "#" . $hexColor;
-            return $hexColor;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Background color of the barcode image.
-     * Default value: #FFFFFF
-     * @param string $hexValue  value of background color.
-     * @throws BarcodeException
-     */
-    public function setBackColor(string $hexValue): void
-    {
-        try
-        {
-            $this->getJavaClass()->setBackColor(hexdec($hexValue));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the resolution of the BarCode image.
-     * One value for both dimensions.
-     * Default value: 96 dpi.
-     * @return float The Resolution parameter value is less than or equal to 0.
-     * @throws BarcodeException
-     */
-    public function getResolution(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getResolution(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the resolution of the BarCode image.
-     * One value for both dimensions.
-     * Default value: 96 dpi.
-     * @param float $value The Resolution parameter value is less than or equal to 0.
-     * @throws BarcodeException
-     */
-    public function setResolution(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setResolution($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Image parameters. See <see cref="ImageParameters"/>.
-     * @return
-     */
-    public function getImage() : ImageParameters
-    {
-        return $this->image;
-    }
-
-    /**
-     *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
-     *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
-     *  Default value: 0.
-     *
-     *  This sample shows how to create and save a BarCode image.
-     * @code
-     *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
-     *     $generator->getParameters()->setRotationAngle(7);
-     *     $generator->save("test.png", BarcodeImageFormat::PNG);
-     * @endcode
-     */
-    public function getRotationAngle(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getRotationAngle(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *  BarCode image rotation angle, measured in degree, e.g. RotationAngle = 0 or RotationAngle = 360 means no rotation.
-     *  If RotationAngle NOT equal to 90, 180, 270 or 0, it may increase the difficulty for the scanner to read the image.
-     *  Default value: 0.
-     *
-     *  This sample shows how to create and save a BarCode image.
-     * @code
-     *     $generator = new BarcodeGenerator( EncodeTypes::DATA_MATRIX);
-     *     $generator->getParameters()->setRotationAngle(7);
-     *     $generator->save("test.png", BarcodeImageFormat::PNG);
-     * @endcode
-     */
-    public function setRotationAngle(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setRotationAngle($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption Above the BarCode image.
-     * @see CaptionParameters.
-     */
-    public function getCaptionAbove(): CaptionParameters
-    {
-        try
-        {
-            return $this->captionAbove;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption Below the BarCode image.
-     * @see CaptionParameters.
-     */
-    public function getCaptionBelow(): CaptionParameters
-    {
-        try
-        {
-            return $this->captionBelow;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Specifies the different types of automatic sizing modes.
-     * Default value: AutoSizeMode::NONE.
-     */
-    public function getAutoSizeMode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAutoSizeMode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Specifies the different types of automatic sizing modes.
-     * Default value: AutoSizeMode::NONE.
-     */
-    public function setAutoSizeMode(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setAutoSizeMode($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * BarCode image height when AutoSizeMode property is set to AutoSizeMode::NEAREST or AutoSizeMode::INTERPOLATION.
-     */
-    public function getImageHeight(): Unit
-    {
-        return $this->imageHeight;
-    }
-
-    /**
-     * BarCode image height when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
-     */
-    public function setImageHeight(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setImageHeight($value->getJavaClass());
-            $this->imageHeight = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
-     */
-    public function getImageWidth(): Unit
-    {
-        return $this->imageWidth;
-    }
-
-    /**
-     * BarCode image width when AutoSizeMode property is set to AutoSizeMode.NEAREST or AutoSizeMode::INTERPOLATION.
-     */
-    public function setImageWidth(Unit $value)
-    {
-        $this->getJavaClass()->setImageWidth($value->getJavaClass());
-        $this->imageWidth = $value;
-    }
-
-    /**
-     * Gets the BarcodeParameters that contains all barcode properties.
-     */
-    public function getBarcode(): BarcodeParameters
-    {
-        try
-        {
-            return $this->barcodeParameters;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the BorderParameters that contains all configuration properties for barcode border.
-     */
-    public function getBorder(): BorderParameters
-    {
-        try
-        {
-            return $this->borderParameters;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Barcode image border parameters
- */
-class BorderParameters extends BaseJavaClass
-{
-    private $width;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->width = new Unit($this->getJavaClass()->getWidth());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border visibility. If false than parameter Width is always ignored (0).
-     * Default value: false.
-     */
-    public function getVisible(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getVisible(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border visibility. If false than parameter Width is always ignored (0).
-     * Default value: false.
-     */
-    public function setVisible(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setVisible($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border width.
-     * Default value: 0.
-     * Ignored if Visible is set to false.
-     */
-    public function getWidth(): Unit
-    {
-        try
-        {
-            return $this->width;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border width.
-     * Default value: 0.
-     * Ignored if Visible is set to false.
-     *public
-     */
-    public function setWidth(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setWidth($value->getJavaClass());
-            $this->width = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this BorderParameters.
-     *
-     * @return string A string that represents this BorderParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border dash style.
-     * Default value: BorderDashStyle::SOLID.
-     */
-    public function getDashStyle(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getDashStyle(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border dash style.
-     * Default value: BorderDashStyle::SOLID.
-     */
-    public function setDashStyle(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setDashStyle($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border color.
-     * Default value: #000000
-     */
-    public function getColor(): string
-    {
-        try
-        {
-            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getColor(), "integer")));
-            while (strlen($hexColor) < 6)
-            {
-                $hexColor = "0" . $hexColor;
-            }
-            $hexColor = "#" . $hexColor;
-            return $hexColor;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border color.
-     * Default value: #000000
-     */
-    public function setColor(string $value): void
-    {
-        try
-        {
-            if(substr($value, 0, 1) == '#')
-                $value = substr($value, 1, strlen($value) - 1);
-            $this->getJavaClass()->setColor(hexdec($value));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Caption parameters.
- */
-class CaptionParameters extends BaseJavaClass
-{
-    private $font;
-    private $padding;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->padding = new Padding($this->getJavaClass()->getPadding());
-            $this->font = new FontUnit($this->getJavaClass()->getFont());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption text.
-     * Default value: empty string.
-     */
-    public function getText(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getText(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption text.
-     * Default value: empty string.
-     */
-    public function setText(string $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setText($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption font.
-     * Default value: Arial 8pt regular.
-     */
-    public function getFont(): FontUnit
-    {
-        try
-        {
-            return $this->font;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption text visibility.
-     * Default value: false.
-     */
-    public function getVisible(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getVisible(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption text visibility.
-     * Default value: false.
-     */
-    public function setVisible(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setVisible($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption text color.
-     * Default value BLACK.
-     */
-    public function getTextColor(): string
-    {
-        try
-        {
-            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getTextColor(), "integer")));
-            while (strlen($hexColor) < 6)
-            {
-                $hexColor = "0" . $hexColor;
-            }
-            $hexColor = "#" . $hexColor;
-            return $hexColor;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption text color.
-     * Default value BLACK.
-     */
-    public function setTextColor(string $value): void
-    {
-        try
-        {
-            if(substr($value, 0, 1) == '#')
-                $value = substr($value, 1, strlen($value) - 1);
-            $this->getJavaClass()->setTextColor(hexdec($value));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Captions paddings.
-     * Default value for CaptionAbove: 5pt 5pt 0 5pt.
-     * Default value for CaptionBelow: 0 5pt 5pt 5pt.
-     */
-    public function getPadding(): Padding
-    {
-        try
-        {
-            return $this->padding;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Captions paddings.
-     * Default value for CaptionAbove: 5pt 5pt 0 5pt.
-     * Default value for CaptionBelow: 0 5pt 5pt 5pt.
-     */
-    public function setPadding(Padding $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setPadding($value->getJavaClass());
-            $this->padding = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption test horizontal alignment.
-     * Default value: StringAlignment.Center.
-     */
-    public function getAlignment(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getAlignment(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Caption test horizontal alignment.
-     * Default value: StringAlignment.CENTER.
-     */
-    public function setAlignment(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setAlignment($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /*
-     * Specify word wraps (line breaks) within text.
-     * @return bool
-     */
-    public function getNoWrap(): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /*
-     * Specify word wraps (line breaks) within text.
-     */
-    public function setNoWrap(bool $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setNoWrap($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this CaptionParameters.
-     *
-     * @return string A string that represents this Padding.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- *  Specifies the size value in different units (Pixel, Inches, etc.).
- *
- * This sample shows how to create and save a BarCode image.
- * @code
- *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
- *    $generator->getParameters()->getBarcode()->getBarHeight()->setMillimeters(10);
- *    $generator->save("test.png", BarcodeImageFormat::PNG);
- * @endcode
- */
-class Unit extends BaseJavaClass
-{
-    public function __construct($source)
-    {
-        try
-        {
-            parent::__construct(self::initUnit($source));
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    private static function initUnit($source)
-    {
-        if ($source instanceof Unit)
-        {
-            return $source->getJavaClass();
-        }
-        return $source;
-    }
-
-    protected function init(): void
-    {
-        // TODO: Implement init() method.
-    }
-
-    /**
-     * Gets size value in pixels.
-     */
-    public function getPixels(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getPixels(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets size value in pixels.
-     */
-    public function setPixels(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setPixels($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets size value in inches.
-     */
-    public function getInches(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getInches(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets size value in inches.
-     */
-    public function setInches(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setInches($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets size value in millimeters.
-     */
-    public function getMillimeters(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getMillimeters(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets size value in millimeters.
-     */
-    public function setMillimeters(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setMillimeters($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets size value in point.
-     */
-    public function getPoint(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getPoint(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets size value in point.
-     */
-    public function setPoint(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setPoint($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets size value in document units.
-     */
-    public function getDocument(): float
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getDocument(), "float");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets size value in document units.
-     */
-    public function setDocument(float $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setDocument($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this Unit.
-     *
-     * @return string that represents this Unit.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Determines whether this instance and a specified object,
-     * which must also be a Unit object, have the same value.
-     *
-     * @param Unit $obj The Unit to compare to this instance.
-     * @return true if obj is a Unit and its value is the same as this instance;
-     * otherwise, false. If obj is null, the method returns false.
-     */
-    public function equals(Unit $obj): bool
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->equals($obj->getJavaClass()), "boolean");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Paddings parameters.
- */
-class Padding extends BaseJavaClass
-{
-
-    private $top;
-    private $bottom;
-    private $right;
-    private $left;
-
-    protected function init(): void
-    {
-        $this->top = new Unit($this->getJavaClass()->getTop());
-        $this->bottom = new Unit($this->getJavaClass()->getBottom());
-        $this->right = new Unit($this->getJavaClass()->getRight());
-        $this->left = new Unit($this->getJavaClass()->getLeft());
-    }
-
-    /**
-     * Top padding.
-     */
-    public function getTop(): Unit
-    {
-        try
-        {
-            return $this->top;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Top padding.
-     */
-    public function setTop(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setTop($value->getJavaClass());
-            $this->top = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Bottom padding.
-     */
-    public function getBottom(): Unit
-    {
-        try
-        {
-            return $this->bottom;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Bottom padding.
-     */
-    public function setBottom(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setBottom($value->getJavaClass());
-            $this->bottom = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Right padding.
-     */
-    public function getRight(): Unit
-    {
-        try
-        {
-            return $this->right;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Right padding.
-     */
-    public function setRight(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setRight($value->getJavaClass());
-            $this->right = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Left padding.
-     */
-    public function getLeft(): Unit
-    {
-        try
-        {
-            return $this->left;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Left padding.
-     */
-    public function setLeft(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setLeft($value->getJavaClass());
-            $this->left = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this Padding.
-     *
-     * @return string A string that represents this Padding.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
 
 /**
  * Codetext parameters.
  */
-class CodetextParameters extends BaseJavaClass
+class CodetextParameters implements Communicator
 {
+    private $codetextParametersDto;
+
+    private function getCodetextParametersDto(): CodetextParametersDTO
+    {
+        return $this->codetextParametersDto;
+    }
+
+    private function setCodetextParametersDto(CodetextParametersDTO $codetextParametersDto): void
+    {
+        $this->codetextParametersDto = $codetextParametersDto;
+    }
 
     private $font;
     private $space;
 
-    protected function init(): void
+    function __construct(CodetextParametersDTO $codetextParametersDto)
+    {
+        $this->codetextParametersDto = $codetextParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->font = new FontUnit($this->getJavaClass()->getFont());
-            $this->space = new Unit($this->getJavaClass()->getSpace());
+            $this->font = new FontUnit($this->getCodetextParametersDto()->font);
+            $this->space = new Unit($this->getCodetextParametersDto()->space);
         }
         catch (Exception $ex)
         {
@@ -2223,7 +1598,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getTwoDDisplayText(), "string");
+            return $this->getCodetextParametersDto()->twoDDisplayText;
         }
         catch (Exception $ex)
         {
@@ -2239,7 +1614,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setTwoDDisplayText($value);
+            $this->getCodetextParametersDto()->twoDDisplayText = $value;
         }
         catch (Exception $ex)
         {
@@ -2256,7 +1631,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getFontMode(), "integer");
+            return $this->getCodetextParametersDto()->fontMode;
         }
         catch (Exception $ex)
         {
@@ -2273,7 +1648,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setFontMode($value);
+            $this->getCodetextParametersDto()->fontMode = $value;
         }
         catch (Exception $ex)
         {
@@ -2300,7 +1675,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setFont($value->getJavaClass());
+            $this->getCodetextParametersDto()->font = $value->getFontUnitDto();
             $this->font = $value;
         }
         catch (Exception $ex)
@@ -2335,7 +1710,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setSpace($value->getJavaClass());
+            $this->getCodetextParametersDto()->space = $value->getUnitDto();
             $this->space = $value;
         }
         catch (Exception $ex)
@@ -2352,7 +1727,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAlignment(), "integer");
+            return $this->getCodetextParametersDto()->alignment;
         }
         catch (Exception $ex)
         {
@@ -2368,7 +1743,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAlignment($value);
+            $this->getCodetextParametersDto()->alignment = $value;
         }
         catch (Exception $ex)
         {
@@ -2384,7 +1759,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $hexColor = strtoupper(dechex(java_cast($this->getJavaClass()->getColor(), "integer")));
+            $hexColor = strtoupper(dechex($this->getCodetextParametersDto()->color));
             while (strlen($hexColor) < 6)
             {
                 $hexColor = "0" . $hexColor;
@@ -2408,7 +1783,7 @@ class CodetextParameters extends BaseJavaClass
         {
             if(substr($value, 0, 1) == '#')
                 $value = substr($value, 1, strlen($value) - 1);
-            $this->getJavaClass()->setColor(hexdec($value));
+            $this->getCodetextParametersDto()->color = hexdec($value);
         }
         catch (Exception $ex)
         {
@@ -2424,7 +1799,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getLocation(), "integer");
+            return $this->getCodetextParametersDto()->location;
         }
         catch (Exception $ex)
         {
@@ -2440,7 +1815,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setLocation($value);
+            $this->getCodetextParametersDto()->location = $value;
         }
         catch (Exception $ex)
         {
@@ -2456,7 +1831,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getNoWrap(), "boolean");
+            return $this->getCodetextParametersDto()->noWrap;
         }
         catch (Exception $ex)
         {
@@ -2471,7 +1846,7 @@ class CodetextParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setNoWrap($value);
+            $this->getCodetextParametersDto()->noWrap = $value;
         }
         catch (Exception $ex)
         {
@@ -2486,14 +1861,12 @@ class CodetextParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->CodetextParameters_toString($this->getCodetextParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
@@ -2501,16 +1874,38 @@ class CodetextParameters extends BaseJavaClass
  *
  * Postal parameters. Used for Postnet, Planet.
  */
-class PostalParameters extends BaseJavaClass
+class PostalParameters implements Communicator
 {
+    private $postalParametersDto;
+
+    private function getPostalParametersDto(): PostalParametersDTO
+    {
+        return $this->postalParametersDto;
+    }
+
+    private function setPostalParametersDto(PostalParametersDTO $postalParametersDto): void
+    {
+        $this->postalParametersDto = $postalParametersDto;
+    }
 
     private $postalShortBarHeight;
 
-    protected function init(): void
+    function __construct(PostalParametersDTO $postalParametersDto)
+    {
+        $this->postalParametersDto = $postalParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->postalShortBarHeight = new Unit($this->getJavaClass()->getPostalShortBarHeight());
+            $this->postalShortBarHeight = new Unit($this->getPostalParametersDto()->postalShortBarHeight);
         }
         catch (Exception $ex)
         {
@@ -2540,7 +1935,7 @@ class PostalParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPostalShortBarHeight($value->getJavaClass());
+            $this->getPostalParametersDto()->postalShortBarHeight = $value->getUnitDto();
             $this->postalShortBarHeight = $value;
         }
         catch (Exception $ex)
@@ -2556,29 +1951,50 @@ class PostalParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->PostalParameters_toString($this->getPostalParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * AustralianPost barcode parameters.
  */
-class AustralianPostParameters extends BaseJavaClass
+class AustralianPostParameters implements Communicator
 {
+    private $australianPostParametersDto;
+
+    private function getAustralianPostParametersDto(): AustralianPostParametersDTO
+    {
+        return $this->australianPostParametersDto;
+    }
+
+    private function setAustralianPostParametersDto(AustralianPostParametersDTO $australianPostParametersDto): void
+    {
+        $this->australianPostParametersDto = $australianPostParametersDto;
+    }
+
     private $australianPostShortBarHeight;
 
-    protected function init(): void
+    function __construct(AustralianPostParametersDTO $australianPostParametersDto)
+    {
+        $this->australianPostParametersDto = $australianPostParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->australianPostShortBarHeight = new Unit($this->getJavaClass()->getAustralianPostShortBarHeight());
+            $this->australianPostShortBarHeight = new Unit($this->getAustralianPostParametersDto()->australianPostShortBarHeight);
         }
         catch (Exception $ex)
         {
@@ -2608,7 +2024,7 @@ class AustralianPostParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAustralianPostShortBarHeight($value->getJavaClass());
+            $this->getAustralianPostParametersDto()->australianPostShortBarHeight = $value->getUnitDto();
             $this->australianPostShortBarHeight = $value;
         }
         catch (Exception $ex)
@@ -2624,7 +2040,7 @@ class AustralianPostParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAustralianPostEncodingTable(), "integer");
+            return $this->getAustralianPostParametersDto()->australianPostEncodingTable;
         }
         catch (Exception $ex)
         {
@@ -2639,7 +2055,7 @@ class AustralianPostParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAustralianPostEncodingTable($value);
+            $this->getAustralianPostParametersDto()->australianPostEncodingTable = $value;
         }
         catch (Exception $ex)
         {
@@ -2654,24 +2070,44 @@ class AustralianPostParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->AustralianPostParameters_toString($this->getAustralianPostParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * Codablock parameters.
  */
-class CodablockParameters extends BaseJavaClass
+class CodablockParameters implements Communicator
 {
+    private $codablockParametersDto;
 
-    protected function init(): void
+    private function getCodablockParametersDto(): CodablockParametersDTO
+    {
+        return $this->codablockParametersDto;
+    }
+
+    private function setCodablockParametersDto(CodablockParametersDTO $codablockParametersDto): void
+    {
+        $this->codablockParametersDto = $codablockParametersDto;
+    }
+
+    function __construct(CodablockParametersDTO $codablockParametersDto)
+    {
+        $this->codablockParametersDto = $codablockParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -2682,7 +2118,7 @@ class CodablockParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getColumns(), "integer");
+            return $this->getCodablockParametersDto()->columns;
         }
         catch (Exception $ex)
         {
@@ -2697,7 +2133,7 @@ class CodablockParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setColumns($value);
+            $this->getCodablockParametersDto()->columns = $value;
         }
         catch (Exception $ex)
         {
@@ -2712,7 +2148,7 @@ class CodablockParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getRows(), "integer");
+            return $this->getCodablockParametersDto()->rows;
         }
         catch (Exception $ex)
         {
@@ -2727,7 +2163,7 @@ class CodablockParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setRows($value);
+            $this->getCodablockParametersDto()->rows = $value;
         }
         catch (Exception $ex)
         {
@@ -2742,7 +2178,7 @@ class CodablockParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getCodablockParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -2757,7 +2193,7 @@ class CodablockParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getCodablockParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -2772,24 +2208,44 @@ class CodablockParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->CodablockParameters_toString($this->getCodablockParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * Databar parameters.
  */
-class DataBarParameters extends BaseJavaClass
+class DataBarParameters implements Communicator
 {
+    private $dataBarParametersDto;
 
-    protected function init(): void
+    private function getDataBarParametersDto(): DataBarParametersDTO
+    {
+        return $this->dataBarParametersDto;
+    }
+
+    private function setDataBarParametersDto(DataBarParametersDTO $dataBarParametersDto): void
+    {
+        $this->dataBarParametersDto = $dataBarParametersDto;
+    }
+
+    function __construct(DataBarParametersDTO $dataBarParametersDto)
+    {
+        $this->dataBarParametersDto = $dataBarParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -2800,7 +2256,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->is2DCompositeComponent(), "boolean");
+            return $this->getDataBarParametersDto()->is2DCompositeComponent;
         }
         catch (Exception $ex)
         {
@@ -2815,7 +2271,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->set2DCompositeComponent($value);
+            $this->getDataBarParametersDto()->is2DCompositeComponent = $value;
         }
         catch (Exception $ex)
         {
@@ -2830,7 +2286,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->isAllowOnlyGS1Encoding(), "boolean");
+            return $this->getDataBarParametersDto()->isAllowOnlyGS1Encoding;
         }
         catch (Exception $ex)
         {
@@ -2845,7 +2301,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAllowOnlyGS1Encoding($value);
+            $this->getDataBarParametersDto()->isAllowOnlyGS1Encoding = $value;
         }
         catch (Exception $ex)
         {
@@ -2860,7 +2316,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getColumns(), "integer");
+            return $this->getDataBarParametersDto()->columns;
         }
         catch (Exception $ex)
         {
@@ -2875,7 +2331,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setColumns($value);
+            $this->getDataBarParametersDto()->columns = $value;
         }
         catch (Exception $ex)
         {
@@ -2890,7 +2346,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getRows(), "integer");
+            return $this->getDataBarParametersDto()->rows;
         }
         catch (Exception $ex)
         {
@@ -2905,7 +2361,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setRows($value);
+            $this->getDataBarParametersDto()->rows = $value;
         }
         catch (Exception $ex)
         {
@@ -2921,7 +2377,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getDataBarParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -2937,7 +2393,7 @@ class DataBarParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getDataBarParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -2952,23 +2408,44 @@ class DataBarParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->DataBarParameters_toString($this->getDataBarParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * DataMatrix parameters.
  */
-class DataMatrixParameters extends BaseJavaClass
+class DataMatrixParameters implements Communicator
 {
-    protected function init(): void
+    private $dataMatrixParametersDto;
+
+    private function getDataMatrixParametersDto(): DataMatrixParametersDTO
+    {
+        return $this->dataMatrixParametersDto;
+    }
+
+    private function setDataMatrixParametersDto(DataMatrixParametersDTO $dataMatrixParametersDto): void
+    {
+        $this->dataMatrixParametersDto = $dataMatrixParametersDto;
+    }
+
+    function __construct(DataMatrixParametersDTO $dataMatrixParametersDto)
+    {
+        $this->dataMatrixParametersDto = $dataMatrixParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -2980,7 +2457,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function getDataMatrixVersion() : int
     {
-        return java_cast($this->getJavaClass()->getDataMatrixVersion(), "integer");
+        return $this->getDataMatrixParametersDto()->dataMatrixVersion;
     }
 
     /**
@@ -2991,7 +2468,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function setDataMatrixVersion(int $value)
     {
-        $this->getJavaClass()->setDataMatrixVersion($value);
+        $this->getDataMatrixParametersDto()->dataMatrixVersion = $value;
     }
 
     /**
@@ -3002,7 +2479,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getDataMatrixEcc(), "integer");
+            return $this->getDataMatrixParametersDto()->dataMatrixEcc;
         }
         catch (Exception $ex)
         {
@@ -3018,7 +2495,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setDataMatrixEcc($value);
+            $this->getDataMatrixParametersDto()->dataMatrixEcc = $value;
         }
         catch (Exception $ex)
         {
@@ -3034,7 +2511,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getDataMatrixEncodeMode(), "integer");
+            return $this->getDataMatrixParametersDto()->dataMatrixEncodeMode;
         }
         catch (Exception $ex)
         {
@@ -3050,7 +2527,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setDataMatrixEncodeMode($value);
+            $this->getDataMatrixParametersDto()->dataMatrixEncodeMode = $value;
         }
         catch (Exception $ex)
         {
@@ -3066,7 +2543,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function getStructuredAppendBarcodeId() : int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
+        return $this->getDataMatrixParametersDto()->structuredAppendBarcodeId;
     }
     /**
      * <p>
@@ -3076,7 +2553,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function setStructuredAppendBarcodeId(int $value) : void
     {
-        $this->getJavaClass()->setStructuredAppendBarcodeId($value);
+        $this->getDataMatrixParametersDto()->structuredAppendBarcodeId = $value;
     }
 
     /**
@@ -3087,7 +2564,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function getStructuredAppendBarcodesCount() : int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
+        return $this->getDataMatrixParametersDto()->structuredAppendBarcodesCount;
     }
     /**
      * <p>
@@ -3097,7 +2574,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function setStructuredAppendBarcodesCount(int $value) : void
     {
-        $this->getJavaClass()->setStructuredAppendBarcodesCount($value);
+        $this->getDataMatrixParametersDto()->structuredAppendBarcodesCount = $value;
     }
 
     /**
@@ -3108,7 +2585,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function getStructuredAppendFileId() : int
     {
-        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "integer");
+        return $this->getDataMatrixParametersDto()->structuredAppendFileId;
     }
     /**
      * <p>
@@ -3118,7 +2595,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function setStructuredAppendFileId(int $value) : void
     {
-        $this->getJavaClass()->setStructuredAppendFileId($value);
+        $this->getDataMatrixParametersDto()->structuredAppendFileId = $value;
     }
 
     /**
@@ -3130,7 +2607,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function isReaderProgramming() : bool
     {
-        return java_cast($this->getJavaClass()->isReaderProgramming(), "boolean");
+        return $this->getDataMatrixParametersDto()->isReaderProgramming;
     }
     /**
      * <p>
@@ -3141,7 +2618,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function setReaderProgramming(bool $value) : void
     {
-        $this->getJavaClass()->setReaderProgramming($value);
+        $this->getDataMatrixParametersDto()->isReaderProgramming = $value;
     }
 
     /**
@@ -3157,7 +2634,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getMacroCharacters(), "integer");
+            return $this->getDataMatrixParametersDto()->macroCharacters;
         }
         catch (Exception $ex)
         {
@@ -3178,7 +2655,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setMacroCharacters($value);
+            $this->getDataMatrixParametersDto()->macroCharacters = $value;
         }
         catch (Exception $ex)
         {
@@ -3193,7 +2670,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getColumns(), "integer");
+            return $this->getDataMatrixParametersDto()->columns;
         }
         catch (Exception $ex)
         {
@@ -3208,7 +2685,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setColumns($value);
+            $this->getDataMatrixParametersDto()->columns = $value;
         }
         catch (Exception $ex)
         {
@@ -3223,7 +2700,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getRows(), "integer");
+            return $this->getDataMatrixParametersDto()->rows;
         }
         catch (Exception $ex)
         {
@@ -3238,7 +2715,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setRows($value);
+            $this->getDataMatrixParametersDto()->rows = $value;
         }
         catch (Exception $ex)
         {
@@ -3253,7 +2730,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getDataMatrixParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -3268,7 +2745,7 @@ class DataMatrixParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getDataMatrixParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -3284,9 +2761,8 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function getECIEncoding() : int
     {
-        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
+        return $this->getDataMatrixParametersDto()->eCIEncoding;
     }
-
     /**
      * <p>
      * Sets ECI encoding. Used when DataMatrixEncodeMode is Auto.
@@ -3295,7 +2771,7 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function setECIEncoding(int $value) : void
     {
-        $this->getJavaClass()->setECIEncoding($value);
+        $this->getDataMatrixParametersDto()->eCIEncoding = $value;
     }
 
     /**
@@ -3305,14 +2781,12 @@ class DataMatrixParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->DataMatrixParameters_toString($this->getDataMatrixParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 
 }
@@ -3320,10 +2794,32 @@ class DataMatrixParameters extends BaseJavaClass
 /**
  * Code16K parameters.
  */
-class Code16KParameters extends BaseJavaClass
+class Code16KParameters implements Communicator
 {
+    private $code16KParametersDto;
 
-    protected function init(): void
+    private function getCode16KParametersDto(): Code16KParametersDTO
+    {
+        return $this->code16KParametersDto;
+    }
+
+    private function setCode16KParametersDto(Code16KParametersDTO $code16KParametersDto): void
+    {
+        $this->code16KParametersDto = $code16KParametersDto;
+    }
+
+    function __construct(Code16KParametersDTO $code16KParametersDto)
+    {
+        $this->code16KParametersDto = $code16KParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -3334,7 +2830,7 @@ class Code16KParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getCode16KParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -3349,7 +2845,7 @@ class Code16KParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getCode16KParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -3365,7 +2861,7 @@ class Code16KParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQuietZoneLeftCoef(), "integer");
+            return $this->getCode16KParametersDto()->quietZoneLeftCoef;
         }
         catch (Exception $ex)
         {
@@ -3381,7 +2877,7 @@ class Code16KParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQuietZoneLeftCoef($value);
+            $this->getCode16KParametersDto()->quietZoneLeftCoef = $value;
         }
         catch (Exception $ex)
         {
@@ -3397,7 +2893,7 @@ class Code16KParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQuietZoneRightCoef(), "integer");
+            return $this->getCode16KParametersDto()->quietZoneRightCoef;
         }
         catch (Exception $ex)
         {
@@ -3413,7 +2909,7 @@ class Code16KParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQuietZoneRightCoef($value);
+            $this->getCode16KParametersDto()->quietZoneRightCoef = $value;
         }
         catch (Exception $ex)
         {
@@ -3428,25 +2924,44 @@ class Code16KParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Code16KParameters_toString($this->getCode16KParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * DotCode parameters.
  */
-class DotCodeParameters extends BaseJavaClass
+class DotCodeParameters implements Communicator
 {
-    // protected $javaClassName = "com.aspose.barcode.generation.";
+    private $dotCodeParametersDto;
 
-    protected function init(): void
+    private function getDotCodeParametersDto(): DotCodeParametersDTO
+    {
+        return $this->dotCodeParametersDto;
+    }
+
+    private function setDotCodeParametersDto(DotCodeParametersDTO $dotCodeParametersDto): void
+    {
+        $this->dotCodeParametersDto = $dotCodeParametersDto;
+    }
+
+    function __construct(DotCodeParametersDTO $dotCodeParametersDto)
+    {
+        $this->dotCodeParametersDto = $dotCodeParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -3458,7 +2973,7 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function getDotCodeEncodeMode() : int
     {
-        return java_cast($this->getJavaClass()->getDotCodeEncodeMode(), "integer");
+        return $this->getDotCodeParametersDto()->dotCodeEncodeMode;
     }
     /**
      * <p>
@@ -3468,7 +2983,7 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function setDotCodeEncodeMode(int $value) : void
     {
-        $this->getJavaClass()->setDotCodeEncodeMode($value);
+        $this->getDotCodeParametersDto()->dotCodeEncodeMode = $value;
     }
 
     /**
@@ -3478,7 +2993,7 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function isReaderInitialization() : bool
-    { return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean"); }
+    { return $this->getDotCodeParametersDto()->isReaderInitialization; }
     /**
      * <p>
      * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
@@ -3486,7 +3001,7 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function setReaderInitialization(bool $value) : void
-    { $this->getJavaClass()->setReaderInitialization($value); }
+    { $this->getDotCodeParametersDto()->isReaderInitialization = $value; }
 
     /**
      * <p>
@@ -3494,14 +3009,14 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function getDotCodeStructuredAppendModeBarcodeId() : int
-    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodeId(), "integer"); }
+    { return $this->getDotCodeParametersDto()->dotCodeStructuredAppendModeBarcodeId; }
     /**
      * <p>
      * Identifies the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.
      * </p>
      */
     public function setDotCodeStructuredAppendModeBarcodeId(int $value)
-    { $this->getJavaClass()->setDotCodeStructuredAppendModeBarcodeId($value); }
+    { $this->getDotCodeParametersDto()->dotCodeStructuredAppendModeBarcodeId = $value; }
 
     /**
      * <p>
@@ -3509,14 +3024,14 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function getDotCodeStructuredAppendModeBarcodesCount() : int
-    { return java_cast($this->getJavaClass()->getDotCodeStructuredAppendModeBarcodesCount(), "integer"); }
+    { return $this->getDotCodeParametersDto()->dotCodeStructuredAppendModeBarcodesCount; }
     /**
      * <p>
      * Identifies DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.
      * </p>
      */
     public function setDotCodeStructuredAppendModeBarcodesCount(int $value) : void
-    { $this->getJavaClass()->setDotCodeStructuredAppendModeBarcodesCount($value); }
+    { $this->getDotCodeParametersDto()->dotCodeStructuredAppendModeBarcodesCount = $value; }
 
     /**
      * <p>
@@ -3525,7 +3040,7 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function getECIEncoding() : int
-    { return java_cast($this->getJavaClass()->getECIEncoding(), "integer"); }
+    { return $this->getDotCodeParametersDto()->eCIEncoding; }
     /**
      * <p>
      * Identifies ECI encoding. Used when DotCodeEncodeMode is Auto.
@@ -3533,7 +3048,7 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function setECIEncoding(int $value) : void
-    { $this->getJavaClass()->setECIEncoding($value); }
+    { $this->getDotCodeParametersDto()->eCIEncoding = $value; }
 
     /**
      * <p>
@@ -3542,7 +3057,7 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function getRows() : int
-    { return java_cast($this->getJavaClass()->getRows(), "integer"); }
+    { return $this->getDotCodeParametersDto()->rows; }
     /**
      * <p>
      * Identifies rows count. Sum of the number of rows plus the number of columns of a DotCode symbol must be odd. Number of rows must be at least 5.
@@ -3551,14 +3066,7 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function setRows(int $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setRows($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->toString(), __FILE__, __LINE__);
-        }
+        $this->getDotCodeParametersDto()->rows = $value;
     }
 
     /**
@@ -3568,7 +3076,9 @@ class DotCodeParameters extends BaseJavaClass
      * </p>
      */
     public function getColumns() : int
-    { return java_cast($this->getJavaClass()->getColumns(), "integer"); }
+    {
+        return $this->getDotCodeParametersDto()->columns;
+    }
     /**
      * <p>
      * Identifies columns count. Sum of the number of rows plus the number of columns of a DotCode symbol must be odd. Number of columns must be at least 5.
@@ -3577,14 +3087,7 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function setColumns(int $value) : void
     {
-        try
-        {
-            $this->getJavaClass()->setColumns($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->toString(), __FILE__, __LINE__);
-        }
+        $this->getDotCodeParametersDto()->columns = $value;
     }
 
     /**
@@ -3594,7 +3097,7 @@ class DotCodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getDotCodeParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -3609,7 +3112,7 @@ class DotCodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getDotCodeParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -3624,24 +3127,44 @@ class DotCodeParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->DotCodeParameters_toString($this->getDotCodeParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
-
 
 /**
  * GS1 Composite bar parameters.
  */
-class GS1CompositeBarParameters extends BaseJavaClass
+class GS1CompositeBarParameters implements Communicator
 {
-    protected function init(): void
+    private $gs1CompositeBarParametersDto;
+
+    function getGS1CompositeBarParametersDto(): GS1CompositeBarParametersDTO
+    {
+        return $this->gs1CompositeBarParametersDto;
+    }
+
+    private function setGS1CompositeBarParametersDto(GS1CompositeBarParametersDTO $gs1CompositeBarParametersDto): void
+    {
+        $this->gs1CompositeBarParametersDto = $gs1CompositeBarParametersDto;
+    }
+
+    function __construct(GS1CompositeBarParametersDTO $gs1CompositeBarParametersDto)
+    {
+        $this->gs1CompositeBarParametersDto = $gs1CompositeBarParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -3650,7 +3173,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
      */
     public function getLinearComponentType():int
     {
-        return java_cast($this->getJavaClass()->getLinearComponentType(), "integer");
+        return $this->getGS1CompositeBarParametersDto()->linearComponentType;
     }
 
     /**
@@ -3658,7 +3181,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
      */
     public function setLinearComponentType(int $value): void
     {
-        $this->getJavaClass()->setLinearComponentType($value);
+        $this->getGS1CompositeBarParametersDto()->linearComponentType = $value;
     }
 
     /**
@@ -3666,7 +3189,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
      */
     public function getTwoDComponentType(): int
     {
-        return java_cast($this->getJavaClass()->getTwoDComponentType(), "integer");
+        return $this->getGS1CompositeBarParametersDto()->twoDComponentType;
     }
 
     /**
@@ -3674,7 +3197,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
      */
     public function setTwoDComponentType(int $value) : void
     {
-        $this->getJavaClass()->setTwoDComponentType($value);
+        $this->getGS1CompositeBarParametersDto()->twoDComponentType = $value;
     }
 
     /**
@@ -3684,7 +3207,7 @@ class GS1CompositeBarParameters extends BaseJavaClass
      */
     public function isAllowOnlyGS1Encoding() : bool
     {
-        return java_cast($this->getJavaClass()->isAllowOnlyGS1Encoding(), "bool");
+        return $this->getGS1CompositeBarParametersDto()->isAllowOnlyGS1Encoding;
     }
 
     /**
@@ -3694,32 +3217,59 @@ class GS1CompositeBarParameters extends BaseJavaClass
      */
     public function setAllowOnlyGS1Encoding(bool $value) : void
     {
-        $this->getJavaClass()->setAllowOnlyGS1Encoding($value);
+        $this->getGS1CompositeBarParametersDto()->isAllowOnlyGS1Encoding = $value;
     }
 
     /**
      * Returns a human-readable string representation of this <see cref="DataBarParameters"/>.
-     * @return A string that represents this <see cref="DataBarParameters"/>
+     * @return string that represents this <see cref="DataBarParameters"/>
      */
     public function toString() : string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->GS1CompositeBarParameters_toString($this->getGS1CompositeBarParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * ITF parameters.
  */
-class ITFParameters extends BaseJavaClass
+class ITFParameters implements Communicator
 {
+    private $itfParametersDto;
+
+    private function getITFParametersDto(): ITFParametersDTO
+    {
+        return $this->itfParametersDto;
+    }
+
+    private function setITFParametersDto(ITFParametersDTO $itfParametersDto): void
+    {
+        $this->itfParametersDto = $itfParametersDto;
+    }
 
     private $itfBorderThickness;
 
-    protected function init(): void
+    function __construct(ITFParametersDTO $itfParametersDto)
+    {
+        $this->itfParametersDto = $itfParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->itfBorderThickness = new Unit($this->getJavaClass()->getItfBorderThickness());
+            $this->itfBorderThickness = new Unit($this->getITFParametersDto()->itfBorderThickness);
         }
         catch (Exception $ex)
         {
@@ -3733,14 +3283,7 @@ class ITFParameters extends BaseJavaClass
      */
     public function getItfBorderThickness(): Unit
     {
-        try
-        {
             return $this->itfBorderThickness;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -3751,7 +3294,7 @@ class ITFParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setItfBorderThickness($value->getJavaClass());
+            $this->getITFParametersDto()->itfBorderThickness = $value->getUnitDto();
             $this->itfBorderThickness = $value;
         }
         catch (Exception $ex)
@@ -3768,7 +3311,7 @@ class ITFParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getItfBorderType(), "integer");
+            return $this->getITFParametersDto()->itfBorderType;
         }
         catch (Exception $ex)
         {
@@ -3784,7 +3327,7 @@ class ITFParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setItfBorderType($value);
+            $this->getITFParametersDto()->itfBorderType = $value;
         }
         catch (Exception $ex)
         {
@@ -3803,7 +3346,7 @@ class ITFParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQuietZoneCoef(), "integer");
+            return $this->getITFParametersDto()->quietZoneCoef;
         }
         catch (Exception $ex)
         {
@@ -3822,7 +3365,7 @@ class ITFParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQuietZoneCoef($value);
+            $this->getITFParametersDto()->quietZoneCoef = $value;
         }
         catch (Exception $ex)
         {
@@ -3837,29 +3380,50 @@ class ITFParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->ITFParameters_toString($this->getITFParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * QR parameters.
  */
-class QrParameters extends BaseJavaClass
+class QrParameters implements Communicator
 {
+    private $qrParametersDto;
+
+    private function getQrParametersDto(): QrParametersDTO
+    {
+        return $this->qrParametersDto;
+    }
+
+    private function setQrParametersDto(QrParametersDTO $qrParametersDto): void
+    {
+        $this->qrParametersDto = $qrParametersDto;
+    }
+
     private $structuredAppend;
 
-    protected function init(): void
+    function __construct(QrParametersDTO $qrParametersDto)
+    {
+        $this->qrParametersDto = $qrParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->structuredAppend = new QrStructuredAppendParameters($this->getJavaClass()->getStructuredAppend());
+            $this->structuredAppend = new QrStructuredAppendParameters($this->getQrParametersDto()->structuredAppend);
         }
         catch (Exception $ex)
         {
@@ -3883,7 +3447,7 @@ class QrParameters extends BaseJavaClass
         try
         {
             $this->structuredAppend = $value;
-            $this->getJavaClass()->setStructuredAppend($value->getJavaClass());
+            $this->getQrParametersDto()->structuredAppend = $value->getQrStructuredAppendParametersDto();
         }
         catch (Exception $ex)
         {
@@ -3900,7 +3464,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQrECIEncoding(), "integer");
+            return $this->getQrParametersDto()->qrECIEncoding;
         }
         catch (Exception $ex)
         {
@@ -3917,7 +3481,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQrECIEncoding($value);
+            $this->getQrParametersDto()->qrECIEncoding = $value;
         }
         catch (Exception $ex)
         {
@@ -3933,7 +3497,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQrEncodeMode(), "integer");
+            return $this->getQrParametersDto()->qrEncodeMode;
         }
         catch (Exception $ex)
         {
@@ -3949,7 +3513,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQrEncodeMode($value);
+            $this->getQrParametersDto()->qrEncodeMode = $value;
         }
         catch (Exception $ex)
         {
@@ -3964,7 +3528,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQrEncodeType(), "integer");
+            return $this->getQrParametersDto()->qrEncodeType;
         }
         catch (Exception $ex)
         {
@@ -3979,7 +3543,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQrEncodeType($value);
+            $this->getQrParametersDto()->qrEncodeType = $value;
         }
         catch (Exception $ex)
         {
@@ -3996,7 +3560,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->qrErrorLevel, "integer");
+            return $this->getQrParametersDto()->qrErrorLevel;
         }
         catch (Exception $ex)
         {
@@ -4013,7 +3577,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQrErrorLevel($value);
+            $this->getQrParametersDto()->qrErrorLevel = $value;
         }
         catch (Exception $ex)
         {
@@ -4030,7 +3594,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getQrVersion(), "integer");
+            return $this->getQrParametersDto()->qrVersion;
         }
         catch (Exception $ex)
         {
@@ -4047,7 +3611,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setQrVersion($value);
+            $this->getQrParametersDto()->qrVersion = $value;
         }
         catch (Exception $ex)
         {
@@ -4063,7 +3627,7 @@ class QrParameters extends BaseJavaClass
      */
     public function getMicroQRVersion() : int
     {
-        return java_cast($this->getJavaClass()->getMicroQRVersion(), "integer");
+        return $this->getQrParametersDto()->microQRVersion;
     }
     /**
      * <p>
@@ -4073,7 +3637,7 @@ class QrParameters extends BaseJavaClass
      */
     public function setMicroQRVersion(int $value) : void
     {
-        $this->getJavaClass()->setMicroQRVersion($value);
+        $this->getQrParametersDto()->microQRVersion = $value;
     }
 
     /**
@@ -4084,7 +3648,7 @@ class QrParameters extends BaseJavaClass
      */
     public function getRectMicroQrVersion() : int
     {
-        return java_cast($this->getJavaClass()->getRectMicroQrVersion(), "integer");
+        return $this->getQrParametersDto()->rectMicroQrVersion;
     }
     /**
      * <p>
@@ -4094,7 +3658,7 @@ class QrParameters extends BaseJavaClass
      */
     public function setRectMicroQrVersion(int $value) : void
     {
-        $this->getJavaClass()->setRectMicroQrVersion($value);
+        $this->getQrParametersDto()->rectMicroQrVersion = $value;
     }
 
     /**
@@ -4104,7 +3668,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getQrParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -4119,7 +3683,7 @@ class QrParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getQrParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -4134,9 +3698,130 @@ class QrParameters extends BaseJavaClass
      */
     public function toString(): string
     {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->QrParameters_toString($this->getQrParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+}
+
+/**
+ * QR structured append parameters.
+ */
+class QrStructuredAppendParameters implements Communicator
+{
+    private $qrStructuredAppendParametersDto;
+
+    function getQrStructuredAppendParametersDto(): QrStructuredAppendParametersDTO
+    {
+        return $this->qrStructuredAppendParametersDto;
+    }
+
+    private function setQrStructuredAppendParametersDto(QrStructuredAppendParametersDTO $qrStructuredAppendParametersDto): void
+    {
+        $this->qrStructuredAppendParametersDto = $qrStructuredAppendParametersDto;
+    }
+
+    function __construct(QrStructuredAppendParametersDTO $qrStructuredAppendParametersDto)
+    {
+        $this->qrStructuredAppendParametersDto = $qrStructuredAppendParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+    }
+
+    /**
+     *  Gets the QR structured append mode parity data.
+     */
+    public function getParityByte(): int
+    {
         try
         {
-            return java_cast($this->getJavaClass()->toString(), "string");
+            return $this->getQrStructuredAppendParametersDto()->parityByte;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     *  Sets the QR structured append mode parity data.
+     */
+    public function setParityByte(int $value)
+    {
+        try
+        {
+            $this->getQrStructuredAppendParametersDto()->parityByte = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the index of the QR structured append mode barcode. Index starts from 0.
+     */
+    public function getSequenceIndicator(): int
+    {
+        try
+        {
+            return $this->getQrStructuredAppendParametersDto()->sequenceIndicator;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Sets the index of the QR structured append mode barcode. Index starts from 0.
+     */
+    public function setSequenceIndicator(int $value)
+    {
+        try
+        {
+            $this->getQrStructuredAppendParametersDto()->sequenceIndicator = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the QR structured append mode barcodes quantity. Max value is 16.
+     */
+    public function getTotalCount(): int
+    {
+        try
+        {
+            return $this->getQrStructuredAppendParametersDto()->totalCount;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Sets the QR structured append mode barcodes quantity. Max value is 16.
+     */
+    public function setTotalCount(int $value)
+    {
+        try
+        {
+            $this->getQrStructuredAppendParametersDto()->totalCount = $value;
         }
         catch (Exception $ex)
         {
@@ -4144,6 +3829,7 @@ class QrParameters extends BaseJavaClass
         }
     }
 }
+
 
 /**
  * <p>
@@ -4169,9 +3855,32 @@ class QrParameters extends BaseJavaClass
  * </pre>
  * </p>
  */
-class Pdf417Parameters extends BaseJavaClass
+class Pdf417Parameters implements Communicator
 {
-    protected function init(): void
+    private $pdf417ParametersDto;
+
+    private function getPdf417ParametersDto(): Pdf417ParametersDTO
+    {
+        return $this->pdf417ParametersDto;
+    }
+
+    private function setPdf417ParametersDto(Pdf417ParametersDTO $pdf417ParametersDto): void
+    {
+        $this->pdf417ParametersDto = $pdf417ParametersDto;
+    }
+
+    function __construct(Pdf417ParametersDTO $pdf417ParametersDto)
+    {
+        $this->pdf417ParametersDto = $pdf417ParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -4184,7 +3893,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417CompactionMode(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417CompactionMode;
         }
         catch (Exception $ex)
         {
@@ -4201,7 +3910,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417CompactionMode($value);
+            $this->getPdf417ParametersDto()->pdf417CompactionMode = $value;
         }
         catch (Exception $ex)
         {
@@ -4215,16 +3924,16 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function getPdf417EncodeMode() : int
     {
-        return java_cast($this->getJavaClass()->getPdf417EncodeMode(), "integer");
+        return $this->getPdf417ParametersDto()->pdf417EncodeMode;
     }
 
     /**
      * Identifies Pdf417 encode mode.
      * Default value: Auto.
      */
-    public function setPdf417EncodeMode(int $pdf417EncodeMode) : void
+    public function setPdf417EncodeMode(int $value) : void
     {
-        $this->getJavaClass()->setPdf417EncodeMode($pdf417EncodeMode);
+        $this->getPdf417ParametersDto()->pdf417EncodeMode = $value;
     }
 
     /**
@@ -4236,7 +3945,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417ErrorLevel(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417ErrorLevel;
         }
         catch (Exception $ex)
         {
@@ -4253,7 +3962,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417ErrorLevel($value);
+            $this->getPdf417ParametersDto()->pdf417ErrorLevel = $value;
         }
         catch (Exception $ex)
         {
@@ -4268,7 +3977,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417Truncate(), "boolean");
+            return $this->getPdf417ParametersDto()->pdf417Truncate;
         }
         catch (Exception $ex)
         {
@@ -4283,7 +3992,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417Truncate($value);
+            $this->getPdf417ParametersDto()->pdf417Truncate = $value;
         }
         catch (Exception $ex)
         {
@@ -4298,7 +4007,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getColumns(), "integer");
+            return $this->getPdf417ParametersDto()->columns;
         }
         catch (Exception $ex)
         {
@@ -4313,7 +4022,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setColumns($value);
+            $this->getPdf417ParametersDto()->columns = $value;
         }
         catch (Exception $ex)
         {
@@ -4328,7 +4037,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getRows(), "integer");
+            return $this->getPdf417ParametersDto()->rows;
         }
         catch (Exception $ex)
         {
@@ -4343,7 +4052,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setRows($value);
+            $this->getPdf417ParametersDto()->rows = $value;
         }
         catch (Exception $ex)
         {
@@ -4358,7 +4067,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getPdf417ParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -4373,7 +4082,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getPdf417ParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -4389,7 +4098,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroFileID(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroFileID;
         }
         catch (Exception $ex)
         {
@@ -4405,7 +4114,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroFileID($value);
+            $this->getPdf417ParametersDto()->pdf417MacroFileID = $value;
         }
         catch (Exception $ex)
         {
@@ -4420,7 +4129,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroSegmentID(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroSegmentID;
         }
         catch (Exception $ex)
         {
@@ -4435,7 +4144,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroSegmentID($value);
+            $this->getPdf417ParametersDto()->pdf417MacroSegmentID = $value;
         }
         catch (Exception $ex)
         {
@@ -4450,7 +4159,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroSegmentsCount(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroSegmentsCount;
         }
         catch (Exception $ex)
         {
@@ -4465,7 +4174,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroSegmentsCount($value);
+            $this->getPdf417ParametersDto()->pdf417MacroSegmentsCount = $value;
         }
         catch (Exception $ex)
         {
@@ -4481,7 +4190,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroFileName(), "string");
+            return $this->getPdf417ParametersDto()->pdf417MacroFileName;
         }
         catch (Exception $ex)
         {
@@ -4497,7 +4206,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroFileName($value);
+            $this->getPdf417ParametersDto()->pdf417MacroFileName = $value;
         }
         catch (Exception $ex)
         {
@@ -4512,7 +4221,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return new DateTime('@' . java_cast($this->getJavaClass()->getPdf417MacroTimeStamp(), "string"));
+            return new DateTime('@' . $this->getPdf417ParametersDto()->pdf417MacroTimeStamp);
         }
         catch (Exception $ex)
         {
@@ -4527,7 +4236,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroTimeStamp($value->getTimestamp() . "");
+            $this->getPdf417ParametersDto()->pdf417MacroTimeStamp = $value->getTimestamp() . "";
         }
         catch (Exception $ex)
         {
@@ -4542,7 +4251,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroSender(), "string");
+            return $this->getPdf417ParametersDto()->pdf417MacroSender;
         }
         catch (Exception $ex)
         {
@@ -4557,7 +4266,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroSender($value);
+            $this->getPdf417ParametersDto()->pdf417MacroSender = $value;
         }
         catch (Exception $ex)
         {
@@ -4572,7 +4281,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroAddressee(), "string");
+            return $this->getPdf417ParametersDto()->pdf417MacroAddressee;
         }
         catch (Exception $ex)
         {
@@ -4587,7 +4296,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroAddressee($value);
+            $this->getPdf417ParametersDto()->pdf417MacroAddressee = $value;
         }
         catch (Exception $ex)
         {
@@ -4603,7 +4312,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroFileSize(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroFileSize;
         }
         catch (Exception $ex)
         {
@@ -4619,7 +4328,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroFileSize($value);
+            $this->getPdf417ParametersDto()->pdf417MacroFileSize = $value;
         }
         catch (Exception $ex)
         {
@@ -4635,7 +4344,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroChecksum(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroChecksum;
         }
         catch (Exception $ex)
         {
@@ -4651,7 +4360,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroChecksum($value);
+            $this->getPdf417ParametersDto()->pdf417MacroChecksum = $value;
         }
         catch (Exception $ex)
         {
@@ -4668,7 +4377,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417ECIEncoding(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417ECIEncoding;
         }
         catch (Exception $ex)
         {
@@ -4685,7 +4394,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417ECIEncoding($value);
+            $this->getPdf417ParametersDto()->pdf417ECIEncoding = $value;
         }
         catch (Exception $ex)
         {
@@ -4700,7 +4409,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroECIEncoding(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroECIEncoding;
         }
         catch (Exception $ex)
         {
@@ -4715,7 +4424,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroECIEncoding($value);
+            $this->getPdf417ParametersDto()->pdf417MacroECIEncoding = $value;
         }
         catch (Exception $ex)
         {
@@ -4731,7 +4440,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPdf417MacroTerminator(), "integer");
+            return $this->getPdf417ParametersDto()->pdf417MacroTerminator;
         }
         catch (Exception $ex)
         {
@@ -4747,7 +4456,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPdf417MacroTerminator($value);
+            $this->getPdf417ParametersDto()->pdf417MacroTerminator = $value;
         }
         catch (Exception $ex)
         {
@@ -4764,7 +4473,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->isReaderInitialization(), "boolean");
+            return $this->getPdf417ParametersDto()->isReaderInitialization;
         }
         catch (Exception $ex)
         {
@@ -4781,7 +4490,7 @@ class Pdf417Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setReaderInitialization($value);
+            $this->getPdf417ParametersDto()->isReaderInitialization = $value;
         }
         catch (Exception $ex)
         {
@@ -4819,7 +4528,7 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function getMacroCharacters() : int
     {
-        return java_cast($this->getJavaClass()->getMacroCharacters(), "integer");
+        return $this->getPdf417ParametersDto()->macroCharacters;
     }
 
     /**
@@ -4853,13 +4562,13 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setMacroCharacters(int $value) : void
     {
-        $this->getJavaClass()->setMacroCharacters($value);
+        $this->getPdf417ParametersDto()->macroCharacters = $value;
     }
 
     /**
      * <p>
      * Defines linked modes with GS1MicroPdf417, MicroPdf417 and Pdf417 barcodes
-     * With GS1MicroPdf417 symbology encodes 906, 907, 912, 913, 914, 915 “Linked” UCC/EAN-128 modes
+     * With GS1MicroPdf417 symbology encodes 906, 907, 912, 913, 914, 915 "Linked" UCC/EAN-128 modes
      * With MicroPdf417 and Pdf417 symbologies encodes 918 linkage flag to associated linear component other than an EAN.UCC
      * </p><p><hr><blockquote><pre>
      * These samples show how to encode "Linked" UCC/EAN-128 modes in GS1MicroPdf417 and Linkage Flag (918) in MicroPdf417 and Pdf417 barcodes
@@ -4950,12 +4659,12 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function isLinked() : bool
     {
-        return java_cast($this->getJavaClass()->isLinked(), "boolean");
+        return $this->getPdf417ParametersDto()->isLinked;
     }
     /**
      * <p>
      * Defines linked modes with GS1MicroPdf417, MicroPdf417 and Pdf417 barcodes
-     * With GS1MicroPdf417 symbology encodes 906, 907, 912, 913, 914, 915 “Linked” UCC/EAN-128 modes
+     * With GS1MicroPdf417 symbology encodes 906, 907, 912, 913, 914, 915 "Linked" UCC/EAN-128 modes
      * With MicroPdf417 and Pdf417 symbologies encodes 918 linkage flag to associated linear component other than an EAN.UCC
      * </p><p><hr><blockquote><pre>
      * These samples show how to encode "Linked" UCC/EAN-128 modes in GS1MicroPdf417 and Linkage Flag (918) in MicroPdf417 and Pdf417 barcodes
@@ -5038,7 +4747,7 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setLinked(bool $value) : void
     {
-        $this->getJavaClass()->setLinked($value);
+        $this->getPdf417ParametersDto()->isLinked = $value;
     }
 
     /**
@@ -5078,7 +4787,7 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function isCode128Emulation() : bool
     {
-        return java_cast($this->getJavaClass()->isCode128Emulation(), "boolean");
+        return $this->getPdf417ParametersDto()->isCode128Emulation;
     }
 
     /**
@@ -5118,39 +4827,59 @@ class Pdf417Parameters extends BaseJavaClass
      */
     public function setCode128Emulation(bool $value) : void
     {
-        $this->getJavaClass()->setCode128Emulation($value);
+        $this->getPdf417ParametersDto()->isCode128Emulation = $value;
     }
 
     /**
-     * Returns a human-readable String representation of this Pdf417Parameters.
+     * Returns a human-readable string representation of this Pdf417Parameters.
      *
      * @return string that represents this Pdf417Parameters.
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Pdf417Parameters_toString($this->getPdf417ParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * Supplement parameters. Used for Interleaved2of5, Standard2of5, EAN13, EAN8, UPCA, UPCE, ISBN, ISSN, ISMN.
  */
-class SupplementParameters extends BaseJavaClass
+class SupplementParameters implements Communicator
 {
+    private $supplementParametersDto;
+
+    private function getSupplementParametersDto(): SupplementParametersDTO
+    {
+        return $this->supplementParametersDto;
+    }
+
+    private function setSupplementParametersDto(SupplementParametersDTO $supplementParametersDto): void
+    {
+        $this->supplementParametersDto = $supplementParametersDto;
+    }
     private $_space;
 
-    protected function init(): void
+    function __construct(SupplementParametersDTO $supplementParametersDto)
+    {
+        $this->supplementParametersDto = $supplementParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
         try
         {
-            $this->_space = new Unit($this->getJavaClass()->getSupplementSpace());
+            $this->_space = new Unit($this->getSupplementParametersDto()->supplementSpace);
         }
         catch (Exception $ex)
         {
@@ -5165,7 +4894,7 @@ class SupplementParameters extends BaseJavaClass
     {
         try
         {
-            $SupplementData = java_cast($this->getJavaClass()->getSupplementData(), "string");
+            $SupplementData = $this->getSupplementParametersDto()->supplementData;
             if ($SupplementData == "null")
             {
                 return null;
@@ -5185,7 +4914,7 @@ class SupplementParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setSupplementData($value);
+            $this->getSupplementParametersDto()->supplementData = $value;
         }
         catch (Exception $ex)
         {
@@ -5201,14 +4930,7 @@ class SupplementParameters extends BaseJavaClass
      */
     public function getSupplementSpace(): Unit
     {
-        try
-        {
             return $this->_space;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -5218,23 +4940,44 @@ class SupplementParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->SupplementParameters_toString($this->getSupplementParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
  * MaxiCode parameters.
  */
-class MaxiCodeParameters extends BaseJavaClass
+class MaxiCodeParameters implements Communicator
 {
-    protected function init(): void
+    private $maxiCodeParametersDto;
+
+    private function getMaxiCodeParametersDto(): MaxiCodeParametersDTO
+    {
+        return $this->maxiCodeParametersDto;
+    }
+
+    private function setMaxiCodeParametersDto(MaxiCodeParametersDTO $maxiCodeParametersDto): void
+    {
+        $this->maxiCodeParametersDto = $maxiCodeParametersDto;
+    }
+
+    function __construct(MaxiCodeParametersDTO $maxiCodeParametersDto)
+    {
+        $this->maxiCodeParametersDto = $maxiCodeParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -5243,7 +4986,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function getMaxiCodeMode() : int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeMode(), "integer");
+        return $this->getMaxiCodeParametersDto()->maxiCodeMode;
     }
 
     /**
@@ -5251,7 +4994,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function setMaxiCodeMode(int $maxiCodeMode) : void
     {
-        $this->getJavaClass()->setMaxiCodeMode($maxiCodeMode);
+        $this->getMaxiCodeParametersDto()->maxiCodeMode = $maxiCodeMode;
     }
 
     /**
@@ -5261,7 +5004,7 @@ class MaxiCodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getMaxiCodeEncodeMode(), "integer");
+            return $this->getMaxiCodeParametersDto()->maxiCodeEncodeMode;
         }
         catch (Exception $ex)
         {
@@ -5276,7 +5019,7 @@ class MaxiCodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setMaxiCodeEncodeMode($value);
+            $this->getMaxiCodeParametersDto()->maxiCodeEncodeMode = $value;
         }
         catch (Exception $ex)
         {
@@ -5290,7 +5033,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function getECIEncoding() : int
     {
-        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
+        return $this->getMaxiCodeParametersDto()->eCIEncoding;
     }
 
     /**
@@ -5299,7 +5042,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function setECIEncoding(int $ECIEncoding) : void
     {
-        $this->getJavaClass()->setECIEncoding($ECIEncoding);
+        $this->getMaxiCodeParametersDto()->eCIEncoding = $ECIEncoding;
     }
 
     /**
@@ -5309,7 +5052,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function getMaxiCodeStructuredAppendModeBarcodeId() : int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodeId(), "integer");
+        return $this->getMaxiCodeParametersDto()->maxiCodeStructuredAppendModeBarcodeId;
     }
 
     /**
@@ -5319,7 +5062,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function setMaxiCodeStructuredAppendModeBarcodeId(int $maxiCodeStructuredAppendModeBarcodeId) : void
     {
-        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodeId($maxiCodeStructuredAppendModeBarcodeId);
+        $this->getMaxiCodeParametersDto()->maxiCodeStructuredAppendModeBarcodeId = $maxiCodeStructuredAppendModeBarcodeId;
     }
 
     /**
@@ -5329,7 +5072,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function getMaxiCodeStructuredAppendModeBarcodesCount() : int
     {
-        return java_cast($this->getJavaClass()->getMaxiCodeStructuredAppendModeBarcodesCount(), "integer");
+        return $this->getMaxiCodeParametersDto()->maxiCodeStructuredAppendModeBarcodesCount;
     }
 
     /**
@@ -5339,7 +5082,7 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function setMaxiCodeStructuredAppendModeBarcodesCount(int $maxiCodeStructuredAppendModeBarcodesCount) : void
     {
-        $this->getJavaClass()->setMaxiCodeStructuredAppendModeBarcodesCount($maxiCodeStructuredAppendModeBarcodesCount);
+        $this->getMaxiCodeParametersDto()->maxiCodeStructuredAppendModeBarcodesCount = $maxiCodeStructuredAppendModeBarcodesCount;
     }
 
     /**
@@ -5349,7 +5092,7 @@ class MaxiCodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getAspectRatio(), "float");
+            return $this->getMaxiCodeParametersDto()->aspectRatio;
         }
         catch (Exception $ex)
         {
@@ -5364,7 +5107,7 @@ class MaxiCodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setAspectRatio($value);
+            $this->getMaxiCodeParametersDto()->aspectRatio = $value;
         }
         catch (Exception $ex)
         {
@@ -5379,794 +5122,45 @@ class MaxiCodeParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->MaxiCodeParameters_toString($this->getMaxiCodeParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
-/**
- * Aztec parameters.
- */
-class AztecParameters extends BaseJavaClass
-{
-    function __construct($javaClass)
-    {
-        parent::__construct($javaClass);
-    }
-
-    protected function init(): void
-    {
-    }
-
-    /**
-     * <p>
-     * Gets a Aztec encode mode.
-     * Default value: Auto.
-     * </p>
-     */
-    public function getAztecEncodeMode() : int
-    {
-        return java_cast($this->getJavaClass()->getAztecEncodeMode(), "integer");
-    }
-
-    /**
-     * <p>
-     * Sets a Aztec encode mode.
-     * Default value: Auto.
-     * </p>
-     */
-    public function setAztecEncodeMode(int $value) : void
-    {
-        $this->getJavaClass()->setAztecEncodeMode($value);
-    }
-    
-    /**
-     * <p>
-     * Gets ECI encoding. Used when AztecEncodeMode is Auto.
-     * Default value: ISO-8859-1
-     * </p>
-     */
-    public function getECIEncoding() : int
-    {
-        return java_cast($this->getJavaClass()->getECIEncoding(), "integer");
-    }
-    /**
-     * <p>
-     * Gets ECI encoding. Used when AztecEncodeMode is Auto.
-     * Default value: ISO-8859-1
-     * </p>
-     */
-    public function setECIEncoding(int $value) : void
-    {
-        $this->getJavaClass()->setECIEncoding($value);
-    }
-
-    /**
-     * <p>
-     * Barcode ID for Structured Append mode of Aztec barcode. Barcode ID should be in range from 1 to barcodes count.
-     * Default value: 0
-     * </p>
-     */
-    public function getStructuredAppendBarcodeId() : int
-    {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodeId(), "integer");
-    }
-    /**
-     * <p>
-     * Barcode ID for Structured Append mode of Aztec barcode. Barcode ID should be in range from 1 to barcodes count.
-     * Default value: 0
-     * </p>
-     */
-    public function setStructuredAppendBarcodeId(int $value) : void
-    {
-        $this->getJavaClass()->setStructuredAppendBarcodeId($value);
-    }
-
-    /**
-     * <p>
-     * Barcodes count for Structured Append mode of Aztec barcode. Barcodes count should be in range from 1 to 26.
-     * Default value: 0
-     * </p>
-     */
-    public function getStructuredAppendBarcodesCount() : int
-    {
-        return java_cast($this->getJavaClass()->getStructuredAppendBarcodesCount(), "integer");
-    }
-    /**
-     * <p>
-     * Barcodes count for Structured Append mode of Aztec barcode. Barcodes count should be in range from 1 to 26.
-     * Default value: 0
-     * </p>
-     */
-    public function setStructuredAppendBarcodesCount(int $value) : void
-    {
-        $this->getJavaClass()->setStructuredAppendBarcodesCount($value);
-    }
-
-    /**
-     * <p>
-     * File ID for Structured Append mode of Aztec barcode (optional field). File ID should not contain spaces.
-     * Default value: empty string
-     * </p>
-     */
-    public function getStructuredAppendFileId() : string
-    {
-        return java_cast($this->getJavaClass()->getStructuredAppendFileId(), "string");
-    }
-    /**
-     * <p>
-     * File ID for Structured Append mode of Aztec barcode (optional field). File ID should not contain spaces.
-     * Default value: empty string
-     * </p>
-     */
-    public function setStructuredAppendFileId(string $value) : void
-    {
-        $this->getJavaClass()->setStructuredAppendFileId($value);
-    }
-
-    /**
-     * <p>
-     * Level of error correction of Aztec types of barcode.
-     * Value should between 5 to 95.
-     * </p>
-     */
-    public function getAztecErrorLevel() : int
-    {
-        return java_cast($this->getJavaClass()->getAztecErrorLevel(), "integer");
-    }
-    /**
-     * <p>
-     * Level of error correction of Aztec types of barcode.
-     * Value should between 5 to 95.
-     * </p>
-     */
-    public function setAztecErrorLevel(int $value) : void
-    {
-        $this->getJavaClass()->setAztecErrorLevel($value);
-    }
-
-    /**
-     * <p>
-     * Gets a Aztec Symbol mode.
-     * Default value: AztecSymbolMode.Auto.
-     * </p>
-     */
-    public function getAztecSymbolMode() : int
-    {
-        return java_cast($this->getJavaClass()->getAztecSymbolMode(), "integer");
-    }
-    /**
-     * <p>
-     * Sets a Aztec Symbol mode.
-     * Default value: AztecSymbolMode.Auto.
-     * </p>
-     */
-    public function setAztecSymbolMode(int $value) : void
-    {
-        $this->getJavaClass()->setAztecSymbolMode($value);
-    }
-
-    /**
-     * <p>
-     * Gets layers count of Aztec symbol. Layers count should be in range from 1 to 3 for Compact mode and
-     * in range from 1 to 32 for Full Range mode.
-     * Default value: 0 (auto).
-     * </p>
-     */
-    public function getLayersCount() : int
-    {
-        return java_cast($this->getJavaClass()->getLayersCount(), "integer");
-    }
-    /**
-     * <p>
-     * Sets layers count of Aztec symbol. Layers count should be in range from 1 to 3 for Compact mode and
-     * in range from 1 to 32 for Full Range mode.
-     * Default value: 0 (auto).
-     * </p>
-     */
-    public function setLayersCount(int $value) : void
-    {
-        $this->getJavaClass()->setLayersCount($value);
-    }
-
-    /**
-     * <p>
-     * Used to instruct the reader to interpret the data contained within the symbol
-     * as programming for reader initialization.
-     * </p>
-     */
-    public function isReaderInitialization() : bool
-    {
-        return java_cast($this->getJavaClass()->isReaderInitialization(), "bool");
-    }
-
-    /**
-     * <p>
-     * Used to instruct the reader to interpret the data contained within the symbol
-     * as programming for reader initialization.
-     * </p>
-     */
-    public function setReaderInitialization(bool $value) : void
-    {
-    $this->getJavaClass()->setReaderInitialization($value);
-    }
-
-    /**
-     * <p>
-     * Height/Width ratio of 2D BarCode module.
-     * </p>
-     */
-    public function getAspectRatio() : float
-    {
-        return java_cast($this->getJavaClass()->getAspectRatio(), "float");
-    }
-    /**
-     * <p>
-     * Height/Width ratio of 2D BarCode module.
-     * </p>
-     */
-    public function setAspectRatio(float $value) : void
-    {
-        $this->getJavaClass()->setAspectRatio($value);
-    }
-
-    /**
-     * <p>
-     * Returns a human-readable string representation of this {@code AztecParameters}.
-     * </p>
-     * @return A string that represents this {@code AztecParameters}.
-     */
-    public function toString() : string
-    {
-        return java_cast($this->getJavaClass()->toString(), "string");
-    }
-}
-
-/**
- * Codabar parameters.
- */
-class CodabarParameters extends BaseJavaClass
-{
-
-    protected function init(): void
-    {
-    }
-
-    /**
-     * Get the checksum algorithm for Codabar barcodes.
-     * Default value: CodabarChecksumMode::MOD_16.
-     * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
-     * @see CodabarChecksumMode.
-     */
-    public function getCodabarChecksumMode(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodabarChecksumMode(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Set the checksum algorithm for Codabar barcodes.
-     * Default value: CodabarChecksumMode::MOD_16.
-     * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
-     * @see CodabarChecksumMode.
-     */
-    public function setCodabarChecksumMode(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCodabarChecksumMode($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Start symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     */
-    public function getCodabarStartSymbol(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodabarStartSymbol(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Start symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     */
-    public function setCodabarStartSymbol(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCodabarStartSymbol($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Stop symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     */
-    public function getCodabarStopSymbol(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getCodabarStopSymbol(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Stop symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     */
-    public function setCodabarStopSymbol(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setCodabarStopSymbol($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this CodabarParameters.
-     *
-     * @return string that represents this CodabarParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Coupon parameters. Used for UpcaGs1DatabarCoupon, UpcaGs1Code128Coupon.
- */
-class CouponParameters extends BaseJavaClass
-{
-    private $_space;
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->_space = new Unit($this->getJavaClass()->getSupplementSpace());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Space between main the BarCode and supplement BarCode in Unit value.
-     *
-     * @exception IllegalArgumentException
-     * The Space parameter value is less than 0.
-     */
-    public function getSupplementSpace(): Unit
-    {
-        try
-        {
-            return $this->_space;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Space between main the BarCode and supplement BarCode in Unit value.
-     *
-     * @exception IllegalArgumentException
-     * The Space parameter value is less than 0.
-     */
-    public function setSupplementSpace(Unit $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setSupplementSpace($value->getJavaClass());
-            $this->_space = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Returns a human-readable string representation of this CouponParameters.
-     *
-     * @return string that represents this CouponParameters.
-     */
-    public function toString(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- *
- *  Defines a particular format for text, including font face, size, and style attributes
- *  where size in Unit value property.
- *
- *  This sample shows how to create and save a BarCode image.
- * @code
- *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
- *   $generator->getParameters()->getCaptionAbove()->setText("CAPTION ABOOVE");
- *   $generator->getParameters()->getCaptionAbove()->setVisible(true);
- *   $generator->getParameters()->getCaptionAbove()->getFont()->setStyle(FontStyle::ITALIC);
- *   $generator->getParameters()->getCaptionAbove()->getFont()->getSize()->setPoint(25);
- * @endcode
- */
-final class FontUnit extends BaseJavaClass
-{
-    private $_size;
-
-    public function __construct($source)
-    {
-        parent::__construct(self::initFontUnit($source));
-    }
-
-    private static function initFontUnit($source)
-    {
-        if ($source instanceof FontUnit)
-        {
-            return $source->getJavaClass();
-        }
-        return $source;
-    }
-
-    protected function init(): void
-    {
-        try
-        {
-            $this->_size = new Unit($this->getJavaClass()->getSize());
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the face name of this Font.
-     */
-    public function getFamilyName(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getFamilyName(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the face name of this Font.
-     */
-    public function setFamilyName(string $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setFamilyName($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets style information for this FontUnit.
-     */
-    public function getStyle(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getStyle(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets style information for this FontUnit.
-     */
-    public function setStyle(int $value): void
-    {
-        try
-        {
-            $this->getJavaClass()->setStyle($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets size of this FontUnit in Unit value.
-     *
-     * @exception IllegalArgumentException
-     * The Size parameter value is less than or equal to 0.
-     */
-    public function getSize(): Unit
-    {
-        try
-        {
-            return $this->_size;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Helper class for automatic codetext generation of the Extended Codetext Mode
- */
-class ExtCodetextBuilder extends BaseJavaClass
-{
-    function __construct($javaClass)
-    {
-        parent::__construct($javaClass);
-    }
-
-    function init(): void
-    {
-    }
-
-    /**
-     * Clears extended codetext items
-     */
-    public function clear(): void
-    {
-        try
-        {
-            $this->getJavaClass()->clear();
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Adds plain codetext to the extended codetext items
-     *
-     * @param string $codetext Codetext in unicode to add as extended codetext item
-     */
-    public function addPlainCodetext(string $codetext): void
-    {
-        try
-        {
-            $this->getJavaClass()->addPlainCodetext($codetext);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Adds codetext with Extended Channel Identifier
-     *
-     * @param int ECIEncoding Extended Channel Identifier
-     * @param string codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
-     */
-    public function addECICodetext(int $ECIEncoding, string $codetext): void
-    {
-        try
-        {
-            $this->getJavaClass()->addECICodetext($ECIEncoding, $codetext);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Generate extended codetext from generation items list
-     *
-     * @return string Return string of extended codetext
-     */
-    public function getExtendedCodetext(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-}
-
-/**
- * Extended codetext generator for 2D QR barcodes for ExtendedCodetext Mode of QREncodeMode
- * Use Display2DText property of BarCodeBuilder to set visible text to removing managing characters.
- *
- *  Example how to generate FNC1 first position for Extended Mode
- * @code
- *  //create codetext
- *  $lTextBuilder = new QrExtCodetextBuilder();
- *  $lTextBuilder->addFNC1FirstPosition();
- *  $lTextBuilder->addPlainCodetext("000%89%%0");
- *  $lTextBuilder->addFNC1GroupSeparator();
- *  $lTextBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
- *  //generate codetext
- *  $lCodetext = lTextBuilder->getExtendedCodetext();
- * @endcode
- *
- * Example how to generate FNC1 second position for Extended Mode
- * @code
- *  //create codetext
- *  $lTextBuilder = new QrExtCodetextBuilder();
- *  $lTextBuilder->addFNC1SecondPosition("12");
- *  $lTextBuilder->addPlainCodetext("TRUE3456");
- *  //generate codetext
- *  $lCodetext = lTextBuilder->getExtendedCodetext();
- * @endcode
- *
- * Example how to generate multi ECI mode for Extended Mode
- * @code
- *  //create codetext
- * $lTextBuilder = new QrExtCodetextBuilder();
- * $lTextBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- * $lTextBuilder->addECICodetext(ECIEncodings::UTF8, "Right");
- * $lTextBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
- * $lTextBuilder->addPlainCodetext("t\\e\\\\st");
- *  //generate codetext
- * $lCodetext = $lTextBuilder->getExtendedCodetext();
- * @endcode
- */
-class QrExtCodetextBuilder extends ExtCodetextBuilder
-{
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.MwQrExtCodetextBuilder";
-
-    function __construct()
-    {
-        try
-        {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    function init(): void
-    {
-    }
-
-    /**
-     * Adds FNC1 in first position to the extended codetext items
-     */
-    function addFNC1FirstPosition(): void
-    {
-        try
-        {
-            $this->getJavaClass()->addFNC1FirstPosition();
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Adds FNC1 in second position to the extended codetext items
-     *
-     * @param string $codetext Value of the FNC1 in the second position
-     */
-    function addFNC1SecondPosition(string $codetext): void
-    {
-        try
-        {
-            $this->getJavaClass()->addFNC1SecondPosition($codetext);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Adds Group Separator (GS - '\\u001D') to the extended codetext items
-     */
-    function addFNC1GroupSeparator(): void
-    {
-        try
-        {
-            $this->getJavaClass()->addFNC1GroupSeparator();
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Generates Extended codetext from the extended codetext list.
-     *
-     * @return string Extended codetext as string
-     */
-    function getExtendedCodetext(): string
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-}
 
 /**
  * PatchCode parameters.
  */
-class PatchCodeParameters extends BaseJavaClass
+class PatchCodeParameters implements Communicator
 {
-    protected function init(): void
+    private $patchCodeParametersDto;
+
+    function getPatchCodeParametersDto(): PatchCodeParametersDTO
+    {
+        return $this->patchCodeParametersDto;
+    }
+
+    private function setPatchCodeParametersDto(PatchCodeParametersDTO $patchCodeParametersDto): void
+    {
+        $this->patchCodeParametersDto = $patchCodeParametersDto;
+    }
+
+    function __construct(PatchCodeParametersDTO $patchCodeParametersDto)
+    {
+        $this->patchCodeParametersDto = $patchCodeParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -6177,7 +5171,7 @@ class PatchCodeParameters extends BaseJavaClass
     {
         try
         {
-            $ExtraBarcodeText = java_cast($this->getJavaClass()->getExtraBarcodeText(), "string");
+            $ExtraBarcodeText = $this->getPatchCodeParametersDto()->extraBarcodeText;
             if ($ExtraBarcodeText == "null")
             {
                 return null;
@@ -6197,7 +5191,7 @@ class PatchCodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setExtraBarcodeText($value);
+            $this->getPatchCodeParametersDto()->extraBarcodeText = $value;
         }
         catch (Exception $ex)
         {
@@ -6215,7 +5209,7 @@ class PatchCodeParameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getPatchFormat(), "integer");
+            return $this->getPatchCodeParametersDto()->patchFormat;
         }
         catch (Exception $ex)
         {
@@ -6231,7 +5225,7 @@ class PatchCodeParameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setPatchFormat($value);
+            $this->getPatchCodeParametersDto()->patchFormat = $value;
         }
         catch (Exception $ex)
         {
@@ -6245,296 +5239,44 @@ class PatchCodeParameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->PatchCodeParameters_toString($this->getPatchCodeParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
-}
-
-/**
- * QR structured append parameters.
- */
-class QrStructuredAppendParameters extends BaseJavaClass
-{
-    protected function init(): void
-    {
-    }
-
-    function __construct($javaClass)
-    {
-        try
-        {
-            parent::__construct($javaClass);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *  Gets the QR structured append mode parity data.
-     */
-    public function getParityByte(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getParityByte(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *  Sets the QR structured append mode parity data.
-     */
-    public function setParityByte(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setParityByte($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the index of the QR structured append mode barcode. Index starts from 0.
-     */
-    public function getSequenceIndicator(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getSequenceIndicator(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the index of the QR structured append mode barcode. Index starts from 0.
-     */
-    public function setSequenceIndicator(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setSequenceIndicator($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Gets the QR structured append mode barcodes quantity. Max value is 16.
-     */
-    public function getTotalCount(): int
-    {
-        try
-        {
-            return java_cast($this->getJavaClass()->getTotalCount(), "integer");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets the QR structured append mode barcodes quantity. Max value is 16.
-     */
-    public function setTotalCount(int $value)
-    {
-        try
-        {
-            $this->getJavaClass()->setTotalCount($value);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-}
-
-/**
- * Extended codetext generator for MaxiCode barcodes for ExtendedCodetext Mode of MaxiCodeEncodeMode
- * Use TwoDDisplayText property of BarcodeGenerator to set visible text to removing managing characters.
- *
- * This sample shows how to use MaxiCodeExtCodetextBuilder in Extended Mode.
- *
- * @code
- * //create codetext
- * $textBuilder = new MaxiCodeExtCodetextBuilder();
- * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
- * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
- * $textBuilder->addPlainCodetext("Plain text");
- *
- * //generate codetext
- * $codetext = $textBuilder->getExtendedCodetext();
- *
- * //generate
- * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
- * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
- * $generator->save("test.bmp", BarcodeImageFormat.BMP);
- * @endcode
- */
-class MaxiCodeExtCodetextBuilder extends ExtCodetextBuilder
-{
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwMaxiCodeExtCodetextBuilder";
-
-    function __construct()
-    {
-        try
-        {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    function init(): void
-    {
-    }
-
-    /**
-     * Generates Extended codetext from the extended codetext list.
-     * @return string Extended codetext as string
-     */
-    public function getExtendedCodetext() : string
-    {
-        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
-    }
-}
-
-/**
- * <p>
- * <p>Extended codetext generator for 2D DotCode barcodes for ExtendedCodetext Mode of DotCodeEncodeMode</p>
- * </p><p><hr><blockquote><pre>
- * <pre>
- *
- * //Extended codetext mode
- * //create codetext
- * $textBuilder = new DotCodeExtCodetextBuilder();
- * $textBuilder->addFNC1FormatIdentifier();
- * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- * $textBuilder->addFNC1FormatIdentifier();
- * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
- * $textBuilder->addFNC1FormatIdentifier();
- * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
- * $textBuilder->addPlainCodetext("Plain text");
- * $textBuilder->addFNC3SymbolSeparator();
- * $textBuilder->addFNC3ReaderInitialization();
- * $textBuilder->addPlainCodetext("Reader initialization info");
- * //generate codetext
- * $codetext = $textBuilder->getExtendedCodetext();
- * //generate
- * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * {
- *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
- * 	   $generator->save("test.bmp", BarCodeImageFormat::BMP);
- * }
- * </pre>
- * </pre></blockquote></hr></p>
- */
-class DotCodeExtCodetextBuilder extends ExtCodetextBuilder
-{
-    const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwDotCodeExtCodetextBuilder";
-    public function __construct()
-    {
-        $javaClass = new java(DotCodeExtCodetextBuilder::JAVA_CLASS_NAME);
-        parent::__construct($javaClass);
-    }
-
-    static function construct($javaClass) : DotCodeExtCodetextBuilder
-    {
-        $obj = new DotCodeExtCodetextBuilder();
-        $obj->setJavaClass($javaClass);
-        return $obj;
-    }
-
-    /**
-     * <p>
-     * Adds FNC1 format identifier to the extended codetext items
-     * </p>
-     */
-    public function addFNC1FormatIdentifier() : void
-    {
-        $this->getJavaClass()->addFNC1FormatIdentifier();
-    }
-
-    /**
-     * <p>
-     * Adds FNC3 symbol separator to the extended codetext items
-     * </p>
-     */
-    public function addFNC3SymbolSeparator() : void
-    {
-        $this->getJavaClass()->addFNC3SymbolSeparator();
-    }
-
-    /**
-     * <p>
-     * Adds FNC3 reader initialization to the extended codetext items
-     * </p>
-     */
-    public function addFNC3ReaderInitialization() : void
-    {
-        $this->getJavaClass()->addFNC3ReaderInitialization();
-    }
-
-    /**
-     * <p>
-     * Adds structured append mode to the extended codetext items
-     * </p>
-     * @param barcodeId ID of barcode
-     * @param barcodesCount Barcodes count
-     */
-    public function addStructuredAppendMode(int $barcodeId, int $barcodesCount) : void
-    {
-        $this->getJavaClass()->addStructuredAppendMode($barcodeId, $barcodesCount);
-    }
-
-    /**
-     * <p>
-     * Generates Extended codetext from the extended codetext list.
-     * </p>
-     * @return Extended codetext as string
-     */
-    public function getExtendedCodetext() : string
-    {
-        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
-    }
-
-    public function init() : void {}
 }
 
 /**
  * Code128 parameters.
  */
-class Code128Parameters extends BaseJavaClass
+class Code128Parameters implements Communicator
 {
-    function __construct($javaClass)
+    private $code128ParametersDto;
+
+    private function getCode128ParametersDto(): Code128ParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->code128ParametersDto;
     }
 
-    function init(): void
+    private function setCode128ParametersDto(Code128ParametersDTO $code128ParametersDto): void
+    {
+        $this->code128ParametersDto = $code128ParametersDto;
+    }
+
+    function __construct(Code128ParametersDTO $code128ParametersDto)
+    {
+        $this->code128ParametersDto = $code128ParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -6548,7 +5290,7 @@ class Code128Parameters extends BaseJavaClass
     {
         try
         {
-            return java_cast($this->getJavaClass()->getCode128EncodeMode(), "integer");
+            return $this->getCode128ParametersDto()->code128EncodeMode;
         }
         catch (Exception $ex)
         {
@@ -6565,7 +5307,7 @@ class Code128Parameters extends BaseJavaClass
     {
         try
         {
-            $this->getJavaClass()->setCode128EncodeMode($value);
+            $this->getCode128ParametersDto()->code128EncodeMode = $value;
         }
         catch (Exception $ex)
         {
@@ -6579,30 +5321,47 @@ class Code128Parameters extends BaseJavaClass
      */
     public function toString(): string
     {
-        try
-        {
-            return java_cast($this->getJavaClass()->toString(), "string");
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Code128Parameters_toString($this->getCode128ParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
+
 
 /**
  * <p>
  * Han Xin parameters.
  * </p>
  */
-class HanXinParameters extends BaseJavaClass
+class HanXinParameters implements Communicator
 {
-    function __construct($javaClass)
+    private $hanXinParametersDto;
+
+    private function getHanXinParametersDto(): HanXinParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->hanXinParametersDto;
     }
 
-    function init(): void
+    private function setHanXinParametersDto(HanXinParametersDTO $hanXinParametersDto): void
+    {
+        $this->hanXinParametersDto = $hanXinParametersDto;
+    }
+
+    function __construct(HanXinParametersDTO $hanXinParametersDto)
+    {
+        $this->hanXinParametersDto = $hanXinParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -6615,7 +5374,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function getHanXinVersion() : int
     {
-        return java_cast($this->getJavaClass()->getHanXinVersion(), "integer");
+        return $this->getHanXinParametersDto()->hanXinVersion;
     }
     /**
      * <p>
@@ -6626,7 +5385,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function setHanXinVersion(int $value) : void
     {
-        $this->getJavaClass()->setHanXinVersion($value);
+        $this->getHanXinParametersDto()->hanXinVersion = $value;
     }
 
     /**
@@ -6637,7 +5396,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function getHanXinErrorLevel() : int
     {
-        return java_cast($this->getJavaClass()->getHanXinErrorLevel(), "integer");
+        return $this->getHanXinParametersDto()->hanXinErrorLevel;
     }
     /**
      * <p>
@@ -6647,7 +5406,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function setHanXinErrorLevel(int $value) :void
     {
-        $this->getJavaClass()->setHanXinErrorLevel($value);
+        $this->getHanXinParametersDto()->hanXinErrorLevel = $value;
     }
 
     /**
@@ -6658,7 +5417,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function getHanXinEncodeMode() : int
     {
-        return java_cast($this->getJavaClass()->getHanXinEncodeMode(), "integer");
+        return $this->getHanXinParametersDto()->hanXinEncodeMode;
     }
     /**
      * <p>
@@ -6668,7 +5427,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function setHanXinEncodeMode(int $value) :void
     {
-        $this->getJavaClass()->setHanXinEncodeMode($value);
+        $this->getHanXinParametersDto()->hanXinEncodeMode = $value;
     }
 
     /**
@@ -6679,8 +5438,8 @@ class HanXinParameters extends BaseJavaClass
      * </p>
      */
     public function getHanXinECIEncoding() :int
-{
-        return java_cast($this->getJavaClass()->getHanXinECIEncoding(), "integer");
+    {
+        return $this->getHanXinParametersDto()->hanXinECIEncoding;
     }
     /**
      * <p>
@@ -6691,7 +5450,7 @@ class HanXinParameters extends BaseJavaClass
      */
     public function setHanXinECIEncoding(int $value) :void
     {
-        $this->getJavaClass()->setHanXinECIEncoding($value);
+        $this->getHanXinParametersDto()->hanXinECIEncoding = $value;
     }
 
 
@@ -6699,46 +5458,323 @@ class HanXinParameters extends BaseJavaClass
      * <p>
      * Returns a human-readable string representation of this {@code HanXinParameters}.
      * </p>
-     * @return A string that represents this {@code HanXinParameters}.
+     * @return string that represents this {@code HanXinParameters}.
      */
     public function toString() :string
     {
-        return java_cast($this->getJavaClass()->toString(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->HanXinParameters_toString($this->getHanXinParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
+/**
+ * Aztec parameters.
+ */
+class AztecParameters implements Communicator
+{
+    private $aztecParametersDto;
+
+    private function getAztecParametersDto(): AztecParametersDTO
+    {
+        return $this->aztecParametersDto;
+    }
+
+    private function setAztecParametersDto(AztecParametersDTO $aztecParametersDto): void
+    {
+        $this->aztecParametersDto = $aztecParametersDto;
+    }
+
+    function __construct(AztecParametersDTO $aztecParametersDto)
+    {
+        $this->aztecParametersDto = $aztecParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+    }
+
+    /**
+     * <p>
+     * Gets a Aztec encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function getAztecEncodeMode() : int
+    {
+        return $this->getAztecParametersDto()->aztecEncodeMode;
+    }
+
+    /**
+     * <p>
+     * Sets a Aztec encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function setAztecEncodeMode(int $value) : void
+    {
+        $this->getAztecParametersDto()->aztecEncodeMode = $value;
+    }
+
+    /**
+     * <p>
+     * Gets ECI encoding. Used when AztecEncodeMode is Auto.
+     * Default value: ISO-8859-1
+     * </p>
+     */
+    public function getECIEncoding() : int
+    {
+        return $this->getAztecParametersDto()->ECIEncoding;
+    }
+    /**
+     * <p>
+     * Gets ECI encoding. Used when AztecEncodeMode is Auto.
+     * Default value: ISO-8859-1
+     * </p>
+     */
+    public function setECIEncoding(int $value) : void
+    {
+        $this->getAztecParametersDto()->ECIEncoding = $value;
+    }
+
+    /**
+     * <p>
+     * Barcode ID for Structured Append mode of Aztec barcode. Barcode ID should be in range from 1 to barcodes count.
+     * Default value: 0
+     * </p>
+     */
+    public function getStructuredAppendBarcodeId() : int
+    {
+        return $this->getAztecParametersDto()->structuredAppendBarcodeId;
+    }
+    /**
+     * <p>
+     * Barcode ID for Structured Append mode of Aztec barcode. Barcode ID should be in range from 1 to barcodes count.
+     * Default value: 0
+     * </p>
+     */
+    public function setStructuredAppendBarcodeId(int $value) : void
+    {
+        $this->getAztecParametersDto()->structuredAppendBarcodeId = $value;
+    }
+
+    /**
+     * <p>
+     * Barcodes count for Structured Append mode of Aztec barcode. Barcodes count should be in range from 1 to 26.
+     * Default value: 0
+     * </p>
+     */
+    public function getStructuredAppendBarcodesCount() : int
+    {
+        return $this->getAztecParametersDto()->structuredAppendBarcodesCount;
+    }
+    /**
+     * <p>
+     * Barcodes count for Structured Append mode of Aztec barcode. Barcodes count should be in range from 1 to 26.
+     * Default value: 0
+     * </p>
+     */
+    public function setStructuredAppendBarcodesCount(int $value) : void
+    {
+        $this->getAztecParametersDto()->structuredAppendBarcodesCount = $value;
+    }
+
+    /**
+     * <p>
+     * File ID for Structured Append mode of Aztec barcode (optional field). File ID should not contain spaces.
+     * Default value: empty string
+     * </p>
+     */
+    public function getStructuredAppendFileId() : string
+    {
+        return $this->getAztecParametersDto()->structuredAppendFileId;
+    }
+    /**
+     * <p>
+     * File ID for Structured Append mode of Aztec barcode (optional field). File ID should not contain spaces.
+     * Default value: empty string
+     * </p>
+     */
+    public function setStructuredAppendFileId(string $value) : void
+    {
+        $this->getAztecParametersDto()->structuredAppendFileId = $value;
+    }
+
+    /**
+     * <p>
+     * Level of error correction of Aztec types of barcode.
+     * Value should between 5 to 95.
+     * </p>
+     */
+    public function getAztecErrorLevel() : int
+    {
+        return $this->getAztecParametersDto()->aztecErrorLevel;
+    }
+    /**
+     * <p>
+     * Level of error correction of Aztec types of barcode.
+     * Value should between 5 to 95.
+     * </p>
+     */
+    public function setAztecErrorLevel(int $value) : void
+    {
+        $this->getAztecParametersDto()->aztecErrorLevel = $value;
+    }
+
+    /**
+     * <p>
+     * Gets a Aztec Symbol mode.
+     * Default value: AztecSymbolMode.Auto.
+     * </p>
+     */
+    public function getAztecSymbolMode() : int
+    {
+        return $this->getAztecParametersDto()->aztecSymbolMode;
+    }
+    /**
+     * <p>
+     * Sets a Aztec Symbol mode.
+     * Default value: AztecSymbolMode.Auto.
+     * </p>
+     */
+    public function setAztecSymbolMode(int $value) : void
+    {
+        $this->getAztecParametersDto()->aztecSymbolMode = $value;
+    }
+
+    /**
+     * <p>
+     * Gets layers count of Aztec symbol. Layers count should be in range from 1 to 3 for Compact mode and
+     * in range from 1 to 32 for Full Range mode.
+     * Default value: 0 (auto).
+     * </p>
+     */
+    public function getLayersCount() : int
+    {
+        return $this->getAztecParametersDto()->layersCount;
+    }
+    /**
+     * <p>
+     * Sets layers count of Aztec symbol. Layers count should be in range from 1 to 3 for Compact mode and
+     * in range from 1 to 32 for Full Range mode.
+     * Default value: 0 (auto).
+     * </p>
+     */
+    public function setLayersCount(int $value) : void
+    {
+        $this->getAztecParametersDto()->layersCount = $value;
+    }
+
+    /**
+     * <p>
+     * Used to instruct the reader to interpret the data contained within the symbol
+     * as programming for reader initialization.
+     * </p>
+     */
+    public function isReaderInitialization() : bool
+    {
+        return $this->getAztecParametersDto()->isReaderInitialization;
+    }
+
+    /**
+     * <p>
+     * Used to instruct the reader to interpret the data contained within the symbol
+     * as programming for reader initialization.
+     * </p>
+     */
+    public function setReaderInitialization(bool $value) : void
+    {
+        $this->getAztecParametersDto()->isReaderInitialization = $value;
+    }
+
+    /**
+     * <p>
+     * Height/Width ratio of 2D BarCode module.
+     * </p>
+     */
+    public function getAspectRatio() : float
+    {
+        return $this->getAztecParametersDto()->aspectRatio;
+    }
+    /**
+     * <p>
+     * Height/Width ratio of 2D BarCode module.
+     * </p>
+     */
+    public function setAspectRatio(float $value) : void
+    {
+        $this->getAztecParametersDto()->aspectRatio = $value;
+    }
+
+    /**
+     * <p>
+     * Returns a human-readable string representation of this {@code AztecParameters}.
+     * </p>
+     * @return string that represents this {@code AztecParameters}.
+     */
+    public function toString() : string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->AztecParameters_toString($this->getAztecParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+}
 
 /**
- * <p>
- * <p>Extended codetext generator for 2D DataMatrix barcodes for ExtendedCodetext Mode of DataMatrixEncodeMode</p>
- * </p><p><hr><blockquote><pre>
- * <pre>
- * //Extended codetext mode
- * //create codetext
- * $textBuilder = new DataMatrixExtCodetextBuilder();
- * $codetextBuilder->addECICodetextWithEncodeMode(ECIEncodings::Win1251, DataMatrixEncodeMode::BYTES, "World");
- * $codetextBuilder->addPlainCodetext("Will");
- * $codetextBuilder->addECICodetext(ECIEncodings::UTF_8, "犬Right狗");
- * $codetextBuilder->addCodetextWithEncodeMode(DataMatrixEncodeMode::C_40, "ABCDE");
- * //generate codetext
- * $codetext = $textBuilder->getExtendedCodetext();
- * //generate
- * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, null, $codetext);
- * $generator->getParameters()->getBarcode()->getDataMatrix()->setDataMatrixEncodeMode(DataMatrixEncodeMode::EXTENDED_CODETEXT);
- * $generator->save("test.bmp", BarcodeImageFormat::BMP);
- * </pre>
- * </pre></blockquote></hr></p>
+ * Codabar parameters.
  */
-class DataMatrixExtCodetextBuilder extends ExtCodetextBuilder
+class CodabarParameters implements Communicator
 {
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwDataMatrixExtCodetextBuilder";
+    private $codabarParametersDto;
 
-    function __construct()
+    private function getCodabarParametersDto(): CodabarParametersDTO
+    {
+        return $this->codabarParametersDto;
+    }
+
+    private function setCodabarParametersDto(CodabarParametersDTO $codabarParametersDto): void
+    {
+        $this->codabarParametersDto = $codabarParametersDto;
+    }
+
+    function __construct(CodabarParametersDTO $codabarParametersDto)
+    {
+        $this->codabarParametersDto = $codabarParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+    }
+
+    /**
+     * Get the checksum algorithm for Codabar barcodes.
+     * Default value: CodabarChecksumMode::MOD_16.
+     * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
+     * @see CodabarChecksumMode.
+     */
+    public function getCodabarChecksumMode(): int
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            return $this->getCodabarParametersDto()->codabarChecksumMode;
         }
         catch (Exception $ex)
         {
@@ -6746,98 +5782,479 @@ class DataMatrixExtCodetextBuilder extends ExtCodetextBuilder
         }
     }
 
-    static function construct($javaClass)
-    {
-        $obj = new DataMatrixExtCodetextBuilder();
-        $obj->setJavaClass($javaClass);
-        return $obj;
-    }
-
-    function init(): void
-    {
-    }
     /**
-     * <p>
-     * Adds codetext with Extended Channel Identifier with defined encode mode
-     * </p>
-     * @param ECIEncoding Extended Channel Identifier
-     * @param encodeMode Encode mode value
-     * @param codetext Codetext in unicode to add as extended codetext item with Extended Channel Identifier with defined encode mode
+     * Set the checksum algorithm for Codabar barcodes.
+     * Default value: CodabarChecksumMode::MOD_16.
+     * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
+     * @see CodabarChecksumMode.
      */
-    public function addECICodetextWithEncodeMode(int $ECIEncoding, int $encodeMode, string $codetext) : void
+    public function setCodabarChecksumMode(int $value): void
     {
-        $this->getJavaClass()->addECICodetextWithEncodeMode($ECIEncoding, $encodeMode, $codetext);
+        try
+        {
+            $this->getCodabarParametersDto()->codabarChecksumMode = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Adds codetext with defined encode mode to the extended codetext items
-     * </p>
-     * @param encodeMode Encode mode value
-     * @param codetext Codetext in unicode to add as extended codetext item
+     * Start symbol (character) of Codabar symbology.
+     * Default value: CodabarSymbol::A
      */
-    public function addCodetextWithEncodeMode(int $encodeMode, string $codetext) : void
+    public function getCodabarStartSymbol(): int
     {
-        $this->getJavaClass()->addCodetextWithEncodeMode($encodeMode, $codetext);
+        try
+        {
+            return $this->getCodabarParametersDto()->codabarStartSymbol;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Generates Extended codetext from the extended codetext list.
-     * </p>
-     * @return Extended codetext as string
+     * Start symbol (character) of Codabar symbology.
+     * Default value: CodabarSymbol::A
      */
-    public /*override*/ function getExtendedCodetext() : string
+    public function setCodabarStartSymbol(int $value): void
     {
-        return java_cast($this->getJavaClass()->getExtendedCodetext(), "String");
+        try
+        {
+            $this->getCodabarParametersDto()->codabarStartSymbol = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Stop symbol (character) of Codabar symbology.
+     * Default value: CodabarSymbol::A
+     */
+    public function getCodabarStopSymbol(): int
+    {
+        try
+        {
+            return $this->getCodabarParametersDto()->codabarStopSymbol;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Stop symbol (character) of Codabar symbology.
+     * Default value: CodabarSymbol::A
+     */
+    public function setCodabarStopSymbol(int $value): void
+    {
+        try
+        {
+            $this->getCodabarParametersDto()->codabarStopSymbol = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a human-readable string representation of this CodabarParameters.
+     *
+     * @return string that represents this CodabarParameters.
+     */
+    public function toString(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->CodabarParameters_toString($this->getCodabarParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 }
 
 /**
- * <p>
- * <p>Extended codetext generator for Han Xin Code for Extended Mode of HanXinEncodeMode</p>
- * </p><p><hr><blockquote><pre>
- * <pre>
+ * Coupon parameters. Used for UpcaGs1DatabarCoupon, UpcaGs1Code128Coupon.
+ */
+class CouponParameters implements Communicator
+{
+    private $couponParametersDto;
+
+    private function getCouponParametersDto(): CouponParametersDTO
+    {
+        return $this->couponParametersDto;
+    }
+
+    private function setCouponParametersDto(CouponParametersDTO $couponParametersDto): void
+    {
+        $this->couponParametersDto = $couponParametersDto;
+    }
+
+    private $_space;
+
+    function __construct(CouponParametersDTO $couponParametersDto)
+    {
+        $this->couponParametersDto = $couponParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try
+        {
+            $this->_space = new Unit($this->getCouponParametersDto()->supplementSpace);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Space between main the BarCode and supplement BarCode in Unit value.
+     *
+     * @exception IllegalArgumentException
+     * The Space parameter value is less than 0.
+     */
+    public function getSupplementSpace(): Unit
+    {
+            return $this->_space;
+    }
+
+    /**
+     * Space between main the BarCode and supplement BarCode in Unit value.
+     *
+     * @exception IllegalArgumentException
+     * The Space parameter value is less than 0.
+     */
+    public function setSupplementSpace(Unit $value): void
+    {
+        try
+        {
+            $this->getCouponParametersDto()->supplementSpace = $value->getUnitDto();
+            $this->_space = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a human-readable string representation of this CouponParameters.
+     *
+     * @return string that represents this CouponParameters.
+     */
+    public function toString(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->CouponParameters_toString($this->getCouponParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+}
+
+/**
+ * Caption parameters.
+ */
+class CaptionParameters implements Communicator
+{
+    private $captionParametersDto;
+
+    function getCaptionParametersDto(): CaptionParametersDTO
+    {
+        return $this->captionParametersDto;
+    }
+
+    private function setCaptionParametersDto(CaptionParametersDTO $captionParametersDto): void
+    {
+        $this->captionParametersDto = $captionParametersDto;
+    }
+
+    private $font;
+    private $padding;
+
+    function __construct(CaptionParametersDTO $captionParametersDto)
+    {
+        $this->captionParametersDto = $captionParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try
+        {
+            $this->padding = new Padding($this->getCaptionParametersDto()->padding);
+            $this->font = new FontUnit($this->getCaptionParametersDto()->font);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption text.
+     * Default value: empty string.
+     */
+    public function getText(): string
+    {
+        try
+        {
+            return $this->getCaptionParametersDto()->text;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption text.
+     * Default value: empty string.
+     */
+    public function setText(string $value): void
+    {
+        try
+        {
+            $this->getCaptionParametersDto()->text = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption font.
+     * Default value: Arial 8pt regular.
+     */
+    public function getFont(): FontUnit
+    {
+        try
+        {
+            return $this->font;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption text visibility.
+     * Default value: false.
+     */
+    public function getVisible(): bool
+    {
+        try
+        {
+            return $this->getCaptionParametersDto()->visible;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption text visibility.
+     * Default value: false.
+     */
+    public function setVisible(bool $value): void
+    {
+        try
+        {
+            $this->getCaptionParametersDto()->visible = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption text color.
+     * Default value BLACK.
+     */
+    public function getTextColor(): string
+    {
+        try
+        {
+            $hexColor = strtoupper(dechex($this->getCaptionParametersDto()->textColor));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0" . $hexColor;
+            }
+            $hexColor = "#" . $hexColor;
+            return $hexColor;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption text color.
+     * Default value BLACK.
+     */
+    public function setTextColor(string $value): void
+    {
+        try
+        {
+            if(substr($value, 0, 1) == '#')
+                $value = substr($value, 1, strlen($value) - 1);
+            $this->getCaptionParametersDto()->textColor = hexdec($value);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Captions paddings.
+     * Default value for CaptionAbove: 5pt 5pt 0 5pt.
+     * Default value for CaptionBelow: 0 5pt 5pt 5pt.
+     */
+    public function getPadding(): Padding
+    {
+            return $this->padding;
+    }
+
+    /**
+     * Captions paddings.
+     * Default value for CaptionAbove: 5pt 5pt 0 5pt.
+     * Default value for CaptionBelow: 0 5pt 5pt 5pt.
+     */
+    public function setPadding(Padding $value): void
+    {
+        try
+        {
+            $this->getCaptionParametersDto()->padding = $value->getPaddingDto();
+            $this->padding = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption test horizontal alignment.
+     * Default value: StringAlignment.Center.
+     */
+    public function getAlignment(): int
+    {
+        try
+        {
+            return $this->getCaptionParametersDto()->alignment;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Caption test horizontal alignment.
+     * Default value: StringAlignment.CENTER.
+     */
+    public function setAlignment(int $value): void
+    {
+        try
+        {
+            $this->getCaptionParametersDto()->alignment = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /*
+     * Specify word wraps (line breaks) within text.
+     * @return bool
+     */
+    public function getNoWrap(): bool
+    {
+        try
+        {
+            return $this->getCaptionParametersDto()->noWrap;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /*
+     * Specify word wraps (line breaks) within text.
+     */
+    public function setNoWrap(bool $value): void
+    {
+        try
+        {
+            $this->getCaptionParametersDto()->noWrap = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+/**
+ *  Specifies the size value in different units (Pixel, Inches, etc.).
  *
- * //Extended codetext mode
- * //create codetext
- * $codeTextBuilder = new HanXinExtCodetextBuilder();
- * $codeTextBuilder->addGB18030TwoByte("漄");
- * $codeTextBuilder->addGB18030FourByte("㐁");
- * $codeTextBuilder->addCommonChineseRegionOne("全");
- * $codeTextBuilder->addCommonChineseRegionTwo("螅");
- * $codeTextBuilder->addNumeric("123");
- * $codeTextBuilder->addText("qwe");
- * $codeTextBuilder->addUnicode("ıntəˈnæʃənəl");
- * $codeTextBuilder->addECI("ΑΒΓΔΕ", 9);
- * $codeTextBuilder->addAuto("abc");
- * $codeTextBuilder->addBinary("abc");
- * $codeTextBuilder->addURI("backslashes_should_be_doubled\000555:test");
- * $codeTextBuilder->addGS1("(01)03453120000011(17)191125(10)ABCD1234(21)10");
- * $expectedStr = "漄㐁全螅123qweıntəˈnæʃənəlΑΒΓΔΕabcabcbackslashes_should_be_doubled\000555:test(01)03453120000011(17)191125(10)ABCD1234(21)10";
- * //generate codetext
- * $str = $codeTextBuilder->getExtendedCodetext();
- * //generate
- * $bg = new BarcodeGenerator(EncodeTypes::HAN_XIN, $str);
- * $bg->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::EXTENDED);
- * $img = $bg->generateBarCodeImage(BarcodeImageFormat::PNG);
- * $r = new BarCodeReader($img, null, DecodeType::HAN_XIN))
- * $found = $r->readBarCodes();
- * Assert::assertEquals(1, sizeof(found));
- * Assert::assertEquals($expectedStr, $found[0]->getCodeText());
- * </pre>
- * </pre></blockquote></hr></p>
+ * This sample shows how to create and save a BarCode image.
+ * @code
+ *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
+ *    $generator->getParameters()->getBarcode()->getBarHeight()->setMillimeters(10);
+ *    $generator->save("test.png", BarcodeImageFormat::PNG);
+ * @endcode
  */
-class HanXinExtCodetextBuilder extends BaseJavaClass
+class Unit implements Communicator
 {
-    private const JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwHanXinExtCodetextBuilder";
+    private $unitDto;
 
-    function __construct()
+    function getUnitDto(): UnitDTO
+    {
+        return $this->unitDto;
+    }
+
+    private function setUnitDto(UnitDTO $unitDto): void
+    {
+        $this->unitDto = $unitDto;
+    }
+
+    public function __construct($source)
     {
         try
         {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
+            $this->unitDto = self::initUnit($source);
+            $this->obtainDto();
+            $this->initFieldsFromDto();
         }
         catch (Exception $ex)
         {
@@ -6845,172 +6262,721 @@ class HanXinExtCodetextBuilder extends BaseJavaClass
         }
     }
 
-    function init(): void
+    static function initUnit($source)
+    {
+        if ($source instanceof Unit)
+        {
+            return $source->getUnitDto();
+        }
+        elseif ($source instanceof UnitDTO)
+            return $source;
+        throw new InvalidArgumentException();
+    }
+
+    public function obtainDto(...$args)
     {
     }
 
-    /**
-     * <p>
-     * Adds codetext fragment in ECI mode
-     * </p>
-     * @param text Codetext string
-     * @param encoding ECI encoding in integer format
-     */
-    public function addECI(String $text, int $encoding) : void
+    public function initFieldsFromDto(): void
     {
-        $this->getJavaClass()->addECI($text, $encoding);
+        // TODO: Implement init() method.
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Auto mode
-     * </p>
-     * @param text Codetext string
+     * Gets size value in pixels.
      */
-    public function addAuto(String $text) : void
+    public function  getPixels(): float
     {
-        $this->getJavaClass()->addAuto($text);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $pixels = $client->Unit_getPixels($this->getUnitDto());
+        $thriftConnection->closeConnection();
+
+        return $pixels;
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Binary mode
-     * </p>
-     * @param text Codetext string
+     * Sets size value in pixels.
      */
-    public function addBinary(String $text) : void
+    public function setPixels(float $value): void
     {
-        $this->getJavaClass()->addBinary($text);
+        try
+        {
+            $this->getUnitDto()->units = $value;
+            $this->getUnitDto()->graphicsUnit = GraphicsUnit::PIXEL;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in URI mode
-     * </p>
-     * @param text Codetext string
+     * Gets size value in inches.
      */
-    public function addURI(String $text) : void
+    public function getInches(): float
     {
-        $this->getJavaClass()->addURI($text);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $inches = $client->Unit_getInches($this->getUnitDto());
+        $thriftConnection->closeConnection();
+
+        return $inches;
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Text mode
-     * </p>
-     * @param text Codetext string
+     * Sets size value in inches.
      */
-    public function addText(String $text) : void
+    public function setInches(float $value): void
     {
-        $this->getJavaClass()->addText($text);
+        try
+        {
+            $this->getUnitDto()->units = $value;
+            $this->getUnitDto()->graphicsUnit = GraphicsUnit::INCH;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Numeric mode
-     * </p>
-     * @param text Codetext string
+     * Gets size value in millimeters.
      */
-    public function addNumeric(String $text) : void
+    public function getMillimeters(): float
     {
-        $this->getJavaClass()->addNumeric($text);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $millimeters = $client->Unit_getMillimeters($this->getUnitDto());
+        $thriftConnection->closeConnection();
+
+        return $millimeters;
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Unicode mode
-     * </p>
-     * @param text Codetext string
+     * Sets size value in millimeters.
      */
-    public function addUnicode(String $text) : void
+    public function setMillimeters(float $value): void
     {
-        $this->getJavaClass()->addUnicode($text);
+        try
+        {
+            $this->getUnitDto()->units = $value;
+            $this->getUnitDto()->graphicsUnit = GraphicsUnit::MILLIMETER;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Common Chinese Region One mode
-     * </p>
-     * @param text Codetext string
+     * Gets size value in point.
      */
-    public function addCommonChineseRegionOne(String $text) : void
+    public function getPoint(): float
     {
-        $this->getJavaClass()->addCommonChineseRegionOne($text);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $point = $client->Unit_getPoint($this->getUnitDto());
+        $thriftConnection->closeConnection();
+
+        return $point;
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in Common Chinese Region Two mode
-     * </p>
-     * @param text Codetext string
+     * Sets size value in point.
      */
-    public function addCommonChineseRegionTwo(String $text) : void
+    public function setPoint(float $value): void
     {
-        $this->getJavaClass()->addCommonChineseRegionTwo($text);
+        try
+        {
+            $this->getUnitDto()->units = $value;
+            $this->getUnitDto()->graphicsUnit = GraphicsUnit::POINT;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in GB18030 Two Byte mode
-     * </p>
-     * @param text Codetext string
+     * Gets size value in document units.
      */
-    public function addGB18030TwoByte(String $text) : void
+    public function getDocument(): float
     {
-        $this->getJavaClass()->addGB18030TwoByte($text);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $document = $client->Unit_getDocument($this->getUnitDto());
+        $thriftConnection->closeConnection();
+
+        return $document;
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in GB18030 Four Byte mode
-     * </p>
-     * @param text Codetext string
+     * Sets size value in document units.
      */
-    public function addGB18030FourByte(String $text) : void
+    public function setDocument(float $value): void
     {
-        $this->getJavaClass()->addGB18030FourByte($text);
+        try
+        {
+            $this->getUnitDto()->units = $value;
+            $this->getUnitDto()->graphicsUnit = GraphicsUnit::DOCUMENT;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * <p>
-     * Adds codetext fragment in GS1 mode
-     * </p>
-     * @param text Codetext string
+     * Returns a human-readable string representation of this Unit.
+     *
+     * @return string that represents this Unit.
      */
-    public function addGS1(String $text) : void
+    public function toString(): string
     {
-        $this->getJavaClass()->addGS1($text);
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Unit_toString($this->getUnitDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
     }
 
     /**
-     * <p>
-     * Returns codetext from Extended mode codetext builder
-     * </p>
-     * @return Codetext in Extended mode
+     * Determines whether this instance and a specified object,
+     * which must also be a Unit object, have the same value.
+     *
+     * @param Unit $obj The Unit to compare to this instance.
+     * @return true if obj is a Unit and its value is the same as this instance;
+     * otherwise, false. If obj is null, the method returns false.
      */
-    public function getExtendedCodetext() : String
+    public function equals(Unit $obj): bool
     {
-        return java_cast($this->getJavaClass()->getExtendedCodetext(), "string");
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $isEquals = $client->Unit_equals($this->getUnitDTO(), $obj->getUnitDTO());
+        $thriftConnection->closeConnection();
+
+        return $isEquals;
     }
 }
+
+
+/**
+ *
+ *  Defines a particular format for text, including font face, size, and style attributes
+ *  where size in Unit value property.
+ *
+ *  This sample shows how to create and save a BarCode image.
+ * @code
+ *   $generator = new BarcodeGenerator(EncodeTypes::CODE_128);
+ *   $generator->getParameters()->getCaptionAbove()->setText("CAPTION ABOOVE");
+ *   $generator->getParameters()->getCaptionAbove()->setVisible(true);
+ *   $generator->getParameters()->getCaptionAbove()->getFont()->setStyle(FontStyle::ITALIC);
+ *   $generator->getParameters()->getCaptionAbove()->getFont()->getSize()->setPoint(25);
+ * @endcode
+ */
+final class FontUnit implements Communicator
+{
+    private $fontUnitDto;
+
+    function getFontUnitDto(): FontUnitDTO
+    {
+        return $this->fontUnitDto;
+    }
+
+    private function setFontUnitDto(FontUnitDTO $fontUnitDto): void
+    {
+        $this->fontUnitDto = $fontUnitDto;
+    }
+
+    private $_size;
+
+    public function __construct($source)
+    {
+        $this->fontUnitDto = self::initFontUnit($source);
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    private static function initFontUnit($source)
+    {
+        if ($source instanceof FontUnit)
+        {
+            return $source->getFontUnitDto();
+        }
+        elseif ($source instanceof FontUnitDTO)
+            return $source;
+        throw new InvalidArgumentException();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try
+        {
+            $this->_size = new Unit($this->getFontUnitDto()->size);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets the face name of this Font.
+     */
+    public function getFamilyName(): string
+    {
+        try
+        {
+            return $this->getFontUnitDto()->familyName;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Sets the face name of this Font.
+     */
+    public function setFamilyName(string $value): void
+    {
+        try
+        {
+            $this->getFontUnitDto()->familyName = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets style information for this FontUnit.
+     */
+    public function getStyle(): int
+    {
+        try
+        {
+            return $this->getFontUnitDto()->style;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Sets style information for this FontUnit.
+     */
+    public function setStyle(int $value): void
+    {
+        try
+        {
+            $this->getFontUnitDto()->style = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Gets size of this FontUnit in Unit value.
+     *
+     * @exception IllegalArgumentException
+     * The Size parameter value is less than or equal to 0.
+     */
+    public function getSize(): Unit
+    {
+            return $this->_size;
+    }
+}
+
+/**
+ * Paddings parameters.
+ */
+class Padding implements Communicator
+{
+    private $paddingDto;
+
+    function getPaddingDto(): PaddingDTO
+    {
+        return $this->paddingDto;
+    }
+
+    private function setPaddingDto(PaddingDTO $paddingDto): void
+    {
+        $this->paddingDto = $paddingDto;
+    }
+
+    private $top;
+    private $bottom;
+    private $right;
+    private $left;
+
+    function __construct(PaddingDTO $paddingDto)
+    {
+        $this->paddingDto = $paddingDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        $this->top = new Unit($this->getPaddingDto()->top);
+        $this->bottom = new Unit($this->getPaddingDto()->bottom);
+        $this->right = new Unit($this->getPaddingDto()->right);
+        $this->left = new Unit($this->getPaddingDto()->left);
+    }
+
+    /**
+     * Top padding.
+     */
+    public function getTop(): Unit
+    {
+            return $this->top;
+    }
+
+    /**
+     * Top padding.
+     */
+    public function setTop(Unit $value): void
+    {
+        try
+        {
+            $this->getPaddingDto()->top = $value->getUnitDto();
+            $this->top = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Bottom padding.
+     */
+    public function getBottom(): Unit
+    {
+            return $this->bottom;
+    }
+
+    /**
+     * Bottom padding.
+     */
+    public function setBottom(Unit $value): void
+    {
+        try
+        {
+            $this->getPaddingDto()->bottom = $value->getUnitDto();
+            $this->bottom = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Right padding.
+     */
+    public function getRight(): Unit
+    {
+            return $this->right;
+    }
+
+    /**
+     * Right padding.
+     */
+    public function setRight(Unit $value): void
+    {
+        try
+        {
+            $this->getPaddingDto()->right = $value->getUnitDto();
+            $this->right = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Left padding.
+     */
+    public function getLeft(): Unit
+    {
+            return $this->left;
+    }
+
+    /**
+     * Left padding.
+     */
+    public function setLeft(Unit $value): void
+    {
+        try
+        {
+            $this->getPaddingDto()->left = $value->getUnitDto();
+            $this->left = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a human-readable string representation of this Padding.
+     *
+     * @return string A string that represents this Padding.
+     */
+    public function toString(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->Padding_toString($this->getPaddingDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+}
+
+
+/**
+ * Barcode image border parameters
+ */
+class BorderParameters implements Communicator
+{
+    private $borderParametersDto;
+
+    private function getBorderParametersDto(): BorderParametersDTO
+    {
+        return $this->borderParametersDto;
+    }
+
+    private function setBorderParametersDto(BorderParametersDTO $borderParametersDto): void
+    {
+        $this->borderParametersDto = $borderParametersDto;
+    }
+
+    private $width;
+
+    function __construct(BorderParametersDTO $borderParametersDto)
+    {
+        $this->borderParametersDto = $borderParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        try
+        {
+            $this->width = new Unit($this->getBorderParametersDto()->width);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Border visibility. If false than parameter Width is always ignored (0).
+     * Default value: false.
+     */
+    public function getVisible(): bool
+    {
+        try
+        {
+            return $this->getBorderParametersDto()->visible;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Border visibility. If false than parameter Width is always ignored (0).
+     * Default value: false.
+     */
+    public function setVisible(bool $value): void
+    {
+        try
+        {
+            $this->getBorderParametersDto()->visible = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Border width.
+     * Default value: 0.
+     * Ignored if Visible is set to false.
+     */
+    public function getWidth(): Unit
+    {
+            return $this->width;
+    }
+
+    /**
+     * Border width.
+     * Default value: 0.
+     * Ignored if Visible is set to false.
+     *public
+     */
+    public function setWidth(Unit $value): void
+    {
+        try
+        {
+            $this->getBorderParametersDto()->width = $value->getUnitDto();
+            $this->width = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Returns a human-readable string representation of this BorderParameters.
+     *
+     * @return string A string that represents this BorderParameters.
+     */
+    public function toString(): string
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $str = $client->BorderParameters_toString($this->getBorderParametersDto());
+        $thriftConnection->closeConnection();
+
+        return $str;
+    }
+
+    /**
+     * Border dash style.
+     * Default value: BorderDashStyle::SOLID.
+     */
+    public function getDashStyle(): int
+    {
+        try
+        {
+            return $this->getBorderParametersDto()->dashStyle;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Border dash style.
+     * Default value: BorderDashStyle::SOLID.
+     */
+    public function setDashStyle(int $value): void
+    {
+        try
+        {
+            $this->getBorderParametersDto()->dashStyle = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Border color.
+     * Default value: #000000
+     */
+    public function getColor(): string
+    {
+        try
+        {
+            $hexColor = strtoupper(dechex($this->getBorderParametersDto()->color));
+            while (strlen($hexColor) < 6)
+            {
+                $hexColor = "0" . $hexColor;
+            }
+            $hexColor = "#" . $hexColor;
+            return $hexColor;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Border color.
+     * Default value: #000000
+     */
+    public function setColor(string $hexValue): void
+    {
+        try
+        {
+            if(substr($hexValue, 0, 1) == '#')
+                $hexValue = substr($hexValue, 1, strlen($hexValue) - 1);
+            $this->getBorderParametersDto()->color = hexdec($hexValue);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
 
 /**
  * Image parameters.
  */
-class ImageParameters extends BaseJavaClass
+class ImageParameters implements Communicator
 {
-    private $svg;
-    private $pdf;
+    private $imageParametersDto;
 
-    function __construct($javaClass)
+    private function getImageParametersDto(): ImageParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->imageParametersDto;
     }
 
-    function init() : void
+    private function setImageParametersDto(ImageParametersDTO $imageParametersDto): void
     {
-        $this->svg = new SvgParameters($this->getJavaClass()->getSvg());
-        $this->pdf = new PdfParameters($this->getJavaClass()->getPdf());
+        $this->imageParametersDto = $imageParametersDto;
+    }
+
+    private $svg;
+
+    function __construct(ImageParametersDTO $imageParametersDto)
+    {
+        $this->imageParametersDto = $imageParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+        $this->svg = new SvgParameters($this->getImageParametersDto()->svg);
     }
 
     /**
@@ -7024,44 +6990,42 @@ class ImageParameters extends BaseJavaClass
     /**
      * SVG parameters
      */
-    function setSvg(SvgParameters $value) : void
+    function setSvg(SvgParameters $svg) : void
     {
-        $this->svg = $value;
-        $this->getJavaClass()->setSvg($value->getJavaClass());
-    }
-
-    /**
-     * <p>
-     * PDF parameters
-     * </p>
-     */
-    function getPdf() : PdfParameters
-    {
-        return $this->pdf;
-    }
-    /**
-     * <p>
-     * PDF parameters
-     * </p>
-     */
-    function setPdf(PdfParameters $value)
-    {
-        $this->pdf = $value;
-        $this->getJavaClass()->setPdf($value->getJavaClass());
+        $this->svg = $svg;
+        $this->getImageParametersDto()->svg = $svg->getSvgParametersDto();
     }
 }
 
 /**
  * SVG parameters.
  */
-class SvgParameters extends BaseJavaClass
+class SvgParameters implements Communicator
 {
-    function __construct($javaClass)
+    private $svgParametersDto;
+
+    function getSvgParametersDto(): SvgParametersDTO
     {
-        parent::__construct($javaClass);
+        return $this->svgParametersDto;
     }
 
-    function init() : void
+    private function setSvgParametersDto(SvgParametersDTO $svgParametersDto): void
+    {
+        $this->svgParametersDto = $svgParametersDto;
+    }
+
+    function __construct(SvgParametersDTO $svgParametersDto)
+    {
+        $this->svgParametersDto = $svgParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
     {
     }
 
@@ -7071,7 +7035,7 @@ class SvgParameters extends BaseJavaClass
      */
     function isExplicitSizeInPixels() : bool
     {
-        return java_cast($this->getJavaClass()->isExplicitSizeInPixels(), "boolean");
+        return $this->getSvgParametersDto()->isExplicitSizeInPixels;
     }
 
     /**
@@ -7080,7 +7044,7 @@ class SvgParameters extends BaseJavaClass
      */
     function setExplicitSizeInPixels(bool $explicitSizeInPixels) : void
     {
-        $this->getJavaClass()->setExplicitSizeInPixels($explicitSizeInPixels);
+        $this->getSvgParametersDto()->isExplicitSizeInPixels = $explicitSizeInPixels;
     }
 
     /**
@@ -7089,16 +7053,16 @@ class SvgParameters extends BaseJavaClass
      */
     function isTextDrawnInTextElement() : bool
     {
-        return java_cast($this->getJavaClass()->isTextDrawnInTextElement(), "boolean");
+        return $this->getSvgParametersDto()->isTextDrawnInTextElement;
     }
 
     /**
      * Does SVG image contain text as text element rather than paths (recommended)
      * Default value: true.
      */
-    function setTextDrawnInTextElement(bool $textDrawnInTextElement) : void
+    function setTextDrawnInTextElement(bool $isTextDrawnInTextElement) : void
     {
-        $this->getJavaClass()->setTextDrawnInTextElement($textDrawnInTextElement);
+        $this->getSvgParametersDto()->isTextDrawnInTextElement = $isTextDrawnInTextElement;
     }
 
 
@@ -7111,7 +7075,7 @@ class SvgParameters extends BaseJavaClass
      */
     function setSvgColorMode(int $svgColorMode) : void
     {
-        $this->getJavaClass()->setSvgColorMode($svgColorMode);
+        $this->getSvgParametersDto()->svgColorMode = $svgColorMode;
     }
 
 
@@ -7122,7 +7086,7 @@ class SvgParameters extends BaseJavaClass
      */
     function getSvgColorMode() : int
     {
-        return java_cast($this->getJavaClass()->getSvgColorMode(), "integer");
+        return $this->getSvgParametersDto()->svgColorMode;
     }
 }
 
@@ -7131,7 +7095,7 @@ class SvgParameters extends BaseJavaClass
  * Class for representing HSLA color (Hue, Saturation, Lightness, Alpha)
  * </p>
  */
-class HslaColor 
+class HslaColor
 {
     /**
      * <p>
@@ -7185,7 +7149,7 @@ class HslaColor
         $this->A = $a;
     }
 
-    private static function checkHue(int $value) 
+    private static function checkHue(int $value)
     {
         if ($value < 0 || $value > 360) {
             throw new Exception("Wrong color value");
@@ -7199,9 +7163,9 @@ class HslaColor
         }
     }
 
-    private static function checkAlpha(float $value) 
+    private static function checkAlpha(float $value)
     {
-        if ($value < 0.0 || $value > 1.0) 
+        if ($value < 0.0 || $value > 1.0)
         {
             throw new Exception("Wrong color value");
         }
@@ -7253,234 +7217,1038 @@ class HslaColor
     }
 }
 
+
 /**
- * <p>
- * PDF parameters.
- * </p>
+ * Helper class for automatic codetext generation of the Extended Codetext Mode
  */
-class PdfParameters extends BaseJavaClass
+abstract class ExtCodetextBuilder
 {
-    function __construct($javaClass)
+    protected $_list;
+
+    function __construct()
     {
-        parent::__construct($javaClass);
+        $this->_list = array();
     }
 
-    function init() : void
+    function init(): void
+    {
+    }
+
+    /**
+     * Clears extended codetext items
+     */
+    public function clear(): void
+    {
+        try
+        {
+            array_splice($this->_list, 0);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Adds plain codetext to the extended codetext items
+     *
+     * @param string $codetext Codetext in unicode to add as extended codetext item
+     */
+    public function addPlainCodetext(string $codetext): void
+    {
+        try
+        {
+            $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+            $extCodeItemDTO->extCodeItemType = ExtCodeItemType::PLAIN_CODETEXT;
+            $extCodeItemDTO->arguments = array($codetext);
+            array_push($this->_list, $extCodeItemDTO);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Adds codetext with Extended Channel Identifier
+     *
+     * @param int ECIEncoding Extended Channel Identifier
+     * @param string codetext    Codetext in unicode to add as extended codetext item with Extended Channel Identifier
+     */
+    public function addECICodetext(int $ECIEncoding, string $codetext): void
+    {
+        try
+        {
+            $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+            $extCodeItemDTO->extCodeItemType = ExtCodeItemType::ECI_CODETEXT;
+            $extCodeItemDTO->arguments = array($ECIEncoding, $codetext);
+            array_push($this->_list, $extCodeItemDTO);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * Generate extended codetext from generation items list
+     *
+     * @return string Return string of extended codetext
+     */
+    public final function getExtendedCodetext(): string
+    {
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $extendedCodetext = $client->ExtCodetextBuilder_getExtendedCodetext($this->getExtCodetextBuilderType(), $this->_list);
+            $thriftConnection->closeConnection();
+            return $extendedCodetext;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    protected abstract function getExtCodetextBuilderType() : int;
+}
+
+/**
+ * Extended codetext generator for 2D QR barcodes for ExtendedCodetext Mode of QREncodeMode
+ * Use Display2DText property of BarCodeBuilder to set visible text to removing managing characters.
+ *
+ *  Example how to generate FNC1 first position for Extended Mode
+ * @code
+ *  //create codetext
+ *  $lTextBuilder = new QrExtCodetextBuilder();
+ *  $lTextBuilder->addFNC1FirstPosition();
+ *  $lTextBuilder->addPlainCodetext("000%89%%0");
+ *  $lTextBuilder->addFNC1GroupSeparator();
+ *  $lTextBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
+ *  //generate codetext
+ *  $lCodetext = lTextBuilder->getExtendedCodetext();
+ * @endcode
+ *
+ * Example how to generate FNC1 second position for Extended Mode
+ * @code
+ *  //create codetext
+ *  $lTextBuilder = new QrExtCodetextBuilder();
+ *  $lTextBuilder->addFNC1SecondPosition("12");
+ *  $lTextBuilder->addPlainCodetext("TRUE3456");
+ *  //generate codetext
+ *  $lCodetext = lTextBuilder->getExtendedCodetext();
+ * @endcode
+ *
+ * Example how to generate multi ECI mode for Extended Mode
+ * @code
+ *  //create codetext
+ * $lTextBuilder = new QrExtCodetextBuilder();
+ * $lTextBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $lTextBuilder->addECICodetext(ECIEncodings::UTF8, "Right");
+ * $lTextBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
+ * $lTextBuilder->addPlainCodetext("t\\e\\\\st");
+ *  //generate codetext
+ * $lCodetext = $lTextBuilder->getExtendedCodetext();
+ * @endcode
+ */
+class QrExtCodetextBuilder extends ExtCodetextBuilder
+{
+    function __construct()
+    {
+        try
+        {
+            parent::__construct();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    function init(): void
     {
     }
 
     /**
-     * Nullable. CMYK color value of bar code.
-     * Null means CMYK color is not used, instead normal RGB color is used.
+     * Adds FNC1 in first position to the extended codetext items
      */
-    public function getCMYKBarColor(): ?CMYKColor
+    function addFNC1FirstPosition(): void
     {
-        $raw = $this->getJavaClass()->getCMYKBarColor();
-        return $raw === null
-            ? null
-            : CMYKColor::parseCMYK($raw);
-    }
-
-    public function setCMYKBarColor(?CMYKColor $value): void
-    {
-        $this->getJavaClass()->setCMYKBarColor(
-            $value !== null ? $value->formatCMYK() : null
-        );
+        try
+        {
+            $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+            $extCodeItemDTO->extCodeItemType = ExtCodeItemType::FNC_1_FIRST_POSITION;
+            $extCodeItemDTO->arguments = array();
+            array_push($this->_list, $extCodeItemDTO);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * Nullable. CMYK back color value.
+     * Adds FNC1 in second position to the extended codetext items
+     *
+     * @param string $codetext Value of the FNC1 in the second position
      */
-    public function getCMYKBackColor(): ?CMYKColor
+    function addFNC1SecondPosition(string $codetext): void
     {
-        $raw = $this->getJavaClass()->getCMYKBackColor();
-        return $raw === null
-            ? null
-            : CMYKColor::parseCMYK($raw);
-    }
-
-    public function setCMYKBackColor(?CMYKColor $value): void
-    {
-        $this->getJavaClass()->setCMYKBackColor(
-            $value !== null ? $value->formatCMYK() : null
-        );
+        try
+        {
+            $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+            $extCodeItemDTO->extCodeItemType = ExtCodeItemType::FNC_1_SECOND_POSITION;
+            $extCodeItemDTO->arguments = array($codetext);
+            array_push($this->_list, $extCodeItemDTO);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
     /**
-     * Nullable. CMYK color value of codetext.
+     * Adds Group Separator (GS - '\\u001D') to the extended codetext items
      */
-    public function getCMYKCodetextColor(): ?CMYKColor
+    function addFNC1GroupSeparator(): void
     {
-        $raw = $this->getJavaClass()->getCMYKCodetextColor();
-        return $raw === null
-            ? null
-            : CMYKColor::parseCMYK($raw);
+        try
+        {
+            $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+            $extCodeItemDTO->extCodeItemType = ExtCodeItemType::FNC_1_GROUP_SEPARATOR;
+            $extCodeItemDTO->arguments = array();
+            array_push($this->_list, $extCodeItemDTO);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
     }
 
-    public function setCMYKCodetextColor(?CMYKColor $value): void
+    protected function getExtCodetextBuilderType() : int
     {
-        $this->getJavaClass()->setCMYKCodetextColor(
-            $value !== null ? $value->formatCMYK() : null
-        );
-    }
-
-    /**
-     * Nullable. CMYK color value of caption above.
-     */
-    public function getCMYKCaptionAboveColor(): ?CMYKColor
-    {
-        $raw = $this->getJavaClass()->getCMYKCaptionAboveColor();
-        return $raw === null
-            ? null
-            : CMYKColor::parseCMYK($raw);
-    }
-
-    public function setCMYKCaptionAboveColor(?CMYKColor $value): void
-    {
-        $this->getJavaClass()->setCMYKCaptionAboveColor(
-            $value !== null ? $value->formatCMYK() : null
-        );
-    }
-
-    /**
-     * Nullable. CMYK color value of caption below.
-     */
-    public function getCMYKCaptionBelowColor(): ?CMYKColor
-    {
-        $raw = $this->getJavaClass()->getCMYKCaptionBelowColor();
-        return $raw === null
-            ? null
-            : CMYKColor::parseCMYK($raw);
-    }
-
-    public function setCMYKCaptionBelowColor(?CMYKColor $value): void
-    {
-        $this->getJavaClass()->setCMYKCaptionBelowColor(
-            $value !== null ? $value->formatCMYK() : null
-        );
+        return ExtCodetextBuilderType::QR_EXT_CODETEXT_BUILDER;
     }
 }
 
 /**
  * <p>
- * Class for CMYK color. Null means CMYK is not used, default RGB color is in use.
- * </p>
+ * <p>Extended codetext generator for Aztec barcodes for ExtendedCodetext Mode of AztecEncodeMode</p>
+ * <p>Use TwoDDisplayText property of BarcodeGenerator to set visible text to removing managing characters.</p>
+ * </p><p><hr><blockquote><pre>
+ * This sample shows how to use AztecExtCodetextBuilder in Extended Mode.
+ * <pre>
+ * @code
+ * //create codetext
+ * $textBuilder = new AztecExtCodetextBuilder();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, $codetext);
+ * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setwoDDisplayText("My Text");
+ * $generator->save("test.bmp", BarcodeImageFormat::BMP);
  */
-class CMYKColor
+class AztecExtCodetextBuilder extends ExtCodetextBuilder
 {
-    public $C;
-    public $M;
-    public $Y;
-    public $K;
+    function __construct()
+    {
+        try
+        {
+            parent::__construct();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    public function init() : void
+    {
+    }
+
+    protected function getExtCodetextBuilderType() : int
+    {
+        return ExtCodetextBuilderType::AZTEC_EXT_CODETEXT_BUILDER;
+    }
+}
+
+/**
+ * <p>
+ * <p>Extended codetext generator for 2D DataMatrix barcodes for ExtendedCodetext Mode of DataMatrixEncodeMode</p>
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new DataMatrixExtCodetextBuilder();
+ * $codetextBuilder->addECICodetextWithEncodeMode(ECIEncodings::Win1251, DataMatrixEncodeMode::BYTES, "World");
+ * $codetextBuilder->addPlainCodetext("Will");
+ * $codetextBuilder->addECICodetext(ECIEncodings::UTF_8, "犬Right狗");
+ * $codetextBuilder->addCodetextWithEncodeMode(DataMatrixEncodeMode::C_40, "ABCDE");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, null, $codetext);
+ * $generator->getParameters()->getBarcode()->getDataMatrix()->setDataMatrixEncodeMode(DataMatrixEncodeMode::EXTENDED_CODETEXT);
+ * $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class DataMatrixExtCodetextBuilder extends ExtCodetextBuilder
+{
+    function __construct()
+    {
+        try
+        {
+            parent::__construct();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    function init(): void
+    {
+    }
+    /**
+     * <p>
+     * Adds codetext with Extended Channel Identifier with defined encode mode
+     * </p>
+     * @param ECIEncoding Extended Channel Identifier
+     * @param encodeMode Encode mode value
+     * @param codetext Codetext in unicode to add as extended codetext item with Extended Channel Identifier with defined encode mode
+     */
+    public function addECICodetextWithEncodeMode(int $ECIEncoding, int $encodeMode, string $codetext) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = ExtCodeItemType::ECI_CODETEXT_WITH_ENCODE_MODE;
+        $extCodeItemDTO->arguments = array($ECIEncoding, $encodeMode, $codetext);
+        array_push($this->_list, $extCodeItemDTO);
+    }
 
     /**
      * <p>
-     * Initializes a new instance of the {@code CMYKColor} class from CMYK values.
-     * CMYK values are 0-100.
+     * Adds codetext with defined encode mode to the extended codetext items
      * </p>
-     * @param $c Cyan value [0, 100]
-     * @param $m Magenta value [0, 100]
-     * @param $y Yellow value [0, 100]
-     * @param $k Black value [0, 100]
+     * @param encodeMode Encode mode value
+     * @param codetext Codetext in unicode to add as extended codetext item
      */
-    function __construct(int $c, int $m, int $y, int $k)
+    public function addCodetextWithEncodeMode(int $encodeMode, string $codetext) : void
     {
-        if ($c < 0) $c = 0;
-        if ($m < 0) $m = 0;
-        if ($y < 0) $y = 0;
-        if ($k < 0) $k = 0;
-
-        if ($c > 100) $c = 100;
-        if ($m > 100) $m = 100;
-        if ($y > 100) $y = 100;
-        if ($k > 100) $k = 100;
-
-        $this->C = $c / 100.0;
-        $this->M = $m / 100.0;
-        $this->Y = $y / 100.0;
-        $this->K = $k / 100.0;
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = ExtCodeItemType::CODETEXT_WITH_ENCODE_MODE;
+        $extCodeItemDTO->arguments = array($encodeMode, $codetext);
+        array_push($this->_list, $extCodeItemDTO);
     }
 
-    /**
-     * Parse a CMYK string of the form "C_M_Y_K" into a CMYK object.
-     *
-     * @param string $str
-     * @return CMYK
-     * @throws InvalidArgumentException
-     */
-    public static function parseCMYK(string $cmyk_str): CMYKColor
+    protected function getExtCodetextBuilderType() : int
     {
-        $parts = explode('_', $cmyk_str);
-        if (count($parts) !== 4) {
-            throw new InvalidArgumentException(
-                sprintf('Invalid CMYK string: expected 4 parts but got %d', count($parts))
-            );
-        }
-
-        $values = array_map(function(string $s) {
-            if (!is_numeric($s)) {
-                throw new InvalidArgumentException(
-                    sprintf('Invalid number in CMYK string: "%s"', $s)
-                );
-            }
-            return (float)$s;
-        }, $parts);
-
-        return new CMYKColor($values[0], $values[1], $values[2], $values[3]);
-    }
-
-    /**
-     * Format this CMYK object into a string "C_M_Y_K",
-     * multiplying each component by 100.
-     *
-     * @return string
-     */
-    public function formatCMYK(): string
-    {
-        return sprintf(
-            '%s_%s_%s_%s',
-            $this->C * 100,
-            $this->M * 100,
-            $this->Y * 100,
-            $this->K * 100
-        );
+        return ExtCodetextBuilderType::DATA_MATRIX_EXT_CODETEXT_BUILDER;
     }
 }
 
 /**
- * Class BarcodeClassifications EncodeTypes classification
+ * <p>
+ * <p>Extended codetext generator for 2D DotCode barcodes for ExtendedCodetext Mode of DotCodeEncodeMode</p>
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ *
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new DotCodeExtCodetextBuilder();
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * $textBuilder->addFNC3SymbolSeparator();
+ * $textBuilder->addFNC3ReaderInitialization();
+ * $textBuilder->addPlainCodetext("Reader initialization info");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * {
+ *     $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
+ * 	   $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * }
+ * </pre>
+ * </pre></blockquote></hr></p>
  */
-final class BarcodeClassifications
+class DotCodeExtCodetextBuilder extends ExtCodetextBuilder
+{
+    function __construct()
+    {
+        try
+        {
+            parent::__construct();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>
+     * Adds FNC1 format identifier to the extended codetext items
+     * </p>
+     */
+    public function addFNC1FormatIdentifier() : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = ExtCodeItemType::FNC_1_FORMAT_IDENTIFIER;
+        $extCodeItemDTO->arguments = array();
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds FNC3 symbol separator to the extended codetext items
+     * </p>
+     */
+    public function addFNC3SymbolSeparator() : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = ExtCodeItemType::FNC_3_SYMBOL_SEPARATOR;
+        $extCodeItemDTO->arguments = array();
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds FNC3 reader initialization to the extended codetext items
+     * </p>
+     */
+    public function addFNC3ReaderInitialization() : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = ExtCodeItemType::FNC_3_RRADER_INITILIZATION;
+        $extCodeItemDTO->arguments = array();
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds structured append mode to the extended codetext items
+     * </p>
+     * @param int barcodeId ID of barcode
+     * @param int barcodesCount Barcodes count
+     */
+    public function addStructuredAppendMode(int $barcodeId, int $barcodesCount) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = ExtCodeItemType::STRUCTURE_APPEND_MODE;
+        $extCodeItemDTO->arguments = array($barcodeId, $barcodesCount);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    protected function getExtCodetextBuilderType() : int
+    {
+        return ExtCodetextBuilderType::DOT_CODE_EXT_CODETEXT_BUILDER;
+    }
+
+    public function init() : void {}
+}
+
+/**
+ * Extended codetext generator for MaxiCode barcodes for ExtendedCodetext Mode of MaxiCodeEncodeMode
+ * Use TwoDDisplayText property of BarcodeGenerator to set visible text to removing managing characters.
+ *
+ * This sample shows how to use MaxiCodeExtCodetextBuilder in Extended Mode.
+ *
+ * @code
+ * //create codetext
+ * $textBuilder = new MaxiCodeExtCodetextBuilder();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ *
+ * //generate codetext
+ * $codetext = $textBuilder->getExtendedCodetext();
+ *
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
+ * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ * $generator->save("test.bmp", BarcodeImageFormat.BMP);
+ * @endcode
+ */
+class MaxiCodeExtCodetextBuilder extends ExtCodetextBuilder
+{
+    function __construct()
+    {
+        try
+        {
+            parent::__construct();
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    function init(): void
+    {
+    }
+
+    protected function getExtCodetextBuilderType() : int
+    {
+        return ExtCodetextBuilderType::MAXICODE_EXT_CODETEXT_BUILDER;
+    }
+}
+
+class HanXinExtCodetextBuilderType
+{
+    const ECI = 0;
+    const Auto = 1;
+    const Binary = 2;
+    const URI = 3;
+    const Text = 4;
+    const Numeric = 5;
+    const Unicode = 6;
+    const CommonChineseRegionOne = 7;
+    const CommonChineseRegionTwo = 8;
+    const GB18030TwoByte = 9;
+    const GB18030FourByte = 10;
+    const GS1 = 11;
+}
+
+/**
+ * <p>
+ * <p>Extended codetext generator for Han Xin Code for Extended Mode of HanXinEncodeMode</p>
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ *
+ * //Extended codetext mode
+ * //create codetext
+ * $codeTextBuilder = new HanXinExtCodetextBuilder();
+ * $codeTextBuilder->addGB18030TwoByte("漄");
+ * $codeTextBuilder->addGB18030FourByte("㐁");
+ * $codeTextBuilder->addCommonChineseRegionOne("全");
+ * $codeTextBuilder->addCommonChineseRegionTwo("螅");
+ * $codeTextBuilder->addNumeric("123");
+ * $codeTextBuilder->addText("qwe");
+ * $codeTextBuilder->addUnicode("ıntəˈnæʃənəl");
+ * $codeTextBuilder->addECI("ΑΒΓΔΕ", 9);
+ * $codeTextBuilder->addAuto("abc");
+ * $codeTextBuilder->addBinary("abc");
+ * $codeTextBuilder->addURI("backslashes_should_be_doubled\000555:test");
+ * $codeTextBuilder->addGS1("(01)03453120000011(17)191125(10)ABCD1234(21)10");
+ * $expectedStr = "漄㐁全螅123qweıntəˈnæʃənəlΑΒΓΔΕabcabcbackslashes_should_be_doubled\000555:test(01)03453120000011(17)191125(10)ABCD1234(21)10";
+ * //generate codetext
+ * $str = $codeTextBuilder->getExtendedCodetext();
+ * //generate
+ * $bg = new BarcodeGenerator(EncodeTypes::HAN_XIN, $str);
+ * $bg->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::EXTENDED);
+ * $img = $bg->generateBarCodeImage(BarcodeImageFormat::PNG);
+ * $r = new BarCodeReader($img, null, DecodeType::HAN_XIN))
+ * $found = $r->readBarCodes();
+ * Assert::assertEquals(1, sizeof(found));
+ * Assert::assertEquals($expectedStr, $found[0]->getCodeText());
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class HanXinExtCodetextBuilder
+{
+
+    protected $_list;
+    function __construct()
+    {
+        $this->_list = array();
+    }
+
+    function init(): void
+    {
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in ECI mode
+     * </p>
+     * @param string text Codetext string
+     * @param int encoding ECI encoding in integer format
+     */
+    public function addECI(string $text, int $encoding) : void
+    {
+        $extCodeItemDTO = new ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::ECI;
+        $extCodeItemDTO->arguments = array($text, $encoding);
+        $this->_list[] = $extCodeItemDTO;
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Auto mode
+     * </p>
+     * @param string text Codetext string
+     */
+    public function addAuto(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::Auto;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Binary mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addBinary(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::Binary;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in URI mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addURI(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::URI;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Text mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addText(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::Text;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Numeric mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addNumeric(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::Numeric;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Unicode mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addUnicode(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::Unicode;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Common Chinese Region One mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addCommonChineseRegionOne(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::CommonChineseRegionOne;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in Common Chinese Region Two mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addCommonChineseRegionTwo(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::CommonChineseRegionTwo;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in GB18030 Two Byte mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addGB18030TwoByte(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::GB18030TwoByte;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in GB18030 Four Byte mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addGB18030FourByte(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::GB18030FourByte;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Adds codetext fragment in GS1 mode
+     * </p>
+     * @param text Codetext string
+     */
+    public function addGS1(string $text) : void
+    {
+        $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+        $extCodeItemDTO->extCodeItemType = HanXinExtCodetextBuilderType::GS1;
+        $extCodeItemDTO->arguments = array($text);
+        array_push($this->_list, $extCodeItemDTO);
+    }
+
+    /**
+     * <p>
+     * Returns codetext from Extended mode codetext builder
+     * </p>
+     * @return string Codetext in Extended mode
+     */
+    public function getExtendedCodetext() : string
+    {
+        try
+        {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $extendedCodetext = $client->HanXinExtCodetextBuilder_getExtendedCodetext($this->_list);
+            $thriftConnection->closeConnection();
+            return $extendedCodetext;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+}
+
+class ExtCodetextBuilderType
+{
+    const AZTEC_EXT_CODETEXT_BUILDER = 0;
+    const DATA_MATRIX_EXT_CODETEXT_BUILDER = 1;
+    const DOT_CODE_EXT_CODETEXT_BUILDER = 2;
+    const MAXICODE_EXT_CODETEXT_BUILDER = 3;
+    const QR_EXT_CODETEXT_BUILDER = 4;
+}
+
+class ExtCodeItemType
+{
+    const ECI_CODETEXT = 0;
+    const PLAIN_CODETEXT = 1;
+    const FNC_1_FIRST_POSITION = 3;
+    const FNC_1_SECOND_POSITION = 4;
+    const FNC_1_GROUP_SEPARATOR = 5;
+    const ECI_CODETEXT_WITH_ENCODE_MODE = 6;
+    const CODETEXT_WITH_ENCODE_MODE = 7;
+    const FNC_1_FORMAT_IDENTIFIER = 8;
+    const FNC_3_SYMBOL_SEPARATOR = 9;
+    const FNC_3_RRADER_INITILIZATION = 10;
+    const STRUCTURE_APPEND_MODE = 11;
+}
+
+/**
+ * Specifies style information applied to text.
+ */
+final class FontStyle
 {
     /**
-     * Unspecified classification
+     * Normal text
      */
-    const NONE = 0;
+    const REGULAR = 0;
+    /**
+     * Bold text
+     */
+    const BOLD = 1;
+    /**
+     * Italic text
+     */
+    const ITALIC = 2;
+    /**
+     * Underlined text
+     */
+    const UNDERLINE = 4;
+    /**
+     * Text with a line through the middle
+     */
+    const STRIKEOUT = 8;
+}
+
+/**
+ * Specifies the style of dashed border lines.
+ */
+class BorderDashStyle
+{
+    /**
+     * Specifies a solid line.
+     */
+    const  SOLID = "0"; //DashStyle.Solid
+    /**
+     * Specifies a line consisting of dashes.
+     */
+    const   DASH = "1"; // DashStyle.Dash
+    /**
+     * Specifies a line consisting of dots.
+     */
+    const  DOT = "2"; //(DashStyle.Dot
 
     /**
-     * Specifies 1D-barcode
+     * Specifies a line consisting of a repeating pattern of dash-dot.
      */
-    const TYPE_1D = 1;
+    const  DASH_DOT = "3"; //DashStyle.DashDot
+    /**
+     * Specifies a line consisting of a repeating pattern of dash-dot-dot.
+     */
+    const  DASH_DOT_DOT = "4"; //DashStyle.DashDotDot
+}
+
+/**
+ * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders
+ */
+final class PatchFormat
+{
+    /**
+     * Generates PatchCode only
+     */
+    const PATCH_ONLY = 0;
 
     /**
-     * Specifies 2D-barcode
+     * Generates A4 format page with PatchCodes as borders and optional QR in the center
      */
-    const TYPE_2D = 2;
+    const A4 = 1;
 
     /**
-     * Specifies POSTAL-barcode
+     * Generates A4 landscape format page with PatchCodes as borders and optional QR in the center
      */
-    const POSTAL = 3;
+    const A4_LANDSCAPE = 2;
 
     /**
-     * Specifies DataBar-barcode
+     * Generates US letter format page with PatchCodes as borders and optional QR in the center
      */
-    const DATABAR = 4;
+    const US_LETTER = 3;
 
     /**
-     * Specifies COUPON-barcode
+     * Generates US letter landscape format page with PatchCodes as borders and optional QR in the center
      */
-    const COUPON = 5;
+    const US_LETTER_LANDSCAPE = 4;
+}
+
+/**
+ * Encoding mode for MaxiCode barcodes.
+ *
+ * This sample shows how to genereate MaxiCode barcodes using ComplexBarcodeGenerator
+ * @code
+ * //Mode 2 with standart second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode2();
+ * $maxiCodeCodetext->setPostalCode("524032140");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
+ * $maxiCodeStandartSecondMessage->setMessage("Test message");
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 2 with structured second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode2();
+ * $maxiCodeCodetext->setPostalCode("524032140");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
+ * $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
+ * $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
+ * $maxiCodeStructuredSecondMessage->add("PA");
+ * $maxiCodeStructuredSecondMessage->setYear(99);
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 3 with standart second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode3();
+ * $maxiCodeCodetext->setPostalCode("B1050");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * $maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
+ * $maxiCodeStandartSecondMessage->setMessage("Test message");
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 3 with structured second message
+ * $maxiCodeCodetext = new MaxiCodeCodetextMode3();
+ * $maxiCodeCodetext->setPostalCode("B1050");
+ * $maxiCodeCodetext->setCountryCode(056);
+ * $maxiCodeCodetext->setServiceCategory(999);
+ * $maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
+ * $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
+ * $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
+ * $maxiCodeStructuredSecondMessage->add("PA");
+ * $maxiCodeStructuredSecondMessage->setYear(99);
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 4
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_4);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 5
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_5);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext())
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ *
+ * //Mode 6
+ * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
+ * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_6);
+ * $maxiCodeCodetext->setMessage("Test message");
+ * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
+ * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
+ * @endcode
+ */
+class MaxiCodeMode
+{
+    /**
+     * Mode 2 encodes postal information in first message and data in second message.
+     * Has 9 digits postal code (used only in USA).
+     */
+    const MODE_2 = 2;
+
+    /**
+     * Mode 3 encodes postal information in first message and data in second message.
+     * Has 6 alphanumeric postal code, used in the world.
+     */
+    const MODE_3 = 3;
+
+    /**
+     *  Mode 4 encodes data in first and second message, with short ECC correction.
+     */
+    const MODE_4 = 4;
+
+    /**
+     * Mode 5 encodes data in first and second message, with long ECC correction.
+     */
+    const MODE_5 = 5;
+
+    /**
+     * Mode 6 encodes data in first and second message, with short ECC correction.
+     * Used to encode device.
+     */
+    const MODE_6 = 6;
+}
+
+/**
+ *
+ * Specifies the start or stop symbol of the Codabar barcode specification.
+ */
+final class CodabarSymbol
+{
+    private function __construct()
+    {
+    }
+
+    /**
+     * Specifies character A as the start or stop symbol of the Codabar barcode specification.
+     */
+    const A = 65;
+    /**
+     * Specifies character B as the start or stop symbol of the Codabar barcode specification.
+     */
+    const B = 66;
+    /**
+     * Specifies character C as the start or stop symbol of the Codabar barcode specification.
+     */
+    const C = 67;
+    /**
+     * Specifies character D as the start or stop symbol of the Codabar barcode specification.
+     */
+    const D = 68;
+}
+
+/**
+ * Specifies the checksum algorithm for Codabar
+ */
+class CodabarChecksumMode
+{
+
+    /**
+     * Specifies Mod 10 algorithm for Codabar.
+     */
+    const MOD_10 = "0";
+
+    /**
+     * Specifies Mod 16 algorithm for Codabar (recomended AIIM).
+     */
+    const MOD_16 = "1";
+}
+
+/**
+ * ITF14 barcode's border type
+ */
+class ITF14BorderType
+{
+    /**
+     * NO border enclosing the barcode
+     */
+    const NONE = "0";
+    /**
+     * FRAME enclosing the barcode
+     */
+    const FRAME = "1";
+    /**
+     * Tow horizontal bars enclosing the barcode
+     */
+    const BAR = "2";
+    /**
+     * FRAME enclosing the barcode
+     */
+    const FRAME_OUT = "3";
+    /**
+     * Tow horizontal bars enclosing the barcode
+     */
+    const BAR_OUT = "4";
 }
 
 /**
@@ -7550,89 +8318,38 @@ final class MacroCharacter
 }
 
 /**
- * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders
- */
-final class PatchFormat
-{
-    /**
-     * Generates PatchCode only
-     */
-    const PATCH_ONLY = 0;
-
-    /**
-     * Generates A4 format page with PatchCodes as borders and optional QR in the center
-     */
-    const A4 = 1;
-
-    /**
-     * Generates A4 landscape format page with PatchCodes as borders and optional QR in the center
-     */
-    const A4_LANDSCAPE = 2;
-
-    /**
-     * Generates US letter format page with PatchCodes as borders and optional QR in the center
-     */
-    const US_LETTER = 3;
-
-    /**
-     * Generates US letter landscape format page with PatchCodes as borders and optional QR in the center
-     */
-    const US_LETTER_LANDSCAPE = 4;
-}
-
-/**
- * Specifies style information applied to text.
- */
-final class FontStyle
-{
-    /**
-     * Normal text
-     */
-    const REGULAR = 0;
-    /**
-     * Bold text
-     */
-    const BOLD = 1;
-    /**
-     * Italic text
-     */
-    const ITALIC = 2;
-    /**
-     * Underlined text
-     */
-    const UNDERLINE = 4;
-    /**
-     * Text with a line through the middle
-     */
-    const STRIKEOUT = 8;
-}
-
-/**
  *
- * Specifies the start or stop symbol of the Codabar barcode specification.
+ * Specifies the Aztec symbol mode.
+ *
+ * @code
+ *  $generator = new BarcodeGenerator(EncodeTypes::AZTEC);
+ *  $generator->setCodeText("125");
+ *  $generator->getParameters()->getBarcode()->getAztec()->setAztecSymbolMode(AztecSymbolMode::RUNE);
+ *  $generator->save("test.png", "PNG");
+ * @endcode
  */
-final class CodabarSymbol
+class AztecSymbolMode
 {
-    private function __construct()
-    {
-    }
-
     /**
-     * Specifies character A as the start or stop symbol of the Codabar barcode specification.
+     * Specifies to automatically pick up the best symbol (COMPACT or FULL-range) for Aztec.
+     * This is default value.
      */
-    const A = 65;
+    const AUTO = "0";
     /**
-     * Specifies character B as the start or stop symbol of the Codabar barcode specification.
+     * Specifies the COMPACT symbol for Aztec.
+     * Aztec COMPACT symbol permits only 1, 2, 3 or 4 layers.
      */
-    const B = 66;
+    const COMPACT = "1";
     /**
-     * Specifies character C as the start or stop symbol of the Codabar barcode specification.
+     * Specifies the FULL-range symbol for Aztec.
+     * Aztec FULL-range symbol permits from 1 to 32 layers.
      */
-    const C = 67;
+    const FULL_RANGE = "2";
     /**
-     * Specifies character D as the start or stop symbol of the Codabar barcode specification.
+     * Specifies the RUNE symbol for Aztec.
+     * Aztec Runes are a series of small but distinct machine-readable marks. It permits only number value from 0 to 255.
      */
-    const D = 68;
+    const RUNE = "3";
 }
 
 /**
@@ -7681,7 +8398,7 @@ class DataMatrixEncodeMode
      * Encodes one alphanumeric or two numeric characters per byte
      * </p>
      */
-     const ASCII = 1;
+    const ASCII = 1;
 
     /**
      * Encode 8 bit values
@@ -7768,203 +8485,61 @@ class DataMatrixEncodeMode
 }
 
 /**
- * Specifies the style of dashed border lines.
+ * Codetext location
  */
-class BorderDashStyle
+class  CodeLocation
 {
     /**
-     * Specifies a solid line.
+     * Codetext below barcode.
      */
-    const  SOLID = 0; //DashStyle.Solid
-    /**
-     * Specifies a line consisting of dashes.
-     */
-    const   DASH = 1; // DashStyle.Dash
-    /**
-     * Specifies a line consisting of dots.
-     */
-    const  DOT = 2; //(DashStyle.Dot
+    const BELOW = "0";
 
     /**
-     * Specifies a line consisting of a repeating pattern of dash-dot.
+     * Codetext above barcode.
      */
-    const  DASH_DOT = 3; //DashStyle.DashDot
+    const ABOVE = "1";
+
     /**
-     * Specifies a line consisting of a repeating pattern of dash-dot-dot.
+     * Hide codetext.
      */
-    const  DASH_DOT_DOT = 4; //DashStyle.DashDotDot
+    const NONE = "2";
 }
 
 /**
- * ITF14 barcode's border type
+ * Font size mode.
  */
-class ITF14BorderType
+class  FontMode
 {
     /**
-     * NO border enclosing the barcode
+     * Automatically calculate Font size based on barcode size.
      */
-    const NONE = "0";
+    const AUTO = "0";
+
     /**
-     * FRAME enclosing the barcode
+     * Use Font sized defined by user.
      */
-    const FRAME = "1";
-    /**
-     * Tow horizontal bars enclosing the barcode
-     */
-    const BAR = "2";
-    /**
-     * FRAME enclosing the barcode
-     */
-    const FRAME_OUT = "3";
-    /**
-     * Tow horizontal bars enclosing the barcode
-     */
-    const BAR_OUT = "4";
+    const MANUAL = "1";
 }
 
 /**
- * <p>
- * Encoding mode for QR barcodes.
- * </p>
- * <p><hr><blockquote><pre>
- * Example how to use ECI encoding
- * <pre>
- *     $generator = new BarcodeGenerator(EncodeTypes::QR, "12345TEXT");
- *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
- *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF8);
- *     $generator->save("test.png", BarcodeImageFormat::PNG);
- * </pre>
- * </pre></blockquote></hr></p>
- *      <p><hr><blockquote><pre>
- *  Example how to use FNC1 first position in Extended Mode
- *  <pre>
- *      $textBuilder = new QrExtCodetextBuilder();
- *      $textBuilder->addPlainCodetext("000%89%%0");
- *      $textBuilder->addFNC1GroupSeparator();
- *      $textBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
- *      //generate barcode
- *      $generator = new BarcodeGenerator(EncodeTypes::QR);
- *      $generator->setCodeText(textBuilder->getExtended());
- *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
- *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
- *      $generator->save("d:/test.png", BarcodeImageFormat::PNG);
- * </pre>
- *      *
- * This sample shows how to use FNC1 second position in Extended Mode.
- * <pre>
- *
- *    //create codetext
- *    $textBuilder = new QrExtCodetextBuilder();
- *    $textBuilder->addFNC1SecondPosition("12");
- *    $textBuilder->addPlainCodetext("TRUE3456");
- *    //generate barcode
- *    $generator = new BarcodeGenerator(EncodeTypes::QR);
- *    $generator->setCodeText(textBuilder->getExtended());
- *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
- *    $generator->save("d:/test.png", BarcodeImageFormat::PNG);
- *    </pre>
- *
- *    This sample shows how to use multi ECI mode in Extended Mode.
- *    <pre>
- *
- *   //create codetext
- *   $textBuilder = new QrExtCodetextBuilder();
- *   $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- *   $textBuilder->addECICodetext(ECIEncodings::UTF8, "Right");
- *   $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
- *   $textBuilder->addPlainCodetext("t\e\\st");
- *   //generate barcode
- *   $generator = new BarcodeGenerator(EncodeTypes::QR);
- *   $generator->setCodeText(textBuilder->getExtended());
- *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
- *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
- *   $generator->save("d:/test.png", BarcodeImageFormat::PNG);
- *  </pre>
- *  </pre></blockquote></hr></p>
+ * Text alignment.
  */
-class QREncodeMode
+class  TextAlignment
 {
     /**
-     * In Auto mode, the CodeText is encoded with maximum data compactness.
-     * Unicode characters are encoded in kanji mode if possible, or they are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Left position.
      */
-
-    const AUTO = 0;
-    /**
-     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method to convert the message to byte array with specified encoding.
-     */
-    const BYTES = 1;
+    const LEFT = "0";
 
     /**
-     * Encode codetext with UTF8 encoding with first ByteOfMark character.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with UTF8 encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
+     * Center position.
      */
-    const UTF_8_BOM = 2;
-
+    const CENTER = "1";
 
     /**
-     * Encode codetext with UTF8 encoding with first ByteOfMark character. It can be problems with some barcode scanners.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with BigEndianUnicode encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
+     * Right position.
      */
-    const UTF_16_BEBOM = 3;
-
-    /**
-     * Encode codetext with value set in the ECIEncoding property. It can be problems with some old (pre 2006) barcode scanners.
-     * This mode is not supported by MicroQR barcodes.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use ECI option.
-     */
-    const ECI_ENCODING = 4;
-
-    /**
-     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
-     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
-     * Use Display2DText property to set visible text to removing managing characters.</para>
-     * Encoding Principles:</para>
-     * All symbols "\" must be doubled "\\" in the codetext.</para>
-     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
-     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
-     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
-     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
-     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
-     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
-     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
-     * This mode is not supported by MicroQR barcodes.</para>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode.
-     */
-    const EXTENDED_CODETEXT = 5;
-
-    /**
-     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
-     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
-     * Use Display2DText property to set visible text to removing managing characters.</para>
-     * Encoding Principles:</para>
-     * All symbols "\" must be doubled "\\" in the codetext.</para>
-     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
-     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
-     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
-     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
-     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
-     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
-     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
-     * This mode is not supported by MicroQR barcodes.</para>
-     */
-    const EXTENDED = 6;
-
-    /**
-     * In Binary mode, the CodeText is encoded with maximum data compactness.
-     * If a Unicode character is found, an exception is thrown.
-     */
-    const BINARY = 7;
-
-    /**
-     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * Please note that some old (pre 2006) scanners may not support this mode.
-     * This mode is not supported by MicroQR barcodes.
-     */
-    const ECI = 8;
+    const RIGHT = "2";
 }
 
 /**
@@ -8000,6 +8575,26 @@ class DataMatrixEccType
      * Specifies that encoded Ecc type is defined ECC 200. Recommended to use.
      */
     const ECC_200 = "6";
+}
+
+/**
+ * QR / MicroQR selector mode. Select FORCE_QR for standard QR symbols, AUTO for MicroQR.
+ * FORCE_MICRO_QR is used for strongly MicroQR symbol generation if it is possible.
+ */
+class  QREncodeType
+{
+    /**
+     * Mode starts barcode version negotiation from MicroQR V1
+     */
+    const AUTO = "0";
+    /**
+     * Mode starts barcode version negotiation from QR V1
+     */
+    const FORCE_QR = "1";
+    /**
+     * Mode starts barcode version negotiation from from MicroQR V1 to V4. If data cannot be encoded into MicroQR, exception is thrown.
+     */
+    const FORCE_MICRO_QR = "2";
 }
 
 /**
@@ -8236,38 +8831,171 @@ class QRVersion
 }
 
 /**
- *
- * Specifies the Aztec symbol mode.
- *
- * @code
- *  $generator = new BarcodeGenerator(EncodeTypes::AZTEC);
- *  $generator->setCodeText("125");
- *  $generator->getParameters()->getBarcode()->getAztec()->setAztecSymbolMode(AztecSymbolMode::RUNE);
- *  $generator->save("test.png", "PNG");
- * @endcode
+ * Level of Reed-Solomon error correction. From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
  */
-class AztecSymbolMode
+class QRErrorLevel
 {
     /**
-     * Specifies to automatically pick up the best symbol (COMPACT or FULL-range) for Aztec.
-     * This is default value.
+     * Allows recovery of 7% of the code text
      */
-    const AUTO = "0";
+    const LEVEL_L = "0";
     /**
-     * Specifies the COMPACT symbol for Aztec.
-     * Aztec COMPACT symbol permits only 1, 2, 3 or 4 layers.
+     * Allows recovery of 15% of the code text
      */
-    const COMPACT = "1";
+    const LEVEL_M = "1";
     /**
-     * Specifies the FULL-range symbol for Aztec.
-     * Aztec FULL-range symbol permits from 1 to 32 layers.
+     * Allows recovery of 25% of the code text
      */
-    const FULL_RANGE = "2";
+    const LEVEL_Q = "2";
     /**
-     * Specifies the RUNE symbol for Aztec.
-     * Aztec Runes are a series of small but distinct machine-readable marks. It permits only number value from 0 to 255.
+     * Allows recovery of 30% of the code text
      */
-    const RUNE = "3";
+    const LEVEL_H = "3";
+}
+
+/**
+ * <p>
+ * Encoding mode for QR barcodes.
+ * </p>
+ * <p><hr><blockquote><pre>
+ * Example how to use ECI encoding
+ * <pre>
+ *     $generator = new BarcodeGenerator(EncodeTypes::QR, "12345TEXT");
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF8);
+ *     $generator->save("test.png", BarcodeImageFormat::PNG);
+ * </pre>
+ * </pre></blockquote></hr></p>
+ *      <p><hr><blockquote><pre>
+ *  Example how to use FNC1 first position in Extended Mode
+ *  <pre>
+ *      $textBuilder = new QrExtCodetextBuilder();
+ *      $textBuilder->addPlainCodetext("000%89%%0");
+ *      $textBuilder->addFNC1GroupSeparator();
+ *      $textBuilder->addPlainCodetext("12345&lt;FNC1&gt;");
+ *      //generate barcode
+ *      $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *      $generator->setCodeText(textBuilder->getExtended());
+ *      $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+ *      $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ *      $generator->save("d:/test.png", BarcodeImageFormat::PNG);
+ * </pre>
+ *      *
+ * This sample shows how to use FNC1 second position in Extended Mode.
+ * <pre>
+ *
+ *    //create codetext
+ *    $textBuilder = new QrExtCodetextBuilder();
+ *    $textBuilder->addFNC1SecondPosition("12");
+ *    $textBuilder->addPlainCodetext("TRUE3456");
+ *    //generate barcode
+ *    $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *    $generator->setCodeText(textBuilder->getExtended());
+ *    $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ *    $generator->save("d:/test.png", BarcodeImageFormat::PNG);
+ *    </pre>
+ *
+ *    This sample shows how to use multi ECI mode in Extended Mode.
+ *    <pre>
+ *
+ *   //create codetext
+ *   $textBuilder = new QrExtCodetextBuilder();
+ *   $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ *   $textBuilder->addECICodetext(ECIEncodings::UTF8, "Right");
+ *   $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "Power");
+ *   $textBuilder->addPlainCodetext("t\e\\st");
+ *   //generate barcode
+ *   $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *   $generator->setCodeText(textBuilder->getExtended());
+ *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+ *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
+ *   $generator->save("d:/test.png", BarcodeImageFormat::PNG);
+ *  </pre>
+ *  </pre></blockquote></hr></p>
+ */
+class QREncodeMode
+{
+    /**
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are encoded in kanji mode if possible, or they are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     */
+
+    const AUTO = 0;
+    /**
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method to convert the message to byte array with specified encoding.
+     */
+    const BYTES = 1;
+
+    /**
+     * Encode codetext with UTF8 encoding with first ByteOfMark character.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with UTF8 encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
+     */
+    const UTF_8_BOM = 2;
+
+
+    /**
+     * Encode codetext with UTF8 encoding with first ByteOfMark character. It can be problems with some barcode scanners.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with BigEndianUnicode encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
+     */
+    const UTF_16_BEBOM = 3;
+
+    /**
+     * Encode codetext with value set in the ECIEncoding property. It can be problems with some old (pre 2006) barcode scanners.
+     * This mode is not supported by MicroQR barcodes.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use ECI option.
+     */
+    const ECI_ENCODING = 4;
+
+    /**
+     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
+     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
+     * Use Display2DText property to set visible text to removing managing characters.</para>
+     * Encoding Principles:</para>
+     * All symbols "\" must be doubled "\\" in the codetext.</para>
+     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
+     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
+     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
+     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
+     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
+     * This mode is not supported by MicroQR barcodes.</para>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode.
+     */
+    const EXTENDED_CODETEXT = 5;
+
+    /**
+     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
+     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
+     * Use Display2DText property to set visible text to removing managing characters.</para>
+     * Encoding Principles:</para>
+     * All symbols "\" must be doubled "\\" in the codetext.</para>
+     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
+     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
+     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
+     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
+     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
+     * This mode is not supported by MicroQR barcodes.</para>
+     */
+    const EXTENDED = 6;
+
+    /**
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     */
+    const BINARY = 7;
+
+    /**
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * This mode is not supported by MicroQR barcodes.
+     */
+    const ECI = 8;
 }
 
 /**
@@ -8338,121 +9066,163 @@ class  Pdf417CompactionMode
 }
 
 /**
- * Level of Reed-Solomon error correction. From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
+ * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+ * about the used references for encoding the data in the symbol.
+ *
+ * Example how to use ECI encoding
+ * @code
+ *     $generator = new BarcodeGenerator(EncodeTypes::QR);
+ *     $generator->setCodeText("12345TEXT");
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
+ *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF_8);
+ *     $generator->save("test.png", "PNG");
+ * @endcode
  */
-class QRErrorLevel
-{
-    /**
-     * Allows recovery of 7% of the code text
-     */
-    const LEVEL_L = "0";
-    /**
-     * Allows recovery of 15% of the code text
-     */
-    const LEVEL_M = "1";
-    /**
-     * Allows recovery of 25% of the code text
-     */
-    const LEVEL_Q = "2";
-    /**
-     * Allows recovery of 30% of the code text
-     */
-    const LEVEL_H = "3";
-}
-
-/**
- * QR / MicroQR selector mode. Select FORCE_QR for standard QR symbols, AUTO for MicroQR.
- * FORCE_MICRO_QR is used for strongly MicroQR symbol generation if it is possible.
- */
-class  QREncodeType
-{
-    /**
-     * Mode starts barcode version negotiation from MicroQR V1
-     */
-    const AUTO = "0";
-    /**
-     * Mode starts barcode version negotiation from QR V1
-     */
-    const FORCE_QR = "1";
-    /**
-     * Mode starts barcode version negotiation from from MicroQR V1 to V4. If data cannot be encoded into MicroQR, exception is thrown.
-     */
-    const FORCE_MICRO_QR = "2";
-}
-
-/**
- * Specifies the checksum algorithm for Codabar
- */
-class CodabarChecksumMode
+class ECIEncodings
 {
 
     /**
-     * Specifies Mod 10 algorithm for Codabar.
+     * ISO/IEC 8859-1 Latin alphabet No. 1 encoding. ECI Id:"\000003"
      */
-    const MOD_10 = "0";
+    const ISO_8859_1 = 3;
+    /**
+     * ISO/IEC 8859-2 Latin alphabet No. 2 encoding. ECI Id:"\000004"
+     */
+    const ISO_8859_2 = 4;
+    /**
+     * ISO/IEC 8859-3 Latin alphabet No. 3 encoding. ECI Id:"\000005"
+     */
+    const ISO_8859_3 = 5;
+    /**
+     * ISO/IEC 8859-4 Latin alphabet No. 4 encoding. ECI Id:"\000006"
+     */
+    const ISO_8859_4 = 6;
+    /**
+     * ISO/IEC 8859-5 Latin/Cyrillic alphabet encoding. ECI Id:"\000007"
+     */
+    const ISO_8859_5 = 7;
+    /**
+     * ISO/IEC 8859-6 Latin/Arabic alphabet encoding. ECI Id:"\000008"
+     */
+    const ISO_8859_6 = 8;
+    /**
+     * ISO/IEC 8859-7 Latin/Greek alphabet encoding. ECI Id:"\000009"
+     */
+    const ISO_8859_7 = 9;
+    /**
+     * ISO/IEC 8859-8 Latin/Hebrew alphabet encoding. ECI Id:"\000010"
+     */
+    const ISO_8859_8 = 10;
+    /**
+     * ISO/IEC 8859-9 Latin alphabet No. 5 encoding. ECI Id:"\000011"
+     */
+    const ISO_8859_9 = 11;
+    /**
+     * ISO/IEC 8859-10 Latin alphabet No. 6 encoding. ECI Id:"\000012"
+     */
+    const ISO_8859_10 = 12;
+    /**
+     * ISO/IEC 8859-11 Latin/Thai alphabet encoding. ECI Id:"\000013"
+     */
+    const ISO_8859_11 = 13;
+    //14 is reserved
+    /**
+     * ISO/IEC 8859-13 Latin alphabet No. 7 (Baltic Rim) encoding. ECI Id:"\000015"
+     */
+    const ISO_8859_13 = 15;
+    /**
+     * ISO/IEC 8859-14 Latin alphabet No. 8 (Celtic) encoding. ECI Id:"\000016"
+     */
+    const ISO_8859_14 = 16;
+    /**
+     * ISO/IEC 8859-15 Latin alphabet No. 9 encoding. ECI Id:"\000017"
+     */
+    const ISO_8859_15 = 17;
+    /**
+     * ISO/IEC 8859-16 Latin alphabet No. 10 encoding. ECI Id:"\000018"
+     */
+    const ISO_8859_16 = 18;
+    //19 is reserved
+    /**
+     * Shift JIS (JIS X 0208 Annex 1 + JIS X 0201) encoding. ECI Id:"\000020"
+     */
+    const Shift_JIS = 20;
+    //
+    /**
+     * Windows 1250 Latin 2 (Central Europe) encoding. ECI Id:"\000021"
+     */
+    const Win1250 = 21;
+    /**
+     * Windows 1251 Cyrillic encoding. ECI Id:"\000022"
+     */
+    const Win1251 = 22;
+    /**
+     * Windows 1252 Latin 1 encoding. ECI Id:"\000023"
+     */
+    const Win1252 = 23;
+    /**
+     * Windows 1256 Arabic encoding. ECI Id:"\000024"
+     */
+    const Win1256 = 24;
+    //
+    /**
+     * ISO/IEC 10646 UCS-2 (High order byte first) encoding. ECI Id:"\000025"
+     */
+    const UTF16BE = 25;
+    /**
+     * ISO/IEC 10646 UTF-8 encoding. ECI Id:"\000026"
+     */
+    const UTF8 = 26;
+    //
+    /**
+     * ISO/IEC 646:1991 International Reference Version of ISO 7-bit coded character set encoding. ECI Id:"\000027"
+     */
+    const US_ASCII = 27;
+    /**
+     * Big 5 (Taiwan) Chinese Character Set encoding. ECI Id:"\000028"
+     */
+    const Big5 = 28;
+    /**
+     * <p>GB2312 Chinese Character Set encoding. ECI Id:"\000029"</p>
+     */
+    const GB2312 = 29;
+    /**
+     * Korean Character Set encoding. ECI Id:"\000030"
+     */
+    const EUC_KR = 30;
+    /**
+     * <p>GBK (extension of GB2312 for Simplified Chinese)  encoding. ECI Id:"\000031"</p>
+     */
+    const GBK = 31;
+    /**
+     * <p>GGB18030 Chinese Character Set encoding. ECI Id:"\000032"</p>
+     */
+    const GB18030 = 32;
+    /**
+     * <p> ISO/IEC 10646 UTF-16LE encoding. ECI Id:"\000033"</p>
+     */
+    const UTF16LE = 33;
+    /**
+     * <p> ISO/IEC 10646 UTF-32BE encoding. ECI Id:"\000034"</p>
+     */
+    const UTF32BE = 34;
+    /**
+     * <p> ISO/IEC 10646 UTF-32LE encoding. ECI Id:"\000035"</p>
+     */
+    const UTF32LE = 35;
+    /**
+     * <p> ISO/IEC 646: ISO 7-bit coded character set - Invariant Characters set encoding. ECI Id:"\000170"</p>
+     */
+    const INVARIANT = 170;
+    /**
+     * <p> 8-bit binary data. ECI Id:"\000899"</p>
+     */
+    const BINARY = 899;
 
     /**
-     * Specifies Mod 16 algorithm for Codabar (recomended AIIM).
+     * No Extended Channel Interpretation/p>
      */
-    const MOD_16 = "1";
-}
-
-/**
- * Codetext location
- */
-class  CodeLocation
-{
-    /**
-     * Codetext below barcode.
-     */
-    const BELOW = "0";
-
-    /**
-     * Codetext above barcode.
-     */
-    const ABOVE = "1";
-
-    /**
-     * Hide codetext.
-     */
-    const NONE = "2";
-}
-
-/**
- * Font size mode.
- */
-class  FontMode
-{
-    /**
-     * Automatically calculate Font size based on barcode size.
-     */
-    const AUTO = "0";
-
-    /**
-     * Use Font sized defined by user.
-     */
-    const MANUAL = "1";
-}
-
-/**
- * Text alignment.
- */
-class  TextAlignment
-{
-    /**
-     * Left position.
-     */
-    const LEFT = "0";
-
-    /**
-     * Center position.
-     */
-    const CENTER = "1";
-
-    /**
-     * Right position.
-     */
-    const RIGHT = "2";
+    const NONE = 0;
 }
 
 /**
@@ -8465,7 +9235,7 @@ class  TextAlignment
  *  $generator->setAutoSizeMode(AutoSizeMode.NEAREST);
  *  $generator->getBarCodeWidth()->setMillimeters(50);
  *  $generator->getBarCodeHeight()->setInches(1.3f);
- *  $generator->save("test.png", BarcodeImageFormat::PNG);
+ *  $generator->save("test.png");
  * @endcode
  */
 class AutoSizeMode
@@ -8473,13 +9243,13 @@ class AutoSizeMode
     /**
      * Automatic resizing is disabled. Default value.
      */
-    const NONE = 0;  //or CUSTOM, or DEFAULT
+    const NONE = '0';  //or CUSTOM, or DEFAULT
 
     /**
      * Barcode resizes to nearest lowest possible size
      * which are specified by BarCodeWidth and BarCodeHeight properties.
      */
-    const NEAREST = 1;
+    const NEAREST = '1';
 
     /**
      *  Resizes barcode to specified size with little scaling
@@ -8494,51 +9264,10 @@ class AutoSizeMode
      *      $generator->getParameters()->getBarcode()->setAutoSizeMode(AutoSizeMode::INTERPOLATION);
      *      $generator->getParameters()->getBarcode()->getBarCodeWidth()->setMillimeters(50);
      *      $generator->getParameters()->getBarcode()->getBarCodeHeight()->setInches(1.3);
-     *      $generator->save("test.png", BarcodeImageFormat::PNG);
+     *      $generator->save("test.png", "PNG);
      * @endcode
      */
-    const INTERPOLATION = 2;
-}
-
-/**
- * Specifies the unit of measure for the given data.
- */
-class GraphicsUnit
-{
-    /**
-     * Specifies the world coordinate system unit as the unit of measure.
-     */
-    const WORLD = 0;
-
-    /**
-     * Specifies the unit of measure of the display device. Typically pixels for video displays, and 1/100 inch for printers.
-     */
-    const DISPLAY = 1;
-
-    /**
-     *    Specifies a device pixel as the unit of measure.
-     */
-    const PIXEL = 2;
-
-    /**
-     * Specifies a printer's point  = 1/72 inch) as the unit of measure.
-     */
-    const POINT = 3;
-
-    /**
-     *    Specifies the inch as the unit of measure.
-     */
-    const INCH = 4;
-
-    /**
-     * Specifies the document unit  = 1/300 inch) as the unit of measure.
-     */
-    const DOCUMENT = 5;
-
-    /**
-     * Specifies the millimeter as the unit of measure.
-     */
-    const MILLIMETER = 6;
+    const INTERPOLATION = '2';
 }
 
 /**
@@ -9186,242 +9915,6 @@ class EncodeTypes
 }
 
 /**
- * <p>
- * <p>Extended codetext generator for Aztec barcodes for ExtendedCodetext Mode of AztecEncodeMode</p>
- * <p>Use TwoDDisplayText property of BarcodeGenerator to set visible text to removing managing characters.</p>
- * </p><p><hr><blockquote><pre>
- * This sample shows how to use AztecExtCodetextBuilder in Extended Mode.
- * <pre>
- * @code
- * //create codetext
- * $textBuilder = new AztecExtCodetextBuilder();
- * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
- * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
- * $textBuilder->addPlainCodetext("Plain text");
- * //generate codetext
- * $codetext = $textBuilder->getExtendedCodetext();
- * //generate
- * $generator = new BarcodeGenerator(EncodeTypes::AZTEC, $codetext);
- * $generator->getParameters()->getBarcode()->getCodeTextParameters()->setwoDDisplayText("My Text");
- * $generator->save("test.bmp", BarcodeImageFormat::BMP);
- */
-class AztecExtCodetextBuilder extends ExtCodetextBuilder
-{
-    private const  JAVA_CLASS_NAME = "com.aspose.mw.barcode.generation.MwAztecExtCodetextBuilder";
-
-    public function __construct()
-    {
-        try {
-            $java_class = new java(self::JAVA_CLASS_NAME);
-            parent::__construct($java_class);
-        } catch (Exception $ex) {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    public function init() : void
-    {
-    }
-
-    /**
-     * <p>
-     * Generates Extended codetext from the extended codetext list.
-     * </p>
-     * @return Extended codetext as string
-     */
-    public function getExtendedCodetext() : string
-    {
-        return $this->getJavaClass()->getExtendedCodetext();
-    }
-}
-
-/**
- * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
- * about the used references for encoding the data in the symbol.
- *
- * Example how to use ECI encoding
- * @code
- *     $generator = new BarcodeGenerator(EncodeTypes::QR);
- *     $generator->setCodeText("12345TEXT");
- *     $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::ECI_ENCODING);
- *     $generator->getParameters()->getBarcode()->getQR()->setQrECIEncoding(ECIEncodings::UTF_8);
- *     $generator->save("test.png", "PNG");
- * @endcode
- */
-class ECIEncodings
-{
-
-    /**
-     * ISO/IEC 8859-1 Latin alphabet No. 1 encoding. ECI Id:"\000003"
-     */
-    const ISO_8859_1 = 3;
-    /**
-     * ISO/IEC 8859-2 Latin alphabet No. 2 encoding. ECI Id:"\000004"
-     */
-    const ISO_8859_2 = 4;
-    /**
-     * ISO/IEC 8859-3 Latin alphabet No. 3 encoding. ECI Id:"\000005"
-     */
-    const ISO_8859_3 = 5;
-    /**
-     * ISO/IEC 8859-4 Latin alphabet No. 4 encoding. ECI Id:"\000006"
-     */
-    const ISO_8859_4 = 6;
-    /**
-     * ISO/IEC 8859-5 Latin/Cyrillic alphabet encoding. ECI Id:"\000007"
-     */
-    const ISO_8859_5 = 7;
-    /**
-     * ISO/IEC 8859-6 Latin/Arabic alphabet encoding. ECI Id:"\000008"
-     */
-    const ISO_8859_6 = 8;
-    /**
-     * ISO/IEC 8859-7 Latin/Greek alphabet encoding. ECI Id:"\000009"
-     */
-    const ISO_8859_7 = 9;
-    /**
-     * ISO/IEC 8859-8 Latin/Hebrew alphabet encoding. ECI Id:"\000010"
-     */
-    const ISO_8859_8 = 10;
-    /**
-     * ISO/IEC 8859-9 Latin alphabet No. 5 encoding. ECI Id:"\000011"
-     */
-    const ISO_8859_9 = 11;
-    /**
-     * ISO/IEC 8859-10 Latin alphabet No. 6 encoding. ECI Id:"\000012"
-     */
-    const ISO_8859_10 = 12;
-    /**
-     * ISO/IEC 8859-11 Latin/Thai alphabet encoding. ECI Id:"\000013"
-     */
-    const ISO_8859_11 = 13;
-    //14 is reserved
-    /**
-     * ISO/IEC 8859-13 Latin alphabet No. 7 (Baltic Rim) encoding. ECI Id:"\000015"
-     */
-    const ISO_8859_13 = 15;
-    /**
-     * ISO/IEC 8859-14 Latin alphabet No. 8 (Celtic) encoding. ECI Id:"\000016"
-     */
-    const ISO_8859_14 = 16;
-    /**
-     * ISO/IEC 8859-15 Latin alphabet No. 9 encoding. ECI Id:"\000017"
-     */
-    const ISO_8859_15 = 17;
-    /**
-     * ISO/IEC 8859-16 Latin alphabet No. 10 encoding. ECI Id:"\000018"
-     */
-    const ISO_8859_16 = 18;
-    //19 is reserved
-    /**
-     * Shift JIS (JIS X 0208 Annex 1 + JIS X 0201) encoding. ECI Id:"\000020"
-     */
-    const Shift_JIS = 20;
-    //
-    /**
-     * Windows 1250 Latin 2 (Central Europe) encoding. ECI Id:"\000021"
-     */
-    const Win1250 = 21;
-    /**
-     * Windows 1251 Cyrillic encoding. ECI Id:"\000022"
-     */
-    const Win1251 = 22;
-    /**
-     * Windows 1252 Latin 1 encoding. ECI Id:"\000023"
-     */
-    const Win1252 = 23;
-    /**
-     * Windows 1256 Arabic encoding. ECI Id:"\000024"
-     */
-    const Win1256 = 24;
-    //
-    /**
-     * ISO/IEC 10646 UCS-2 (High order byte first) encoding. ECI Id:"\000025"
-     */
-    const UTF16BE = 25;
-    /**
-     * ISO/IEC 10646 UTF-8 encoding. ECI Id:"\000026"
-     */
-    const UTF8 = 26;
-    //
-    /**
-     * ISO/IEC 646:1991 International Reference Version of ISO 7-bit coded character set encoding. ECI Id:"\000027"
-     */
-    const US_ASCII = 27;
-    /**
-     * Big 5 (Taiwan) Chinese Character Set encoding. ECI Id:"\000028"
-     */
-    const Big5 = 28;
-    /**
-     * <p>GB2312 Chinese Character Set encoding. ECI Id:"\000029"</p>
-     */
-    const GB2312 = 29;
-    /**
-     * Korean Character Set encoding. ECI Id:"\000030"
-     */
-    const EUC_KR = 30;
-    /**
-     * <p>GBK (extension of GB2312 for Simplified Chinese)  encoding. ECI Id:"\000031"</p>
-     */
-    const GBK = 31;
-    /**
-     * <p>GGB18030 Chinese Character Set encoding. ECI Id:"\000032"</p>
-     */
-    const GB18030 = 32;
-    /**
-     * <p> ISO/IEC 10646 UTF-16LE encoding. ECI Id:"\000033"</p>
-     */
-    const UTF16LE = 33;
-    /**
-     * <p> ISO/IEC 10646 UTF-32BE encoding. ECI Id:"\000034"</p>
-     */
-    const UTF32BE = 34;
-    /**
-     * <p> ISO/IEC 10646 UTF-32LE encoding. ECI Id:"\000035"</p>
-     */
-    const UTF32LE = 35;
-    /**
-     * <p> ISO/IEC 646: ISO 7-bit coded character set - Invariant Characters set encoding. ECI Id:"\000170"</p>
-     */
-    const INVARIANT = 170;
-    /**
-     * <p> 8-bit binary data. ECI Id:"\000899"</p>
-     */
-    const BINARY = 899;
-
-    /**
-     * No Extended Channel Interpretation/p>
-     */
-    const NONE = 0;
-}
-
-/**
- * Enable checksum during generation for 1D barcodes.
- * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
- * Checksum never used: Codabar
- * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
- * Checksum always used: Rest symbologies
- */
-class EnableChecksum
-{
-    /**
-     * If checksum is required by the specification - it will be attached.
-     */
-    const DEFAULT = 0;
-
-    /**
-     * Always use checksum if possible.
-     */
-    const YES = 1;
-
-    /**
-     * Do not use checksum.
-     */
-    const NO = 2;
-}
-
-/**
  * Specifies the file format of the image.
  */
 class BarCodeImageFormat
@@ -9449,23 +9942,23 @@ class BarCodeImageFormat
     /**
      * Specifies the Tagged Image File Format (TIFF) image format.
      */
-     const TIFF = 4;
+    const TIFF = 4;
 
 
     /**
      * Specifies the Tagged Image File Format (TIFF) image format in CMYK color model.
      */
-     const TIFF_IN_CMYK = 5;
+    const TIFF_IN_CMYK = 5;
 
     /**
      * Specifies the Enhanced Metafile (EMF) image format.
      */
-     const EMF = 6;
+    const EMF = 6;
 
     /**
      * Specifies the Scalable Vector Graphics (SVG) image format.
      */
-     const SVG = 7;
+    const SVG = 7;
 
     /**
      * Specifies the Portable Document Format (PDF) image format.
@@ -9473,1120 +9966,331 @@ class BarCodeImageFormat
     const PDF = 8;
 }
 
-
 /**
- * Type of 2D component
- * This sample shows how to create and save a GS1 Composite Bar image.
- * Note that 1D codetext and 2D codetext are separated by symbol '/'
- * @code
- * $codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8";
- * $generator = new BarcodeGenerator(EncodeTypes::GS1_COMPOSITE_BAR, $codetext))
- *
- *     $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setLinearComponentType(EncodeTypes::GS1_CODE_128);
- *     $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setTwoDComponentType(TwoDComponentType::CC_A);
- *
- *     // Aspect ratio of 2D component
- *     $generator->getParameters()->getBarcode()->getPdf417()->setAspectRatio(3);
- *     ///
- *     // X-Dimension of 1D and 2D components
- *     $generator->getParameters()->getBarcode()->getXDimension()->setPixels(3);
- *     ///
- *     // Height of 1D component
- *     $generator->getParameters()->getBarcode()->getBarHeight()->setPixels(100);
- *     ///
- *     $generator->save("test.png", BarcodeImageFormat::PNG);
- * @endcode
+ * Specifies the unit of measure for the given data.
  */
-class TwoDComponentType
+class GraphicsUnit
 {
     /**
-     * Auto select type of 2D component
+     * Specifies the world coordinate system unit as the unit of measure.
      */
-    const AUTO = 0;
+    const WORLD = 0;
 
     /**
-     * CC-A type of 2D component. It is a structural variant of MicroPDF417
+     * Specifies the unit of measure of the display device. Typically pixels for video displays, and 1/100 inch for printers.
      */
-    const CC_A = 1;
+    const DISPLAY = 1;
 
     /**
-     * CC-B type of 2D component. It is a MicroPDF417 symbol.
+     *    Specifies a device pixel as the unit of measure.
      */
-    const CC_B = 2;
+    const PIXEL = 2;
 
     /**
-     * CC-C type of 2D component. It is a PDF417 symbol.
+     * Specifies a printer's point  = 1/72 inch) as the unit of measure.
      */
-    const CC_C = 3;
-}
-
-/**
- *  Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
- *  Applied only for Macro PDF417.
- */
-class Pdf417MacroTerminator
-{
-    /**
-     * The terminator will be added automatically if the number of segments is provided
-     * and the current segment is the last one. In other cases, the terminator will not be added.
-     */
-    const AUTO = 0;
+    const POINT = 3;
 
     /**
-     * The terminator will not be added.
+     *    Specifies the inch as the unit of measure.
      */
-    const NONE = 1;
+    const INCH = 4;
 
     /**
-     * The terminator will be added.
+     * Specifies the document unit  = 1/300 inch) as the unit of measure.
      */
-    const SET = 2;
-}
-
-/**
- * Encoding mode for MaxiCode barcodes.
- *
- * @code
- * //Auto mode
- * $codetext = "犬Right狗";
- * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext))
- * $generator->getParameters()->getBarcode()->getMaxiCode()->setECIEncoding(ECIEncodings::UTF8);
- * $generator->save("test.bmp");
- *
- * //Bytes mode
- * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
- * //encode array to String
- * $strBld = "";
- * foreach($encodedArr as $bval)
- * {
- * $strBld .= $bval;
- * }
- * $codetext = $strBld;
- * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
- * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode.BYTES);
- * $generator->save(ApiTests::folder."test2.bmp", BarCodeImageFormat::BMP);
- * @endcode
- */
-class MaxiCodeEncodeMode
-{
-    /**
-     * <p>
-     * In Auto mode, the CodeText is encoded with maximum data compactness.
-     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * </p>
-     */
-    const AUTO = 0;
-    
-    /**
-     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
-     * @deprecated
-     */
-    const BYTES = 1;
+    const DOCUMENT = 5;
 
     /**
-     * <p>
-     * <p>Extended mode which supports multi ECI modes.</p>
-     * <p>It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.</p>
-     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
-     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-     * </p>
-     * @deprecated
+     * Specifies the millimeter as the unit of measure.
      */
-    const EXTENDED_CODETEXT = 2;
-
-    /**
-     * Extended mode which supports multi ECI modes.
-     * It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.
-     * Use Display2DText property to set visible text to removing managing characters.
-     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
-     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
-     */
-    const EXTENDED = 3;
-
-    /**
-     * <p>
-     * In Binary mode, the CodeText is encoded with maximum data compactness.
-     * If a Unicode character is found, an exception is thrown.
-     *  </p>
-     */
-     const BINARY = 4;
-
-    /**
-     * <p>
-     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * Please note that some old (pre 2006) scanners may not support this mode.
-     * </p>
-     */
-    const ECI = 5;
-}
-
-/**
- * Encoding mode for MaxiCode barcodes.
- *
- * This sample shows how to genereate MaxiCode barcodes using ComplexBarcodeGenerator
- * @code
- * //Mode 2 with standart second message
- * $maxiCodeCodetext = new MaxiCodeCodetextMode2();
- * $maxiCodeCodetext->setPostalCode("524032140");
- * $maxiCodeCodetext->setCountryCode(056);
- * $maxiCodeCodetext->setServiceCategory(999);
- * maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
- * $maxiCodeStandartSecondMessage->setMessage("Test message");
- * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- *
- * //Mode 2 with structured second message
- * $maxiCodeCodetext = new MaxiCodeCodetextMode2();
- * $maxiCodeCodetext->setPostalCode("524032140");
- * $maxiCodeCodetext->setCountryCode(056);
- * $maxiCodeCodetext->setServiceCategory(999);
- * maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
- * $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
- * $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
- * $maxiCodeStructuredSecondMessage->add("PA");
- * $maxiCodeStructuredSecondMessage->setYear(99);
- * $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- *
- * //Mode 3 with standart second message
- * $maxiCodeCodetext = new MaxiCodeCodetextMode3();
- * $maxiCodeCodetext->setPostalCode("B1050");
- * $maxiCodeCodetext->setCountryCode(056);
- * $maxiCodeCodetext->setServiceCategory(999);
- * $maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
- * $maxiCodeStandartSecondMessage->setMessage("Test message");
- * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- *
- * //Mode 3 with structured second message
- * $maxiCodeCodetext = new MaxiCodeCodetextMode3();
- * $maxiCodeCodetext->setPostalCode("B1050");
- * $maxiCodeCodetext->setCountryCode(056);
- * $maxiCodeCodetext->setServiceCategory(999);
- * $maxiCodeStructuredSecondMessage = new MaxiCodeStructuredSecondMessage();
- * $maxiCodeStructuredSecondMessage->add("634 ALPHA DRIVE");
- * $maxiCodeStructuredSecondMessage->add("PITTSBURGH");
- * $maxiCodeStructuredSecondMessage->add("PA");
- * $maxiCodeStructuredSecondMessage->setYear(99);
- * $maxiCodeCodetext->setSecondMessage($maxiCodeStructuredSecondMessage);
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- *
- * //Mode 4
- * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
- * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_4);
- * $maxiCodeCodetext->setMessage("Test message");
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- *
- * //Mode 5
- * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
- * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_5);
- * $maxiCodeCodetext->setMessage("Test message");
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext())
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- *
- * //Mode 6
- * $maxiCodeCodetext = new MaxiCodeStandardCodetext();
- * $maxiCodeCodetext->setMode(MaxiCodeMode::MODE_6);
- * $maxiCodeCodetext->setMessage("Test message");
- * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext->getConstructedCodetext();
- * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
- * @endcode
- */
-class MaxiCodeMode
-{
-    /**
-     * Mode 2 encodes postal information in first message and data in second message.
-     * Has 9 digits postal code (used only in USA).
-     */
-    const MODE_2 = 2;
-    
-    /**
-     * Mode 3 encodes postal information in first message and data in second message.
-     * Has 6 alphanumeric postal code, used in the world.
-     */
-    const MODE_3 = 3;
-    
-    /**
-     *  Mode 4 encodes data in first and second message, with short ECC correction.
-     */
-    const MODE_4 = 4;
-
-    /**
-     * Mode 5 encodes data in first and second message, with long ECC correction.
-     */
-    const MODE_5 = 5;
-
-    /**
-     * Mode 6 encodes data in first and second message, with short ECC correction.
-     * Used to encode device.
-     */
-    const MODE_6 = 6;
+    const MILLIMETER = 6;
 }
 
 /**
  * <p>
- * Encoding mode for DotCode barcodes.
- * </p><p><hr><blockquote><pre>
- * <pre>
- * //Auto mode with macros
- * $codetext = ""[)>\u001E05\u001DCodetextWithMacros05\u001E\u0004"";
- * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * $generator->save("test.bmp", BarCodeImageFormat::BMP);
- *
- * //Auto mode
- * $codetext = "犬Right狗";
- * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * $generator->getParameters()->getBarcode()->getDotCode()->setECIEncoding(ECIEncodings::UTF8);
- * $generator->save("test.bmp", BarCodeImageFormat::BMP);
- *
- * //Bytes mode
- * $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
- * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, null);
- * $generator->setCodetext($encodedArr, null);
- * $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::BINARY);
- * $generator->save("test.bmp", BarcodeImageFormat:PNG);
- *
- * //Extended codetext mode
- * //create codetext
- * $textBuilder = new DotCodeExtCodetextBuilder();
- * $textBuilder->addFNC1FormatIdentifier();
- * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
- * $textBuilder->addFNC1FormatIdentifier();
- * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
- * $textBuilder->addFNC3SymbolSeparator();
- * $textBuilder->addFNC1FormatIdentifier();
- * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
- * $textBuilder->addPlainCodetext("Plain text");
- * //generate codetext
- * $codetext = $textBuilder->getExtended();
- * //generate
- * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
- * $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
- * $generator->save("test.bmp", BarCodeImageFormat::BMP);
- * </pre>
- * </pre></blockquote></hr></p>
- */
-class DotCodeEncodeMode
-{
-    /**
-     * <p>
-     * In Auto mode, the CodeText is encoded with maximum data compactness.
-     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * </p>
-     */
-    const AUTO = 0;
-
-    /**
-     * <p>
-     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
-     * </p>
-     * @deprecated
-     */
-     const BYTES = 1;
-
-    /**
-     * <p>
-     * <p>Extended mode which supports multi ECI modes.</p>
-     * <p>It is better to use DotCodeExtCodetextBuilder for extended codetext generation.</p>
-     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
-     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-     * </p>
-     * @deprecated
-     */
-     const EXTENDED_CODETEXT = 2;
-
-    /**
-     * <p>
-     * In Binary mode, the CodeText is encoded with maximum data compactness.
-     * If a Unicode character is found, an exception is thrown.
-     *  </p>
-     */
-    const BINARY = 3;
-
-    /**
-     * <p>
-     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * Please note that some old (pre 2006) scanners may not support this mode.
-     * </p>
-     */
-    const ECI = 4;
-
-    /**
-     * <p>
-     * <p>Extended mode which supports multi ECI modes.</p>
-     * <p>It is better to use DotCodeExtCodetextBuilder for extended codetext generation.</p>
-     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
-     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-     * </p>
-     */
-    const EXTENDED = 5;
-}
-
-
-/**
- * <p>
- * Pdf417 barcode encode mode
+ * Version of MicroQR Code.
+ * From M1 to M4.
  * </p>
  */
-class Pdf417EncodeMode
+class MicroQRVersion
 {
     /**
      * <p>
-     * In Auto mode, the CodeText is encoded with maximum data compactness.
-     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * </p>
-     */
-    const AUTO = 0;
-
-    /**
-     * <p>
-     * In Binary mode, the CodeText is encoded with maximum data compactness.
-     * If a Unicode character is found, an exception is thrown.
-     *  </p>
-     */
-    const BINARY = 1;
-
-    /**
-     * <p>
-     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
-     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
-     * Please note that some old (pre 2006) scanners may not support this mode.
-     * </p>
-     */
-    const ECI = 2;
-
-    /**
-     * <p>
-     * <p>Extended mode which supports multi ECI modes.</p>
-     * <p>It is better to use Pdf417ExtCodetextBuilder for extended codetext generation.</p>
-     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
-     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-     * </p>
-     */
-    const EXTENDED = 3;
-}
-
-
-/**
- * <p>
- * Encoding mode for Code128 barcodes.
- * {@code Code 128} specification.
- * </p><p><hr><blockquote><pre>
- * Thos code demonstrates how to generate code 128 with different encodings
- * <pre>
- *
- * //Generate code 128 with ISO 15417 encoding
- * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
- * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::AUTO);
- * $generator->Save("d:/code128Auto.png", BarCodeImageFormat::Png);
- * //Generate code 128 only with Codeset A encoding
- * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
- * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::CODE_A);
- * $generator->Save("d:/code128CodeA.png", BarCodeImageFormat::Png);
- * </pre>
- * </pre></blockquote></hr></p>
- */
-class Code128EncodeMode
-{
-    /**
-     * <p>
-     * Encode codetext in classic ISO 15417 mode. The mode should be used in all ordinary cases.
-     * </p>
-     */
-    const AUTO = 0;
-
-    /**
-     * <p>
-     * Encode codetext only in 128A codeset.
-     * </p>
-     */
-    const CODE_A = 1;
-
-    /**
-     * <p>
-     * Encode codetext only in 128B codeset.
-     * </p>
-     */
-    const CODE_B = 2;
-
-    /**
-     * <p>
-     * Encode codetext only in 128C codeset.
-     * </p>
-     */
-    const CODE_C = 4;
-
-    /**
-     * <p>
-     * Encode codetext only in 128A and 128B codesets.
-     * </p>
-     */
-    const CODE_AB = 3;
-
-    /**
-     * <p>
-     * Encode codetext only in 128A and 128C codesets.
-     * </p>
-     */
-    const CODE_AC = 5;
-
-    /**
-     * <p>
-     * Encode codetext only in 128B and 128C codesets.
-     * </p>
-     */
-    const CODE_BC = 6;
-}
-
-
-/**
- * <p>
- * Version of Han Xin Code.
- * From Version01 - 23 x 23 modules to Version84 - 189 x 189 modules, increasing in steps of 2 modules per side.
- * </p>
- */
-class HanXinVersion
-{
-    /**
-     * <p>
-     * Specifies to automatically pick up the best version.
+     * Specifies to automatically pick up the best version for MicroQR.
      * This is default value.
      * </p>
      */
     const AUTO = 0;
+
     /**
      * <p>
-     * Specifies version 1 with 23 x 23 modules.
+     * Specifies version M1 for Micro QR with 11 x 11 modules.
      * </p>
      */
-    const VERSION_01 = 1;
+    const M1 = 1;
+
     /**
      * <p>
-     * Specifies version 2 with 25 x 25 modules.
+     * Specifies version M2 for Micro QR with 13 x 13 modules.
      * </p>
      */
-    const VERSION_02 = 2;
+    const M2 = 2;
+
     /**
      * <p>
-     * Specifies version 3 with 27 x 27 modules.
+     * Specifies version M3 for Micro QR with 15 x 15 modules.
      * </p>
      */
-    const VERSION_03 = 3;
+    const M3 = 3;
+
     /**
      * <p>
-     * Specifies version 4 with 29 x 29 modules.
+     * Specifies version M4 for Micro QR with 17 x 17 modules.
      * </p>
      */
-    const VERSION_04 = 4;
-    /**
-     * <p>
-     * Specifies version 5 with 31 x 31 modules.
-     * </p>
-     */
-    const VERSION_05 = 5;
-    /**
-     * <p>
-     * Specifies version 6 with 33 x 33 modules.
-     * </p>
-     */
-    const VERSION_06 = 6;
-    /**
-     * <p>
-     * Specifies version 7 with 35 x 35 modules.
-     * </p>
-     */
-    const VERSION_07 = 7;
-    /**
-     * <p>
-     * Specifies version 8 with 37 x 37 modules.
-     * </p>
-     */
-    const VERSION_08 = 8;
-    /**
-     * <p>
-     * Specifies version 9 with 39 x 39 modules.
-     * </p>
-     */
-    const VERSION_09 = 9;
-    /**
-     * <p>
-     * Specifies version 10 with 41 x 41 modules.
-     * </p>
-     */
-    const VERSION_10 = 10;
-    /**
-     * <p>
-     * Specifies version 11 with 43 x 43 modules.
-     * </p>
-     */
-    const VERSION_11 = 11;
-    /**
-     * <p>
-     * Specifies version 12 with 45 x 45 modules.
-     * </p>
-     */
-    const VERSION_12 = 12;
-    /**
-     * <p>
-     * Specifies version 13 with 47 x 47 modules.
-     * </p>
-     */
-    const VERSION_13 = 13;
-    /**
-     * <p>
-     * Specifies version 14 with 49 x 49 modules.
-     * </p>
-     */
-    const VERSION_14 = 14;
-    /**
-     * <p>
-     * Specifies version 15 with 51 x 51 modules.
-     * </p>
-     */
-    const VERSION_15 = 15;
-    /**
-     * <p>
-     * Specifies version 16 with 53 x 53 modules.
-     * </p>
-     */
-    const VERSION_16 = 16;
-    /**
-     * <p>
-     * Specifies version 17 with 55 x 55 modules.
-     * </p>
-     */
-    const VERSION_17 = 17;
-    /**
-     * <p>
-     * Specifies version 18 with 57 x 57 modules.
-     * </p>
-     */
-    const VERSION_18 = 18;
-    /**
-     * <p>
-     * Specifies version 19 with 59 x 59 modules.
-     * </p>
-     */
-    const VERSION_19 = 19;
-    /**
-     * <p>
-     * Specifies version 20 with 61 x 61 modules.
-     * </p>
-     */
-    const VERSION_20 = 20;
-    /**
-     * <p>
-     * Specifies version 21 with 63 x 63 modules.
-     * </p>
-     */
-    const VERSION_21 = 21;
-    /**
-     * <p>
-     * Specifies version 22 with 65 x 65 modules.
-     * </p>
-     */
-    const VERSION_22 = 22;
-    /**
-     * <p>
-     * Specifies version 23 with 67 x 67 modules.
-     * </p>
-     */
-    const VERSION_23 = 23;
-    /**
-     * <p>
-     * Specifies version 24 with 69 x 69 modules.
-     * </p>
-     */
-    const VERSION_24 = 24;
-    /**
-     * <p>
-     * Specifies version 25 with 71 x 71 modules.
-     * </p>
-     */
-    const VERSION_25 = 25;
-    /**
-     * <p>
-     * Specifies version 26 with 73 x 73 modules.
-     * </p>
-     */
-    const VERSION_26 = 26;
-    /**
-     * <p>
-     * Specifies version 27 with 75 x 75 modules.
-     * </p>
-     */
-    const VERSION_27 = 27;
-    /**
-     * <p>
-     * Specifies version 28 with 77 x 77 modules.
-     * </p>
-     */
-    const VERSION_28 = 28;
-    /**
-     * <p>
-     * Specifies version 29 with 79 x 79 modules.
-     * </p>
-     */
-    const VERSION_29 = 29;
-    /**
-     * <p>
-     * Specifies version 30 with 81 x 81 modules.
-     * </p>
-     */
-    const VERSION_30 = 30;
-    /**
-     * <p>
-     * Specifies version 31 with 83 x 83 modules.
-     * </p>
-     */
-    const VERSION_31 = 31;
-    /**
-     * <p>
-     * Specifies version 32 with 85 x 85 modules.
-     * </p>
-     */
-    const VERSION_32 = 32;
-    /**
-     * <p>
-     * Specifies version 33 with 87 x 87 modules.
-     * </p>
-     */
-    const VERSION_33 = 33;
-    /**
-     * <p>
-     * Specifies version 34 with 89 x 89 modules.
-     * </p>
-     */
-    const VERSION_34 = 34;
-    /**
-     * <p>
-     * Specifies version 35 with 91 x 91 modules.
-     * </p>
-     */
-    const VERSION_35 = 35;
-    /**
-     * <p>
-     * Specifies version 36 with 93 x 93 modules.
-     * </p>
-     */
-    const VERSION_36 = 36;
-    /**
-     * <p>
-     * Specifies version 37 with 95 x 95 modules.
-     * </p>
-     */
-    const VERSION_37 = 37;
-    /**
-     * <p>
-     * Specifies version 38 with 97 x 97 modules.
-     * </p>
-     */
-    const VERSION_38 = 38;
-    /**
-     * <p>
-     * Specifies version 39 with 99 x 99 modules.
-     * </p>
-     */
-    const VERSION_39 = 39;
-    /**
-     * <p>
-     * Specifies version 40 with 101 x 101 modules.
-     * </p>
-     */
-    const VERSION_40 = 40;
-    /**
-     * <p>
-     * Specifies version 41 with 103 x 103 modules.
-     * </p>
-     */
-    const VERSION_41 = 41;
-    /**
-     * <p>
-     * Specifies version 42 with 105 x 105 modules.
-     * </p>
-     */
-    const VERSION_42 = 42;
-    /**
-     * <p>
-     * Specifies version 43 with 107 x 107 modules.
-     * </p>
-     */
-    const VERSION_43 = 43;
-    /**
-     * <p>
-     * Specifies version 44 with 109 x 109 modules.
-     * </p>
-     */
-    const VERSION_44 = 44;
-    /**
-     * <p>
-     * Specifies version 45 with 111 x 111 modules.
-     * </p>
-     */
-    const VERSION_45 = 45;
-    /**
-     * <p>
-     * Specifies version 46 with 113 x 113 modules.
-     * </p>
-     */
-    const VERSION_46 = 46;
-    /**
-     * <p>
-     * Specifies version 47 with 115 x 115 modules.
-     * </p>
-     */
-    const VERSION_47 = 47;
-    /**
-     * <p>
-     * Specifies version 48 with 117 x 117 modules.
-     * </p>
-     */
-    const VERSION_48 = 48;
-    /**
-     * <p>
-     * Specifies version 49 with 119 x 119 modules.
-     * </p>
-     */
-    const VERSION_49 = 49;
-    /**
-     * <p>
-     * Specifies version 50 with 121 x 121 modules.
-     * </p>
-     */
-    const VERSION_50 = 50;
-    /**
-     * <p>
-     * Specifies version 51 with 123 x 123 modules.
-     * </p>
-     */
-    const VERSION_51 = 51;
-    /**
-     * <p>
-     * Specifies version 52 with 125 x 125 modules.
-     * </p>
-     */
-    const VERSION_52 = 52;
-    /**
-     * <p>
-     * Specifies version 53 with 127 x 127 modules.
-     * </p>
-     */
-    const VERSION_53 = 53;
-    /**
-     * <p>
-     * Specifies version 54 with 129 x 129 modules.
-     * </p>
-     */
-    const VERSION_54 = 54;
-    /**
-     * <p>
-     * Specifies version 55 with 131 x 131 modules.
-     * </p>
-     */
-    const VERSION_55 = 55;
-    /**
-     * <p>
-     * Specifies version 56 with 133 x 133 modules.
-     * </p>
-     */
-    const VERSION_56 = 56;
-    /**
-     * <p>
-     * Specifies version 57 with 135 x 135 modules.
-     * </p>
-     */
-    const VERSION_57 = 57;
-    /**
-     * <p>
-     * Specifies version 58 with 137 x 137 modules.
-     * </p>
-     */
-    const VERSION_58 = 58;
-    /**
-     * <p>
-     * Specifies version 59 with 139 x 139 modules.
-     * </p>
-     */
-    const VERSION_59 = 59;
-    /**
-     * <p>
-     * Specifies version 60 with 141 x 141 modules.
-     * </p>
-     */
-    const VERSION_60 = 60;
-    /**
-     * <p>
-     * Specifies version 61 with 143 x 143 modules.
-     * </p>
-     */
-    const VERSION_61 = 61;
-    /**
-     * <p>
-     * Specifies version 62 with 145 x 145 modules.
-     * </p>
-     */
-    const VERSION_62 = 62;
-    /**
-     * <p>
-     * Specifies version 63 with 147 x 147 modules.
-     * </p>
-     */
-    const VERSION_63 = 63;
-    /**
-     * <p>
-     * Specifies version 64 with 149 x 149 modules.
-     * </p>
-     */
-    const VERSION_64 = 64;
-    /**
-     * <p>
-     * Specifies version 65 with 151 x 151 modules.
-     * </p>
-     */
-    const VERSION_65 = 65;
-    /**
-     * <p>
-     * Specifies version 66 with 153 x 153 modules.
-     * </p>
-     */
-    const VERSION_66 = 66;
-    /**
-     * <p>
-     * Specifies version 67 with 155 x 155 modules.
-     * </p>
-     */
-    const VERSION_67 = 67;
-    /**
-     * <p>
-     * Specifies version 68 with 157 x 157 modules.
-     * </p>
-     */
-    const VERSION_68 = 68;
-    /**
-     * <p>
-     * Specifies version 69 with 159 x 159 modules.
-     * </p>
-     */
-    const VERSION_69 = 69;
-    /**
-     * <p>
-     * Specifies version 70 with 161 x 161 modules.
-     * </p>
-     */
-    const VERSION_70 = 70;
-    /**
-     * <p>
-     * Specifies version 71 with 163 x 163 modules.
-     * </p>
-     */
-    const VERSION_71 = 71;
-    /**
-     * <p>
-     * Specifies version 72 with 165 x 165 modules.
-     * </p>
-     */
-    const VERSION_72 = 72;
-    /**
-     * <p>
-     * Specifies version 73 with 167 x 167 modules.
-     * </p>
-     */
-    const VERSION_73 = 73;
-    /**
-     * <p>
-     * Specifies version 74 with 169 x 169 modules.
-     * </p>
-     */
-    const VERSION_74 = 74;
-    /**
-     * <p>
-     * Specifies version 75 with 171 x 171 modules.
-     * </p>
-     */
-    const VERSION_75 = 75;
-    /**
-     * <p>
-     * Specifies version 76 with 173 x 173 modules.
-     * </p>
-     */
-    const VERSION_76 = 76;
-    /**
-     * <p>
-     * Specifies version 77 with 175 x 175 modules.
-     * </p>
-     */
-    const VERSION_77 = 77;
-    /**
-     * <p>
-     * Specifies version 78 with 177 x 177 modules.
-     * </p>
-     */
-    const VERSION_78 = 78;
-    /**
-     * <p>
-     * Specifies version 79 with 179 x 179 modules.
-     * </p>
-     */
-    const VERSION_79 = 79;
-    /**
-     * <p>
-     * Specifies version 80 with 181 x 181 modules.
-     * </p>
-     */
-    const VERSION_80 = 80;
-    /**
-     * <p>
-     * Specifies version 81 with 183 x 183 modules.
-     * </p>
-     */
-    const VERSION_81 = 81;
-    /**
-     * <p>
-     * Specifies version 82 with 185 x 185 modules.
-     * </p>
-     */
-    const VERSION_82 = 82;
-    /**
-     * <p>
-     * Specifies version 83 with 187 x 187 modules.
-     * </p>
-     */
-    const VERSION_83 = 83;
-    /**
-     * <p>
-     * Specifies version 84 with 189 x 189 modules.
-     * </p>
-     */
-    const VERSION_84 = 84;
+    const M4 = 4;
 }
 
 /**
  * <p>
- * Level of Reed-Solomon error correction. From low to high: L1, L2, L3, L4.
+ * Version of RectMicroQR Code.
+ * From version R7x43 to version R17x139.
  * </p>
  */
-class HanXinErrorLevel
+class RectMicroQRVersion
 {
     /**
      * <p>
-     * Allows recovery of 8% of the code text
-     * </p>
-     */
-    const L1 = 0;
-    /**
-     * <p>
-     * Allows recovery of 15% of the code text
-     * </p>
-     */
-    const L2 = 1;
-    /**
-     * <p>
-     * Allows recovery of 23% of the code text
-     * </p>
-     */
-    const L3 = 2;
-    /**
-     * <p>
-     * Allows recovery of 30% of the code text
-     * </p>
-     */
-    const L4 = 3;
-}
-
-/**
- * <p>
- * Han Xin Code encoding mode. It is recommended to use Auto with ASCII / Chinese characters or Unicode for Unicode characters.
- * </p><p><hr><blockquote><pre>
- *  <pre>
- *  // Auto mode
- *  $codetext = "1234567890ABCDEFGabcdefg,Han Xin Code";
- *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
- *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
- *
- *  // Bytes mode
- *  $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
- *
- *  //encode array to string
- *  StringBuilder strBld = new StringBuilder();
- *  for (byte bval : encodedArr)
- *      strBld.append((char) bval);
- *  $codetext = strBld.toString();
- *
- *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
- *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::BYTES);
- *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
- *
- *  // ECI mode
- *  $codetext = "ΑΒΓΔΕ";
- *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
- *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::ECI);
- *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinECIEncoding(ECIEncodings::ISO_8859_7);
- *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
- *
- *  // URI mode
- *  $codetext = "https://www.test.com/%BC%DE%%%ab/search=test";
- *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
- *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::URI);
- *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
- *
- *  // Extended mode - TBD
- *  </pre>
- *  </pre></blockquote></hr></p>
- */
-class HanXinEncodeMode
-{
-    /**
-     * <p>
-     * Sequence of Numeric, Text, ECI, Binary Bytes and 4 GB18030 modes changing automatically.
+     * Specifies to automatically pick up the best version for RectMicroQR.
+     * This is default value.
      * </p>
      */
     const AUTO = 0;
+
     /**
      * <p>
-     * Binary byte mode encodes binary data in any form and encodes them in their binary byte. Every byte in
-     * Binary Byte mode is represented by 8 bits.
+     * Specifies version with 7 x 43 modules.
      * </p>
      */
-    const BINARY = 1;
+    const R7x43 = 1;
+
     /**
      * <p>
-     * Extended Channel Interpretation (ECI) mode
+     * Specifies version with 7 x 59 modules.
      * </p>
      */
-    const ECI = 2;
+    const R7x59 = 2;
+
     /**
      * <p>
-     * Unicode mode designs a way to represent any text data reference to UTF8 encoding/charset in Han Xin Code.
+     * Specifies version with 7 x 77 modules.
      * </p>
      */
-    const UNICODE = 3;
+    const R7x77 = 3;
+
     /**
      * <p>
-     * URI mode indicates the data represented in Han Xin Code is Uniform Resource Identifier (URI)
-     * reference to RFC 3986.
+     * Specifies version with 7 x 99 modules.
      * </p>
      */
-    const URI = 4;
+    const R7x99 = 4;
+
     /**
      * <p>
-     * Extended mode  will allow more flexible combinations of other modes, this mode is currently not implemented.
+     * Specifies version with 7 x 139 modules.
      * </p>
      */
-    const EXTENDED = 5;
+    const R7x139 = 5;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 43 modules.
+     * </p>
+     */
+    const R9x43 = 6;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 59 modules.
+     * </p>
+     */
+    const R9x59 = 7;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 77 modules.
+     * </p>
+     */
+    const R9x77 = 8;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 99 modules.
+     * </p>
+     */
+    const R9x99 = 9;
+
+    /**
+     * <p>
+     * Specifies version with 9 x 139 modules.
+     * </p>
+     */
+    const R9x139 = 10;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 27 modules.
+     * </p>
+     */
+    const R11x27 = 11;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 43 modules.
+     * </p>
+     */
+    const R11x43 = 12;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 59 modules.
+     * </p>
+     */
+    const R11x59 = 13;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 77 modules.
+     * </p>
+     */
+    const R11x77 = 14;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 99 modules.
+     * </p>
+     */
+    const R11x99 = 15;
+
+    /**
+     * <p>
+     * Specifies version with 11 x 139 modules.
+     * </p>
+     */
+    const R11x139 = 16;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 27 modules.
+     * </p>
+     */
+    const R13x27 = 17;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 43 modules.
+     * </p>
+     */
+    const R13x43 = 18;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 59 modules.
+     * </p>
+     */
+    const R13x59 = 19;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 77 modules.
+     * </p>
+     */
+    const R13x77 = 20;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 99 modules.
+     * </p>
+     */
+    const R13x99 = 21;
+
+    /**
+     * <p>
+     * Specifies version with 13 x 139 modules.
+     * </p>
+     */
+    const R13x139 = 22;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 43 modules.
+     * </p>
+     */
+    const R15x43 = 23;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 59 modules.
+     * </p>
+     */
+    const R15x59 = 24;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 77 modules.
+     * </p>
+     */
+    const R15x77 = 25;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 99 modules.
+     * </p>
+     */
+    const R15x99 = 26;
+
+    /**
+     * <p>
+     * Specifies version with 15 x 139 modules.
+     * </p>
+     */
+    const R15x139 = 27;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 43 modules.
+     * </p>
+     */
+    const R17x43 = 28;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 59 modules.
+     * </p>
+     */
+    const R17x59 = 29;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 77 modules.
+     * </p>
+     */
+    const R17x77 = 30;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 99 modules.
+     * </p>
+     */
+    const R17x99 = 31;
+
+    /**
+     * <p>
+     * Specifies version with 17 x 139 modules.
+     * </p>
+     */
+    const R17x139 = 32;
 }
 
 /**
@@ -11117,7 +10821,7 @@ class AztecEncodeMode
      * If a Unicode character is found, an exception is thrown.
      *  </p>
      */
-     const BINARY = 4;
+    const BINARY = 4;
 
     /**
      * <p>
@@ -11126,293 +10830,1040 @@ class AztecEncodeMode
      * Please note that some old (pre 2006) scanners may not support this mode.
      * </p>
      */
-     const ECI = 5;
+    const ECI = 5;
+}
+
+
+/**
+ * Type of 2D component
+ * This sample shows how to create and save a GS1 Composite Bar image.
+ * Note that 1D codetext and 2D codetext are separated by symbol '/'
+ * @code
+ * $codetext = "(01)03212345678906/(21)A1B2C3D4E5F6G7H8";
+ * $generator = new BarcodeGenerator(EncodeTypes::GS1_COMPOSITE_BAR, $codetext))
+ *
+ *     $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setLinearComponentType(EncodeTypes::GS1_CODE_128);
+ *     $generator->getParameters()->getBarcode()->getGS1CompositeBar()->setTwoDComponentType(TwoDComponentType::CC_A);
+ *
+ *     // Aspect ratio of 2D component
+ *     $generator->getParameters()->getBarcode()->getPdf417()->setAspectRatio(3);
+ *     ///
+ *     // X-Dimension of 1D and 2D components
+ *     $generator->getParameters()->getBarcode()->getXDimension()->setPixels(3);
+ *     ///
+ *     // Height of 1D component
+ *     $generator->getParameters()->getBarcode()->getBarHeight()->setPixels(100);
+ *     ///
+ *     $generator->save("test.png", BarcodeImageFormat::PNG);
+ * @endcode
+ */
+class TwoDComponentType
+{
+    /**
+     * Auto select type of 2D component
+     */
+    const AUTO = 0;
+
+    /**
+     * CC-A type of 2D component. It is a structural variant of MicroPDF417
+     */
+    const CC_A = 1;
+
+    /**
+     * CC-B type of 2D component. It is a MicroPDF417 symbol.
+     */
+    const CC_B = 2;
+
+    /**
+     * CC-C type of 2D component. It is a PDF417 symbol.
+     */
+    const CC_C = 3;
+}
+
+/**
+ * Enable checksum during generation for 1D barcodes.
+ * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.
+ * Checksum never used: Codabar
+ * Checksum is possible: Code39 Standard/Extended, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, DeutschePostIdentcode, DeutschePostLeitcode, VIN
+ * Checksum always used: Rest symbologies
+ */
+class EnableChecksum
+{
+    /**
+     * If checksum is required by the specification - it will be attached.
+     */
+    const DEFAULT = 0;
+
+    /**
+     * Always use checksum if possible.
+     */
+    const YES = 1;
+
+    /**
+     * Do not use checksum.
+     */
+    const NO = 2;
+}
+
+/**
+ *  Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
+ *  Applied only for Macro PDF417.
+ */
+class Pdf417MacroTerminator
+{
+    /**
+     * The terminator will be added automatically if the number of segments is provided
+     * and the current segment is the last one. In other cases, the terminator will not be added.
+     */
+    const AUTO = 0;
+
+    /**
+     * The terminator will not be added.
+     */
+    const NONE = 1;
+
+    /**
+     * The terminator will be added.
+     */
+    const SET = 2;
+}
+
+/**
+ * Encoding mode for MaxiCode barcodes.
+ *
+ * @code
+ * //Auto mode
+ * $codetext = "犬Right狗";
+ * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext))
+ * $generator->getParameters()->getBarcode()->getMaxiCode()->setECIEncoding(ECIEncodings::UTF8);
+ * $generator->save("test.bmp");
+ *
+ * //Bytes mode
+ * $encodedArr = array( 0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9 );
+ * //encode array to string
+ * $strBld = "";
+ * foreach($encodedArr as $bval)
+ * {
+ * $strBld .= $bval;
+ * }
+ * $codetext = $strBld;
+ * $generator = new BarcodeGenerator(EncodeTypes::MAXI_CODE, $codetext);
+ * $generator->getParameters()->getBarcode()->getMaxiCode()->setMaxiCodeEncodeMode(MaxiCodeEncodeMode.BYTES);
+ * $generator->save(ApiTests::folder."test2.bmp", BarCodeImageFormat::BMP);
+ * @endcode
+ */
+class MaxiCodeEncodeMode
+{
+    /**
+     * <p>
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * </p>
+     */
+    const AUTO = 0;
+
+    /**
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
+     * @deprecated
+     */
+    const BYTES = 1;
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     * @deprecated
+     */
+    const EXTENDED_CODETEXT = 2;
+
+    /**
+     * Extended mode which supports multi ECI modes.
+     * It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.
+     * Use Display2DText property to set visible text to removing managing characters.
+     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier
+     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.
+     */
+    const EXTENDED = 3;
+
+    /**
+     * <p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
+     */
+    const BINARY = 4;
+
+    /**
+     * <p>
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
+     * </p>
+     */
+    const ECI = 5;
 }
 
 /**
  * <p>
- * Version of MicroQR Code.
- * From M1 to M4.
- * </p>
+ * Encoding mode for DotCode barcodes.
+ * </p><p><hr><blockquote><pre>
+ * <pre>
+ * //Auto mode with macros
+ * $codetext = ""[)>\u001E05\u001DCodetextWithMacros05\u001E\u0004"";
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ *
+ * //Auto mode
+ * $codetext = "犬Right狗";
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * $generator->getParameters()->getBarcode()->getDotCode()->setECIEncoding(ECIEncodings::UTF8);
+ * $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ *
+ * //Bytes mode
+ * $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, null);
+ * $generator->setCodetext($encodedArr, null);
+ * $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::BINARY);
+ * $generator->save("test.bmp", BarcodeImageFormat:PNG);
+ *
+ * //Extended codetext mode
+ * //create codetext
+ * $textBuilder = new DotCodeExtCodetextBuilder();
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::Win1251, "Will");
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF8, "犬Right狗");
+ * $textBuilder->addFNC3SymbolSeparator();
+ * $textBuilder->addFNC1FormatIdentifier();
+ * $textBuilder->addECICodetext(ECIEncodings::UTF16BE, "犬Power狗");
+ * $textBuilder->addPlainCodetext("Plain text");
+ * //generate codetext
+ * $codetext = $textBuilder->getExtended();
+ * //generate
+ * $generator = new BarcodeGenerator(EncodeTypes::DOT_CODE, $codetext);
+ * $generator->getParameters()->getBarcode()->getDotCode()->setDotCodeEncodeMode(DotCodeEncodeMode::EXTENDED_CODETEXT);
+ * $generator->save("test.bmp", BarCodeImageFormat::BMP);
+ * </pre>
+ * </pre></blockquote></hr></p>
  */
-class MicroQRVersion
+class DotCodeEncodeMode
 {
     /**
      * <p>
-     * Specifies to automatically pick up the best version for MicroQR.
-     * This is default value.
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
      * </p>
      */
     const AUTO = 0;
 
     /**
      * <p>
-     * Specifies version M1 for Micro QR with 11 x 11 modules.
+     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
      * </p>
+     * @deprecated
      */
-    const M1 = 1;
+    const BYTES = 1;
 
     /**
      * <p>
-     * Specifies version M2 for Micro QR with 13 x 13 modules.
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use DotCodeExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
      * </p>
+     * @deprecated
      */
-    const M2 = 2;
+    const EXTENDED_CODETEXT = 2;
 
     /**
      * <p>
-     * Specifies version M3 for Micro QR with 15 x 15 modules.
-     * </p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
      */
-    const M3 = 3;
+    const BINARY = 3;
 
     /**
      * <p>
-     * Specifies version M4 for Micro QR with 17 x 17 modules.
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
      * </p>
      */
-    const M4 = 4;
+    const ECI = 4;
+
+    /**
+     * <p>
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use DotCodeExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
+     * </p>
+     */
+    const EXTENDED = 5;
 }
+
 
 /**
  * <p>
- * Version of RectMicroQR Code.
- * From version R7x43 to version R17x139.
+ * Pdf417 barcode encode mode
  * </p>
  */
-class RectMicroQRVersion
+class Pdf417EncodeMode
 {
     /**
      * <p>
-     * Specifies to automatically pick up the best version for RectMicroQR.
-     * This is default value.
+     * In Auto mode, the CodeText is encoded with maximum data compactness.
+     * Unicode characters are re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
      * </p>
      */
     const AUTO = 0;
 
     /**
      * <p>
-     * Specifies version with 7 x 43 modules.
-     * </p>
+     * In Binary mode, the CodeText is encoded with maximum data compactness.
+     * If a Unicode character is found, an exception is thrown.
+     *  </p>
      */
-    const R7x43 = 1;
+    const BINARY = 1;
 
     /**
      * <p>
-     * Specifies version with 7 x 59 modules.
+     * In ECI mode, the entire message is re-encoded in the ECIEncoding specified encoding with the insertion of an ECI identifier.
+     * If a character is found that is not supported by the selected ECI encoding, an exception is thrown.
+     * Please note that some old (pre 2006) scanners may not support this mode.
      * </p>
      */
-    const R7x59 = 2;
+    const ECI = 2;
 
     /**
      * <p>
-     * Specifies version with 7 x 77 modules.
+     * <p>Extended mode which supports multi ECI modes.</p>
+     * <p>It is better to use Pdf417ExtCodetextBuilder for extended codetext generation.</p>
+     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
+     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
+     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
      * </p>
      */
-    const R7x77 = 3;
+    const EXTENDED = 3;
+}
+
+
+/**
+ * <p>
+ * Encoding mode for Code128 barcodes.
+ * {@code Code 128} specification.
+ * </p><p><hr><blockquote><pre>
+ * Thos code demonstrates how to generate code 128 with different encodings
+ * <pre>
+ *
+ * //Generate code 128 with ISO 15417 encoding
+ * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
+ * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::AUTO);
+ * $generator->Save("d:/code128Auto.png", BarCodeImageFormat::Png);
+ * //Generate code 128 only with Codeset A encoding
+ * $generator = new BarcodeGenerator(EncodeTypes::Code128, "ABCD1234567890");
+ * $generator->Parameters->Barcode->Code128->setCode128EncodeMode(Code128EncodeMode::CODE_A);
+ * $generator->Save("d:/code128CodeA.png", BarCodeImageFormat::Png);
+ * </pre>
+ * </pre></blockquote></hr></p>
+ */
+class Code128EncodeMode
+{
+    /**
+     * <p>
+     * Encode codetext in classic ISO 15417 mode. The mode should be used in all ordinary cases.
+     * </p>
+     */
+    const AUTO = 0;
 
     /**
      * <p>
-     * Specifies version with 7 x 99 modules.
+     * Encode codetext only in 128A codeset.
      * </p>
      */
-    const R7x99 = 4;
+    const CODE_A = 1;
 
     /**
      * <p>
-     * Specifies version with 7 x 139 modules.
+     * Encode codetext only in 128B codeset.
      * </p>
      */
-    const R7x139 = 5;
+    const CODE_B = 2;
 
     /**
      * <p>
-     * Specifies version with 9 x 43 modules.
+     * Encode codetext only in 128C codeset.
      * </p>
      */
-    const R9x43 = 6;
+    const CODE_C = 4;
 
     /**
      * <p>
-     * Specifies version with 9 x 59 modules.
+     * Encode codetext only in 128A and 128B codesets.
      * </p>
      */
-    const R9x59 = 7;
+    const CODE_AB = 3;
 
     /**
      * <p>
-     * Specifies version with 9 x 77 modules.
+     * Encode codetext only in 128A and 128C codesets.
      * </p>
      */
-    const R9x77 = 8;
+    const CODE_AC = 5;
 
     /**
      * <p>
-     * Specifies version with 9 x 99 modules.
+     * Encode codetext only in 128B and 128C codesets.
      * </p>
      */
-    const R9x99 = 9;
+    const CODE_BC = 6;
+}
 
+/**
+ * <p>
+ * Han Xin Code encoding mode. It is recommended to use Auto with ASCII / Chinese characters or Unicode for Unicode characters.
+ * </p><p><hr><blockquote><pre>
+ *  <pre>
+ *  // Auto mode
+ *  $codetext = "1234567890ABCDEFGabcdefg,Han Xin Code";
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ *  // Bytes mode
+ *  $encodedArr = array(0xFF, 0xFE, 0xFD, 0xFC, 0xFB, 0xFA, 0xF9);
+ *
+ *  //encode array to string
+ *  StringBuilder strBld = new StringBuilder();
+ *  for (byte bval : encodedArr)
+ *      strBld.append((char) bval);
+ *  $codetext = strBld.toString();
+ *
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
+ *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::BYTES);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ *  // ECI mode
+ *  $codetext = "ΑΒΓΔΕ";
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
+ *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::ECI);
+ *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinECIEncoding(ECIEncodings::ISO_8859_7);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ *  // URI mode
+ *  $codetext = "https://www.test.com/%BC%DE%%%ab/search=test";
+ *  $generator = new BarcodeGenerator(EncodeTypes::HAN_XIN, codetext);
+ *  $generator->getParameters()->getBarcode()->getHanXin()->setHanXinEncodeMode(HanXinEncodeMode::URI);
+ *  $generator->save("test.bmp", BarcodeImageFormat::BMP);
+ *
+ *  // Extended mode - TBD
+ *  </pre>
+ *  </pre></blockquote></hr></p>
+ */
+class HanXinEncodeMode
+{
     /**
      * <p>
-     * Specifies version with 9 x 139 modules.
+     * Sequence of Numeric, Text, ECI, Binary Bytes and 4 GB18030 modes changing automatically.
      * </p>
      */
-    const R9x139 = 10;
-
+    const AUTO = 0;
     /**
      * <p>
-     * Specifies version with 11 x 27 modules.
+     * Binary byte mode encodes binary data in any form and encodes them in their binary byte. Every byte in
+     * Binary Byte mode is represented by 8 bits.
      * </p>
      */
-    const R11x27 = 11;
-
+    const BINARY = 1;
     /**
      * <p>
-     * Specifies version with 11 x 43 modules.
+     * Extended Channel Interpretation (ECI) mode
      * </p>
      */
-    const R11x43 = 12;
-
+    const ECI = 2;
     /**
      * <p>
-     * Specifies version with 11 x 59 modules.
+     * Unicode mode designs a way to represent any text data reference to UTF8 encoding/charset in Han Xin Code.
      * </p>
      */
-    const R11x59 = 13;
-
+    const UNICODE = 3;
     /**
      * <p>
-     * Specifies version with 11 x 77 modules.
+     * URI mode indicates the data represented in Han Xin Code is Uniform Resource Identifier (URI)
+     * reference to RFC 3986.
      * </p>
      */
-    const R11x77 = 14;
-
+    const URI = 4;
     /**
      * <p>
-     * Specifies version with 11 x 99 modules.
+     * Extended mode  will allow more flexible combinations of other modes, this mode is currently not implemented.
      * </p>
      */
-    const R11x99 = 15;
+    const EXTENDED = 5;
+}
 
+/**
+ * <p>
+ * Level of Reed-Solomon error correction. From low to high: L1, L2, L3, L4.
+ * </p>
+ */
+class HanXinErrorLevel
+{
     /**
      * <p>
-     * Specifies version with 11 x 139 modules.
+     * Allows recovery of 8% of the code text
      * </p>
      */
-    const R11x139 = 16;
-
+    const L1 = 0;
     /**
      * <p>
-     * Specifies version with 13 x 27 modules.
+     * Allows recovery of 15% of the code text
      * </p>
      */
-    const R13x27 = 17;
-
+    const L2 = 1;
     /**
      * <p>
-     * Specifies version with 13 x 43 modules.
+     * Allows recovery of 23% of the code text
      * </p>
      */
-    const R13x43 = 18;
-
+    const L3 = 2;
     /**
      * <p>
-     * Specifies version with 13 x 59 modules.
+     * Allows recovery of 30% of the code text
      * </p>
      */
-    const R13x59 = 19;
+    const L4 = 3;
+}
 
+
+/**
+ * <p>
+ * Version of Han Xin Code.
+ * From Version01 - 23 x 23 modules to Version84 - 189 x 189 modules, increasing in steps of 2 modules per side.
+ * </p>
+ */
+class HanXinVersion
+{
     /**
      * <p>
-     * Specifies version with 13 x 77 modules.
+     * Specifies to automatically pick up the best version.
+     * This is default value.
      * </p>
      */
-    const R13x77 = 20;
-
+    const AUTO = 0;
     /**
      * <p>
-     * Specifies version with 13 x 99 modules.
+     * Specifies version 1 with 23 x 23 modules.
      * </p>
      */
-    const R13x99 = 21;
-
+    const VERSION_01 = 1;
     /**
      * <p>
-     * Specifies version with 13 x 139 modules.
+     * Specifies version 2 with 25 x 25 modules.
      * </p>
      */
-    const R13x139 = 22;
-
+    const VERSION_02 = 2;
     /**
      * <p>
-     * Specifies version with 15 x 43 modules.
+     * Specifies version 3 with 27 x 27 modules.
      * </p>
      */
-    const R15x43 = 23;
-
+    const VERSION_03 = 3;
     /**
      * <p>
-     * Specifies version with 15 x 59 modules.
+     * Specifies version 4 with 29 x 29 modules.
      * </p>
      */
-    const R15x59 = 24;
-
+    const VERSION_04 = 4;
     /**
      * <p>
-     * Specifies version with 15 x 77 modules.
+     * Specifies version 5 with 31 x 31 modules.
      * </p>
      */
-    const R15x77 = 25;
-
+    const VERSION_05 = 5;
     /**
      * <p>
-     * Specifies version with 15 x 99 modules.
+     * Specifies version 6 with 33 x 33 modules.
      * </p>
      */
-    const R15x99 = 26;
-
+    const VERSION_06 = 6;
     /**
      * <p>
-     * Specifies version with 15 x 139 modules.
+     * Specifies version 7 with 35 x 35 modules.
      * </p>
      */
-    const R15x139 = 27;
-
+    const VERSION_07 = 7;
     /**
      * <p>
-     * Specifies version with 17 x 43 modules.
+     * Specifies version 8 with 37 x 37 modules.
      * </p>
      */
-    const R17x43 = 28;
-
+    const VERSION_08 = 8;
     /**
      * <p>
-     * Specifies version with 17 x 59 modules.
+     * Specifies version 9 with 39 x 39 modules.
      * </p>
      */
-    const R17x59 = 29;
-
+    const VERSION_09 = 9;
     /**
      * <p>
-     * Specifies version with 17 x 77 modules.
+     * Specifies version 10 with 41 x 41 modules.
      * </p>
      */
-    const R17x77 = 30;
-
+    const VERSION_10 = 10;
     /**
      * <p>
-     * Specifies version with 17 x 99 modules.
+     * Specifies version 11 with 43 x 43 modules.
      * </p>
      */
-    const R17x99 = 31;
-
+    const VERSION_11 = 11;
     /**
      * <p>
-     * Specifies version with 17 x 139 modules.
+     * Specifies version 12 with 45 x 45 modules.
      * </p>
      */
-    const R17x139 = 32;
+    const VERSION_12 = 12;
+    /**
+     * <p>
+     * Specifies version 13 with 47 x 47 modules.
+     * </p>
+     */
+    const VERSION_13 = 13;
+    /**
+     * <p>
+     * Specifies version 14 with 49 x 49 modules.
+     * </p>
+     */
+    const VERSION_14 = 14;
+    /**
+     * <p>
+     * Specifies version 15 with 51 x 51 modules.
+     * </p>
+     */
+    const VERSION_15 = 15;
+    /**
+     * <p>
+     * Specifies version 16 with 53 x 53 modules.
+     * </p>
+     */
+    const VERSION_16 = 16;
+    /**
+     * <p>
+     * Specifies version 17 with 55 x 55 modules.
+     * </p>
+     */
+    const VERSION_17 = 17;
+    /**
+     * <p>
+     * Specifies version 18 with 57 x 57 modules.
+     * </p>
+     */
+    const VERSION_18 = 18;
+    /**
+     * <p>
+     * Specifies version 19 with 59 x 59 modules.
+     * </p>
+     */
+    const VERSION_19 = 19;
+    /**
+     * <p>
+     * Specifies version 20 with 61 x 61 modules.
+     * </p>
+     */
+    const VERSION_20 = 20;
+    /**
+     * <p>
+     * Specifies version 21 with 63 x 63 modules.
+     * </p>
+     */
+    const VERSION_21 = 21;
+    /**
+     * <p>
+     * Specifies version 22 with 65 x 65 modules.
+     * </p>
+     */
+    const VERSION_22 = 22;
+    /**
+     * <p>
+     * Specifies version 23 with 67 x 67 modules.
+     * </p>
+     */
+    const VERSION_23 = 23;
+    /**
+     * <p>
+     * Specifies version 24 with 69 x 69 modules.
+     * </p>
+     */
+    const VERSION_24 = 24;
+    /**
+     * <p>
+     * Specifies version 25 with 71 x 71 modules.
+     * </p>
+     */
+    const VERSION_25 = 25;
+    /**
+     * <p>
+     * Specifies version 26 with 73 x 73 modules.
+     * </p>
+     */
+    const VERSION_26 = 26;
+    /**
+     * <p>
+     * Specifies version 27 with 75 x 75 modules.
+     * </p>
+     */
+    const VERSION_27 = 27;
+    /**
+     * <p>
+     * Specifies version 28 with 77 x 77 modules.
+     * </p>
+     */
+    const VERSION_28 = 28;
+    /**
+     * <p>
+     * Specifies version 29 with 79 x 79 modules.
+     * </p>
+     */
+    const VERSION_29 = 29;
+    /**
+     * <p>
+     * Specifies version 30 with 81 x 81 modules.
+     * </p>
+     */
+    const VERSION_30 = 30;
+    /**
+     * <p>
+     * Specifies version 31 with 83 x 83 modules.
+     * </p>
+     */
+    const VERSION_31 = 31;
+    /**
+     * <p>
+     * Specifies version 32 with 85 x 85 modules.
+     * </p>
+     */
+    const VERSION_32 = 32;
+    /**
+     * <p>
+     * Specifies version 33 with 87 x 87 modules.
+     * </p>
+     */
+    const VERSION_33 = 33;
+    /**
+     * <p>
+     * Specifies version 34 with 89 x 89 modules.
+     * </p>
+     */
+    const VERSION_34 = 34;
+    /**
+     * <p>
+     * Specifies version 35 with 91 x 91 modules.
+     * </p>
+     */
+    const VERSION_35 = 35;
+    /**
+     * <p>
+     * Specifies version 36 with 93 x 93 modules.
+     * </p>
+     */
+    const VERSION_36 = 36;
+    /**
+     * <p>
+     * Specifies version 37 with 95 x 95 modules.
+     * </p>
+     */
+    const VERSION_37 = 37;
+    /**
+     * <p>
+     * Specifies version 38 with 97 x 97 modules.
+     * </p>
+     */
+    const VERSION_38 = 38;
+    /**
+     * <p>
+     * Specifies version 39 with 99 x 99 modules.
+     * </p>
+     */
+    const VERSION_39 = 39;
+    /**
+     * <p>
+     * Specifies version 40 with 101 x 101 modules.
+     * </p>
+     */
+    const VERSION_40 = 40;
+    /**
+     * <p>
+     * Specifies version 41 with 103 x 103 modules.
+     * </p>
+     */
+    const VERSION_41 = 41;
+    /**
+     * <p>
+     * Specifies version 42 with 105 x 105 modules.
+     * </p>
+     */
+    const VERSION_42 = 42;
+    /**
+     * <p>
+     * Specifies version 43 with 107 x 107 modules.
+     * </p>
+     */
+    const VERSION_43 = 43;
+    /**
+     * <p>
+     * Specifies version 44 with 109 x 109 modules.
+     * </p>
+     */
+    const VERSION_44 = 44;
+    /**
+     * <p>
+     * Specifies version 45 with 111 x 111 modules.
+     * </p>
+     */
+    const VERSION_45 = 45;
+    /**
+     * <p>
+     * Specifies version 46 with 113 x 113 modules.
+     * </p>
+     */
+    const VERSION_46 = 46;
+    /**
+     * <p>
+     * Specifies version 47 with 115 x 115 modules.
+     * </p>
+     */
+    const VERSION_47 = 47;
+    /**
+     * <p>
+     * Specifies version 48 with 117 x 117 modules.
+     * </p>
+     */
+    const VERSION_48 = 48;
+    /**
+     * <p>
+     * Specifies version 49 with 119 x 119 modules.
+     * </p>
+     */
+    const VERSION_49 = 49;
+    /**
+     * <p>
+     * Specifies version 50 with 121 x 121 modules.
+     * </p>
+     */
+    const VERSION_50 = 50;
+    /**
+     * <p>
+     * Specifies version 51 with 123 x 123 modules.
+     * </p>
+     */
+    const VERSION_51 = 51;
+    /**
+     * <p>
+     * Specifies version 52 with 125 x 125 modules.
+     * </p>
+     */
+    const VERSION_52 = 52;
+    /**
+     * <p>
+     * Specifies version 53 with 127 x 127 modules.
+     * </p>
+     */
+    const VERSION_53 = 53;
+    /**
+     * <p>
+     * Specifies version 54 with 129 x 129 modules.
+     * </p>
+     */
+    const VERSION_54 = 54;
+    /**
+     * <p>
+     * Specifies version 55 with 131 x 131 modules.
+     * </p>
+     */
+    const VERSION_55 = 55;
+    /**
+     * <p>
+     * Specifies version 56 with 133 x 133 modules.
+     * </p>
+     */
+    const VERSION_56 = 56;
+    /**
+     * <p>
+     * Specifies version 57 with 135 x 135 modules.
+     * </p>
+     */
+    const VERSION_57 = 57;
+    /**
+     * <p>
+     * Specifies version 58 with 137 x 137 modules.
+     * </p>
+     */
+    const VERSION_58 = 58;
+    /**
+     * <p>
+     * Specifies version 59 with 139 x 139 modules.
+     * </p>
+     */
+    const VERSION_59 = 59;
+    /**
+     * <p>
+     * Specifies version 60 with 141 x 141 modules.
+     * </p>
+     */
+    const VERSION_60 = 60;
+    /**
+     * <p>
+     * Specifies version 61 with 143 x 143 modules.
+     * </p>
+     */
+    const VERSION_61 = 61;
+    /**
+     * <p>
+     * Specifies version 62 with 145 x 145 modules.
+     * </p>
+     */
+    const VERSION_62 = 62;
+    /**
+     * <p>
+     * Specifies version 63 with 147 x 147 modules.
+     * </p>
+     */
+    const VERSION_63 = 63;
+    /**
+     * <p>
+     * Specifies version 64 with 149 x 149 modules.
+     * </p>
+     */
+    const VERSION_64 = 64;
+    /**
+     * <p>
+     * Specifies version 65 with 151 x 151 modules.
+     * </p>
+     */
+    const VERSION_65 = 65;
+    /**
+     * <p>
+     * Specifies version 66 with 153 x 153 modules.
+     * </p>
+     */
+    const VERSION_66 = 66;
+    /**
+     * <p>
+     * Specifies version 67 with 155 x 155 modules.
+     * </p>
+     */
+    const VERSION_67 = 67;
+    /**
+     * <p>
+     * Specifies version 68 with 157 x 157 modules.
+     * </p>
+     */
+    const VERSION_68 = 68;
+    /**
+     * <p>
+     * Specifies version 69 with 159 x 159 modules.
+     * </p>
+     */
+    const VERSION_69 = 69;
+    /**
+     * <p>
+     * Specifies version 70 with 161 x 161 modules.
+     * </p>
+     */
+    const VERSION_70 = 70;
+    /**
+     * <p>
+     * Specifies version 71 with 163 x 163 modules.
+     * </p>
+     */
+    const VERSION_71 = 71;
+    /**
+     * <p>
+     * Specifies version 72 with 165 x 165 modules.
+     * </p>
+     */
+    const VERSION_72 = 72;
+    /**
+     * <p>
+     * Specifies version 73 with 167 x 167 modules.
+     * </p>
+     */
+    const VERSION_73 = 73;
+    /**
+     * <p>
+     * Specifies version 74 with 169 x 169 modules.
+     * </p>
+     */
+    const VERSION_74 = 74;
+    /**
+     * <p>
+     * Specifies version 75 with 171 x 171 modules.
+     * </p>
+     */
+    const VERSION_75 = 75;
+    /**
+     * <p>
+     * Specifies version 76 with 173 x 173 modules.
+     * </p>
+     */
+    const VERSION_76 = 76;
+    /**
+     * <p>
+     * Specifies version 77 with 175 x 175 modules.
+     * </p>
+     */
+    const VERSION_77 = 77;
+    /**
+     * <p>
+     * Specifies version 78 with 177 x 177 modules.
+     * </p>
+     */
+    const VERSION_78 = 78;
+    /**
+     * <p>
+     * Specifies version 79 with 179 x 179 modules.
+     * </p>
+     */
+    const VERSION_79 = 79;
+    /**
+     * <p>
+     * Specifies version 80 with 181 x 181 modules.
+     * </p>
+     */
+    const VERSION_80 = 80;
+    /**
+     * <p>
+     * Specifies version 81 with 183 x 183 modules.
+     * </p>
+     */
+    const VERSION_81 = 81;
+    /**
+     * <p>
+     * Specifies version 82 with 185 x 185 modules.
+     * </p>
+     */
+    const VERSION_82 = 82;
+    /**
+     * <p>
+     * Specifies version 83 with 187 x 187 modules.
+     * </p>
+     */
+    const VERSION_83 = 83;
+    /**
+     * <p>
+     * Specifies version 84 with 189 x 189 modules.
+     * </p>
+     */
+    const VERSION_84 = 84;
 }
 
 /**
@@ -11449,4 +11900,3 @@ class SvgColorMode
      */
     const HSLA = 3;
 }
-?>

@@ -1,5 +1,5 @@
-.DS_Store
-/composer.phar
 /vendor/
+composer.lock
+/server.log
 /.idea/
-/.gradle/
+/.DS_Store

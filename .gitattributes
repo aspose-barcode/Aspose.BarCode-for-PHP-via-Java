@@ -1,0 +1,13 @@
+/find_autoload.php export-ignore
+.gitattributes export-ignore
+/vendor/ export-ignore
+/.gitignore export-ignore
+/.idea/ export-ignore
+/composer.lock export-ignore
+/test/ export-ignore
+/docs/ export-ignore
+/composer_install.cmd export-ignore
+/composer_update.cmd export-ignore
+/server.log export-ignore
+/TEMP* export-ignore
+/*.neon export-ignore
