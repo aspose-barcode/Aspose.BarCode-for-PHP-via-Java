@@ -154,6 +154,6 @@ public function readAndGenerateExample()
 }
 ```
 
-For detailed instructions, please refer to the [official documentation](https://docs.aspose.com/barcode/phpjava/).
+Comprehensive instructions can be found in the [official documentation](https://docs.aspose.com/barcode/phpjava/).
 
 [Product](https://products.aspose.com/barcode) | [Documentation](https://products.aspose.com/barcode/php-java) | [Blog](https://blog.aspose.com/category/barcode/) | [API Reference](https://apireference.aspose.com/barcode/java) | [Search](https://search.aspose.com/) | [Free Support](https://forum.aspose.com/c/barcode) | [Temporary License](https://purchase.aspose.com/temporary-license)
