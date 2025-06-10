@@ -3,7 +3,7 @@
 	"description": "Aspose.BarCode for PHP via Java is a robust barcode generation and recognition component.",
 	"type": "library",
 	"keywords": ["barcode", "generator", "recognition", "php", "java", "aspose"],
-	"license": "proprietary",
+	"license": "Proprietary",
 	"authors": [
 		{
 			"name": "Aspose",

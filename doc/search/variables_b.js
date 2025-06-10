@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['l1_2172',['L1',['../d6/d25/classAspose_1_1Barcode_1_1HanXinErrorLevel.html#a3d5179c65bfe2ce219a5db10ecd01ad7',1,'Aspose::Barcode::HanXinErrorLevel']]],
+  ['l2_2173',['L2',['../d6/d25/classAspose_1_1Barcode_1_1HanXinErrorLevel.html#a13b31fe04ed2ddfbf38e505f082ae5c8',1,'Aspose::Barcode::HanXinErrorLevel']]],
+  ['l3_2174',['L3',['../d6/d25/classAspose_1_1Barcode_1_1HanXinErrorLevel.html#a7b522d44d520f0ae44121f4ad046e073',1,'Aspose::Barcode::HanXinErrorLevel']]],
+  ['l4_2175',['L4',['../d6/d25/classAspose_1_1Barcode_1_1HanXinErrorLevel.html#a4efc841ccbe84f7fa144e42555b12e9d',1,'Aspose::Barcode::HanXinErrorLevel']]],
+  ['large_2176',['LARGE',['../da/dc9/classAspose_1_1Barcode_1_1XDimensionMode.html#a84f26fdebb31cb44c0a2e8835796cb32',1,'Aspose::Barcode::XDimensionMode']]],
+  ['left_2177',['LEFT',['../dc/d71/classAspose_1_1Barcode_1_1TextAlignment.html#a5ca321f03b84769f0d723e8647637d79',1,'Aspose::Barcode::TextAlignment']]],
+  ['level_5f0_2178',['LEVEL_0',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#aa2fa7055a683ac88cefa9f2faf9d1cbd',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f1_2179',['LEVEL_1',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#af0b4f9a74ca35a8d99a671703bef665e',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f2_2180',['LEVEL_2',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#a733929d643d043cd9048f77400486478',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f3_2181',['LEVEL_3',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#a02ff6d295eb2998f92eefeab30a7d28f',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f4_2182',['LEVEL_4',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#a678f42207d58f8cdcc3d4dd1ce846ae7',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f5_2183',['LEVEL_5',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#a4c60cdc2e0d8da5a86767c2b7538fbaa',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f6_2184',['LEVEL_6',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#a275f1e640e4a85bc814ac6647f827f51',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f7_2185',['LEVEL_7',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#af52cd00ce7bfc0ee1e52e26e712ef0f4',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5f8_2186',['LEVEL_8',['../d4/d77/classAspose_1_1Barcode_1_1Pdf417ErrorLevel.html#a9f28196b03a2a36087365ff5a9ba84ec',1,'Aspose::Barcode::Pdf417ErrorLevel']]],
+  ['level_5fh_2187',['LEVEL_H',['../db/d0e/classAspose_1_1Barcode_1_1QRErrorLevel.html#a9a6959cc590464cac8a9a1eb20a50187',1,'Aspose::Barcode::QRErrorLevel']]],
+  ['level_5fl_2188',['LEVEL_L',['../db/d0e/classAspose_1_1Barcode_1_1QRErrorLevel.html#a7d917a22f3a4899edcd23bdab9557891',1,'Aspose::Barcode::QRErrorLevel']]],
+  ['level_5fm_2189',['LEVEL_M',['../db/d0e/classAspose_1_1Barcode_1_1QRErrorLevel.html#a84bb5802c2475e61fdbd8a45c0bb2001',1,'Aspose::Barcode::QRErrorLevel']]],
+  ['level_5fq_2190',['LEVEL_Q',['../db/d0e/classAspose_1_1Barcode_1_1QRErrorLevel.html#acbbe4267a2582d0de4cdff2670d51f70',1,'Aspose::Barcode::QRErrorLevel']]],
+  ['low_2191',['LOW',['../d4/d97/classAspose_1_1Barcode_1_1BarcodeQualityMode.html#adebf08de388a6eefd31870631ad0feca',1,'Aspose::Barcode::BarcodeQualityMode']]]
+];
