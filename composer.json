@@ -14,8 +14,8 @@
 	"require": {
 		"php": ">=7.4",
 		"apache/thrift": "^0.20.0",
-        "ext-gd": "*"
-    },
+		"ext-gd": "*"
+	},
 	"autoload": {
 		"classmap": [
 			"lib/"

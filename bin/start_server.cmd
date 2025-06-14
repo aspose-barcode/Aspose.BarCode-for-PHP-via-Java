@@ -2,11 +2,11 @@
 :: Get the directory where this script is located
 set SCRIPT_DIR=%~dp0
 
-:: Define the path to the JAR file (adjust this if the path changes)
-set JAR_PATH=%SCRIPT_DIR%lib\aspose-barcode-php-thrift-25.5.jar
+:: Define the path to the JAR file relative to bin/
+set JAR_PATH=%SCRIPT_DIR%..\lib\aspose-barcode-php-25.5.jar
 
 :: Define the log file path
-set LOG_FILE=%SCRIPT_DIR%server.log
+set LOG_FILE=%SCRIPT_DIR%\server.log
 
 echo Starting Thrift server...
 
