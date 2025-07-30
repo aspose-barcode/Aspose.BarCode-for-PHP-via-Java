@@ -269,6 +269,66 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         throw new \Exception("BarcodeReader_importFromXml failed: unknown result");
     }
 
+    public function BarcodeResult_getCodeTextWithEncoding($bytesArray, $encoding)
+    {
+        $this->send_BarcodeResult_getCodeTextWithEncoding($bytesArray, $encoding);
+        return $this->recv_BarcodeResult_getCodeTextWithEncoding();
+    }
+
+    public function send_BarcodeResult_getCodeTextWithEncoding($bytesArray, $encoding)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_BarcodeResult_getCodeTextWithEncoding_args();
+        $args->bytesArray = $bytesArray;
+        $args->encoding = $encoding;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'BarcodeResult_getCodeTextWithEncoding',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('BarcodeResult_getCodeTextWithEncoding', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_BarcodeResult_getCodeTextWithEncoding()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_BarcodeResult_getCodeTextWithEncoding_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_BarcodeResult_getCodeTextWithEncoding_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("BarcodeResult_getCodeTextWithEncoding failed: unknown result");
+    }
+
     public function QualitySettings_getHighPerformance()
     {
         $this->send_QualitySettings_getHighPerformance();

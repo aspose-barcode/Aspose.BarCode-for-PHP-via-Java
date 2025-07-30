@@ -1205,10 +1205,48 @@ class BarCodeResult implements Communicator
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-
-    function getCodeText()
+    
+    /**
+     * <p>
+     *  Gets the code text with encoding.
+     *  </p><p><hr><blockquote><pre>
+     *  <p>This example shows how to use {@code GetCodeText}:</p>
+     *  <pre>
+     *  $gen = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, null);
+     * 	$gen->setCodeText("車種名", "932");
+     * 	$gen->save("barcode.png", BarCodeImageFormat::PNG);
+     *
+     * 	$reader = new BarCodeReader("barcode.png", null, DecodeType::DATA_MATRIX);
+     *  $results = $reader->readBarCodes();
+     *  for($i = 0; i < sizeof($results); $i++)
+     *  {
+     *      $result = $results[$i];
+     *      echo("BarCode CodeText: " . $result->getCodeText("932"));
+     *  }
+     * 	</pre>
+     *  </pre></blockquote></hr></p>
+     * @return A string containing recognized code text.
+     * @param encoding The encoding for codetext.
+     */
+    function getCodeText(?string $encoding) : string
     {
-        return $this->getBarCodeResultDTO()->codeText;
+        if($encoding == null || $encoding == "")
+        {
+            return $this->getBarCodeResultDTO()->codeText;
+        }
+        else
+        {
+            try
+            {
+                $thriftConnection = new ThriftConnection();
+                $client = $thriftConnection->openConnection();
+                $codeText = $client->BarcodeResult_getCodeTextWithEncoding($this->getBarCodeResultDTO()->codeBytes, $encoding);
+                $thriftConnection->closeConnection();
+                return $codeText;
+            } catch (Exception $ex) {
+                throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+            }
+        }
     }
 
     function getCodeType()

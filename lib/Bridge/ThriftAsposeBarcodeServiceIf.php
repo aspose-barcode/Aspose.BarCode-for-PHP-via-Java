@@ -40,6 +40,12 @@ interface ThriftAsposeBarcodeServiceIf
      */
     public function BarcodeReader_importFromXml($source);
     /**
+     * @param string $bytesArray
+     * @param string $encoding
+     * @return string
+     */
+    public function BarcodeResult_getCodeTextWithEncoding($bytesArray, $encoding);
+    /**
      * @return \Aspose\Barcode\Bridge\QualitySettingsDTO
      */
     public function QualitySettings_getHighPerformance();

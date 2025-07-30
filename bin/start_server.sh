@@ -4,7 +4,7 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Define the path to the JAR file relative to this script
-JAR_PATH="$SCRIPT_DIR/../lib/aspose-barcode-php-25.6.jar"
+JAR_PATH="$SCRIPT_DIR/../lib/aspose-barcode-php-25.7.jar"
 
 # Define the log file path (optional)
 LOG_FILE="$SCRIPT_DIR/server.log"

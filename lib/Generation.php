@@ -244,10 +244,54 @@ class BarcodeGenerator implements Communicator
 
     /**
      * <p>
-     * Encodes codetext with byte order mark (BOM) using specified encoding.
-     * </p>
-     * @param string|array codeText CodeText string | Bytes of codetext
-     * @param int encoding
+     *  <p>
+     *  Encodes the Unicode {@code <b>codeText</b>} into a byte sequence using the specified {@code <b>encoding</b>}.
+     *  UTF-8 is the most commonly used encoding.
+     *  If the encoding supports it and {@code <b>insertBOM</b>} is set to {@code true}, the function includes a
+     *  {@code <a href="https://en.wikipedia.org/wiki/Byte_order_mark#Byte-order_marks_by_encoding">byte order mark (BOM)</a>}.
+     *  </p>
+     *  <p>
+     *  This function is intended for use with 2D barcodes only (e.g., Aztec, QR, DataMatrix, PDF417, MaxiCode, DotCode, HanXin, RectMicroQR, etc.).
+     *  It enables manual encoding of Unicode text using national or special encodings; however, this method is considered obsolete in modern applications.
+     *  For modern use cases, {@code <a href="https://en.wikipedia.org/wiki/Extended_Channel_Interpretation">ECI</a>} encoding is recommended for Unicode data.
+     *  </p>
+     *  <p>
+     *  Using this function with 1D barcodes, GS1-compliant barcodes (including 2D), or HIBC barcodes (including 2D) is not supported by the corresponding barcode standards and may lead to unpredictable results.
+     *  </p>
+     *  </p><p><hr><blockquote><pre>
+     *  <p>This example shows how to use {@code SetCodeText} with or without a BOM for 2D barcodes.</p>
+     *  <pre>
+     * 	//Encode codetext using UTF-8 with BOM
+     * 	$gen = new BarcodeGenerator(EncodeTypes::QR, null);
+     *  $gen->setCodeText("車種名", "UTF-8", true);
+     * 	$gen->save("barcode.png", BarCodeImageFormat::PNG);
+     *
+     * 	$reader = new BarCodeReader("barcode.png", null, DecodeType::QR);
+     * 	$results = $reader->readBarCodes();
+     * 	for($i = 0; $i < sizeof($results); $i++)
+     * 	{
+     * 	    $result = $results[$i];
+     * 	    echo ("BarCode CodeText: " . $result->getCodeText());
+     *  }
+     * 	//Encode codetext using UTF-8 without BOM
+     * 	$gen = new BarcodeGenerator(EncodeTypes::QR, null);
+     *  $gen->setCodeText("車種名", "UTF-8", false);
+     * 	$gen->save("barcode.png", BarCodeImageFormat::PNG);
+     * 	$reader = new BarCodeReader("barcode.png", null, DecodeType.QR);
+     *  $results = $reader->readBarCodes();
+     *  for($i = 0; $i < sizeof($results); $i++)
+     *  {
+     *      $result = $results[$i];
+     *      echo ("BarCode CodeText: " . $result->getCodeText());
+     *  }
+     * 	</pre>
+     *  </pre></blockquote></hr></p>
+     * @param codeText CodeText string
+     * @param encoding Applied encoding
+     * @param insertBOM
+     *  Indicates whether to insert a byte order mark (BOM) when the specified encoding supports it (e.g., UTF-8, UTF-16, UTF-32).
+     *  If set to {@code true}, the BOM is added; if {@code false}, the BOM is omitted even if the encoding normally uses one.
+     *
      */
     public function setCodeText($codeText, ?string $encoding = null, ?bool $insertBOM = false): void
     {
