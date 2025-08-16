@@ -168,7 +168,4 @@ class CommonUtility
         // Unsupported input
         throw new BarcodeException("Unsupported input type. Expected GD resource, file resource, base64 string, or valid file path.");
     }
-
-
 }
-

@@ -1,6 +1,7 @@
 <?php
 namespace Aspose\Barcode;
 
+use Aspose\Barcode\Bridge\BarcodeExceptionDTO;
 use Aspose\Barcode\Bridge\ExtCodeItemDTO;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\CommonUtility;
@@ -201,7 +202,17 @@ class BarcodeGenerator implements Communicator
             $base64Image = $client->BarcodeGenerator_generateBarCodeImage($this->getBarcodeGeneratorDto(), $format, $licenseContent);
             $thriftConnection->closeConnection();
             return $base64Image;
-        } catch (Exception $exc) {
+        }catch (BarcodeExceptionDTO $be) {
+            $msg = $be->message ?? '(no message)';
+            $pos = $be->position ?? '';
+            $kind = $be->kind ?? '';
+            // pass a clear message up so it gets into your report
+            throw new \Exception("Java error" .
+                ($kind !== null ? " [$kind]" : "") .
+                ": $msg\n$pos");
+        }
+
+        catch (Exception $exc) {
             throw new BarcodeException($exc->getMessage(), __FILE__, __LINE__);
         }
     }

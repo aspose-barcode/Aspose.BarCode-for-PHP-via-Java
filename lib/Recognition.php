@@ -1197,7 +1197,7 @@ class BarCodeResult implements Communicator
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-    
+
     /**
      * <p>
      *  Gets the code text with encoding.
@@ -2102,7 +2102,7 @@ final class Code128ExtendedParameters implements Communicator
      */
     public function getCode128DataPortions(): array
     {
-            return $this->code128DataPortions;
+        return $this->code128DataPortions;
     }
 
     public function isEmpty(): bool

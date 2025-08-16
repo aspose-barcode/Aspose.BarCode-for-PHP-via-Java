@@ -26,18 +26,31 @@ class ThriftAsposeBarcodeService_BarcodeGenerator_generateBarCodeImage_result
             'isRequired' => false,
             'type' => TType::STRING,
         ),
+        1 => array(
+            'var' => 'ex',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\BarcodeExceptionDTO',
+        ),
     );
 
     /**
      * @var string
      */
     public $success = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\BarcodeExceptionDTO
+     */
+    public $ex = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
             if (isset($vals['success'])) {
                 $this->success = $vals['success'];
+            }
+            if (isset($vals['ex'])) {
+                $this->ex = $vals['ex'];
             }
         }
     }
@@ -68,6 +81,14 @@ class ThriftAsposeBarcodeService_BarcodeGenerator_generateBarCodeImage_result
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 1:
+                    if ($ftype == TType::STRUCT) {
+                        $this->ex = new \Aspose\Barcode\Bridge\BarcodeExceptionDTO();
+                        $xfer += $this->ex->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -85,6 +106,11 @@ class ThriftAsposeBarcodeService_BarcodeGenerator_generateBarCodeImage_result
         if ($this->success !== null) {
             $xfer += $output->writeFieldBegin('success', TType::STRING, 0);
             $xfer += $output->writeString($this->success);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->ex !== null) {
+            $xfer += $output->writeFieldBegin('ex', TType::STRUCT, 1);
+            $xfer += $this->ex->write($output);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

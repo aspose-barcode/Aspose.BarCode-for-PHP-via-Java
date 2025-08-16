@@ -111,16 +111,19 @@ interface ThriftAsposeBarcodeServiceIf
      * @param int $imageFormat
      * @param string $base64LicenseContent
      * @return string
+     * @throws \Aspose\Barcode\Bridge\BarcodeExceptionDTO
      */
     public function BarcodeGenerator_generateBarCodeImage(\Aspose\Barcode\Bridge\BarcodeGeneratorDTO $barcodeGeneratorDTO, $imageFormat, $base64LicenseContent);
     /**
      * @param string $source
      * @return \Aspose\Barcode\Bridge\BarcodeGeneratorDTO
+     * @throws \Aspose\Barcode\Bridge\BarcodeExceptionDTO
      */
     public function BarcodeGenerator_importFromXml($source);
     /**
      * @param \Aspose\Barcode\Bridge\BarcodeGeneratorDTO $barcodeGeneratorDTO
      * @return string
+     * @throws \Aspose\Barcode\Bridge\BarcodeExceptionDTO
      */
     public function BarcodeGenerator_exportToXml(\Aspose\Barcode\Bridge\BarcodeGeneratorDTO $barcodeGeneratorDTO);
     /**
