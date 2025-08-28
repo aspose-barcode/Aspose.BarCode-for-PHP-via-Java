@@ -38,6 +38,7 @@ use Aspose\Barcode\Bridge\FontUnitDTO;
 use Aspose\Barcode\Bridge\CaptionParametersDTO;
 use Aspose\Barcode\Bridge\UnitDTO;
 use Aspose\Barcode\Bridge\SvgParametersDTO;
+use Aspose\Barcode\Bridge\PdfParametersDTO;
 use Aspose\Barcode\Bridge\ImageParametersDTO;
 use Aspose\Barcode\Bridge\BaseGenerationParametersDTO;
 use Aspose\Barcode\Bridge\BarcodeGeneratorDTO;
@@ -7146,6 +7147,251 @@ class SvgParameters implements Communicator
 }
 
 /**
+ * PDF parameters wrapper.
+ * Expects an underlying `javaClass` instance that provides
+ * the corresponding getter/setter methods returning/accepting
+ * CMYK strings like "30_100_0_30" or `null`.
+ */
+class PdfParameters implements Communicator
+{
+    private $pdfParametersDto;
+
+    function getPdfParametersDto(): PdfParametersDTO
+    {
+        return $this->pdfParametersDto;
+    }
+
+    private function setPdfParametersDto(PdfParametersDTO $pdfParametersDto): void
+    {
+        $this->pdfParametersDto = $pdfParametersDto;
+    }
+
+    function __construct(PdfParametersDTO $pdfParametersDto)
+    {
+        $this->pdfParametersDto = $pdfParametersDto;
+        $this->obtainDto();
+        $this->initFieldsFromDto();
+    }
+
+    public function obtainDto(...$args)
+    {
+    }
+
+    public function initFieldsFromDto(): void
+    {
+    }
+    /**
+     * <p>
+     * Nullable. CMYK color value of bar code. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    function getCMYKBarColor() : CMYKColor
+    {
+        return CMYKColor::parseCMYK($this->getPdfParametersDto()->cmykBarColor);
+    }
+    /**
+     * <p>
+     * Nullable. CMYK color value of bar code. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    function setCMYKBarColor(CMYKColor $value) : void
+    {
+        $this->getPdfParametersDto()->cmykBarColor = $value != null ? $value->formatCMYK() : null;
+    }
+
+    /**
+     * <p>
+     * Nullable. CMYK back color value. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function getCMYKBackColor() : CMYKColor
+    {
+        return CMYKColor::parseCMYK($this->getPdfParametersDto()->cmykBackColor);
+    }
+    /**
+     * <p>
+     * Nullable. CMYK back color value. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function setCMYKBackColor(CMYKColor $value) : void
+    {
+        $this->getPdfParametersDto()->cmykBackColor = ($value != null ? $value->formatCMYK() : null);
+    }
+
+    /**
+     * <p>
+     * Nullable. CMYK color value of Codetext. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function getCMYKCodetextColor() : CMYKColor
+    {
+        return CMYKColor::parseCMYK($this->getPdfParametersDto()->cmykCodetextColor);
+    }
+
+    /**
+     * <p>
+     * Nullable. CMYK color value of Codetext. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function setCMYKCodetextColor(CMYKColor $value) : void
+    {
+        $this->getPdfParametersDto()->cmykCodetextColor = $value != null ? $value->formatCMYK() : null;
+    }
+
+    /**
+     * <p>
+     * Nullable. CMYK color value of caption above. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function getCMYKCaptionAboveColor() : CMYKColor
+    {
+        return CMYKColor::parseCMYK($this->getPdfParametersDto()->cmykCaptionAboveColor);
+    }
+    /**
+     * <p>
+     * Nullable. CMYK color value of caption above. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function setCMYKCaptionAboveColor(CMYKColor $value) : void
+    {
+        $this->getPdfParametersDto()->cmykCaptionAboveColor = $value != null ? $value->formatCMYK() : null;
+    }
+
+    /**
+     * <p>
+     * Nullable. CMYK color value of caption below. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function getCMYKCaptionBelowColor() : CMYKColor
+    {
+        return CMYKColor::parseCMYK($this->getPdfParametersDto()->cmykCaptionBelowColor);
+    }
+    /**
+     * <p>
+     * Nullable. CMYK color value of caption below. Null means CMYK color is not used, instead normal RGB color is used.
+     * </p>
+     */
+    public function setCMYKCaptionBelowColor(CMYKColor $value) : void
+    {
+        $this->getPdfParametersDto()->cmykCaptionBelowColor = $value->formatCMYK();
+    }
+
+    /**
+     * <p>
+     * Are paths used instead of text (use if Unicode characters are not displayed)
+     * Default value: false.
+     * </p>
+     */
+    public function isTextAsPath() : bool
+    {
+        return $this->getPdfParametersDto()->textAsPath;
+    }
+
+    /**
+     * <p>
+     * Are paths used instead of text (use if Unicode characters are not displayed)
+     * Default value: false.
+     * </p>
+     */
+    public function setTextAsPath(bool $value) : void
+    {
+        $this->getPdfParametersDto()->textAsPath = $value;
+    }
+}
+
+/**
+ * Class for CMYK color. A null instance means CMYK is not used,
+ * and default RGB color is in use.
+ */
+class CMYKColor
+{
+    /** @var float Cyan component (0.0–1.0) */
+    public float $C;
+
+    /** @var float Magenta component (0.0–1.0) */
+    public float $M;
+
+    /** @var float Yellow component (0.0–1.0) */
+    public float $Y;
+
+    /** @var float Black component (0.0–1.0) */
+    public float $K;
+
+    /**
+     * Initializes a new instance of the CMYKColor class from CMYK values.
+     * CMYK values are expected in the range 0–100.
+     *
+     * @param int $c Cyan value [0, 100]
+     * @param int $m Magenta value [0, 100]
+     * @param int $y Yellow value [0, 100]
+     * @param int $k Black value [0, 100]
+     */
+    public function __construct(int $c,int $m,int $y,int $k)
+    {
+        // Clamp to [0, 100] and store as fractions [0.0, 1.0]
+        $this->C = min(100, max(0, $c)) / 100.0;
+        $this->M = min(100, max(0, $m)) / 100.0;
+        $this->Y = min(100, max(0, $y)) / 100.0;
+        $this->K = min(100, max(0, $k)) / 100.0;
+    }
+
+    /**
+     * Parse a CMYK string of the form "C_M_Y_K" into a CMYKColor instance.
+     *
+     * @param string $str a string like "30_100_0_30"
+     * @return CMYKColor
+     * @throws InvalidArgumentException if the format is invalid or values are not numeric
+     */
+    public static function parseCMYK(string $str): CMYKColor
+    {
+        $parts = explode('_', $str);
+        if (count($parts) !== 4) {
+            throw new InvalidArgumentException("Invalid CMYK string: expected 4 parts but got " . count($parts));
+        }
+
+        $nums = [];
+        foreach ($parts as $i => $s) {
+            if (!is_numeric($s)) {
+                throw new InvalidArgumentException("Invalid number in CMYK string at index $i: \"$s\"");
+            }
+            // PHP does not auto-convert to float in this context
+            $nums[] = floatval($s);
+        }
+
+        return new CMYKColor($nums[0], $nums[1], $nums[2], $nums[3]);
+    }
+
+    /**
+     * Format this CMYKColor into a string "C_M_Y_K",
+     * multiplying each internal component (0–1) by 100 and rounding.
+     *
+     * @return string e.g. "30_100_0_30"
+     */
+    public function formatCMYK(): string
+    {
+        $c = round($this->C * 100);
+        $m = round($this->M * 100);
+        $y = round($this->Y * 100);
+        $k = round($this->K * 100);
+        return "{$c}_{$m}_{$y}_{$k}";
+    }
+
+    /**
+     * Optional: a human-readable representation.
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        $c = round($this->C * 100);
+        $m = round($this->M * 100);
+        $y = round($this->Y * 100);
+        $k = round($this->K * 100);
+        return "CMYKColor(C={$c}%, M={$m}%, Y={$y}%, K={$k}%)";
+    }
+}
+
+/**
  * <p>
  * Class for representing HSLA color (Hue, Saturation, Lightness, Alpha)
  * </p>
@@ -8075,24 +8321,24 @@ class BorderDashStyle
     /**
      * Specifies a solid line.
      */
-    const  SOLID = "0"; //DashStyle.Solid
+    const  SOLID = 0; //DashStyle.Solid
     /**
      * Specifies a line consisting of dashes.
      */
-    const   DASH = "1"; // DashStyle.Dash
+    const   DASH = 1; // DashStyle.Dash
     /**
      * Specifies a line consisting of dots.
      */
-    const  DOT = "2"; //(DashStyle.Dot
+    const  DOT = 2; //(DashStyle.Dot
 
     /**
      * Specifies a line consisting of a repeating pattern of dash-dot.
      */
-    const  DASH_DOT = "3"; //DashStyle.DashDot
+    const  DASH_DOT = 3; //DashStyle.DashDot
     /**
      * Specifies a line consisting of a repeating pattern of dash-dot-dot.
      */
-    const  DASH_DOT_DOT = "4"; //DashStyle.DashDotDot
+    const  DASH_DOT_DOT = 4; //DashStyle.DashDotDot
 }
 
 /**
