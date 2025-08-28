@@ -120,52 +120,52 @@ class CommonUtility
 
     public static function convertImageResourceToBase64($imageResource): ?string
     {
-        if (is_null($imageResource)) {
+        if ($imageResource === null) {
             return null;
         }
 
-        // Handle resource types
+        // Handle GD resource
         if (is_resource($imageResource)) {
             $type = get_resource_type($imageResource);
 
-            if ($type === 'gd') {
-                ob_start();
-                imagepng($imageResource);
-                $imageData = ob_get_contents();
-                ob_end_clean();
-                return base64_encode($imageData);
-            }
+            switch ($type) {
+                case 'gd':
+                    ob_start();
+                    imagepng($imageResource);
+                    $imageData = ob_get_clean(); // same as ob_get_contents() + ob_end_clean()
+                    return base64_encode($imageData);
 
-            if ($type === 'file') {
-                $imageData = stream_get_contents($imageResource);
-                fclose($imageResource);
-                return base64_encode($imageData);
-            }
+                case 'file':
+                    $imageData = stream_get_contents($imageResource);
+                    fclose($imageResource);
+                    return base64_encode($imageData);
 
-            throw new BarcodeException("This resource type is not supported: " . $type);
+                default:
+                    throw new BarcodeException("Unsupported resource type: $type");
+            }
         }
+
         // Handle string input
         if (is_string($imageResource)) {
-            // Check if it's already a valid base64 string
-            if (base64_encode(base64_decode($imageResource, true)) === $imageResource) {
-                return $imageResource;
-            }
 
-            // Check if it's a valid file path
-            if (is_file($imageResource)) {
+            // If string is a valid file path
+            if (file_exists($imageResource) && is_file($imageResource) && is_readable($imageResource)) {
                 $fileContent = file_get_contents($imageResource);
+                if ($fileContent === false) {
+                    throw new BarcodeException("Failed to read file content: $imageResource");
+                }
                 return base64_encode($fileContent);
             }
 
-            // If it's a string but file does not exist
-            if (!file_exists($imageResource)) {
-                throw new BarcodeException("File does not exist: " . $imageResource);
+
+            // If string is already valid base64 (safe check)
+            if (base64_encode(base64_decode($imageResource, true)) === $imageResource) {
+                return $imageResource;
             }
+            throw new BarcodeException("File does not exist or is not readable: $imageResource");
         }
 
+        // Unsupported input
         throw new BarcodeException("Unsupported input type. Expected GD resource, file resource, base64 string, or valid file path.");
     }
-
-
 }
-

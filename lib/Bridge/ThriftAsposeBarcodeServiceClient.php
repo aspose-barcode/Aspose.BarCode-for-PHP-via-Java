@@ -1096,6 +1096,9 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         if ($result->success !== null) {
             return $result->success;
         }
+        if ($result->ex !== null) {
+            throw $result->ex;
+        }
         throw new \Exception("BarcodeGenerator_generateBarCodeImage failed: unknown result");
     }
 
@@ -1155,6 +1158,9 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         if ($result->success !== null) {
             return $result->success;
         }
+        if ($result->ex !== null) {
+            throw $result->ex;
+        }
         throw new \Exception("BarcodeGenerator_importFromXml failed: unknown result");
     }
 
@@ -1213,6 +1219,9 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         }
         if ($result->success !== null) {
             return $result->success;
+        }
+        if ($result->ex !== null) {
+            throw $result->ex;
         }
         throw new \Exception("BarcodeGenerator_exportToXml failed: unknown result");
     }

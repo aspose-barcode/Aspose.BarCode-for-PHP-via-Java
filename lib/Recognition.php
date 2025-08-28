@@ -299,8 +299,6 @@ class BarCodeReader implements Communicator
      * //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * //set separate options
-     * $reader->getQualitySettings()->setAllowMedianSmoothing(true);
-     * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
      *
@@ -332,8 +330,6 @@ class BarCodeReader implements Communicator
      * //set high performance mode
      * $reader->setQualitySettings(QualitySettings::getHighPerformance());
      * //set separate options
-     * $reader->getQualitySettings()->setAllowMedianSmoothing(true);
-     * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
      * foreach($reader->readBarCodes() as $result)
      *   print("BarCode CodeText: ".$result->getCodeText());
      *
@@ -380,7 +376,7 @@ class BarCodeReader implements Communicator
     {
         try {
             $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBase64($imageResource);
-            $this->barCodeReaderDto->areas = CommonUtility::convertImageResourceToBase64($areas);
+            $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($areas);
             if(is_null($this->barCodeReaderDto->barCodeDecodeTypes) || sizeof($this->barCodeReaderDto->barCodeDecodeTypes) == 0)
                 $this->barCodeReaderDto->barCodeDecodeTypes = array(DecodeType::ALL_SUPPORTED_TYPES);
         } catch (Exception $ex) {
@@ -849,15 +845,11 @@ class AustraliaPostSettings implements Communicator
  * //set high performance mode
  * $reader->setQualitySettings(QualitySettings::getHighPerformance());
  * //set separate options
- * $reader->getQualitySettings()->setAllowMedianSmoothing(true);
- * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
  * foreach($reader->readBarCodes() as $result)
  *       print("BarCode CodeText: ".$result->getCodeText());
  * $reader = new BarCodeReader("test.png",  null, array(DecodeType::CODE_39, DecodeType::CODE_128));
  * //default mode is NormalQuality
  * //set separate options
- * $reader->getQualitySettings()->setAllowMedianSmoothing(true);
- * $reader->getQualitySettings()->setMedianSmoothingWindowSize(5);
  * foreach($reader->readBarCodes() as $result)
  *   print("BarCode CodeText: ".$result->getCodeText());
  * @endcode
@@ -1205,7 +1197,7 @@ class BarCodeResult implements Communicator
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
-    
+
     /**
      * <p>
      *  Gets the code text with encoding.
@@ -2110,7 +2102,7 @@ final class Code128ExtendedParameters implements Communicator
      */
     public function getCode128DataPortions(): array
     {
-            return $this->code128DataPortions;
+        return $this->code128DataPortions;
     }
 
     public function isEmpty(): bool
@@ -2560,6 +2552,7 @@ final class Pdf417ExtendedParameters implements Communicator
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
 }
 
 

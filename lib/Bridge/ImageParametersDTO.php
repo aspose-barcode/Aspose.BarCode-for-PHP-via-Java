@@ -27,18 +27,31 @@ class ImageParametersDTO
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\SvgParametersDTO',
         ),
+        2 => array(
+            'var' => 'pdf',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\PdfParametersDTO',
+        ),
     );
 
     /**
      * @var \Aspose\Barcode\Bridge\SvgParametersDTO
      */
     public $svg = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\PdfParametersDTO
+     */
+    public $pdf = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
             if (isset($vals['svg'])) {
                 $this->svg = $vals['svg'];
+            }
+            if (isset($vals['pdf'])) {
+                $this->pdf = $vals['pdf'];
             }
         }
     }
@@ -70,6 +83,14 @@ class ImageParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 2:
+                    if ($ftype == TType::STRUCT) {
+                        $this->pdf = new \Aspose\Barcode\Bridge\PdfParametersDTO();
+                        $xfer += $this->pdf->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -90,6 +111,14 @@ class ImageParametersDTO
             }
             $xfer += $output->writeFieldBegin('svg', TType::STRUCT, 1);
             $xfer += $this->svg->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->pdf !== null) {
+            if (!is_object($this->pdf)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('pdf', TType::STRUCT, 2);
+            $xfer += $this->pdf->write($output);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();
