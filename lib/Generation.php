@@ -7018,6 +7018,7 @@ class ImageParameters implements Communicator
     }
 
     private $svg;
+    private $pdf;
 
     function __construct(ImageParametersDTO $imageParametersDto)
     {
@@ -7033,6 +7034,7 @@ class ImageParameters implements Communicator
     public function initFieldsFromDto(): void
     {
         $this->svg = new SvgParameters($this->getImageParametersDto()->svg);
+        $this->pdf = new PdfParameters($this->getImageParametersDto()->pdf);
     }
 
     /**
@@ -7050,6 +7052,26 @@ class ImageParameters implements Communicator
     {
         $this->svg = $svg;
         $this->getImageParametersDto()->svg = $svg->getSvgParametersDto();
+    }
+
+    /**
+     * <p>
+     * PDF parameters
+     * </p>
+     */
+    function getPdf()
+    {
+        return $this->pdf;
+    }
+    /**
+     * <p>
+     * PDF parameters
+     * </p>
+     */
+    function setPdf(PdfParameters $value)
+    {
+        $this->pdf = $value;
+        $this->getImageParametersDto()->pdf = $value->getPdfParametersDto();
     }
 }
 
