@@ -8,6 +8,7 @@
 /docs/ export-ignore
 /composer_install.cmd export-ignore
 /composer_update.cmd export-ignore
+/composer_dump_autoload.cmd export-ignore
 /server.log export-ignore
 /TEMP* export-ignore
 /*.neon export-ignore
