@@ -33,7 +33,7 @@ var searchData=
   ['r9x77_841',['R9x77',['../df/da3/classAspose_1_1Barcode_1_1RectMicroQRVersion.html#acd9f0c7a733016584de72a48e9d434ef',1,'Aspose::Barcode::RectMicroQRVersion']]],
   ['r9x99_842',['R9x99',['../df/da3/classAspose_1_1Barcode_1_1RectMicroQRVersion.html#a6ab1177cfc18de205a7d0e7eda78346e',1,'Aspose::Barcode::RectMicroQRVersion']]],
   ['recognitionabortedexception_843',['RecognitionAbortedException',['../d3/d31/classAspose_1_1Barcode_1_1RecognitionAbortedException.html',1,'Aspose::Barcode']]],
-  ['rect_5fmicro_5fqr_844',['RECT_MICRO_QR',['../da/d52/classAspose_1_1Barcode_1_1EncodeTypes.html#a3fe295ee65ac759e542b9aa9b0349984',1,'Aspose\Barcode\EncodeTypes\RECT_MICRO_QR()'],['../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#aa263d5eb6743eca90a439522305dd538',1,'Aspose\Barcode\DecodeType\RECT_MICRO_QR()']]],
+  ['rect_5fmicro_5fqr_844',['RECT_MICRO_QR',['../da/d52/classAspose_1_1Barcode_1_1EncodeTypes.html#a3fe295ee65ac759e542b9aa9b0349984',1,'Aspose\Barcode\Generation\EncodeTypes\RECT_MICRO_QR()'],['../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#aa263d5eb6743eca90a439522305dd538',1,'Aspose\Barcode\Recognition\DecodeType\RECT_MICRO_QR()']]],
   ['rectangle_845',['Rectangle',['../de/d59/classAspose_1_1Barcode_1_1Internal_1_1Rectangle.html',1,'Aspose::Barcode::Internal']]],
   ['rectmicroqrversion_846',['RectMicroQRVersion',['../df/da3/classAspose_1_1Barcode_1_1RectMicroQRVersion.html',1,'Aspose::Barcode']]],
   ['regular_847',['REGULAR',['../d7/db0/classAspose_1_1Barcode_1_1FontStyle.html#a4a713afacfbf522ca995c7a74b04fc8e',1,'Aspose::Barcode::FontStyle']]],
@@ -42,7 +42,7 @@ var searchData=
   ['rgb_850',['RGB',['../d7/de4/classAspose_1_1Barcode_1_1SvgColorMode.html#a31aa86f41224d28934114b02bfea8982',1,'Aspose::Barcode::SvgColorMode']]],
   ['rgba_851',['RGBA',['../d7/de4/classAspose_1_1Barcode_1_1SvgColorMode.html#ace2ff17d2221f83282129d831892fe90',1,'Aspose::Barcode::SvgColorMode']]],
   ['right_852',['RIGHT',['../dc/d71/classAspose_1_1Barcode_1_1TextAlignment.html#acf6ba4db37c02f603a126784994356f4',1,'Aspose::Barcode::TextAlignment']]],
-  ['rm_5f4_5fscc_853',['RM_4_SCC',['../da/d52/classAspose_1_1Barcode_1_1EncodeTypes.html#ac5535a0e631cfb0c9bf89ad6e6d8d37f',1,'Aspose\Barcode\EncodeTypes\RM_4_SCC()'],['../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a3805d2b8707404b9148d25e10bc35534',1,'Aspose\Barcode\DecodeType\RM_4_SCC()']]],
+  ['rm_5f4_5fscc_853',['RM_4_SCC',['../da/d52/classAspose_1_1Barcode_1_1EncodeTypes.html#ac5535a0e631cfb0c9bf89ad6e6d8d37f',1,'Aspose\Barcode\Generation\EncodeTypes\RM_4_SCC()'],['../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a3805d2b8707404b9148d25e10bc35534',1,'Aspose\Barcode\Recognition\DecodeType\RM_4_SCC()']]],
   ['rows_5fcolumns_854',['ROWS_COLUMNS',['../d8/d8c/classAspose_1_1Barcode_1_1DataMatrixVersion.html#a5757991d7481b9cc7f8dc833232bcfa1',1,'Aspose::Barcode::DataMatrixVersion']]],
   ['rune_855',['RUNE',['../dd/d36/classAspose_1_1Barcode_1_1AztecSymbolMode.html#a75f01b7caf46da0aefda4e0e8dc0f2f6',1,'Aspose::Barcode::AztecSymbolMode']]]
 ];
