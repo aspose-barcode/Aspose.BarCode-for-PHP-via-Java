@@ -4,10 +4,9 @@ namespace Aspose\Barcode\Generation;
 
 use Aspose\Barcode\Bridge\FontUnitDTO;
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Generation\Unit;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
-use Aspose\Barcode\InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  *

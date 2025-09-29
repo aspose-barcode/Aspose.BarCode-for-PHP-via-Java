@@ -3,8 +3,6 @@
 namespace Aspose\Barcode\ComplexBarcode;
 
 use Aspose\Barcode\Bridge\IComplexCodetextDTO;
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
 use Aspose\Barcode\Internal\ThriftConnection;
 
 /**

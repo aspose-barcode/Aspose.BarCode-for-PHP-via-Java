@@ -2,22 +2,11 @@
 
 namespace Aspose\Barcode\Recognition;
 
-use Aspose\Barcode\Recognition\AztecExtendedParameters;
 use Aspose\Barcode\Bridge\BarCodeExtendedParametersDTO;
-use Aspose\Barcode\Recognition\CodabarExtendedParameters;
-use Aspose\Barcode\Recognition\Code128ExtendedParameters;
-use Aspose\Barcode\Recognition\DataBarExtendedParameters;
-use Aspose\Barcode\Recognition\DataMatrixExtendedParameters;
-use Aspose\Barcode\Recognition\DotCodeExtendedParameters;
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Recognition\GS1CompositeBarExtendedParameters;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\Recognition\MaxiCodeExtendedParameters;
-use Aspose\Barcode\Recognition\OneDExtendedParameters;
-use Aspose\Barcode\Recognition\Pdf417ExtendedParameters;
-use Aspose\Barcode\Recognition\QRExtendedParameters;
 
 /**
  * <p>

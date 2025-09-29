@@ -2,9 +2,6 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
-use Aspose\Barcode\ComplexBarcode\SwissQRBill;
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
@@ -100,7 +97,7 @@ final class SwissQRCodetext extends IComplexCodetext
             $thriftConnection->closeConnection();
             return $constructedCodetext;
         }
-        catch (Exception $ex)
+        catch (\Throwable $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }

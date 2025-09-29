@@ -2,8 +2,6 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\Address;
-use Aspose\Barcode\ComplexBarcode\AlternativeScheme;
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
@@ -72,9 +70,9 @@ final class SwissQRBill implements Communicator
         try
         {
             $alternativeSchemes = array();
-            for ($i = 0; $i < $javaAlternativeSchemes->size(); $i++)
+            for ($i = 0; $i < sizeof($javaAlternativeSchemes); $i++)
             {
-                $alternativeSchemes[$i] = AlternativeScheme::construct($javaAlternativeSchemes->get($i));
+                $alternativeSchemes[$i] = AlternativeScheme::construct($javaAlternativeSchemes[$i]);
             }
             return $alternativeSchemes;
         }

@@ -2,32 +2,10 @@
 
 namespace Aspose\Barcode\Generation;
 
-use Aspose\Barcode\Generation\AustralianPostParameters;
-use Aspose\Barcode\Generation\AztecParameters;
 use Aspose\Barcode\Bridge\BarcodeParametersDTO;
-use Aspose\Barcode\Generation\CodabarParameters;
-use Aspose\Barcode\Generation\CodablockParameters;
-use Aspose\Barcode\Generation\Code128Parameters;
-use Aspose\Barcode\Generation\Code16KParameters;
-use Aspose\Barcode\Generation\CodetextParameters;
-use Aspose\Barcode\Generation\CouponParameters;
-use Aspose\Barcode\Generation\DataBarParameters;
-use Aspose\Barcode\Generation\DataMatrixParameters;
-use Aspose\Barcode\Generation\DotCodeParameters;
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Generation\GS1CompositeBarParameters;
-use Aspose\Barcode\Generation\HanXinParameters;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
-use Aspose\Barcode\Generation\ITFParameters;
-use Aspose\Barcode\Generation\MaxiCodeParameters;
-use Aspose\Barcode\Generation\Padding;
-use Aspose\Barcode\Generation\PatchCodeParameters;
-use Aspose\Barcode\Generation\Pdf417Parameters;
-use Aspose\Barcode\Generation\PostalParameters;
-use Aspose\Barcode\Generation\QrParameters;
-use Aspose\Barcode\Generation\SupplementParameters;
-use Aspose\Barcode\Generation\Unit;
 
 /**
  * Barcode generation parameters.
@@ -182,7 +160,7 @@ class BarcodeParameters implements Communicator
      * Get bars reduction value that is used to compensate ink spread while printing.
      * @return Unit value of BarWidthReduction
      */
-    public function getBarWidthReduction(): Unit
+    public function getBarWidthReduction(): ?Unit
     {
         try
         {
@@ -197,14 +175,17 @@ class BarcodeParameters implements Communicator
     /**
      * Sets bars reduction value that is used to compensate ink spread while printing.
      */
-    public function setBarWidthReduction(Unit $value): void
+    public function setBarWidthReduction(?Unit $value): void
     {
         try
         {
-            $this->getBarcodeParametersDto()->barWidthReduction = $value->getUnitDto();
+            if($value === null)
+                $this->getBarcodeParametersDto()->barWidthReduction = $value;
+            else
+                $this->getBarcodeParametersDto()->barWidthReduction = $value->getUnitDto();
             $this->barWidthReduction = $value;
         }
-        catch (Exception $ex)
+        catch (\Throwable $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }

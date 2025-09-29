@@ -2,7 +2,7 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\DateTime;
+use DateTime;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;
 

@@ -2,7 +2,6 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\MaxiCodeSecondMessage;
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
@@ -83,7 +82,7 @@ class MaxiCodeStandartSecondMessage extends MaxiCodeSecondMessage
     {
         $thriftConnection = new ThriftConnection();
         $client = $thriftConnection->openConnection();
-        $isEqual = $client->MaxiCodeStandardCodetext_equals($this->getMaxiCodeSecondMessageDto(), $obj->getMaxiCodeSecondMessageDto());
+        $isEqual = $client->MaxiCodeStandartSecondMessage_equals($this->getMaxiCodeSecondMessageDto(), $obj->getMaxiCodeSecondMessageDto());
         $thriftConnection->closeConnection();
         return $isEqual;
     }

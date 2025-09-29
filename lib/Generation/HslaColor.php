@@ -2,11 +2,7 @@
 
 namespace Aspose\Barcode\Generation;
 
-use Aspose\Barcode\Alpha;
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Hue;
-use Aspose\Barcode\Lightness;
-use Aspose\Barcode\Saturation;
 
 /**
  * <p>

@@ -8,9 +8,6 @@ use Aspose\Barcode\Generation\Base64CodeTextType;
 use Aspose\Barcode\Generation\BaseGenerationParameters;
 use Aspose\Barcode\Bridge\BarcodeExceptionDTO;
 use Aspose\Barcode\Bridge\BarcodeGeneratorDTO;
-use Aspose\Barcode\codeText;
-use Aspose\Barcode\encoding;
-use Aspose\Barcode\insertBOM;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\CommonUtility;
 use Aspose\Barcode\Internal\Communicator;
@@ -164,7 +161,7 @@ class BarcodeGenerator implements Communicator
      * This sample shows how to create and save a barcode image.
      *
      * @param int $format value of BarCodeImageFormat (PNG, BMP, JPEG, GIF, EMF)
-     * @return string base64 representation of image.
+     * @return base64 representation of image.
      *
      * @code
      *  $generator = new BarCodeGenerator(EncodeTypes::CODE_128);
@@ -233,7 +230,11 @@ class BarcodeGenerator implements Communicator
     {
         try
         {
-            return $this->getBarcodeGeneratorDto()->base64CodeText;
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $codeText = $client->BarcodeGenerator_getCodeTextWithEncoding($this->getBarcodeGeneratorDto()->base64CodeText, $this->getBarcodeGeneratorDto()->encoding, $this->getBarcodeGeneratorDto()->insertBOM, $this->getBarcodeGeneratorDto()->barcodeType);
+            $thriftConnection->closeConnection();
+            return $codeText;
         }
         catch (Exception $ex)
         {
@@ -292,7 +293,7 @@ class BarcodeGenerator implements Communicator
      *  If set to {@code true}, the BOM is added; if {@code false}, the BOM is omitted even if the encoding normally uses one.
      *
      */
-    public function setCodeText($codeText, ?string $encoding = null, ?bool $insertBOM = false): void
+    public function setCodeText($codeText, ?string $encoding = null, ?bool $insertBOM = true): void
     {
         try
         {

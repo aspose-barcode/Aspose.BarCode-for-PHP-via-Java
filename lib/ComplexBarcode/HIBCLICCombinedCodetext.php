@@ -2,12 +2,7 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\ComplexBarcode\HIBCLICComplexCodetext;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\obj;
-use Aspose\Barcode\ComplexBarcode\PrimaryData;
-use Aspose\Barcode\ComplexBarcode\SecondaryAndAdditionalData;
 
 /**
  * <p>

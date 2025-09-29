@@ -2,8 +2,6 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
@@ -157,7 +155,7 @@ final class Mailmark2DCodetext extends IComplexCodetext
     {
         try
         {
-            $this->getIComplexCodetextDTO()->versionID = (int)$value;
+            $this->getIComplexCodetextDTO()->versionID = $value;
         }
         catch (Exception $ex)
         {

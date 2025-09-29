@@ -2,7 +2,7 @@
 
 namespace Aspose\Barcode\Generation;
 
-use Aspose\Barcode\InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * Class for CMYK color. A null instance means CMYK is not used,

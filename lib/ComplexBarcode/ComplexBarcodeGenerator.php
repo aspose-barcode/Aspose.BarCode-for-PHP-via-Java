@@ -4,7 +4,6 @@ namespace Aspose\Barcode\ComplexBarcode;
 
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Generation\BaseGenerationParameters;
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\License;

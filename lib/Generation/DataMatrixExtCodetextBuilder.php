@@ -2,8 +2,6 @@
 
 namespace Aspose\Barcode\Generation;
 
-use Aspose\Barcode\Generation\ExtCodeItemType;
-use Aspose\Barcode\Generation\ExtCodetextBuilderType;
 use Aspose\Barcode\Internal\BarcodeException;
 use Exception;
 

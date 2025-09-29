@@ -4,8 +4,6 @@ namespace Aspose\Barcode\ComplexBarcode;
 
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\obj;
-use Aspose\Barcode\primaryDataCodetext;
 
 /**
  * <p>

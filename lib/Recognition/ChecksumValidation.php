@@ -1,40 +1,6 @@
 <?php
 namespace Aspose\Barcode\Recognition;
 
-use Aspose\Barcode\Internal\BarcodeException;
-use Aspose\Barcode\Internal\CommonUtility;
-use Aspose\Barcode\Internal\Communicator;
-use Aspose\Barcode\Internal\License;
-use Aspose\Barcode\Internal\Point;
-use Aspose\Barcode\Internal\Rectangle;
-use Aspose\Barcode\Internal\ThriftConnection;
-use DateTime;
-use Exception;
-
-use Aspose\Barcode\Bridge\QuadrangleDTO;
-use Aspose\Barcode\Bridge\CodabarExtendedParametersDTO;
-use Aspose\Barcode\Bridge\DataMatrixExtendedParametersDTO;
-use Aspose\Barcode\Bridge\Code128DataPortionDTO;
-use Aspose\Barcode\Bridge\AustraliaPostSettingsDTO;
-use Aspose\Barcode\Bridge\GS1CompositeBarExtendedParametersDTO;
-use Aspose\Barcode\Bridge\AztecExtendedParametersDTO;
-use Aspose\Barcode\Bridge\DotCodeExtendedParametersDTO;
-use Aspose\Barcode\Bridge\MaxiCodeExtendedParametersDTO;
-use Aspose\Barcode\Bridge\DataBarExtendedParametersDTO;
-use Aspose\Barcode\Bridge\Pdf417ExtendedParametersDTO;
-use Aspose\Barcode\Bridge\QRExtendedParametersDTO;
-use Aspose\Barcode\Bridge\Code128ExtendedParametersDTO;
-use Aspose\Barcode\Bridge\OneDExtendedParametersDTO;
-use Aspose\Barcode\Bridge\BarCodeExtendedParametersDTO;
-use Aspose\Barcode\Bridge\BarCodeRegionParametersDTO;
-use Aspose\Barcode\Bridge\BarCodeResultDTO;
-use Aspose\Barcode\Bridge\QualitySettingsDTO;
-use Aspose\Barcode\Bridge\BarcodeSettingsDTO;
-use Aspose\Barcode\Bridge\BarcodeReaderDTO;
-use InvalidArgumentException;
-use TypeError;
-
-
 /**
  * Enable checksum validation during recognition for 1D barcodes.
  * Default is treated as Yes for symbologies which must contain checksum, as No where checksum only possible.

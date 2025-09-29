@@ -2,11 +2,8 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
-use Aspose\Barcode\ComplexBarcode\HIBCPASRecord;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\List;
+
 
 /**
  * <p>

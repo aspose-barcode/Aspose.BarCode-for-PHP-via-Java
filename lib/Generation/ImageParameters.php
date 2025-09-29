@@ -4,8 +4,6 @@ namespace Aspose\Barcode\Generation;
 
 use Aspose\Barcode\Bridge\ImageParametersDTO;
 use Aspose\Barcode\Internal\Communicator;
-use Aspose\Barcode\Generation\PdfParameters;
-use Aspose\Barcode\Generation\SvgParameters;
 
 /**
  * Image parameters.

@@ -7,7 +7,6 @@ use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\Generation\Unit;
 
 /**
  * ITF parameters.

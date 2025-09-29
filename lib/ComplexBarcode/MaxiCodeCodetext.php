@@ -2,8 +2,6 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
-
 /**
  * Base class for encoding and decoding the text embedded in the MaxiCode code.
  *
