@@ -2,7 +2,6 @@
 
 namespace Aspose\Barcode\Recognition;
 
-use Aspose\Barcode\Recognition\AustraliaPostSettings;
 use Aspose\Barcode\Bridge\BarcodeSettingsDTO;
 use Aspose\Barcode\Internal\Communicator;
 

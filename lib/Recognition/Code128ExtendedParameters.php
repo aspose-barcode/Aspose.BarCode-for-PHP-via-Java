@@ -3,7 +3,6 @@
 namespace Aspose\Barcode\Recognition;
 
 use Aspose\Barcode\Bridge\Code128ExtendedParametersDTO;
-use Aspose\Barcode\Recognition\Code128DataPortion;
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;

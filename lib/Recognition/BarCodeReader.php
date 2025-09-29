@@ -2,10 +2,7 @@
 
 namespace Aspose\Barcode\Recognition;
 
-use Aspose\Barcode\Recognition\BarCodeResult;
-use Aspose\Barcode\Recognition\BarcodeSettings;
 use Aspose\Barcode\Bridge\BarcodeReaderDTO;
-use Aspose\Barcode\Recognition\DecodeType;
 use Aspose\Barcode\Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\CommonUtility;
@@ -13,9 +10,9 @@ use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\License;
 use Aspose\Barcode\Internal\Rectangle;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\InvalidArgumentException;
-use Aspose\Barcode\Recognition\QualitySettings;
-use Aspose\Barcode\TypeError;
+use InvalidArgumentException;
+use RuntimeException;
+use TypeError;
 
 /**
  * BarCodeReader encapsulates an image which may contain one or several barcodes, it then can perform ReadBarCodes operation to detect barcodes.
@@ -434,13 +431,13 @@ class BarCodeReader implements Communicator
             $xmlData = $client->BarcodeReader_exportToXml($this->barCodeReaderDto);
             $thriftConnection->closeConnection();
             $isContentExported = $xmlData != null;
-            if ($isContentExported)
+            if (!$isContentExported + (file_put_contents($xmlFile, $xmlData) === false) )
             {
-                file_put_contents($xmlFile, $xmlData);
+                throw new RuntimeException("Failed to write file: " . $xmlFile);
             }
             return $isContentExported;
         }
-        catch (Exception $ex)
+        catch (\RuntimeException $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
@@ -461,8 +458,6 @@ class BarCodeReader implements Communicator
                 $resource = fopen($resource, "r");
             }
             $xmlData = (stream_get_contents($resource));
-            $offset = 6;
-            $xmlData = substr($xmlData, $offset, strlen($xmlData) - $offset);
             $thriftConnection = new ThriftConnection();
             $client = $thriftConnection->openConnection();
 
@@ -471,7 +466,7 @@ class BarCodeReader implements Communicator
 
             return BarCodeReader::construct($barCodeReaderDto);
         }
-        catch (Exception $ex)
+        catch (\Throwable $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }

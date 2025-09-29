@@ -4,10 +4,8 @@ namespace Aspose\Barcode\Generation;
 
 use Aspose\Barcode\Bridge\ExtCodeItemDTO;
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Generation\HanXinExtCodetextBuilderType;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\text;
 
 /**
  * <p>

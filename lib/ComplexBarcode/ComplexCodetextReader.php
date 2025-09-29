@@ -2,22 +2,8 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\Exception;
-use Aspose\Barcode\ComplexBarcode\HIBCLICCombinedCodetext;
-use Aspose\Barcode\ComplexBarcode\HIBCLICComplexCodetext;
-use Aspose\Barcode\ComplexBarcode\HIBCLICPrimaryDataCodetext;
-use Aspose\Barcode\ComplexBarcode\HIBCLICSecondaryAndAdditionalDataCodetext;
-use Aspose\Barcode\ComplexBarcode\HIBCPASCodetext;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\ComplexBarcode\Mailmark2DCodetext;
-use Aspose\Barcode\ComplexBarcode\MailmarkCodetext;
-use Aspose\Barcode\ComplexBarcode\MaxiCodeCodetext;
-use Aspose\Barcode\ComplexBarcode\MaxiCodeCodetextMode2;
-use Aspose\Barcode\ComplexBarcode\MaxiCodeCodetextMode3;
-use Aspose\Barcode\ComplexBarcode\MaxiCodeStandardCodetext;
-use Aspose\Barcode\ComplexBarcode\SwissQRCodetext;
 
 /**
  * ComplexCodetextReader decodes codetext to specified complex barcode type.
@@ -37,7 +23,7 @@ final class ComplexCodetextReader
      * @param string encodedCodetext encoded codetext
      * @return SwissQRCodetext decoded SwissQRCodetext or null.
      */
-    public static function tryDecodeSwissQR(string $encodedCodetext): SwissQRCodetext
+    public static function tryDecodeSwissQR(string $encodedCodetext): ?SwissQRCodetext
     {
         try
         {
@@ -47,9 +33,9 @@ final class ComplexCodetextReader
             $thriftConnection->closeConnection();
             return SwissQRCodetext::construct($swissQRCodetextDTO);
         }
-        catch (Exception $ex)
+        catch (\Throwable $ex)
         {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+            return null;
         }
     }
 
@@ -58,7 +44,7 @@ final class ComplexCodetextReader
      * @param string $encodedCodetext encoded codetext
      * @return Mailmark2DCodetext decoded Royal Mail Mailmark 2D or null.
      */
-    public static function tryDecodeMailmark2D(string $encodedCodetext): Mailmark2DCodetext
+    public static function tryDecodeMailmark2D(string $encodedCodetext): ?Mailmark2DCodetext
     {
         try
         {
@@ -69,9 +55,9 @@ final class ComplexCodetextReader
             $mailmark2DCodetext = Mailmark2DCodetext::construct($mailmark2DCodetextDTO);
             return $mailmark2DCodetext;
         }
-        catch (Exception $ex)
+        catch (\Throwable $ex)
         {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+            return null;
         }
     }
 
@@ -87,7 +73,7 @@ final class ComplexCodetextReader
         {
             $res->initFromString($encodedCodetext);
         }
-        catch (Exception $e)
+        catch (\Throwable $e)
         {
             return null;
         }
@@ -100,12 +86,15 @@ final class ComplexCodetextReader
      * @param string encodedCodetext encoded codetext
      * @return MaxiCodeCodetext Decoded MaxiCode codetext.
      */
-    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext): MaxiCodeCodetext
+    public static function tryDecodeMaxiCode(int $maxiCodeMode, string $encodedCodetext): ?MaxiCodeCodetext
     {
         $thriftConnection = new ThriftConnection();
         $client = $thriftConnection->openConnection();
         $maxiCodeCodetextDTO = $client->ComplexCodetextReader_tryDecodeMaxiCode($maxiCodeMode, $encodedCodetext);
         $thriftConnection->closeConnection();
+
+        if($maxiCodeCodetextDTO->isNull === true)
+            return null;
 
         if ($maxiCodeCodetextDTO->complexCodetextType == ComplexCodetextType::MaxiCodeCodetextMode2)
         {

@@ -9,7 +9,6 @@ use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\Point;
 use Aspose\Barcode\Internal\Rectangle;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\Recognition\Quadrangle;
 
 /**
  * Represents the recognized barcode's region and barcode angle

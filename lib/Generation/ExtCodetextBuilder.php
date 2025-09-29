@@ -3,7 +3,6 @@
 namespace Aspose\Barcode\Generation;
 
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Generation\ExtCodeItemType;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
 

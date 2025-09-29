@@ -42,6 +42,11 @@ class DataMatrixExtendedParametersDTO
             'type' => TType::BOOL,
         ),
         5 => array(
+            'var' => 'empty',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
+        6 => array(
             'var' => 'toString',
             'isRequired' => false,
             'type' => TType::STRING,
@@ -65,6 +70,10 @@ class DataMatrixExtendedParametersDTO
      */
     public $readerProgramming = null;
     /**
+     * @var bool
+     */
+    public $empty = null;
+    /**
      * @var string
      */
     public $toString = null;
@@ -83,6 +92,9 @@ class DataMatrixExtendedParametersDTO
             }
             if (isset($vals['readerProgramming'])) {
                 $this->readerProgramming = $vals['readerProgramming'];
+            }
+            if (isset($vals['empty'])) {
+                $this->empty = $vals['empty'];
             }
             if (isset($vals['toString'])) {
                 $this->toString = $vals['toString'];
@@ -138,6 +150,13 @@ class DataMatrixExtendedParametersDTO
                     }
                     break;
                 case 5:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->empty);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 6:
                     if ($ftype == TType::STRING) {
                         $xfer += $input->readString($this->toString);
                     } else {
@@ -178,8 +197,13 @@ class DataMatrixExtendedParametersDTO
             $xfer += $output->writeBool($this->readerProgramming);
             $xfer += $output->writeFieldEnd();
         }
+        if ($this->empty !== null) {
+            $xfer += $output->writeFieldBegin('empty', TType::BOOL, 5);
+            $xfer += $output->writeBool($this->empty);
+            $xfer += $output->writeFieldEnd();
+        }
         if ($this->toString !== null) {
-            $xfer += $output->writeFieldBegin('toString', TType::STRING, 5);
+            $xfer += $output->writeFieldBegin('toString', TType::STRING, 6);
             $xfer += $output->writeString($this->toString);
             $xfer += $output->writeFieldEnd();
         }

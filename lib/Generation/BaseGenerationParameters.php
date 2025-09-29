@@ -2,16 +2,11 @@
 
 namespace Aspose\Barcode\Generation;
 
-use Aspose\Barcode\Generation\BarcodeParameters;
-use Aspose\Barcode\Generation\BorderParameters;
 use Aspose\Barcode\Bridge\BaseGenerationParametersDTO;
-use Aspose\Barcode\Generation\CaptionParameters;
 use Aspose\Barcode\Exception;
-use Aspose\Barcode\Generation\ImageParameters;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\Generation\Unit;
 
 /**
  * Barcode image generation parameters.

@@ -20,13 +20,13 @@ class AutoSizeMode
     /**
      * Automatic resizing is disabled. Default value.
      */
-    const NONE = '0';  //or CUSTOM, or DEFAULT
+    const NONE = 0;  //or CUSTOM, or DEFAULT
 
     /**
      * Barcode resizes to nearest lowest possible size
      * which are specified by BarCodeWidth and BarCodeHeight properties.
      */
-    const NEAREST = '1';
+    const NEAREST = 1;
 
     /**
      *  Resizes barcode to specified size with little scaling

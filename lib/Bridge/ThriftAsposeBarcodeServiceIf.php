@@ -107,6 +107,14 @@ interface ThriftAsposeBarcodeServiceIf
      */
     public function BarcodeGenerator_ctor($encodeType);
     /**
+     * @param string $codeText
+     * @param string $encoding
+     * @param bool $insertBoM
+     * @param int $encodeType
+     * @return string
+     */
+    public function BarcodeGenerator_getCodeTextWithEncoding($codeText, $encoding, $insertBoM, $encodeType);
+    /**
      * @param \Aspose\Barcode\Bridge\BarcodeGeneratorDTO $barcodeGeneratorDTO
      * @param int $imageFormat
      * @param string $base64LicenseContent

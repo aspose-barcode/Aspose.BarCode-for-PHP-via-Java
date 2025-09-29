@@ -2,11 +2,8 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\ComplexCodetextType;
-use Aspose\Barcode\ComplexBarcode\HIBCLICComplexCodetext;
-use Aspose\Barcode\ComplexBarcode\SecondaryAndAdditionalData;
 use Aspose\Barcode\Internal\ThriftConnection;
-use Aspose\Barcode\obj;
+
 
 /**
  * Class for encoding and decoding the text embedded in the HIBC LIC code which stores seconday data.

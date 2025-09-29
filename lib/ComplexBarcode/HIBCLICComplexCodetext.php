@@ -2,8 +2,6 @@
 
 namespace Aspose\Barcode\ComplexBarcode;
 
-use Aspose\Barcode\ComplexBarcode\IComplexCodetext;
-
 /**
  * <p>
  * Base class for encoding and decoding the text embedded in the HIBC LIC code.

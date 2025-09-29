@@ -3,8 +3,8 @@
 namespace Aspose\Barcode\ComplexBarcode;
 
 use Aspose\Barcode\Bridge\IComplexCodetextDTO;
-use Aspose\Barcode\ComplexBarcode\MaxiCodeCodetext;
 use Aspose\Barcode\Exception;
+use Aspose\Barcode\Generation\MaxiCodeMode;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;
 
@@ -43,7 +43,7 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
             $this->setIComplexCodetextDTO($this->obtainDto());
             $this->initFieldsFromDto();
         }
-        catch (Exception $ex)
+        catch (\Throwable $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
@@ -92,6 +92,9 @@ class MaxiCodeStandardCodetext extends MaxiCodeCodetext
      */
     public function setMode(int $mode): void
     {
+        if ($mode != MaxiCodeMode::MODE_4 && $mode != MaxiCodeMode::MODE_5 && $mode != MaxiCodeMode::MODE_6) {
+            throw new BarCodeException("Incorrect MaxiCode mode. Standart codetext can be used only for modes 4, 5 or 6.");
+        }
         $this->getIComplexCodetextDTO()->mode = $mode;
     }
 

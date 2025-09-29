@@ -2,15 +2,12 @@
 
 namespace Aspose\Barcode\Recognition;
 
-use Aspose\Barcode\A;
-use Aspose\Barcode\Recognition\BarCodeExtendedParameters;
-use Aspose\Barcode\Recognition\BarCodeRegionParameters;
 use Aspose\Barcode\Bridge\BarCodeResultDTO;
-use Aspose\Barcode\encoding;
-use Aspose\Barcode\Exception;
+
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;
+use Exception;
 
 /**
  * Stores recognized barcode data like SingleDecodeType type, {string} codetext,
@@ -107,26 +104,27 @@ class BarCodeResult implements Communicator
      *    </pre>
      *  </pre></blockquote></hr></p>
      * @param encoding The encoding for codetext.
-     * @return A string containing recognized code text.
+     * @return codeText string containing recognized code text.
      */
-    function getCodeText(?string $encoding): string
+    function getCodeText(?string $encoding = null): string
     {
-        if ($encoding == null || $encoding == "")
-        {
+        if ($encoding == null || $encoding == "") {
             return $this->getBarCodeResultDTO()->codeText;
-        } else
-        {
-            try
-            {
-                $thriftConnection = new ThriftConnection();
-                $client = $thriftConnection->openConnection();
-                $codeText = $client->BarcodeResult_getCodeTextWithEncoding($this->getBarCodeResultDTO()->codeBytes, $encoding);
+        }
+
+        try {
+            $thriftConnection = new ThriftConnection();
+            $client = $thriftConnection->openConnection();
+            $codeText = $client->BarcodeResult_getCodeTextWithEncoding($this->getBarCodeResultDTO()->codeBytes, $encoding);
+            $thriftConnection->closeConnection();
+            return $codeText;
+        }
+        catch (Exception $ex) {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+        finally {
+            if (isset($thriftConnection)) {
                 $thriftConnection->closeConnection();
-                return $codeText;
-            }
-            catch (Exception $ex)
-            {
-                throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
             }
         }
     }
