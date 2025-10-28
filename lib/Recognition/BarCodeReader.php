@@ -39,7 +39,6 @@ class BarCodeReader implements Communicator
     private function setBarCodeReaderDto(BarcodeReaderDTO $barCodeReaderDto): void
     {
         $this->barCodeReaderDto = $barCodeReaderDto;
-//        $this->initFieldsFromDto();
     }
 
     private QualitySettings $qualitySettings;
@@ -86,7 +85,7 @@ class BarCodeReader implements Communicator
      */
     private function initializeImageRelatedFields(): void
     {
-        $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBase64($this->imageResource);
+        $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBinared($this->imageResource);
         $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($this->areas);
     }
 
@@ -370,7 +369,7 @@ class BarCodeReader implements Communicator
     {
         try
         {
-            $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBase64($imageResource);
+            $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBinared($imageResource);
             $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($areas);
             if (is_null($this->barCodeReaderDto->barCodeDecodeTypes) || sizeof($this->barCodeReaderDto->barCodeDecodeTypes) == 0)
                 $this->barCodeReaderDto->barCodeDecodeTypes = array(DecodeType::ALL_SUPPORTED_TYPES);
