@@ -118,7 +118,7 @@ class CommonUtility
         return $stringFormattedAreas;
     }
 
-    public static function convertImageResourceToBase64($imageResource): ?string
+    public static function convertImageResourceToBinared($imageResource): ?string
     {
         if ($imageResource === null) {
             return null;
@@ -132,13 +132,16 @@ class CommonUtility
                 case 'gd':
                     ob_start();
                     imagepng($imageResource);
-                    $imageData = ob_get_clean(); // same as ob_get_contents() + ob_end_clean()
-                    return base64_encode($imageData);
+                    $imageData = ob_get_clean();
+                    return $imageData;
 
                 case 'file':
                     $imageData = stream_get_contents($imageResource);
                     fclose($imageResource);
-                    return base64_encode($imageData);
+                    if ($imageData === false) {
+                        throw new BarcodeException("Failed to read from file resource");
+                    }
+                    return $imageData;
 
                 default:
                     throw new BarcodeException("Unsupported resource type: $type");
@@ -154,18 +157,19 @@ class CommonUtility
                 if ($fileContent === false) {
                     throw new BarcodeException("Failed to read file content: $imageResource");
                 }
-                return base64_encode($fileContent);
+                return $fileContent;
             }
 
-
-            // If string is already valid base64 (safe check)
-            if (base64_encode(base64_decode($imageResource, true)) === $imageResource) {
-                return $imageResource;
+            // If string is base64
+            $decoded = base64_decode($imageResource, true);
+            if ($decoded !== false && base64_encode($decoded) === $imageResource) {
+                return $decoded;
             }
-            throw new BarcodeException("File does not exist or is not readable: $imageResource");
+
+            throw new BarcodeException("File does not exist, is unreadable, or invalid base64 string: $imageResource");
         }
 
-        // Unsupported input
+        // Unsupported input type
         throw new BarcodeException("Unsupported input type. Expected GD resource, file resource, base64 string, or valid file path.");
     }
 }
