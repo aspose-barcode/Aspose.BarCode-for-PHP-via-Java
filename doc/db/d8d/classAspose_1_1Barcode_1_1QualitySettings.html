@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">25.5</span>
+   &#160;<span id="projectnumber">25.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -170,15 +170,11 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="comment">//set high performance mode</span></div>
 <div class="line">$reader-&gt;setQualitySettings(<a class="code" href="../../db/d8d/classAspose_1_1Barcode_1_1QualitySettings.html#a53ee3801e47ba7fcc5f21f9d5049b8aa">QualitySettings::getHighPerformance</a>());</div>
 <div class="line"><span class="comment">//set separate options</span></div>
-<div class="line">$reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(<span class="keyword">true</span>);</div>
-<div class="line">$reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">      print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
 <div class="line">$reader = <span class="keyword">new</span> BarCodeReader(<span class="stringliteral">&quot;test.png&quot;</span>,  <span class="keyword">null</span>, array(<a class="code" href="../../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a3e6603e81457f206691f0345890b38bd">DecodeType::CODE_39</a>, <a class="code" href="../../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a2b67e63e12b868c0949ca89715255a19">DecodeType::CODE_128</a>));</div>
 <div class="line"><span class="comment">//default mode is NormalQuality</span></div>
 <div class="line"><span class="comment">//set separate options</span></div>
-<div class="line">$reader-&gt;getQualitySettings()-&gt;setAllowMedianSmoothing(<span class="keyword">true</span>);</div>
-<div class="line">$reader-&gt;getQualitySettings()-&gt;setMedianSmoothingWindowSize(5);</div>
 <div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
 <div class="line">  print(<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>

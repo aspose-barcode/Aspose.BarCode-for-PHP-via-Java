@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">25.5</span>
+   &#160;<span id="projectnumber">25.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -498,11 +498,52 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Encodes codetext with byte order mark (BOM) using specified encoding. </p>
+<p class="DocNodeLTR">Encodes the Unicode</p><div class="fragment"><div class="line">&lt;b&gt;codeText&lt;/b&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> into a byte sequence using the specified</p><div class="fragment"><div class="line">&lt;b&gt;encoding&lt;/b&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> . UTF-8 is the most commonly used encoding. If the encoding supports it and</p><div class="fragment"><div class="line">&lt;b&gt;insertBOM&lt;/b&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> is set to</p><div class="fragment"><div class="line"><span class="keyword">true</span> </div>
+</div><!-- fragment --><p class="DocNodeLTR"> , the function includes a </p><div class="fragment"><div class="line">&lt;a href=<span class="stringliteral">&quot;https://en.wikipedia.org/wiki/Byte_order_mark#Byte-order_marks_by_encoding&quot;</span>&gt;<span class="keywordtype">byte</span> order mark (BOM)&lt;/a&gt; </div>
+</div><!-- fragment --><p> . </p>
+<p class="DocNodeLTR">This function is intended for use with 2D barcodes only (e.g., Aztec, QR, DataMatrix, PDF417, MaxiCode, DotCode, HanXin, RectMicroQR, etc.). It enables manual encoding of Unicode text using national or special encodings; however, this method is considered obsolete in modern applications. For modern use cases,</p><div class="fragment"><div class="line">&lt;a href=<span class="stringliteral">&quot;https://en.wikipedia.org/wiki/Extended_Channel_Interpretation&quot;</span>&gt;ECI&lt;/a&gt; </div>
+</div><!-- fragment --><p class="DocNodeLTR"> encoding is recommended for Unicode data. </p>
+<p class="DocNodeLTR">Using this function with 1D barcodes, GS1-compliant barcodes (including 2D), or HIBC barcodes (including 2D) is not supported by the corresponding barcode standards and may lead to unpredictable results. </p>
+<hr  />
+<blockquote class="doxtable DocNodeLTR">
+<pre>
+ </pre><pre>This example shows how to use<div class="fragment"><div class="line">SetCodeText </div>
+</div><!-- fragment -->  with or without a BOM for 2D barcodes.</pre><pre>
+ <pre>
+    //Encode codetext using UTF-8 with BOM
+    $gen = new BarcodeGenerator(EncodeTypes::QR, null);
+ $gen-&gt;setCodeText("車種名", "UTF-8", true);
+    $gen-&gt;save("barcode.png", <a class="el" href="../../de/dd6/classAspose_1_1Barcode_1_1BarCodeImageFormat.html#a610ba256f7f5af5fe46f6169b8b082bd">BarCodeImageFormat::PNG</a>);
+
+    $reader = new <a class="el" href="../../de/d04/classAspose_1_1Barcode_1_1BarCodeReader.html">BarCodeReader</a>("barcode.png", null, <a class="el" href="../../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a7d9e172b47289c7b7bd4a14b236cd023">DecodeType::QR</a>);
+    $results = $reader-&gt;readBarCodes();
+    for($i = 0; $i &lt; sizeof($results); $i++)
+    {
+        $result = $results[$i];
+        echo ("BarCode CodeText: " . $result-&gt;<a class="el" href="../../dd/dc3/classAspose_1_1Barcode_1_1BarcodeGenerator.html#a9cf1d8e7c8a8080a0e46e2ee729972b1">getCodeText()</a>);
+ }
+    //Encode codetext using UTF-8 without BOM
+    $gen = new BarcodeGenerator(EncodeTypes::QR, null);
+ $gen-&gt;setCodeText("車種名", "UTF-8", false);
+    $gen-&gt;save("barcode.png", <a class="el" href="../../de/dd6/classAspose_1_1Barcode_1_1BarCodeImageFormat.html#a610ba256f7f5af5fe46f6169b8b082bd">BarCodeImageFormat::PNG</a>);
+    $reader = new <a class="el" href="../../de/d04/classAspose_1_1Barcode_1_1BarCodeReader.html">BarCodeReader</a>("barcode.png", null, <a class="el" href="../../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a7d9e172b47289c7b7bd4a14b236cd023">DecodeType.QR</a>);
+ $results = $reader-&gt;readBarCodes();
+ for($i = 0; $i &lt; sizeof($results); $i++)
+ {
+     $result = $results[$i];
+     echo ("BarCode CodeText: " . $result-&gt;<a class="el" href="../../dd/dc3/classAspose_1_1Barcode_1_1BarcodeGenerator.html#a9cf1d8e7c8a8080a0e46e2ee729972b1">getCodeText()</a>);
+ }
+    </pre> </pre></blockquote>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">string|array</td><td>&#x202A;codeText CodeText string | Bytes of codetext </td></tr>
-    <tr><td class="paramname">int</td><td>&#x202A;encoding </td></tr>
+    <tr><td class="paramname">codeText</td><td>&#x202A;CodeText string </td></tr>
+    <tr><td class="paramname">encoding</td><td>&#x202A;Applied encoding </td></tr>
+    <tr><td class="paramname">insertBOM</td><td>&#x202A;Indicates whether to insert a byte order mark (BOM) when the specified encoding supports it (e.g., UTF-8, UTF-16, UTF-32). If set to<div class="fragment"><div class="line"><span class="keyword">true</span> </div>
+</div><!-- fragment -->&#x202A; , the BOM is added; if<div class="fragment"><div class="line"><span class="keyword">false</span> </div>
+</div><!-- fragment -->&#x202A; , the BOM is omitted even if the encoding normally uses one. </td></tr>
   </table>
   </dd>
 </dl>

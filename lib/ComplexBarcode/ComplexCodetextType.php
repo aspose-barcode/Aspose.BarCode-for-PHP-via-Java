@@ -14,4 +14,5 @@ class ComplexCodetextType
     const MaxiCodeCodetextMode2 = 7;
     const MaxiCodeCodetextMode3 = 8;
     const SwissQRCodetext = 9;
+    const USADriveIdCodetext = 10;
 }

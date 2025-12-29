@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">25.5</span>
+   &#160;<span id="projectnumber">25.12</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -104,8 +104,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a09e3287f76f28162cfafbf3b84799720"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ab0257238abab0f4c305d4555e2e25f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d0b/classAspose_1_1Barcode_1_1BarCodeResult.html#a6ab0257238abab0f4c305d4555e2e25f">getReadingQuality</a> ()</td></tr>
 <tr class="separator:a6ab0257238abab0f4c305d4555e2e25f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52e81eb8e3eb83f1e4bcf0b598128684"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d0b/classAspose_1_1Barcode_1_1BarCodeResult.html#a52e81eb8e3eb83f1e4bcf0b598128684">getCodeText</a> ()</td></tr>
-<tr class="separator:a52e81eb8e3eb83f1e4bcf0b598128684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a79f7cf257a327b9209d4f3f6d9c29e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d0b/classAspose_1_1Barcode_1_1BarCodeResult.html#a6a79f7cf257a327b9209d4f3f6d9c29e">getCodeText</a> (?string $encoding)</td></tr>
+<tr class="separator:a6a79f7cf257a327b9209d4f3f6d9c29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5b380a9b3dd6f8c5fa23c7731cf9b38"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d0b/classAspose_1_1Barcode_1_1BarCodeResult.html#ae5b380a9b3dd6f8c5fa23c7731cf9b38">getCodeType</a> ()</td></tr>
 <tr class="separator:ae5b380a9b3dd6f8c5fa23c7731cf9b38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7727721ed74080798df52a6a79460d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d0b/classAspose_1_1Barcode_1_1BarCodeResult.html#af7727721ed74080798df52a6a79460d0">getCodeBytes</a> ()</td></tr>
@@ -169,8 +169,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a52e81eb8e3eb83f1e4bcf0b598128684"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52e81eb8e3eb83f1e4bcf0b598128684">&#9670;&nbsp;</a></span>getCodeText()</h2>
+<a id="a6a79f7cf257a327b9209d4f3f6d9c29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a79f7cf257a327b9209d4f3f6d9c29e">&#9670;&nbsp;</a></span>getCodeText()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,11 +178,38 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Aspose\Barcode\BarCodeResult::getCodeText </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">?string&#160;</td>
+          <td class="paramname"><em>$encoding</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p class="DocNodeLTR">Gets the code text with encoding. </p>
+<hr  />
+<blockquote class="doxtable DocNodeLTR">
+<pre>
+ </pre><pre>This example shows how to use<div class="fragment"><div class="line">GetCodeText </div>
+</div><!-- fragment --> :</pre><pre>
+ <pre>
+ $gen = new BarcodeGenerator(EncodeTypes::DATA_MATRIX, null);
+    $gen-&gt;setCodeText("車種名", "932");
+    $gen-&gt;save("barcode.png", <a class="el" href="../../de/dd6/classAspose_1_1Barcode_1_1BarCodeImageFormat.html#a610ba256f7f5af5fe46f6169b8b082bd">BarCodeImageFormat::PNG</a>);
+
+    $reader = new <a class="el" href="../../de/d04/classAspose_1_1Barcode_1_1BarCodeReader.html">BarCodeReader</a>("barcode.png", null, <a class="el" href="../../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a164f9599420d15665003b707186710db">DecodeType::DATA_MATRIX</a>);
+ $results = $reader-&gt;readBarCodes();
+ for($i = 0; i &lt; sizeof($results); $i++)
+ {
+     $result = $results[$i];
+     echo("BarCode CodeText: " . $result-&gt;getCodeText("932"));
+ }
+    </pre> </pre></blockquote>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;A string containing recognized code text. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">encoding</td><td>&#x202A;The encoding for codetext. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -161,4 +161,23 @@ final class ComplexCodetextReader
             return null;
         return HIBCPASCodetext::construct($hibclicComplexCodetextDTO);
     }
+
+
+    /**
+     * <p>
+     * Decodes USADriveId codetext.
+     * </p>
+     * @return ?USADriveIdCodetext Decoded USADriveId or null.
+     * @param string encodedCodetext Encoded codetext
+     */
+    public static function tryDecodeUSADriveId(string $encodedCodetext) : ?USADriveIdCodetext
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        $usaDriveIdCodetextDTO = $client->ComplexCodetextReader_tryDecodeUSADriveId($encodedCodetext);
+        $thriftConnection->closeConnection();
+        if ($usaDriveIdCodetextDTO->isNull)
+            return null;
+        return USADriveIdCodetext::_internal_construct($usaDriveIdCodetextDTO);
+    }
 }

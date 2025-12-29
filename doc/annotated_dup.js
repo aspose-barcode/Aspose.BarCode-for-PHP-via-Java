@@ -66,6 +66,8 @@ var annotated_dup =
         [ "\u202ABorderParameters", "d1/df7/classAspose_1_1Barcode_1_1BorderParameters.html", "d1/df7/classAspose_1_1Barcode_1_1BorderParameters" ],
         [ "\u202AImageParameters", "dc/d8c/classAspose_1_1Barcode_1_1ImageParameters.html", "dc/d8c/classAspose_1_1Barcode_1_1ImageParameters" ],
         [ "\u202ASvgParameters", "d3/d21/classAspose_1_1Barcode_1_1SvgParameters.html", "d3/d21/classAspose_1_1Barcode_1_1SvgParameters" ],
+        [ "\u202APdfParameters", "dc/d99/classAspose_1_1Barcode_1_1PdfParameters.html", "dc/d99/classAspose_1_1Barcode_1_1PdfParameters" ],
+        [ "\u202ACMYKColor", "dd/df0/classAspose_1_1Barcode_1_1CMYKColor.html", "dd/df0/classAspose_1_1Barcode_1_1CMYKColor" ],
         [ "\u202AHslaColor", "d8/d5d/classAspose_1_1Barcode_1_1HslaColor.html", "d8/d5d/classAspose_1_1Barcode_1_1HslaColor" ],
         [ "\u202AExtCodetextBuilder", "d2/d77/classAspose_1_1Barcode_1_1ExtCodetextBuilder.html", "d2/d77/classAspose_1_1Barcode_1_1ExtCodetextBuilder" ],
         [ "\u202AQrExtCodetextBuilder", "d7/dea/classAspose_1_1Barcode_1_1QrExtCodetextBuilder.html", "d7/dea/classAspose_1_1Barcode_1_1QrExtCodetextBuilder" ],

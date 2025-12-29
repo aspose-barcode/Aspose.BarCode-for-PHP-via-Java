@@ -3,7 +3,7 @@
 set SCRIPT_DIR=%~dp0
 
 :: Define the path to the JAR file relative to bin/
-set JAR_PATH=%SCRIPT_DIR%..\lib\aspose-barcode-php-25.11.jar
+set JAR_PATH=%SCRIPT_DIR%..\lib\aspose-barcode-php-25.12.jar
 
 :: Define the log file path
 set LOG_FILE=%SCRIPT_DIR%\server.log
