@@ -320,6 +320,16 @@ interface ThriftAsposeBarcodeServiceIf
      */
     public function ComplexCodetextReader_tryDecodeMailmark2D($encodedCodetext);
     /**
+     * @param string $encodedCodetext
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext);
+    /**
+     * @param string $encodedCodetext
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function ComplexCodetextReader_tryDecodeUSADriveId($encodedCodetext);
+    /**
      * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
      */
     public function MailmarkCodetext_ctor();
@@ -441,11 +451,6 @@ interface ThriftAsposeBarcodeServiceIf
      * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
      */
     public function HIBCPASCodetext_ctor();
-    /**
-     * @param string $encodedCodetext
-     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
-     */
-    public function ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext);
     /**
      * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $HIBCLICSecondaryAndAdditionalDataCodetext
      * @return string
@@ -623,6 +628,42 @@ interface ThriftAsposeBarcodeServiceIf
      * @return string
      */
     public function MaxiCodeCodetextMode3_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $maxiCodeCodetextMode3DTO);
+    /**
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function USADriveIdCodetext_ctor();
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $swissQRCodetext
+     * @param string $constructedCodetext
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function USADriveIdCodetext_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $swissQRCodetext, $constructedCodetext);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $usaDriveIdCodetext
+     * @return string
+     */
+    public function USADriveIdCodetext_saveToXml(\Aspose\Barcode\Bridge\IComplexCodetextDTO $usaDriveIdCodetext);
+    /**
+     * @return \Aspose\Barcode\Bridge\OptionalFieldsDTO
+     */
+    public function OptionalFields_ctor();
+    /**
+     * @param string $type
+     * @return \Aspose\Barcode\Bridge\SubfilePropertiesDTO
+     */
+    public function SubfileProperties_ctor($type);
+    /**
+     * @return \Aspose\Barcode\Bridge\USADriveIdJurisdSubfileDTO
+     */
+    public function USADriveIdJurisdSubfilet_ctor();
+    /**
+     * @return \Aspose\Barcode\Bridge\DataElementDTO
+     */
+    public function DataElement_ctor();
+    /**
+     * @return \Aspose\Barcode\Bridge\MandatoryFieldsDTO
+     */
+    public function MandatoryFields_ctor();
     /**
      * @param \Aspose\Barcode\Bridge\AlternativeSchemeDTO $obj1
      * @param \Aspose\Barcode\Bridge\AlternativeSchemeDTO $obj2

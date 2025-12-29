@@ -3419,6 +3419,124 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         throw new \Exception("ComplexCodetextReader_tryDecodeMailmark2D failed: unknown result");
     }
 
+    public function ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext)
+    {
+        $this->send_ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext);
+        return $this->recv_ComplexCodetextReader_tryDecodeHIBCPAS();
+    }
+
+    public function send_ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeHIBCPAS_args();
+        $args->encodedCodetext = $encodedCodetext;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'ComplexCodetextReader_tryDecodeHIBCPAS',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('ComplexCodetextReader_tryDecodeHIBCPAS', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_ComplexCodetextReader_tryDecodeHIBCPAS()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeHIBCPAS_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeHIBCPAS_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("ComplexCodetextReader_tryDecodeHIBCPAS failed: unknown result");
+    }
+
+    public function ComplexCodetextReader_tryDecodeUSADriveId($encodedCodetext)
+    {
+        $this->send_ComplexCodetextReader_tryDecodeUSADriveId($encodedCodetext);
+        return $this->recv_ComplexCodetextReader_tryDecodeUSADriveId();
+    }
+
+    public function send_ComplexCodetextReader_tryDecodeUSADriveId($encodedCodetext)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeUSADriveId_args();
+        $args->encodedCodetext = $encodedCodetext;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'ComplexCodetextReader_tryDecodeUSADriveId',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('ComplexCodetextReader_tryDecodeUSADriveId', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_ComplexCodetextReader_tryDecodeUSADriveId()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeUSADriveId_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeUSADriveId_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("ComplexCodetextReader_tryDecodeUSADriveId failed: unknown result");
+    }
+
     public function MailmarkCodetext_ctor()
     {
         $this->send_MailmarkCodetext_ctor();
@@ -4781,65 +4899,6 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
             return $result->success;
         }
         throw new \Exception("HIBCPASCodetext_ctor failed: unknown result");
-    }
-
-    public function ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext)
-    {
-        $this->send_ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext);
-        return $this->recv_ComplexCodetextReader_tryDecodeHIBCPAS();
-    }
-
-    public function send_ComplexCodetextReader_tryDecodeHIBCPAS($encodedCodetext)
-    {
-        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeHIBCPAS_args();
-        $args->encodedCodetext = $encodedCodetext;
-        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
-        if ($bin_accel) {
-            thrift_protocol_write_binary(
-                $this->output_,
-                'ComplexCodetextReader_tryDecodeHIBCPAS',
-                TMessageType::CALL,
-                $args,
-                $this->seqid_,
-                $this->output_->isStrictWrite()
-            );
-        } else {
-            $this->output_->writeMessageBegin('ComplexCodetextReader_tryDecodeHIBCPAS', TMessageType::CALL, $this->seqid_);
-            $args->write($this->output_);
-            $this->output_->writeMessageEnd();
-            $this->output_->getTransport()->flush();
-        }
-    }
-
-    public function recv_ComplexCodetextReader_tryDecodeHIBCPAS()
-    {
-        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
-        if ($bin_accel) {
-            $result = thrift_protocol_read_binary(
-                $this->input_,
-                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeHIBCPAS_result',
-                $this->input_->isStrictRead()
-            );
-        } else {
-            $rseqid = 0;
-            $fname = null;
-            $mtype = 0;
-
-            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
-            if ($mtype == TMessageType::EXCEPTION) {
-                $x = new TApplicationException();
-                $x->read($this->input_);
-                $this->input_->readMessageEnd();
-                throw $x;
-            }
-            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeHIBCPAS_result();
-            $result->read($this->input_);
-            $this->input_->readMessageEnd();
-        }
-        if ($result->success !== null) {
-            return $result->success;
-        }
-        throw new \Exception("ComplexCodetextReader_tryDecodeHIBCPAS failed: unknown result");
     }
 
     public function HIBCLICSecondaryAndAdditionalDataCodetext_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $HIBCLICSecondaryAndAdditionalDataCodetext)
@@ -6853,6 +6912,474 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
             return $result->success;
         }
         throw new \Exception("MaxiCodeCodetextMode3_getConstructedCodetext failed: unknown result");
+    }
+
+    public function USADriveIdCodetext_ctor()
+    {
+        $this->send_USADriveIdCodetext_ctor();
+        return $this->recv_USADriveIdCodetext_ctor();
+    }
+
+    public function send_USADriveIdCodetext_ctor()
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_ctor_args();
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'USADriveIdCodetext_ctor',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('USADriveIdCodetext_ctor', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_USADriveIdCodetext_ctor()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_ctor_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_ctor_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("USADriveIdCodetext_ctor failed: unknown result");
+    }
+
+    public function USADriveIdCodetext_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $swissQRCodetext, $constructedCodetext)
+    {
+        $this->send_USADriveIdCodetext_initFromString($swissQRCodetext, $constructedCodetext);
+        return $this->recv_USADriveIdCodetext_initFromString();
+    }
+
+    public function send_USADriveIdCodetext_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $swissQRCodetext, $constructedCodetext)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_initFromString_args();
+        $args->swissQRCodetext = $swissQRCodetext;
+        $args->constructedCodetext = $constructedCodetext;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'USADriveIdCodetext_initFromString',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('USADriveIdCodetext_initFromString', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_USADriveIdCodetext_initFromString()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_initFromString_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_initFromString_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("USADriveIdCodetext_initFromString failed: unknown result");
+    }
+
+    public function USADriveIdCodetext_saveToXml(\Aspose\Barcode\Bridge\IComplexCodetextDTO $usaDriveIdCodetext)
+    {
+        $this->send_USADriveIdCodetext_saveToXml($usaDriveIdCodetext);
+        return $this->recv_USADriveIdCodetext_saveToXml();
+    }
+
+    public function send_USADriveIdCodetext_saveToXml(\Aspose\Barcode\Bridge\IComplexCodetextDTO $usaDriveIdCodetext)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_saveToXml_args();
+        $args->usaDriveIdCodetext = $usaDriveIdCodetext;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'USADriveIdCodetext_saveToXml',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('USADriveIdCodetext_saveToXml', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_USADriveIdCodetext_saveToXml()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_saveToXml_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdCodetext_saveToXml_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("USADriveIdCodetext_saveToXml failed: unknown result");
+    }
+
+    public function OptionalFields_ctor()
+    {
+        $this->send_OptionalFields_ctor();
+        return $this->recv_OptionalFields_ctor();
+    }
+
+    public function send_OptionalFields_ctor()
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_OptionalFields_ctor_args();
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'OptionalFields_ctor',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('OptionalFields_ctor', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_OptionalFields_ctor()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_OptionalFields_ctor_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_OptionalFields_ctor_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("OptionalFields_ctor failed: unknown result");
+    }
+
+    public function SubfileProperties_ctor($type)
+    {
+        $this->send_SubfileProperties_ctor($type);
+        return $this->recv_SubfileProperties_ctor();
+    }
+
+    public function send_SubfileProperties_ctor($type)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_SubfileProperties_ctor_args();
+        $args->type = $type;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'SubfileProperties_ctor',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('SubfileProperties_ctor', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_SubfileProperties_ctor()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_SubfileProperties_ctor_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_SubfileProperties_ctor_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("SubfileProperties_ctor failed: unknown result");
+    }
+
+    public function USADriveIdJurisdSubfilet_ctor()
+    {
+        $this->send_USADriveIdJurisdSubfilet_ctor();
+        return $this->recv_USADriveIdJurisdSubfilet_ctor();
+    }
+
+    public function send_USADriveIdJurisdSubfilet_ctor()
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdJurisdSubfilet_ctor_args();
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'USADriveIdJurisdSubfilet_ctor',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('USADriveIdJurisdSubfilet_ctor', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_USADriveIdJurisdSubfilet_ctor()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdJurisdSubfilet_ctor_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_USADriveIdJurisdSubfilet_ctor_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("USADriveIdJurisdSubfilet_ctor failed: unknown result");
+    }
+
+    public function DataElement_ctor()
+    {
+        $this->send_DataElement_ctor();
+        return $this->recv_DataElement_ctor();
+    }
+
+    public function send_DataElement_ctor()
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_DataElement_ctor_args();
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'DataElement_ctor',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('DataElement_ctor', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_DataElement_ctor()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_DataElement_ctor_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_DataElement_ctor_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("DataElement_ctor failed: unknown result");
+    }
+
+    public function MandatoryFields_ctor()
+    {
+        $this->send_MandatoryFields_ctor();
+        return $this->recv_MandatoryFields_ctor();
+    }
+
+    public function send_MandatoryFields_ctor()
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MandatoryFields_ctor_args();
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'MandatoryFields_ctor',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('MandatoryFields_ctor', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_MandatoryFields_ctor()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MandatoryFields_ctor_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MandatoryFields_ctor_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("MandatoryFields_ctor failed: unknown result");
     }
 
     public function AlternativeScheme_equals(\Aspose\Barcode\Bridge\AlternativeSchemeDTO $obj1, \Aspose\Barcode\Bridge\AlternativeSchemeDTO $obj2)

@@ -185,6 +185,54 @@ class IComplexCodetextDTO
             'isRequired' => false,
             'type' => TType::I32,
         ),
+        33 => array(
+            'var' => 'issuerIdentificationNumber',
+            'isRequired' => false,
+            'type' => TType::STRING,
+        ),
+        34 => array(
+            'var' => 'aAMVAVersionNumber',
+            'isRequired' => false,
+            'type' => TType::STRING,
+        ),
+        35 => array(
+            'var' => 'jurisdictionVersionNumber',
+            'isRequired' => false,
+            'type' => TType::STRING,
+        ),
+        36 => array(
+            'var' => 'numberOfEntries',
+            'isRequired' => false,
+            'type' => TType::I32,
+        ),
+        37 => array(
+            'var' => 'subfileDesignator',
+            'isRequired' => false,
+            'type' => TType::LST,
+            'etype' => TType::STRUCT,
+            'elem' => array(
+                'type' => TType::STRUCT,
+                'class' => '\Aspose\Barcode\Bridge\SubfilePropertiesDTO',
+                ),
+        ),
+        38 => array(
+            'var' => 'mandatoryElements',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\MandatoryFieldsDTO',
+        ),
+        39 => array(
+            'var' => 'optionalElements',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\OptionalFieldsDTO',
+        ),
+        40 => array(
+            'var' => 'jurisdictionSpecificSubfile',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\USADriveIdJurisdSubfileDTO',
+        ),
     );
 
     /**
@@ -311,6 +359,38 @@ class IComplexCodetextDTO
      * @var int
      */
     public $complexCodetextType = null;
+    /**
+     * @var string
+     */
+    public $issuerIdentificationNumber = null;
+    /**
+     * @var string
+     */
+    public $aAMVAVersionNumber = null;
+    /**
+     * @var string
+     */
+    public $jurisdictionVersionNumber = null;
+    /**
+     * @var int
+     */
+    public $numberOfEntries = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\SubfilePropertiesDTO[]
+     */
+    public $subfileDesignator = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\MandatoryFieldsDTO
+     */
+    public $mandatoryElements = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\OptionalFieldsDTO
+     */
+    public $optionalElements = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\USADriveIdJurisdSubfileDTO
+     */
+    public $jurisdictionSpecificSubfile = null;
 
     public function __construct($vals = null)
     {
@@ -407,6 +487,30 @@ class IComplexCodetextDTO
             }
             if (isset($vals['complexCodetextType'])) {
                 $this->complexCodetextType = $vals['complexCodetextType'];
+            }
+            if (isset($vals['issuerIdentificationNumber'])) {
+                $this->issuerIdentificationNumber = $vals['issuerIdentificationNumber'];
+            }
+            if (isset($vals['aAMVAVersionNumber'])) {
+                $this->aAMVAVersionNumber = $vals['aAMVAVersionNumber'];
+            }
+            if (isset($vals['jurisdictionVersionNumber'])) {
+                $this->jurisdictionVersionNumber = $vals['jurisdictionVersionNumber'];
+            }
+            if (isset($vals['numberOfEntries'])) {
+                $this->numberOfEntries = $vals['numberOfEntries'];
+            }
+            if (isset($vals['subfileDesignator'])) {
+                $this->subfileDesignator = $vals['subfileDesignator'];
+            }
+            if (isset($vals['mandatoryElements'])) {
+                $this->mandatoryElements = $vals['mandatoryElements'];
+            }
+            if (isset($vals['optionalElements'])) {
+                $this->optionalElements = $vals['optionalElements'];
+            }
+            if (isset($vals['jurisdictionSpecificSubfile'])) {
+                $this->jurisdictionSpecificSubfile = $vals['jurisdictionSpecificSubfile'];
             }
         }
     }
@@ -661,6 +765,75 @@ class IComplexCodetextDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 33:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->issuerIdentificationNumber);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 34:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->aAMVAVersionNumber);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 35:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->jurisdictionVersionNumber);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 36:
+                    if ($ftype == TType::I32) {
+                        $xfer += $input->readI32($this->numberOfEntries);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 37:
+                    if ($ftype == TType::LST) {
+                        $this->subfileDesignator = array();
+                        $_size62 = 0;
+                        $_etype65 = 0;
+                        $xfer += $input->readListBegin($_etype65, $_size62);
+                        for ($_i66 = 0; $_i66 < $_size62; ++$_i66) {
+                            $elem67 = null;
+                            $elem67 = new \Aspose\Barcode\Bridge\SubfilePropertiesDTO();
+                            $xfer += $elem67->read($input);
+                            $this->subfileDesignator []= $elem67;
+                        }
+                        $xfer += $input->readListEnd();
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 38:
+                    if ($ftype == TType::STRUCT) {
+                        $this->mandatoryElements = new \Aspose\Barcode\Bridge\MandatoryFieldsDTO();
+                        $xfer += $this->mandatoryElements->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 39:
+                    if ($ftype == TType::STRUCT) {
+                        $this->optionalElements = new \Aspose\Barcode\Bridge\OptionalFieldsDTO();
+                        $xfer += $this->optionalElements->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 40:
+                    if ($ftype == TType::STRUCT) {
+                        $this->jurisdictionSpecificSubfile = new \Aspose\Barcode\Bridge\USADriveIdJurisdSubfileDTO();
+                        $xfer += $this->jurisdictionSpecificSubfile->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -820,8 +993,8 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('records', TType::LST, 28);
             $output->writeListBegin(TType::STRUCT, count($this->records));
-            foreach ($this->records as $iter62) {
-                $xfer += $iter62->write($output);
+            foreach ($this->records as $iter68) {
+                $xfer += $iter68->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
@@ -847,6 +1020,62 @@ class IComplexCodetextDTO
         if ($this->complexCodetextType !== null) {
             $xfer += $output->writeFieldBegin('complexCodetextType', TType::I32, 32);
             $xfer += $output->writeI32($this->complexCodetextType);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->issuerIdentificationNumber !== null) {
+            $xfer += $output->writeFieldBegin('issuerIdentificationNumber', TType::STRING, 33);
+            $xfer += $output->writeString($this->issuerIdentificationNumber);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->aAMVAVersionNumber !== null) {
+            $xfer += $output->writeFieldBegin('aAMVAVersionNumber', TType::STRING, 34);
+            $xfer += $output->writeString($this->aAMVAVersionNumber);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->jurisdictionVersionNumber !== null) {
+            $xfer += $output->writeFieldBegin('jurisdictionVersionNumber', TType::STRING, 35);
+            $xfer += $output->writeString($this->jurisdictionVersionNumber);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->numberOfEntries !== null) {
+            $xfer += $output->writeFieldBegin('numberOfEntries', TType::I32, 36);
+            $xfer += $output->writeI32($this->numberOfEntries);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->subfileDesignator !== null) {
+            if (!is_array($this->subfileDesignator)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('subfileDesignator', TType::LST, 37);
+            $output->writeListBegin(TType::STRUCT, count($this->subfileDesignator));
+            foreach ($this->subfileDesignator as $iter69) {
+                $xfer += $iter69->write($output);
+            }
+            $output->writeListEnd();
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->mandatoryElements !== null) {
+            if (!is_object($this->mandatoryElements)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('mandatoryElements', TType::STRUCT, 38);
+            $xfer += $this->mandatoryElements->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->optionalElements !== null) {
+            if (!is_object($this->optionalElements)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('optionalElements', TType::STRUCT, 39);
+            $xfer += $this->optionalElements->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->jurisdictionSpecificSubfile !== null) {
+            if (!is_object($this->jurisdictionSpecificSubfile)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('jurisdictionSpecificSubfile', TType::STRUCT, 40);
+            $xfer += $this->jurisdictionSpecificSubfile->write($output);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();
