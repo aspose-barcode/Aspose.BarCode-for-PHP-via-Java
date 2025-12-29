@@ -57,6 +57,7 @@ var menudata={children:[
 {text:"\u202Au",url:"functions_u.html#index_u"},
 {text:"\u202Av",url:"functions_v.html#index_v"},
 {text:"\u202Aw",url:"functions_w.html#index_w"},
+{text:"\u202Ax",url:"functions_x.html#index_x"},
 {text:"\u202Ay",url:"functions_y.html#index_y"}]},
 {text:"\u202AFunctions",url:"functions_func.html",children:[
 {text:"_",url:"functions_func.html#index__5F"},
@@ -96,4 +97,5 @@ var menudata={children:[
 {text:"\u202Au",url:"functions_vars_u.html#index_u"},
 {text:"\u202Av",url:"functions_vars_v.html#index_v"},
 {text:"\u202Aw",url:"functions_vars_w.html#index_w"},
+{text:"\u202Ax",url:"functions_vars_x.html#index_x"},
 {text:"\u202Ay",url:"functions_vars_y.html#index_y"}]}]}]}]}

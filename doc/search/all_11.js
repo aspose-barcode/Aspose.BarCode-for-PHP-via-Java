@@ -1,15 +1,16 @@
 var searchData=
 [
-  ['qr_816',['QR',['../da/d52/classAspose_1_1Barcode_1_1EncodeTypes.html#ac6df282ff48f485d27b44f56303d63d5',1,'Aspose\Barcode\EncodeTypes\QR()'],['../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a7d9e172b47289c7b7bd4a14b236cd023',1,'Aspose\Barcode\DecodeType\QR()']]],
-  ['qr_5fext_5fcodetext_5fbuilder_817',['QR_EXT_CODETEXT_BUILDER',['../de/dd3/classAspose_1_1Barcode_1_1ExtCodetextBuilderType.html#a7b298b6556c726cb121d3faf55e44638',1,'Aspose::Barcode::ExtCodetextBuilderType']]],
-  ['qrencodemode_818',['QREncodeMode',['../d0/dc6/classAspose_1_1Barcode_1_1QREncodeMode.html',1,'Aspose::Barcode']]],
-  ['qrencodetype_819',['QREncodeType',['../dc/dd0/classAspose_1_1Barcode_1_1QREncodeType.html',1,'Aspose::Barcode']]],
-  ['qrerrorlevel_820',['QRErrorLevel',['../db/d0e/classAspose_1_1Barcode_1_1QRErrorLevel.html',1,'Aspose::Barcode']]],
-  ['qrextcodetextbuilder_821',['QrExtCodetextBuilder',['../d7/dea/classAspose_1_1Barcode_1_1QrExtCodetextBuilder.html',1,'Aspose::Barcode']]],
-  ['qrextendedparameters_822',['QRExtendedParameters',['../db/da8/classAspose_1_1Barcode_1_1QRExtendedParameters.html',1,'Aspose::Barcode']]],
-  ['qrparameters_823',['QrParameters',['../dd/dbf/classAspose_1_1Barcode_1_1QrParameters.html',1,'Aspose::Barcode']]],
-  ['qrstructuredappendparameters_824',['QrStructuredAppendParameters',['../d5/d43/classAspose_1_1Barcode_1_1QrStructuredAppendParameters.html',1,'Aspose::Barcode']]],
-  ['qrversion_825',['QRVersion',['../d9/d4d/classAspose_1_1Barcode_1_1QRVersion.html',1,'Aspose::Barcode']]],
-  ['quadrangle_826',['Quadrangle',['../df/d7b/classAspose_1_1Barcode_1_1Quadrangle.html',1,'Aspose::Barcode']]],
-  ['qualitysettings_827',['QualitySettings',['../db/d8d/classAspose_1_1Barcode_1_1QualitySettings.html',1,'Aspose::Barcode']]]
+  ['qr_963',['QR',['../de/d2a/classAspose_1_1Barcode_1_1Generation_1_1EncodeTypes.html#ae1ad2abab4d086b70eddb0af71c0e891',1,'Aspose\Barcode\Generation\EncodeTypes\QR()'],['../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a694eaa0f6a87bfb6d56a3489de866a82',1,'Aspose\Barcode\Recognition\DecodeType\QR()']]],
+  ['qr_5fext_5fcodetext_5fbuilder_964',['QR_EXT_CODETEXT_BUILDER',['../d1/d2e/classAspose_1_1Barcode_1_1Generation_1_1ExtCodetextBuilderType.html#a6ddeea5530b8f4fc272d8c57a479c16b',1,'Aspose::Barcode::Generation::ExtCodetextBuilderType']]],
+  ['qrbillstandardversion_965',['QrBillStandardVersion',['../d6/d2e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1QrBillStandardVersion.html',1,'Aspose::Barcode::ComplexBarcode']]],
+  ['qrencodemode_966',['QREncodeMode',['../dc/dd9/classAspose_1_1Barcode_1_1Generation_1_1QREncodeMode.html',1,'Aspose::Barcode::Generation']]],
+  ['qrencodetype_967',['QREncodeType',['../d1/d49/classAspose_1_1Barcode_1_1Generation_1_1QREncodeType.html',1,'Aspose::Barcode::Generation']]],
+  ['qrerrorlevel_968',['QRErrorLevel',['../d1/deb/classAspose_1_1Barcode_1_1Generation_1_1QRErrorLevel.html',1,'Aspose::Barcode::Generation']]],
+  ['qrextcodetextbuilder_969',['QrExtCodetextBuilder',['../de/df7/classAspose_1_1Barcode_1_1Generation_1_1QrExtCodetextBuilder.html',1,'Aspose::Barcode::Generation']]],
+  ['qrextendedparameters_970',['QRExtendedParameters',['../d3/dc3/classAspose_1_1Barcode_1_1Recognition_1_1QRExtendedParameters.html',1,'Aspose::Barcode::Recognition']]],
+  ['qrparameters_971',['QrParameters',['../d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html',1,'Aspose::Barcode::Generation']]],
+  ['qrstructuredappendparameters_972',['QrStructuredAppendParameters',['../dc/db6/classAspose_1_1Barcode_1_1Generation_1_1QrStructuredAppendParameters.html',1,'Aspose::Barcode::Generation']]],
+  ['qrversion_973',['QRVersion',['../dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html',1,'Aspose::Barcode::Generation']]],
+  ['quadrangle_974',['Quadrangle',['../db/d29/classAspose_1_1Barcode_1_1Recognition_1_1Quadrangle.html',1,'Aspose::Barcode::Recognition']]],
+  ['qualitysettings_975',['QualitySettings',['../dc/d4b/classAspose_1_1Barcode_1_1Recognition_1_1QualitySettings.html',1,'Aspose::Barcode::Recognition']]]
 ];

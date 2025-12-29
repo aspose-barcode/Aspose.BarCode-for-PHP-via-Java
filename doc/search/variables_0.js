@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['_24_5flist_1968',['$_list',['../d2/d77/classAspose_1_1Barcode_1_1ExtCodetextBuilder.html#a3c6ada3aa0667b4170bb4f9cf86f7c6d',1,'Aspose\Barcode\ExtCodetextBuilder\$_list()'],['../de/dde/classAspose_1_1Barcode_1_1HanXinExtCodetextBuilder.html#a0be59234e83a55d1e9146b1fdc4c8403',1,'Aspose\Barcode\HanXinExtCodetextBuilder\$_list()']]],
-  ['_24a_1969',['$A',['../d8/d5d/classAspose_1_1Barcode_1_1HslaColor.html#ad3b3f620f5aea997bc2393999108da4f',1,'Aspose::Barcode::HslaColor']]],
-  ['_24c_1970',['$C',['../dd/df0/classAspose_1_1Barcode_1_1CMYKColor.html#af53bea82421838e8cb43dd3b45a5b218',1,'Aspose::Barcode::CMYKColor']]],
-  ['_24h_1971',['$H',['../d8/d5d/classAspose_1_1Barcode_1_1HslaColor.html#ad9ef8b5c1573b7c7e03fc1b3ad73883a',1,'Aspose::Barcode::HslaColor']]],
-  ['_24k_1972',['$K',['../dd/df0/classAspose_1_1Barcode_1_1CMYKColor.html#a21c30752970d1eafbd66a98e1e2541af',1,'Aspose::Barcode::CMYKColor']]],
-  ['_24l_1973',['$L',['../d8/d5d/classAspose_1_1Barcode_1_1HslaColor.html#afeaa5ff034d4c7fb747b071850a6bf29',1,'Aspose::Barcode::HslaColor']]],
-  ['_24m_1974',['$M',['../dd/df0/classAspose_1_1Barcode_1_1CMYKColor.html#aac54f24f28699af558512accce319a6b',1,'Aspose::Barcode::CMYKColor']]],
-  ['_24maxicodesecondmessagedto_1975',['$maxiCodeSecondMessageDto',['../d4/d74/classAspose_1_1Barcode_1_1MaxiCodeSecondMessage.html#a66e6e03773a8d24226894ac2664326f3',1,'Aspose::Barcode::MaxiCodeSecondMessage']]],
-  ['_24s_1976',['$S',['../d8/d5d/classAspose_1_1Barcode_1_1HslaColor.html#ac98e578e180a656454d2d0bc9b0e056d',1,'Aspose::Barcode::HslaColor']]],
-  ['_24y_1977',['$Y',['../dd/df0/classAspose_1_1Barcode_1_1CMYKColor.html#af7545592d9a11d870334f21a24beeef6',1,'Aspose::Barcode::CMYKColor']]]
+  ['_24_5flist_2420',['$_list',['../d0/d06/classAspose_1_1Barcode_1_1Generation_1_1ExtCodetextBuilder.html#ac84cf703fadcad025a09986f286d90c7',1,'Aspose\Barcode\Generation\ExtCodetextBuilder\$_list()'],['../d7/d49/classAspose_1_1Barcode_1_1Generation_1_1HanXinExtCodetextBuilder.html#ada4961b6bdaba749663a65eddc47b923',1,'Aspose\Barcode\Generation\HanXinExtCodetextBuilder\$_list()']]],
+  ['_24a_2421',['$A',['../d0/de5/classAspose_1_1Barcode_1_1Generation_1_1HslaColor.html#a6a58315825e60716082f436dbe2ae736',1,'Aspose::Barcode::Generation::HslaColor']]],
+  ['_24c_2422',['$C',['../dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#add9a2e36c59c7cfc56f4bf2702a0a2ab',1,'Aspose::Barcode::Generation::CMYKColor']]],
+  ['_24h_2423',['$H',['../d0/de5/classAspose_1_1Barcode_1_1Generation_1_1HslaColor.html#a999e134825a719f7427929d99dd9d0ad',1,'Aspose::Barcode::Generation::HslaColor']]],
+  ['_24k_2424',['$K',['../dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a60758208e90b5bd7f392576ec2c4c368',1,'Aspose::Barcode::Generation::CMYKColor']]],
+  ['_24l_2425',['$L',['../d0/de5/classAspose_1_1Barcode_1_1Generation_1_1HslaColor.html#a9860e67495071811eebf7856754a353a',1,'Aspose::Barcode::Generation::HslaColor']]],
+  ['_24m_2426',['$M',['../dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#ae3895ecc96ae4e2d6f54122921ea97e7',1,'Aspose::Barcode::Generation::CMYKColor']]],
+  ['_24maxicodesecondmessagedto_2427',['$maxiCodeSecondMessageDto',['../d5/dc8/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessage.html#a3da2b64f3839ef3bffe0f4c041d2bfef',1,'Aspose::Barcode::ComplexBarcode::MaxiCodeSecondMessage']]],
+  ['_24s_2428',['$S',['../d0/de5/classAspose_1_1Barcode_1_1Generation_1_1HslaColor.html#a316320f98622f2af00264eb82d975323',1,'Aspose::Barcode::Generation::HslaColor']]],
+  ['_24y_2429',['$Y',['../dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a6d56855d1deeb5b388f424846ab04552',1,'Aspose::Barcode::Generation::CMYKColor']]]
 ];
