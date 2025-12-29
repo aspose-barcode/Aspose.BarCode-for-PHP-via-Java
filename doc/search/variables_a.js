@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jpeg_2219',['JPEG',['../de/dd6/classAspose_1_1Barcode_1_1BarCodeImageFormat.html#af282a350437a374488e314f8ca5dc1c4',1,'Aspose::Barcode::BarCodeImageFormat']]]
+  ['jpeg_2699',['JPEG',['../da/d79/classAspose_1_1Barcode_1_1Generation_1_1BarCodeImageFormat.html#a45b7d84cc6c5f4cea94084c85818a714',1,'Aspose::Barcode::Generation::BarCodeImageFormat']]]
 ];

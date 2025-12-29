@@ -1,0 +1,27 @@
+var classAspose_1_1Barcode_1_1Generation_1_1AztecParameters =
+[
+    [ "\u202A__construct", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a669112ef460e865ffc2fcc113fad2ba9", null ],
+    [ "\u202AgetAspectRatio", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a7b0317476158a48f0be93fe299e70a75", null ],
+    [ "\u202AgetAztecEncodeMode", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#acaa8c50e829e0f0a2a3d23f952f11372", null ],
+    [ "\u202AgetAztecErrorLevel", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a573ae5d7b939298b06d1445d21f2fc3f", null ],
+    [ "\u202AgetAztecSymbolMode", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a3725747df0f8ab787070ad565f8f99ef", null ],
+    [ "\u202AgetECIEncoding", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a6bbe28b2551ec3e86e887bdcc5ec9423", null ],
+    [ "\u202AgetLayersCount", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a13b673eacbbf3a726a09374342b64d7a", null ],
+    [ "\u202AgetStructuredAppendBarcodeId", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a1cbb53bff0983e4af1ff4e04d04aff4b", null ],
+    [ "\u202AgetStructuredAppendBarcodesCount", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a5eea8d10020df3d48990e1dc702954f1", null ],
+    [ "\u202AgetStructuredAppendFileId", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a57b7f9fab2ddca2f160840f7d0326cf4", null ],
+    [ "\u202AinitFieldsFromDto", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a276828ba7519353bc1e6785eee74cdd8", null ],
+    [ "\u202AisReaderInitialization", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#af380d4b04f668b1f07547522b0d41aa6", null ],
+    [ "\u202AobtainDto", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#ac42d0df0633fe5eb61af420c7762cd89", null ],
+    [ "\u202AsetAspectRatio", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a579c2a7208552e2ae2d77ca71bf8c805", null ],
+    [ "\u202AsetAztecEncodeMode", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a23e78ef7021ba6a05b16f0e93e79b696", null ],
+    [ "\u202AsetAztecErrorLevel", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a3fe2e69f8359646397502aa949ab095e", null ],
+    [ "\u202AsetAztecSymbolMode", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#ab783219712e6d5d230f36324550c2a32", null ],
+    [ "\u202AsetECIEncoding", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a89dd19024b58b80373c635ac6754315e", null ],
+    [ "\u202AsetLayersCount", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a27cf9d884357c530a0f2cff522ce9955", null ],
+    [ "\u202AsetReaderInitialization", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a67b78d9d8473819e728480928ab8624d", null ],
+    [ "\u202AsetStructuredAppendBarcodeId", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a9090daef6eebfce3246923378692543d", null ],
+    [ "\u202AsetStructuredAppendBarcodesCount", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a6f7cc4103f7e9979ea555ac5d0e7f39b", null ],
+    [ "\u202AsetStructuredAppendFileId", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#aa7ec79c30cf59e838c4e860ffde3ca16", null ],
+    [ "\u202AtoString", "df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a1e9969381e7e4edd06773a1a3e3efe16", null ]
+];

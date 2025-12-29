@@ -1,0 +1,25 @@
+var classAspose_1_1Barcode_1_1Generation_1_1QrParameters =
+[
+    [ "\u202A__construct", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a7210c412e6a938bf1089070d64475e2c", null ],
+    [ "\u202AgetAspectRatio", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#ac7e25a9197a32b4c4c700295fae8a995", null ],
+    [ "\u202AgetMicroQRVersion", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a80115660f1df1a0c0a9222830e9067b8", null ],
+    [ "\u202AgetQrECIEncoding", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a7c9f39d5046d5da45779d7ef500f5ecd", null ],
+    [ "\u202AgetQrEncodeMode", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#aaa4ebf7f877c97336904d6b13c0c4c88", null ],
+    [ "\u202AgetQrEncodeType", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a26799fc0834d51f5fb4e6de0e00e47b8", null ],
+    [ "\u202AgetQrErrorLevel", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#ab3a8aa4bc710e6e34d95cbb1c6ceadcd", null ],
+    [ "\u202AgetQrVersion", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#af54b26161e413caf6250bdff5e31ff80", null ],
+    [ "\u202AgetRectMicroQrVersion", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#aa58d7957a9717ba3ef3ebc925095392f", null ],
+    [ "\u202AgetStructuredAppend", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#ab9ed92fec223b1be0fffbd6b447fa8ba", null ],
+    [ "\u202AinitFieldsFromDto", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#aeb826be206331fa4de6072fad84484dd", null ],
+    [ "\u202AobtainDto", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a5df3019ed7c7783dea76a59513b69552", null ],
+    [ "\u202AsetAspectRatio", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a1aaeb17ed9366ff532e61f788fcd0bf8", null ],
+    [ "\u202AsetMicroQRVersion", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a10d51727068da073007319570d6623c6", null ],
+    [ "\u202AsetQrECIEncoding", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#abc75c3b2b6e6b63a15c5f240f2ff8c47", null ],
+    [ "\u202AsetQrEncodeMode", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#ad83b30210394952be31ffb04da53b7d6", null ],
+    [ "\u202AsetQrEncodeType", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#ab3aa6bef6d3ebf6592dadedfbf1a3151", null ],
+    [ "\u202AsetQrErrorLevel", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#afbd04982d7860ba125ad091c9477dd0f", null ],
+    [ "\u202AsetQrVersion", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a5ffbbb8b5830afb4a34f31c297c09d8f", null ],
+    [ "\u202AsetRectMicroQrVersion", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a99320486d83ca8275e048bf38add52f8", null ],
+    [ "\u202AsetStructuredAppend", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a1088fe6e28f0a9a28239035f8779c832", null ],
+    [ "\u202AtoString", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a0ee63feb498b96c6039ce0e210693f35", null ]
+];

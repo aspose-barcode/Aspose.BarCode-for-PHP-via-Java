@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['qr_2299',['QR',['../da/d52/classAspose_1_1Barcode_1_1EncodeTypes.html#ac6df282ff48f485d27b44f56303d63d5',1,'Aspose\Barcode\EncodeTypes\QR()'],['../de/d1b/classAspose_1_1Barcode_1_1DecodeType.html#a7d9e172b47289c7b7bd4a14b236cd023',1,'Aspose\Barcode\DecodeType\QR()']]],
-  ['qr_5fext_5fcodetext_5fbuilder_2300',['QR_EXT_CODETEXT_BUILDER',['../de/dd3/classAspose_1_1Barcode_1_1ExtCodetextBuilderType.html#a7b298b6556c726cb121d3faf55e44638',1,'Aspose::Barcode::ExtCodetextBuilderType']]]
+  ['qr_2800',['QR',['../de/d2a/classAspose_1_1Barcode_1_1Generation_1_1EncodeTypes.html#ae1ad2abab4d086b70eddb0af71c0e891',1,'Aspose\Barcode\Generation\EncodeTypes\QR()'],['../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a694eaa0f6a87bfb6d56a3489de866a82',1,'Aspose\Barcode\Recognition\DecodeType\QR()']]],
+  ['qr_5fext_5fcodetext_5fbuilder_2801',['QR_EXT_CODETEXT_BUILDER',['../d1/d2e/classAspose_1_1Barcode_1_1Generation_1_1ExtCodetextBuilderType.html#a6ddeea5530b8f4fc272d8c57a479c16b',1,'Aspose::Barcode::Generation::ExtCodetextBuilderType']]]
 ];

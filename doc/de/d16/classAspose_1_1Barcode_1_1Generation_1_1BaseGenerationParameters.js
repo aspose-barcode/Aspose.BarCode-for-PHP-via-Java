@@ -1,0 +1,28 @@
+var classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters =
+[
+    [ "\u202A__construct", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#adaa2c3ef798d9b86697a8a1d020ba802", null ],
+    [ "\u202AgetAutoSizeMode", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#ad4010209cb25472a01b2c9849abc93f9", null ],
+    [ "\u202AgetBackColor", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#aabe299af57141f1d74ee6d2f42361649", null ],
+    [ "\u202AgetBarcode", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a7e9cd3390c2827fdabeb143cbaf80357", null ],
+    [ "\u202AgetBorder", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#ae8467b94ad346fd35c6b6fb392db1168", null ],
+    [ "\u202AgetCaptionAbove", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a808d6899c9e4ef6feb2d991c514b626e", null ],
+    [ "\u202AgetCaptionBelow", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#ad38644fe6452a0bbfe3c0ce751cc600e", null ],
+    [ "\u202AgetImage", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a901b928e406df4cd5bb43164ae6345bf", null ],
+    [ "\u202AgetImageHeight", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#ae3a3b403833c3d192c9b85b9fe7e758d", null ],
+    [ "\u202AgetImageWidth", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#aae165f4e66c3152763a12d13d6cdff5d", null ],
+    [ "\u202AgetResolution", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a0e81d721349eb294e05cfa24438c8edf", null ],
+    [ "\u202AgetRotationAngle", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a4b25c2fbde8ebb9d8a19e5217b1b9658", null ],
+    [ "\u202AgetUseAntiAlias", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a7094bf127b382e01d32a098b385704b7", null ],
+    [ "\u202AinitFieldsFromDto", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#afa8a73bf8eae0d3fd0db7eda003f389d", null ],
+    [ "\u202AobtainDto", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a1eae0d3c867795dd624cc058bd6d0c48", null ],
+    [ "\u202AsetAutoSizeMode", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a1a5997ad2f2656feaf0f1117c1214154", null ],
+    [ "\u202AsetBackColor", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#afaca108e668992800a38fc4a3b65b87b", null ],
+    [ "\u202AsetBarcode", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a0937f6addbe08c7f9c55e9fd6b086609", null ],
+    [ "\u202AsetCaptionAbove", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#ad27ff3d55c9540fc71ef875f2ac4a6fb", null ],
+    [ "\u202AsetCaptionBelow", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#ae882a5cd895a792cadfea5054b5cc6cc", null ],
+    [ "\u202AsetImageHeight", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a688024fe9563e999fba2aade8fabf9ea", null ],
+    [ "\u202AsetImageWidth", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a7be58a7acfc90e8f8196ba42e6996849", null ],
+    [ "\u202AsetResolution", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a2c6c13a07a12500df397095134e2656b", null ],
+    [ "\u202AsetRotationAngle", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#afaed166c33841c7eaf2a17c8e26be85a", null ],
+    [ "\u202AsetUseAntiAlias", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1BaseGenerationParameters.html#a8240bfd87ba407c11e1a7359f3b7c6b4", null ]
+];

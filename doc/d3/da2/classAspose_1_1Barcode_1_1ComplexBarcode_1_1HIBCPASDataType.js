@@ -1,0 +1,27 @@
+var classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType =
+[
+    [ "\u202AADMINISTRABLE_PRODUCT_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ad5de96a33e48a40e6d0b07a17ddd4137", null ],
+    [ "\u202AASSET_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a16e17ae9534ce63a7c8a924d12f833be", null ],
+    [ "\u202ABLOOD_PRODUCT_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#aa90d1f52ec75db21f9962ae199ffe019", null ],
+    [ "\u202ABUSINESS_CONTROL_NUMBER", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a1f3cbf26d583e0756c28f277d5450411", null ],
+    [ "\u202ADATE_TIME", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a35fa95f929d5b4733e6f54a2f73c6df5", null ],
+    [ "\u202ADEMOGRAPHIC_DATA", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ac6f82e3ee5e54671bad37dcfb8e36d16", null ],
+    [ "\u202ADIETARY_ITEM_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a9fa7aa92ffbf8b25ce50d01588da3b8a", null ],
+    [ "\u202AEPISODE_OF_CARE_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ae1881d15e9cb1594ce381e719b86cb28", null ],
+    [ "\u202AHEALTH_INDUSTRY_NUMBER", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ab6d3ffcd41a07180598ba1a3a57b90b3", null ],
+    [ "\u202AHOSPITAL_ITEM_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a3be570f95211957229b678b145ad4625", null ],
+    [ "\u202AIMPLANTABLE_PRODUCT_INFORMATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#adff90d474e4128cbca3793117fc7c1b8", null ],
+    [ "\u202ALABELER_IDENTIFICATION_CODE", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a0826349831287a566056b08b434ae7bd", null ],
+    [ "\u202ALIBRARY_MATERIALS_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a6b0155617defa5ecb22bf06f6b6cdbf0", null ],
+    [ "\u202AMANUFACTURER_SERIAL_NUMBER", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#aa617a21f6cd639ebea27b28ee71534f3", null ],
+    [ "\u202AMEDICAL_PROCEDURE_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a89dcdb8cb431d58c143f575dae9f4ecc", null ],
+    [ "\u202APATIENT_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ac8adf227f2988d3d8dce9226e785da47", null ],
+    [ "\u202APATIENT_VISIT_ID", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a228e2fcc5dc0d98c6e5be1fc50b6e8c9", null ],
+    [ "\u202APERSONNEL_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a51056810b1ce5c8c99a0700cc20a4752", null ],
+    [ "\u202APURCHASE_ORDER_NUMBER", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ad7f00d0583aec7f033140519e5ccc4e4", null ],
+    [ "\u202AREIMBURSEMENT_CATEGORY", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ac3decaa07a71c69ed8f8b8f35112f012", null ],
+    [ "\u202ASERVICE_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#a33f86bd70ef8e8f0865f8f07715ed2ec", null ],
+    [ "\u202ASPECIMEN_IDENTIFICATION", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ac6b74d1092103391488032148b2d7bc9", null ],
+    [ "\u202AUSER_DEFINED", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#acb934a8f031fde4ba04bd7ad9a257a0b", null ],
+    [ "\u202AXML_DOCUMENT", "d3/da2/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASDataType.html#ab5f62e0ad967405dfb0a505576249cb1", null ]
+];

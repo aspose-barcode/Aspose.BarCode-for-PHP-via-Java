@@ -23,5 +23,6 @@ var functions_vars =
     [ "\u202Au", "functions_vars_u.html", null ],
     [ "\u202Av", "functions_vars_v.html", null ],
     [ "\u202Aw", "functions_vars_w.html", null ],
+    [ "\u202Ax", "functions_vars_x.html", null ],
     [ "\u202Ay", "functions_vars_y.html", null ]
 ];

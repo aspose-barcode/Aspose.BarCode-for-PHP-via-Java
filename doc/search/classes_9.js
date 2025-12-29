@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['license_1325',['License',['../d8/df6/classAspose_1_1Barcode_1_1Internal_1_1License.html',1,'Aspose::Barcode::Internal']]],
-  ['licensemanager_1326',['LicenseManager',['../df/d82/classAspose_1_1Barcode_1_1Internal_1_1LicenseManager.html',1,'Aspose::Barcode::Internal']]]
+  ['license_1594',['License',['../d8/df6/classAspose_1_1Barcode_1_1Internal_1_1License.html',1,'Aspose::Barcode::Internal']]],
+  ['licensemanager_1595',['LicenseManager',['../df/d82/classAspose_1_1Barcode_1_1Internal_1_1LicenseManager.html',1,'Aspose::Barcode::Internal']]]
 ];
