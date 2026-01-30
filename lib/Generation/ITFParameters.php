@@ -25,7 +25,7 @@ class ITFParameters implements Communicator
         $this->itfParametersDto = $itfParametersDto;
     }
 
-    private $itfBorderThickness;
+    private $borderThickness;
 
     function __construct(ITFParametersDTO $itfParametersDto)
     {
@@ -42,33 +42,60 @@ class ITFParameters implements Communicator
     {
         try
         {
-            $this->itfBorderThickness = new Unit($this->getITFParametersDto()->itfBorderThickness);
+            $this->borderThickness = new Unit($this->getITFParametersDto()->borderThickness);
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * <p>
+     * Gets an ITF border (bearer bar) thickness in Unit value.
+     * Default value: 12pt.
+     * </p>
+     * @return an ITF border (bearer bar) thickness in Unit value.
+     */
+    public function getBorderThickness() : Unit
+    {
+        return $this->borderThickness;
+    }
+
+    /**
+     * <p>
+     * Sets an ITF border (bearer bar) thickness in Unit value.
+     * Default value: 12pt.
+     * </p>
+     * @param value an ITF border (bearer bar) thickness in Unit value.
+     */
+    public function setBorderThickness(Unit $value): void
+    {
+        $this->itfBorderThickness = $value;
+        $this->getITFParametersDto()->borderThickness = $value->getUnitDto();
     }
 
     /**
      * Gets an ITF border (bearer bar) thickness in Unit value.
      * Default value: 12pt.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getBorderThickness().
      */
     public function getItfBorderThickness(): Unit
     {
-        return $this->itfBorderThickness;
+        return $this->borderThickness;
     }
 
     /**
      * Sets an ITF border (bearer bar) thickness in Unit value.
      * Default value: 12pt.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setBorderThickness().
      */
     public function setItfBorderThickness(Unit $value): void
     {
         try
         {
-            $this->getITFParametersDto()->itfBorderThickness = $value->getUnitDto();
-            $this->itfBorderThickness = $value;
+            $this->getITFParametersDto()->borderThickness = $value->getUnitDto();
+            $this->borderThickness = $value;
         }
         catch (Exception $ex)
         {
@@ -77,14 +104,37 @@ class ITFParameters implements Communicator
     }
 
     /**
+     * <p>
+     * Border type of ITF barcode.
+     * Default value: ITF14BorderType.Bar.
+     * </p>
+     */
+    public function getBorderType(): int
+    {
+        return $this->getITFParametersDto()->borderType;
+    }
+
+    /**
+     * <p>
+     * Border type of ITF barcode.
+     * Default value: ITF14BorderType.Bar.
+     * </p>
+     */
+    public function setBorderType(int $value): void
+    {
+        $this->getITFParametersDto()->borderType = $value;
+    }
+
+    /**
      * Border type of ITF barcode.
      * Default value: ITF14BorderType::BAR.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getBorderType().
      */
     public function getItfBorderType(): int
     {
         try
         {
-            return $this->getITFParametersDto()->itfBorderType;
+            return $this->getITFParametersDto()->borderType;
         }
         catch (Exception $ex)
         {
@@ -95,12 +145,13 @@ class ITFParameters implements Communicator
     /**
      * Border type of ITF barcode.
      * Default value: ITF14BorderType::BAR.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setBorderType().
      */
     public function setItfBorderType(int $value): void
     {
         try
         {
-            $this->getITFParametersDto()->itfBorderType = $value;
+            $this->getITFParametersDto()->borderType = $value;
         }
         catch (Exception $ex)
         {

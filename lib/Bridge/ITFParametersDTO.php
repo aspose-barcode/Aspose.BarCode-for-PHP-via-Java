@@ -22,13 +22,13 @@ class ITFParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'itfBorderThickness',
+            'var' => 'borderThickness',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\UnitDTO',
         ),
         2 => array(
-            'var' => 'itfBorderType',
+            'var' => 'borderType',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -42,11 +42,11 @@ class ITFParametersDTO
     /**
      * @var \Aspose\Barcode\Bridge\UnitDTO
      */
-    public $itfBorderThickness = null;
+    public $borderThickness = null;
     /**
      * @var int
      */
-    public $itfBorderType = null;
+    public $borderType = null;
     /**
      * @var int
      */
@@ -55,11 +55,11 @@ class ITFParametersDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['itfBorderThickness'])) {
-                $this->itfBorderThickness = $vals['itfBorderThickness'];
+            if (isset($vals['borderThickness'])) {
+                $this->borderThickness = $vals['borderThickness'];
             }
-            if (isset($vals['itfBorderType'])) {
-                $this->itfBorderType = $vals['itfBorderType'];
+            if (isset($vals['borderType'])) {
+                $this->borderType = $vals['borderType'];
             }
             if (isset($vals['quietZoneCoef'])) {
                 $this->quietZoneCoef = $vals['quietZoneCoef'];
@@ -88,15 +88,15 @@ class ITFParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::STRUCT) {
-                        $this->itfBorderThickness = new \Aspose\Barcode\Bridge\UnitDTO();
-                        $xfer += $this->itfBorderThickness->read($input);
+                        $this->borderThickness = new \Aspose\Barcode\Bridge\UnitDTO();
+                        $xfer += $this->borderThickness->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->itfBorderType);
+                        $xfer += $input->readI32($this->borderType);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -122,17 +122,17 @@ class ITFParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('ITFParametersDTO');
-        if ($this->itfBorderThickness !== null) {
-            if (!is_object($this->itfBorderThickness)) {
+        if ($this->borderThickness !== null) {
+            if (!is_object($this->borderThickness)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('itfBorderThickness', TType::STRUCT, 1);
-            $xfer += $this->itfBorderThickness->write($output);
+            $xfer += $output->writeFieldBegin('borderThickness', TType::STRUCT, 1);
+            $xfer += $this->borderThickness->write($output);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->itfBorderType !== null) {
-            $xfer += $output->writeFieldBegin('itfBorderType', TType::I32, 2);
-            $xfer += $output->writeI32($this->itfBorderType);
+        if ($this->borderType !== null) {
+            $xfer += $output->writeFieldBegin('borderType', TType::I32, 2);
+            $xfer += $output->writeI32($this->borderType);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->quietZoneCoef !== null) {

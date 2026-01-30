@@ -22,12 +22,12 @@ class CodabarExtendedParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'codabarStartSymbol',
+            'var' => 'startSymbol',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'codabarStopSymbol',
+            'var' => 'stopSymbol',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -41,11 +41,11 @@ class CodabarExtendedParametersDTO
     /**
      * @var int
      */
-    public $codabarStartSymbol = null;
+    public $startSymbol = null;
     /**
      * @var int
      */
-    public $codabarStopSymbol = null;
+    public $stopSymbol = null;
     /**
      * @var string
      */
@@ -54,11 +54,11 @@ class CodabarExtendedParametersDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['codabarStartSymbol'])) {
-                $this->codabarStartSymbol = $vals['codabarStartSymbol'];
+            if (isset($vals['startSymbol'])) {
+                $this->startSymbol = $vals['startSymbol'];
             }
-            if (isset($vals['codabarStopSymbol'])) {
-                $this->codabarStopSymbol = $vals['codabarStopSymbol'];
+            if (isset($vals['stopSymbol'])) {
+                $this->stopSymbol = $vals['stopSymbol'];
             }
             if (isset($vals['toString'])) {
                 $this->toString = $vals['toString'];
@@ -87,14 +87,14 @@ class CodabarExtendedParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->codabarStartSymbol);
+                        $xfer += $input->readI32($this->startSymbol);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->codabarStopSymbol);
+                        $xfer += $input->readI32($this->stopSymbol);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -120,14 +120,14 @@ class CodabarExtendedParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('CodabarExtendedParametersDTO');
-        if ($this->codabarStartSymbol !== null) {
-            $xfer += $output->writeFieldBegin('codabarStartSymbol', TType::I32, 1);
-            $xfer += $output->writeI32($this->codabarStartSymbol);
+        if ($this->startSymbol !== null) {
+            $xfer += $output->writeFieldBegin('startSymbol', TType::I32, 1);
+            $xfer += $output->writeI32($this->startSymbol);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->codabarStopSymbol !== null) {
-            $xfer += $output->writeFieldBegin('codabarStopSymbol', TType::I32, 2);
-            $xfer += $output->writeI32($this->codabarStopSymbol);
+        if ($this->stopSymbol !== null) {
+            $xfer += $output->writeFieldBegin('stopSymbol', TType::I32, 2);
+            $xfer += $output->writeI32($this->stopSymbol);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->toString !== null) {

@@ -28,12 +28,12 @@ class QrParametersDTO
             'class' => '\Aspose\Barcode\Bridge\QrStructuredAppendParametersDTO',
         ),
         2 => array(
-            'var' => 'qrECIEncoding',
+            'var' => 'eciEncoding',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'qrEncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -43,12 +43,12 @@ class QrParametersDTO
             'type' => TType::I32,
         ),
         5 => array(
-            'var' => 'qrErrorLevel',
+            'var' => 'errorLevel',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         6 => array(
-            'var' => 'qrVersion',
+            'var' => 'version',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -76,11 +76,11 @@ class QrParametersDTO
     /**
      * @var int
      */
-    public $qrECIEncoding = null;
+    public $eciEncoding = null;
     /**
      * @var int
      */
-    public $qrEncodeMode = null;
+    public $encodeMode = null;
     /**
      * @var int
      */
@@ -88,11 +88,11 @@ class QrParametersDTO
     /**
      * @var int
      */
-    public $qrErrorLevel = null;
+    public $errorLevel = null;
     /**
      * @var int
      */
-    public $qrVersion = null;
+    public $version = null;
     /**
      * @var int
      */
@@ -112,20 +112,20 @@ class QrParametersDTO
             if (isset($vals['structuredAppend'])) {
                 $this->structuredAppend = $vals['structuredAppend'];
             }
-            if (isset($vals['qrECIEncoding'])) {
-                $this->qrECIEncoding = $vals['qrECIEncoding'];
+            if (isset($vals['eciEncoding'])) {
+                $this->eciEncoding = $vals['eciEncoding'];
             }
-            if (isset($vals['qrEncodeMode'])) {
-                $this->qrEncodeMode = $vals['qrEncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
             if (isset($vals['qrEncodeType'])) {
                 $this->qrEncodeType = $vals['qrEncodeType'];
             }
-            if (isset($vals['qrErrorLevel'])) {
-                $this->qrErrorLevel = $vals['qrErrorLevel'];
+            if (isset($vals['errorLevel'])) {
+                $this->errorLevel = $vals['errorLevel'];
             }
-            if (isset($vals['qrVersion'])) {
-                $this->qrVersion = $vals['qrVersion'];
+            if (isset($vals['version'])) {
+                $this->version = $vals['version'];
             }
             if (isset($vals['microQRVersion'])) {
                 $this->microQRVersion = $vals['microQRVersion'];
@@ -168,14 +168,14 @@ class QrParametersDTO
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qrECIEncoding);
+                        $xfer += $input->readI32($this->eciEncoding);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qrEncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -189,14 +189,14 @@ class QrParametersDTO
                     break;
                 case 5:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qrErrorLevel);
+                        $xfer += $input->readI32($this->errorLevel);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 6:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qrVersion);
+                        $xfer += $input->readI32($this->version);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -244,14 +244,14 @@ class QrParametersDTO
             $xfer += $this->structuredAppend->write($output);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qrECIEncoding !== null) {
-            $xfer += $output->writeFieldBegin('qrECIEncoding', TType::I32, 2);
-            $xfer += $output->writeI32($this->qrECIEncoding);
+        if ($this->eciEncoding !== null) {
+            $xfer += $output->writeFieldBegin('eciEncoding', TType::I32, 2);
+            $xfer += $output->writeI32($this->eciEncoding);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qrEncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('qrEncodeMode', TType::I32, 3);
-            $xfer += $output->writeI32($this->qrEncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 3);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->qrEncodeType !== null) {
@@ -259,14 +259,14 @@ class QrParametersDTO
             $xfer += $output->writeI32($this->qrEncodeType);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qrErrorLevel !== null) {
-            $xfer += $output->writeFieldBegin('qrErrorLevel', TType::I32, 5);
-            $xfer += $output->writeI32($this->qrErrorLevel);
+        if ($this->errorLevel !== null) {
+            $xfer += $output->writeFieldBegin('errorLevel', TType::I32, 5);
+            $xfer += $output->writeI32($this->errorLevel);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qrVersion !== null) {
-            $xfer += $output->writeFieldBegin('qrVersion', TType::I32, 6);
-            $xfer += $output->writeI32($this->qrVersion);
+        if ($this->version !== null) {
+            $xfer += $output->writeFieldBegin('version', TType::I32, 6);
+            $xfer += $output->writeI32($this->version);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->microQRVersion !== null) {

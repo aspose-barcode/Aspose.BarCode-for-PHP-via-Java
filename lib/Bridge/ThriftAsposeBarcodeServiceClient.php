@@ -6502,40 +6502,40 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         throw new \Exception("HIBCPASRecord_equals failed: unknown result");
     }
 
-    public function MaxiCodeStandartSecondMessage_ctor()
+    public function MaxiCodeStandardSecondMessage_ctor()
     {
-        $this->send_MaxiCodeStandartSecondMessage_ctor();
-        return $this->recv_MaxiCodeStandartSecondMessage_ctor();
+        $this->send_MaxiCodeStandardSecondMessage_ctor();
+        return $this->recv_MaxiCodeStandardSecondMessage_ctor();
     }
 
-    public function send_MaxiCodeStandartSecondMessage_ctor()
+    public function send_MaxiCodeStandardSecondMessage_ctor()
     {
-        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MaxiCodeStandartSecondMessage_ctor_args();
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MaxiCodeStandardSecondMessage_ctor_args();
         $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
         if ($bin_accel) {
             thrift_protocol_write_binary(
                 $this->output_,
-                'MaxiCodeStandartSecondMessage_ctor',
+                'MaxiCodeStandardSecondMessage_ctor',
                 TMessageType::CALL,
                 $args,
                 $this->seqid_,
                 $this->output_->isStrictWrite()
             );
         } else {
-            $this->output_->writeMessageBegin('MaxiCodeStandartSecondMessage_ctor', TMessageType::CALL, $this->seqid_);
+            $this->output_->writeMessageBegin('MaxiCodeStandardSecondMessage_ctor', TMessageType::CALL, $this->seqid_);
             $args->write($this->output_);
             $this->output_->writeMessageEnd();
             $this->output_->getTransport()->flush();
         }
     }
 
-    public function recv_MaxiCodeStandartSecondMessage_ctor()
+    public function recv_MaxiCodeStandardSecondMessage_ctor()
     {
         $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
         if ($bin_accel) {
             $result = thrift_protocol_read_binary(
                 $this->input_,
-                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MaxiCodeStandartSecondMessage_ctor_result',
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MaxiCodeStandardSecondMessage_ctor_result',
                 $this->input_->isStrictRead()
             );
         } else {
@@ -6550,14 +6550,14 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
                 $this->input_->readMessageEnd();
                 throw $x;
             }
-            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MaxiCodeStandartSecondMessage_ctor_result();
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_MaxiCodeStandardSecondMessage_ctor_result();
             $result->read($this->input_);
             $this->input_->readMessageEnd();
         }
         if ($result->success !== null) {
             return $result->success;
         }
-        throw new \Exception("MaxiCodeStandartSecondMessage_ctor failed: unknown result");
+        throw new \Exception("MaxiCodeStandardSecondMessage_ctor failed: unknown result");
     }
 
     public function MaxiCodeStructuredSecondMessage_getMessage(\Aspose\Barcode\Bridge\MaxiCodeSecondMessageDTO $maxiCodeStructuredSecondMessage)

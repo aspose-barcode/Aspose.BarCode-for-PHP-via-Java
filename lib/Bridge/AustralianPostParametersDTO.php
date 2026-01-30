@@ -22,13 +22,13 @@ class AustralianPostParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'australianPostShortBarHeight',
+            'var' => 'shortBarHeight',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\UnitDTO',
         ),
         2 => array(
-            'var' => 'australianPostEncodingTable',
+            'var' => 'encodingTable',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -37,20 +37,20 @@ class AustralianPostParametersDTO
     /**
      * @var \Aspose\Barcode\Bridge\UnitDTO
      */
-    public $australianPostShortBarHeight = null;
+    public $shortBarHeight = null;
     /**
      * @var int
      */
-    public $australianPostEncodingTable = null;
+    public $encodingTable = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['australianPostShortBarHeight'])) {
-                $this->australianPostShortBarHeight = $vals['australianPostShortBarHeight'];
+            if (isset($vals['shortBarHeight'])) {
+                $this->shortBarHeight = $vals['shortBarHeight'];
             }
-            if (isset($vals['australianPostEncodingTable'])) {
-                $this->australianPostEncodingTable = $vals['australianPostEncodingTable'];
+            if (isset($vals['encodingTable'])) {
+                $this->encodingTable = $vals['encodingTable'];
             }
         }
     }
@@ -76,15 +76,15 @@ class AustralianPostParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::STRUCT) {
-                        $this->australianPostShortBarHeight = new \Aspose\Barcode\Bridge\UnitDTO();
-                        $xfer += $this->australianPostShortBarHeight->read($input);
+                        $this->shortBarHeight = new \Aspose\Barcode\Bridge\UnitDTO();
+                        $xfer += $this->shortBarHeight->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->australianPostEncodingTable);
+                        $xfer += $input->readI32($this->encodingTable);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -103,17 +103,17 @@ class AustralianPostParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('AustralianPostParametersDTO');
-        if ($this->australianPostShortBarHeight !== null) {
-            if (!is_object($this->australianPostShortBarHeight)) {
+        if ($this->shortBarHeight !== null) {
+            if (!is_object($this->shortBarHeight)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('australianPostShortBarHeight', TType::STRUCT, 1);
-            $xfer += $this->australianPostShortBarHeight->write($output);
+            $xfer += $output->writeFieldBegin('shortBarHeight', TType::STRUCT, 1);
+            $xfer += $this->shortBarHeight->write($output);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->australianPostEncodingTable !== null) {
-            $xfer += $output->writeFieldBegin('australianPostEncodingTable', TType::I32, 2);
-            $xfer += $output->writeI32($this->australianPostEncodingTable);
+        if ($this->encodingTable !== null) {
+            $xfer += $output->writeFieldBegin('encodingTable', TType::I32, 2);
+            $xfer += $output->writeI32($this->encodingTable);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

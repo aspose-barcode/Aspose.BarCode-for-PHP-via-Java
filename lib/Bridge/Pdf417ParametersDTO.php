@@ -27,12 +27,12 @@ class Pdf417ParametersDTO
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'pdf417ErrorLevel',
+            'var' => 'errorLevel',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'pdf417Truncate',
+            'var' => 'truncate',
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
@@ -52,62 +52,62 @@ class Pdf417ParametersDTO
             'type' => TType::DOUBLE,
         ),
         7 => array(
-            'var' => 'pdf417MacroFileID',
+            'var' => 'macroPdf417FileID',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         8 => array(
-            'var' => 'pdf417MacroSegmentID',
+            'var' => 'macroPdf417SegmentID',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         9 => array(
-            'var' => 'pdf417MacroSegmentsCount',
+            'var' => 'macroPdf417SegmentsCount',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         10 => array(
-            'var' => 'pdf417MacroFileName',
+            'var' => 'macroPdf417FileName',
             'isRequired' => false,
             'type' => TType::STRING,
         ),
         11 => array(
-            'var' => 'pdf417MacroTimeStamp',
+            'var' => 'macroPdf417TimeStamp',
             'isRequired' => false,
             'type' => TType::STRING,
         ),
         12 => array(
-            'var' => 'pdf417MacroSender',
+            'var' => 'macroPdf417Sender',
             'isRequired' => false,
             'type' => TType::STRING,
         ),
         13 => array(
-            'var' => 'pdf417MacroAddressee',
+            'var' => 'macroPdf417Addressee',
             'isRequired' => false,
             'type' => TType::STRING,
         ),
         14 => array(
-            'var' => 'pdf417MacroFileSize',
+            'var' => 'macroPdf417FileSize',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         15 => array(
-            'var' => 'pdf417MacroChecksum',
+            'var' => 'macroPdf417Checksum',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         16 => array(
-            'var' => 'pdf417ECIEncoding',
+            'var' => 'eciEncoding',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         17 => array(
-            'var' => 'pdf417MacroECIEncoding',
+            'var' => 'macroPdf417ECIEncoding',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         18 => array(
-            'var' => 'pdf417MacroTerminator',
+            'var' => 'macroPdf417Terminator',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -132,7 +132,7 @@ class Pdf417ParametersDTO
             'type' => TType::BOOL,
         ),
         23 => array(
-            'var' => 'pdf417EncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -145,11 +145,11 @@ class Pdf417ParametersDTO
     /**
      * @var int
      */
-    public $pdf417ErrorLevel = null;
+    public $errorLevel = null;
     /**
      * @var bool
      */
-    public $pdf417Truncate = null;
+    public $truncate = null;
     /**
      * @var int
      */
@@ -165,51 +165,51 @@ class Pdf417ParametersDTO
     /**
      * @var int
      */
-    public $pdf417MacroFileID = null;
+    public $macroPdf417FileID = null;
     /**
      * @var int
      */
-    public $pdf417MacroSegmentID = null;
+    public $macroPdf417SegmentID = null;
     /**
      * @var int
      */
-    public $pdf417MacroSegmentsCount = null;
+    public $macroPdf417SegmentsCount = null;
     /**
      * @var string
      */
-    public $pdf417MacroFileName = null;
+    public $macroPdf417FileName = null;
     /**
      * @var string
      */
-    public $pdf417MacroTimeStamp = null;
+    public $macroPdf417TimeStamp = null;
     /**
      * @var string
      */
-    public $pdf417MacroSender = null;
+    public $macroPdf417Sender = null;
     /**
      * @var string
      */
-    public $pdf417MacroAddressee = null;
+    public $macroPdf417Addressee = null;
     /**
      * @var int
      */
-    public $pdf417MacroFileSize = null;
+    public $macroPdf417FileSize = null;
     /**
      * @var int
      */
-    public $pdf417MacroChecksum = null;
+    public $macroPdf417Checksum = null;
     /**
      * @var int
      */
-    public $pdf417ECIEncoding = null;
+    public $eciEncoding = null;
     /**
      * @var int
      */
-    public $pdf417MacroECIEncoding = null;
+    public $macroPdf417ECIEncoding = null;
     /**
      * @var int
      */
-    public $pdf417MacroTerminator = null;
+    public $macroPdf417Terminator = null;
     /**
      * @var bool
      */
@@ -229,7 +229,7 @@ class Pdf417ParametersDTO
     /**
      * @var int
      */
-    public $pdf417EncodeMode = null;
+    public $encodeMode = null;
 
     public function __construct($vals = null)
     {
@@ -237,11 +237,11 @@ class Pdf417ParametersDTO
             if (isset($vals['pdf417CompactionMode'])) {
                 $this->pdf417CompactionMode = $vals['pdf417CompactionMode'];
             }
-            if (isset($vals['pdf417ErrorLevel'])) {
-                $this->pdf417ErrorLevel = $vals['pdf417ErrorLevel'];
+            if (isset($vals['errorLevel'])) {
+                $this->errorLevel = $vals['errorLevel'];
             }
-            if (isset($vals['pdf417Truncate'])) {
-                $this->pdf417Truncate = $vals['pdf417Truncate'];
+            if (isset($vals['truncate'])) {
+                $this->truncate = $vals['truncate'];
             }
             if (isset($vals['columns'])) {
                 $this->columns = $vals['columns'];
@@ -252,41 +252,41 @@ class Pdf417ParametersDTO
             if (isset($vals['aspectRatio'])) {
                 $this->aspectRatio = $vals['aspectRatio'];
             }
-            if (isset($vals['pdf417MacroFileID'])) {
-                $this->pdf417MacroFileID = $vals['pdf417MacroFileID'];
+            if (isset($vals['macroPdf417FileID'])) {
+                $this->macroPdf417FileID = $vals['macroPdf417FileID'];
             }
-            if (isset($vals['pdf417MacroSegmentID'])) {
-                $this->pdf417MacroSegmentID = $vals['pdf417MacroSegmentID'];
+            if (isset($vals['macroPdf417SegmentID'])) {
+                $this->macroPdf417SegmentID = $vals['macroPdf417SegmentID'];
             }
-            if (isset($vals['pdf417MacroSegmentsCount'])) {
-                $this->pdf417MacroSegmentsCount = $vals['pdf417MacroSegmentsCount'];
+            if (isset($vals['macroPdf417SegmentsCount'])) {
+                $this->macroPdf417SegmentsCount = $vals['macroPdf417SegmentsCount'];
             }
-            if (isset($vals['pdf417MacroFileName'])) {
-                $this->pdf417MacroFileName = $vals['pdf417MacroFileName'];
+            if (isset($vals['macroPdf417FileName'])) {
+                $this->macroPdf417FileName = $vals['macroPdf417FileName'];
             }
-            if (isset($vals['pdf417MacroTimeStamp'])) {
-                $this->pdf417MacroTimeStamp = $vals['pdf417MacroTimeStamp'];
+            if (isset($vals['macroPdf417TimeStamp'])) {
+                $this->macroPdf417TimeStamp = $vals['macroPdf417TimeStamp'];
             }
-            if (isset($vals['pdf417MacroSender'])) {
-                $this->pdf417MacroSender = $vals['pdf417MacroSender'];
+            if (isset($vals['macroPdf417Sender'])) {
+                $this->macroPdf417Sender = $vals['macroPdf417Sender'];
             }
-            if (isset($vals['pdf417MacroAddressee'])) {
-                $this->pdf417MacroAddressee = $vals['pdf417MacroAddressee'];
+            if (isset($vals['macroPdf417Addressee'])) {
+                $this->macroPdf417Addressee = $vals['macroPdf417Addressee'];
             }
-            if (isset($vals['pdf417MacroFileSize'])) {
-                $this->pdf417MacroFileSize = $vals['pdf417MacroFileSize'];
+            if (isset($vals['macroPdf417FileSize'])) {
+                $this->macroPdf417FileSize = $vals['macroPdf417FileSize'];
             }
-            if (isset($vals['pdf417MacroChecksum'])) {
-                $this->pdf417MacroChecksum = $vals['pdf417MacroChecksum'];
+            if (isset($vals['macroPdf417Checksum'])) {
+                $this->macroPdf417Checksum = $vals['macroPdf417Checksum'];
             }
-            if (isset($vals['pdf417ECIEncoding'])) {
-                $this->pdf417ECIEncoding = $vals['pdf417ECIEncoding'];
+            if (isset($vals['eciEncoding'])) {
+                $this->eciEncoding = $vals['eciEncoding'];
             }
-            if (isset($vals['pdf417MacroECIEncoding'])) {
-                $this->pdf417MacroECIEncoding = $vals['pdf417MacroECIEncoding'];
+            if (isset($vals['macroPdf417ECIEncoding'])) {
+                $this->macroPdf417ECIEncoding = $vals['macroPdf417ECIEncoding'];
             }
-            if (isset($vals['pdf417MacroTerminator'])) {
-                $this->pdf417MacroTerminator = $vals['pdf417MacroTerminator'];
+            if (isset($vals['macroPdf417Terminator'])) {
+                $this->macroPdf417Terminator = $vals['macroPdf417Terminator'];
             }
             if (isset($vals['isReaderInitialization'])) {
                 $this->isReaderInitialization = $vals['isReaderInitialization'];
@@ -300,8 +300,8 @@ class Pdf417ParametersDTO
             if (isset($vals['isCode128Emulation'])) {
                 $this->isCode128Emulation = $vals['isCode128Emulation'];
             }
-            if (isset($vals['pdf417EncodeMode'])) {
-                $this->pdf417EncodeMode = $vals['pdf417EncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
         }
     }
@@ -334,14 +334,14 @@ class Pdf417ParametersDTO
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417ErrorLevel);
+                        $xfer += $input->readI32($this->errorLevel);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::BOOL) {
-                        $xfer += $input->readBool($this->pdf417Truncate);
+                        $xfer += $input->readBool($this->truncate);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -369,84 +369,84 @@ class Pdf417ParametersDTO
                     break;
                 case 7:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroFileID);
+                        $xfer += $input->readI32($this->macroPdf417FileID);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 8:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroSegmentID);
+                        $xfer += $input->readI32($this->macroPdf417SegmentID);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 9:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroSegmentsCount);
+                        $xfer += $input->readI32($this->macroPdf417SegmentsCount);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 10:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->pdf417MacroFileName);
+                        $xfer += $input->readString($this->macroPdf417FileName);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 11:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->pdf417MacroTimeStamp);
+                        $xfer += $input->readString($this->macroPdf417TimeStamp);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 12:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->pdf417MacroSender);
+                        $xfer += $input->readString($this->macroPdf417Sender);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 13:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->pdf417MacroAddressee);
+                        $xfer += $input->readString($this->macroPdf417Addressee);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 14:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroFileSize);
+                        $xfer += $input->readI32($this->macroPdf417FileSize);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 15:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroChecksum);
+                        $xfer += $input->readI32($this->macroPdf417Checksum);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 16:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417ECIEncoding);
+                        $xfer += $input->readI32($this->eciEncoding);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 17:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroECIEncoding);
+                        $xfer += $input->readI32($this->macroPdf417ECIEncoding);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 18:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417MacroTerminator);
+                        $xfer += $input->readI32($this->macroPdf417Terminator);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -481,7 +481,7 @@ class Pdf417ParametersDTO
                     break;
                 case 23:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->pdf417EncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -505,14 +505,14 @@ class Pdf417ParametersDTO
             $xfer += $output->writeI32($this->pdf417CompactionMode);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417ErrorLevel !== null) {
-            $xfer += $output->writeFieldBegin('pdf417ErrorLevel', TType::I32, 2);
-            $xfer += $output->writeI32($this->pdf417ErrorLevel);
+        if ($this->errorLevel !== null) {
+            $xfer += $output->writeFieldBegin('errorLevel', TType::I32, 2);
+            $xfer += $output->writeI32($this->errorLevel);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417Truncate !== null) {
-            $xfer += $output->writeFieldBegin('pdf417Truncate', TType::BOOL, 3);
-            $xfer += $output->writeBool($this->pdf417Truncate);
+        if ($this->truncate !== null) {
+            $xfer += $output->writeFieldBegin('truncate', TType::BOOL, 3);
+            $xfer += $output->writeBool($this->truncate);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->columns !== null) {
@@ -530,64 +530,64 @@ class Pdf417ParametersDTO
             $xfer += $output->writeDouble($this->aspectRatio);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroFileID !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroFileID', TType::I32, 7);
-            $xfer += $output->writeI32($this->pdf417MacroFileID);
+        if ($this->macroPdf417FileID !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417FileID', TType::I32, 7);
+            $xfer += $output->writeI32($this->macroPdf417FileID);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroSegmentID !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroSegmentID', TType::I32, 8);
-            $xfer += $output->writeI32($this->pdf417MacroSegmentID);
+        if ($this->macroPdf417SegmentID !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417SegmentID', TType::I32, 8);
+            $xfer += $output->writeI32($this->macroPdf417SegmentID);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroSegmentsCount !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroSegmentsCount', TType::I32, 9);
-            $xfer += $output->writeI32($this->pdf417MacroSegmentsCount);
+        if ($this->macroPdf417SegmentsCount !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417SegmentsCount', TType::I32, 9);
+            $xfer += $output->writeI32($this->macroPdf417SegmentsCount);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroFileName !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroFileName', TType::STRING, 10);
-            $xfer += $output->writeString($this->pdf417MacroFileName);
+        if ($this->macroPdf417FileName !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417FileName', TType::STRING, 10);
+            $xfer += $output->writeString($this->macroPdf417FileName);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroTimeStamp !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroTimeStamp', TType::STRING, 11);
-            $xfer += $output->writeString($this->pdf417MacroTimeStamp);
+        if ($this->macroPdf417TimeStamp !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417TimeStamp', TType::STRING, 11);
+            $xfer += $output->writeString($this->macroPdf417TimeStamp);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroSender !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroSender', TType::STRING, 12);
-            $xfer += $output->writeString($this->pdf417MacroSender);
+        if ($this->macroPdf417Sender !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417Sender', TType::STRING, 12);
+            $xfer += $output->writeString($this->macroPdf417Sender);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroAddressee !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroAddressee', TType::STRING, 13);
-            $xfer += $output->writeString($this->pdf417MacroAddressee);
+        if ($this->macroPdf417Addressee !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417Addressee', TType::STRING, 13);
+            $xfer += $output->writeString($this->macroPdf417Addressee);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroFileSize !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroFileSize', TType::I32, 14);
-            $xfer += $output->writeI32($this->pdf417MacroFileSize);
+        if ($this->macroPdf417FileSize !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417FileSize', TType::I32, 14);
+            $xfer += $output->writeI32($this->macroPdf417FileSize);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroChecksum !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroChecksum', TType::I32, 15);
-            $xfer += $output->writeI32($this->pdf417MacroChecksum);
+        if ($this->macroPdf417Checksum !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417Checksum', TType::I32, 15);
+            $xfer += $output->writeI32($this->macroPdf417Checksum);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417ECIEncoding !== null) {
-            $xfer += $output->writeFieldBegin('pdf417ECIEncoding', TType::I32, 16);
-            $xfer += $output->writeI32($this->pdf417ECIEncoding);
+        if ($this->eciEncoding !== null) {
+            $xfer += $output->writeFieldBegin('eciEncoding', TType::I32, 16);
+            $xfer += $output->writeI32($this->eciEncoding);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroECIEncoding !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroECIEncoding', TType::I32, 17);
-            $xfer += $output->writeI32($this->pdf417MacroECIEncoding);
+        if ($this->macroPdf417ECIEncoding !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417ECIEncoding', TType::I32, 17);
+            $xfer += $output->writeI32($this->macroPdf417ECIEncoding);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417MacroTerminator !== null) {
-            $xfer += $output->writeFieldBegin('pdf417MacroTerminator', TType::I32, 18);
-            $xfer += $output->writeI32($this->pdf417MacroTerminator);
+        if ($this->macroPdf417Terminator !== null) {
+            $xfer += $output->writeFieldBegin('macroPdf417Terminator', TType::I32, 18);
+            $xfer += $output->writeI32($this->macroPdf417Terminator);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->isReaderInitialization !== null) {
@@ -610,9 +610,9 @@ class Pdf417ParametersDTO
             $xfer += $output->writeBool($this->isCode128Emulation);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->pdf417EncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('pdf417EncodeMode', TType::I32, 23);
-            $xfer += $output->writeI32($this->pdf417EncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 23);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

@@ -43,10 +43,11 @@ class AztecParameters implements Communicator
      * Gets a Aztec encode mode.
      * Default value: Auto.
      * </p>
+     * @return a Aztec encode mode.
      */
-    public function getAztecEncodeMode(): int
+    public function getEncodeMode() : int
     {
-        return $this->getAztecParametersDto()->aztecEncodeMode;
+        return $this->getAztecParametersDto()->encodeMode;
     }
 
     /**
@@ -54,10 +55,35 @@ class AztecParameters implements Communicator
      * Sets a Aztec encode mode.
      * Default value: Auto.
      * </p>
+     * @param value a Aztec encode mode.
+     */
+    public function setEncodeMode(int $value): void
+    {
+        $this->getAztecParametersDto()->encodeMode = $value;
+    }
+
+    /**
+     * <p>
+     * Gets a Aztec encode mode.
+     * Default value: Auto.
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
+     */
+    public function getAztecEncodeMode(): int
+    {
+        return $this->getAztecParametersDto()->encodeMode;
+    }
+
+    /**
+     * <p>
+     * Sets a Aztec encode mode.
+     * Default value: Auto.
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
      */
     public function setAztecEncodeMode(int $value): void
     {
-        $this->getAztecParametersDto()->aztecEncodeMode = $value;
+        $this->getAztecParametersDto()->encodeMode = $value;
     }
 
     /**
@@ -154,9 +180,9 @@ class AztecParameters implements Communicator
      * Value should between 5 to 95.
      * </p>
      */
-    public function getAztecErrorLevel(): int
+    public function getErrorLevel(): int
     {
-        return $this->getAztecParametersDto()->aztecErrorLevel;
+        return $this->getAztecParametersDto()->errorLevel;
     }
 
     /**
@@ -164,6 +190,30 @@ class AztecParameters implements Communicator
      * Level of error correction of Aztec types of barcode.
      * Value should between 5 to 95.
      * </p>
+     */
+    public function setErrorLevel(int $value) : void
+    {
+        $this->getAztecParametersDto()->errorLevel = $value;
+    }
+
+    /**
+     * <p>
+     * Level of error correction of Aztec types of barcode.
+     * Value should between 5 to 95.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getErrorLevel().
+     * </p>
+     */
+    public function getAztecErrorLevel(): int
+    {
+        return $this->getAztecParametersDto()->errorLevel;
+    }
+
+    /**
+     * <p>
+     * Level of error correction of Aztec types of barcode.
+     * Value should between 5 to 95.
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setErrorLevel().
      */
     public function setAztecErrorLevel(int $value): void
     {
@@ -176,9 +226,9 @@ class AztecParameters implements Communicator
      * Default value: AztecSymbolMode.Auto.
      * </p>
      */
-    public function getAztecSymbolMode(): int
+    public function getSymbolMode(): int
     {
-        return $this->getAztecParametersDto()->aztecSymbolMode;
+        return $this->getAztecParametersDto()->symbolMode;
     }
 
     /**
@@ -187,9 +237,33 @@ class AztecParameters implements Communicator
      * Default value: AztecSymbolMode.Auto.
      * </p>
      */
+    public function setSymbolMode(int $value): void
+    {
+        $this->getAztecParametersDto()->symbolMode = $value;
+    }
+
+    /**
+     * <p>
+     * Gets a Aztec Symbol mode.
+     * Default value: AztecSymbolMode.Auto.
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getSymbolMode().
+     */
+    public function getAztecSymbolMode(): int
+    {
+        return $this->getAztecParametersDto()->symbolMode;
+    }
+
+    /**
+     * <p>
+     * Sets a Aztec Symbol mode.
+     * Default value: AztecSymbolMode.Auto.
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setSymbolMode().
+     */
     public function setAztecSymbolMode(int $value): void
     {
-        $this->getAztecParametersDto()->aztecSymbolMode = $value;
+        $this->getAztecParametersDto()->symbolMode = $value;
     }
 
     /**

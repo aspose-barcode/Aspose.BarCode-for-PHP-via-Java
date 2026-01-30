@@ -22,7 +22,7 @@ class Code128ParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'code128EncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -31,13 +31,13 @@ class Code128ParametersDTO
     /**
      * @var int
      */
-    public $code128EncodeMode = null;
+    public $encodeMode = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['code128EncodeMode'])) {
-                $this->code128EncodeMode = $vals['code128EncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
         }
     }
@@ -63,7 +63,7 @@ class Code128ParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->code128EncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -82,9 +82,9 @@ class Code128ParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('Code128ParametersDTO');
-        if ($this->code128EncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('code128EncodeMode', TType::I32, 1);
-            $xfer += $output->writeI32($this->code128EncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 1);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

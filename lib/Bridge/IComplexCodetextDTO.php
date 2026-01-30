@@ -129,7 +129,7 @@ class IComplexCodetextDTO
             'type' => TType::I32,
         ),
         23 => array(
-            'var' => 'maxiCodeEncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -322,7 +322,7 @@ class IComplexCodetextDTO
     /**
      * @var int
      */
-    public $maxiCodeEncodeMode = null;
+    public $encodeMode = null;
     /**
      * @var int
      */
@@ -458,8 +458,8 @@ class IComplexCodetextDTO
             if (isset($vals['serviceCategory'])) {
                 $this->serviceCategory = $vals['serviceCategory'];
             }
-            if (isset($vals['maxiCodeEncodeMode'])) {
-                $this->maxiCodeEncodeMode = $vals['maxiCodeEncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
             if (isset($vals['ECIEncoding'])) {
                 $this->ECIEncoding = $vals['ECIEncoding'];
@@ -685,7 +685,7 @@ class IComplexCodetextDTO
                     break;
                 case 23:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->maxiCodeEncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -959,9 +959,9 @@ class IComplexCodetextDTO
             $xfer += $output->writeI32($this->serviceCategory);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->maxiCodeEncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('maxiCodeEncodeMode', TType::I32, 23);
-            $xfer += $output->writeI32($this->maxiCodeEncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 23);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->ECIEncoding !== null) {

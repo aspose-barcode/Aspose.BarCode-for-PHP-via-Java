@@ -22,7 +22,7 @@ class PostalParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'postalShortBarHeight',
+            'var' => 'shortBarHeight',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\UnitDTO',
@@ -32,13 +32,13 @@ class PostalParametersDTO
     /**
      * @var \Aspose\Barcode\Bridge\UnitDTO
      */
-    public $postalShortBarHeight = null;
+    public $shortBarHeight = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['postalShortBarHeight'])) {
-                $this->postalShortBarHeight = $vals['postalShortBarHeight'];
+            if (isset($vals['shortBarHeight'])) {
+                $this->shortBarHeight = $vals['shortBarHeight'];
             }
         }
     }
@@ -64,8 +64,8 @@ class PostalParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::STRUCT) {
-                        $this->postalShortBarHeight = new \Aspose\Barcode\Bridge\UnitDTO();
-                        $xfer += $this->postalShortBarHeight->read($input);
+                        $this->shortBarHeight = new \Aspose\Barcode\Bridge\UnitDTO();
+                        $xfer += $this->shortBarHeight->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -84,12 +84,12 @@ class PostalParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('PostalParametersDTO');
-        if ($this->postalShortBarHeight !== null) {
-            if (!is_object($this->postalShortBarHeight)) {
+        if ($this->shortBarHeight !== null) {
+            if (!is_object($this->shortBarHeight)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('postalShortBarHeight', TType::STRUCT, 1);
-            $xfer += $this->postalShortBarHeight->write($output);
+            $xfer += $output->writeFieldBegin('shortBarHeight', TType::STRUCT, 1);
+            $xfer += $this->shortBarHeight->write($output);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

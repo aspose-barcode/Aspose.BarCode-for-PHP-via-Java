@@ -99,31 +99,88 @@ class Pdf417Parameters implements Communicator
     /**
      * Identifies Pdf417 encode mode.
      * Default value: Auto.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
      */
     public function getPdf417EncodeMode(): int
     {
-        return $this->getPdf417ParametersDto()->pdf417EncodeMode;
+        return $this->getPdf417ParametersDto()->encodeMode;
     }
 
     /**
      * Identifies Pdf417 encode mode.
      * Default value: Auto.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
      */
     public function setPdf417EncodeMode(int $value): void
     {
-        $this->getPdf417ParametersDto()->pdf417EncodeMode = $value;
+        $this->getPdf417ParametersDto()->encodeMode = $value;
+    }
+
+    /**
+     * <p>
+     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+     * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
+     * Current implementation consists all well known charset encodings.
+     * </p>
+     */
+    public function getECIEncoding(): int
+    {
+        return $this->getPdf417ParametersDto()->eciEncoding;
+    }
+
+    /**
+     * <p>
+     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+     * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
+     * Current implementation consists all well known charset encodings.
+     * </p>
+     */
+    public function setECIEncoding(int $value): void
+    {
+        $this->getPdf417ParametersDto()->eciEncoding = $value;
+    }
+
+    /**
+     * <p>
+     * Gets Pdf417 symbology type of BarCode's error correction level
+     * ranging from level0 to level8, level0 means no error correction info,
+     * level8 means best error correction which means a larger picture.
+     * </p>
+     * @return Pdf417 symbology type of BarCode's error correction level
+     * ranging from level0 to level8, level0 means no error correction info,
+     * level8 means best error correction which means a larger picture.
+     */
+    public function getErrorLevel(): int
+    {
+        return $this->getPdf417ParametersDto()->errorLevel;
+    }
+
+    /**
+     * <p>
+     * Sets Pdf417 symbology type of BarCode's error correction level
+     * ranging from level0 to level8, level0 means no error correction info,
+     * level8 means best error correction which means a larger picture.
+     * </p>
+     * @param value Pdf417 symbology type of BarCode's error correction level
+     * ranging from level0 to level8, level0 means no error correction info,
+     * level8 means best error correction which means a larger picture.
+     */
+    public function setErrorLevel(int $value): void
+    {
+        $this->getPdf417ParametersDto()->errorLevel = $value;
     }
 
     /**
      * Gets Pdf417 symbology type of BarCode's error correction level
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getErrorLevel().
      */
     public function getPdf417ErrorLevel(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417ErrorLevel;
+            return $this->getPdf417ParametersDto()->errorLevel;
         }
         catch (Exception $ex)
         {
@@ -135,27 +192,49 @@ class Pdf417Parameters implements Communicator
      * Sets Pdf417 symbology type of BarCode's error correction level
      * ranging from level0 to level8, level0 means no error correction info,
      * level8 means best error correction which means a larger picture.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setErrorLevel().
      */
     public function setPdf417ErrorLevel(int $value): void
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417ErrorLevel = $value;
+            $this->getPdf417ParametersDto()->errorLevel = $value;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    } /**
+ * <p>
+ * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
+ * Also known as CompactPDF417. Rigth row indicator and right stop pattern are removed in this mode.
+ * </p>
+ */
+    public function getTruncate(): bool
+    {
+        return $this->getPdf417ParametersDto()->truncate;
+    }
+
+    /**
+     * <p>
+     * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
+     * Also known as CompactPDF417. Rigth row indicator and right stop pattern are removed in this mode.
+     * </p>
+     */
+    public function setTruncate(bool $value): void
+    {
+        $this->getPdf417ParametersDto()->truncate = $value;
     }
 
     /**
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getTruncate().
      */
     public function getPdf417Truncate(): bool
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417Truncate;
+            return $this->getPdf417ParametersDto()->truncate;
         }
         catch (Exception $ex)
         {
@@ -165,12 +244,13 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Whether Pdf417 symbology type of BarCode is truncated (to reduce space).
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setTruncate().
      */
     public function setPdf417Truncate(bool $value): void
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417Truncate = $value;
+            $this->getPdf417ParametersDto()->truncate = $value;
         }
         catch (Exception $ex)
         {
@@ -269,14 +349,37 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
+     * MacroPdf417 barcode's file ID (Required field).
+     * MicroPDF417 barcode's file ID (Required field for Structured Append mode)
+     * </p>
+     */
+    public function getMacroPdf417FileID(): int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417FileID;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode's file ID (Required field).
+     * MicroPDF417 barcode's file ID (Required field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417FileID(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417FileID = $value;
+    }
+
+    /**
      * Getsmacro Pdf417 barcode's file ID.
      * Used for MacroPdf417.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417FileID().
      */
     public function getPdf417MacroFileID(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroFileID;
+            return $this->getPdf417ParametersDto()->macroPdf417FileID;
         }
         catch (Exception $ex)
         {
@@ -287,12 +390,13 @@ class Pdf417Parameters implements Communicator
     /**
      * Sets macro Pdf417 barcode's file ID.
      * Used for MacroPdf417.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417FileID().
      */
     public function setPdf417MacroFileID(int $value): void
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroFileID = $value;
+            $this->getPdf417ParametersDto()->macroPdf417FileID = $value;
         }
         catch (Exception $ex)
         {
@@ -301,13 +405,36 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
+     * MacroPdf417 barcode's segment ID (Required field), which starts from 0, to MacroSegmentsCount - 1.
+     * MicroPDF417 barcode's segment ID (Required field for Structured Append mode)
+     * </p>
+     */
+     public function getMacroPdf417SegmentID(): int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417SegmentID;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode's segment ID (Required field), which starts from 0, to MacroSegmentsCount - 1.
+     * MicroPDF417 barcode's segment ID (Required field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417SegmentID(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417SegmentID = $value;
+    }
+
+    /**
      * Gets macro Pdf417 barcode's segment ID, which starts from 0, to MacroSegmentsCount - 1.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417SegmentID().
      */
     public function getPdf417MacroSegmentID(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroSegmentID;
+            return $this->getPdf417ParametersDto()->macroPdf417SegmentID;
         }
         catch (Exception $ex)
         {
@@ -317,27 +444,50 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Sets macro Pdf417 barcode's segment ID, which starts from 0, to MacroSegmentsCount - 1.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417SegmentID().
      */
     public function setPdf417MacroSegmentID(int $value): void
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroSegmentID = $value;
+            $this->getPdf417ParametersDto()->macroPdf417SegmentID = $value;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+    /**
+     * <p>
+     * MacroPdf417 barcode segments count (optional field).
+     * MicroPDF417 barcode segments count (optional field for Structured Append mode)
+     * </p>
+     */
+    public function getMacroPdf417SegmentsCount(): int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417SegmentsCount;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode segments count (optional field).
+     * MicroPDF417 barcode segments count (optional field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417SegmentsCount(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417SegmentsCount = $value;
+    }
 
     /**
      * Gets macro Pdf417 barcode segments count.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417SegmentsCount().
      */
     public function getPdf417MacroSegmentsCount(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroSegmentsCount;
+            return $this->getPdf417ParametersDto()->macroPdf417SegmentsCount;
         }
         catch (Exception $ex)
         {
@@ -346,13 +496,36 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
+     * MacroPdf417 barcode file name (optional field).
+     * MicroPDF417 barcode file name (optional field for Structured Append mode)
+     * </p>
+     */
+    public function getMacroPdf417FileName() : string
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417FileName;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode file name (optional field).
+     * MicroPDF417 barcode file name (optional field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417FileName(string $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417FileName = $value;
+    }
+
+    /**
      * Sets macro Pdf417 barcode segments count.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417SegmentsCount().
      */
     public function setPdf417MacroSegmentsCount(int $value): void
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroSegmentsCount = $value;
+            $this->getPdf417ParametersDto()->macroPdf417SegmentsCount = $value;
         }
         catch (Exception $ex)
         {
@@ -363,12 +536,13 @@ class Pdf417Parameters implements Communicator
     /**
      * Gets macro Pdf417 barcode file name.
      * @return
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417FileName().
      */
     public function getPdf417MacroFileName(): string
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroFileName;
+            return $this->getPdf417ParametersDto()->macroPdf417FileName;
         }
         catch (Exception $ex)
         {
@@ -379,12 +553,49 @@ class Pdf417Parameters implements Communicator
     /**
      * Sets macro Pdf417 barcode file name.
      * @param string $value
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417FileName().
      */
     public function setPdf417MacroFileName(string $value)
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroFileName = $value;
+            $this->getPdf417ParametersDto()->macroPdf417FileName = $value;
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode time stamp (optional field).
+     * MicroPDF417 barcode time stamp (optional field for Structured Append mode)
+     * </p>
+     */
+    public function getMacroPdf417TimeStamp() : DateTime
+    {
+        try
+        {
+            return new DateTime('@' . $this->getPdf417ParametersDto()->macroPdf417TimeStamp);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode time stamp (optional field).
+     * MicroPDF417 barcode time stamp (optional field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417TimeStamp(DateTime $value): void
+    {
+        try
+        {
+            $this->getPdf417ParametersDto()->macroPdf417TimeStamp = $value->getTimestamp() . "";
         }
         catch (Exception $ex)
         {
@@ -394,12 +605,13 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Gets macro Pdf417 barcode time stamp.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417TimeStamp().
      */
     public function getPdf417MacroTimeStamp(): DateTime
     {
         try
         {
-            return new DateTime('@' . $this->getPdf417ParametersDto()->pdf417MacroTimeStamp);
+            return new DateTime('@' . $this->getPdf417ParametersDto()->macroPdf417TimeStamp);
         }
         catch (Exception $ex)
         {
@@ -409,12 +621,13 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Sets macro Pdf417 barcode time stamp.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417TimeStamp().
      */
     public function setPdf417MacroTimeStamp(DateTime $value)
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroTimeStamp = $value->getTimestamp() . "";
+            $this->getPdf417ParametersDto()->macroPdf417TimeStamp = $value->getTimestamp() . "";
         }
         catch (Exception $ex)
         {
@@ -423,13 +636,36 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
+     * MacroPdf417 barcode sender name (optional field).
+     * MicroPDF417 barcode sender name (optional field for Structured Append mode)
+     * </p>
+     */
+    public function getMacroPdf417Sender(): string
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417Sender;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode sender name (optional field).
+     * MicroPDF417 barcode sender name (optional field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417Sender(string $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417Sender = $value;
+    }
+
+    /**
      * Gets macro Pdf417 barcode sender name.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417Sender().
      */
     public function getPdf417MacroSender(): string
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroSender;
+            return $this->getPdf417ParametersDto()->macroPdf417Sender;
         }
         catch (Exception $ex)
         {
@@ -439,12 +675,13 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Sets macro Pdf417 barcode sender name.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417Sender().
      */
     public function setPdf417MacroSender(string $value)
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroSender = $value;
+            $this->getPdf417ParametersDto()->macroPdf417Sender = $value;
         }
         catch (Exception $ex)
         {
@@ -453,13 +690,36 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
+     * MacroPdf417 barcode addressee name (optional field).
+     * MicroPDF417 barcode addressee name (optional field for Structured Append mode)
+     * </p>
+     */
+    public function getMacroPdf417Addressee() : string
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417Addressee;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode addressee name (optional field).
+     * MicroPDF417 barcode addressee name (optional field for Structured Append mode)
+     * </p>
+     */
+    public function setMacroPdf417Addressee(string $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417Addressee = $value;
+    }
+
+    /**
      * Gets macro Pdf417 barcode addressee name.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417Addressee().
      */
     public function getPdf417MacroAddressee(): string
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroAddressee;
+            return $this->getPdf417ParametersDto()->macroPdf417Addressee;
         }
         catch (Exception $ex)
         {
@@ -469,12 +729,13 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Sets macro Pdf417 barcode addressee name.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417Addressee().
      */
     public function setPdf417MacroAddressee(string $value)
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroAddressee = $value;
+            $this->getPdf417ParametersDto()->macroPdf417Addressee = $value;
         }
         catch (Exception $ex)
         {
@@ -483,14 +744,39 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
+     * MacroPdf417 file size (optional field).
+     * MicroPDF417 file size (optional field for Structured Append mode)
+     * The file size field contains the size in bytes of the entire source file.
+     * </p>
+     */
+    public function getMacroPdf417FileSize() : int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417FileSize;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 file size (optional field).
+     * MicroPDF417 file size (optional field for Structured Append mode)
+     * The file size field contains the size in bytes of the entire source file.
+     * </p>
+     */
+    public function setMacroPdf417FileSize(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417FileSize = $value;
+    }
+
+    /**
      * Gets macro Pdf417 file size.
      * @return int file size field contains the size in bytes of the entire source file.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417FileSize().
      */
     public function getPdf417MacroFileSize(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroFileSize;
+            return $this->getPdf417ParametersDto()->macroPdf417FileSize;
         }
         catch (Exception $ex)
         {
@@ -501,28 +787,53 @@ class Pdf417Parameters implements Communicator
     /**
      * Sets macro Pdf417 file size.
      * @param int $value The file size field contains the size in bytes of the entire source file.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417FileSize().
      */
     public function setPdf417MacroFileSize(int $value)
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroFileSize = $value;
+            $this->getPdf417ParametersDto()->macroPdf417FileSize = $value;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+    /**
+     * <p>
+     * MacroPdf417 barcode checksum (optional field).
+     * MicroPDF417 barcode checksum (optional field for Structured Append mode)
+     * The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial. x^16 + x^12 + x^5 + 1
+     * </p>
+     */
+    public function getMacroPdf417Checksum() : int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417Checksum;
+    }
+
+    /**
+     * <p>
+     * MacroPdf417 barcode checksum (optional field).
+     * MicroPDF417 barcode checksum (optional field for Structured Append mode)
+     * The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial. x^16 + x^12 + x^5 + 1
+     * </p>
+     */
+    public function setMacroPdf417Checksum(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417Checksum = $value;
+    }
 
     /**
      *  Gets macro Pdf417 barcode checksum.
      * @return int checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417Checksum().
      */
     public function getPdf417MacroChecksum(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroChecksum;
+            return $this->getPdf417ParametersDto()->macroPdf417Checksum;
         }
         catch (Exception $ex)
         {
@@ -533,6 +844,7 @@ class Pdf417Parameters implements Communicator
     /**
      *  Sets macro Pdf417 barcode checksum.
      * @param int $value The checksum field contains the value of the 16-bit (2 bytes) CRC checksum using the CCITT-16 polynomial.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417Checksum().
      */
     public function setPdf417MacroChecksum(int $value)
     {
@@ -545,6 +857,27 @@ class Pdf417Parameters implements Communicator
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+    /**
+     * <p>
+     * Identifies Pdf417 encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function getEncodeMode() : int
+    {
+        return $this->getPdf417ParametersDto()->encodeMode;
+    }
+
+    /**
+     * <p>
+     * Identifies Pdf417 encode mode.
+     * Default value: Auto.
+     * </p>
+     */
+    public function setEncodeMode(int $value): void
+    {
+        $this->getPdf417ParametersDto()->encodeMode = $value;
+    }
 
     /**
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
@@ -555,7 +888,7 @@ class Pdf417Parameters implements Communicator
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417ECIEncoding;
+            return $this->getPdf417ParametersDto()->eciEncoding;
         }
         catch (Exception $ex)
         {
@@ -567,12 +900,13 @@ class Pdf417Parameters implements Communicator
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
      * about the used references for encoding the data in the symbol. Not applied for Macro PDF417 text fields.
      * Current implementation consists all well known charset encodings.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setECIEncoding().
      */
     public function setPdf417ECIEncoding(int $value): void
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417ECIEncoding = $value;
+            $this->getPdf417ParametersDto()->eciEncoding = $value;
         }
         catch (Exception $ex)
         {
@@ -581,13 +915,34 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
      * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
+     * </p>
+     */
+    public function getMacroPdf417ECIEncoding(): int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417ECIEncoding;
+    }
+
+    /**
+     * <p>
+     * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
+     * </p>
+     */
+    public function setMacroPdf417ECIEncoding(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417ECIEncoding = $value;
+    }
+
+    /**
+     * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417ECIEncoding().
      */
     public function getPdf417MacroECIEncoding(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroECIEncoding;
+            return $this->getPdf417ParametersDto()->macroPdf417ECIEncoding;
         }
         catch (Exception $ex)
         {
@@ -597,6 +952,7 @@ class Pdf417Parameters implements Communicator
 
     /**
      * Extended Channel Interpretation Identifiers. Applies for Macro PDF417 text fields.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417ECIEncoding().
      */
     public function setPdf417MacroECIEncoding(int $value)
     {
@@ -611,14 +967,37 @@ class Pdf417Parameters implements Communicator
     }
 
     /**
+     * <p>
      * Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
      * Applied only for Macro PDF417.
+     * </p>
+     */
+    public function getMacroPdf417Terminator(): int
+    {
+        return $this->getPdf417ParametersDto()->macroPdf417Terminator;
+    }
+
+    /**
+     * <p>
+     * Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
+     * Applied only for Macro PDF417.
+     * </p>
+     */
+    public function setMacroPdf417Terminator(int $value): void
+    {
+        $this->getPdf417ParametersDto()->macroPdf417Terminator = $value;
+    }
+
+    /**
+     * Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
+     * Applied only for Macro PDF417.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMacroPdf417Terminator().
      */
     public function getPdf417MacroTerminator(): int
     {
         try
         {
-            return $this->getPdf417ParametersDto()->pdf417MacroTerminator;
+            return $this->getPdf417ParametersDto()->macroPdf417Terminator;
         }
         catch (Exception $ex)
         {
@@ -629,12 +1008,13 @@ class Pdf417Parameters implements Communicator
     /**
      * Used to tell the encoder whether to add Macro PDF417 Terminator (codeword 922) to the segment.
      * Applied only for Macro PDF417.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMacroPdf417Terminator().
      */
     public function setPdf417MacroTerminator(int $value)
     {
         try
         {
-            $this->getPdf417ParametersDto()->pdf417MacroTerminator = $value;
+            $this->getPdf417ParametersDto()->macroPdf417Terminator = $value;
         }
         catch (Exception $ex)
         {

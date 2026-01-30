@@ -22,7 +22,7 @@ class AztecParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'aztecEncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -47,12 +47,12 @@ class AztecParametersDTO
             'type' => TType::STRING,
         ),
         6 => array(
-            'var' => 'aztecErrorLevel',
+            'var' => 'errorLevel',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         7 => array(
-            'var' => 'aztecSymbolMode',
+            'var' => 'symbolMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -76,7 +76,7 @@ class AztecParametersDTO
     /**
      * @var int
      */
-    public $aztecEncodeMode = null;
+    public $encodeMode = null;
     /**
      * @var int
      */
@@ -96,11 +96,11 @@ class AztecParametersDTO
     /**
      * @var int
      */
-    public $aztecErrorLevel = null;
+    public $errorLevel = null;
     /**
      * @var int
      */
-    public $aztecSymbolMode = null;
+    public $symbolMode = null;
     /**
      * @var int
      */
@@ -117,8 +117,8 @@ class AztecParametersDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['aztecEncodeMode'])) {
-                $this->aztecEncodeMode = $vals['aztecEncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
             if (isset($vals['ECIEncoding'])) {
                 $this->ECIEncoding = $vals['ECIEncoding'];
@@ -132,11 +132,11 @@ class AztecParametersDTO
             if (isset($vals['structuredAppendFileId'])) {
                 $this->structuredAppendFileId = $vals['structuredAppendFileId'];
             }
-            if (isset($vals['aztecErrorLevel'])) {
-                $this->aztecErrorLevel = $vals['aztecErrorLevel'];
+            if (isset($vals['errorLevel'])) {
+                $this->errorLevel = $vals['errorLevel'];
             }
-            if (isset($vals['aztecSymbolMode'])) {
-                $this->aztecSymbolMode = $vals['aztecSymbolMode'];
+            if (isset($vals['symbolMode'])) {
+                $this->symbolMode = $vals['symbolMode'];
             }
             if (isset($vals['layersCount'])) {
                 $this->layersCount = $vals['layersCount'];
@@ -171,7 +171,7 @@ class AztecParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->aztecEncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -206,14 +206,14 @@ class AztecParametersDTO
                     break;
                 case 6:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->aztecErrorLevel);
+                        $xfer += $input->readI32($this->errorLevel);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 7:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->aztecSymbolMode);
+                        $xfer += $input->readI32($this->symbolMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -253,9 +253,9 @@ class AztecParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('AztecParametersDTO');
-        if ($this->aztecEncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('aztecEncodeMode', TType::I32, 1);
-            $xfer += $output->writeI32($this->aztecEncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 1);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->ECIEncoding !== null) {
@@ -278,14 +278,14 @@ class AztecParametersDTO
             $xfer += $output->writeString($this->structuredAppendFileId);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->aztecErrorLevel !== null) {
-            $xfer += $output->writeFieldBegin('aztecErrorLevel', TType::I32, 6);
-            $xfer += $output->writeI32($this->aztecErrorLevel);
+        if ($this->errorLevel !== null) {
+            $xfer += $output->writeFieldBegin('errorLevel', TType::I32, 6);
+            $xfer += $output->writeI32($this->errorLevel);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->aztecSymbolMode !== null) {
-            $xfer += $output->writeFieldBegin('aztecSymbolMode', TType::I32, 7);
-            $xfer += $output->writeI32($this->aztecSymbolMode);
+        if ($this->symbolMode !== null) {
+            $xfer += $output->writeFieldBegin('symbolMode', TType::I32, 7);
+            $xfer += $output->writeI32($this->symbolMode);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->layersCount !== null) {

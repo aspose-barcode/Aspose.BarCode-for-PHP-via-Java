@@ -43,12 +43,36 @@ class DataMatrixParameters implements Communicator
     /**
      * <p>
      * Gets a Datamatrix symbol size.
+     * Default value: Version.Auto.
+     * </p>
+     * @return a Datamatrix symbol size.
+     */
+    public function getVersion() : int
+    {
+        return $this->getDataMatrixParametersDto()->version;
+    }
+
+    /**
+     * <p>
+     * Sets a Datamatrix symbol size.
+     * Default value: Version.Auto.
+     * </p>
+     * @param value a Datamatrix symbol size.
+     */
+    public function setVersion(int $value) : void
+    {
+        $this->getDataMatrixParametersDto()->version = $value;
+    }
+
+    /**
+     * <p>
+     * Gets a Datamatrix symbol size.
      * Default value: DataMatrixVersion.Auto.
      * </p>
      */
     public function getDataMatrixVersion(): int
     {
-        return $this->getDataMatrixParametersDto()->dataMatrixVersion;
+        return $this->getDataMatrixParametersDto()->version;
     }
 
     /**
@@ -59,12 +83,37 @@ class DataMatrixParameters implements Communicator
      */
     public function setDataMatrixVersion(int $value)
     {
-        $this->getDataMatrixParametersDto()->dataMatrixVersion = $value;
+        $this->getDataMatrixParametersDto()->version = $value;
+    }
+
+    /**
+     * <p>
+     * Gets a Datamatrix ECC type.
+     * Default value: DataMatrixEccType.Ecc200.
+     * </p>
+     * @return a Datamatrix ECC type.
+     */
+    public function getEccType(): int
+    {
+        return $this->getDataMatrixParametersDto()->eccType;
+    }
+
+    /**
+     * <p>
+     * Sets a Datamatrix ECC type.
+     * Default value: DataMatrixEccType.Ecc200.
+     * </p>
+     * @param value a Datamatrix ECC type.
+     */
+    public function setEccType(int $value): void
+    {
+        $this->getDataMatrixParametersDto()->eccType = $value;
     }
 
     /**
      * Gets a Datamatrix ECC type.
      * Default value: DataMatrixEccType::ECC_200.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEccType().
      */
     public function getDataMatrixEcc(): int
     {
@@ -81,6 +130,7 @@ class DataMatrixParameters implements Communicator
     /**
      * Sets a Datamatrix ECC type.
      * Default value: DataMatrixEccType::ECC_200.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEccType().
      */
     public function setDataMatrixEcc(int $value): void
     {
@@ -95,14 +145,37 @@ class DataMatrixParameters implements Communicator
     }
 
     /**
+     * <p>
+     * Encode mode of Datamatrix barcode.
+     * Default value: EncodeMode.Auto.
+     * </p>
+     */
+    public function getEncodeMode(): int
+    {
+        return $this->getDataMatrixParametersDto()->encodeMode;
+    }
+
+    /**
+     * <p>
+     * Encode mode of Datamatrix barcode.
+     * Default value: EncodeMode.Auto.
+     * </p>
+     */
+    public function setEncodeMode(int $value) : void
+    {
+        $this->getDataMatrixParametersDto()->encodeMode = $value;
+    }
+
+    /**
      * Encode mode of Datamatrix barcode.
      * Default value: DataMatrixEncodeMode::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
      */
     public function getDataMatrixEncodeMode(): int
     {
         try
         {
-            return $this->getDataMatrixParametersDto()->dataMatrixEncodeMode;
+            return $this->getDataMatrixParametersDto()->encodeMode;
         }
         catch (Exception $ex)
         {
@@ -113,12 +186,13 @@ class DataMatrixParameters implements Communicator
     /**
      * Encode mode of Datamatrix barcode.
      * Default value: DataMatrixEncodeMode::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
      */
     public function setDataMatrixEncodeMode(int $value): void
     {
         try
         {
-            $this->getDataMatrixParametersDto()->dataMatrixEncodeMode = $value;
+            $this->getDataMatrixParametersDto()->encodeMode = $value;
         }
         catch (Exception $ex)
         {

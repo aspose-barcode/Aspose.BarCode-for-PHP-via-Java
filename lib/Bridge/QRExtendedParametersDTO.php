@@ -22,17 +22,17 @@ class QRExtendedParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'qRStructuredAppendModeBarCodesQuantity',
+            'var' => 'structuredAppendModeBarCodesQuantity',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'qRStructuredAppendModeBarCodeIndex',
+            'var' => 'structuredAppendModeBarCodeIndex',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'qRStructuredAppendModeParityData',
+            'var' => 'structuredAppendModeParityData',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -42,7 +42,7 @@ class QRExtendedParametersDTO
             'type' => TType::BOOL,
         ),
         5 => array(
-            'var' => 'qrVersion',
+            'var' => 'version',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -57,7 +57,7 @@ class QRExtendedParametersDTO
             'type' => TType::I32,
         ),
         8 => array(
-            'var' => 'qrErrorLevel',
+            'var' => 'errorLevel',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -71,15 +71,15 @@ class QRExtendedParametersDTO
     /**
      * @var int
      */
-    public $qRStructuredAppendModeBarCodesQuantity = null;
+    public $structuredAppendModeBarCodesQuantity = null;
     /**
      * @var int
      */
-    public $qRStructuredAppendModeBarCodeIndex = null;
+    public $structuredAppendModeBarCodeIndex = null;
     /**
      * @var int
      */
-    public $qRStructuredAppendModeParityData = null;
+    public $structuredAppendModeParityData = null;
     /**
      * @var bool
      */
@@ -87,7 +87,7 @@ class QRExtendedParametersDTO
     /**
      * @var int
      */
-    public $qrVersion = null;
+    public $version = null;
     /**
      * @var int
      */
@@ -99,7 +99,7 @@ class QRExtendedParametersDTO
     /**
      * @var int
      */
-    public $qrErrorLevel = null;
+    public $errorLevel = null;
     /**
      * @var string
      */
@@ -108,20 +108,20 @@ class QRExtendedParametersDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['qRStructuredAppendModeBarCodesQuantity'])) {
-                $this->qRStructuredAppendModeBarCodesQuantity = $vals['qRStructuredAppendModeBarCodesQuantity'];
+            if (isset($vals['structuredAppendModeBarCodesQuantity'])) {
+                $this->structuredAppendModeBarCodesQuantity = $vals['structuredAppendModeBarCodesQuantity'];
             }
-            if (isset($vals['qRStructuredAppendModeBarCodeIndex'])) {
-                $this->qRStructuredAppendModeBarCodeIndex = $vals['qRStructuredAppendModeBarCodeIndex'];
+            if (isset($vals['structuredAppendModeBarCodeIndex'])) {
+                $this->structuredAppendModeBarCodeIndex = $vals['structuredAppendModeBarCodeIndex'];
             }
-            if (isset($vals['qRStructuredAppendModeParityData'])) {
-                $this->qRStructuredAppendModeParityData = $vals['qRStructuredAppendModeParityData'];
+            if (isset($vals['structuredAppendModeParityData'])) {
+                $this->structuredAppendModeParityData = $vals['structuredAppendModeParityData'];
             }
             if (isset($vals['empty'])) {
                 $this->empty = $vals['empty'];
             }
-            if (isset($vals['qrVersion'])) {
-                $this->qrVersion = $vals['qrVersion'];
+            if (isset($vals['version'])) {
+                $this->version = $vals['version'];
             }
             if (isset($vals['microQRVersion'])) {
                 $this->microQRVersion = $vals['microQRVersion'];
@@ -129,8 +129,8 @@ class QRExtendedParametersDTO
             if (isset($vals['rectMicroQRVersion'])) {
                 $this->rectMicroQRVersion = $vals['rectMicroQRVersion'];
             }
-            if (isset($vals['qrErrorLevel'])) {
-                $this->qrErrorLevel = $vals['qrErrorLevel'];
+            if (isset($vals['errorLevel'])) {
+                $this->errorLevel = $vals['errorLevel'];
             }
             if (isset($vals['toString'])) {
                 $this->toString = $vals['toString'];
@@ -159,21 +159,21 @@ class QRExtendedParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qRStructuredAppendModeBarCodesQuantity);
+                        $xfer += $input->readI32($this->structuredAppendModeBarCodesQuantity);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qRStructuredAppendModeBarCodeIndex);
+                        $xfer += $input->readI32($this->structuredAppendModeBarCodeIndex);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qRStructuredAppendModeParityData);
+                        $xfer += $input->readI32($this->structuredAppendModeParityData);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -187,7 +187,7 @@ class QRExtendedParametersDTO
                     break;
                 case 5:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qrVersion);
+                        $xfer += $input->readI32($this->version);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -208,7 +208,7 @@ class QRExtendedParametersDTO
                     break;
                 case 8:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->qrErrorLevel);
+                        $xfer += $input->readI32($this->errorLevel);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -234,19 +234,19 @@ class QRExtendedParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('QRExtendedParametersDTO');
-        if ($this->qRStructuredAppendModeBarCodesQuantity !== null) {
-            $xfer += $output->writeFieldBegin('qRStructuredAppendModeBarCodesQuantity', TType::I32, 1);
-            $xfer += $output->writeI32($this->qRStructuredAppendModeBarCodesQuantity);
+        if ($this->structuredAppendModeBarCodesQuantity !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeBarCodesQuantity', TType::I32, 1);
+            $xfer += $output->writeI32($this->structuredAppendModeBarCodesQuantity);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qRStructuredAppendModeBarCodeIndex !== null) {
-            $xfer += $output->writeFieldBegin('qRStructuredAppendModeBarCodeIndex', TType::I32, 2);
-            $xfer += $output->writeI32($this->qRStructuredAppendModeBarCodeIndex);
+        if ($this->structuredAppendModeBarCodeIndex !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeBarCodeIndex', TType::I32, 2);
+            $xfer += $output->writeI32($this->structuredAppendModeBarCodeIndex);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qRStructuredAppendModeParityData !== null) {
-            $xfer += $output->writeFieldBegin('qRStructuredAppendModeParityData', TType::I32, 3);
-            $xfer += $output->writeI32($this->qRStructuredAppendModeParityData);
+        if ($this->structuredAppendModeParityData !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeParityData', TType::I32, 3);
+            $xfer += $output->writeI32($this->structuredAppendModeParityData);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->empty !== null) {
@@ -254,9 +254,9 @@ class QRExtendedParametersDTO
             $xfer += $output->writeBool($this->empty);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qrVersion !== null) {
-            $xfer += $output->writeFieldBegin('qrVersion', TType::I32, 5);
-            $xfer += $output->writeI32($this->qrVersion);
+        if ($this->version !== null) {
+            $xfer += $output->writeFieldBegin('version', TType::I32, 5);
+            $xfer += $output->writeI32($this->version);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->microQRVersion !== null) {
@@ -269,9 +269,9 @@ class QRExtendedParametersDTO
             $xfer += $output->writeI32($this->rectMicroQRVersion);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->qrErrorLevel !== null) {
-            $xfer += $output->writeFieldBegin('qrErrorLevel', TType::I32, 8);
-            $xfer += $output->writeI32($this->qrErrorLevel);
+        if ($this->errorLevel !== null) {
+            $xfer += $output->writeFieldBegin('errorLevel', TType::I32, 8);
+            $xfer += $output->writeI32($this->errorLevel);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->toString !== null) {

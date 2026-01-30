@@ -47,17 +47,43 @@ class MaxiCodeExtendedParameters implements Communicator
     }
 
     /**
+     * <p>
+     * Gets a MaxiCode encode mode.
+     * Default value: Mode4
+     * </p>
+     * @return a MaxiCode encode mode.
+     */
+    public function getMode(): int
+    {
+        return $this->getMaxiCodeExtendedParametersDTO()->mode;
+    }
+
+    /**
      * Gets a MaxiCode encode mode.
      *  Default value: Mode4
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getMode().
      */
     public function getMaxiCodeMode(): int
     {
-        return $this->getMaxiCodeExtendedParametersDTO()->maxiCodeMode;
+        return $this->getMaxiCodeExtendedParametersDTO()->mode;
+    }
+
+    /**
+     * <p>
+     * Gets a MaxiCode barcode id in structured append mode.
+     * Default value: 0
+     * </p>
+     * @return a MaxiCode barcode id in structured append mode.
+     */
+    public function getStructuredAppendModeBarcodeId(): int
+    {
+        return $this->getMaxiCodeExtendedParametersDTO()->structuredAppendModeBarcodeId;
     }
 
     /**
      * Sets a MaxiCode encode mode.
      *  Default value: Mode4
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setMode().
      */
     public function setMaxiCodeMode(int $maxiCodeMode): void
     {
@@ -67,15 +93,29 @@ class MaxiCodeExtendedParameters implements Communicator
     /**
      * Gets a MaxiCode barcode id in structured append mode.
      * Default value: 0
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeBarcodeId().
      */
     public function getMaxiCodeStructuredAppendModeBarcodeId(): int
     {
-        return $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodeId;
+        return $this->getMaxiCodeExtendedParametersDTO()->structuredAppendModeBarcodeId;
+    }
+
+    /**
+     * <p>
+     * Gets a MaxiCode barcodes count in structured append mode.
+     * Default value: -1
+     * </p>
+     * @return a MaxiCode barcodes count in structured append mode.
+     */
+    public function getStructuredAppendModeBarcodesCount(): int
+    {
+        return $this->getMaxiCodeExtendedParametersDTO()->structuredAppendModeBarcodesCount;
     }
 
     /**
      * Sets a MaxiCode barcode id in structured append mode.
      * Default value: 0
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStructuredAppendModeBarcodeId().
      */
     public function setMaxiCodeStructuredAppendModeBarcodeId(int $value): void
     {
@@ -85,19 +125,21 @@ class MaxiCodeExtendedParameters implements Communicator
     /**
      * Gets a MaxiCode barcodes count in structured append mode.
      * Default value: -1
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeBarcodesCount().
      */
     public function getMaxiCodeStructuredAppendModeBarcodesCount(): int
     {
-        return $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodesCount;
+        return $this->getMaxiCodeExtendedParametersDTO()->structuredAppendModeBarcodesCount;
     }
 
     /**
      * Sets a MaxiCode barcodes count in structured append mode.
      * Default value: -1
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStructuredAppendModeBarcodesCount().
      */
     public function setMaxiCodeStructuredAppendModeBarcodesCount(int $value): void
     {
-        $this->getMaxiCodeExtendedParametersDTO()->maxiCodeStructuredAppendModeBarcodesCount = $value;
+        $this->getMaxiCodeExtendedParametersDTO()->structuredAppendModeBarcodesCount = $value;
     }
 
     /**

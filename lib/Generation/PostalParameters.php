@@ -26,7 +26,7 @@ class PostalParameters implements Communicator
         $this->postalParametersDto = $postalParametersDto;
     }
 
-    private $postalShortBarHeight;
+    private $shortBarHeight;
 
     function __construct(PostalParametersDTO $postalParametersDto)
     {
@@ -43,7 +43,7 @@ class PostalParameters implements Communicator
     {
         try
         {
-            $this->postalShortBarHeight = new Unit($this->getPostalParametersDto()->postalShortBarHeight);
+            $this->shortBarHeight = new Unit($this->getPostalParametersDto()->shortBarHeight);
         }
         catch (Exception $ex)
         {
@@ -52,13 +52,35 @@ class PostalParameters implements Communicator
     }
 
     /**
+     * <p>
      * Short bar's height of Postal barcodes.
+     * </p>
+     */
+    public function getShortBarHeight() : Unit
+    {
+        return $this->shortBarHeight;
+    }
+
+    /**
+     * <p>
+     * Short bar's height of Postal barcodes.
+     * </p>
+     */
+    public function setShortBarHeight( Unit $value) : void
+    {
+        $this->shortBarHeight = $value;
+        $this->getPostalParametersDto()->shortBarHeight = $value->getUnitDto();
+    }
+
+    /**
+     * Short bar's height of Postal barcodes.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getShortBarHeight().
      */
     public function getPostalShortBarHeight(): Unit
     {
         try
         {
-            return $this->postalShortBarHeight;
+            return $this->shortBarHeight;
         }
         catch (Exception $ex)
         {
@@ -68,6 +90,7 @@ class PostalParameters implements Communicator
 
     /**
      * Short bar's height of Postal barcodes.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setShortBarHeight().
      */
     public function setPostalShortBarHeight(Unit $value): void
     {

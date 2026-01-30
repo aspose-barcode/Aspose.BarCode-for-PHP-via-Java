@@ -42,22 +42,43 @@ class AustralianPostParameters implements Communicator
     {
         try
         {
-            $this->australianPostShortBarHeight = new Unit($this->getAustralianPostParametersDto()->australianPostShortBarHeight);
+            $this->shortBarHeight = new Unit($this->getAustralianPostParametersDto()->shortBarHeight);
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+    /**
+     * <p>
+     * Short bar's height of AustralianPost barcode.
+     * </p>
+     */
+    public function getShortBarHeight(): Unit
+    {
+        return $this->shortBarHeight;
+    }
+
+    /**
+     * <p>
+     * Short bar's height of AustralianPost barcode.
+     * </p>
+     */
+    public function setShortBarHeight(Unit $value): void
+    {
+        $this->shortBarHeight = $value;
+        $this->getAustralianPostParametersDto()->shortBarHeight = $value->getUnitDto();
+    }
 
     /**
      * Short bar's height of AustralianPost barcode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getShortBarHeight().
      */
     public function getAustralianPostShortBarHeight(): Unit
     {
         try
         {
-            return $this->australianPostShortBarHeight;
+            return $this->shortBarHeight;
         }
         catch (Exception $ex)
         {
@@ -67,28 +88,49 @@ class AustralianPostParameters implements Communicator
 
     /**
      * Short bar's height of AustralianPost barcode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setShortBarHeight().
      */
     public function setAustralianPostShortBarHeight(Unit $value): void
     {
         try
         {
-            $this->getAustralianPostParametersDto()->australianPostShortBarHeight = $value->getUnitDto();
-            $this->australianPostShortBarHeight = $value;
+            $this->getAustralianPostParametersDto()->shortBarHeight = $value->getUnitDto();
+            $this->shortBarHeight = $value;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+    /**
+     * <p>
+     * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
+     * </p>
+     */
+    public function getEncodingTable(): int
+    {
+        return $this->getAustralianPostParametersDto()->encodingTable;
+    }
+
+    /**
+     * <p>
+     * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
+     * </p>
+     */
+    public function setEncodingTable(int $value): void
+    {
+        $this->getAustralianPostParametersDto()->encodingTable = $value;
+    }
 
     /**
      * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodingTable().
      */
     public function getAustralianPostEncodingTable(): int
     {
         try
         {
-            return $this->getAustralianPostParametersDto()->australianPostEncodingTable;
+            return $this->getAustralianPostParametersDto()->encodingTable;
         }
         catch (Exception $ex)
         {
@@ -98,12 +140,13 @@ class AustralianPostParameters implements Communicator
 
     /**
      * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodingTable().
      */
     public function setAustralianPostEncodingTable(int $value): void
     {
         try
         {
-            $this->getAustralianPostParametersDto()->australianPostEncodingTable = $value;
+            $this->getAustralianPostParametersDto()->encodingTable = $value;
         }
         catch (Exception $ex)
         {

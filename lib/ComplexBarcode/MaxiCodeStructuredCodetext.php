@@ -35,7 +35,7 @@ abstract class MaxiCodeStructuredCodetext extends MaxiCodeCodetext
             switch ($maxiCodeSecondMessageDTO->maxiCodeSecondMessageType)
             {
                 case MaxiCodeSecondMessageType::MAXI_CODE_STANDART_SECOND_MESSAGE:
-                    $this->secondMessage = MaxiCodeStandartSecondMessage::_construct($maxiCodeSecondMessageDTO);
+                    $this->secondMessage = MaxiCodeStandardSecondMessage::_construct($maxiCodeSecondMessageDTO);
                     break;
                 case MaxiCodeSecondMessageType::MAXI_CODE_STRUCTURED_SECOND_MESSAGE:
                     $this->secondMessage = MaxiCodeStructuredSecondMessage::_construct($maxiCodeSecondMessageDTO);

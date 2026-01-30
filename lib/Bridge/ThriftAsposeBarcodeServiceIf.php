@@ -597,7 +597,7 @@ interface ThriftAsposeBarcodeServiceIf
     /**
      * @return \Aspose\Barcode\Bridge\MaxiCodeSecondMessageDTO
      */
-    public function MaxiCodeStandartSecondMessage_ctor();
+    public function MaxiCodeStandardSecondMessage_ctor();
     /**
      * @param \Aspose\Barcode\Bridge\MaxiCodeSecondMessageDTO $maxiCodeStructuredSecondMessage
      * @return string

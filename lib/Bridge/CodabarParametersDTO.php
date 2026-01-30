@@ -22,17 +22,17 @@ class CodabarParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'codabarChecksumMode',
+            'var' => 'checksumMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'codabarStartSymbol',
+            'var' => 'startSymbol',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'codabarStopSymbol',
+            'var' => 'stopSymbol',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -41,27 +41,27 @@ class CodabarParametersDTO
     /**
      * @var int
      */
-    public $codabarChecksumMode = null;
+    public $checksumMode = null;
     /**
      * @var int
      */
-    public $codabarStartSymbol = null;
+    public $startSymbol = null;
     /**
      * @var int
      */
-    public $codabarStopSymbol = null;
+    public $stopSymbol = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['codabarChecksumMode'])) {
-                $this->codabarChecksumMode = $vals['codabarChecksumMode'];
+            if (isset($vals['checksumMode'])) {
+                $this->checksumMode = $vals['checksumMode'];
             }
-            if (isset($vals['codabarStartSymbol'])) {
-                $this->codabarStartSymbol = $vals['codabarStartSymbol'];
+            if (isset($vals['startSymbol'])) {
+                $this->startSymbol = $vals['startSymbol'];
             }
-            if (isset($vals['codabarStopSymbol'])) {
-                $this->codabarStopSymbol = $vals['codabarStopSymbol'];
+            if (isset($vals['stopSymbol'])) {
+                $this->stopSymbol = $vals['stopSymbol'];
             }
         }
     }
@@ -87,21 +87,21 @@ class CodabarParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->codabarChecksumMode);
+                        $xfer += $input->readI32($this->checksumMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->codabarStartSymbol);
+                        $xfer += $input->readI32($this->startSymbol);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->codabarStopSymbol);
+                        $xfer += $input->readI32($this->stopSymbol);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -120,19 +120,19 @@ class CodabarParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('CodabarParametersDTO');
-        if ($this->codabarChecksumMode !== null) {
-            $xfer += $output->writeFieldBegin('codabarChecksumMode', TType::I32, 1);
-            $xfer += $output->writeI32($this->codabarChecksumMode);
+        if ($this->checksumMode !== null) {
+            $xfer += $output->writeFieldBegin('checksumMode', TType::I32, 1);
+            $xfer += $output->writeI32($this->checksumMode);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->codabarStartSymbol !== null) {
-            $xfer += $output->writeFieldBegin('codabarStartSymbol', TType::I32, 2);
-            $xfer += $output->writeI32($this->codabarStartSymbol);
+        if ($this->startSymbol !== null) {
+            $xfer += $output->writeFieldBegin('startSymbol', TType::I32, 2);
+            $xfer += $output->writeI32($this->startSymbol);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->codabarStopSymbol !== null) {
-            $xfer += $output->writeFieldBegin('codabarStopSymbol', TType::I32, 3);
-            $xfer += $output->writeI32($this->codabarStopSymbol);
+        if ($this->stopSymbol !== null) {
+            $xfer += $output->writeFieldBegin('stopSymbol', TType::I32, 3);
+            $xfer += $output->writeI32($this->stopSymbol);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

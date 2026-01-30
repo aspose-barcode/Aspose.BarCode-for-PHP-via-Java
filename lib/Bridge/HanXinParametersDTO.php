@@ -22,22 +22,22 @@ class HanXinParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'hanXinVersion',
+            'var' => 'version',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'hanXinErrorLevel',
+            'var' => 'errorLevel',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'hanXinEncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         4 => array(
-            'var' => 'hanXinECIEncoding',
+            'var' => 'eciEncoding',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -46,34 +46,34 @@ class HanXinParametersDTO
     /**
      * @var int
      */
-    public $hanXinVersion = null;
+    public $version = null;
     /**
      * @var int
      */
-    public $hanXinErrorLevel = null;
+    public $errorLevel = null;
     /**
      * @var int
      */
-    public $hanXinEncodeMode = null;
+    public $encodeMode = null;
     /**
      * @var int
      */
-    public $hanXinECIEncoding = null;
+    public $eciEncoding = null;
 
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['hanXinVersion'])) {
-                $this->hanXinVersion = $vals['hanXinVersion'];
+            if (isset($vals['version'])) {
+                $this->version = $vals['version'];
             }
-            if (isset($vals['hanXinErrorLevel'])) {
-                $this->hanXinErrorLevel = $vals['hanXinErrorLevel'];
+            if (isset($vals['errorLevel'])) {
+                $this->errorLevel = $vals['errorLevel'];
             }
-            if (isset($vals['hanXinEncodeMode'])) {
-                $this->hanXinEncodeMode = $vals['hanXinEncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
-            if (isset($vals['hanXinECIEncoding'])) {
-                $this->hanXinECIEncoding = $vals['hanXinECIEncoding'];
+            if (isset($vals['eciEncoding'])) {
+                $this->eciEncoding = $vals['eciEncoding'];
             }
         }
     }
@@ -99,28 +99,28 @@ class HanXinParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->hanXinVersion);
+                        $xfer += $input->readI32($this->version);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->hanXinErrorLevel);
+                        $xfer += $input->readI32($this->errorLevel);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->hanXinEncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 4:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->hanXinECIEncoding);
+                        $xfer += $input->readI32($this->eciEncoding);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -139,24 +139,24 @@ class HanXinParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('HanXinParametersDTO');
-        if ($this->hanXinVersion !== null) {
-            $xfer += $output->writeFieldBegin('hanXinVersion', TType::I32, 1);
-            $xfer += $output->writeI32($this->hanXinVersion);
+        if ($this->version !== null) {
+            $xfer += $output->writeFieldBegin('version', TType::I32, 1);
+            $xfer += $output->writeI32($this->version);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->hanXinErrorLevel !== null) {
-            $xfer += $output->writeFieldBegin('hanXinErrorLevel', TType::I32, 2);
-            $xfer += $output->writeI32($this->hanXinErrorLevel);
+        if ($this->errorLevel !== null) {
+            $xfer += $output->writeFieldBegin('errorLevel', TType::I32, 2);
+            $xfer += $output->writeI32($this->errorLevel);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->hanXinEncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('hanXinEncodeMode', TType::I32, 3);
-            $xfer += $output->writeI32($this->hanXinEncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 3);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->hanXinECIEncoding !== null) {
-            $xfer += $output->writeFieldBegin('hanXinECIEncoding', TType::I32, 4);
-            $xfer += $output->writeI32($this->hanXinECIEncoding);
+        if ($this->eciEncoding !== null) {
+            $xfer += $output->writeFieldBegin('eciEncoding', TType::I32, 4);
+            $xfer += $output->writeI32($this->eciEncoding);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();
