@@ -63,13 +63,24 @@ final class QRExtendedParameters implements Communicator
     }
 
     /**
+     * <p>Gets the QR structured append mode barcodes quantity. Default value is -1.</p>
+     * Value: The quantity of the QR structured append mode barcode.
+     * @return the QR structured append mode barcodes quantity.
+     */
+    public function getStructuredAppendModeBarCodesQuantity(): int
+    {
+        return $this->getQRExtendedParametersDTO()->structuredAppendModeBarCodesQuantity;
+    }
+
+    /**
      * Gets the QR structured append mode barcodes quantity. Default value is -1.Value: The quantity of the QR structured append mode barcode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeBarCodesQuantity().
      */
     public function getQRStructuredAppendModeBarCodesQuantity(): int
     {
         try
         {
-            return $this->getQRExtendedParametersDTO()->qRStructuredAppendModeBarCodesQuantity;
+            return $this->getQRExtendedParametersDTO()->structuredAppendModeBarCodesQuantity;
         }
         catch (Exception $ex)
         {
@@ -78,13 +89,25 @@ final class QRExtendedParameters implements Communicator
     }
 
     /**
+     * <p>Gets the index of the QR structured append mode barcode. Index starts from 0. Default value is -1.</p>
+     * Value: The quantity of the QR structured append mode barcode.
+     * @return the index of the QR structured append mode barcode.
+     */
+    public function getStructuredAppendModeBarCodeIndex(): int
+    {
+        return $this->getQRExtendedParametersDTO()->structuredAppendModeBarCodeIndex;
+    }
+
+    /**
      * Gets the index of the QR structured append mode barcode. Index starts from 0. Default value is -1.Value: The quantity of the QR structured append mode barcode.
+     *
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeBarCodeIndex().
      */
     public function getQRStructuredAppendModeBarCodeIndex(): int
     {
         try
         {
-            return $this->getQRExtendedParametersDTO()->qRStructuredAppendModeBarCodeIndex;
+            return $this->getQRExtendedParametersDTO()->structuredAppendModeBarCodeIndex;
         }
         catch (Exception $ex)
         {
@@ -93,12 +116,23 @@ final class QRExtendedParameters implements Communicator
     }
 
     /**
+     * <p>Gets the QR structured append mode parity data. Default value is -1.</p>
+     * Value: The index of the QR structured append mode barcode.
+     * @return the QR structured append mode parity data.
+     */
+    public function getStructuredAppendModeParityData(): int
+    {
+        return $this->getQRExtendedParametersDTO()->structuredAppendModeParityData;
+    }
+
+    /**
      * Version of recognized QR Code. From Version1 to Version40.
      * return recognized QR Code
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getVersion().
      */
     public function getQRVersion(): int
     {
-        return $this->getQRExtendedParametersDTO()->qrVersion;
+        return $this->getQRExtendedParametersDTO()->version;
     }
 
     /**
@@ -120,28 +154,50 @@ final class QRExtendedParameters implements Communicator
     }
 
     /**
+     * <p>
+     * Reed-Solomon error correction level of recognized barcode. From low to high: LevelL, LevelM, LevelQ, LevelH.
+     * </p>
+     */
+    public function getErrorLevel(): int
+    {
+        return $this->getQRExtendedParametersDTO()->errorLevel;
+    }
+
+    /**
      * Reed-Solomon error correction level of recognized barcode. From low to high: LevelL, LevelM, LevelQ, LevelH.
      * @return int error correction level of recognized barcode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getErrorLevel().
      */
     public function getQRErrorLevel(): int
     {
-        return $this->getQRExtendedParametersDTO()->qrErrorLevel;
+        return $this->getQRExtendedParametersDTO()->errorLevel;
     }
 
 
     /**
      * Gets the QR structured append mode parity data. Default value is -1.Value: The index of the QR structured append mode barcode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeParityData().
      */
     public function getQRStructuredAppendModeParityData(): int
     {
         try
         {
-            return $this->getQRExtendedParametersDTO()->qRStructuredAppendModeParityData;
+            return $this->getQRExtendedParametersDTO()->structuredAppendModeParityData;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+    }
+
+    /**
+     * <p>
+     * Version of recognized QR Code. From Version1 to Version40.
+     * </p>
+     */
+    public function getVersion() : int
+    {
+        return $this->getQRExtendedParametersDTO()->version;
     }
 
     public function isEmpty(): bool

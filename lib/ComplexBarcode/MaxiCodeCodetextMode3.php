@@ -15,9 +15,9 @@ use Aspose\Barcode\Internal\ThriftConnection;
  *  $maxiCodeCodetext->setPostalCode("B1050");
  *  $maxiCodeCodetext->setCountryCode(056);
  *  $maxiCodeCodetext->setServiceCategory(999);
- *  MaxiCodeStandartSecondMessage maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
- *  maxiCodeStandartSecondMessage->setMessage("Test message");
- *  $maxiCodeCodetext->setSecondMessage(maxiCodeStandartSecondMessage);
+ *  MaxiCodeStandardSecondMessage maxiCodeStandardSecondMessage = new MaxiCodeStandardSecondMessage();
+ *  maxiCodeStandardSecondMessage->setMessage("Test message");
+ *  $maxiCodeCodetext->setSecondMessage(maxiCodeStandardSecondMessage);
  *  ComplexBarcodeGenerator complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
  *  complexGenerator.generateBarCodeImage(BarcodeImageFormat::PNG);
  *
@@ -46,7 +46,7 @@ use Aspose\Barcode\Internal\ThriftConnection;
  *          print("BarCode Type: ".$maxiCodeStructuredCodetext->getPostalCode());
  *          print("MaxiCode mode: ".$maxiCodeStructuredCodetext->getCountryCode());
  *          print("BarCode CodeText: ".$maxiCodeStructuredCodetext->getServiceCategory());
- *          if ($maxiCodeStructuredCodetext->getSecondMessage() instanceOf MaxiCodeStandartSecondMessage)
+ *          if ($maxiCodeStructuredCodetext->getSecondMessage() instanceOf MaxiCodeStandardSecondMessage)
  *          {
  *              $secondMessage = maxiCodeStructuredCodetext->getSecondMessage();
  *              print("Message: ".$secondMessage->getMessage());

@@ -45,12 +45,37 @@ class Code128Parameters implements Communicator
      * Gets a Code128 encode mode.
      * Default value: Code128EncodeMode.Auto
      * </p>
+     * @return a Code128 encode mode.
+     */
+    public function getEncodeMode() : int
+    {
+        return $this->getCode128ParametersDto()->encodeMode;
+    }
+
+    /**
+     * <p>
+     * Sets a Code128 encode mode.
+     * Default value: Code128EncodeMode.Auto
+     * </p>
+     * @param value a Code128 encode mode.
+     */
+    public function setEncodeMode(int$value): void
+    {
+        $this->getCode128ParametersDto()->encodeMode = $value;
+    }
+
+    /**
+     * <p>
+     * Gets a Code128 encode mode.
+     * Default value: Code128EncodeMode.Auto
+     * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
      */
     public function getCode128EncodeMode(): int
     {
         try
         {
-            return $this->getCode128ParametersDto()->code128EncodeMode;
+            return $this->getCode128ParametersDto()->encodeMode;
         }
         catch (Exception $ex)
         {
@@ -63,12 +88,13 @@ class Code128Parameters implements Communicator
      * Sets a Code128 encode mode.
      * Default value: Code128EncodeMode.Auto
      * </p>
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
      */
     public function setCode128EncodeMode(int $value)
     {
         try
         {
-            $this->getCode128ParametersDto()->code128EncodeMode = $value;
+            $this->getCode128ParametersDto()->encodeMode = $value;
         }
         catch (Exception $ex)
         {

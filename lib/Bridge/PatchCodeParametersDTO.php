@@ -27,7 +27,7 @@ class PatchCodeParametersDTO
             'type' => TType::STRING,
         ),
         2 => array(
-            'var' => 'patchFormat',
+            'var' => 'format',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -40,7 +40,7 @@ class PatchCodeParametersDTO
     /**
      * @var int
      */
-    public $patchFormat = null;
+    public $format = null;
 
     public function __construct($vals = null)
     {
@@ -48,8 +48,8 @@ class PatchCodeParametersDTO
             if (isset($vals['extraBarcodeText'])) {
                 $this->extraBarcodeText = $vals['extraBarcodeText'];
             }
-            if (isset($vals['patchFormat'])) {
-                $this->patchFormat = $vals['patchFormat'];
+            if (isset($vals['format'])) {
+                $this->format = $vals['format'];
             }
         }
     }
@@ -82,7 +82,7 @@ class PatchCodeParametersDTO
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->patchFormat);
+                        $xfer += $input->readI32($this->format);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -106,9 +106,9 @@ class PatchCodeParametersDTO
             $xfer += $output->writeString($this->extraBarcodeText);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->patchFormat !== null) {
-            $xfer += $output->writeFieldBegin('patchFormat', TType::I32, 2);
-            $xfer += $output->writeI32($this->patchFormat);
+        if ($this->format !== null) {
+            $xfer += $output->writeFieldBegin('format', TType::I32, 2);
+            $xfer += $output->writeI32($this->format);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

@@ -21,19 +21,45 @@ namespace Aspose\Barcode\ComplexBarcode;
 abstract class MaxiCodeCodetext extends IComplexCodetext
 {
     /**
+     * <p>
      * Gets a MaxiCode encode mode.
+     * Default value: Auto.
+     * </p>
+     * @return a MaxiCode encode mode.
+     */
+    public function getEncodeMode(): int
+    {
+        return $this->getIComplexCodetextDTO()->encodeMode;
+    }
+
+    /**
+     * <p>
+     * Sets a MaxiCode encode mode.
+     * Default value: Auto.
+     * </p>
+     * @param value a MaxiCode encode mode.
+     */
+    public function setEncodeMode($value):void
+    {
+        $this->getIComplexCodetextDTO()->encodeMode = $value;
+    }
+
+    /**
+     * Gets a MaxiCode encode mode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
      */
     public function getMaxiCodeEncodeMode(): int
     {
-        return $this->getIComplexCodetextDTO()->maxiCodeEncodeMode;
+        return $this->getIComplexCodetextDTO()->encodeMode;
     }
 
     /**
      * Sets a MaxiCode encode mode.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
      */
     public function setMaxiCodeEncodeMode(int $value): void
     {
-        $this->getIComplexCodetextDTO()->maxiCodeEncodeMode = $value;
+        $this->getIComplexCodetextDTO()->encodeMode = $value;
     }
 
     /**

@@ -51,6 +51,32 @@ class QrParameters implements Communicator
     }
 
     /**
+     * <p>
+     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+     * about the used references for encoding the data in the symbol.
+     * Current implementation consists all well known charset encodings.
+     * Not supported by MicroQR.
+     * </p>
+     */
+    public function getECIEncoding(): int
+    {
+        return $this->getQrParametersDto()->eciEncoding;
+    }
+
+    /**
+     * <p>
+     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
+     * about the used references for encoding the data in the symbol.
+     * Current implementation consists all well known charset encodings.
+     * Not supported by MicroQR.
+     * </p>
+     */
+    public function setECIEncoding(int $value): void
+    {
+        $this->getQrParametersDto()->eciEncoding = $value;
+    }
+
+    /**
      * QR structured append parameters.
      */
     public function getStructuredAppend(): QrStructuredAppendParameters
@@ -75,15 +101,38 @@ class QrParameters implements Communicator
     }
 
     /**
+     * <p>
+     * QR symbology type of BarCode's encoding mode.
+     * Default value: QREncodeMode.Auto.
+     * </p>
+     */
+    public function getEncodeMode(): int
+    {
+        return $this->getQrParametersDto()->encodeMode;
+    }
+
+    /**
+     * <p>
+     * QR symbology type of BarCode's encoding mode.
+     * Default value: QREncodeMode.Auto.
+     * </p>
+     */
+    public function setEncodeMode(int $value): void
+    {
+        $this->getQrParametersDto()->encodeMode = $value;
+    }
+
+    /**
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
      * about the used references for encoding the data in the symbol.
      * Current implementation consists all well known charset encodings.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getECIEncoding().
      */
     public function getQrECIEncoding(): int
     {
         try
         {
-            return $this->getQrParametersDto()->qrECIEncoding;
+            return $this->getQrParametersDto()->eciEncoding;
         }
         catch (Exception $ex)
         {
@@ -95,12 +144,13 @@ class QrParameters implements Communicator
      * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
      * about the used references for encoding the data in the symbol.
      * Current implementation consists all well known charset encodings.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setECIEncoding().
      */
     public function setQrECIEncoding(int $value): void
     {
         try
         {
-            $this->getQrParametersDto()->qrECIEncoding = $value;
+            $this->getQrParametersDto()->eciEncoding = $value;
         }
         catch (Exception $ex)
         {
@@ -111,12 +161,13 @@ class QrParameters implements Communicator
     /**
      * QR symbology type of BarCode's encoding mode.
      * Default value: QREncodeMode::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
      */
     public function getQrEncodeMode(): int
     {
         try
         {
-            return $this->getQrParametersDto()->qrEncodeMode;
+            return $this->getQrParametersDto()->encodeMode;
         }
         catch (Exception $ex)
         {
@@ -127,12 +178,13 @@ class QrParameters implements Communicator
     /**
      * QR symbology type of BarCode's encoding mode.
      * Default value: QREncodeMode::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
      */
     public function setQrEncodeMode(int $value): void
     {
         try
         {
-            $this->getQrParametersDto()->qrEncodeMode = $value;
+            $this->getQrParametersDto()->encodeMode = $value;
         }
         catch (Exception $ex)
         {
@@ -171,15 +223,38 @@ class QrParameters implements Communicator
     }
 
     /**
+     * <p>
+     *  Level of Reed-Solomon error correction for QR, MicroQR and RectMicroQR barcode.
+     *  From low to high: LevelL, LevelM, LevelQ, LevelH. See QRErrorLevel.
+     * </p>
+     */
+    public function getErrorLevel(): int
+    {
+        return $this->getQrParametersDto()->errorLevel;
+    }
+
+    /**
+     * <p>
+     *  Level of Reed-Solomon error correction for QR, MicroQR and RectMicroQR barcode.
+     *  From low to high: LevelL, LevelM, LevelQ, LevelH. See QRErrorLevel.
+     * </p>
+     */
+    public function setErrorLevel(int $value): void
+    {
+        $this->getQrParametersDto()->errorLevel = $value;
+    }
+
+    /**
      *  Level of Reed-Solomon error correction for QR barcode.
      *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
      * @see QRErrorLevel.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getErrorLevel().
      */
     public function getQrErrorLevel(): int
     {
         try
         {
-            return $this->getQrParametersDto()->qrErrorLevel;
+            return $this->getQrParametersDto()->errorLevel;
         }
         catch (Exception $ex)
         {
@@ -191,12 +266,13 @@ class QrParameters implements Communicator
      *  Level of Reed-Solomon error correction for QR barcode.
      *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
      * @see QRErrorLevel.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setErrorLevel().
      */
     public function setQrErrorLevel(int $value): void
     {
         try
         {
-            $this->getQrParametersDto()->qrErrorLevel = $value;
+            $this->getQrParametersDto()->errorLevel = $value;
         }
         catch (Exception $ex)
         {
@@ -205,15 +281,38 @@ class QrParameters implements Communicator
     }
 
     /**
+     * <p>
+     * Version of QR Code.From Version1 to Version40.
+     * Default value is QRVersion.Auto.
+     * </p>
+     */
+    public function getVersion(): int
+    {
+        return $this->getQrParametersDto()->version;
+    }
+
+    /**
+     * <p>
+     * Version of QR Code.From Version1 to Version40.
+     * Default value is QRVersion.Auto.
+     * </p>
+     */
+    public function setVersion(int $value): void
+    {
+        $this->getQrParametersDto()->version = $value;
+    }
+
+    /**
      * Version of QR Code.
      * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
      * Default value is QRVersion::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getVersion().
      */
     public function getQrVersion(): int
     {
         try
         {
-            return $this->getQrParametersDto()->qrVersion;
+            return $this->getQrParametersDto()->version;
         }
         catch (Exception $ex)
         {
@@ -225,12 +324,13 @@ class QrParameters implements Communicator
      * Version of QR Code.
      * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
      * Default value is QRVersion::AUTO.
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setVersion().
      */
     public function setQrVersion(int $value): void
     {
         try
         {
-            $this->getQrParametersDto()->qrVersion = $value;
+            $this->getQrParametersDto()->version = $value;
         }
         catch (Exception $ex)
         {

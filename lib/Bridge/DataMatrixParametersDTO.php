@@ -22,17 +22,17 @@ class DataMatrixParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'dataMatrixVersion',
+            'var' => 'version',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'dataMatrixEcc',
+            'var' => 'eccType',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'dataMatrixEncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -86,15 +86,15 @@ class DataMatrixParametersDTO
     /**
      * @var int
      */
-    public $dataMatrixVersion = null;
+    public $version = null;
     /**
      * @var int
      */
-    public $dataMatrixEcc = null;
+    public $eccType = null;
     /**
      * @var int
      */
-    public $dataMatrixEncodeMode = null;
+    public $encodeMode = null;
     /**
      * @var int
      */
@@ -135,14 +135,14 @@ class DataMatrixParametersDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['dataMatrixVersion'])) {
-                $this->dataMatrixVersion = $vals['dataMatrixVersion'];
+            if (isset($vals['version'])) {
+                $this->version = $vals['version'];
             }
-            if (isset($vals['dataMatrixEcc'])) {
-                $this->dataMatrixEcc = $vals['dataMatrixEcc'];
+            if (isset($vals['eccType'])) {
+                $this->eccType = $vals['eccType'];
             }
-            if (isset($vals['dataMatrixEncodeMode'])) {
-                $this->dataMatrixEncodeMode = $vals['dataMatrixEncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
             if (isset($vals['structuredAppendBarcodeId'])) {
                 $this->structuredAppendBarcodeId = $vals['structuredAppendBarcodeId'];
@@ -195,21 +195,21 @@ class DataMatrixParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dataMatrixVersion);
+                        $xfer += $input->readI32($this->version);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dataMatrixEcc);
+                        $xfer += $input->readI32($this->eccType);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dataMatrixEncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -291,19 +291,19 @@ class DataMatrixParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('DataMatrixParametersDTO');
-        if ($this->dataMatrixVersion !== null) {
-            $xfer += $output->writeFieldBegin('dataMatrixVersion', TType::I32, 1);
-            $xfer += $output->writeI32($this->dataMatrixVersion);
+        if ($this->version !== null) {
+            $xfer += $output->writeFieldBegin('version', TType::I32, 1);
+            $xfer += $output->writeI32($this->version);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->dataMatrixEcc !== null) {
-            $xfer += $output->writeFieldBegin('dataMatrixEcc', TType::I32, 2);
-            $xfer += $output->writeI32($this->dataMatrixEcc);
+        if ($this->eccType !== null) {
+            $xfer += $output->writeFieldBegin('eccType', TType::I32, 2);
+            $xfer += $output->writeI32($this->eccType);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->dataMatrixEncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('dataMatrixEncodeMode', TType::I32, 3);
-            $xfer += $output->writeI32($this->dataMatrixEncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 3);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->structuredAppendBarcodeId !== null) {

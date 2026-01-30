@@ -27,7 +27,7 @@ class DotCodeParametersDTO
             'type' => TType::DOUBLE,
         ),
         2 => array(
-            'var' => 'dotCodeEncodeMode',
+            'var' => 'encodeMode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -37,12 +37,12 @@ class DotCodeParametersDTO
             'type' => TType::BOOL,
         ),
         4 => array(
-            'var' => 'dotCodeStructuredAppendModeBarcodeId',
+            'var' => 'structuredAppendModeBarcodeId',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         5 => array(
-            'var' => 'dotCodeStructuredAppendModeBarcodesCount',
+            'var' => 'structuredAppendModeBarcodesCount',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -70,7 +70,7 @@ class DotCodeParametersDTO
     /**
      * @var int
      */
-    public $dotCodeEncodeMode = null;
+    public $encodeMode = null;
     /**
      * @var bool
      */
@@ -78,11 +78,11 @@ class DotCodeParametersDTO
     /**
      * @var int
      */
-    public $dotCodeStructuredAppendModeBarcodeId = null;
+    public $structuredAppendModeBarcodeId = null;
     /**
      * @var int
      */
-    public $dotCodeStructuredAppendModeBarcodesCount = null;
+    public $structuredAppendModeBarcodesCount = null;
     /**
      * @var int
      */
@@ -102,17 +102,17 @@ class DotCodeParametersDTO
             if (isset($vals['aspectRatio'])) {
                 $this->aspectRatio = $vals['aspectRatio'];
             }
-            if (isset($vals['dotCodeEncodeMode'])) {
-                $this->dotCodeEncodeMode = $vals['dotCodeEncodeMode'];
+            if (isset($vals['encodeMode'])) {
+                $this->encodeMode = $vals['encodeMode'];
             }
             if (isset($vals['isReaderInitialization'])) {
                 $this->isReaderInitialization = $vals['isReaderInitialization'];
             }
-            if (isset($vals['dotCodeStructuredAppendModeBarcodeId'])) {
-                $this->dotCodeStructuredAppendModeBarcodeId = $vals['dotCodeStructuredAppendModeBarcodeId'];
+            if (isset($vals['structuredAppendModeBarcodeId'])) {
+                $this->structuredAppendModeBarcodeId = $vals['structuredAppendModeBarcodeId'];
             }
-            if (isset($vals['dotCodeStructuredAppendModeBarcodesCount'])) {
-                $this->dotCodeStructuredAppendModeBarcodesCount = $vals['dotCodeStructuredAppendModeBarcodesCount'];
+            if (isset($vals['structuredAppendModeBarcodesCount'])) {
+                $this->structuredAppendModeBarcodesCount = $vals['structuredAppendModeBarcodesCount'];
             }
             if (isset($vals['eCIEncoding'])) {
                 $this->eCIEncoding = $vals['eCIEncoding'];
@@ -154,7 +154,7 @@ class DotCodeParametersDTO
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dotCodeEncodeMode);
+                        $xfer += $input->readI32($this->encodeMode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -168,14 +168,14 @@ class DotCodeParametersDTO
                     break;
                 case 4:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dotCodeStructuredAppendModeBarcodeId);
+                        $xfer += $input->readI32($this->structuredAppendModeBarcodeId);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 5:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dotCodeStructuredAppendModeBarcodesCount);
+                        $xfer += $input->readI32($this->structuredAppendModeBarcodesCount);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -220,9 +220,9 @@ class DotCodeParametersDTO
             $xfer += $output->writeDouble($this->aspectRatio);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->dotCodeEncodeMode !== null) {
-            $xfer += $output->writeFieldBegin('dotCodeEncodeMode', TType::I32, 2);
-            $xfer += $output->writeI32($this->dotCodeEncodeMode);
+        if ($this->encodeMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeMode', TType::I32, 2);
+            $xfer += $output->writeI32($this->encodeMode);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->isReaderInitialization !== null) {
@@ -230,14 +230,14 @@ class DotCodeParametersDTO
             $xfer += $output->writeBool($this->isReaderInitialization);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->dotCodeStructuredAppendModeBarcodeId !== null) {
-            $xfer += $output->writeFieldBegin('dotCodeStructuredAppendModeBarcodeId', TType::I32, 4);
-            $xfer += $output->writeI32($this->dotCodeStructuredAppendModeBarcodeId);
+        if ($this->structuredAppendModeBarcodeId !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeBarcodeId', TType::I32, 4);
+            $xfer += $output->writeI32($this->structuredAppendModeBarcodeId);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->dotCodeStructuredAppendModeBarcodesCount !== null) {
-            $xfer += $output->writeFieldBegin('dotCodeStructuredAppendModeBarcodesCount', TType::I32, 5);
-            $xfer += $output->writeI32($this->dotCodeStructuredAppendModeBarcodesCount);
+        if ($this->structuredAppendModeBarcodesCount !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeBarcodesCount', TType::I32, 5);
+            $xfer += $output->writeI32($this->structuredAppendModeBarcodesCount);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->eCIEncoding !== null) {

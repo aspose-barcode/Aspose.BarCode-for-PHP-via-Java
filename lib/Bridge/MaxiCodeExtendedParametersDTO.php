@@ -22,17 +22,17 @@ class MaxiCodeExtendedParametersDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'maxiCodeMode',
+            'var' => 'mode',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'maxiCodeStructuredAppendModeBarcodeId',
+            'var' => 'structuredAppendModeBarcodeId',
             'isRequired' => false,
             'type' => TType::I32,
         ),
         3 => array(
-            'var' => 'maxiCodeStructuredAppendModeBarcodesCount',
+            'var' => 'structuredAppendModeBarcodesCount',
             'isRequired' => false,
             'type' => TType::I32,
         ),
@@ -46,15 +46,15 @@ class MaxiCodeExtendedParametersDTO
     /**
      * @var int
      */
-    public $maxiCodeMode = null;
+    public $mode = null;
     /**
      * @var int
      */
-    public $maxiCodeStructuredAppendModeBarcodeId = null;
+    public $structuredAppendModeBarcodeId = null;
     /**
      * @var int
      */
-    public $maxiCodeStructuredAppendModeBarcodesCount = null;
+    public $structuredAppendModeBarcodesCount = null;
     /**
      * @var string
      */
@@ -63,14 +63,14 @@ class MaxiCodeExtendedParametersDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['maxiCodeMode'])) {
-                $this->maxiCodeMode = $vals['maxiCodeMode'];
+            if (isset($vals['mode'])) {
+                $this->mode = $vals['mode'];
             }
-            if (isset($vals['maxiCodeStructuredAppendModeBarcodeId'])) {
-                $this->maxiCodeStructuredAppendModeBarcodeId = $vals['maxiCodeStructuredAppendModeBarcodeId'];
+            if (isset($vals['structuredAppendModeBarcodeId'])) {
+                $this->structuredAppendModeBarcodeId = $vals['structuredAppendModeBarcodeId'];
             }
-            if (isset($vals['maxiCodeStructuredAppendModeBarcodesCount'])) {
-                $this->maxiCodeStructuredAppendModeBarcodesCount = $vals['maxiCodeStructuredAppendModeBarcodesCount'];
+            if (isset($vals['structuredAppendModeBarcodesCount'])) {
+                $this->structuredAppendModeBarcodesCount = $vals['structuredAppendModeBarcodesCount'];
             }
             if (isset($vals['toString'])) {
                 $this->toString = $vals['toString'];
@@ -99,21 +99,21 @@ class MaxiCodeExtendedParametersDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->maxiCodeMode);
+                        $xfer += $input->readI32($this->mode);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 2:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->maxiCodeStructuredAppendModeBarcodeId);
+                        $xfer += $input->readI32($this->structuredAppendModeBarcodeId);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
                 case 3:
                     if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->maxiCodeStructuredAppendModeBarcodesCount);
+                        $xfer += $input->readI32($this->structuredAppendModeBarcodesCount);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -139,19 +139,19 @@ class MaxiCodeExtendedParametersDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('MaxiCodeExtendedParametersDTO');
-        if ($this->maxiCodeMode !== null) {
-            $xfer += $output->writeFieldBegin('maxiCodeMode', TType::I32, 1);
-            $xfer += $output->writeI32($this->maxiCodeMode);
+        if ($this->mode !== null) {
+            $xfer += $output->writeFieldBegin('mode', TType::I32, 1);
+            $xfer += $output->writeI32($this->mode);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->maxiCodeStructuredAppendModeBarcodeId !== null) {
-            $xfer += $output->writeFieldBegin('maxiCodeStructuredAppendModeBarcodeId', TType::I32, 2);
-            $xfer += $output->writeI32($this->maxiCodeStructuredAppendModeBarcodeId);
+        if ($this->structuredAppendModeBarcodeId !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeBarcodeId', TType::I32, 2);
+            $xfer += $output->writeI32($this->structuredAppendModeBarcodeId);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->maxiCodeStructuredAppendModeBarcodesCount !== null) {
-            $xfer += $output->writeFieldBegin('maxiCodeStructuredAppendModeBarcodesCount', TType::I32, 3);
-            $xfer += $output->writeI32($this->maxiCodeStructuredAppendModeBarcodesCount);
+        if ($this->structuredAppendModeBarcodesCount !== null) {
+            $xfer += $output->writeFieldBegin('structuredAppendModeBarcodesCount', TType::I32, 3);
+            $xfer += $output->writeI32($this->structuredAppendModeBarcodesCount);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->toString !== null) {

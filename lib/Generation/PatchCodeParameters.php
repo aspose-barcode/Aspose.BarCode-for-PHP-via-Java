@@ -76,16 +76,39 @@ class PatchCodeParameters implements Communicator
     }
 
     /**
+     * <p>
+     * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
+     * Default value: PatchFormat.PatchOnly
+     * </p>
+     */
+    public function getFormat(): int
+    {
+        return $this->getPatchCodeParametersDto()->format;
+    }
+
+    /**
+     * <p>
+     * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
+     * Default value: PatchFormat.PatchOnly
+     * </p>
+     */
+    public function setFormat(int $value): void
+    {
+        $this->getPatchCodeParametersDto()->format = $value;
+    }
+
+    /**
      * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
      * Default value: PatchFormat::PATCH_ONLY
      *
      * @return
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getFormat().
      */
     public function getPatchFormat(): int
     {
         try
         {
-            return $this->getPatchCodeParametersDto()->patchFormat;
+            return $this->getPatchCodeParametersDto()->format;
         }
         catch (Exception $ex)
         {
@@ -96,12 +119,13 @@ class PatchCodeParameters implements Communicator
     /**
      * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
      * Default value: PatchFormat::PATCH_ONLY
+     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setFormat().
      */
     public function setPatchFormat(int $value): void
     {
         try
         {
-            $this->getPatchCodeParametersDto()->patchFormat = $value;
+            $this->getPatchCodeParametersDto()->format = $value;
         }
         catch (Exception $ex)
         {

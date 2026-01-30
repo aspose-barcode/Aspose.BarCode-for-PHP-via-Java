@@ -122,11 +122,6 @@ class BarCodeResult implements Communicator
         catch (Exception $ex) {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
-        finally {
-            if (isset($thriftConnection)) {
-                $thriftConnection->closeConnection();
-            }
-        }
     }
 
     function getCodeType()
