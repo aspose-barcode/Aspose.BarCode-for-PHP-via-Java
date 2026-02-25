@@ -5,7 +5,10 @@ var classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters =
     [ "\u202AgetDotCodeIsReaderInitialization", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#afbe54d9cc61b0118d81c3c63bf7e5683", null ],
     [ "\u202AgetDotCodeStructuredAppendModeBarcodeId", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#aa298cbf4ddf942f9a86af79bab79ebfe", null ],
     [ "\u202AgetDotCodeStructuredAppendModeBarcodesCount", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#aa468155ad8a94d0a111d2af6217749f3", null ],
+    [ "\u202AgetStructuredAppendModeBarcodeId", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#ae45a424d31816b1cdcf73afe7982670d", null ],
+    [ "\u202AgetStructuredAppendModeBarcodesCount", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#aa56a2bb18e32c2e41985357deceb6143", null ],
     [ "\u202AinitFieldsFromDto", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#a2c30d389ce114e4454ab1771b30a348b", null ],
+    [ "\u202AisReaderInitialization", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#acfcc844318ac6e33bea16b5c9555f3b8", null ],
     [ "\u202AobtainDto", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#a6cdb60a53aa7cce95c6f3e15c9e90fd6", null ],
     [ "\u202AtoString", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html#ad49a7f4280fd28f4638677edb42cc607", null ]
 ];

@@ -7,7 +7,10 @@ var classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters =
     [ "\u202AgetDotCodeStructuredAppendModeBarcodeId", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a745c931d7d469da199006c252e8033dd", null ],
     [ "\u202AgetDotCodeStructuredAppendModeBarcodesCount", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a30a15c88634d8cdd3748f839d14d0ce3", null ],
     [ "\u202AgetECIEncoding", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a5c5a46560827eba0ca6d9c2703a2b710", null ],
+    [ "\u202AgetEncodeMode", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a2f17bb265b3082ff7c4efc34a04774b2", null ],
     [ "\u202AgetRows", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a696fac152c3affbd4e317081ccb39521", null ],
+    [ "\u202AgetStructuredAppendModeBarcodeId", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#ab9f0618546b33724ea3df5338c008af0", null ],
+    [ "\u202AgetStructuredAppendModeBarcodesCount", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a606e849202ffbf6f841f10ba2a7eb733", null ],
     [ "\u202AinitFieldsFromDto", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a215d5d0d03e8c29329f539c172d04c8a", null ],
     [ "\u202AisReaderInitialization", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a26c540ca126e12dc80bf5010785a1772", null ],
     [ "\u202AobtainDto", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a102f277ff78178140e8a0f344aafdfd8", null ],
@@ -17,7 +20,10 @@ var classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters =
     [ "\u202AsetDotCodeStructuredAppendModeBarcodeId", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af646dad6537e911b2a8c9deb4af45388", null ],
     [ "\u202AsetDotCodeStructuredAppendModeBarcodesCount", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a017e37eca5f57a610591c2dd2ff4835f", null ],
     [ "\u202AsetECIEncoding", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#ae4b72fa5842f8d28afe810c523fb95fd", null ],
+    [ "\u202AsetEncodeMode", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#ad7535e120288a075e4ea1cee48dd668a", null ],
     [ "\u202AsetReaderInitialization", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a037833514f629eaab04c30579b1e665d", null ],
     [ "\u202AsetRows", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a3c024fe1e73353bae8caf8c6098a90fb", null ],
+    [ "\u202AsetStructuredAppendModeBarcodeId", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#acc7a5492319e12e178b0ceffb05813c1", null ],
+    [ "\u202AsetStructuredAppendModeBarcodesCount", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#a2f7a445082f77a2a8010909f8c01ff06", null ],
     [ "\u202AtoString", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#adeeb35e4a72ed198f46a6303315d0e17", null ]
 ];

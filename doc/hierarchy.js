@@ -43,7 +43,9 @@ var hierarchy =
       ] ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\MandatoryFields", "d0/d26/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MandatoryFields.html", null ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeSecondMessage", "d5/dc8/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessage.html", [
-        [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStandartSecondMessage", "d0/de7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandartSecondMessage.html", null ],
+        [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStandardSecondMessage", "d1/d1e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardSecondMessage.html", [
+          [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStandartSecondMessage", "d0/de7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandartSecondMessage.html", null ]
+        ] ],
         [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStructuredSecondMessage", "dd/da3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStructuredSecondMessage.html", null ]
       ] ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\OptionalFields", "df/dd3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1OptionalFields.html", null ],

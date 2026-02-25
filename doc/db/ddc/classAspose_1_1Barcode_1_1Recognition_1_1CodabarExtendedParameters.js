@@ -4,9 +4,13 @@ var classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters =
     [ "\u202Aequals", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#aee25b38f0021fa637a1ecf8cc791def3", null ],
     [ "\u202AgetCodabarStartSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#af4fa31b53a8ea0771709826c27507f00", null ],
     [ "\u202AgetCodabarStopSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a933f12a2f90ce76e278145cc6dee98cd", null ],
+    [ "\u202AgetStartSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a7f545564be00d7989ee9dd9a278e6d26", null ],
+    [ "\u202AgetStopSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a4141588ec276c1fe8f7bde78dd1863d1", null ],
     [ "\u202AinitFieldsFromDto", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a39b73465de241e58634f205bceef086b", null ],
     [ "\u202AobtainDto", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a5d04cb13c5a1880c7df6e7cb8ba19707", null ],
     [ "\u202AsetCodabarStartSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a3f155d844325df4fe0aad6292261f80f", null ],
     [ "\u202AsetCodabarStopSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a9a412fbb4d71f93927236e221781498a", null ],
+    [ "\u202AsetStartSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a28d374f1267069f3c34e8902cb09b68a", null ],
+    [ "\u202AsetStopSymbol", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#ab6881ce620ba0187b16fd8f2ed6c5aec", null ],
     [ "\u202AtoString", "db/ddc/classAspose_1_1Barcode_1_1Recognition_1_1CodabarExtendedParameters.html#a640698de9c6cbc6cc8207daeb46c19a0", null ]
 ];

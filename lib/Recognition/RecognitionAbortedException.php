@@ -2,15 +2,15 @@
 
 namespace Aspose\Barcode\Recognition;
 
-use Aspose\Barcode\Exception;
+use Exception;
 
 class RecognitionAbortedException extends Exception
 {
     private ?int $executionTime;
 
     /**
-     * Gets the execution time of current recognition session
-     * @return int The execution time of current recognition session
+     * Gets the execution time of current recognition session.
+     * @return int The execution time of current recognition session.
      */
     public function getExecutionTime(): int
     {
@@ -18,8 +18,8 @@ class RecognitionAbortedException extends Exception
     }
 
     /**
-     * Sets the execution time of current recognition session
-     * @param int $value The execution time of current recognition session
+     * Sets the execution time of current recognition session.
+     * @param int $value The execution time of current recognition session.
      */
     public function setExecutionTime(int $value): void
     {
@@ -27,13 +27,38 @@ class RecognitionAbortedException extends Exception
     }
 
     /**
-     * Initializes a new instance of the <see cref="RecognitionAbortedException" /> class with specified recognition abort message.
-     * @param $message null|string The error message of the exception.
-     * @param $executionTime null|int The execution time of current recognition session.
+     * Initializes a new instance of the RecognitionAbortedException class.
+     * @param string|null $message The error message of the exception.
+     * @param int|null $executionTime The execution time of current recognition session.
      */
     public function __construct(?string $message, ?int $executionTime)
     {
         parent::__construct($message);
         $this->executionTime = $executionTime;
+    }
+
+    /**
+     * Returns a string representation of the exception.
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        $message = $this->getMessage() ?? 'Recognition aborted';
+
+        if ($this->executionTime !== null) {
+            return sprintf(
+                '%s: %s (execution time: %d ms)',
+                static::class,
+                $message,
+                $this->executionTime
+            );
+        }
+
+        return sprintf(
+            '%s: %s',
+            static::class,
+            $message
+        );
     }
 }
