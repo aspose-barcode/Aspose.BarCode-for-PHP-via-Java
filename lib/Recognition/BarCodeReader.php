@@ -3,7 +3,7 @@
 namespace Aspose\Barcode\Recognition;
 
 use Aspose\Barcode\Bridge\BarcodeReaderDTO;
-use Aspose\Barcode\Exception;
+use Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\CommonUtility;
 use Aspose\Barcode\Internal\Communicator;
@@ -109,7 +109,7 @@ class BarCodeReader implements Communicator
 
         if (CommonUtility::isClassContainsConstantValueFromArray(DecodeType::class, $decodeTypes))
         {
-            $this->barCodeReaderDto->barCodeDecodeTypes = $decodeTypes;
+            $this->barCodeReaderDto->barCodeReadType = $decodeTypes;
         }
     }
 
@@ -138,7 +138,7 @@ class BarCodeReader implements Communicator
         {
             foreach ($decodeTypes as $decodeType)
             {
-                if (DecodeType::containsAny($decodeType, $this->getBarCodeReaderDto()->barCodeDecodeTypes))
+                if (DecodeType::containsAny($decodeType, $this->getBarCodeReaderDto()->barCodeReadType))
                     return true;
             }
             return false;
@@ -371,14 +371,23 @@ class BarCodeReader implements Communicator
         {
             $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBinared($imageResource);
             $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($areas);
-            if (is_null($this->barCodeReaderDto->barCodeDecodeTypes) || sizeof($this->barCodeReaderDto->barCodeDecodeTypes) == 0)
-                $this->barCodeReaderDto->barCodeDecodeTypes = array(DecodeType::ALL_SUPPORTED_TYPES);
+            if (is_null($this->barCodeReaderDto->barCodeReadType) || sizeof($this->barCodeReaderDto->barCodeReadType) == 0)
+                $this->barCodeReaderDto->barCodeReadType = array(DecodeType::ALL_SUPPORTED_TYPES);
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
     }
+
+    /**
+     * Gets the decode type of the input barcode decoding
+     * @returns {*}
+     */
+     public function getBarCodeReadType(): array
+     {
+         return $this->barCodeReaderDto->barCodeReadType;
+     }
 
     /**
      * Sets SingleDecodeType type array for recognition.
@@ -406,9 +415,12 @@ class BarCodeReader implements Communicator
             {
                 throw new TypeError("Argument 1 passed to BarCodeReader::setBarCodeReadType() must be of the type int");
             }
-        $this->barCodeReaderDto->barCodeDecodeTypes = $types;
+        $this->barCodeReaderDto->barCodeReadType = $types;
     }
 
+    /**
+     * @deprecated Use getBarCodeReadType() instead.
+     */
     public function getBarCodeDecodeType(): array
     {
         return $this->decodeTypes;

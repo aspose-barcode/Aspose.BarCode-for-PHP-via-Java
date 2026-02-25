@@ -3,7 +3,7 @@
 namespace Aspose\Barcode\Recognition;
 
 use Aspose\Barcode\Bridge\QualitySettingsDTO;
-use Aspose\Barcode\Exception;
+use Exception;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\Communicator;
 use Aspose\Barcode\Internal\ThriftConnection;

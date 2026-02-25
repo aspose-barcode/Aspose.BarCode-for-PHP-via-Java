@@ -26,6 +26,7 @@ var namespaceAspose_1_1Barcode_1_1ComplexBarcode =
     [ "\u202AMaxiCodeSecondMessage", "d5/dc8/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessage.html", "d5/dc8/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessage" ],
     [ "\u202AMaxiCodeSecondMessageType", "d2/dc7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessageType.html", "d2/dc7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessageType" ],
     [ "\u202AMaxiCodeStandardCodetext", "d0/dc9/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardCodetext.html", "d0/dc9/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardCodetext" ],
+    [ "\u202AMaxiCodeStandardSecondMessage", "d1/d1e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardSecondMessage.html", "d1/d1e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardSecondMessage" ],
     [ "\u202AMaxiCodeStandartSecondMessage", "d0/de7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandartSecondMessage.html", "d0/de7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandartSecondMessage" ],
     [ "\u202AMaxiCodeStructuredCodetext", "d8/d35/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStructuredCodetext.html", "d8/d35/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStructuredCodetext" ],
     [ "\u202AMaxiCodeStructuredSecondMessage", "dd/da3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStructuredSecondMessage.html", "dd/da3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStructuredSecondMessage" ],

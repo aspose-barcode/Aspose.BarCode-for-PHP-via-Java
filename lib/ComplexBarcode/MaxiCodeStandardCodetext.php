@@ -3,7 +3,7 @@
 namespace Aspose\Barcode\ComplexBarcode;
 
 use Aspose\Barcode\Bridge\IComplexCodetextDTO;
-use Aspose\Barcode\Exception;
+use Exception;
 use Aspose\Barcode\Generation\MaxiCodeMode;
 use Aspose\Barcode\Internal\BarcodeException;
 use Aspose\Barcode\Internal\ThriftConnection;

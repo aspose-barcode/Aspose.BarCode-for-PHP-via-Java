@@ -36,7 +36,7 @@ class BarcodeReaderDTO
                 ),
         ),
         3 => array(
-            'var' => 'barCodeDecodeTypes',
+            'var' => 'barCodeReadType',
             'isRequired' => false,
             'type' => TType::LST,
             'etype' => TType::I32,
@@ -84,7 +84,7 @@ class BarcodeReaderDTO
     /**
      * @var int[]
      */
-    public $barCodeDecodeTypes = null;
+    public $barCodeReadType = null;
     /**
      * @var int
      */
@@ -111,8 +111,8 @@ class BarcodeReaderDTO
             if (isset($vals['areas'])) {
                 $this->areas = $vals['areas'];
             }
-            if (isset($vals['barCodeDecodeTypes'])) {
-                $this->barCodeDecodeTypes = $vals['barCodeDecodeTypes'];
+            if (isset($vals['barCodeReadType'])) {
+                $this->barCodeReadType = $vals['barCodeReadType'];
             }
             if (isset($vals['timeout'])) {
                 $this->timeout = $vals['timeout'];
@@ -173,14 +173,14 @@ class BarcodeReaderDTO
                     break;
                 case 3:
                     if ($ftype == TType::LST) {
-                        $this->barCodeDecodeTypes = array();
+                        $this->barCodeReadType = array();
                         $_size6 = 0;
                         $_etype9 = 0;
                         $xfer += $input->readListBegin($_etype9, $_size6);
                         for ($_i10 = 0; $_i10 < $_size6; ++$_i10) {
                             $elem11 = null;
                             $xfer += $input->readI32($elem11);
-                            $this->barCodeDecodeTypes []= $elem11;
+                            $this->barCodeReadType []= $elem11;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -258,13 +258,13 @@ class BarcodeReaderDTO
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->barCodeDecodeTypes !== null) {
-            if (!is_array($this->barCodeDecodeTypes)) {
+        if ($this->barCodeReadType !== null) {
+            if (!is_array($this->barCodeReadType)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('barCodeDecodeTypes', TType::LST, 3);
-            $output->writeListBegin(TType::I32, count($this->barCodeDecodeTypes));
-            foreach ($this->barCodeDecodeTypes as $iter19) {
+            $xfer += $output->writeFieldBegin('barCodeReadType', TType::LST, 3);
+            $output->writeListBegin(TType::I32, count($this->barCodeReadType));
+            foreach ($this->barCodeReadType as $iter19) {
                 $xfer += $output->writeI32($iter19);
             }
             $output->writeListEnd();

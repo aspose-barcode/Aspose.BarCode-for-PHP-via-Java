@@ -44,16 +44,16 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"d1/db6/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeCodetextMode3.html#ab6235eef037f9b18ddc7ecfeccb752aa",
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#ad3b4798d2ab4f7d5b085d59f2fb3b4f1",
-"d5/d76/classAspose_1_1Barcode_1_1Generation_1_1CaptionParameters.html#a2e9ae8f3d27f4b32764a0d558429f8ca",
-"d7/db1/classAspose_1_1Barcode_1_1Generation_1_1CodabarParameters.html#a486f3bf58e6cdb5a80035b301f7002f4",
-"d9/dd8/classAspose_1_1Barcode_1_1Recognition_1_1DataMatrixExtendedParameters.html#a8a59f41650595b166ad91832df90bc8c",
-"dc/d48/classAspose_1_1Barcode_1_1Generation_1_1HanXinVersion.html#ad0b73e6c95e92ee5fa7f75a07a0813bb",
-"dd/d70/classAspose_1_1Barcode_1_1Generation_1_1Pdf417Parameters.html#a540e9c8186f4a2ad81c62779b3551735",
-"de/d74/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeCodetextMode2.html#a31ea2cb75dd61ffcd59f8ec8d45ad388",
-"df/dd3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1OptionalFields.html#a7814b357f9c0c1a31c69860b97ae64bc"
+"",
+"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a1fcae6623b1cf1ff4868d59f5bb80613",
+"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2df12cc32d89869be6310e886950cea6",
+"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a320b90c3d051733e602c1a34705e14b1",
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6c96e0ca4bc29eabc7f2f3720a64107c",
+"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a6ccffe3b861d83f59c0a16014cc1d61f",
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a60758208e90b5bd7f392576ec2c4c368",
+"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ae5f4ed38d4e7390becff99fa8cc560a1",
+"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af1829f35b6a18742ccdd13920cc60872",
+"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ad6c54d217e88c924dcccd4de06a08625"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
