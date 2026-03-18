@@ -1,7 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a6ccffe3b861d83f59c0a16014cc1d61f":[2,0,0,0,1,22,8],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a7854420b66a19b9792aa187f841e2b39":[2,0,0,0,1,22,10],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a9ae62b95d5c1a4649ed9a9d7374fa31f":[2,0,0,0,1,22,11],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a9c10f6699e817f0dae99736cee09b12c":[2,0,0,0,1,22,2],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#aac647dc5910ff7240c270634e9a2870c":[2,0,0,0,1,22,6],
@@ -249,5 +247,7 @@ var NAVTREEINDEX5 =
 "dc/d18/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICPrimaryDataCodetext.html#ae210e1039aa5cdd415b2152e8ca9344d":[2,0,0,0,0,10,6],
 "dc/d18/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICPrimaryDataCodetext.html#ae6fa9d64942afb71b3cb2797840ff89e":[2,0,0,0,0,10,9],
 "dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html":[2,0,0,0,1,13],
-"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a22a73b904b59cd153416c5223fb03baa":[2,0,0,0,1,13,0]
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a22a73b904b59cd153416c5223fb03baa":[2,0,0,0,1,13,0],
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a60758208e90b5bd7f392576ec2c4c368":[2,0,0,0,1,13,4],
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a6d56855d1deeb5b388f424846ab04552":[2,0,0,0,1,13,6]
 };

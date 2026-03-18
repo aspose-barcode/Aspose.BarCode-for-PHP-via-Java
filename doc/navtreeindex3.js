@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a320b90c3d051733e602c1a34705e14b1":[2,0,0,0,1,56,4],
-"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a453ceb23d730126c1791a233c630c05e":[2,0,0,0,1,56,6],
 "d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a5469b6030e313a83c5782e441fce4f48":[2,0,0,0,1,56,2],
 "d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#ab5364b6c2ec3043570d6d7da70a05e54":[2,0,0,0,1,56,5],
 "d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#ab5dc71424a74a8eb7e1c35ab6b8e2577":[2,0,0,0,1,56,3],
@@ -249,5 +247,7 @@ var NAVTREEINDEX3 =
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a64e256c5306012eff715f3f26180b3f1":[2,0,0,0,1,29,25],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a661f1a69f065ed31221efbe6869505dc":[2,0,0,0,1,29,46],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6693a71a14cf2b7095bdd66f5b35d74c":[2,0,0,0,1,29,47],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6b33f26564547cbbfcbe1bd3ad8c76e8":[2,0,0,0,1,29,31]
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6b33f26564547cbbfcbe1bd3ad8c76e8":[2,0,0,0,1,29,31],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6c96e0ca4bc29eabc7f2f3720a64107c":[2,0,0,0,1,29,49],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6ce190e2b753accfbf3019ae50cb5f30":[2,0,0,0,1,29,66]
 };

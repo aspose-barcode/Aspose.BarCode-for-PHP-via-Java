@@ -44,16 +44,16 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a1fcae6623b1cf1ff4868d59f5bb80613",
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2df12cc32d89869be6310e886950cea6",
-"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a320b90c3d051733e602c1a34705e14b1",
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6c96e0ca4bc29eabc7f2f3720a64107c",
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a6ccffe3b861d83f59c0a16014cc1d61f",
-"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a60758208e90b5bd7f392576ec2c4c368",
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ae5f4ed38d4e7390becff99fa8cc560a1",
-"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af1829f35b6a18742ccdd13920cc60872",
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ad6c54d217e88c924dcccd4de06a08625"
+"annotated.html",
+"d1/db6/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeCodetextMode3.html",
+"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2f50bb426987732aa5a3bbb9b3c04287",
+"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a5469b6030e313a83c5782e441fce4f48",
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6d2c32284353b1686b0a3abeeb633922",
+"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a9ae62b95d5c1a4649ed9a9d7374fa31f",
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a91f51046d06df26b0ca11632bdbea926",
+"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#aee962914a41c23fe4a7fd2d911313e06",
+"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af8607a8b4095f73dfc161fdf544be6ac",
+"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ae11254f665fdb2cf186dd00e930a07d9"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
