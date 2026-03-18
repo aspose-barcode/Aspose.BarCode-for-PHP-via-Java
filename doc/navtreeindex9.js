@@ -1,7 +1,5 @@
 var NAVTREEINDEX9 =
 {
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ad6c54d217e88c924dcccd4de06a08625":[2,0,0,0,1,77,21],
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#add8c4838290366636878f8c3b73274d9":[2,0,0,0,1,77,27],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ae11254f665fdb2cf186dd00e930a07d9":[2,0,0,0,1,77,15],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#aeae931aff5ab1094126163efedec83d4":[2,0,0,0,1,77,17],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#aebb400d39d4d8e543ec7830275da1e63":[2,0,0,0,1,77,0],
@@ -167,8 +165,8 @@ var NAVTREEINDEX9 =
 "df/df4/classAspose_1_1Barcode_1_1Recognition_1_1AztecExtendedParameters.html#add70cd3f7a1ec2a71f931fb398a48c47":[2,0,0,0,3,1,8],
 "df/df4/classAspose_1_1Barcode_1_1Recognition_1_1AztecExtendedParameters.html#af5956a4c3f0b11bbc939f41ef9c5033d":[2,0,0,0,3,1,5],
 "df/df4/classAspose_1_1Barcode_1_1Recognition_1_1AztecExtendedParameters.html#afffd7af4595f9d3e30cc46d49f192cf9":[2,0,0,0,3,1,6],
-"functions.html":[2,3,0],
 "functions.html":[2,3,0,0],
+"functions.html":[2,3,0],
 "functions__.html":[2,3,0,1],
 "functions_a.html":[2,3,0,2],
 "functions_b.html":[2,3,0,3],
@@ -205,8 +203,8 @@ var NAVTREEINDEX9 =
 "functions_t.html":[2,3,0,20],
 "functions_u.html":[2,3,0,21],
 "functions_v.html":[2,3,0,22],
-"functions_vars.html":[2,3,2],
 "functions_vars.html":[2,3,2,0],
+"functions_vars.html":[2,3,2],
 "functions_vars_a.html":[2,3,2,1],
 "functions_vars_b.html":[2,3,2,2],
 "functions_vars_c.html":[2,3,2,3],
@@ -237,5 +235,7 @@ var NAVTREEINDEX9 =
 "hierarchy.html":[2,2],
 "index.html":[],
 "namespaces.html":[1,0],
-"pages.html":[]
+"pages.html":[],
+"":[1,0,0,0],
+"":[1,0,0]
 };

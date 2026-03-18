@@ -1,7 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af1829f35b6a18742ccdd13920cc60872":[2,0,0,0,1,32,2],
-"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af646dad6537e911b2a8c9deb4af45388":[2,0,0,0,1,32,17],
 "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af8607a8b4095f73dfc161fdf544be6ac":[2,0,0,0,1,32,1],
 "de/d2a/classAspose_1_1Barcode_1_1Generation_1_1EncodeTypes.html":[2,0,0,0,1,35],
 "de/d2a/classAspose_1_1Barcode_1_1Generation_1_1EncodeTypes.html#a0041ee3cfa1b401e55e0cdb59586babe":[2,0,0,0,1,35,71],
@@ -249,5 +247,7 @@ var NAVTREEINDEX8 =
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ab13d2d1152d55322c060e3f2d5716a52":[2,0,0,0,1,77,23],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ab439d2d4aa715b6130479adc21f01a0b":[2,0,0,0,1,77,18],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ab45736f60ca0ca4dbf7cbe5ea0d27b4a":[2,0,0,0,1,77,8],
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#acea27a37c2988182728f37d609b4e4dc":[2,0,0,0,1,77,3]
+"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#acea27a37c2988182728f37d609b4e4dc":[2,0,0,0,1,77,3],
+"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ad6c54d217e88c924dcccd4de06a08625":[2,0,0,0,1,77,21],
+"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#add8c4838290366636878f8c3b73274d9":[2,0,0,0,1,77,27]
 };

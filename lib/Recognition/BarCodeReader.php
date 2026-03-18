@@ -98,7 +98,8 @@ class BarCodeReader implements Communicator
         if (is_null($decodeTypes))
         {
             $decodeTypes = [DecodeType::ALL_SUPPORTED_TYPES];
-        } elseif (is_int($decodeTypes))
+        }
+        elseif (is_int($decodeTypes))
         {
             $decodeTypes = [$decodeTypes];
             $this->decodeTypes = $decodeTypes;
@@ -469,6 +470,7 @@ class BarCodeReader implements Communicator
                 $resource = fopen($resource, "r");
             }
             $xmlData = (stream_get_contents($resource));
+            $xmlData = substr($xmlData, 0, 3) === "п»ї" ? substr($xmlData, 3) : $xmlData;
             $thriftConnection = new ThriftConnection();
             $client = $thriftConnection->openConnection();
 
@@ -487,6 +489,7 @@ class BarCodeReader implements Communicator
     {
         $barcodeReader = new BarCodeReader(null, null, null);
         $barcodeReader->setBarCodeReaderDto($barCodeReaderDto);
+        $barcodeReader->initFieldsFromDto();
         return $barcodeReader;
     }
 }
