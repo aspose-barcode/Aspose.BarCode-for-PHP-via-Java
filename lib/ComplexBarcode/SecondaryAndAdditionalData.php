@@ -86,7 +86,7 @@ class SecondaryAndAdditionalData implements Communicator
      */
     public function getExpiryDate(): DateTime
     {
-        return new DateTime('@' . $this->getSecondaryAndAdditionalDataDto()->expiryDate);
+        return new DateTime($this->getSecondaryAndAdditionalDataDto()->expiryDate);
     }
 
     /**
@@ -96,7 +96,7 @@ class SecondaryAndAdditionalData implements Communicator
      */
     public function setExpiryDate(DateTime $value): void
     {
-        $this->getSecondaryAndAdditionalDataDto()->expiryDate = $value->getTimestamp() . "";
+        $this->getSecondaryAndAdditionalDataDto()->expiryDate = $value->format(DateTime::ATOM);
     }
 
     /**
@@ -152,7 +152,7 @@ class SecondaryAndAdditionalData implements Communicator
      */
     public function getDateOfManufacture(): DateTime
     {
-        return new DateTime('@' . $this->getSecondaryAndAdditionalDataDto()->dateOfManufacture);
+        return new DateTime($this->getSecondaryAndAdditionalDataDto()->dateOfManufacture);
     }
 
     /**
@@ -164,7 +164,7 @@ class SecondaryAndAdditionalData implements Communicator
      */
     public function setDateOfManufacture(DateTime $value): void
     {
-        $this->getSecondaryAndAdditionalDataDto()->dateOfManufacture = ($value->getTimestamp() . "");
+        $this->getSecondaryAndAdditionalDataDto()->dateOfManufacture = $value->format(DateTime::ATOM);
     }
 
     /**

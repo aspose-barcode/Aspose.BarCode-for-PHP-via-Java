@@ -1,5 +1,10 @@
 var NAVTREEINDEX4 =
 {
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a661f1a69f065ed31221efbe6869505dc":[2,0,0,0,1,29,46],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6693a71a14cf2b7095bdd66f5b35d74c":[2,0,0,0,1,29,47],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6b33f26564547cbbfcbe1bd3ad8c76e8":[2,0,0,0,1,29,31],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6c96e0ca4bc29eabc7f2f3720a64107c":[2,0,0,0,1,29,49],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6ce190e2b753accfbf3019ae50cb5f30":[2,0,0,0,1,29,66],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6d2c32284353b1686b0a3abeeb633922":[2,0,0,0,1,29,23],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a71f3de3745cc1e35c96a4612786ffb9c":[2,0,0,0,1,29,60],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a7b87d51c6f00fd41174d423345dc89ce":[2,0,0,0,1,29,65],
@@ -244,10 +249,5 @@ var NAVTREEINDEX4 =
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a1ad5bd070c3646b5931a3650211f5711":[2,0,0,0,1,22,5],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a28f20b8c3f084c3b0de3be1860f2d429":[2,0,0,0,1,22,18],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a35db94930c3399ec8e4b795f878ab8df":[2,0,0,0,1,22,9],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a3dc6c88580ef16aaf3708e4dcb2c3d48":[2,0,0,0,1,22,14],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a509b9f8d92114002591c1eb2ec51a9f8":[2,0,0,0,1,22,4],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a5a4a999901489591944ec02eabf9573f":[2,0,0,0,1,22,0],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a5d1ead7838923db4cecf3b5521eb73fd":[2,0,0,0,1,22,17],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a6ccffe3b861d83f59c0a16014cc1d61f":[2,0,0,0,1,22,8],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a7854420b66a19b9792aa187f841e2b39":[2,0,0,0,1,22,10]
+"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a3dc6c88580ef16aaf3708e4dcb2c3d48":[2,0,0,0,1,22,14]
 };

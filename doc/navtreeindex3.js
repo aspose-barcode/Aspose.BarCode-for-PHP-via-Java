@@ -1,5 +1,9 @@
 var NAVTREEINDEX3 =
 {
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#ae044c8a9f7e5f56086d95f500da78b2b":[2,0,0,0,1,78,2],
+"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html":[2,0,0,0,1,56],
+"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a320b90c3d051733e602c1a34705e14b1":[2,0,0,0,1,56,4],
+"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a453ceb23d730126c1791a233c630c05e":[2,0,0,0,1,56,6],
 "d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a5469b6030e313a83c5782e441fce4f48":[2,0,0,0,1,56,2],
 "d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#ab5364b6c2ec3043570d6d7da70a05e54":[2,0,0,0,1,56,5],
 "d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#ab5dc71424a74a8eb7e1c35ab6b8e2577":[2,0,0,0,1,56,3],
@@ -172,9 +176,10 @@ var NAVTREEINDEX3 =
 "d6/dae/classAspose_1_1Barcode_1_1Generation_1_1TextAlignment.html#a25bdec1e04056a8cecb562c3f314281a":[2,0,0,0,1,81,1],
 "d6/dae/classAspose_1_1Barcode_1_1Generation_1_1TextAlignment.html#ad0e4a4c11585065ec6c77064cbdae9ec":[2,0,0,0,1,81,0],
 "d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html":[2,0,0,0,3,29],
-"d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html#a027a96f5f01f802b5f8803f48c6b51ec":[2,0,0,0,3,29,1],
-"d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html#a4c61907fa533475b1ecda082cc0348cd":[2,0,0,0,3,29,2],
+"d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html#a027a96f5f01f802b5f8803f48c6b51ec":[2,0,0,0,3,29,2],
+"d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html#a4c61907fa533475b1ecda082cc0348cd":[2,0,0,0,3,29,3],
 "d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html#a55d19ba9c3fe166e79c323b58f76a2e0":[2,0,0,0,3,29,0],
+"d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html#a6c2311abc9d2ed859b53cec31bbda2a6":[2,0,0,0,3,29,1],
 "d7/d09/namespaceAspose_1_1Barcode_1_1Recognition.html":[1,0,0,0,3],
 "d7/d27/classAspose_1_1Barcode_1_1Generation_1_1SvgColorMode.html":[2,0,0,0,1,79],
 "d7/d27/classAspose_1_1Barcode_1_1Generation_1_1SvgColorMode.html#a6f54cab4913f577b33758283380d6a42":[2,0,0,0,1,79,3],
@@ -244,10 +249,5 @@ var NAVTREEINDEX3 =
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a5aa80c2e4fe3c6c41736a33b7bc59863":[2,0,0,0,1,29,43],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a61cfde75c43279a772f764f7be02268d":[2,0,0,0,1,29,57],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6475720c8070f8eaafb693a26fa42a26":[2,0,0,0,1,29,36],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a64e256c5306012eff715f3f26180b3f1":[2,0,0,0,1,29,25],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a661f1a69f065ed31221efbe6869505dc":[2,0,0,0,1,29,46],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6693a71a14cf2b7095bdd66f5b35d74c":[2,0,0,0,1,29,47],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6b33f26564547cbbfcbe1bd3ad8c76e8":[2,0,0,0,1,29,31],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6c96e0ca4bc29eabc7f2f3720a64107c":[2,0,0,0,1,29,49],
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6ce190e2b753accfbf3019ae50cb5f30":[2,0,0,0,1,29,66]
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a64e256c5306012eff715f3f26180b3f1":[2,0,0,0,1,29,25]
 };

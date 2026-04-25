@@ -575,14 +575,7 @@ class Pdf417Parameters implements Communicator
      */
     public function getMacroPdf417TimeStamp() : DateTime
     {
-        try
-        {
-            return new DateTime('@' . $this->getPdf417ParametersDto()->macroPdf417TimeStamp);
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        return new DateTime($this->getPdf417ParametersDto()->macroPdf417TimeStamp);
     }
 
     /**
@@ -593,14 +586,7 @@ class Pdf417Parameters implements Communicator
      */
     public function setMacroPdf417TimeStamp(DateTime $value): void
     {
-        try
-        {
-            $this->getPdf417ParametersDto()->macroPdf417TimeStamp = $value->getTimestamp() . "";
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
+        $this->getPdf417ParametersDto()->macroPdf417TimeStamp = $value->format(DateTime::ATOM);
     }
 
     /**

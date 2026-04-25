@@ -1,5 +1,7 @@
 var NAVTREEINDEX0 =
 {
+"":[1,0,0],
+"":[1,0,0,0],
 "annotated.html":[2,0],
 "classes.html":[2,1],
 "d0/d06/classAspose_1_1Barcode_1_1Generation_1_1ExtCodetextBuilder.html":[2,0,0,0,1,37],
@@ -224,15 +226,17 @@ var NAVTREEINDEX0 =
 "d1/d49/classAspose_1_1Barcode_1_1Generation_1_1QREncodeType.html#aa75cfbe29ce139742ba190cd9bdd1a13":[2,0,0,0,1,71,2],
 "d1/d4f/namespaceAspose_1_1Barcode_1_1Generation.html":[1,0,0,0,1],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html":[2,0,0,0,3,8],
-"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a076b561616f4ac54515fa6d482836209":[2,0,0,0,3,8,6],
-"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a13d22b2192924b69a3abdf19f4193276":[2,0,0,0,3,8,7],
+"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a076b561616f4ac54515fa6d482836209":[2,0,0,0,3,8,7],
+"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a13d22b2192924b69a3abdf19f4193276":[2,0,0,0,3,8,8],
+"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a1e0c69cf9ae278f5b9924bce48d0d3b1":[2,0,0,0,3,8,6],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a4b8a746261dd34e7b4664bf44a5db727":[2,0,0,0,3,8,3],
+"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a5aa74552c1247c88efe18b1f1b74e82b":[2,0,0,0,3,8,10],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a6617aa32d5c00477c591b0e810a72142":[2,0,0,0,3,8,0],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a73d454eba7c037dba2f496685c2b5637":[2,0,0,0,3,8,2],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a80256159798cf1acdbb810688e0e3032":[2,0,0,0,3,8,4],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a8061d429f236290236e4a50bce92c344":[2,0,0,0,3,8,1],
-"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aa1e911c730e9801de6dab96d31ffd496":[2,0,0,0,3,8,9],
-"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aec86fc1da0e645917c0f98c8f34cc385":[2,0,0,0,3,8,8],
+"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aa1e911c730e9801de6dab96d31ffd496":[2,0,0,0,3,8,11],
+"d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aec86fc1da0e645917c0f98c8f34cc385":[2,0,0,0,3,8,9],
 "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aff0ce250bdbf340ea3809e03beeddfa1":[2,0,0,0,3,8,5],
 "d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html":[2,0,0,0,0,34],
 "d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#a089947dbcf236ce711c4c5d1b9daf9f2":[2,0,0,0,0,34,3],
@@ -245,9 +249,5 @@ var NAVTREEINDEX0 =
 "d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#ad9328f49dc5408af2e815bda35c2d4ee":[2,0,0,0,0,34,6],
 "d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#ae2cddb79c5d1a24d27ba88d4a2c1f163":[2,0,0,0,0,34,0],
 "d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#ae84f6e50449bbdb002b9ddea7518c0b8":[2,0,0,0,0,34,7],
-"d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#af3b25d3d06ce47f3c9158f2026cbe9cc":[2,0,0,0,0,34,5],
-"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html":[2,0,0,0,3,15],
-"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a154b4bf1be65611120487fe460a8c883":[2,0,0,0,3,15,2],
-"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a1fcae6623b1cf1ff4868d59f5bb80613":[2,0,0,0,3,15,0],
-"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#acc8dd596c29738508b54aa69d1d18889":[2,0,0,0,3,15,1]
+"d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#af3b25d3d06ce47f3c9158f2026cbe9cc":[2,0,0,0,0,34,5]
 };

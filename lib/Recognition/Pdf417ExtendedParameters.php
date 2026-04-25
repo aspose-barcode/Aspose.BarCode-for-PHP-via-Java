@@ -185,7 +185,7 @@ final class Pdf417ExtendedParameters implements Communicator
     {
         try
         {
-            return new DateTime('@' . $this->getPdf417ExtendedParametersDTO()->macroPdf417TimeStamp);
+            return new DateTime($this->getPdf417ExtendedParametersDTO()->macroPdf417TimeStamp);
         }
         catch (Exception $ex)
         {

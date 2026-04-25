@@ -173,9 +173,7 @@ var hierarchy =
     [ "\u202AAspose\\Barcode\\ComplexBarcode\\USADriveIdSex", "d8/db4/classAspose_1_1Barcode_1_1ComplexBarcode_1_1USADriveIdSex.html", null ],
     [ "\u202AAspose\\Barcode\\Recognition\\XDimensionMode", "d5/daf/classAspose_1_1Barcode_1_1Recognition_1_1XDimensionMode.html", null ],
     [ "\u202AException", null, [
+      [ "\u202AAspose\\Barcode\\Internal\\BarcodeException", "da/d92/classAspose_1_1Barcode_1_1Internal_1_1BarcodeException.html", null ],
       [ "\u202AAspose\\Barcode\\Recognition\\RecognitionAbortedException", "d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html", null ]
-    ] ],
-    [ "\u202AException", null, [
-      [ "\u202AAspose\\Barcode\\Internal\\BarcodeException", "da/d92/classAspose_1_1Barcode_1_1Internal_1_1BarcodeException.html", null ]
     ] ]
 ];
