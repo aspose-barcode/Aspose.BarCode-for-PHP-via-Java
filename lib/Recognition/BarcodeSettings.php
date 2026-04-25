@@ -186,7 +186,86 @@ class BarcodeSettings implements Communicator
         $this->getBarcodeSettingsDto()->stripFNC = $value;
     }
 
+
+
     /**
+     * Returns only barcode types explicitly specified for recognition.
+     * When enabled, recognized barcodes of other compatible or equivalent types are filtered out.
+     * Default value is false.
+     *
+     * <p>Example:</p>
+     * <pre>
+     * // generate EAN13 barcode
+     * $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "2383823482894");
+     * $generator->save("c:\\test.png");
+     *
+     * // recognize only UPCA barcodes (no results, because source is EAN13)
+     * $reader = new BarCodeReader("c:\\test.png", null, DecodeType::UPCA);
+     * $reader->getBarcodeSettings()->setOnlyRequestedTypes(true);
+     *
+     * foreach ($reader->readBarCodes() as $result)
+     * {
+     *     echo "BarCode CodeText: " . $result->getCodeText() . PHP_EOL;
+     * }
+     *
+     * // recognize compatible types: EAN13, UPCA, ISSN, ISMN, ISBN
+     * // (EAN13 will be returned as UPCA-equivalent)
+     * $reader2 = new BarCodeReader("c:\\test.png", null, DecodeType::UPCA);
+     * $reader2->getBarcodeSettings()->setOnlyRequestedTypes(false);
+     *
+     * foreach ($reader2->readBarCodes() as $result)
+     * {
+     *     echo "BarCode CodeText: " . $result->getCodeText() . PHP_EOL;
+     * }
+     * </pre>
+     *
+     * @return true if only explicitly requested barcode types are returned; otherwise false
+     */
+    public function isOnlyRequestedTypes()
+    {
+        return $this->getBarcodeSettingsDto()->onlyRequestedTypes;
+    }
+
+    /**
+     * Returns only barcode types explicitly specified for recognition.
+     * When enabled, recognized barcodes of other compatible or equivalent types are filtered out.
+     * Default value is false.
+     *
+     * <p>Example:</p>
+     * <pre>
+     *  // generate EAN13 barcode
+     *  $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "2383823482894");
+     *  $generator->save("c:\\test.png");
+     *
+     *  // recognize only UPCA barcodes (no results, because source is EAN13)
+     *  $reader = new BarCodeReader("c:\\test.png", null, DecodeType::UPCA);
+     *  $reader->getBarcodeSettings()->setOnlyRequestedTypes(true);
+     *
+     *  foreach ($reader->readBarCodes() as $result)
+     *  {
+     *      echo "BarCode CodeText: " . $result->getCodeText() . PHP_EOL;
+     *  }
+     *
+     *  // recognize compatible types: EAN13, UPCA, ISSN, ISMN, ISBN
+     *  // (EAN13 will be returned as UPCA-equivalent)
+     *  $reader2 = new BarCodeReader("c:\\test.png", null, DecodeType::UPCA);
+     *  $reader2->getBarcodeSettings()->setOnlyRequestedTypes(false);
+     *
+     *  foreach ($reader2->readBarCodes() as $result)
+     *  {
+     *      echo "BarCode CodeText: " . $result->getCodeText() . PHP_EOL;
+     *  }
+     * </pre>
+     *
+     * @return true if only explicitly requested barcode types are returned; otherwise false
+     */
+    public function setOnlyRequestedTypes(bool $value) : void
+    {
+        $this->getBarcodeSettingsDto()->onlyRequestedTypes = $value;
+    }
+
+
+/**
      * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
      *
      * @code

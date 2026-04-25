@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">26.3</span>
+   &#160;<span id="projectnumber">26.4</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -110,6 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a80256159798cf1acdbb810688e0e3032"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1e911c730e9801de6dab96d31ffd496"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aa1e911c730e9801de6dab96d31ffd496">setStripFNC</a> (bool $value)</td></tr>
 <tr class="separator:aa1e911c730e9801de6dab96d31ffd496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e0c69cf9ae278f5b9924bce48d0d3b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a1e0c69cf9ae278f5b9924bce48d0d3b1">isOnlyRequestedTypes</a> ()</td></tr>
+<tr class="separator:a1e0c69cf9ae278f5b9924bce48d0d3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa74552c1247c88efe18b1f1b74e82b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a5aa74552c1247c88efe18b1f1b74e82b">setOnlyRequestedTypes</a> (bool $value)</td></tr>
+<tr class="separator:a5aa74552c1247c88efe18b1f1b74e82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b8a746261dd34e7b4664bf44a5db727"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a4b8a746261dd34e7b4664bf44a5db727">getDetectEncoding</a> ()</td></tr>
 <tr class="separator:a4b8a746261dd34e7b4664bf44a5db727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec86fc1da0e645917c0f98c8f34cc385"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aec86fc1da0e645917c0f98c8f34cc385">setDetectEncoding</a> (bool $value)</td></tr>
@@ -292,6 +296,49 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a1e0c69cf9ae278f5b9924bce48d0d3b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e0c69cf9ae278f5b9924bce48d0d3b1">&#9670;&nbsp;</a></span>isOnlyRequestedTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspose\Barcode\Recognition\BarcodeSettings::isOnlyRequestedTypes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Returns only barcode types explicitly specified for recognition. When enabled, recognized barcodes of other compatible or equivalent types are filtered out. Default value is false.</p>
+<p class="DocNodeLTR">Example:</p>
+<pre>
+// generate EAN13 barcode
+$generator = new BarcodeGenerator(EncodeTypes::EAN_13, "2383823482894");
+$generator-&gt;save("c:\\test.png");
+
+// recognize only UPCA barcodes (no results, because source is EAN13)
+$reader = new <a class="el" href="../../df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html">BarCodeReader</a>("c:\\test.png", null, <a class="el" href="../../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a468677ce7f8eb2fba4623aff8027cdfc">DecodeType::UPCA</a>);
+$reader-&gt;getBarcodeSettings()-&gt;setOnlyRequestedTypes(true);
+
+foreach ($reader-&gt;readBarCodes() as $result)
+{
+    echo "BarCode CodeText: " . $result-&gt;getCodeText() . PHP_EOL;
+}
+
+// recognize compatible types: EAN13, UPCA, ISSN, ISMN, ISBN
+// (EAN13 will be returned as UPCA-equivalent)
+$reader2 = new <a class="el" href="../../df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html">BarCodeReader</a>("c:\\test.png", null, <a class="el" href="../../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a468677ce7f8eb2fba4623aff8027cdfc">DecodeType::UPCA</a>);
+$reader2-&gt;getBarcodeSettings()-&gt;setOnlyRequestedTypes(false);
+
+foreach ($reader2-&gt;readBarCodes() as $result)
+{
+    echo "BarCode CodeText: " . $result-&gt;getCodeText() . PHP_EOL;
+}
+</pre><dl class="section return"><dt>Returns</dt><dd>&#x202A;true if only explicitly requested barcode types are returned; otherwise false </dd></dl>
+
+</div>
+</div>
 <a id="a076b561616f4ac54515fa6d482836209"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a076b561616f4ac54515fa6d482836209">&#9670;&nbsp;</a></span>obtainDto()</h2>
 
@@ -372,6 +419,50 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5aa74552c1247c88efe18b1f1b74e82b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aa74552c1247c88efe18b1f1b74e82b">&#9670;&nbsp;</a></span>setOnlyRequestedTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspose\Barcode\Recognition\BarcodeSettings::setOnlyRequestedTypes </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Returns only barcode types explicitly specified for recognition. When enabled, recognized barcodes of other compatible or equivalent types are filtered out. Default value is false.</p>
+<p class="DocNodeLTR">Example:</p>
+<pre>
+ // generate EAN13 barcode
+ $generator = new BarcodeGenerator(EncodeTypes::EAN_13, "2383823482894");
+ $generator-&gt;save("c:\\test.png");
+
+ // recognize only UPCA barcodes (no results, because source is EAN13)
+ $reader = new <a class="el" href="../../df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html">BarCodeReader</a>("c:\\test.png", null, <a class="el" href="../../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a468677ce7f8eb2fba4623aff8027cdfc">DecodeType::UPCA</a>);
+ $reader-&gt;getBarcodeSettings()-&gt;setOnlyRequestedTypes(true);
+
+ foreach ($reader-&gt;readBarCodes() as $result)
+ {
+     echo "BarCode CodeText: " . $result-&gt;getCodeText() . PHP_EOL;
+ }
+
+ // recognize compatible types: EAN13, UPCA, ISSN, ISMN, ISBN
+ // (EAN13 will be returned as UPCA-equivalent)
+ $reader2 = new <a class="el" href="../../df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html">BarCodeReader</a>("c:\\test.png", null, <a class="el" href="../../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a468677ce7f8eb2fba4623aff8027cdfc">DecodeType::UPCA</a>);
+ $reader2-&gt;getBarcodeSettings()-&gt;setOnlyRequestedTypes(false);
+
+ foreach ($reader2-&gt;readBarCodes() as $result)
+ {
+     echo "BarCode CodeText: " . $result-&gt;getCodeText() . PHP_EOL;
+ }
+</pre><dl class="section return"><dt>Returns</dt><dd>&#x202A;true if only explicitly requested barcode types are returned; otherwise false </dd></dl>
 
 </div>
 </div>

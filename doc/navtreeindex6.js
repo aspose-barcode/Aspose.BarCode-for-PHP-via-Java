@@ -1,5 +1,10 @@
 var NAVTREEINDEX6 =
 {
+"dc/d18/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICPrimaryDataCodetext.html#ae6fa9d64942afb71b3cb2797840ff89e":[2,0,0,0,0,10,9],
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html":[2,0,0,0,1,13],
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a22a73b904b59cd153416c5223fb03baa":[2,0,0,0,1,13,0],
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a60758208e90b5bd7f392576ec2c4c368":[2,0,0,0,1,13,4],
+"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a6d56855d1deeb5b388f424846ab04552":[2,0,0,0,1,13,6],
 "dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a91f51046d06df26b0ca11632bdbea926":[2,0,0,0,1,13,1],
 "dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#aac6303c73539792e8346a35a313eb3ff":[2,0,0,0,1,13,2],
 "dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#add9a2e36c59c7cfc56f4bf2702a0a2ab":[2,0,0,0,1,13,3],
@@ -244,10 +249,5 @@ var NAVTREEINDEX6 =
 "dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#aab8f684e5484d105a8107482fe73fae6":[2,0,0,0,1,28,31],
 "dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ab096fe9ac2f48a1c90300a3774570219":[2,0,0,0,1,28,18],
 "dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#abacb22661cf5b9d03e28bc8ef2b48cc3":[2,0,0,0,1,28,17],
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#abafd13ffa27a10970096d969d91482df":[2,0,0,0,1,28,19],
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ac72509e776b3172443d5696e11987501":[2,0,0,0,1,28,15],
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ad93e29a9fdec30816c19e076a77d5a89":[2,0,0,0,1,28,21],
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ae4de353467c9c65ccff9926074627ff4":[2,0,0,0,1,28,23],
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ae5f4ed38d4e7390becff99fa8cc560a1":[2,0,0,0,1,28,10],
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#aec68e9ee206d74f4f1765732549849a4":[2,0,0,0,1,28,33]
+"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#abafd13ffa27a10970096d969d91482df":[2,0,0,0,1,28,19]
 };

@@ -6,8 +6,10 @@ var classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings =
     [ "\u202AgetDetectEncoding", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a4b8a746261dd34e7b4664bf44a5db727", null ],
     [ "\u202AgetStripFNC", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a80256159798cf1acdbb810688e0e3032", null ],
     [ "\u202AinitFieldsFromDto", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aff0ce250bdbf340ea3809e03beeddfa1", null ],
+    [ "\u202AisOnlyRequestedTypes", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a1e0c69cf9ae278f5b9924bce48d0d3b1", null ],
     [ "\u202AobtainDto", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a076b561616f4ac54515fa6d482836209", null ],
     [ "\u202AsetChecksumValidation", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a13d22b2192924b69a3abdf19f4193276", null ],
     [ "\u202AsetDetectEncoding", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aec86fc1da0e645917c0f98c8f34cc385", null ],
+    [ "\u202AsetOnlyRequestedTypes", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a5aa74552c1247c88efe18b1f1b74e82b", null ],
     [ "\u202AsetStripFNC", "d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aa1e911c730e9801de6dab96d31ffd496", null ]
 ];

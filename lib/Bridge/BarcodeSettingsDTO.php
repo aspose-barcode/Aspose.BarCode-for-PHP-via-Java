@@ -37,6 +37,11 @@ class BarcodeSettingsDTO
             'type' => TType::BOOL,
         ),
         4 => array(
+            'var' => 'onlyRequestedTypes',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
+        5 => array(
             'var' => 'australiaPost',
             'isRequired' => false,
             'type' => TType::STRUCT,
@@ -57,6 +62,10 @@ class BarcodeSettingsDTO
      */
     public $detectEncoding = null;
     /**
+     * @var bool
+     */
+    public $onlyRequestedTypes = null;
+    /**
      * @var \Aspose\Barcode\Bridge\AustraliaPostSettingsDTO
      */
     public $australiaPost = null;
@@ -72,6 +81,9 @@ class BarcodeSettingsDTO
             }
             if (isset($vals['detectEncoding'])) {
                 $this->detectEncoding = $vals['detectEncoding'];
+            }
+            if (isset($vals['onlyRequestedTypes'])) {
+                $this->onlyRequestedTypes = $vals['onlyRequestedTypes'];
             }
             if (isset($vals['australiaPost'])) {
                 $this->australiaPost = $vals['australiaPost'];
@@ -120,6 +132,13 @@ class BarcodeSettingsDTO
                     }
                     break;
                 case 4:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->onlyRequestedTypes);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 5:
                     if ($ftype == TType::STRUCT) {
                         $this->australiaPost = new \Aspose\Barcode\Bridge\AustraliaPostSettingsDTO();
                         $xfer += $this->australiaPost->read($input);
@@ -156,11 +175,16 @@ class BarcodeSettingsDTO
             $xfer += $output->writeBool($this->detectEncoding);
             $xfer += $output->writeFieldEnd();
         }
+        if ($this->onlyRequestedTypes !== null) {
+            $xfer += $output->writeFieldBegin('onlyRequestedTypes', TType::BOOL, 4);
+            $xfer += $output->writeBool($this->onlyRequestedTypes);
+            $xfer += $output->writeFieldEnd();
+        }
         if ($this->australiaPost !== null) {
             if (!is_object($this->australiaPost)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('australiaPost', TType::STRUCT, 4);
+            $xfer += $output->writeFieldBegin('australiaPost', TType::STRUCT, 5);
             $xfer += $this->australiaPost->write($output);
             $xfer += $output->writeFieldEnd();
         }

@@ -4,6 +4,7 @@ var classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader =
     [ "\u202AcontainsAny", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#a75fd10794cf485c5fdb31cb282acc4aa", null ],
     [ "\u202AexportToXml", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#a6c745b95336baadffc85dfe9dbdb6385", null ],
     [ "\u202AgetBarCodeDecodeType", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#a8269ced64f83b67f1c56c4acb8f46009", null ],
+    [ "\u202AgetBarCodeReadType", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#abc2b5fcc3e46e2f4b8369aa59a2e872e", null ],
     [ "\u202AgetFoundBarCodes", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#a9abb96e7a6d8fddee1a7d07749ac26a1", null ],
     [ "\u202AgetFoundCount", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#ad522b532839c5fc0673ecc8f4dbb14ba", null ],
     [ "\u202AgetTimeout", "df/dbb/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeReader.html#a673fb2ebbf77bda9c0bdf17544c982ef", null ],

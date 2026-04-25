@@ -29,7 +29,7 @@ class SecondaryAndAdditionalDataDTO
         2 => array(
             'var' => 'expiryDate',
             'isRequired' => false,
-            'type' => TType::I32,
+            'type' => TType::STRING,
         ),
         3 => array(
             'var' => 'lotNumber',
@@ -44,7 +44,7 @@ class SecondaryAndAdditionalDataDTO
         5 => array(
             'var' => 'dateOfManufacture',
             'isRequired' => false,
-            'type' => TType::I32,
+            'type' => TType::STRING,
         ),
         6 => array(
             'var' => 'quantity',
@@ -58,7 +58,7 @@ class SecondaryAndAdditionalDataDTO
      */
     public $expiryDateFormat = null;
     /**
-     * @var int
+     * @var string
      */
     public $expiryDate = null;
     /**
@@ -70,7 +70,7 @@ class SecondaryAndAdditionalDataDTO
      */
     public $serialNumber = null;
     /**
-     * @var int
+     * @var string
      */
     public $dateOfManufacture = null;
     /**
@@ -129,8 +129,8 @@ class SecondaryAndAdditionalDataDTO
                     }
                     break;
                 case 2:
-                    if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->expiryDate);
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->expiryDate);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -150,8 +150,8 @@ class SecondaryAndAdditionalDataDTO
                     }
                     break;
                 case 5:
-                    if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->dateOfManufacture);
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->dateOfManufacture);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -183,8 +183,8 @@ class SecondaryAndAdditionalDataDTO
             $xfer += $output->writeFieldEnd();
         }
         if ($this->expiryDate !== null) {
-            $xfer += $output->writeFieldBegin('expiryDate', TType::I32, 2);
-            $xfer += $output->writeI32($this->expiryDate);
+            $xfer += $output->writeFieldBegin('expiryDate', TType::STRING, 2);
+            $xfer += $output->writeString($this->expiryDate);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->lotNumber !== null) {
@@ -198,8 +198,8 @@ class SecondaryAndAdditionalDataDTO
             $xfer += $output->writeFieldEnd();
         }
         if ($this->dateOfManufacture !== null) {
-            $xfer += $output->writeFieldBegin('dateOfManufacture', TType::I32, 5);
-            $xfer += $output->writeI32($this->dateOfManufacture);
+            $xfer += $output->writeFieldBegin('dateOfManufacture', TType::STRING, 5);
+            $xfer += $output->writeString($this->dateOfManufacture);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->quantity !== null) {

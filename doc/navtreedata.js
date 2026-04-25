@@ -44,16 +44,16 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html",
-"d1/db6/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeCodetextMode3.html",
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2f50bb426987732aa5a3bbb9b3c04287",
-"d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html#a5469b6030e313a83c5782e441fce4f48",
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6d2c32284353b1686b0a3abeeb633922",
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a9ae62b95d5c1a4649ed9a9d7374fa31f",
-"dc/d37/classAspose_1_1Barcode_1_1Generation_1_1CMYKColor.html#a91f51046d06df26b0ca11632bdbea926",
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#aee962914a41c23fe4a7fd2d911313e06",
-"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#af8607a8b4095f73dfc161fdf544be6ac",
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ae11254f665fdb2cf186dd00e930a07d9"
+"",
+"d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html",
+"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a243be3dce081a56375b309b3306ff5f3",
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#ae044c8a9f7e5f56086d95f500da78b2b",
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a661f1a69f065ed31221efbe6869505dc",
+"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a509b9f8d92114002591c1eb2ec51a9f8",
+"dc/d18/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICPrimaryDataCodetext.html#ae6fa9d64942afb71b3cb2797840ff89e",
+"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ac72509e776b3172443d5696e11987501",
+"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#adeeb35e4a72ed198f46a6303315d0e17",
+"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ab439d2d4aa715b6130479adc21f01a0b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
