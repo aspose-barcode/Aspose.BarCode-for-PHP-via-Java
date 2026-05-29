@@ -1,7 +1,5 @@
 var NAVTREEINDEX9 =
 {
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ab439d2d4aa715b6130479adc21f01a0b":[2,0,0,0,1,77,18],
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ab45736f60ca0ca4dbf7cbe5ea0d27b4a":[2,0,0,0,1,77,8],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#acea27a37c2988182728f37d609b4e4dc":[2,0,0,0,1,77,3],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#ad6c54d217e88c924dcccd4de06a08625":[2,0,0,0,1,77,21],
 "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#add8c4838290366636878f8c3b73274d9":[2,0,0,0,1,77,27],
@@ -241,5 +239,7 @@ var NAVTREEINDEX9 =
 "hierarchy.html":[2,2],
 "index.html":[],
 "namespaces.html":[1,0],
-"pages.html":[]
+"pages.html":[],
+"":[1,0,0,0],
+"":[1,0,0]
 };
