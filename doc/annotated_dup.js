@@ -122,6 +122,7 @@ var annotated_dup =
           [ "\u202AQREncodeType", "d1/d49/classAspose_1_1Barcode_1_1Generation_1_1QREncodeType.html", "d1/d49/classAspose_1_1Barcode_1_1Generation_1_1QREncodeType" ],
           [ "\u202AQRErrorLevel", "d1/deb/classAspose_1_1Barcode_1_1Generation_1_1QRErrorLevel.html", "d1/deb/classAspose_1_1Barcode_1_1Generation_1_1QRErrorLevel" ],
           [ "\u202AQrExtCodetextBuilder", "de/df7/classAspose_1_1Barcode_1_1Generation_1_1QrExtCodetextBuilder.html", "de/df7/classAspose_1_1Barcode_1_1Generation_1_1QrExtCodetextBuilder" ],
+          [ "\u202AQrExtCompactionMode", "de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode.html", "de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode" ],
           [ "\u202AQrParameters", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html", "d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters" ],
           [ "\u202AQrStructuredAppendParameters", "dc/db6/classAspose_1_1Barcode_1_1Generation_1_1QrStructuredAppendParameters.html", "dc/db6/classAspose_1_1Barcode_1_1Generation_1_1QrStructuredAppendParameters" ],
           [ "\u202AQRVersion", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion" ],

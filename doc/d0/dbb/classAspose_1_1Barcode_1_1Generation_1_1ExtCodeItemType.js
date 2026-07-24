@@ -1,5 +1,6 @@
 var classAspose_1_1Barcode_1_1Generation_1_1ExtCodeItemType =
 [
+    [ "\u202ACODETEXT_WITH_COMPACTION_MODE", "d0/dbb/classAspose_1_1Barcode_1_1Generation_1_1ExtCodeItemType.html#a4da0adea8fcac87c49a11b9ea4f1407d", null ],
     [ "\u202ACODETEXT_WITH_ENCODE_MODE", "d0/dbb/classAspose_1_1Barcode_1_1Generation_1_1ExtCodeItemType.html#a7e214ab5fd41d38a0e83fdc0f7f08f37", null ],
     [ "\u202AECI_CODETEXT", "d0/dbb/classAspose_1_1Barcode_1_1Generation_1_1ExtCodeItemType.html#ac38385ddfb77407b2178ef48b38b3408", null ],
     [ "\u202AECI_CODETEXT_WITH_ENCODE_MODE", "d0/dbb/classAspose_1_1Barcode_1_1Generation_1_1ExtCodeItemType.html#adfaf18eb398fb0d3be430ed4cd0ce828", null ],

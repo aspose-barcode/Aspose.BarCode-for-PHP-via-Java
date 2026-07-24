@@ -100,6 +100,37 @@ class QrParameters implements Communicator
         }
     }
 
+
+    /**
+     * <p>
+     * <p>Gets or sets a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.</p>
+     * <p>If false, GS1 separators may be encoded as '%' in Alphanumeric mode according to QR specification.</p>
+     * <p>If true, GS1 group separators are encoded in Byte mode as the 0x1D character, and '%' characters are also encoded in Byte mode to preserve them as data.</p>
+     * <p>This option may improve compatibility with decoders that expect byte-level GS1 group separators and prevents '%' data characters from being interpreted as GS1 separators.</p>
+     * </p>
+     *
+     * @return a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.
+     */
+    public function getEncodeGS1SeparatorInByteMode() : bool
+    {
+        return $this->getQrParametersDto()->encodeGS1SeparatorInByteMode;
+    }
+
+    /**
+     * <p>
+     * <p>Gets or sets a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.</p>
+     * <p>If false, GS1 separators may be encoded as '%' in Alphanumeric mode according to QR specification.</p>
+     * <p>If true, GS1 group separators are encoded in Byte mode as the 0x1D character, and '%' characters are also encoded in Byte mode to preserve them as data.</p>
+     * <p>This option may improve compatibility with decoders that expect byte-level GS1 group separators and prevents '%' data characters from being interpreted as GS1 separators.</p>
+     * </p>
+     *
+     * @param value a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.
+     */
+    public function setEncodeGS1SeparatorInByteMode(bool $value) : void
+    {
+        $this->getQrParametersDto()->encodeGS1SeparatorInByteMode = $value;
+    }
+
     /**
      * <p>
      * QR symbology type of BarCode's encoding mode.

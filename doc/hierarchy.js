@@ -161,6 +161,7 @@ var hierarchy =
     [ "\u202AAspose\\Barcode\\Generation\\QREncodeMode", "dc/dd9/classAspose_1_1Barcode_1_1Generation_1_1QREncodeMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QREncodeType", "d1/d49/classAspose_1_1Barcode_1_1Generation_1_1QREncodeType.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QRErrorLevel", "d1/deb/classAspose_1_1Barcode_1_1Generation_1_1QRErrorLevel.html", null ],
+    [ "\u202AAspose\\Barcode\\Generation\\QrExtCompactionMode", "de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QRVersion", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\RectMicroQRVersion", "df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\SvgColorMode", "d7/d27/classAspose_1_1Barcode_1_1Generation_1_1SvgColorMode.html", null ],

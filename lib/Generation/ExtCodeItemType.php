@@ -15,4 +15,5 @@ class ExtCodeItemType
     const FNC_3_SYMBOL_SEPARATOR = 9;
     const FNC_3_RRADER_INITILIZATION = 10;
     const STRUCTURE_APPEND_MODE = 11;
+    const CODETEXT_WITH_COMPACTION_MODE = 12;
 }
