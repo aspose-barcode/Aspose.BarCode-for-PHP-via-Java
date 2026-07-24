@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#af3b25d3d06ce47f3c9158f2026cbe9cc":[2,0,0,0,0,34,5],
 "d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html":[2,0,0,0,3,15],
 "d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a154b4bf1be65611120487fe460a8c883":[2,0,0,0,3,15,2],
 "d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a1fcae6623b1cf1ff4868d59f5bb80613":[2,0,0,0,3,15,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a12f26021a034e17103a7b33952f8d1d0":[2,0,0,0,1,7,5],
 "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a17e989d788086c53463414fa2ff301d5":[2,0,0,0,1,7,19],
 "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a1c6e48285e5ec315b6b1294e7f45e78c":[2,0,0,0,1,7,23],
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a1dd2f2efa1a3a871c11c492f21f779c1":[2,0,0,0,1,7,38],
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2076e15db5ea4da686df86d79e7efe64":[2,0,0,0,1,7,44]
+"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a1dd2f2efa1a3a871c11c492f21f779c1":[2,0,0,0,1,7,38]
 };

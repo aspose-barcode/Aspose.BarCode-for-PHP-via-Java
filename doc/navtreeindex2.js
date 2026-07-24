@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2076e15db5ea4da686df86d79e7efe64":[2,0,0,0,1,7,44],
 "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a243be3dce081a56375b309b3306ff5f3":[2,0,0,0,1,7,0],
 "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2adbc1a74e5f18bf05f20794d8b94872":[2,0,0,0,1,7,33],
 "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2df12cc32d89869be6310e886950cea6":[2,0,0,0,1,7,36],
@@ -243,11 +244,10 @@ var NAVTREEINDEX2 =
 "d4/db9/classAspose_1_1Barcode_1_1Generation_1_1DotCodeEncodeMode.html#a72239c8e828ae56a4a496d36a9927850":[2,0,0,0,1,30,1],
 "d4/db9/classAspose_1_1Barcode_1_1Generation_1_1DotCodeEncodeMode.html#adf0bae4f25c13caddbc384c06e64d945":[2,0,0,0,1,30,5],
 "d4/db9/classAspose_1_1Barcode_1_1Generation_1_1DotCodeEncodeMode.html#afd0ef7a474279c922de9255d7c26b4a8":[2,0,0,0,1,30,4],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html":[2,0,0,0,1,78],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#a0b6b2ed7cc74768fc9f2ea1034663b8b":[2,0,0,0,1,78,4],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#a7acfb932fc84d1a9d0dfd4fc2f1bdbf6":[2,0,0,0,1,78,3],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#a7bc096b57950e743b4f4b4a5c1c2cbb4":[2,0,0,0,1,78,1],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#aac3622e262092b330b4da5090b27ad6c":[2,0,0,0,1,78,0],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#ac1a48a3753b0c42feb52e70a31bee2c2":[2,0,0,0,1,78,5],
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#ada2e96c8e60ab650d5dd973c2c0564c8":[2,0,0,0,1,78,6]
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html":[2,0,0,0,1,79],
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#a0b6b2ed7cc74768fc9f2ea1034663b8b":[2,0,0,0,1,79,4],
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#a7acfb932fc84d1a9d0dfd4fc2f1bdbf6":[2,0,0,0,1,79,3],
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#a7bc096b57950e743b4f4b4a5c1c2cbb4":[2,0,0,0,1,79,1],
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#aac3622e262092b330b4da5090b27ad6c":[2,0,0,0,1,79,0],
+"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#ac1a48a3753b0c42feb52e70a31bee2c2":[2,0,0,0,1,79,5]
 };

@@ -119,7 +119,7 @@ class DataMatrixParameters implements Communicator
     {
         try
         {
-            return $this->getDataMatrixParametersDto()->dataMatrixEcc;
+            return $this->getDataMatrixParametersDto()->eccType;
         }
         catch (Exception $ex)
         {
@@ -136,7 +136,7 @@ class DataMatrixParameters implements Communicator
     {
         try
         {
-            $this->getDataMatrixParametersDto()->dataMatrixEcc = $value;
+            $this->getDataMatrixParametersDto()->eccType = $value;
         }
         catch (Exception $ex)
         {

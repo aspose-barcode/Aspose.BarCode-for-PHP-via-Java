@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">26.6</span>
+   &#160;<span id="projectnumber">26.7</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -110,6 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab9ed92fec223b1be0fffbd6b447fa8ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1088fe6e28f0a9a28239035f8779c832"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a1088fe6e28f0a9a28239035f8779c832">setStructuredAppend</a> (<a class="el" href="../../dc/db6/classAspose_1_1Barcode_1_1Generation_1_1QrStructuredAppendParameters.html">QrStructuredAppendParameters</a> $value)</td></tr>
 <tr class="separator:a1088fe6e28f0a9a28239035f8779c832"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2bf77eef9a774ee5b867c6c195589c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#ad2bf77eef9a774ee5b867c6c195589c0">getEncodeGS1SeparatorInByteMode</a> ()</td></tr>
+<tr class="separator:ad2bf77eef9a774ee5b867c6c195589c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f755554c8573d0f24ef5a4d633286f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a8f755554c8573d0f24ef5a4d633286f3">setEncodeGS1SeparatorInByteMode</a> (bool $value)</td></tr>
+<tr class="separator:a8f755554c8573d0f24ef5a4d633286f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2acf2197e81fb34940e50d87db47d2f6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a2acf2197e81fb34940e50d87db47d2f6">getEncodeMode</a> ()</td></tr>
 <tr class="separator:a2acf2197e81fb34940e50d87db47d2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aef129be1b862dab1ae9f25fb7c82b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a6aef129be1b862dab1ae9f25fb7c82b6">setEncodeMode</a> (int $value)</td></tr>
@@ -212,6 +216,28 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details about the used references for encoding the data in the symbol. Current implementation consists all well known charset encodings. Not supported by MicroQR. </p>
+
+</div>
+</div>
+<a id="ad2bf77eef9a774ee5b867c6c195589c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2bf77eef9a774ee5b867c6c195589c0">&#9670;&nbsp;</a></span>getEncodeGS1SeparatorInByteMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspose\Barcode\Generation\QrParameters::getEncodeGS1SeparatorInByteMode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Gets or sets a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.</p>
+<p class="DocNodeLTR">If false, GS1 separators may be encoded as '' in Alphanumeric mode according to QR specification.</p>
+<p class="DocNodeLTR">If true, GS1 group separators are encoded in Byte mode as the 0x1D character, and '' characters are also encoded in Byte mode to preserve them as data.</p>
+<p class="DocNodeLTR">This option may improve compatibility with decoders that expect byte-level GS1 group separators and prevents '' data characters from being interpreted as GS1 separators.</p>
+<dl class="section return"><dt>Returns</dt><dd>&#x202A;a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes. </dd></dl>
 
 </div>
 </div>
@@ -488,6 +514,34 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details about the used references for encoding the data in the symbol. Current implementation consists all well known charset encodings. Not supported by MicroQR. </p>
+
+</div>
+</div>
+<a id="a8f755554c8573d0f24ef5a4d633286f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f755554c8573d0f24ef5a4d633286f3">&#9670;&nbsp;</a></span>setEncodeGS1SeparatorInByteMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspose\Barcode\Generation\QrParameters::setEncodeGS1SeparatorInByteMode </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Gets or sets a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.</p>
+<p class="DocNodeLTR">If false, GS1 separators may be encoded as '' in Alphanumeric mode according to QR specification.</p>
+<p class="DocNodeLTR">If true, GS1 group separators are encoded in Byte mode as the 0x1D character, and '' characters are also encoded in Byte mode to preserve them as data.</p>
+<p class="DocNodeLTR">This option may improve compatibility with decoders that expect byte-level GS1 group separators and prevents '' data characters from being interpreted as GS1 separators.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>&#x202A;a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

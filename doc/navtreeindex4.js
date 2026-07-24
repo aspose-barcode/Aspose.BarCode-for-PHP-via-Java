@@ -1,5 +1,8 @@
 var NAVTREEINDEX4 =
 {
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a61cfde75c43279a772f764f7be02268d":[2,0,0,0,1,29,57],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6475720c8070f8eaafb693a26fa42a26":[2,0,0,0,1,29,36],
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a64e256c5306012eff715f3f26180b3f1":[2,0,0,0,1,29,25],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a661f1a69f065ed31221efbe6869505dc":[2,0,0,0,1,29,46],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6693a71a14cf2b7095bdd66f5b35d74c":[2,0,0,0,1,29,47],
 "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6b33f26564547cbbfcbe1bd3ad8c76e8":[2,0,0,0,1,29,31],
@@ -246,8 +249,5 @@ var NAVTREEINDEX4 =
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html":[2,0,0,0,1,22],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a0f48947c44503eef2c53c70df94ba1ab":[2,0,0,0,1,22,1],
 "d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a16f3ac6486ee5e9cab83ee271638a2e7":[2,0,0,0,1,22,16],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a1ad5bd070c3646b5931a3650211f5711":[2,0,0,0,1,22,5],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a28f20b8c3f084c3b0de3be1860f2d429":[2,0,0,0,1,22,18],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a35db94930c3399ec8e4b795f878ab8df":[2,0,0,0,1,22,9],
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a3dc6c88580ef16aaf3708e4dcb2c3d48":[2,0,0,0,1,22,14]
+"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a1ad5bd070c3646b5931a3650211f5711":[2,0,0,0,1,22,5]
 };

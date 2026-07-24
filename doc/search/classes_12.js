@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xdimensionmode_1710',['XDimensionMode',['../d5/daf/classAspose_1_1Barcode_1_1Recognition_1_1XDimensionMode.html',1,'Aspose::Barcode::Recognition']]]
+  ['xdimensionmode_1718',['XDimensionMode',['../d5/daf/classAspose_1_1Barcode_1_1Recognition_1_1XDimensionMode.html',1,'Aspose::Barcode::Recognition']]]
 ];
