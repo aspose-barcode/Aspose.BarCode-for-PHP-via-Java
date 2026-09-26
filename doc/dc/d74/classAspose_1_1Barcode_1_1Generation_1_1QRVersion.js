@@ -40,9 +40,5 @@ var classAspose_1_1Barcode_1_1Generation_1_1QRVersion =
     [ "\u202AVERSION_37", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#a23c4128150561c6d8d532ce95a53d350", null ],
     [ "\u202AVERSION_38", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#a6cf1e207246b4ea39f5d4ae0e04d204a", null ],
     [ "\u202AVERSION_39", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#ada374c3be46f69b14ff95b5ee3b00395", null ],
-    [ "\u202AVERSION_40", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#a292d5c165ac869521d3dcca67214db07", null ],
-    [ "\u202AVERSION_M1", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#aa2b2c9fda1346d60829aedf482b0d4a6", null ],
-    [ "\u202AVERSION_M2", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#acfe259994b5012315ae70d4bf1c5c3f7", null ],
-    [ "\u202AVERSION_M3", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#af84306df94543a8015494b491b8ce50c", null ],
-    [ "\u202AVERSION_M4", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#a28332b5034960a647478afdc674edd24", null ]
+    [ "\u202AVERSION_40", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html#a292d5c165ac869521d3dcca67214db07", null ]
 ];

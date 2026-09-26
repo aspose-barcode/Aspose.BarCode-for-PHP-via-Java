@@ -38,8 +38,7 @@ namespace Aspose\Barcode\Recognition;
 class BarCodeConfidence
 {
     /**
-     * Recognition confidence of barcode where codetext was not recognized correctly or barcode was detected as posible fake
-     *
+     * Recognition confidence of barcode where codetext was not recognized correctly or barcode was detected as posible fakeBarCodeExtendedParameters
      */
     const NONE = 0;
 
@@ -47,7 +46,7 @@ class BarCodeConfidence
      * Recognition confidence of barcode (mostly 1D barcodes) with weak checksumm or even without it. Could contains some misrecognitions in codetext
      * or even fake recognitions if  is low
      *
-     * @see BarCodeResult.ReadingQuality
+     * @see BarCodeResult
      */
     const MODERATE = 80;
 

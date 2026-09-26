@@ -154,106 +154,6 @@ class QrParameters implements Communicator
     }
 
     /**
-     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
-     * about the used references for encoding the data in the symbol.
-     * Current implementation consists all well known charset encodings.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getECIEncoding().
-     */
-    public function getQrECIEncoding(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->eciEncoding;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
-     * about the used references for encoding the data in the symbol.
-     * Current implementation consists all well known charset encodings.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setECIEncoding().
-     */
-    public function setQrECIEncoding(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->eciEncoding = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR symbology type of BarCode's encoding mode.
-     * Default value: QREncodeMode::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
-     */
-    public function getQrEncodeMode(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->encodeMode;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR symbology type of BarCode's encoding mode.
-     * Default value: QREncodeMode::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
-     */
-    public function setQrEncodeMode(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->encodeMode = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
-     */
-    public function getQrEncodeType(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->qrEncodeType;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
-     */
-    public function setQrEncodeType(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->qrEncodeType = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * <p>
      *  Level of Reed-Solomon error correction for QR, MicroQR and RectMicroQR barcode.
      *  From low to high: LevelL, LevelM, LevelQ, LevelH. See QRErrorLevel.
@@ -276,42 +176,6 @@ class QrParameters implements Communicator
     }
 
     /**
-     *  Level of Reed-Solomon error correction for QR barcode.
-     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     * @see QRErrorLevel.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getErrorLevel().
-     */
-    public function getQrErrorLevel(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->errorLevel;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *  Level of Reed-Solomon error correction for QR barcode.
-     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     * @see QRErrorLevel.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setErrorLevel().
-     */
-    public function setQrErrorLevel(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->errorLevel = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * <p>
      * Version of QR Code.From Version1 to Version40.
      * Default value is QRVersion.Auto.
@@ -331,42 +195,6 @@ class QrParameters implements Communicator
     public function setVersion(int $value): void
     {
         $this->getQrParametersDto()->version = $value;
-    }
-
-    /**
-     * Version of QR Code.
-     * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
-     * Default value is QRVersion::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getVersion().
-     */
-    public function getQrVersion(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->version;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Version of QR Code.
-     * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
-     * Default value is QRVersion::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setVersion().
-     */
-    public function setQrVersion(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->version = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**

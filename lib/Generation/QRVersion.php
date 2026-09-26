@@ -213,24 +213,4 @@ class QRVersion
      * Specifies version 40 with 177 x 177 modules.
      */
     const VERSION_40 = "40";
-
-    /**
-     * Specifies version M1 for Micro QR with 11 x 11 modules.
-     */
-    const VERSION_M1 = "101";
-
-    /**
-     * Specifies version M2 for Micro QR with 13 x 13 modules.
-     */
-    const VERSION_M2 = "102";
-
-    /**
-     * Specifies version M3 for Micro QR with 15 x 15 modules.
-     */
-    const VERSION_M3 = "103";
-
-    /**
-     * Specifies version M4 for Micro QR with 17 x 17 modules.
-     */
-    const VERSION_M4 = "104";
 }

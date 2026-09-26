@@ -12,9 +12,9 @@ namespace Aspose\Barcode\Generation;
  * $maxiCodeCodetext->setPostalCode("524032140");
  * $maxiCodeCodetext->setCountryCode(056);
  * $maxiCodeCodetext->setServiceCategory(999);
- * maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
- * $maxiCodeStandartSecondMessage->setMessage("Test message");
- * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ * maxiCodeStandardSecondMessage = new MaxiCodeStandardSecondMessage();
+ * $maxiCodeStandardSecondMessage->setMessage("Test message");
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStandardSecondMessage);
  * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
  * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
  *
@@ -37,9 +37,9 @@ namespace Aspose\Barcode\Generation;
  * $maxiCodeCodetext->setPostalCode("B1050");
  * $maxiCodeCodetext->setCountryCode(056);
  * $maxiCodeCodetext->setServiceCategory(999);
- * $maxiCodeStandartSecondMessage = new MaxiCodeStandartSecondMessage();
- * $maxiCodeStandartSecondMessage->setMessage("Test message");
- * $maxiCodeCodetext->setSecondMessage($maxiCodeStandartSecondMessage);
+ * $maxiCodeStandardSecondMessage = new MaxiCodeStandardSecondMessage();
+ * $maxiCodeStandardSecondMessage->setMessage("Test message");
+ * $maxiCodeCodetext->setSecondMessage($maxiCodeStandardSecondMessage);
  * $complexGenerator = new ComplexBarcodeGenerator($maxiCodeCodetext);
  * $complexGenerator->generateBarCodeImage(BarcodeImageFormat::PNG);
  *
@@ -82,30 +82,30 @@ namespace Aspose\Barcode\Generation;
 class MaxiCodeMode
 {
     /**
-     * Mode 2 encodes postal information in first message and data in second message.
-     * Has 9 digits postal code (used only in USA).
+     * Mode 2 encodes postal information in the first message and data in the second message.
+     * Has a 9-digit postal code and is used only in the USA.
      */
     const MODE_2 = 2;
 
     /**
-     * Mode 3 encodes postal information in first message and data in second message.
-     * Has 6 alphanumeric postal code, used in the world.
+     * Mode 3 encodes postal information in the first message and data in the second message.
+     * Has a 6-character alphanumeric postal code and is used worldwide.
      */
     const MODE_3 = 3;
 
     /**
-     *  Mode 4 encodes data in first and second message, with short ECC correction.
+     *  Mode 4 encodes data in the first and second messages with short ECC correction.
      */
     const MODE_4 = 4;
 
     /**
-     * Mode 5 encodes data in first and second message, with long ECC correction.
+     * Mode 5 encodes data in the first and second messages with long ECC correction.
      */
     const MODE_5 = 5;
 
     /**
-     * Mode 6 encodes data in first and second message, with short ECC correction.
-     * Used to encode device.
+     * Mode 6 encodes data in the first and second messages with short ECC correction.
+     * Used to encode devices.
      */
     const MODE_6 = 6;
 }

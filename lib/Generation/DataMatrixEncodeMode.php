@@ -51,12 +51,6 @@ class DataMatrixEncodeMode
     const ASCII = 1;
 
     /**
-     * Encode 8 bit values
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use Base256 option.
-     */
-    const BYTES = 6;
-
-    /**
      * <p>
      * Uses C40 encoding. Encodes Upper-case alphanumeric, Lower case and special characters
      * </p>
@@ -83,23 +77,6 @@ class DataMatrixEncodeMode
      * </p>
      */
     const ANSIX12 = 11;
-
-    /**
-     * <p>
-     * <p>ExtendedCodetext mode allows to manually switch encodation schemes and ECI encodings in codetext.</p>
-     * <p>It is better to use DataMatrixExtCodetextBuilder for extended codetext generation.</p>
-     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
-     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-     * <p></p>
-     * <p>Encodation schemes are set in the next format : "\Encodation_scheme_name:text\Encodation_scheme_name:text".</p>
-     * <p>Allowed encodation schemes are: EDIFACT, ANSIX12, ASCII, C40, Text, Auto.</p>
-     * <p></p>
-     * <p>All backslashes (\) must be doubled in text.</p>
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode
-     */
-    const EXTENDED_CODETEXT = 12;
 
     /**
      * ExtendedCodetext mode allows to manually switch encodation schemes and ECI encodings in codetext.

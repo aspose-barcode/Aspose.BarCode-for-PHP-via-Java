@@ -360,40 +360,6 @@ class BarcodeParameters implements Communicator
     }
 
     /**
-     * Indicates whether explains the character "\" as an escape character in CodeText property. Used for Pdf417, DataMatrix, Code128 only
-     * If the EnableEscape is true, "\" will be explained as a special escape character. Otherwise, "\" acts as normal characters.
-     * Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.
-     */
-    public function getEnableEscape(): bool
-    {
-        try
-        {
-            return $this->getBarcodeParametersDto()->enableEscape;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Indicates whether explains the character "\" as an escape character in CodeText property. Used for Pdf417, DataMatrix, Code128 only
-     * If the EnableEscape is true, "\" will be explained as a special escape character. Otherwise, "\" acts as normal characters.
-     *<hr>Aspose.BarCode supports inputing decimal ascii code and mnemonic for ASCII control-code characters. For example, \013 and \\CR stands for CR.</hr>
-     */
-    public function setEnableEscape(bool $value): void
-    {
-        try
-        {
-            $this->getBarcodeParametersDto()->enableEscape = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Wide bars to Narrow bars ratio.
      * Default value: 3, that is, wide bars are 3 times as wide as narrow bars.
      * Used for ITF, PZN, PharmaCode, Standard2of5, Interleaved2of5, Matrix2of5, ItalianPost25, IATA2of5, VIN, DeutschePost, OPC, Code32, DataLogic2of5, PatchCode, Code39Extended, Code39Standard

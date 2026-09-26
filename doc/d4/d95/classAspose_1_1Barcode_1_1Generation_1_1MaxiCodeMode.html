@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">26.7</span>
+   &#160;<span id="projectnumber">26.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -112,9 +112,9 @@ Public Attributes</h2></td></tr>
 <div class="line">$maxiCodeCodetext-&gt;setPostalCode(<span class="stringliteral">&quot;524032140&quot;</span>);</div>
 <div class="line">$maxiCodeCodetext-&gt;setCountryCode(056);</div>
 <div class="line">$maxiCodeCodetext-&gt;setServiceCategory(999);</div>
-<div class="line">maxiCodeStandartSecondMessage = <span class="keyword">new</span> MaxiCodeStandartSecondMessage();</div>
-<div class="line">$maxiCodeStandartSecondMessage-&gt;setMessage(<span class="stringliteral">&quot;Test message&quot;</span>);</div>
-<div class="line">$maxiCodeCodetext-&gt;setSecondMessage($maxiCodeStandartSecondMessage);</div>
+<div class="line">maxiCodeStandardSecondMessage = <span class="keyword">new</span> MaxiCodeStandardSecondMessage();</div>
+<div class="line">$maxiCodeStandardSecondMessage-&gt;setMessage(<span class="stringliteral">&quot;Test message&quot;</span>);</div>
+<div class="line">$maxiCodeCodetext-&gt;setSecondMessage($maxiCodeStandardSecondMessage);</div>
 <div class="line">$complexGenerator = <span class="keyword">new</span> ComplexBarcodeGenerator($maxiCodeCodetext);</div>
 <div class="line">$complexGenerator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG);</div>
 <div class="line"> </div>
@@ -137,9 +137,9 @@ Public Attributes</h2></td></tr>
 <div class="line">$maxiCodeCodetext-&gt;setPostalCode(<span class="stringliteral">&quot;B1050&quot;</span>);</div>
 <div class="line">$maxiCodeCodetext-&gt;setCountryCode(056);</div>
 <div class="line">$maxiCodeCodetext-&gt;setServiceCategory(999);</div>
-<div class="line">$maxiCodeStandartSecondMessage = <span class="keyword">new</span> MaxiCodeStandartSecondMessage();</div>
-<div class="line">$maxiCodeStandartSecondMessage-&gt;setMessage(<span class="stringliteral">&quot;Test message&quot;</span>);</div>
-<div class="line">$maxiCodeCodetext-&gt;setSecondMessage($maxiCodeStandartSecondMessage);</div>
+<div class="line">$maxiCodeStandardSecondMessage = <span class="keyword">new</span> MaxiCodeStandardSecondMessage();</div>
+<div class="line">$maxiCodeStandardSecondMessage-&gt;setMessage(<span class="stringliteral">&quot;Test message&quot;</span>);</div>
+<div class="line">$maxiCodeCodetext-&gt;setSecondMessage($maxiCodeStandardSecondMessage);</div>
 <div class="line">$complexGenerator = <span class="keyword">new</span> ComplexBarcodeGenerator($maxiCodeCodetext);</div>
 <div class="line">$complexGenerator-&gt;generateBarCodeImage(BarcodeImageFormat::PNG);</div>
 <div class="line"> </div>
@@ -189,7 +189,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Mode 2 encodes postal information in first message and data in second message. Has 9 digits postal code (used only in USA). </p>
+<p class="DocNodeLTR">Mode 2 encodes postal information in the first message and data in the second message. Has a 9-digit postal code and is used only in the USA. </p>
 
 </div>
 </div>
@@ -204,7 +204,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Mode 3 encodes postal information in first message and data in second message. Has 6 alphanumeric postal code, used in the world. </p>
+<p class="DocNodeLTR">Mode 3 encodes postal information in the first message and data in the second message. Has a 6-character alphanumeric postal code and is used worldwide. </p>
 
 </div>
 </div>
@@ -219,7 +219,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Mode 4 encodes data in first and second message, with short ECC correction. </p>
+<p class="DocNodeLTR">Mode 4 encodes data in the first and second messages with short ECC correction. </p>
 
 </div>
 </div>
@@ -234,7 +234,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Mode 5 encodes data in first and second message, with long ECC correction. </p>
+<p class="DocNodeLTR">Mode 5 encodes data in the first and second messages with long ECC correction. </p>
 
 </div>
 </div>
@@ -249,7 +249,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="DocNodeLTR">Mode 6 encodes data in first and second message, with short ECC correction. Used to encode device. </p>
+<p class="DocNodeLTR">Mode 6 encodes data in the first and second messages with short ECC correction. Used to encode devices. </p>
 
 </div>
 </div>

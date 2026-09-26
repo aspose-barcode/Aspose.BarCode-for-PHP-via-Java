@@ -56,7 +56,7 @@ namespace Aspose\Barcode\Generation;
  *   //generate barcode
  *   $generator = new BarcodeGenerator(EncodeTypes::QR);
  *   $generator->setCodeText(textBuilder->getExtended());
- *   $generator->getParameters()->getBarcode()->getQR()->setQrEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
+ *   $generator->getParameters()->getBarcode()->getQR()->setEncodeMode(QREncodeMode::EXTENDED_CODETEXT);
  *   $generator->getParameters()->getBarcode()->getCodeTextParameters()->setTwoDDisplayText("My Text");
  *   $generator->save("d:/test.png", BarcodeImageFormat::PNG);
  *  </pre>
@@ -71,49 +71,6 @@ class QREncodeMode
      */
 
     const AUTO = 0;
-    /**
-     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method to convert the message to byte array with specified encoding.
-     */
-    const BYTES = 1;
-
-    /**
-     * Encode codetext with UTF8 encoding with first ByteOfMark character.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with UTF8 encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
-     */
-    const UTF_8_BOM = 2;
-
-
-    /**
-     * Encode codetext with UTF8 encoding with first ByteOfMark character. It can be problems with some barcode scanners.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'SetCodeText' method with BigEndianUnicode encoding to add a byte order mark (BOM) and encode the message. After that, the CodeText can be encoded using the 'Auto' mode.
-     */
-    const UTF_16_BEBOM = 3;
-
-    /**
-     * Encode codetext with value set in the ECIEncoding property. It can be problems with some old (pre 2006) barcode scanners.
-     * This mode is not supported by MicroQR barcodes.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use ECI option.
-     */
-    const ECI_ENCODING = 4;
-
-    /**
-     * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>
-     * It is better to use QrExtCodetextBuilder for extended codetext generation.</para>
-     * Use Display2DText property to set visible text to removing managing characters.</para>
-     * Encoding Principles:</para>
-     * All symbols "\" must be doubled "\\" in the codetext.</para>
-     * FNC1 in first position is set in codetext as as "&lt;FNC1&gt;"</para>
-     * FNC1 in second position is set in codetext as as "&lt;FNC1(value)&gt;". The value must be single symbols (a-z, A-Z) or digits from 0 to 99.</para>
-     * Group Separator for FNC1 modes is set as 0x1D character '\\u001D' </para>
-     * If you need to insert "&lt;FNC1&gt;" string into barcode write it as "&lt;\FNC1&gt;" </para>
-     * ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</para>
-     * To disable current ECI mode and convert to default JIS8 mode zero mode ECI indetifier is set. "\000000"</para>
-     * All unicode characters after ECI identifier are automatically encoded into correct character codeset.</para>
-     * This mode is not supported by MicroQR barcodes.</para>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the 'Extended' encode mode.
-     */
-    const EXTENDED_CODETEXT = 5;
 
     /**
      * Extended Channel mode which supports FNC1 first position, FNC1 second position and multi ECI modes.</para>

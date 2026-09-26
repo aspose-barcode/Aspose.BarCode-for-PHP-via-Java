@@ -69,43 +69,6 @@ class CodabarParameters implements Communicator
     }
 
     /**
-     * Get the checksum algorithm for Codabar barcodes.
-     * Default value: CodabarChecksumMode::MOD_16.
-     * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
-     * @see CodabarChecksumMode.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getChecksumMode().
-     */
-    public function getCodabarChecksumMode(): int
-    {
-        try
-        {
-            return $this->getCodabarParametersDto()->checksumMode;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Set the checksum algorithm for Codabar barcodes.
-     * Default value: CodabarChecksumMode::MOD_16.
-     * To enable checksum calculation set value EnableChecksum::YES to property EnableChecksum.
-     * @see CodabarChecksumMode.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setChecksumMode().
-     */
-    public function setCodabarChecksumMode(int $value): void
-    {
-        try
-        {
-            $this->getCodabarParametersDto()->checksumMode = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-    /**
      * <p>
      * Start symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol.A
@@ -128,39 +91,6 @@ class CodabarParameters implements Communicator
     }
 
     /**
-     * Start symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStartSymbol().
-     */
-    public function getCodabarStartSymbol(): int
-    {
-        try
-        {
-            return $this->getCodabarParametersDto()->startSymbol;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Start symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStartSymbol().
-     */
-    public function setCodabarStartSymbol(int $value): void
-    {
-        try
-        {
-            $this->getCodabarParametersDto()->codabarStartSymbol = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-    /**
      * <p>
      * Stop symbol (character) of Codabar symbology.
      * Default value: CodabarSymbol.A
@@ -180,40 +110,6 @@ class CodabarParameters implements Communicator
     public function setStopSymbol(int $value): void
     {
         $this->getCodabarParametersDto()->stopSymbol = $value;
-    }
-
-    /**
-     * Stop symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStopSymbol().
-     */
-    public function getCodabarStopSymbol(): int
-    {
-        try
-        {
-            return $this->getCodabarParametersDto()->stopSymbol;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Stop symbol (character) of Codabar symbology.
-     * Default value: CodabarSymbol::A
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStopSymbol().
-     */
-    public function setCodabarStopSymbol(int $value): void
-    {
-        try
-        {
-            $this->getCodabarParametersDto()->stopSymbol = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**

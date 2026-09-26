@@ -42,30 +42,6 @@ class DotCodeParameters implements Communicator
 
     /**
      * <p>
-     * Identifies DotCode encode mode.
-     * Default value: Auto.
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
-     */
-    public function getDotCodeEncodeMode(): int
-    {
-        return $this->getDotCodeParametersDto()->encodeMode;
-    }
-
-    /**
-     * <p>
-     * Identifies DotCode encode mode.
-     * Default value: Auto.
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
-     */
-    public function setDotCodeEncodeMode(int $value): void
-    {
-        $this->getDotCodeParametersDto()->encodeMode = $value;
-    }
-
-    /**
-     * <p>
      * Indicates whether code is used for instruct reader to interpret the following data as instructions for initialization or reprogramming of the bar code reader.
      * Default value is false.
      * </p>
@@ -108,17 +84,6 @@ class DotCodeParameters implements Communicator
 
     /**
      * <p>
-     * Identifies the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeBarcodeId().
-     */
-    public function getDotCodeStructuredAppendModeBarcodeId(): int
-    {
-        return $this->getDotCodeParametersDto()->structuredAppendModeBarcodeId;
-    }
-
-    /**
-     * <p>
      * Identifies DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.
      * </p>
      */
@@ -133,39 +98,6 @@ class DotCodeParameters implements Communicator
      * </p>
      */
     public function setStructuredAppendModeBarcodesCount(int $value): void
-    {
-        $this->getDotCodeParametersDto()->structuredAppendModeBarcodesCount = $value;
-    }
-
-    /**
-     * <p>
-     * Identifies the ID of the DotCode structured append mode barcode. ID starts from 1 and must be less or equal to barcodes count. Default value is -1.
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStructuredAppendModeBarcodeId().
-     */
-    public function setDotCodeStructuredAppendModeBarcodeId(int $value)
-    {
-        $this->getDotCodeParametersDto()->structuredAppendModeBarcodeId = $value;
-    }
-
-    /**
-     * <p>
-     * Identifies DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStructuredAppendModeBarcodesCount().
-     */
-    public function getDotCodeStructuredAppendModeBarcodesCount(): int
-    {
-        return $this->getDotCodeParametersDto()->structuredAppendModeBarcodesCount;
-    }
-
-    /**
-     * <p>
-     * Identifies DotCode structured append mode barcodes count. Default value is -1. Count must be a value from 1 to 35.
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStructuredAppendModeBarcodesCount().
-     */
-    public function setDotCodeStructuredAppendModeBarcodesCount(int $value): void
     {
         $this->getDotCodeParametersDto()->structuredAppendModeBarcodesCount = $value;
     }

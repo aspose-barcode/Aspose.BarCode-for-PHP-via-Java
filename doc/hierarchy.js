@@ -43,9 +43,7 @@ var hierarchy =
       ] ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\MandatoryFields", "d0/d26/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MandatoryFields.html", null ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeSecondMessage", "d5/dc8/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessage.html", [
-        [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStandardSecondMessage", "d1/d1e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardSecondMessage.html", [
-          [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStandartSecondMessage", "d0/de7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandartSecondMessage.html", null ]
-        ] ],
+        [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStandardSecondMessage", "d1/d1e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStandardSecondMessage.html", null ],
         [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeStructuredSecondMessage", "dd/da3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeStructuredSecondMessage.html", null ]
       ] ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\OptionalFields", "df/dd3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1OptionalFields.html", null ],
@@ -153,13 +151,11 @@ var hierarchy =
     [ "\u202AAspose\\Barcode\\ComplexBarcode\\MaxiCodeSecondMessageType", "d2/dc7/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeSecondMessageType.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\MicroQRVersion", "dc/da5/classAspose_1_1Barcode_1_1Generation_1_1MicroQRVersion.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\PatchFormat", "d7/db5/classAspose_1_1Barcode_1_1Generation_1_1PatchFormat.html", null ],
-    [ "\u202AAspose\\Barcode\\Generation\\Pdf417CompactionMode", "d0/d32/classAspose_1_1Barcode_1_1Generation_1_1Pdf417CompactionMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\Pdf417EncodeMode", "dd/d2c/classAspose_1_1Barcode_1_1Generation_1_1Pdf417EncodeMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\Pdf417ErrorLevel", "dc/d80/classAspose_1_1Barcode_1_1Generation_1_1Pdf417ErrorLevel.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\Pdf417MacroTerminator", "da/d73/classAspose_1_1Barcode_1_1Generation_1_1Pdf417MacroTerminator.html", null ],
     [ "\u202AAspose\\Barcode\\ComplexBarcode\\QrBillStandardVersion", "d6/d2e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1QrBillStandardVersion.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QREncodeMode", "dc/dd9/classAspose_1_1Barcode_1_1Generation_1_1QREncodeMode.html", null ],
-    [ "\u202AAspose\\Barcode\\Generation\\QREncodeType", "d1/d49/classAspose_1_1Barcode_1_1Generation_1_1QREncodeType.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QRErrorLevel", "d1/deb/classAspose_1_1Barcode_1_1Generation_1_1QRErrorLevel.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QrExtCompactionMode", "de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\QRVersion", "dc/d74/classAspose_1_1Barcode_1_1Generation_1_1QRVersion.html", null ],

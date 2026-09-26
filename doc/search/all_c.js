@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kanji_847',['KANJI',['../de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode.html#afbc49c987fe759f3a2851b2d1317afaa',1,'Aspose::Barcode::Generation::QrExtCompactionMode']]]
+  ['kanji_789',['KANJI',['../de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode.html#afbc49c987fe759f3a2851b2d1317afaa',1,'Aspose::Barcode::Generation::QrExtCompactionMode']]]
 ];

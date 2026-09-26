@@ -45,16 +45,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "",
-"d1/d78/classAspose_1_1Barcode_1_1ComplexBarcode_1_1SubfileProperties.html#af3b25d3d06ce47f3c9158f2026cbe9cc",
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a2076e15db5ea4da686df86d79e7efe64",
-"d4/dc5/classAspose_1_1Barcode_1_1Generation_1_1SupplementParameters.html#ada2e96c8e60ab650d5dd973c2c0564c8",
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a61cfde75c43279a772f764f7be02268d",
-"d9/d38/classAspose_1_1Barcode_1_1Generation_1_1CodetextParameters.html#a28f20b8c3f084c3b0de3be1860f2d429",
-"dc/d18/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICPrimaryDataCodetext.html#ace29277a445512a6ea1174571567f18a",
-"dc/dee/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixParameters.html#ab096fe9ac2f48a1c90300a3774570219",
-"de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html#abcdd16624f20aa8bf3009541307757c8",
-"df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html#a553873b265e30502b46f9dd341d69ae9",
-"hierarchy.html"
+"d1/db6/classAspose_1_1Barcode_1_1ComplexBarcode_1_1MaxiCodeCodetextMode3.html#ac9e96bc58cc779de106adcad30990815",
+"d2/dd3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1ComplexBarcodeGenerator.html#a759672aafc664962f3612104c590a289",
+"d5/d9e/classAspose_1_1Barcode_1_1Generation_1_1QrParameters.html#a1088fe6e28f0a9a28239035f8779c832",
+"d7/de1/classAspose_1_1Barcode_1_1Recognition_1_1BarCodeResult.html",
+"da/d5b/classAspose_1_1Barcode_1_1Generation_1_1FontMode.html",
+"dc/d48/classAspose_1_1Barcode_1_1Generation_1_1HanXinVersion.html#af888a1c33ce45326d34b550f359d5859",
+"dd/d70/classAspose_1_1Barcode_1_1Generation_1_1Pdf417Parameters.html#af74831ceb7676e58e964e9c88a592299",
+"de/d93/classAspose_1_1Barcode_1_1Generation_1_1QrExtCompactionMode.html#a15f5b4e50ba5f8a8b8eda0a18dbaba2f",
+"df/dd3/classAspose_1_1Barcode_1_1ComplexBarcode_1_1OptionalFields.html#af670e742dc914b5c406254e4799ad41e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

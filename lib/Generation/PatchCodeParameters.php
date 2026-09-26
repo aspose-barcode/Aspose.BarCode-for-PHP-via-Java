@@ -98,42 +98,6 @@ class PatchCodeParameters implements Communicator
     }
 
     /**
-     * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
-     * Default value: PatchFormat::PATCH_ONLY
-     *
-     * @return
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getFormat().
-     */
-    public function getPatchFormat(): int
-    {
-        try
-        {
-            return $this->getPatchCodeParametersDto()->format;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * PatchCode format. Choose PatchOnly to generate single PatchCode. Use page format to generate Patch page with PatchCodes as borders.
-     * Default value: PatchFormat::PATCH_ONLY
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setFormat().
-     */
-    public function setPatchFormat(int $value): void
-    {
-        try
-        {
-            $this->getPatchCodeParametersDto()->format = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Returns a human-readable string representation of this PatchCodeParameters.
      * @return string A string that represents this PatchCodeParameters.
      */
