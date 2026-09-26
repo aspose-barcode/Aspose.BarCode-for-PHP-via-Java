@@ -45,24 +45,6 @@ abstract class MaxiCodeCodetext extends IComplexCodetext
     }
 
     /**
-     * Gets a MaxiCode encode mode.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
-     */
-    public function getMaxiCodeEncodeMode(): int
-    {
-        return $this->getIComplexCodetextDTO()->encodeMode;
-    }
-
-    /**
-     * Sets a MaxiCode encode mode.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
-     */
-    public function setMaxiCodeEncodeMode(int $value): void
-    {
-        $this->getIComplexCodetextDTO()->encodeMode = $value;
-    }
-
-    /**
      * Gets ECI encoding. Used when MaxiCodeEncodeMode is AUTO.
      */
     public function getECIEncoding(): int

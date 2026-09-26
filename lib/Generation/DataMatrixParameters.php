@@ -66,28 +66,6 @@ class DataMatrixParameters implements Communicator
 
     /**
      * <p>
-     * Gets a Datamatrix symbol size.
-     * Default value: DataMatrixVersion.Auto.
-     * </p>
-     */
-    public function getDataMatrixVersion(): int
-    {
-        return $this->getDataMatrixParametersDto()->version;
-    }
-
-    /**
-     * <p>
-     * Sets a Datamatrix symbol size.
-     * Default value: DataMatrixVersion.Auto.
-     * </p>
-     */
-    public function setDataMatrixVersion(int $value)
-    {
-        $this->getDataMatrixParametersDto()->version = $value;
-    }
-
-    /**
-     * <p>
      * Gets a Datamatrix ECC type.
      * Default value: DataMatrixEccType.Ecc200.
      * </p>
@@ -111,40 +89,6 @@ class DataMatrixParameters implements Communicator
     }
 
     /**
-     * Gets a Datamatrix ECC type.
-     * Default value: DataMatrixEccType::ECC_200.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEccType().
-     */
-    public function getDataMatrixEcc(): int
-    {
-        try
-        {
-            return $this->getDataMatrixParametersDto()->dataMatrixEcc;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Sets a Datamatrix ECC type.
-     * Default value: DataMatrixEccType::ECC_200.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEccType().
-     */
-    public function setDataMatrixEcc(int $value): void
-    {
-        try
-        {
-            $this->getDataMatrixParametersDto()->dataMatrixEcc = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * <p>
      * Encode mode of Datamatrix barcode.
      * Default value: EncodeMode.Auto.
@@ -164,40 +108,6 @@ class DataMatrixParameters implements Communicator
     public function setEncodeMode(int $value) : void
     {
         $this->getDataMatrixParametersDto()->encodeMode = $value;
-    }
-
-    /**
-     * Encode mode of Datamatrix barcode.
-     * Default value: DataMatrixEncodeMode::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
-     */
-    public function getDataMatrixEncodeMode(): int
-    {
-        try
-        {
-            return $this->getDataMatrixParametersDto()->encodeMode;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Encode mode of Datamatrix barcode.
-     * Default value: DataMatrixEncodeMode::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
-     */
-    public function setDataMatrixEncodeMode(int $value): void
-    {
-        try
-        {
-            $this->getDataMatrixParametersDto()->encodeMode = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -325,66 +235,6 @@ class DataMatrixParameters implements Communicator
         try
         {
             $this->getDataMatrixParametersDto()->macroCharacters = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Columns count.
-     */
-    public function getColumns(): int
-    {
-        try
-        {
-            return $this->getDataMatrixParametersDto()->columns;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Columns count.
-     */
-    public function setColumns(int $value): void
-    {
-        try
-        {
-            $this->getDataMatrixParametersDto()->columns = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Rows count.
-     */
-    public function getRows(): int
-    {
-        try
-        {
-            return $this->getDataMatrixParametersDto()->rows;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Rows count.
-     */
-    public function setRows(int $value): void
-    {
-        try
-        {
-            $this->getDataMatrixParametersDto()->rows = $value;
         }
         catch (Exception $ex)
         {

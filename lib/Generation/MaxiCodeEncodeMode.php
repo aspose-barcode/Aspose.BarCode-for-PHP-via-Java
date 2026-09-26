@@ -38,24 +38,6 @@ class MaxiCodeEncodeMode
     const AUTO = 0;
 
     /**
-     * Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first.
-     * @deprecated
-     */
-    const BYTES = 1;
-
-    /**
-     * <p>
-     * <p>Extended mode which supports multi ECI modes.</p>
-     * <p>It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.</p>
-     * <p>Use Display2DText property to set visible text to removing managing characters.</p>
-     * <p>ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-     * <p>All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-     * </p>
-     * @deprecated
-     */
-    const EXTENDED_CODETEXT = 2;
-
-    /**
      * Extended mode which supports multi ECI modes.
      * It is better to use MaxiCodeExtCodetextBuilder for extended codetext generation.
      * Use Display2DText property to set visible text to removing managing characters.

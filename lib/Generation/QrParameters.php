@@ -100,6 +100,37 @@ class QrParameters implements Communicator
         }
     }
 
+
+    /**
+     * <p>
+     * <p>Gets or sets a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.</p>
+     * <p>If false, GS1 separators may be encoded as '%' in Alphanumeric mode according to QR specification.</p>
+     * <p>If true, GS1 group separators are encoded in Byte mode as the 0x1D character, and '%' characters are also encoded in Byte mode to preserve them as data.</p>
+     * <p>This option may improve compatibility with decoders that expect byte-level GS1 group separators and prevents '%' data characters from being interpreted as GS1 separators.</p>
+     * </p>
+     *
+     * @return a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.
+     */
+    public function getEncodeGS1SeparatorInByteMode() : bool
+    {
+        return $this->getQrParametersDto()->encodeGS1SeparatorInByteMode;
+    }
+
+    /**
+     * <p>
+     * <p>Gets or sets a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.</p>
+     * <p>If false, GS1 separators may be encoded as '%' in Alphanumeric mode according to QR specification.</p>
+     * <p>If true, GS1 group separators are encoded in Byte mode as the 0x1D character, and '%' characters are also encoded in Byte mode to preserve them as data.</p>
+     * <p>This option may improve compatibility with decoders that expect byte-level GS1 group separators and prevents '%' data characters from being interpreted as GS1 separators.</p>
+     * </p>
+     *
+     * @param value a value indicating whether GS1 special characters should be encoded in Byte mode for QR and RectMicroQR barcodes.
+     */
+    public function setEncodeGS1SeparatorInByteMode(bool $value) : void
+    {
+        $this->getQrParametersDto()->encodeGS1SeparatorInByteMode = $value;
+    }
+
     /**
      * <p>
      * QR symbology type of BarCode's encoding mode.
@@ -120,106 +151,6 @@ class QrParameters implements Communicator
     public function setEncodeMode(int $value): void
     {
         $this->getQrParametersDto()->encodeMode = $value;
-    }
-
-    /**
-     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
-     * about the used references for encoding the data in the symbol.
-     * Current implementation consists all well known charset encodings.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getECIEncoding().
-     */
-    public function getQrECIEncoding(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->eciEncoding;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Extended Channel Interpretation Identifiers. It is used to tell the barcode reader details
-     * about the used references for encoding the data in the symbol.
-     * Current implementation consists all well known charset encodings.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setECIEncoding().
-     */
-    public function setQrECIEncoding(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->eciEncoding = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR symbology type of BarCode's encoding mode.
-     * Default value: QREncodeMode::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
-     */
-    public function getQrEncodeMode(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->encodeMode;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR symbology type of BarCode's encoding mode.
-     * Default value: QREncodeMode::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
-     */
-    public function setQrEncodeMode(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->encodeMode = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
-     */
-    public function getQrEncodeType(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->qrEncodeType;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * QR / MicroQR selector mode. Select ForceQR for standard QR symbols, Auto for MicroQR.
-     */
-    public function setQrEncodeType(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->qrEncodeType = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**
@@ -245,42 +176,6 @@ class QrParameters implements Communicator
     }
 
     /**
-     *  Level of Reed-Solomon error correction for QR barcode.
-     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     * @see QRErrorLevel.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getErrorLevel().
-     */
-    public function getQrErrorLevel(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->errorLevel;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     *  Level of Reed-Solomon error correction for QR barcode.
-     *  From low to high: LEVEL_L, LEVEL_M, LEVEL_Q, LEVEL_H.
-     * @see QRErrorLevel.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setErrorLevel().
-     */
-    public function setQrErrorLevel(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->errorLevel = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * <p>
      * Version of QR Code.From Version1 to Version40.
      * Default value is QRVersion.Auto.
@@ -300,42 +195,6 @@ class QrParameters implements Communicator
     public function setVersion(int $value): void
     {
         $this->getQrParametersDto()->version = $value;
-    }
-
-    /**
-     * Version of QR Code.
-     * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
-     * Default value is QRVersion::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getVersion().
-     */
-    public function getQrVersion(): int
-    {
-        try
-        {
-            return $this->getQrParametersDto()->version;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Version of QR Code.
-     * From Version1 to Version40 for QR code and from M1 to M4 for MicroQr.
-     * Default value is QRVersion::AUTO.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setVersion().
-     */
-    public function setQrVersion(int $value): void
-    {
-        try
-        {
-            $this->getQrParametersDto()->version = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**

@@ -69,6 +69,5 @@ var classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion =
     [ "\u202AECC200_88x88", "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a6ce190e2b753accfbf3019ae50cb5f30", null ],
     [ "\u202AECC200_8x18", "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a3f620f3a2f81dae682abd01899c8f150", null ],
     [ "\u202AECC200_8x32", "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#ae2dddd59449b25e4b69cafbba9f6707b", null ],
-    [ "\u202AECC200_96x96", "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#aa486aaf9d0aed0f7fd0b5df9f2101a2b", null ],
-    [ "\u202AROWS_COLUMNS", "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#a7ecc92b5b7776ed6c8e6d3887e555259", null ]
+    [ "\u202AECC200_96x96", "d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#aa486aaf9d0aed0f7fd0b5df9f2101a2b", null ]
 ];

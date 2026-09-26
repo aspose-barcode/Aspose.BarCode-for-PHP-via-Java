@@ -65,44 +65,6 @@ class Code128Parameters implements Communicator
     }
 
     /**
-     * <p>
-     * Gets a Code128 encode mode.
-     * Default value: Code128EncodeMode.Auto
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodeMode().
-     */
-    public function getCode128EncodeMode(): int
-    {
-        try
-        {
-            return $this->getCode128ParametersDto()->encodeMode;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * <p>
-     * Sets a Code128 encode mode.
-     * Default value: Code128EncodeMode.Auto
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodeMode().
-     */
-    public function setCode128EncodeMode(int $value)
-    {
-        try
-        {
-            $this->getCode128ParametersDto()->encodeMode = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Returns a human-readable string representation of this PatchCodeParameters.
      * @return string A string that represents this PatchCodeParameters.
      */

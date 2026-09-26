@@ -3,4 +3,3 @@ composer.lock
 server.log
 .idea/
 .DS_Store
-doc/

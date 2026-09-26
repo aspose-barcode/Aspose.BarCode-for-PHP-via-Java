@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">26.4</span>
+   &#160;<span id="projectnumber">26.9</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -96,10 +96,6 @@ $(document).ready(function(){initNavTree('d1/d0d/classAspose_1_1Barcode_1_1Gener
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae3b82bbd93ee189091f07bc1e6b0a257"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d0d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeEncodeMode.html#ae3b82bbd93ee189091f07bc1e6b0a257">AUTO</a> = 0</td></tr>
 <tr class="separator:ae3b82bbd93ee189091f07bc1e6b0a257"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f7d9756ca90a946f27192976753d357"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d0d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeEncodeMode.html#a5f7d9756ca90a946f27192976753d357">BYTES</a> = 1</td></tr>
-<tr class="separator:a5f7d9756ca90a946f27192976753d357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f8c43a0c4744394fdf25dfd381ca6ad"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d0d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeEncodeMode.html#a3f8c43a0c4744394fdf25dfd381ca6ad">EXTENDED_CODETEXT</a> = 2</td></tr>
-<tr class="separator:a3f8c43a0c4744394fdf25dfd381ca6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab391fff6c3d6abe675f716d82c46efd1"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d0d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeEncodeMode.html#ab391fff6c3d6abe675f716d82c46efd1">EXTENDED</a> = 3</td></tr>
 <tr class="separator:ab391fff6c3d6abe675f716d82c46efd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8f74ddb52d515634dd175da9f419185"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d0d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeEncodeMode.html#ab8f74ddb52d515634dd175da9f419185">BINARY</a> = 4</td></tr>
@@ -158,21 +154,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5f7d9756ca90a946f27192976753d357"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f7d9756ca90a946f27192976753d357">&#9670;&nbsp;</a></span>BYTES</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const Aspose\Barcode\Generation\MaxiCodeEncodeMode::BYTES = 1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p class="DocNodeLTR">Encode codetext as plain bytes. If it detects any Unicode character, the character will be encoded as two bytes, lower byte first. </p><dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000049">Deprecated:</a></b></dt><dd></dd></dl>
-
-</div>
-</div>
 <a id="aa9260059de89572f4fe6ee48c4e4f9ad"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa9260059de89572f4fe6ee48c4e4f9ad">&#9670;&nbsp;</a></span>ECI</h2>
 
@@ -200,26 +181,6 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Extended mode which supports multi ECI modes. It is better to use <a class="el" href="../../d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a> for extended codetext generation. Use Display2DText property to set visible text to removing managing characters. ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier All unicode characters after ECI identifier are automatically encoded into correct character codeset. </p>
-
-</div>
-</div>
-<a id="a3f8c43a0c4744394fdf25dfd381ca6ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f8c43a0c4744394fdf25dfd381ca6ad">&#9670;&nbsp;</a></span>EXTENDED_CODETEXT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const Aspose\Barcode\Generation\MaxiCodeEncodeMode::EXTENDED_CODETEXT = 2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p class="DocNodeLTR">Extended mode which supports multi ECI modes.</p>
-<p class="DocNodeLTR">It is better to use <a class="el" href="../../d5/d1d/classAspose_1_1Barcode_1_1Generation_1_1MaxiCodeExtCodetextBuilder.html">MaxiCodeExtCodetextBuilder</a> for extended codetext generation.</p>
-<p class="DocNodeLTR">Use Display2DText property to set visible text to removing managing characters.</p>
-<p class="DocNodeLTR">ECI identifiers are set as single slash and six digits identifier "\000026" - UTF8 ECI identifier</p>
-<p class="DocNodeLTR">All unicode characters after ECI identifier are automatically encoded into correct character codeset.</p>
-<dl class="deprecated"><dt><b><a class="el" href="../../da/d58/deprecated.html#_deprecated000050">Deprecated:</a></b></dt><dd></dd></dl>
 
 </div>
 </div>

@@ -67,6 +67,11 @@ class QrParametersDTO
             'isRequired' => false,
             'type' => TType::DOUBLE,
         ),
+        10 => array(
+            'var' => 'encodeGS1SeparatorInByteMode',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
     );
 
     /**
@@ -105,6 +110,10 @@ class QrParametersDTO
      * @var double
      */
     public $aspectRatio = null;
+    /**
+     * @var bool
+     */
+    public $encodeGS1SeparatorInByteMode = null;
 
     public function __construct($vals = null)
     {
@@ -135,6 +144,9 @@ class QrParametersDTO
             }
             if (isset($vals['aspectRatio'])) {
                 $this->aspectRatio = $vals['aspectRatio'];
+            }
+            if (isset($vals['encodeGS1SeparatorInByteMode'])) {
+                $this->encodeGS1SeparatorInByteMode = $vals['encodeGS1SeparatorInByteMode'];
             }
         }
     }
@@ -222,6 +234,13 @@ class QrParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 10:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->encodeGS1SeparatorInByteMode);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -282,6 +301,11 @@ class QrParametersDTO
         if ($this->aspectRatio !== null) {
             $xfer += $output->writeFieldBegin('aspectRatio', TType::DOUBLE, 9);
             $xfer += $output->writeDouble($this->aspectRatio);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->encodeGS1SeparatorInByteMode !== null) {
+            $xfer += $output->writeFieldBegin('encodeGS1SeparatorInByteMode', TType::BOOL, 10);
+            $xfer += $output->writeBool($this->encodeGS1SeparatorInByteMode);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

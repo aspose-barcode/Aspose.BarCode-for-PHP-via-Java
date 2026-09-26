@@ -18,13 +18,6 @@ class DataMatrixVersion
     const AUTO = 0;
     /**
      * <p>
-     * Instructs to get symbol sizes from Rows And Columns parameters. Note that DataMatrix does not support
-     * custom rows and columns numbers. This option is not recommended to use.
-     * </p>
-     */
-    const ROWS_COLUMNS = 1;
-    /**
-     * <p>
      * Specifies size of 9 x 9 modules for ECC000 type.
      * </p>
      */

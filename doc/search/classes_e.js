@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['recognitionabortedexception_1690',['RecognitionAbortedException',['../d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html',1,'Aspose::Barcode::Recognition']]],
-  ['rectangle_1691',['Rectangle',['../de/d59/classAspose_1_1Barcode_1_1Internal_1_1Rectangle.html',1,'Aspose::Barcode::Internal']]],
-  ['rectmicroqrversion_1692',['RectMicroQRVersion',['../df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html',1,'Aspose::Barcode::Generation']]]
+  ['recognitionabortedexception_1578',['RecognitionAbortedException',['../d6/dda/classAspose_1_1Barcode_1_1Recognition_1_1RecognitionAbortedException.html',1,'Aspose::Barcode::Recognition']]],
+  ['rectangle_1579',['Rectangle',['../de/d59/classAspose_1_1Barcode_1_1Internal_1_1Rectangle.html',1,'Aspose::Barcode::Internal']]],
+  ['rectmicroqrversion_1580',['RectMicroQRVersion',['../df/d49/classAspose_1_1Barcode_1_1Generation_1_1RectMicroQRVersion.html',1,'Aspose::Barcode::Generation']]]
 ];

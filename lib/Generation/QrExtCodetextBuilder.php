@@ -117,6 +117,42 @@ class QrExtCodetextBuilder extends ExtCodetextBuilder
         }
     }
 
+    /**
+     * Adds codetext with the specified QR compaction mode to the extended codetext items.
+     *
+     * @param int $mode QR compaction mode for the codetext.
+     * @param string $codetext Codetext in Unicode to add as an extended codetext item.
+     * @throws BarcodeException
+     */
+    function addCodetextWithCompactionMode(int $mode, string $codetext): void
+    {
+        try
+        {
+            if ($codetext === "")
+                return;
+
+            $extCodeItemDTO = new \Aspose\Barcode\Bridge\ExtCodeItemDTO();
+            $extCodeItemDTO->extCodeItemType = ExtCodeItemType::CODETEXT_WITH_COMPACTION_MODE;
+            $extCodeItemDTO->arguments = array($mode, $codetext);
+
+            array_push($this->_list, $extCodeItemDTO);
+        }
+        catch (Exception $ex)
+        {
+            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
+        }
+    }
+
+    /**
+     * <p>
+     * Clears extended codetext items
+     * </p>
+     */
+    public function clear(): void
+    {
+        parent::clear();
+    }
+
     protected function getExtCodetextBuilderType(): int
     {
         return ExtCodetextBuilderType::QR_EXT_CODETEXT_BUILDER;

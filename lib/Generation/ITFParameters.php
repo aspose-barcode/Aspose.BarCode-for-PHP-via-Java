@@ -76,34 +76,6 @@ class ITFParameters implements Communicator
     }
 
     /**
-     * Gets an ITF border (bearer bar) thickness in Unit value.
-     * Default value: 12pt.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getBorderThickness().
-     */
-    public function getItfBorderThickness(): Unit
-    {
-        return $this->borderThickness;
-    }
-
-    /**
-     * Sets an ITF border (bearer bar) thickness in Unit value.
-     * Default value: 12pt.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setBorderThickness().
-     */
-    public function setItfBorderThickness(Unit $value): void
-    {
-        try
-        {
-            $this->getITFParametersDto()->borderThickness = $value->getUnitDto();
-            $this->borderThickness = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * <p>
      * Border type of ITF barcode.
      * Default value: ITF14BorderType.Bar.
@@ -123,40 +95,6 @@ class ITFParameters implements Communicator
     public function setBorderType(int $value): void
     {
         $this->getITFParametersDto()->borderType = $value;
-    }
-
-    /**
-     * Border type of ITF barcode.
-     * Default value: ITF14BorderType::BAR.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getBorderType().
-     */
-    public function getItfBorderType(): int
-    {
-        try
-        {
-            return $this->getITFParametersDto()->borderType;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Border type of ITF barcode.
-     * Default value: ITF14BorderType::BAR.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setBorderType().
-     */
-    public function setItfBorderType(int $value): void
-    {
-        try
-        {
-            $this->getITFParametersDto()->borderType = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**

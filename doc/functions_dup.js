@@ -12,6 +12,7 @@ var functions_dup =
     [ "\u202Ah", "functions_h.html", null ],
     [ "\u202Ai", "functions_i.html", null ],
     [ "\u202Aj", "functions_j.html", null ],
+    [ "\u202Ak", "functions_k.html", null ],
     [ "\u202Al", "functions_l.html", null ],
     [ "\u202Am", "functions_m.html", null ],
     [ "\u202An", "functions_n.html", null ],

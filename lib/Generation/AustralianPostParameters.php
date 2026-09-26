@@ -25,8 +25,6 @@ class AustralianPostParameters implements Communicator
         $this->australianPostParametersDto = $australianPostParametersDto;
     }
 
-    private $australianPostShortBarHeight;
-
     function __construct(AustralianPostParametersDTO $australianPostParametersDto)
     {
         $this->australianPostParametersDto = $australianPostParametersDto;
@@ -71,38 +69,6 @@ class AustralianPostParameters implements Communicator
     }
 
     /**
-     * Short bar's height of AustralianPost barcode.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getShortBarHeight().
-     */
-    public function getAustralianPostShortBarHeight(): Unit
-    {
-        try
-        {
-            return $this->shortBarHeight;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Short bar's height of AustralianPost barcode.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setShortBarHeight().
-     */
-    public function setAustralianPostShortBarHeight(Unit $value): void
-    {
-        try
-        {
-            $this->getAustralianPostParametersDto()->shortBarHeight = $value->getUnitDto();
-            $this->shortBarHeight = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-    /**
      * <p>
      * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
      * </p>
@@ -120,38 +86,6 @@ class AustralianPostParameters implements Communicator
     public function setEncodingTable(int $value): void
     {
         $this->getAustralianPostParametersDto()->encodingTable = $value;
-    }
-
-    /**
-     * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getEncodingTable().
-     */
-    public function getAustralianPostEncodingTable(): int
-    {
-        try
-        {
-            return $this->getAustralianPostParametersDto()->encodingTable;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Interpreting type for the Customer Information of AustralianPost, default to CustomerInformationInterpretingType.Other"
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setEncodingTable().
-     */
-    public function setAustralianPostEncodingTable(int $value): void
-    {
-        try
-        {
-            $this->getAustralianPostParametersDto()->encodingTable = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
     }
 
     /**

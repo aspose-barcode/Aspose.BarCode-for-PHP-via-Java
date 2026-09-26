@@ -73,39 +73,6 @@ class PostalParameters implements Communicator
     }
 
     /**
-     * Short bar's height of Postal barcodes.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getShortBarHeight().
-     */
-    public function getPostalShortBarHeight(): Unit
-    {
-        try
-        {
-            return $this->shortBarHeight;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
-     * Short bar's height of Postal barcodes.
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setShortBarHeight().
-     */
-    public function setPostalShortBarHeight(Unit $value): void
-    {
-        try
-        {
-            $this->getPostalParametersDto()->postalShortBarHeight = $value->getUnitDto();
-            $this->postalShortBarHeight = $value;
-        }
-        catch (Exception $ex)
-        {
-            throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
-        }
-    }
-
-    /**
      * Returns a human-readable string representation of this PostalParameters.
      *
      * @return string A string that represents this PostalParameters.

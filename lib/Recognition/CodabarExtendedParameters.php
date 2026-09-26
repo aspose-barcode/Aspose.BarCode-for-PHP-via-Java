@@ -74,30 +74,6 @@ class CodabarExtendedParameters implements Communicator
 
     /**
      * <p>
-     * Gets or sets a Codabar start symbol.
-     * Default value: CodabarSymbol.A
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStartSymbol().
-     */
-    public function getCodabarStartSymbol(): int
-    {
-        return $this->getCodabarExtendedParametersDTO()->startSymbol;
-    }
-
-    /**
-     * <p>
-     * Gets or sets a Codabar start symbol.
-     * Default value: CodabarSymbol.A
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStartSymbol().
-     */
-    public function setCodabarStartSymbol(int $value): void
-    {
-        $this->getCodabarExtendedParametersDTO()->startSymbol = $value;
-    }
-
-    /**
-     * <p>
      * Gets a Codabar stop symbol.
      * Default value: CodabarSymbol.A
      * </p>
@@ -116,30 +92,6 @@ class CodabarExtendedParameters implements Communicator
      * @param value a Codabar stop symbol.
      */
     public function setStopSymbol(int $value): void
-    {
-        $this->getCodabarExtendedParametersDTO()->stopSymbol = $value;
-    }
-
-    /**
-     * <p>
-     * Gets or sets a Codabar stop symbol.
-     * Default value: CodabarSymbol.A
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the getStopSymbol().
-     */
-    public function getCodabarStopSymbol(): int
-    {
-        return $this->getCodabarExtendedParametersDTO()->stopSymbol;
-    }
-
-    /**
-     * <p>
-     * Gets or sets a Codabar stop symbol.
-     * Default value: CodabarSymbol.A
-     * </p>
-     * @deprecated This property is obsolete and will be removed in future releases. Instead, use the setStopSymbol().
-     */
-    public function setCodabarStopSymbol(int $value): void
     {
         $this->getCodabarExtendedParametersDTO()->stopSymbol = $value;
     }
