@@ -22,7 +22,7 @@ class BarcodeReaderDTO
 
     static public $_TSPEC = array(
         1 => array(
-            'var' => 'base64Image',
+            'var' => 'imageData',
             'isRequired' => false,
             'type' => TType::STRING,
         ),
@@ -30,9 +30,9 @@ class BarcodeReaderDTO
             'var' => 'areas',
             'isRequired' => false,
             'type' => TType::LST,
-            'etype' => TType::STRING,
+            'etype' => TType::I32,
             'elem' => array(
-                'type' => TType::STRING,
+                'type' => TType::I32,
                 ),
         ),
         3 => array(
@@ -76,9 +76,9 @@ class BarcodeReaderDTO
     /**
      * @var string
      */
-    public $base64Image = null;
+    public $imageData = null;
     /**
-     * @var string[]
+     * @var int[]
      */
     public $areas = null;
     /**
@@ -105,8 +105,8 @@ class BarcodeReaderDTO
     public function __construct($vals = null)
     {
         if (is_array($vals)) {
-            if (isset($vals['base64Image'])) {
-                $this->base64Image = $vals['base64Image'];
+            if (isset($vals['imageData'])) {
+                $this->imageData = $vals['imageData'];
             }
             if (isset($vals['areas'])) {
                 $this->areas = $vals['areas'];
@@ -150,7 +150,7 @@ class BarcodeReaderDTO
             switch ($fid) {
                 case 1:
                     if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->base64Image);
+                        $xfer += $input->readString($this->imageData);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -163,7 +163,7 @@ class BarcodeReaderDTO
                         $xfer += $input->readListBegin($_etype3, $_size0);
                         for ($_i4 = 0; $_i4 < $_size0; ++$_i4) {
                             $elem5 = null;
-                            $xfer += $input->readString($elem5);
+                            $xfer += $input->readI32($elem5);
                             $this->areas []= $elem5;
                         }
                         $xfer += $input->readListEnd();
@@ -241,9 +241,9 @@ class BarcodeReaderDTO
     {
         $xfer = 0;
         $xfer += $output->writeStructBegin('BarcodeReaderDTO');
-        if ($this->base64Image !== null) {
-            $xfer += $output->writeFieldBegin('base64Image', TType::STRING, 1);
-            $xfer += $output->writeString($this->base64Image);
+        if ($this->imageData !== null) {
+            $xfer += $output->writeFieldBegin('imageData', TType::STRING, 1);
+            $xfer += $output->writeString($this->imageData);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->areas !== null) {
@@ -251,9 +251,9 @@ class BarcodeReaderDTO
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
             $xfer += $output->writeFieldBegin('areas', TType::LST, 2);
-            $output->writeListBegin(TType::STRING, count($this->areas));
+            $output->writeListBegin(TType::I32, count($this->areas));
             foreach ($this->areas as $iter18) {
-                $xfer += $output->writeString($iter18);
+                $xfer += $output->writeI32($iter18);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

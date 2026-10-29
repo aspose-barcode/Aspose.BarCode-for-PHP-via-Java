@@ -44,6 +44,8 @@ var namespaceAspose_1_1Barcode_1_1Generation =
     [ "\u202AFontUnit", "d0/de0/classAspose_1_1Barcode_1_1Generation_1_1FontUnit.html", "d0/de0/classAspose_1_1Barcode_1_1Generation_1_1FontUnit" ],
     [ "\u202AGraphicsUnit", "dd/d24/classAspose_1_1Barcode_1_1Generation_1_1GraphicsUnit.html", "dd/d24/classAspose_1_1Barcode_1_1Generation_1_1GraphicsUnit" ],
     [ "\u202AGS1CompositeBarParameters", "d9/d81/classAspose_1_1Barcode_1_1Generation_1_1GS1CompositeBarParameters.html", "d9/d81/classAspose_1_1Barcode_1_1Generation_1_1GS1CompositeBarParameters" ],
+    [ "\u202AGS1Parameters", "dd/d79/classAspose_1_1Barcode_1_1Generation_1_1GS1Parameters.html", "dd/d79/classAspose_1_1Barcode_1_1Generation_1_1GS1Parameters" ],
+    [ "\u202AGS1ValidationLevel", "da/dd5/classAspose_1_1Barcode_1_1Generation_1_1GS1ValidationLevel.html", "da/dd5/classAspose_1_1Barcode_1_1Generation_1_1GS1ValidationLevel" ],
     [ "\u202AHanXinEncodeMode", "d1/d18/classAspose_1_1Barcode_1_1Generation_1_1HanXinEncodeMode.html", "d1/d18/classAspose_1_1Barcode_1_1Generation_1_1HanXinEncodeMode" ],
     [ "\u202AHanXinErrorLevel", "d4/d3f/classAspose_1_1Barcode_1_1Generation_1_1HanXinErrorLevel.html", "d4/d3f/classAspose_1_1Barcode_1_1Generation_1_1HanXinErrorLevel" ],
     [ "\u202AHanXinExtCodetextBuilder", "d7/d49/classAspose_1_1Barcode_1_1Generation_1_1HanXinExtCodetextBuilder.html", "d7/d49/classAspose_1_1Barcode_1_1Generation_1_1HanXinExtCodetextBuilder" ],

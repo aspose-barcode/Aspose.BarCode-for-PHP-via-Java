@@ -57,6 +57,7 @@ var classAspose_1_1Barcode_1_1Recognition_1_1DecodeType =
     [ "\u202AITALIAN_POST_25", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a86d1e341331a7d45061e434cce51eca5", null ],
     [ "\u202AITF_14", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a5d995919a5cf2c0941b3b9680ce47016", null ],
     [ "\u202AITF_6", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a11b87a80fa652d009402bf1f5cbb8ff9", null ],
+    [ "\u202AJAPAN_POST", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a7243e39806bdcfa2bb73934e2391cf6b", null ],
     [ "\u202AMACRO_PDF_417", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a773c6c4f991906494b34dcacdc71db6b", null ],
     [ "\u202AMAILMARK", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a9ba0df1f8b642376218e5383564d012f", null ],
     [ "\u202AMATRIX_2_OF_5", "d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a7c43948d3dea1248f39611c5d3c9c19d", null ],

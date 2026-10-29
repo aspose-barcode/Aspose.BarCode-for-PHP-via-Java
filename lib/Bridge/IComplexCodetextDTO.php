@@ -233,6 +233,26 @@ class IComplexCodetextDTO
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\USADriveIdJurisdSubfileDTO',
         ),
+        41 => array(
+            'var' => 'gs1Elements',
+            'isRequired' => false,
+            'type' => TType::LST,
+            'etype' => TType::STRUCT,
+            'elem' => array(
+                'type' => TType::STRUCT,
+                'class' => '\Aspose\Barcode\Bridge\GS1ElementDTO',
+                ),
+        ),
+        42 => array(
+            'var' => 'uriStem',
+            'isRequired' => false,
+            'type' => TType::STRING,
+        ),
+        43 => array(
+            'var' => 'primaryApplicationIdentifier',
+            'isRequired' => false,
+            'type' => TType::STRING,
+        ),
     );
 
     /**
@@ -391,6 +411,18 @@ class IComplexCodetextDTO
      * @var \Aspose\Barcode\Bridge\USADriveIdJurisdSubfileDTO
      */
     public $jurisdictionSpecificSubfile = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\GS1ElementDTO[]
+     */
+    public $gs1Elements = null;
+    /**
+     * @var string
+     */
+    public $uriStem = null;
+    /**
+     * @var string
+     */
+    public $primaryApplicationIdentifier = null;
 
     public function __construct($vals = null)
     {
@@ -511,6 +543,15 @@ class IComplexCodetextDTO
             }
             if (isset($vals['jurisdictionSpecificSubfile'])) {
                 $this->jurisdictionSpecificSubfile = $vals['jurisdictionSpecificSubfile'];
+            }
+            if (isset($vals['gs1Elements'])) {
+                $this->gs1Elements = $vals['gs1Elements'];
+            }
+            if (isset($vals['uriStem'])) {
+                $this->uriStem = $vals['uriStem'];
+            }
+            if (isset($vals['primaryApplicationIdentifier'])) {
+                $this->primaryApplicationIdentifier = $vals['primaryApplicationIdentifier'];
             }
         }
     }
@@ -834,6 +875,37 @@ class IComplexCodetextDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 41:
+                    if ($ftype == TType::LST) {
+                        $this->gs1Elements = array();
+                        $_size68 = 0;
+                        $_etype71 = 0;
+                        $xfer += $input->readListBegin($_etype71, $_size68);
+                        for ($_i72 = 0; $_i72 < $_size68; ++$_i72) {
+                            $elem73 = null;
+                            $elem73 = new \Aspose\Barcode\Bridge\GS1ElementDTO();
+                            $xfer += $elem73->read($input);
+                            $this->gs1Elements []= $elem73;
+                        }
+                        $xfer += $input->readListEnd();
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 42:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->uriStem);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 43:
+                    if ($ftype == TType::STRING) {
+                        $xfer += $input->readString($this->primaryApplicationIdentifier);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -993,8 +1065,8 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('records', TType::LST, 28);
             $output->writeListBegin(TType::STRUCT, count($this->records));
-            foreach ($this->records as $iter68) {
-                $xfer += $iter68->write($output);
+            foreach ($this->records as $iter74) {
+                $xfer += $iter74->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
@@ -1048,8 +1120,8 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('subfileDesignator', TType::LST, 37);
             $output->writeListBegin(TType::STRUCT, count($this->subfileDesignator));
-            foreach ($this->subfileDesignator as $iter69) {
-                $xfer += $iter69->write($output);
+            foreach ($this->subfileDesignator as $iter75) {
+                $xfer += $iter75->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
@@ -1076,6 +1148,28 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('jurisdictionSpecificSubfile', TType::STRUCT, 40);
             $xfer += $this->jurisdictionSpecificSubfile->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->gs1Elements !== null) {
+            if (!is_array($this->gs1Elements)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('gs1Elements', TType::LST, 41);
+            $output->writeListBegin(TType::STRUCT, count($this->gs1Elements));
+            foreach ($this->gs1Elements as $iter76) {
+                $xfer += $iter76->write($output);
+            }
+            $output->writeListEnd();
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->uriStem !== null) {
+            $xfer += $output->writeFieldBegin('uriStem', TType::STRING, 42);
+            $xfer += $output->writeString($this->uriStem);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->primaryApplicationIdentifier !== null) {
+            $xfer += $output->writeFieldBegin('primaryApplicationIdentifier', TType::STRING, 43);
+            $xfer += $output->writeString($this->primaryApplicationIdentifier);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

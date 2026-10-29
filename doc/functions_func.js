@@ -12,5 +12,6 @@ var functions_func =
     [ "\u202Ap", "functions_func_p.html", null ],
     [ "\u202Ar", "functions_func_r.html", null ],
     [ "\u202As", "functions_func_s.html", null ],
-    [ "\u202At", "functions_func_t.html", null ]
+    [ "\u202At", "functions_func_t.html", null ],
+    [ "\u202Av", "functions_func_v.html", null ]
 ];

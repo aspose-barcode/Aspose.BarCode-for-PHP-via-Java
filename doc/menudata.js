@@ -73,7 +73,8 @@ var menudata={children:[
 {text:"\u202Ap",url:"functions_func_p.html#index_p"},
 {text:"\u202Ar",url:"functions_func_r.html#index_r"},
 {text:"\u202As",url:"functions_func_s.html#index_s"},
-{text:"\u202At",url:"functions_func_t.html#index_t"}]},
+{text:"\u202At",url:"functions_func_t.html#index_t"},
+{text:"\u202Av",url:"functions_func_v.html#index_v"}]},
 {text:"\u202AVariables",url:"functions_vars.html",children:[
 {text:"$",url:"functions_vars.html#index__24"},
 {text:"\u202Aa",url:"functions_vars_a.html#index_a"},

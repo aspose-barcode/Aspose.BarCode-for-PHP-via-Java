@@ -330,6 +330,16 @@ interface ThriftAsposeBarcodeServiceIf
      */
     public function ComplexCodetextReader_tryDecodeUSADriveId($encodedCodetext);
     /**
+     * @param string $encodedCodetext
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function ComplexCodetextReader_tryDecodeGS1Codetext($encodedCodetext);
+    /**
+     * @param string $encodedCodetext
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function ComplexCodetextReader_tryDecodeGS1DigitalLink($encodedCodetext);
+    /**
      * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
      */
     public function MailmarkCodetext_ctor();
@@ -676,6 +686,100 @@ interface ThriftAsposeBarcodeServiceIf
      * @return bool
      */
     public function Address_equals(\Aspose\Barcode\Bridge\AddressDTO $obj1, \Aspose\Barcode\Bridge\AddressDTO $obj2);
+    /**
+     * @param string $applicationIdentifier
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\GS1ValidationResultDTO
+     */
+    public function GS1Element_validate($applicationIdentifier, $value);
+    /**
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\GS1ValidationResultDTO
+     */
+    public function GS1Codetext_validate($value);
+    /**
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1Codetext_parse($value);
+    /**
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\GS1ParseResultDTO
+     */
+    public function GS1Codetext_tryParse($value);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $state
+     * @return string
+     */
+    public function GS1Codetext_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $state
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1Codetext_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state, $value);
+    /**
+     * @param string $uriStem
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_ctor1($uriStem);
+    /**
+     * @param string $uriStem
+     * @param string $primaryApplicationIdentifier
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_ctor2($uriStem, $primaryApplicationIdentifier);
+    /**
+     * @param string $uriStem
+     * @param string $primaryApplicationIdentifier
+     * @param \Aspose\Barcode\Bridge\GS1ElementDTO[] $elements
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_ctor3($uriStem, $primaryApplicationIdentifier, array $elements);
+    /**
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\GS1ValidationResultDTO
+     */
+    public function GS1DigitalLink_validate($value);
+    /**
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_parse($value);
+    /**
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\GS1ParseResultDTO
+     */
+    public function GS1DigitalLink_tryParse($value);
+    /**
+     * @param string $uriStem
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $codetext
+     * @param string $primaryApplicationIdentifier
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_create($uriStem, \Aspose\Barcode\Bridge\IComplexCodetextDTO $codetext, $primaryApplicationIdentifier);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $state
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_toGS1Codetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $state
+     * @return string
+     * @throws \Aspose\Barcode\Bridge\GS1ValidationExceptionDTO
+     */
+    public function GS1DigitalLink_toUriString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $state
+     * @return string
+     */
+    public function GS1DigitalLink_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state);
+    /**
+     * @param \Aspose\Barcode\Bridge\IComplexCodetextDTO $state
+     * @param string $value
+     * @return \Aspose\Barcode\Bridge\IComplexCodetextDTO
+     */
+    public function GS1DigitalLink_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state, $value);
     /**
      * @param \Aspose\Barcode\Bridge\QuadrangleDTO $obj1
      * @param \Aspose\Barcode\Bridge\QuadrangleDTO $obj2

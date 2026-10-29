@@ -27,9 +27,10 @@ class BarcodeGeneratorDTO
             'type' => TType::I32,
         ),
         2 => array(
-            'var' => 'base64CodeText',
+            'var' => 'codeText',
             'isRequired' => false,
-            'type' => TType::STRING,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\CodeTextDTO',
         ),
         3 => array(
             'var' => 'encoding',
@@ -37,17 +38,12 @@ class BarcodeGeneratorDTO
             'type' => TType::STRING,
         ),
         4 => array(
-            'var' => 'codeTextType',
-            'isRequired' => false,
-            'type' => TType::I32,
-        ),
-        5 => array(
             'var' => 'parameters',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\BaseGenerationParametersDTO',
         ),
-        6 => array(
+        5 => array(
             'var' => 'insertBOM',
             'isRequired' => false,
             'type' => TType::BOOL,
@@ -59,17 +55,13 @@ class BarcodeGeneratorDTO
      */
     public $barcodeType = null;
     /**
-     * @var string
+     * @var \Aspose\Barcode\Bridge\CodeTextDTO
      */
-    public $base64CodeText = null;
+    public $codeText = null;
     /**
      * @var string
      */
     public $encoding = null;
-    /**
-     * @var int
-     */
-    public $codeTextType = null;
     /**
      * @var \Aspose\Barcode\Bridge\BaseGenerationParametersDTO
      */
@@ -85,14 +77,11 @@ class BarcodeGeneratorDTO
             if (isset($vals['barcodeType'])) {
                 $this->barcodeType = $vals['barcodeType'];
             }
-            if (isset($vals['base64CodeText'])) {
-                $this->base64CodeText = $vals['base64CodeText'];
+            if (isset($vals['codeText'])) {
+                $this->codeText = $vals['codeText'];
             }
             if (isset($vals['encoding'])) {
                 $this->encoding = $vals['encoding'];
-            }
-            if (isset($vals['codeTextType'])) {
-                $this->codeTextType = $vals['codeTextType'];
             }
             if (isset($vals['parameters'])) {
                 $this->parameters = $vals['parameters'];
@@ -130,8 +119,9 @@ class BarcodeGeneratorDTO
                     }
                     break;
                 case 2:
-                    if ($ftype == TType::STRING) {
-                        $xfer += $input->readString($this->base64CodeText);
+                    if ($ftype == TType::STRUCT) {
+                        $this->codeText = new \Aspose\Barcode\Bridge\CodeTextDTO();
+                        $xfer += $this->codeText->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -144,13 +134,6 @@ class BarcodeGeneratorDTO
                     }
                     break;
                 case 4:
-                    if ($ftype == TType::I32) {
-                        $xfer += $input->readI32($this->codeTextType);
-                    } else {
-                        $xfer += $input->skip($ftype);
-                    }
-                    break;
-                case 5:
                     if ($ftype == TType::STRUCT) {
                         $this->parameters = new \Aspose\Barcode\Bridge\BaseGenerationParametersDTO();
                         $xfer += $this->parameters->read($input);
@@ -158,7 +141,7 @@ class BarcodeGeneratorDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 6:
+                case 5:
                     if ($ftype == TType::BOOL) {
                         $xfer += $input->readBool($this->insertBOM);
                     } else {
@@ -184,9 +167,12 @@ class BarcodeGeneratorDTO
             $xfer += $output->writeI32($this->barcodeType);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->base64CodeText !== null) {
-            $xfer += $output->writeFieldBegin('base64CodeText', TType::STRING, 2);
-            $xfer += $output->writeString($this->base64CodeText);
+        if ($this->codeText !== null) {
+            if (!is_object($this->codeText)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('codeText', TType::STRUCT, 2);
+            $xfer += $this->codeText->write($output);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->encoding !== null) {
@@ -194,21 +180,16 @@ class BarcodeGeneratorDTO
             $xfer += $output->writeString($this->encoding);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->codeTextType !== null) {
-            $xfer += $output->writeFieldBegin('codeTextType', TType::I32, 4);
-            $xfer += $output->writeI32($this->codeTextType);
-            $xfer += $output->writeFieldEnd();
-        }
         if ($this->parameters !== null) {
             if (!is_object($this->parameters)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('parameters', TType::STRUCT, 5);
+            $xfer += $output->writeFieldBegin('parameters', TType::STRUCT, 4);
             $xfer += $this->parameters->write($output);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->insertBOM !== null) {
-            $xfer += $output->writeFieldBegin('insertBOM', TType::BOOL, 6);
+            $xfer += $output->writeFieldBegin('insertBOM', TType::BOOL, 5);
             $xfer += $output->writeBool($this->insertBOM);
             $xfer += $output->writeFieldEnd();
         }

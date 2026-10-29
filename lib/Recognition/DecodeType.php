@@ -239,6 +239,11 @@ class DecodeType
     const AUSTRALIA_POST = 37;
 
     /**
+     * Specifies that the data should be decoded with <b>Japan Post</b> barcode specification
+     */
+    const JAPAN_POST = 84;
+
+    /**
      * Specifies that the data should be decoded with { <b>Postnet</b>} barcode specification
      */
     const POSTNET = 38;

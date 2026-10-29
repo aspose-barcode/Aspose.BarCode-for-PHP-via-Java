@@ -32,6 +32,7 @@ class BarcodeParameters implements Communicator
     private $codablock;
     private $dataBar;
     private $gs1CompositeBar;
+    private $gs1;
     private $dataMatrix;
     private $code16K;
     private $itf;
@@ -72,6 +73,7 @@ class BarcodeParameters implements Communicator
             $this->codablock = new CodablockParameters($this->getBarcodeParametersDto()->codablock);
             $this->dataBar = new DataBarParameters($this->getBarcodeParametersDto()->dataBar);
             $this->gs1CompositeBar = new GS1CompositeBarParameters($this->getBarcodeParametersDto()->gs1CompositeBar);
+            $this->gs1 = new GS1Parameters($this->getBarcodeParametersDto()->gs1);
             $this->dataMatrix = new DataMatrixParameters($this->getBarcodeParametersDto()->dataMatrix);
             $this->code16K = new Code16KParameters($this->getBarcodeParametersDto()->code16K);
             $this->itf = new ITFParameters($this->getBarcodeParametersDto()->itf);
@@ -751,4 +753,13 @@ class BarcodeParameters implements Communicator
     {
         return $this->hanXin;
     }
+
+    /**
+     * Access GS1 content/syntax validation for barcode generation.
+     */
+    public function getGS1(): GS1Parameters
+    {
+        return $this->gs1;
+    }
+
 }

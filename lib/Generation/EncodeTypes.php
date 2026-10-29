@@ -248,6 +248,11 @@ class EncodeTypes
     const  AUSTRALIA_POST = 38;
 
     /**
+     * Represents Japan Post BarCode
+     */
+    const JAPAN_POST = 85;
+
+    /**
      * Specifies that the data should be encoded with Postnet barcode specification
      */
     const  POSTNET = 39;
