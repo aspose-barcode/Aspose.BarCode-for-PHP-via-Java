@@ -3537,6 +3537,124 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
         throw new \Exception("ComplexCodetextReader_tryDecodeUSADriveId failed: unknown result");
     }
 
+    public function ComplexCodetextReader_tryDecodeGS1Codetext($encodedCodetext)
+    {
+        $this->send_ComplexCodetextReader_tryDecodeGS1Codetext($encodedCodetext);
+        return $this->recv_ComplexCodetextReader_tryDecodeGS1Codetext();
+    }
+
+    public function send_ComplexCodetextReader_tryDecodeGS1Codetext($encodedCodetext)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeGS1Codetext_args();
+        $args->encodedCodetext = $encodedCodetext;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'ComplexCodetextReader_tryDecodeGS1Codetext',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('ComplexCodetextReader_tryDecodeGS1Codetext', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_ComplexCodetextReader_tryDecodeGS1Codetext()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeGS1Codetext_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeGS1Codetext_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("ComplexCodetextReader_tryDecodeGS1Codetext failed: unknown result");
+    }
+
+    public function ComplexCodetextReader_tryDecodeGS1DigitalLink($encodedCodetext)
+    {
+        $this->send_ComplexCodetextReader_tryDecodeGS1DigitalLink($encodedCodetext);
+        return $this->recv_ComplexCodetextReader_tryDecodeGS1DigitalLink();
+    }
+
+    public function send_ComplexCodetextReader_tryDecodeGS1DigitalLink($encodedCodetext)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeGS1DigitalLink_args();
+        $args->encodedCodetext = $encodedCodetext;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'ComplexCodetextReader_tryDecodeGS1DigitalLink',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('ComplexCodetextReader_tryDecodeGS1DigitalLink', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_ComplexCodetextReader_tryDecodeGS1DigitalLink()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeGS1DigitalLink_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_ComplexCodetextReader_tryDecodeGS1DigitalLink_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("ComplexCodetextReader_tryDecodeGS1DigitalLink failed: unknown result");
+    }
+
     public function MailmarkCodetext_ctor()
     {
         $this->send_MailmarkCodetext_ctor();
@@ -7500,6 +7618,1020 @@ class ThriftAsposeBarcodeServiceClient implements \Aspose\Barcode\Bridge\ThriftA
             return $result->success;
         }
         throw new \Exception("Address_equals failed: unknown result");
+    }
+
+    public function GS1Element_validate($applicationIdentifier, $value)
+    {
+        $this->send_GS1Element_validate($applicationIdentifier, $value);
+        return $this->recv_GS1Element_validate();
+    }
+
+    public function send_GS1Element_validate($applicationIdentifier, $value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Element_validate_args();
+        $args->applicationIdentifier = $applicationIdentifier;
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1Element_validate',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1Element_validate', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1Element_validate()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Element_validate_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Element_validate_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1Element_validate failed: unknown result");
+    }
+
+    public function GS1Codetext_validate($value)
+    {
+        $this->send_GS1Codetext_validate($value);
+        return $this->recv_GS1Codetext_validate();
+    }
+
+    public function send_GS1Codetext_validate($value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_validate_args();
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1Codetext_validate',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1Codetext_validate', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1Codetext_validate()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_validate_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_validate_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1Codetext_validate failed: unknown result");
+    }
+
+    public function GS1Codetext_parse($value)
+    {
+        $this->send_GS1Codetext_parse($value);
+        return $this->recv_GS1Codetext_parse();
+    }
+
+    public function send_GS1Codetext_parse($value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_parse_args();
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1Codetext_parse',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1Codetext_parse', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1Codetext_parse()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_parse_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_parse_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1Codetext_parse failed: unknown result");
+    }
+
+    public function GS1Codetext_tryParse($value)
+    {
+        $this->send_GS1Codetext_tryParse($value);
+        return $this->recv_GS1Codetext_tryParse();
+    }
+
+    public function send_GS1Codetext_tryParse($value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_tryParse_args();
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1Codetext_tryParse',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1Codetext_tryParse', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1Codetext_tryParse()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_tryParse_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_tryParse_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1Codetext_tryParse failed: unknown result");
+    }
+
+    public function GS1Codetext_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $this->send_GS1Codetext_getConstructedCodetext($state);
+        return $this->recv_GS1Codetext_getConstructedCodetext();
+    }
+
+    public function send_GS1Codetext_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_getConstructedCodetext_args();
+        $args->state = $state;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1Codetext_getConstructedCodetext',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1Codetext_getConstructedCodetext', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1Codetext_getConstructedCodetext()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_getConstructedCodetext_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_getConstructedCodetext_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1Codetext_getConstructedCodetext failed: unknown result");
+    }
+
+    public function GS1Codetext_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state, $value)
+    {
+        $this->send_GS1Codetext_initFromString($state, $value);
+        return $this->recv_GS1Codetext_initFromString();
+    }
+
+    public function send_GS1Codetext_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state, $value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_initFromString_args();
+        $args->state = $state;
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1Codetext_initFromString',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1Codetext_initFromString', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1Codetext_initFromString()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_initFromString_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1Codetext_initFromString_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1Codetext_initFromString failed: unknown result");
+    }
+
+    public function GS1DigitalLink_ctor1($uriStem)
+    {
+        $this->send_GS1DigitalLink_ctor1($uriStem);
+        return $this->recv_GS1DigitalLink_ctor1();
+    }
+
+    public function send_GS1DigitalLink_ctor1($uriStem)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor1_args();
+        $args->uriStem = $uriStem;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_ctor1',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_ctor1', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_ctor1()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor1_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor1_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_ctor1 failed: unknown result");
+    }
+
+    public function GS1DigitalLink_ctor2($uriStem, $primaryApplicationIdentifier)
+    {
+        $this->send_GS1DigitalLink_ctor2($uriStem, $primaryApplicationIdentifier);
+        return $this->recv_GS1DigitalLink_ctor2();
+    }
+
+    public function send_GS1DigitalLink_ctor2($uriStem, $primaryApplicationIdentifier)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor2_args();
+        $args->uriStem = $uriStem;
+        $args->primaryApplicationIdentifier = $primaryApplicationIdentifier;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_ctor2',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_ctor2', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_ctor2()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor2_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor2_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_ctor2 failed: unknown result");
+    }
+
+    public function GS1DigitalLink_ctor3($uriStem, $primaryApplicationIdentifier, array $elements)
+    {
+        $this->send_GS1DigitalLink_ctor3($uriStem, $primaryApplicationIdentifier, $elements);
+        return $this->recv_GS1DigitalLink_ctor3();
+    }
+
+    public function send_GS1DigitalLink_ctor3($uriStem, $primaryApplicationIdentifier, array $elements)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor3_args();
+        $args->uriStem = $uriStem;
+        $args->primaryApplicationIdentifier = $primaryApplicationIdentifier;
+        $args->elements = $elements;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_ctor3',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_ctor3', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_ctor3()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor3_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_ctor3_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_ctor3 failed: unknown result");
+    }
+
+    public function GS1DigitalLink_validate($value)
+    {
+        $this->send_GS1DigitalLink_validate($value);
+        return $this->recv_GS1DigitalLink_validate();
+    }
+
+    public function send_GS1DigitalLink_validate($value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_validate_args();
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_validate',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_validate', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_validate()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_validate_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_validate_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_validate failed: unknown result");
+    }
+
+    public function GS1DigitalLink_parse($value)
+    {
+        $this->send_GS1DigitalLink_parse($value);
+        return $this->recv_GS1DigitalLink_parse();
+    }
+
+    public function send_GS1DigitalLink_parse($value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_parse_args();
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_parse',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_parse', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_parse()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_parse_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_parse_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_parse failed: unknown result");
+    }
+
+    public function GS1DigitalLink_tryParse($value)
+    {
+        $this->send_GS1DigitalLink_tryParse($value);
+        return $this->recv_GS1DigitalLink_tryParse();
+    }
+
+    public function send_GS1DigitalLink_tryParse($value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_tryParse_args();
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_tryParse',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_tryParse', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_tryParse()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_tryParse_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_tryParse_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_tryParse failed: unknown result");
+    }
+
+    public function GS1DigitalLink_create($uriStem, \Aspose\Barcode\Bridge\IComplexCodetextDTO $codetext, $primaryApplicationIdentifier)
+    {
+        $this->send_GS1DigitalLink_create($uriStem, $codetext, $primaryApplicationIdentifier);
+        return $this->recv_GS1DigitalLink_create();
+    }
+
+    public function send_GS1DigitalLink_create($uriStem, \Aspose\Barcode\Bridge\IComplexCodetextDTO $codetext, $primaryApplicationIdentifier)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_create_args();
+        $args->uriStem = $uriStem;
+        $args->codetext = $codetext;
+        $args->primaryApplicationIdentifier = $primaryApplicationIdentifier;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_create',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_create', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_create()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_create_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_create_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_create failed: unknown result");
+    }
+
+    public function GS1DigitalLink_toGS1Codetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $this->send_GS1DigitalLink_toGS1Codetext($state);
+        return $this->recv_GS1DigitalLink_toGS1Codetext();
+    }
+
+    public function send_GS1DigitalLink_toGS1Codetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_toGS1Codetext_args();
+        $args->state = $state;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_toGS1Codetext',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_toGS1Codetext', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_toGS1Codetext()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_toGS1Codetext_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_toGS1Codetext_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_toGS1Codetext failed: unknown result");
+    }
+
+    public function GS1DigitalLink_toUriString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $this->send_GS1DigitalLink_toUriString($state);
+        return $this->recv_GS1DigitalLink_toUriString();
+    }
+
+    public function send_GS1DigitalLink_toUriString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_toUriString_args();
+        $args->state = $state;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_toUriString',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_toUriString', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_toUriString()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_toUriString_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_toUriString_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        if ($result->ex !== null) {
+            throw $result->ex;
+        }
+        throw new \Exception("GS1DigitalLink_toUriString failed: unknown result");
+    }
+
+    public function GS1DigitalLink_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $this->send_GS1DigitalLink_getConstructedCodetext($state);
+        return $this->recv_GS1DigitalLink_getConstructedCodetext();
+    }
+
+    public function send_GS1DigitalLink_getConstructedCodetext(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_getConstructedCodetext_args();
+        $args->state = $state;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_getConstructedCodetext',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_getConstructedCodetext', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_getConstructedCodetext()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_getConstructedCodetext_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_getConstructedCodetext_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_getConstructedCodetext failed: unknown result");
+    }
+
+    public function GS1DigitalLink_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state, $value)
+    {
+        $this->send_GS1DigitalLink_initFromString($state, $value);
+        return $this->recv_GS1DigitalLink_initFromString();
+    }
+
+    public function send_GS1DigitalLink_initFromString(\Aspose\Barcode\Bridge\IComplexCodetextDTO $state, $value)
+    {
+        $args = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_initFromString_args();
+        $args->state = $state;
+        $args->value = $value;
+        $bin_accel = ($this->output_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_write_binary');
+        if ($bin_accel) {
+            thrift_protocol_write_binary(
+                $this->output_,
+                'GS1DigitalLink_initFromString',
+                TMessageType::CALL,
+                $args,
+                $this->seqid_,
+                $this->output_->isStrictWrite()
+            );
+        } else {
+            $this->output_->writeMessageBegin('GS1DigitalLink_initFromString', TMessageType::CALL, $this->seqid_);
+            $args->write($this->output_);
+            $this->output_->writeMessageEnd();
+            $this->output_->getTransport()->flush();
+        }
+    }
+
+    public function recv_GS1DigitalLink_initFromString()
+    {
+        $bin_accel = ($this->input_ instanceof TBinaryProtocolAccelerated) && function_exists('thrift_protocol_read_binary');
+        if ($bin_accel) {
+            $result = thrift_protocol_read_binary(
+                $this->input_,
+                '\Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_initFromString_result',
+                $this->input_->isStrictRead()
+            );
+        } else {
+            $rseqid = 0;
+            $fname = null;
+            $mtype = 0;
+
+            $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+            if ($mtype == TMessageType::EXCEPTION) {
+                $x = new TApplicationException();
+                $x->read($this->input_);
+                $this->input_->readMessageEnd();
+                throw $x;
+            }
+            $result = new \Aspose\Barcode\Bridge\ThriftAsposeBarcodeService_GS1DigitalLink_initFromString_result();
+            $result->read($this->input_);
+            $this->input_->readMessageEnd();
+        }
+        if ($result->success !== null) {
+            return $result->success;
+        }
+        throw new \Exception("GS1DigitalLink_initFromString failed: unknown result");
     }
 
     public function Quadrangle_equals(\Aspose\Barcode\Bridge\QuadrangleDTO $obj1, \Aspose\Barcode\Bridge\QuadrangleDTO $obj2)

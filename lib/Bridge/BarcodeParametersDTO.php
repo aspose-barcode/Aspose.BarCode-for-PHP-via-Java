@@ -67,138 +67,139 @@ class BarcodeParametersDTO
             'type' => TType::I32,
         ),
         9 => array(
-            'var' => 'enableEscape',
-            'isRequired' => false,
-            'type' => TType::BOOL,
-        ),
-        10 => array(
             'var' => 'throwExceptionWhenCodeTextIncorrect',
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
-        11 => array(
+        10 => array(
             'var' => 'wideNarrowRatio',
             'isRequired' => false,
             'type' => TType::DOUBLE,
         ),
-        12 => array(
+        11 => array(
             'var' => 'codeTextParameters',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\CodetextParametersDTO',
         ),
-        13 => array(
+        12 => array(
             'var' => 'filledBars',
             'isRequired' => false,
             'type' => TType::BOOL,
         ),
-        14 => array(
+        13 => array(
             'var' => 'postal',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\PostalParametersDTO',
         ),
-        15 => array(
+        14 => array(
             'var' => 'australianPost',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\AustralianPostParametersDTO',
         ),
-        16 => array(
+        15 => array(
             'var' => 'dataBar',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\DataBarParametersDTO',
         ),
-        17 => array(
+        16 => array(
             'var' => 'gs1CompositeBar',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\GS1CompositeBarParametersDTO',
         ),
-        18 => array(
+        17 => array(
             'var' => 'codablock',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\CodablockParametersDTO',
         ),
-        19 => array(
+        18 => array(
             'var' => 'dataMatrix',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\DataMatrixParametersDTO',
         ),
-        20 => array(
+        19 => array(
             'var' => 'code16K',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\Code16KParametersDTO',
         ),
-        21 => array(
+        20 => array(
             'var' => 'dotCode',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\DotCodeParametersDTO',
         ),
-        22 => array(
+        21 => array(
             'var' => 'itf',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\ITFParametersDTO',
         ),
-        23 => array(
+        22 => array(
             'var' => 'pdf417',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\Pdf417ParametersDTO',
         ),
-        24 => array(
+        23 => array(
             'var' => 'qr',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\QrParametersDTO',
         ),
-        25 => array(
+        24 => array(
             'var' => 'supplement',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\SupplementParametersDTO',
         ),
-        26 => array(
+        25 => array(
             'var' => 'maxiCode',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\MaxiCodeParametersDTO',
         ),
-        27 => array(
+        26 => array(
             'var' => 'aztec',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\AztecParametersDTO',
         ),
-        28 => array(
+        27 => array(
             'var' => 'code128',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\Code128ParametersDTO',
         ),
-        29 => array(
+        28 => array(
             'var' => 'codabar',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\CodabarParametersDTO',
         ),
-        30 => array(
+        29 => array(
             'var' => 'coupon',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\CouponParametersDTO',
         ),
-        31 => array(
+        30 => array(
             'var' => 'hanXin',
             'isRequired' => false,
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\HanXinParametersDTO',
+        ),
+        31 => array(
+            'var' => 'gs1',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\GS1ParametersDTO',
         ),
     );
 
@@ -234,10 +235,6 @@ class BarcodeParametersDTO
      * @var int
      */
     public $isChecksumEnabled = null;
-    /**
-     * @var bool
-     */
-    public $enableEscape = null;
     /**
      * @var bool
      */
@@ -326,6 +323,10 @@ class BarcodeParametersDTO
      * @var \Aspose\Barcode\Bridge\HanXinParametersDTO
      */
     public $hanXin = null;
+    /**
+     * @var \Aspose\Barcode\Bridge\GS1ParametersDTO
+     */
+    public $gs1 = null;
 
     public function __construct($vals = null)
     {
@@ -353,9 +354,6 @@ class BarcodeParametersDTO
             }
             if (isset($vals['isChecksumEnabled'])) {
                 $this->isChecksumEnabled = $vals['isChecksumEnabled'];
-            }
-            if (isset($vals['enableEscape'])) {
-                $this->enableEscape = $vals['enableEscape'];
             }
             if (isset($vals['throwExceptionWhenCodeTextIncorrect'])) {
                 $this->throwExceptionWhenCodeTextIncorrect = $vals['throwExceptionWhenCodeTextIncorrect'];
@@ -422,6 +420,9 @@ class BarcodeParametersDTO
             }
             if (isset($vals['hanXin'])) {
                 $this->hanXin = $vals['hanXin'];
+            }
+            if (isset($vals['gs1'])) {
+                $this->gs1 = $vals['gs1'];
             }
         }
     }
@@ -508,26 +509,19 @@ class BarcodeParametersDTO
                     break;
                 case 9:
                     if ($ftype == TType::BOOL) {
-                        $xfer += $input->readBool($this->enableEscape);
-                    } else {
-                        $xfer += $input->skip($ftype);
-                    }
-                    break;
-                case 10:
-                    if ($ftype == TType::BOOL) {
                         $xfer += $input->readBool($this->throwExceptionWhenCodeTextIncorrect);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 11:
+                case 10:
                     if ($ftype == TType::DOUBLE) {
                         $xfer += $input->readDouble($this->wideNarrowRatio);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 12:
+                case 11:
                     if ($ftype == TType::STRUCT) {
                         $this->codeTextParameters = new \Aspose\Barcode\Bridge\CodetextParametersDTO();
                         $xfer += $this->codeTextParameters->read($input);
@@ -535,14 +529,14 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 13:
+                case 12:
                     if ($ftype == TType::BOOL) {
                         $xfer += $input->readBool($this->filledBars);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 14:
+                case 13:
                     if ($ftype == TType::STRUCT) {
                         $this->postal = new \Aspose\Barcode\Bridge\PostalParametersDTO();
                         $xfer += $this->postal->read($input);
@@ -550,7 +544,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 15:
+                case 14:
                     if ($ftype == TType::STRUCT) {
                         $this->australianPost = new \Aspose\Barcode\Bridge\AustralianPostParametersDTO();
                         $xfer += $this->australianPost->read($input);
@@ -558,7 +552,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 16:
+                case 15:
                     if ($ftype == TType::STRUCT) {
                         $this->dataBar = new \Aspose\Barcode\Bridge\DataBarParametersDTO();
                         $xfer += $this->dataBar->read($input);
@@ -566,7 +560,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 17:
+                case 16:
                     if ($ftype == TType::STRUCT) {
                         $this->gs1CompositeBar = new \Aspose\Barcode\Bridge\GS1CompositeBarParametersDTO();
                         $xfer += $this->gs1CompositeBar->read($input);
@@ -574,7 +568,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 18:
+                case 17:
                     if ($ftype == TType::STRUCT) {
                         $this->codablock = new \Aspose\Barcode\Bridge\CodablockParametersDTO();
                         $xfer += $this->codablock->read($input);
@@ -582,7 +576,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 19:
+                case 18:
                     if ($ftype == TType::STRUCT) {
                         $this->dataMatrix = new \Aspose\Barcode\Bridge\DataMatrixParametersDTO();
                         $xfer += $this->dataMatrix->read($input);
@@ -590,7 +584,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 20:
+                case 19:
                     if ($ftype == TType::STRUCT) {
                         $this->code16K = new \Aspose\Barcode\Bridge\Code16KParametersDTO();
                         $xfer += $this->code16K->read($input);
@@ -598,7 +592,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 21:
+                case 20:
                     if ($ftype == TType::STRUCT) {
                         $this->dotCode = new \Aspose\Barcode\Bridge\DotCodeParametersDTO();
                         $xfer += $this->dotCode->read($input);
@@ -606,7 +600,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 22:
+                case 21:
                     if ($ftype == TType::STRUCT) {
                         $this->itf = new \Aspose\Barcode\Bridge\ITFParametersDTO();
                         $xfer += $this->itf->read($input);
@@ -614,7 +608,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 23:
+                case 22:
                     if ($ftype == TType::STRUCT) {
                         $this->pdf417 = new \Aspose\Barcode\Bridge\Pdf417ParametersDTO();
                         $xfer += $this->pdf417->read($input);
@@ -622,7 +616,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 24:
+                case 23:
                     if ($ftype == TType::STRUCT) {
                         $this->qr = new \Aspose\Barcode\Bridge\QrParametersDTO();
                         $xfer += $this->qr->read($input);
@@ -630,7 +624,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 25:
+                case 24:
                     if ($ftype == TType::STRUCT) {
                         $this->supplement = new \Aspose\Barcode\Bridge\SupplementParametersDTO();
                         $xfer += $this->supplement->read($input);
@@ -638,7 +632,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 26:
+                case 25:
                     if ($ftype == TType::STRUCT) {
                         $this->maxiCode = new \Aspose\Barcode\Bridge\MaxiCodeParametersDTO();
                         $xfer += $this->maxiCode->read($input);
@@ -646,7 +640,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 27:
+                case 26:
                     if ($ftype == TType::STRUCT) {
                         $this->aztec = new \Aspose\Barcode\Bridge\AztecParametersDTO();
                         $xfer += $this->aztec->read($input);
@@ -654,7 +648,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 28:
+                case 27:
                     if ($ftype == TType::STRUCT) {
                         $this->code128 = new \Aspose\Barcode\Bridge\Code128ParametersDTO();
                         $xfer += $this->code128->read($input);
@@ -662,7 +656,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 29:
+                case 28:
                     if ($ftype == TType::STRUCT) {
                         $this->codabar = new \Aspose\Barcode\Bridge\CodabarParametersDTO();
                         $xfer += $this->codabar->read($input);
@@ -670,7 +664,7 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 30:
+                case 29:
                     if ($ftype == TType::STRUCT) {
                         $this->coupon = new \Aspose\Barcode\Bridge\CouponParametersDTO();
                         $xfer += $this->coupon->read($input);
@@ -678,10 +672,18 @@ class BarcodeParametersDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
-                case 31:
+                case 30:
                     if ($ftype == TType::STRUCT) {
                         $this->hanXin = new \Aspose\Barcode\Bridge\HanXinParametersDTO();
                         $xfer += $this->hanXin->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 31:
+                    if ($ftype == TType::STRUCT) {
+                        $this->gs1 = new \Aspose\Barcode\Bridge\GS1ParametersDTO();
+                        $xfer += $this->gs1->read($input);
                     } else {
                         $xfer += $input->skip($ftype);
                     }
@@ -755,18 +757,13 @@ class BarcodeParametersDTO
             $xfer += $output->writeI32($this->isChecksumEnabled);
             $xfer += $output->writeFieldEnd();
         }
-        if ($this->enableEscape !== null) {
-            $xfer += $output->writeFieldBegin('enableEscape', TType::BOOL, 9);
-            $xfer += $output->writeBool($this->enableEscape);
-            $xfer += $output->writeFieldEnd();
-        }
         if ($this->throwExceptionWhenCodeTextIncorrect !== null) {
-            $xfer += $output->writeFieldBegin('throwExceptionWhenCodeTextIncorrect', TType::BOOL, 10);
+            $xfer += $output->writeFieldBegin('throwExceptionWhenCodeTextIncorrect', TType::BOOL, 9);
             $xfer += $output->writeBool($this->throwExceptionWhenCodeTextIncorrect);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->wideNarrowRatio !== null) {
-            $xfer += $output->writeFieldBegin('wideNarrowRatio', TType::DOUBLE, 11);
+            $xfer += $output->writeFieldBegin('wideNarrowRatio', TType::DOUBLE, 10);
             $xfer += $output->writeDouble($this->wideNarrowRatio);
             $xfer += $output->writeFieldEnd();
         }
@@ -774,12 +771,12 @@ class BarcodeParametersDTO
             if (!is_object($this->codeTextParameters)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('codeTextParameters', TType::STRUCT, 12);
+            $xfer += $output->writeFieldBegin('codeTextParameters', TType::STRUCT, 11);
             $xfer += $this->codeTextParameters->write($output);
             $xfer += $output->writeFieldEnd();
         }
         if ($this->filledBars !== null) {
-            $xfer += $output->writeFieldBegin('filledBars', TType::BOOL, 13);
+            $xfer += $output->writeFieldBegin('filledBars', TType::BOOL, 12);
             $xfer += $output->writeBool($this->filledBars);
             $xfer += $output->writeFieldEnd();
         }
@@ -787,7 +784,7 @@ class BarcodeParametersDTO
             if (!is_object($this->postal)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('postal', TType::STRUCT, 14);
+            $xfer += $output->writeFieldBegin('postal', TType::STRUCT, 13);
             $xfer += $this->postal->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -795,7 +792,7 @@ class BarcodeParametersDTO
             if (!is_object($this->australianPost)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('australianPost', TType::STRUCT, 15);
+            $xfer += $output->writeFieldBegin('australianPost', TType::STRUCT, 14);
             $xfer += $this->australianPost->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -803,7 +800,7 @@ class BarcodeParametersDTO
             if (!is_object($this->dataBar)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('dataBar', TType::STRUCT, 16);
+            $xfer += $output->writeFieldBegin('dataBar', TType::STRUCT, 15);
             $xfer += $this->dataBar->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -811,7 +808,7 @@ class BarcodeParametersDTO
             if (!is_object($this->gs1CompositeBar)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('gs1CompositeBar', TType::STRUCT, 17);
+            $xfer += $output->writeFieldBegin('gs1CompositeBar', TType::STRUCT, 16);
             $xfer += $this->gs1CompositeBar->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -819,7 +816,7 @@ class BarcodeParametersDTO
             if (!is_object($this->codablock)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('codablock', TType::STRUCT, 18);
+            $xfer += $output->writeFieldBegin('codablock', TType::STRUCT, 17);
             $xfer += $this->codablock->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -827,7 +824,7 @@ class BarcodeParametersDTO
             if (!is_object($this->dataMatrix)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('dataMatrix', TType::STRUCT, 19);
+            $xfer += $output->writeFieldBegin('dataMatrix', TType::STRUCT, 18);
             $xfer += $this->dataMatrix->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -835,7 +832,7 @@ class BarcodeParametersDTO
             if (!is_object($this->code16K)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('code16K', TType::STRUCT, 20);
+            $xfer += $output->writeFieldBegin('code16K', TType::STRUCT, 19);
             $xfer += $this->code16K->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -843,7 +840,7 @@ class BarcodeParametersDTO
             if (!is_object($this->dotCode)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('dotCode', TType::STRUCT, 21);
+            $xfer += $output->writeFieldBegin('dotCode', TType::STRUCT, 20);
             $xfer += $this->dotCode->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -851,7 +848,7 @@ class BarcodeParametersDTO
             if (!is_object($this->itf)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('itf', TType::STRUCT, 22);
+            $xfer += $output->writeFieldBegin('itf', TType::STRUCT, 21);
             $xfer += $this->itf->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -859,7 +856,7 @@ class BarcodeParametersDTO
             if (!is_object($this->pdf417)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('pdf417', TType::STRUCT, 23);
+            $xfer += $output->writeFieldBegin('pdf417', TType::STRUCT, 22);
             $xfer += $this->pdf417->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -867,7 +864,7 @@ class BarcodeParametersDTO
             if (!is_object($this->qr)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('qr', TType::STRUCT, 24);
+            $xfer += $output->writeFieldBegin('qr', TType::STRUCT, 23);
             $xfer += $this->qr->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -875,7 +872,7 @@ class BarcodeParametersDTO
             if (!is_object($this->supplement)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('supplement', TType::STRUCT, 25);
+            $xfer += $output->writeFieldBegin('supplement', TType::STRUCT, 24);
             $xfer += $this->supplement->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -883,7 +880,7 @@ class BarcodeParametersDTO
             if (!is_object($this->maxiCode)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('maxiCode', TType::STRUCT, 26);
+            $xfer += $output->writeFieldBegin('maxiCode', TType::STRUCT, 25);
             $xfer += $this->maxiCode->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -891,7 +888,7 @@ class BarcodeParametersDTO
             if (!is_object($this->aztec)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('aztec', TType::STRUCT, 27);
+            $xfer += $output->writeFieldBegin('aztec', TType::STRUCT, 26);
             $xfer += $this->aztec->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -899,7 +896,7 @@ class BarcodeParametersDTO
             if (!is_object($this->code128)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('code128', TType::STRUCT, 28);
+            $xfer += $output->writeFieldBegin('code128', TType::STRUCT, 27);
             $xfer += $this->code128->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -907,7 +904,7 @@ class BarcodeParametersDTO
             if (!is_object($this->codabar)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('codabar', TType::STRUCT, 29);
+            $xfer += $output->writeFieldBegin('codabar', TType::STRUCT, 28);
             $xfer += $this->codabar->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -915,7 +912,7 @@ class BarcodeParametersDTO
             if (!is_object($this->coupon)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('coupon', TType::STRUCT, 30);
+            $xfer += $output->writeFieldBegin('coupon', TType::STRUCT, 29);
             $xfer += $this->coupon->write($output);
             $xfer += $output->writeFieldEnd();
         }
@@ -923,8 +920,16 @@ class BarcodeParametersDTO
             if (!is_object($this->hanXin)) {
                 throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
             }
-            $xfer += $output->writeFieldBegin('hanXin', TType::STRUCT, 31);
+            $xfer += $output->writeFieldBegin('hanXin', TType::STRUCT, 30);
             $xfer += $this->hanXin->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->gs1 !== null) {
+            if (!is_object($this->gs1)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('gs1', TType::STRUCT, 31);
+            $xfer += $this->gs1->write($output);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

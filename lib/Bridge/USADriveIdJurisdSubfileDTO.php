@@ -69,14 +69,14 @@ class USADriveIdJurisdSubfileDTO
                 case 1:
                     if ($ftype == TType::LST) {
                         $this->dataElements = array();
-                        $_size77 = 0;
-                        $_etype80 = 0;
-                        $xfer += $input->readListBegin($_etype80, $_size77);
-                        for ($_i81 = 0; $_i81 < $_size77; ++$_i81) {
-                            $elem82 = null;
-                            $elem82 = new \Aspose\Barcode\Bridge\DataElementDTO();
-                            $xfer += $elem82->read($input);
-                            $this->dataElements []= $elem82;
+                        $_size84 = 0;
+                        $_etype87 = 0;
+                        $xfer += $input->readListBegin($_etype87, $_size84);
+                        for ($_i88 = 0; $_i88 < $_size84; ++$_i88) {
+                            $elem89 = null;
+                            $elem89 = new \Aspose\Barcode\Bridge\DataElementDTO();
+                            $xfer += $elem89->read($input);
+                            $this->dataElements []= $elem89;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -103,8 +103,8 @@ class USADriveIdJurisdSubfileDTO
             }
             $xfer += $output->writeFieldBegin('dataElements', TType::LST, 1);
             $output->writeListBegin(TType::STRUCT, count($this->dataElements));
-            foreach ($this->dataElements as $iter83) {
-                $xfer += $iter83->write($output);
+            foreach ($this->dataElements as $iter90) {
+                $xfer += $iter90->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

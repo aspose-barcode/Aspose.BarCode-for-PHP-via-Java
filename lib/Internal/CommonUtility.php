@@ -1,6 +1,7 @@
 <?php
 namespace Aspose\Barcode\Internal;
 
+use GdImage;
 use ReflectionClass;
 
 class CommonUtility
@@ -97,79 +98,116 @@ class CommonUtility
         return true;
     }
 
-    public static function convertAreasToStringFormattedAreas($areas): array
+    public static function convertAreasToIntArray($areas): array
     {
-        $stringFormattedAreas = array();
-        if (!is_null($areas)) {
-            if (is_array($areas)) {
-                if (!CommonUtility::areAllNull($areas)) {
-                    foreach ($areas as $area) {
-                        if (is_null($area) || !($area instanceof Rectangle))
-                            throw new BarcodeException('All elements of $areas should be instances of Rectangle class');
-                        array_push($stringFormattedAreas, $area->toString());
-                    }
-                }
-            } else {
-                if (!($areas instanceof Rectangle))
-                    throw new BarcodeException('All elements of $areas should be instances of Rectangle class');
-                array_push($stringFormattedAreas, $areas->toString());
-            }
+        if (is_null($areas)) {
+            return [];
         }
-        return $stringFormattedAreas;
+
+        $areas = is_array($areas) ? $areas : [$areas];
+
+        if (CommonUtility::areAllNull($areas)) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($areas as $area) {
+            if (!($area instanceof Rectangle)) {
+                throw new BarcodeException(
+                    'All elements of $areas should be instances of Rectangle class'
+                );
+            }
+
+            $result[] = $area->getX();
+            $result[] = $area->getY();
+            $result[] = $area->getWidth();
+            $result[] = $area->getHeight();
+        }
+
+        return $result;
     }
 
-    public static function convertImageResourceToBinared($imageResource): ?string
+    public static function convertImageResourceToBinary($imageResource): ?string
     {
         if ($imageResource === null) {
             return null;
         }
 
-        // Handle GD resource
         if (is_resource($imageResource)) {
             $type = get_resource_type($imageResource);
 
             switch ($type) {
                 case 'gd':
                     ob_start();
-                    imagepng($imageResource);
+
+                    if (!imagepng($imageResource)) {
+                        ob_end_clean();
+                        throw new BarcodeException(
+                            "Failed to convert GD image to binary data"
+                        );
+                    }
+
                     $imageData = ob_get_clean();
+
+                    if ($imageData === false) {
+                        throw new BarcodeException(
+                            "Failed to get binary data from GD image"
+                        );
+                    }
+
                     return $imageData;
 
-                case 'file':
+                case 'stream':
                     $imageData = stream_get_contents($imageResource);
-                    fclose($imageResource);
+
                     if ($imageData === false) {
-                        throw new BarcodeException("Failed to read from file resource");
+                        throw new BarcodeException(
+                            "Failed to read from stream resource"
+                        );
                     }
+
                     return $imageData;
 
                 default:
-                    throw new BarcodeException("Unsupported resource type: $type");
+                    throw new BarcodeException(
+                        "Unsupported resource type: $type"
+                    );
             }
         }
 
-        // Handle string input
         if (is_string($imageResource)) {
+            if (
+                file_exists($imageResource) &&
+                is_file($imageResource) &&
+                is_readable($imageResource)
+            ) {
+                $imageData = file_get_contents($imageResource);
 
-            // If string is a valid file path
-            if (file_exists($imageResource) && is_file($imageResource) && is_readable($imageResource)) {
-                $fileContent = file_get_contents($imageResource);
-                if ($fileContent === false) {
-                    throw new BarcodeException("Failed to read file content: $imageResource");
+                if ($imageData === false) {
+                    throw new BarcodeException(
+                        "Failed to read file content: $imageResource"
+                    );
                 }
-                return $fileContent;
+
+                return $imageData;
             }
 
-            // If string is base64
+            // Оставить только если публичный API по-прежнему
+            // должен принимать Base64 от пользователя.
             $decoded = base64_decode($imageResource, true);
-            if ($decoded !== false && base64_encode($decoded) === $imageResource) {
+
+            if ($decoded !== false) {
                 return $decoded;
             }
 
-            throw new BarcodeException("File does not exist, is unreadable, or invalid base64 string: $imageResource");
+            throw new BarcodeException(
+                "File does not exist, is unreadable, or invalid base64 string: $imageResource"
+            );
         }
 
-        // Unsupported input type
-        throw new BarcodeException("Unsupported input type. Expected GD resource, file resource, base64 string, or valid file path.");
+        throw new BarcodeException(
+            "Unsupported input type. Expected GD resource, stream resource, base64 string, or valid file path."
+        );
     }
 }

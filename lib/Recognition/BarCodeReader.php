@@ -85,8 +85,8 @@ class BarCodeReader implements Communicator
      */
     private function initializeImageRelatedFields(): void
     {
-        $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBinared($this->imageResource);
-        $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($this->areas);
+        $this->barCodeReaderDto->imageData = CommonUtility::convertImageResourceToBinary($this->imageResource);
+        $this->barCodeReaderDto->areas = CommonUtility::convertAreasToIntArray($this->areas);
     }
 
     /**
@@ -370,8 +370,8 @@ class BarCodeReader implements Communicator
     {
         try
         {
-            $this->barCodeReaderDto->base64Image = CommonUtility::convertImageResourceToBinared($imageResource);
-            $this->barCodeReaderDto->areas = CommonUtility::convertAreasToStringFormattedAreas($areas);
+            $this->barCodeReaderDto->imageData = CommonUtility::convertImageResourceToBinary($imageResource);
+            $this->barCodeReaderDto->areas = CommonUtility::convertAreasToIntArray($areas);
             if (is_null($this->barCodeReaderDto->barCodeReadType) || sizeof($this->barCodeReaderDto->barCodeReadType) == 0)
                 $this->barCodeReaderDto->barCodeReadType = array(DecodeType::ALL_SUPPORTED_TYPES);
         }

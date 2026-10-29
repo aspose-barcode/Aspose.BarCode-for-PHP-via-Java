@@ -24,6 +24,8 @@ var hierarchy =
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\DataElement", "d5/d3b/classAspose_1_1Barcode_1_1ComplexBarcode_1_1DataElement.html", null ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\HIBCPASRecord", "d1/d06/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCPASRecord.html", null ],
       [ "\u202AAspose\\Barcode\\ComplexBarcode\\IComplexCodetext", "d7/d73/classAspose_1_1Barcode_1_1ComplexBarcode_1_1IComplexCodetext.html", [
+        [ "\u202AAspose\\Barcode\\ComplexBarcode\\GS1Codetext", "de/d01/classAspose_1_1Barcode_1_1ComplexBarcode_1_1GS1Codetext.html", null ],
+        [ "\u202AAspose\\Barcode\\ComplexBarcode\\GS1DigitalLink", "d0/db5/classAspose_1_1Barcode_1_1ComplexBarcode_1_1GS1DigitalLink.html", null ],
         [ "\u202AAspose\\Barcode\\ComplexBarcode\\HIBCLICComplexCodetext", "de/d88/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICComplexCodetext.html", [
           [ "\u202AAspose\\Barcode\\ComplexBarcode\\HIBCLICCombinedCodetext", "db/d94/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICCombinedCodetext.html", null ],
           [ "\u202AAspose\\Barcode\\ComplexBarcode\\HIBCLICPrimaryDataCodetext", "dc/d18/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICPrimaryDataCodetext.html", null ]
@@ -70,6 +72,7 @@ var hierarchy =
       [ "\u202AAspose\\Barcode\\Generation\\DotCodeParameters", "de/d16/classAspose_1_1Barcode_1_1Generation_1_1DotCodeParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Generation\\FontUnit", "d0/de0/classAspose_1_1Barcode_1_1Generation_1_1FontUnit.html", null ],
       [ "\u202AAspose\\Barcode\\Generation\\GS1CompositeBarParameters", "d9/d81/classAspose_1_1Barcode_1_1Generation_1_1GS1CompositeBarParameters.html", null ],
+      [ "\u202AAspose\\Barcode\\Generation\\GS1Parameters", "dd/d79/classAspose_1_1Barcode_1_1Generation_1_1GS1Parameters.html", null ],
       [ "\u202AAspose\\Barcode\\Generation\\HanXinParameters", "d9/dc9/classAspose_1_1Barcode_1_1Generation_1_1HanXinParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Generation\\ITFParameters", "d9/d07/classAspose_1_1Barcode_1_1Generation_1_1ITFParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Generation\\ImageParameters", "d0/d37/classAspose_1_1Barcode_1_1Generation_1_1ImageParameters.html", null ],
@@ -131,6 +134,9 @@ var hierarchy =
     [ "\u202AAspose\\Barcode\\Generation\\FontMode", "da/d5b/classAspose_1_1Barcode_1_1Generation_1_1FontMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\FontStyle", "d6/da9/classAspose_1_1Barcode_1_1Generation_1_1FontStyle.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\GraphicsUnit", "dd/d24/classAspose_1_1Barcode_1_1Generation_1_1GraphicsUnit.html", null ],
+    [ "\u202AAspose\\Barcode\\ComplexBarcode\\GS1BarcodeTypeValidator", "d6/dd0/classAspose_1_1Barcode_1_1ComplexBarcode_1_1GS1BarcodeTypeValidator.html", null ],
+    [ "\u202AAspose\\Barcode\\ComplexBarcode\\GS1ParseResult", "d9/ddd/classAspose_1_1Barcode_1_1ComplexBarcode_1_1GS1ParseResult.html", null ],
+    [ "\u202AAspose\\Barcode\\Generation\\GS1ValidationLevel", "da/dd5/classAspose_1_1Barcode_1_1Generation_1_1GS1ValidationLevel.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\HanXinEncodeMode", "d1/d18/classAspose_1_1Barcode_1_1Generation_1_1HanXinEncodeMode.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\HanXinErrorLevel", "d4/d3f/classAspose_1_1Barcode_1_1Generation_1_1HanXinErrorLevel.html", null ],
     [ "\u202AAspose\\Barcode\\Generation\\HanXinExtCodetextBuilder", "d7/d49/classAspose_1_1Barcode_1_1Generation_1_1HanXinExtCodetextBuilder.html", null ],

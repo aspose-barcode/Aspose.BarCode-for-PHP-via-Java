@@ -2,10 +2,11 @@
 
 namespace Aspose\Barcode\Generation;
 
+use Aspose\Barcode\Bridge\CodeTextDTO;
 use Aspose\Barcode\Generation\BarCodeImageFormat;
+use Aspose\Barcode\Generation\BaseGenerationParameters;
 use Aspose\Barcode\Recognition\BarCodeReader;
 use Aspose\Barcode\Generation\Base64CodeTextType;
-use Aspose\Barcode\Generation\BaseGenerationParameters;
 use Aspose\Barcode\Bridge\BarcodeExceptionDTO;
 use Aspose\Barcode\Bridge\BarcodeGeneratorDTO;
 use Aspose\Barcode\Internal\BarcodeException;
@@ -65,7 +66,8 @@ class BarcodeGenerator implements Communicator
         {
             $this->barcodeGeneratorDto = $this->obtainDto($encodeType);
             $this->getBarcodeGeneratorDto()->barcodeType = $encodeType;
-            $this->getBarcodeGeneratorDto()->base64CodeText = $codeText;
+            if($codeText !== null)
+                $this->getBarcodeGeneratorDto()->codeText = new CodeTextDTO((['text' => $codeText]));
             $this->initFieldsFromDto();
         }
         catch (Exception $ex)
@@ -189,11 +191,11 @@ class BarcodeGenerator implements Communicator
             $pos = $be->position ?? '';
             $kind = $be->kind ?? '';
             // pass a clear message up so it gets into your report
-            throw new \Exception("Java error" .
+            throw new BarcodeException("Java error" .
                 ($kind !== null ? " [$kind]" : "") .
                 ": $msg\n$pos");
         }
-        catch (Exception $exc)
+        catch (\Throwable $exc)
         {
             throw new BarcodeException($exc->getMessage(), __FILE__, __LINE__);
         }
@@ -232,7 +234,7 @@ class BarcodeGenerator implements Communicator
         {
             $thriftConnection = new ThriftConnection();
             $client = $thriftConnection->openConnection();
-            $codeText = $client->BarcodeGenerator_getCodeTextWithEncoding($this->getBarcodeGeneratorDto()->base64CodeText, $this->getBarcodeGeneratorDto()->encoding, $this->getBarcodeGeneratorDto()->insertBOM, $this->getBarcodeGeneratorDto()->barcodeType);
+            $codeText = $client->BarcodeGenerator_getCodeTextWithEncoding($this->getBarcodeGeneratorDto()->codeText->text, $this->getBarcodeGeneratorDto()->encoding, $this->getBarcodeGeneratorDto()->insertBOM, $this->getBarcodeGeneratorDto()->barcodeType);
             $thriftConnection->closeConnection();
             return $codeText;
         }
@@ -297,17 +299,24 @@ class BarcodeGenerator implements Communicator
     {
         try
         {
+            $dto = $this->getBarcodeGeneratorDto();
+
             if (is_array($codeText))
             {
-                $this->getBarcodeGeneratorDto()->base64CodeText = (base64_encode(pack("C*", ...$codeText)));
-                $this->getBarcodeGeneratorDto()->codeTextType = Base64CodeTextType::BYTE;
-            } else
+                // PHP byte array -> Thrift binary
+                $dto->codeText = new CodeTextDTO(['bytes' => pack('C*', ...$codeText)]);
+            }
+            else
             {
-                $this->getBarcodeGeneratorDto()->base64CodeText = $codeText;
-                $this->getBarcodeGeneratorDto()->codeTextType = Base64CodeTextType::STRING;
+                // PHP string -> Thrift string
+                $dto->codeText = new CodeTextDTO(['text' => $codeText]);
+
                 if (!is_null($encoding) && strlen($encoding) > 0)
-                    $this->getBarcodeGeneratorDto()->encoding = $encoding;
-                $this->getBarcodeGeneratorDto()->insertBOM = $insertBOM;
+                {
+                    $dto->encoding = $encoding;
+                }
+
+                $dto->insertBOM = $insertBOM;
             }
         }
         catch (Exception $ex)
@@ -317,51 +326,85 @@ class BarcodeGenerator implements Communicator
     }
 
     /**
-     * Exports BarCode properties to the xml-file specified
+     * Exports BarCode properties to the xml-file specified.
+     *
      * @param string $xmlFile The path to xml file
      * @return bool Whether or not export completed successfully.
-     * Returns True in case of success; False Otherwise
      */
     public function exportToXml(string $xmlFile): bool
     {
+        $thriftConnection = null;
+
         try
         {
             $thriftConnection = new ThriftConnection();
             $client = $thriftConnection->openConnection();
-            //TODO BARCODEPHP-677 Implement the passing of license file content from PHP to Java
+
+            // Thrift binary -> PHP binary string
             $xmlData = $client->BarcodeGenerator_exportToXml($this->barcodeGeneratorDto);
-            $thriftConnection->closeConnection();
-            $isContentExported = $xmlData != null;
-            if ($isContentExported)
+
+            if ($xmlData === null)
             {
-                file_put_contents($xmlFile, $xmlData);
+                return false;
             }
-            return $isContentExported;
+
+            return file_put_contents($xmlFile, $xmlData) !== false;
         }
         catch (Exception $ex)
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+        finally
+        {
+            if ($thriftConnection !== null)
+            {
+                $thriftConnection->closeConnection();
+            }
+        }
     }
 
     /**
-     * Import BarCode properties from xml file
-     * @param string $resource The name of the xml file or path to http resource
-     * @return \Aspose\Barcode\Recognition\BarCodeReader
+     * Imports BarCode properties from xml file.
+     *
+     * @param mixed $resource The name of the xml file, URL or stream resource
+     * @return BarcodeGenerator
      * @throws BarcodeException
      */
     public static function importFromXml($resource): BarcodeGenerator
     {
+        $thriftConnection = null;
+
         try
         {
             if (CommonUtility::isPath($resource))
             {
-                $resource = fopen($resource, "r");
+                // File contents are already raw bytes represented
+                // as a binary-safe PHP string.
+                $xmlData = file_get_contents($resource);
+
+                if ($xmlData === false)
+                {
+                    throw new Exception("Unable to read XML resource: " . $resource);
+                }
             }
-            $xmlData = (stream_get_contents($resource));
+            elseif (is_resource($resource))
+            {
+                $xmlData = stream_get_contents($resource);
+
+                if ($xmlData === false)
+                {
+                    throw new Exception("Unable to read XML stream.");
+                }
+            }
+            else
+            {
+                throw new Exception("Resource must be a file path, URL or stream resource.");
+            }
+
             $thriftConnection = new ThriftConnection();
             $client = $thriftConnection->openConnection();
 
+            // PHP binary string -> Thrift binary -> Java byte[]
             $barCodeGeneratorDto = $client->BarcodeGenerator_importFromXml($xmlData);
             $thriftConnection->closeConnection();
 
@@ -371,11 +414,19 @@ class BarcodeGenerator implements Communicator
         {
             throw new BarcodeException($ex->getMessage(), __FILE__, __LINE__);
         }
+        finally
+        {
+            if ($thriftConnection !== null)
+            {
+                $thriftConnection->closeConnection();
+            }
+        }
     }
 
     private static function construct(BarcodeGeneratorDTO $barCodeGeneratorDto): BarcodeGenerator
     {
         $barCodeGenerator = new BarcodeGenerator(0, null);
+
         $barCodeGenerator->setBarcodeGeneratorDto($barCodeGeneratorDto);
         $barCodeGenerator->initFieldsFromDto();
         return $barCodeGenerator;

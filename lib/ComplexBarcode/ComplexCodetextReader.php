@@ -180,4 +180,45 @@ final class ComplexCodetextReader
             return null;
         return USADriveIdCodetext::_internal_construct($usaDriveIdCodetextDTO);
     }
+    /**
+     * Decodes bracketed GS1 codetext on the Java backend.
+     * Returns null if Java reports an invalid GS1 codetext.
+     */
+    public static function tryDecodeGS1Codetext(?string $encodedCodetext): ?GS1Codetext
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        try
+        {
+            $dto = $client->ComplexCodetextReader_tryDecodeGS1Codetext($encodedCodetext);
+            if ($dto === null || $dto->isNull)
+                return null;
+            return GS1Codetext::construct($dto);
+        }
+        finally
+        {
+            $thriftConnection->closeConnection();
+        }
+    }
+
+    /**
+     * Decodes a GS1 Digital Link URI on the Java backend.
+     * Returns null if Java reports an invalid URI.
+     */
+    public static function tryDecodeGS1DigitalLink(?string $encodedCodetext): ?GS1DigitalLink
+    {
+        $thriftConnection = new ThriftConnection();
+        $client = $thriftConnection->openConnection();
+        try
+        {
+            $dto = $client->ComplexCodetextReader_tryDecodeGS1DigitalLink($encodedCodetext);
+            if ($dto === null || $dto->isNull)
+                return null;
+            return GS1DigitalLink::construct($dto);
+        }
+        finally
+        {
+            $thriftConnection->closeConnection();
+        }
+    }
 }

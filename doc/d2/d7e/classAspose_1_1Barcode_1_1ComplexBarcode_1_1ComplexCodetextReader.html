@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">26.9</span>
+   &#160;<span id="projectnumber">26.10</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -108,6 +108,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a4c87d7757a417f1b7e232cb6a32701e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66fa80d8a626f8c496f96a95f036df2f"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d7e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1ComplexCodetextReader.html#a66fa80d8a626f8c496f96a95f036df2f">tryDecodeUSADriveId</a> (string $encodedCodetext)</td></tr>
 <tr class="separator:a66fa80d8a626f8c496f96a95f036df2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5803546268eb3645341ff8985ff7637f"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d7e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1ComplexCodetextReader.html#a5803546268eb3645341ff8985ff7637f">tryDecodeGS1Codetext</a> (?string $encodedCodetext)</td></tr>
+<tr class="separator:a5803546268eb3645341ff8985ff7637f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63afd51aea18e05ebe356e22edc8ea4f"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d7e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1ComplexCodetextReader.html#a63afd51aea18e05ebe356e22edc8ea4f">tryDecodeGS1DigitalLink</a> (?string $encodedCodetext)</td></tr>
+<tr class="separator:a63afd51aea18e05ebe356e22edc8ea4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p class="DocNodeLTR"><a class="el" href="../../d2/d7e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1ComplexCodetextReader.html">ComplexCodetextReader</a> decodes codetext to specified complex barcode type.</p>
@@ -115,6 +119,60 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">$cr-&gt;read();</div>
 <div class="line">$result = <a class="code" href="../../d2/d7e/classAspose_1_1Barcode_1_1ComplexBarcode_1_1ComplexCodetextReader.html#ade5aaaaebfa634cdd5cd27cfe964deb3">ComplexCodetextReader::tryDecodeSwissQR</a>($cr-&gt;getCodeText(<span class="keyword">false</span>));</div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5803546268eb3645341ff8985ff7637f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5803546268eb3645341ff8985ff7637f">&#9670;&nbsp;</a></span>tryDecodeGS1Codetext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Aspose\Barcode\ComplexBarcode\ComplexCodetextReader::tryDecodeGS1Codetext </td>
+          <td>(</td>
+          <td class="paramtype">?string&#160;</td>
+          <td class="paramname"><em>$encodedCodetext</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Decodes bracketed GS1 codetext on the Java backend. Returns null if Java reports an invalid GS1 codetext. </p>
+
+</div>
+</div>
+<a id="a63afd51aea18e05ebe356e22edc8ea4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63afd51aea18e05ebe356e22edc8ea4f">&#9670;&nbsp;</a></span>tryDecodeGS1DigitalLink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Aspose\Barcode\ComplexBarcode\ComplexCodetextReader::tryDecodeGS1DigitalLink </td>
+          <td>(</td>
+          <td class="paramtype">?string&#160;</td>
+          <td class="paramname"><em>$encodedCodetext</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Decodes a GS1 Digital Link URI on the Java backend. Returns null if Java reports an invalid URI. </p>
+
+</div>
+</div>
 <a id="a03a8096d04bdc5295bc6e52443adf4dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a03a8096d04bdc5295bc6e52443adf4dd">&#9670;&nbsp;</a></span>tryDecodeHIBCLIC()</h2>
 

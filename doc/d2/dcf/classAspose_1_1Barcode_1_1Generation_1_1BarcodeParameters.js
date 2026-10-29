@@ -18,6 +18,7 @@ var classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters =
     [ "\u202AgetDataMatrix", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a358cb1b80eac9eba51c37b6ab7d1b89d", null ],
     [ "\u202AgetDotCode", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a53326237383be2b7465cb9a518c5b2e5", null ],
     [ "\u202AgetFilledBars", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#ac8b72fa1e0abcc92e0fa7fa2256ba534", null ],
+    [ "\u202AgetGS1", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#aec5a91df1f964088a523d27b1ddc613c", null ],
     [ "\u202AgetGS1CompositeBar", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a17e989d788086c53463414fa2ff301d5", null ],
     [ "\u202AgetHanXin", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#af9b79af733efbcc2d8247a51a8f7dd4c", null ],
     [ "\u202AgetITF", "d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a5e7c0ccc3d7c37b25fddb0385d16c91c", null ],
