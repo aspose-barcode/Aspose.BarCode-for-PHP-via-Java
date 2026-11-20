@@ -171,6 +171,8 @@ var annotated_dup =
           [ "\u202ADotCodeExtendedParameters", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters" ],
           [ "\u202AGS1CompositeBarExtendedParameters", "d8/de6/classAspose_1_1Barcode_1_1Recognition_1_1GS1CompositeBarExtendedParameters.html", "d8/de6/classAspose_1_1Barcode_1_1Recognition_1_1GS1CompositeBarExtendedParameters" ],
           [ "\u202AInverseImageMode", "d7/d80/classAspose_1_1Barcode_1_1Recognition_1_1InverseImageMode.html", "d7/d80/classAspose_1_1Barcode_1_1Recognition_1_1InverseImageMode" ],
+          [ "\u202AIso15416Quality", "d9/d3e/classAspose_1_1Barcode_1_1Recognition_1_1Iso15416Quality.html", "d9/d3e/classAspose_1_1Barcode_1_1Recognition_1_1Iso15416Quality" ],
+          [ "\u202AIsoSymbolQuality", "d2/dbf/classAspose_1_1Barcode_1_1Recognition_1_1IsoSymbolQuality.html", "d2/dbf/classAspose_1_1Barcode_1_1Recognition_1_1IsoSymbolQuality" ],
           [ "\u202AMaxiCodeExtendedParameters", "d3/d92/classAspose_1_1Barcode_1_1Recognition_1_1MaxiCodeExtendedParameters.html", "d3/d92/classAspose_1_1Barcode_1_1Recognition_1_1MaxiCodeExtendedParameters" ],
           [ "\u202AOneDExtendedParameters", "de/d0b/classAspose_1_1Barcode_1_1Recognition_1_1OneDExtendedParameters.html", "de/d0b/classAspose_1_1Barcode_1_1Recognition_1_1OneDExtendedParameters" ],
           [ "\u202APdf417ExtendedParameters", "d2/d72/classAspose_1_1Barcode_1_1Recognition_1_1Pdf417ExtendedParameters.html", "d2/d72/classAspose_1_1Barcode_1_1Recognition_1_1Pdf417ExtendedParameters" ],

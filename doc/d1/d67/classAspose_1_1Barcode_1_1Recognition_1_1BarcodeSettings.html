@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">&#x202A;Aspose.Barcode for PHP via Java
-   &#160;<span id="projectnumber">26.10</span>
+   &#160;<span id="projectnumber">26.11</span>
    </div>
    <div id="projectbrief">&#x202A;Aspose.Barcode for PHP via Java Generation and Recognition API docs</div>
   </td>
@@ -118,6 +118,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4b8a746261dd34e7b4664bf44a5db727"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec86fc1da0e645917c0f98c8f34cc385"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aec86fc1da0e645917c0f98c8f34cc385">setDetectEncoding</a> (bool $value)</td></tr>
 <tr class="separator:aec86fc1da0e645917c0f98c8f34cc385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee942ccb8f9b821ae50d7dfa4cae83f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#aee942ccb8f9b821ae50d7dfa4cae83f3">getCalculateSymbolQuality</a> ()</td></tr>
+<tr class="separator:aee942ccb8f9b821ae50d7dfa4cae83f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f668f7e8f1a232e50723208378f67c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a6f668f7e8f1a232e50723208378f67c4">setCalculateSymbolQuality</a> (bool $value)</td></tr>
+<tr class="separator:a6f668f7e8f1a232e50723208378f67c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8061d429f236290236e4a50bce92c344"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d67/classAspose_1_1Barcode_1_1Recognition_1_1BarcodeSettings.html#a8061d429f236290236e4a50bce92c344">getAustraliaPost</a> ()</td></tr>
 <tr class="separator:a8061d429f236290236e4a50bce92c344"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -164,6 +168,24 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p class="DocNodeLTR">Gets AustraliaPost decoding parameters </p><dl class="section return"><dt>Returns</dt><dd>&#x202A;<a class="el" href="../../dc/dc9/classAspose_1_1Barcode_1_1Recognition_1_1AustraliaPostSettings.html">AustraliaPostSettings</a> The AustraliaPost decoding parameters which make influence on recognized data of AustraliaPost symbology </dd></dl>
+
+</div>
+</div>
+<a id="aee942ccb8f9b821ae50d7dfa4cae83f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee942ccb8f9b821ae50d7dfa4cae83f3">&#9670;&nbsp;</a></span>getCalculateSymbolQuality()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspose\Barcode\Recognition\BarcodeSettings::getCalculateSymbolQuality </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Gets a value indicating whether ISO symbol quality calculation is enabled. </p>
 
 </div>
 </div>
@@ -359,6 +381,25 @@ foreach ($reader2-&gt;readBarCodes() as $result)
 
 </div>
 </div>
+<a id="a6f668f7e8f1a232e50723208378f67c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f668f7e8f1a232e50723208378f67c4">&#9670;&nbsp;</a></span>setCalculateSymbolQuality()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aspose\Barcode\Recognition\BarcodeSettings::setCalculateSymbolQuality </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>$value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p class="DocNodeLTR">Enables or disables ISO symbol quality calculation. </p>
+
+</div>
+</div>
 <a id="a13d22b2192924b69a3abdf19f4193276"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a13d22b2192924b69a3abdf19f4193276">&#9670;&nbsp;</a></span>setChecksumValidation()</h2>
 
@@ -419,6 +460,22 @@ foreach ($reader2-&gt;readBarCodes() as $result)
         </tr>
       </table>
 </div><div class="memdoc">
+<p class="DocNodeLTR">The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.</p>
+<div class="fragment"><div class="line">$generator = <span class="keyword">new</span> BarcodeGenerator(EncodeTypes::QR, <span class="stringliteral">&quot;Слово&quot;</span>))</div>
+<div class="line">$im = $generator-&gt;generateBarcodeImage(BarcodeImageFormat::PNG);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//detects encoding for Unicode codesets is enabled</span></div>
+<div class="line">$reader = <span class="keyword">new</span> BarCodeReader($im, <a class="code" href="../../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a694eaa0f6a87bfb6d56a3489de866a82">DecodeType::QR</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setDetectEncoding(<span class="keyword">true</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">//detect encoding is disabled</span></div>
+<div class="line">$reader = <span class="keyword">new</span> BarCodeReader($im, <a class="code" href="../../d1/dfb/classAspose_1_1Barcode_1_1Recognition_1_1DecodeType.html#a694eaa0f6a87bfb6d56a3489de866a82">DecodeType::QR</a>);</div>
+<div class="line">$reader-&gt;getBarcodeSettings()-&gt;setDetectEncoding(<span class="keyword">false</span>);</div>
+<div class="line"><span class="keywordflow">foreach</span>($reader-&gt;readBarCodes() as $result)</div>
+<div class="line">    echo (<span class="stringliteral">&quot;BarCode CodeText: &quot;</span>.$result-&gt;getCodeText());</div>
+</div><!-- fragment --><dl class="section return"><dt>Returns</dt><dd>&#x202A;bool The flag which force engine to detect codetext encoding for Unicode codesets </dd></dl>
 
 </div>
 </div>

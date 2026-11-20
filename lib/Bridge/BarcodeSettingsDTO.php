@@ -47,6 +47,11 @@ class BarcodeSettingsDTO
             'type' => TType::STRUCT,
             'class' => '\Aspose\Barcode\Bridge\AustraliaPostSettingsDTO',
         ),
+        6 => array(
+            'var' => 'calculateSymbolQuality',
+            'isRequired' => false,
+            'type' => TType::BOOL,
+        ),
     );
 
     /**
@@ -69,6 +74,10 @@ class BarcodeSettingsDTO
      * @var \Aspose\Barcode\Bridge\AustraliaPostSettingsDTO
      */
     public $australiaPost = null;
+    /**
+     * @var bool
+     */
+    public $calculateSymbolQuality = null;
 
     public function __construct($vals = null)
     {
@@ -87,6 +96,9 @@ class BarcodeSettingsDTO
             }
             if (isset($vals['australiaPost'])) {
                 $this->australiaPost = $vals['australiaPost'];
+            }
+            if (isset($vals['calculateSymbolQuality'])) {
+                $this->calculateSymbolQuality = $vals['calculateSymbolQuality'];
             }
         }
     }
@@ -146,6 +158,13 @@ class BarcodeSettingsDTO
                         $xfer += $input->skip($ftype);
                     }
                     break;
+                case 6:
+                    if ($ftype == TType::BOOL) {
+                        $xfer += $input->readBool($this->calculateSymbolQuality);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
                 default:
                     $xfer += $input->skip($ftype);
                     break;
@@ -186,6 +205,11 @@ class BarcodeSettingsDTO
             }
             $xfer += $output->writeFieldBegin('australiaPost', TType::STRUCT, 5);
             $xfer += $this->australiaPost->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
+        if ($this->calculateSymbolQuality !== null) {
+            $xfer += $output->writeFieldBegin('calculateSymbolQuality', TType::BOOL, 6);
+            $xfer += $output->writeBool($this->calculateSymbolQuality);
             $xfer += $output->writeFieldEnd();
         }
         $xfer += $output->writeFieldStop();

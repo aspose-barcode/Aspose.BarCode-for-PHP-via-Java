@@ -59,6 +59,12 @@ class BarCodeResultDTO
             'class' => '\Aspose\Barcode\Bridge\BarCodeExtendedParametersDTO',
         ),
         8 => array(
+            'var' => 'isoSymbolQuality',
+            'isRequired' => false,
+            'type' => TType::STRUCT,
+            'class' => '\Aspose\Barcode\Bridge\IsoSymbolQualityDTO',
+        ),
+        9 => array(
             'var' => 'codeText',
             'isRequired' => false,
             'type' => TType::STRING,
@@ -94,6 +100,10 @@ class BarCodeResultDTO
      */
     public $extended = null;
     /**
+     * @var \Aspose\Barcode\Bridge\IsoSymbolQualityDTO
+     */
+    public $isoSymbolQuality = null;
+    /**
      * @var string
      */
     public $codeText = null;
@@ -121,6 +131,9 @@ class BarCodeResultDTO
             }
             if (isset($vals['extended'])) {
                 $this->extended = $vals['extended'];
+            }
+            if (isset($vals['isoSymbolQuality'])) {
+                $this->isoSymbolQuality = $vals['isoSymbolQuality'];
             }
             if (isset($vals['codeText'])) {
                 $this->codeText = $vals['codeText'];
@@ -199,6 +212,14 @@ class BarCodeResultDTO
                     }
                     break;
                 case 8:
+                    if ($ftype == TType::STRUCT) {
+                        $this->isoSymbolQuality = new \Aspose\Barcode\Bridge\IsoSymbolQualityDTO();
+                        $xfer += $this->isoSymbolQuality->read($input);
+                    } else {
+                        $xfer += $input->skip($ftype);
+                    }
+                    break;
+                case 9:
                     if ($ftype == TType::STRING) {
                         $xfer += $input->readString($this->codeText);
                     } else {
@@ -260,8 +281,16 @@ class BarCodeResultDTO
             $xfer += $this->extended->write($output);
             $xfer += $output->writeFieldEnd();
         }
+        if ($this->isoSymbolQuality !== null) {
+            if (!is_object($this->isoSymbolQuality)) {
+                throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+            }
+            $xfer += $output->writeFieldBegin('isoSymbolQuality', TType::STRUCT, 8);
+            $xfer += $this->isoSymbolQuality->write($output);
+            $xfer += $output->writeFieldEnd();
+        }
         if ($this->codeText !== null) {
-            $xfer += $output->writeFieldBegin('codeText', TType::STRING, 8);
+            $xfer += $output->writeFieldBegin('codeText', TType::STRING, 9);
             $xfer += $output->writeString($this->codeText);
             $xfer += $output->writeFieldEnd();
         }

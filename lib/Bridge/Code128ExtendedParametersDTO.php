@@ -100,14 +100,14 @@ class Code128ExtendedParametersDTO
                 case 2:
                     if ($ftype == TType::LST) {
                         $this->code128DataPortions = array();
-                        $_size28 = 0;
-                        $_etype31 = 0;
-                        $xfer += $input->readListBegin($_etype31, $_size28);
-                        for ($_i32 = 0; $_i32 < $_size28; ++$_i32) {
-                            $elem33 = null;
-                            $elem33 = new \Aspose\Barcode\Bridge\Code128DataPortionDTO();
-                            $xfer += $elem33->read($input);
-                            $this->code128DataPortions []= $elem33;
+                        $_size37 = 0;
+                        $_etype40 = 0;
+                        $xfer += $input->readListBegin($_etype40, $_size37);
+                        for ($_i41 = 0; $_i41 < $_size37; ++$_i41) {
+                            $elem42 = null;
+                            $elem42 = new \Aspose\Barcode\Bridge\Code128DataPortionDTO();
+                            $xfer += $elem42->read($input);
+                            $this->code128DataPortions []= $elem42;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -146,8 +146,8 @@ class Code128ExtendedParametersDTO
             }
             $xfer += $output->writeFieldBegin('code128DataPortions', TType::LST, 2);
             $output->writeListBegin(TType::STRUCT, count($this->code128DataPortions));
-            foreach ($this->code128DataPortions as $iter34) {
-                $xfer += $iter34->write($output);
+            foreach ($this->code128DataPortions as $iter43) {
+                $xfer += $iter43->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

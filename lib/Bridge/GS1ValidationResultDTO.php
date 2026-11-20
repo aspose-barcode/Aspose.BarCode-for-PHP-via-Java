@@ -88,14 +88,14 @@ class GS1ValidationResultDTO
                 case 2:
                     if ($ftype == TType::LST) {
                         $this->issues = array();
-                        $_size91 = 0;
-                        $_etype94 = 0;
-                        $xfer += $input->readListBegin($_etype94, $_size91);
-                        for ($_i95 = 0; $_i95 < $_size91; ++$_i95) {
-                            $elem96 = null;
-                            $elem96 = new \Aspose\Barcode\Bridge\GS1ValidationIssueDTO();
-                            $xfer += $elem96->read($input);
-                            $this->issues []= $elem96;
+                        $_size100 = 0;
+                        $_etype103 = 0;
+                        $xfer += $input->readListBegin($_etype103, $_size100);
+                        for ($_i104 = 0; $_i104 < $_size100; ++$_i104) {
+                            $elem105 = null;
+                            $elem105 = new \Aspose\Barcode\Bridge\GS1ValidationIssueDTO();
+                            $xfer += $elem105->read($input);
+                            $this->issues []= $elem105;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -127,8 +127,8 @@ class GS1ValidationResultDTO
             }
             $xfer += $output->writeFieldBegin('issues', TType::LST, 2);
             $output->writeListBegin(TType::STRUCT, count($this->issues));
-            foreach ($this->issues as $iter97) {
-                $xfer += $iter97->write($output);
+            foreach ($this->issues as $iter106) {
+                $xfer += $iter106->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

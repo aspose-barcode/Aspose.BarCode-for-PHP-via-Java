@@ -44,16 +44,16 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
+"annotated.html",
 "d1/db4/classAspose_1_1Barcode_1_1Recognition_1_1CustomerInformationInterpretingType.html#a1fcae6623b1cf1ff4868d59f5bb80613",
-"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a9228900d3a99fceefe333c6672048529",
-"d5/d5c/classAspose_1_1Barcode_1_1Generation_1_1HanXinExtCodetextBuilderType.html#ade5f6cef16383b433d8b48b4ffdb803a",
-"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#aebc9e80b55fae80d2ab04ad6c7a195c9",
-"d9/dc9/classAspose_1_1Barcode_1_1Generation_1_1HanXinParameters.html#abc3c826d2b9a857f491c00f960eb21dc",
-"dc/d48/classAspose_1_1Barcode_1_1Generation_1_1HanXinVersion.html#a9e81b0255bc864ca6dc893bb12ce389a",
-"dd/d70/classAspose_1_1Barcode_1_1Generation_1_1Pdf417Parameters.html#a3675e212da6e746ae34d4d5bd2dbf93b",
-"de/d2b/classAspose_1_1Barcode_1_1ComplexBarcode_1_1HIBCLICDateFormat.html#a5447cd4b995fc09d81d81fc8204a7c94",
-"df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#af434822ebd9a336ea87ff2e5a4000242"
+"d2/dcf/classAspose_1_1Barcode_1_1Generation_1_1BarcodeParameters.html#a614681cd6d3c5ad622d4d65f158abb4e",
+"d5/d5c/classAspose_1_1Barcode_1_1Generation_1_1HanXinExtCodetextBuilderType.html#a845fd3d0080334eabcf2282785901a7b",
+"d7/d8b/classAspose_1_1Barcode_1_1Generation_1_1DataMatrixVersion.html#ad4a0de01acc175045472d17a6bf83bda",
+"d9/d81/classAspose_1_1Barcode_1_1Generation_1_1GS1CompositeBarParameters.html#acee8460571ed0a0cf690bfac796041de",
+"dc/d48/classAspose_1_1Barcode_1_1Generation_1_1HanXinVersion.html#a753db6302afa48d833747fbaf37a212e",
+"dd/d2f/classAspose_1_1Barcode_1_1Generation_1_1PostalParameters.html#a2b8c1cd831594163491e78fa5bc3fca8",
+"de/d2a/classAspose_1_1Barcode_1_1Generation_1_1EncodeTypes.html#ad633d010d059dbf1cf9ad4924a3bf532",
+"df/dc1/classAspose_1_1Barcode_1_1Generation_1_1AztecParameters.html#a1e9969381e7e4edd06773a1a3e3efe16"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

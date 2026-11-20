@@ -763,14 +763,14 @@ class IComplexCodetextDTO
                 case 28:
                     if ($ftype == TType::LST) {
                         $this->records = array();
-                        $_size56 = 0;
-                        $_etype59 = 0;
-                        $xfer += $input->readListBegin($_etype59, $_size56);
-                        for ($_i60 = 0; $_i60 < $_size56; ++$_i60) {
-                            $elem61 = null;
-                            $elem61 = new \Aspose\Barcode\Bridge\HIBCPASRecordDTO();
-                            $xfer += $elem61->read($input);
-                            $this->records []= $elem61;
+                        $_size65 = 0;
+                        $_etype68 = 0;
+                        $xfer += $input->readListBegin($_etype68, $_size65);
+                        for ($_i69 = 0; $_i69 < $_size65; ++$_i69) {
+                            $elem70 = null;
+                            $elem70 = new \Aspose\Barcode\Bridge\HIBCPASRecordDTO();
+                            $xfer += $elem70->read($input);
+                            $this->records []= $elem70;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -837,14 +837,14 @@ class IComplexCodetextDTO
                 case 37:
                     if ($ftype == TType::LST) {
                         $this->subfileDesignator = array();
-                        $_size62 = 0;
-                        $_etype65 = 0;
-                        $xfer += $input->readListBegin($_etype65, $_size62);
-                        for ($_i66 = 0; $_i66 < $_size62; ++$_i66) {
-                            $elem67 = null;
-                            $elem67 = new \Aspose\Barcode\Bridge\SubfilePropertiesDTO();
-                            $xfer += $elem67->read($input);
-                            $this->subfileDesignator []= $elem67;
+                        $_size71 = 0;
+                        $_etype74 = 0;
+                        $xfer += $input->readListBegin($_etype74, $_size71);
+                        for ($_i75 = 0; $_i75 < $_size71; ++$_i75) {
+                            $elem76 = null;
+                            $elem76 = new \Aspose\Barcode\Bridge\SubfilePropertiesDTO();
+                            $xfer += $elem76->read($input);
+                            $this->subfileDesignator []= $elem76;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -878,14 +878,14 @@ class IComplexCodetextDTO
                 case 41:
                     if ($ftype == TType::LST) {
                         $this->gs1Elements = array();
-                        $_size68 = 0;
-                        $_etype71 = 0;
-                        $xfer += $input->readListBegin($_etype71, $_size68);
-                        for ($_i72 = 0; $_i72 < $_size68; ++$_i72) {
-                            $elem73 = null;
-                            $elem73 = new \Aspose\Barcode\Bridge\GS1ElementDTO();
-                            $xfer += $elem73->read($input);
-                            $this->gs1Elements []= $elem73;
+                        $_size77 = 0;
+                        $_etype80 = 0;
+                        $xfer += $input->readListBegin($_etype80, $_size77);
+                        for ($_i81 = 0; $_i81 < $_size77; ++$_i81) {
+                            $elem82 = null;
+                            $elem82 = new \Aspose\Barcode\Bridge\GS1ElementDTO();
+                            $xfer += $elem82->read($input);
+                            $this->gs1Elements []= $elem82;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -1065,8 +1065,8 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('records', TType::LST, 28);
             $output->writeListBegin(TType::STRUCT, count($this->records));
-            foreach ($this->records as $iter74) {
-                $xfer += $iter74->write($output);
+            foreach ($this->records as $iter83) {
+                $xfer += $iter83->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
@@ -1120,8 +1120,8 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('subfileDesignator', TType::LST, 37);
             $output->writeListBegin(TType::STRUCT, count($this->subfileDesignator));
-            foreach ($this->subfileDesignator as $iter75) {
-                $xfer += $iter75->write($output);
+            foreach ($this->subfileDesignator as $iter84) {
+                $xfer += $iter84->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
@@ -1156,8 +1156,8 @@ class IComplexCodetextDTO
             }
             $xfer += $output->writeFieldBegin('gs1Elements', TType::LST, 41);
             $output->writeListBegin(TType::STRUCT, count($this->gs1Elements));
-            foreach ($this->gs1Elements as $iter76) {
-                $xfer += $iter76->write($output);
+            foreach ($this->gs1Elements as $iter85) {
+                $xfer += $iter85->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

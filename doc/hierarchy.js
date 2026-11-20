@@ -103,6 +103,8 @@ var hierarchy =
       [ "\u202AAspose\\Barcode\\Recognition\\DataMatrixExtendedParameters", "d9/dd8/classAspose_1_1Barcode_1_1Recognition_1_1DataMatrixExtendedParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Recognition\\DotCodeExtendedParameters", "d8/df6/classAspose_1_1Barcode_1_1Recognition_1_1DotCodeExtendedParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Recognition\\GS1CompositeBarExtendedParameters", "d8/de6/classAspose_1_1Barcode_1_1Recognition_1_1GS1CompositeBarExtendedParameters.html", null ],
+      [ "\u202AAspose\\Barcode\\Recognition\\Iso15416Quality", "d9/d3e/classAspose_1_1Barcode_1_1Recognition_1_1Iso15416Quality.html", null ],
+      [ "\u202AAspose\\Barcode\\Recognition\\IsoSymbolQuality", "d2/dbf/classAspose_1_1Barcode_1_1Recognition_1_1IsoSymbolQuality.html", null ],
       [ "\u202AAspose\\Barcode\\Recognition\\MaxiCodeExtendedParameters", "d3/d92/classAspose_1_1Barcode_1_1Recognition_1_1MaxiCodeExtendedParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Recognition\\OneDExtendedParameters", "de/d0b/classAspose_1_1Barcode_1_1Recognition_1_1OneDExtendedParameters.html", null ],
       [ "\u202AAspose\\Barcode\\Recognition\\Pdf417ExtendedParameters", "d2/d72/classAspose_1_1Barcode_1_1Recognition_1_1Pdf417ExtendedParameters.html", null ],

@@ -16,11 +16,18 @@
 		"apache/thrift": "^0.20.0",
 		"ext-gd": "*"
 	},
-  "autoload": {
-    "psr-4": {
-      "Aspose\\Barcode\\": "lib/"
-    }
-  },
+	"config": {
+		"audit": {
+			"ignore": {
+				"PKSA-t5dt-c9kk-znks": "Required for PHP 7 compatibility"
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Aspose\\Barcode\\": "lib/"
+		}
+	},
 	"minimum-stability": "stable",
 	"prefer-stable": true
 }
