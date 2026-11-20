@@ -265,7 +265,7 @@ class BarcodeSettings implements Communicator
     }
 
 
-/**
+    /**
      * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
      *
      * @code
@@ -293,9 +293,50 @@ class BarcodeSettings implements Communicator
         return $this->getBarcodeSettingsDto()->detectEncoding;
     }
 
+
+
+    /**
+     * The flag which force engine to detect codetext encoding for Unicode codesets. Default value is true.
+     *
+     * @code
+     *
+     * $generator = new BarcodeGenerator(EncodeTypes::QR, "Слово"))
+     * $im = $generator->generateBarcodeImage(BarcodeImageFormat::PNG);
+     *
+     * //detects encoding for Unicode codesets is enabled
+     * $reader = new BarCodeReader($im, DecodeType::QR);
+     * $reader->getBarcodeSettings()->setDetectEncoding(true);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     *
+     * //detect encoding is disabled
+     * $reader = new BarCodeReader($im, DecodeType::QR);
+     * $reader->getBarcodeSettings()->setDetectEncoding(false);
+     * foreach($reader->readBarCodes() as $result)
+     *     echo ("BarCode CodeText: ".$result->getCodeText());
+     * @endcode
+     *
+     * @return bool The flag which force engine to detect codetext encoding for Unicode codesets
+     */
     public function setDetectEncoding(bool $value): void
     {
         $this->getBarcodeSettingsDto()->detectEncoding = $value;
+    }
+
+    /**
+     * Gets a value indicating whether ISO symbol quality calculation is enabled.
+     */
+    public function getCalculateSymbolQuality(): bool
+    {
+        return $this->getBarcodeSettingsDto()->calculateSymbolQuality;
+    }
+
+    /**
+     * Enables or disables ISO symbol quality calculation.
+     */
+    public function setCalculateSymbolQuality(bool $value): void
+    {
+        $this->getBarcodeSettingsDto()->calculateSymbolQuality = $value;
     }
 
     /**

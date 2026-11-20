@@ -69,14 +69,14 @@ class HanXinExtCodetextBuilderDTO
                 case 1:
                     if ($ftype == TType::LST) {
                         $this->items = array();
-                        $_size35 = 0;
-                        $_etype38 = 0;
-                        $xfer += $input->readListBegin($_etype38, $_size35);
-                        for ($_i39 = 0; $_i39 < $_size35; ++$_i39) {
-                            $elem40 = null;
-                            $elem40 = new \Aspose\Barcode\Bridge\HanXinExtCodetextBuilderItem();
-                            $xfer += $elem40->read($input);
-                            $this->items []= $elem40;
+                        $_size44 = 0;
+                        $_etype47 = 0;
+                        $xfer += $input->readListBegin($_etype47, $_size44);
+                        for ($_i48 = 0; $_i48 < $_size44; ++$_i48) {
+                            $elem49 = null;
+                            $elem49 = new \Aspose\Barcode\Bridge\HanXinExtCodetextBuilderItem();
+                            $xfer += $elem49->read($input);
+                            $this->items []= $elem49;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -103,8 +103,8 @@ class HanXinExtCodetextBuilderDTO
             }
             $xfer += $output->writeFieldBegin('items', TType::LST, 1);
             $output->writeListBegin(TType::STRUCT, count($this->items));
-            foreach ($this->items as $iter41) {
-                $xfer += $iter41->write($output);
+            foreach ($this->items as $iter50) {
+                $xfer += $iter50->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

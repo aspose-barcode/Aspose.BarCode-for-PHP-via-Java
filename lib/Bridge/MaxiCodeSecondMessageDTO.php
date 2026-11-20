@@ -118,13 +118,13 @@ class MaxiCodeSecondMessageDTO
                 case 3:
                     if ($ftype == TType::LST) {
                         $this->identifiers = array();
-                        $_size77 = 0;
-                        $_etype80 = 0;
-                        $xfer += $input->readListBegin($_etype80, $_size77);
-                        for ($_i81 = 0; $_i81 < $_size77; ++$_i81) {
-                            $elem82 = null;
-                            $xfer += $input->readString($elem82);
-                            $this->identifiers []= $elem82;
+                        $_size86 = 0;
+                        $_etype89 = 0;
+                        $xfer += $input->readListBegin($_etype89, $_size86);
+                        for ($_i90 = 0; $_i90 < $_size86; ++$_i90) {
+                            $elem91 = null;
+                            $xfer += $input->readString($elem91);
+                            $this->identifiers []= $elem91;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -168,8 +168,8 @@ class MaxiCodeSecondMessageDTO
             }
             $xfer += $output->writeFieldBegin('identifiers', TType::LST, 3);
             $output->writeListBegin(TType::STRING, count($this->identifiers));
-            foreach ($this->identifiers as $iter83) {
-                $xfer += $output->writeString($iter83);
+            foreach ($this->identifiers as $iter92) {
+                $xfer += $output->writeString($iter92);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

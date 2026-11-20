@@ -87,13 +87,13 @@ class ExtCodeItemDTO
                 case 2:
                     if ($ftype == TType::LST) {
                         $this->arguments = array();
-                        $_size42 = 0;
-                        $_etype45 = 0;
-                        $xfer += $input->readListBegin($_etype45, $_size42);
-                        for ($_i46 = 0; $_i46 < $_size42; ++$_i46) {
-                            $elem47 = null;
-                            $xfer += $input->readString($elem47);
-                            $this->arguments []= $elem47;
+                        $_size51 = 0;
+                        $_etype54 = 0;
+                        $xfer += $input->readListBegin($_etype54, $_size51);
+                        for ($_i55 = 0; $_i55 < $_size51; ++$_i55) {
+                            $elem56 = null;
+                            $xfer += $input->readString($elem56);
+                            $this->arguments []= $elem56;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -125,8 +125,8 @@ class ExtCodeItemDTO
             }
             $xfer += $output->writeFieldBegin('arguments', TType::LST, 2);
             $output->writeListBegin(TType::STRING, count($this->arguments));
-            foreach ($this->arguments as $iter48) {
-                $xfer += $output->writeString($iter48);
+            foreach ($this->arguments as $iter57) {
+                $xfer += $output->writeString($iter57);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();

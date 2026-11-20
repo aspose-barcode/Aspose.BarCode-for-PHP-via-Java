@@ -244,14 +244,14 @@ class SwissQRBillDTO
                 case 10:
                     if ($ftype == TType::LST) {
                         $this->alternativeSchemes = array();
-                        $_size49 = 0;
-                        $_etype52 = 0;
-                        $xfer += $input->readListBegin($_etype52, $_size49);
-                        for ($_i53 = 0; $_i53 < $_size49; ++$_i53) {
-                            $elem54 = null;
-                            $elem54 = new \Aspose\Barcode\Bridge\AlternativeSchemeDTO();
-                            $xfer += $elem54->read($input);
-                            $this->alternativeSchemes []= $elem54;
+                        $_size58 = 0;
+                        $_etype61 = 0;
+                        $xfer += $input->readListBegin($_etype61, $_size58);
+                        for ($_i62 = 0; $_i62 < $_size58; ++$_i62) {
+                            $elem63 = null;
+                            $elem63 = new \Aspose\Barcode\Bridge\AlternativeSchemeDTO();
+                            $xfer += $elem63->read($input);
+                            $this->alternativeSchemes []= $elem63;
                         }
                         $xfer += $input->readListEnd();
                     } else {
@@ -329,8 +329,8 @@ class SwissQRBillDTO
             }
             $xfer += $output->writeFieldBegin('alternativeSchemes', TType::LST, 10);
             $output->writeListBegin(TType::STRUCT, count($this->alternativeSchemes));
-            foreach ($this->alternativeSchemes as $iter55) {
-                $xfer += $iter55->write($output);
+            foreach ($this->alternativeSchemes as $iter64) {
+                $xfer += $iter64->write($output);
             }
             $output->writeListEnd();
             $xfer += $output->writeFieldEnd();
